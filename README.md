@@ -14,5 +14,5 @@ POC扫描  https://github.com/jweny/pocassist
 SQL注入 https://github.com/sqlmapproject/sqlmap  
 OWASP TOP10检测 https://github.com/andresriancho/w3af  
 XSS 检测 https://github.com/hahwul/dalfox  
-网站技术  https://github.com/chushuai/wappalyzer 
+网站技术  https://github.com/chushuai/wappalyzer   
 用Golang运行JavaScript https://github.com/dop251/goja  

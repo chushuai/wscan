@@ -294,3 +294,26 @@
 /builds/lohengrin/gunkit/core/assassin/entry/genca.go
 /builds/lohengrin/gunkit/core/assassin/entry/reverse.go
 /builds/lohengrin/gunkit/core/assassin/main.go
+```
+
+```
+from io import StringIO
+from datetime import datetime
+
+now = datetime.now()
+banner = f"""/**
+* @Author: shaochuyu
+* @Date: {now.month}/{now.day}/{now.year} {now.hour}:{now.minute}
+*/
+"""
+
+input = StringIO(text)
+for line in input:
+    file_path = line.strip()
+    folder = os.path.dirname(file_path)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    with open(file_path, 'w') as fp:
+        fp.write(banner + f"package {os.path.split(os.path.dirname(file_path))[1]}\n")
+```

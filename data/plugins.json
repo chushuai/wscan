@@ -1,0 +1,107 @@
+{
+	"vulnerables": [
+		{
+			"plugin_name": "sqli",
+			"issue_name": "SQL注入",
+			"level": "严重"
+		},
+		{
+			"plugin_name": "blindsql_time",
+			"issue_name": "SQL盲注（基于时间）",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "blindsql",
+			"issue_name": "SQL盲注（基于真假）",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "xss",
+			"issue_name": "跨站脚本攻击",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "crlf_injection",
+			"issue_name": "CRLF注入",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "directory_traversal",
+			"issue_name": "目录穿越",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "info_disclosure",
+			"issue_name": "敏感信息泄露",
+			"level": "中危"
+		},
+		{
+			"plugin_name": "sensitive_files",
+			"issue_name": "敏感路径泄露",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "poc_scan",
+			"issue_name": "使用含有已知漏洞的组件",
+			"level": "高危"
+		},
+		{
+	 		"plugin_name":"background_disclosure",
+			"issue_name":"后台地址泄露",
+			"level":"中危"
+	 	}
+	],
+	"illegality": [
+		{
+			"plugin_name": "keywords",
+			"issue_name": "违法关键词",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "trojanhorse",
+			"issue_name": "网页挂马",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "domain_hijack",
+			"issue_name": "网页劫持",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "black_link",
+			"issue_name": "网站暗链",
+			"level": "高危"
+		},
+		{
+			"plugin_name": "yellow_image",
+			"issue_name": "图片鉴黄",
+			"level": "高危"
+		},{
+			"plugin_name": "illegal_feature",
+			"issue_name": "违法网站识别",
+			"level": "高危"
+		}
+	],
+	"base_info": [
+		{
+			"plugin_name": "icp",
+			"issue_name": "ICP备案信息检测",
+			"level": "信息"
+		},
+		{
+			"plugin_name": "cdn",
+			"issue_name": "CDN服务器检测",
+			"level": "信息"
+		},
+		{
+			"plugin_name": "whois",
+			"issue_name": "Whois检测",
+			"level": "信息"
+		},
+		{
+			"plugin_name": "component",
+			"issue_name": "网站基础组件探测",
+			"level": "信息"
+		}
+	]
+}

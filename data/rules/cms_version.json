@@ -1,0 +1,20 @@
+{
+	"Dedecms":[
+		{
+			"url":"/data/admin/ver.txt",
+			"re":"^(\\d*?)$"
+		}
+	],
+	"Discuz":[
+		{
+			"url":"/",
+			"re":"Discuz! (X[\\d\\.]*?)\""
+		}
+	],
+	"KesionCMS":[
+		{
+			"url":"/Admin/Include/version.xml",
+			"re":"<version>([\\d\\.]*?)</version>"
+		}
+	]
+}

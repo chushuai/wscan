@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<rules rid="1010" name="login_path_disclosure" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>         
+			<regexp value="后台管理地址泄露" httpcode="200"><![CDATA[<title>.{0,30}?(后台|登录|管理系统).{0,30}?</title>]]></regexp>
+		</rule>
+		<desc>管理后台地址泄露</desc>
+		<name_zh>管理后台地址泄露</name_zh>
+		<solution>建议修改管理后台地址名称并且不要再页面上显示</solution>
+
+	</rules>
+	<rules rid="1001" name="ip_address" >
+		<risk>Information</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<!-- 192.168.0.0-192.168.255.255 -->
+			<regexp value="IP" httpcode="all"><![CDATA[192\.168\.[0-9]{1,3}\.[0-9]{1,3}]]></regexp>
+			<!-- 10.0.0.0-10.255.255.255 -->
+			<regexp value="IP" httpcode="all"><![CDATA[(?<=[^.\d])10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(?=[^.\d])]]></regexp>
+			<!-- 172.16.0.0-172.31.255.255 -->
+			<regexp value="IP" httpcode="all"><![CDATA[172\.1[6-9]\.[0-9]{1,3}\.[0-9]{1,3}|172\.2[0-9]\.[0-9]{1,3}\.[0-9]{1,3}|172\.3[0-1]\.[0-9]{1,3}\.[0-9]{1,3}]]></regexp>
+		</rule>
+		<name_zh>内网IP地址泄漏</name_zh>
+		<desc>内网IP地址泄漏</desc>
+		<solution>建议移除内网地址信息。</solution>
+	</rules>
+
+	<rules rid="1002" name="dbms_info" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<fetch>'</fetch>
+		<rule>
+			<!-- MySQL -->
+			<regexp value="MySQL" httpcode="all"><![CDATA[SQL syntax.*?MySQL]]></regexp>
+			<regexp value="MySQL" httpcode="all"><![CDATA[Warning.*?mysql_.*]]></regexp>
+			<regexp value="MySQL" httpcode="all"><![CDATA[Warning.*?mysqli_.*]]></regexp>
+			<regexp value="MySQL" httpcode="all"><![CDATA[valid MySQL result]]></regexp>
+			<regexp value="MySQL" httpcode="all"><![CDATA[MySqlClient\.]]></regexp>
+			<regexp value="MySQL" httpcode="all"><![CDATA[Can't connect to MySQL server on.*\)]]></regexp>
+        	<!-- Microsoft SQL Server -->
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[Driver.*? SQL[\-\_\ ]*Server]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[OLE DB.*? SQL Server]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[(\W|\A)SQL Server.*?Driver]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[Warning.*?mssql_.*?]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[(\W|\A)SQL Server.*?[0-9a-fA-F]{8}]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[Exception Details:.*?\WSystem\.Data\.SqlClient\.]]></regexp>
+        	<regexp value="Microsoft SQL Server" httpcode="all"><![CDATA[Exception Details:.*?\WRoadhouse\.Cms\.]]></regexp>
+        	<!-- Microsoft Access -->
+        	<regexp value="Microsoft Access" httpcode="all"><![CDATA[Microsoft Access Driver]]></regexp>
+			<regexp value="Microsoft Access" httpcode="all"><![CDATA[JET Database Engine]]></regexp>
+			<regexp value="Microsoft Access" httpcode="all"><![CDATA[Access Database Engine]]></regexp>
+			<regexp value="Microsoft Access" httpcode="all"><![CDATA[OLE DB.*? ODBC Drivers]]></regexp>
+        	<!-- Oracle -->
+        	<regexp value="Oracle" httpcode="all"><![CDATA[ORA-[0-9][0-9][0-9][0-9]]]></regexp>
+        	<regexp value="Oracle" httpcode="all"><![CDATA[Oracle error]]></regexp>
+        	<regexp value="Oracle" httpcode="all"><![CDATA[Oracle.*?Driver]]></regexp>
+        	<regexp value="Oracle" httpcode="all"><![CDATA[Warning.*?\Woci_.*?]]></regexp>
+        	<regexp value="Oracle" httpcode="all"><![CDATA[Warning.*?\Wora_.*?]]></regexp>
+		</rule>
+		<name_zh>数据库信息泄漏</name_zh>
+		<desc>数据库信息泄漏，恶意攻击者可收集到数据库配置信息、帐号及密码、源代码等敏感信息。</desc>
+		<solution>建议关闭数据库错误信息。</solution>
+	</rules>
+
+	<rules rid="1003" name="debug_info" >
+		<risk>Information</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<!-- .net debug -->
+			<regexp value=".NET" httpcode="all"><![CDATA[<h1>server\s+error\s+in[\s\S]*?Application\.<hr width=100%\s+size=1\s+color=silver></h1>]]></regexp>
+			<regexp value=".NET" httpcode="500"><![CDATA[<b>堆栈跟踪:</b>[\s\S]*?<code><pre>[\S\s]*?</pre></code>]]></regexp>
+
+        	<!-- java debug -->
+			<regexp value="JAVA" httpcode="all"><![CDATA[<PRE>JSP[\w]+:[\s\S]*?<BR></PRE>]]></regexp>
+			<regexp value="JAVA" httpcode="all"><![CDATA[<pre>[\s\S]*?org.apache.jasper.servlet.JspServletWrapper.service[\s\S]*?</pre>[\s\S]*<b>note</b> <u>The full stack trace of the root cause is available in[\s\S]*?(Apache Tomcat/\d\.\d\.\d{2})]]></regexp>
+
+        	<!-- django debug -->
+        	<regexp value="Django" httpcode="all"><![CDATA[(You're seeing this error because you have \<code\>DEBUG = True\</code\>)]]></regexp>
+
+        	<!-- Ruby debug -->
+        	<regexp value="RUBY" httpcode="all"><![CDATA[/lib/ruby/gems/\d\.\d/gems/[\s\S]*?]]></regexp>
+
+			<!-- PHP -->
+        	<regexp value="PHP" httpcode="all"><![CDATA[<b>Warning</b>:[\s\S]*?on line <b>\d+</b>|<b>Notice</b>:[\s\S]*?on line <b>\d+</b>|error[\s\S]*?on line <b>\d+</b>]]></regexp>
+		</rule>
+		<name_zh>服务端调试信息泄漏</name_zh>
+		<desc>服务端调试信息泄漏，可造成Web应用服务器的源代码信息、环境配置信息、帐号及密码等敏感信息泄露。</desc>
+		<solution>建议关闭服务端调试信息显示。</solution>
+	</rules>
+
+	<rules rid="1004" name="auto_indexes" >
+		<risk>High</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<!-- IIS auto indexes -->
+			<regexp value="IIS " httpcode="all"><![CDATA[<body><H1>\S+\s+-\s+\S{1,255}?</H1><hr>\s+<pre>[\S\s]{1,255}?<A\s+HREF="\S{1,255}?">\S{1,255}?</A><br>]]></regexp>
+
+        	<!-- Apache auto indexes -->
+			<regexp value="Apache " httpcode="all"><![CDATA[<img\s+src="/icons/blank.gif"\s+alt="\[ICO\]"></th><th><a\s+href="\S*">Name</a>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<td><a\s+href="\S*">Parent\s+Directory</a></td>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<h1>Index\s+of\s+\S+</h1>\s+<ul><li><a\s+href="\S+">\s+\S+</a></li>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<pre><img\s+src="/icons/blank.gif"\s+alt="Icon\s*?"\s+/>\s+<a href="\?C=N;O=D">Name</a>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<a\s+href="\?C=N;O=D">Name</a>\s+<a\s+href="\?C=M;O=A">Last\s+modified</a>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<TD\s+STYLE="padding-right:\s+\S+"><A\s+HREF="\S+">Parent\s+Directory</A></TD>]]></regexp>
+			<regexp value="Apache " httpcode="all"><![CDATA[<img[\s\S]*?src="/icons/back.gif"\s*?alt="\[DIR\]">\s*?<a href="/">Parent Directory</a>]]></regexp>
+
+        	<!-- Nginx auto indexes -->
+        	<regexp value="Nginx " httpcode="all"><![CDATA[<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>]]></regexp>
+
+        	<!-- Tomcat auto inexes -->
+        	<regexp value="Tomcat " httpcode="all"><![CDATA[<body><h1>Directory Listing For[\s\S]*?<td align="left"><font size="\+1"><strong>Filename</strong></font></td>]]></regexp>
+
+        	<!-- Lighttpd auto inexes -->
+        	<regexp value="Lighttpd " httpcode="all"><![CDATA[<body>[\S\s]*?<h2>Index of [\w\W]+</h2>[\S\s]*?<div class="list">[\S\s]*?<table summary="Directory Listing" cellpadding="0" cellspacing="0">]]></regexp>
+
+		</rule>
+		<name_zh>目录遍历风险</name_zh>
+		<desc>Web服务器允许目录浏览，导致用户可以看到目录结构。有可能被恶意攻击者收集用于进一步攻击。</desc>
+		<solution>建议禁用Web服务器目录浏览功能。</solution>
+	</rules>
+
+	<rules rid="1005" name="web_path" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<!-- Windows server web path -->
+			<regexp value="Windows" httpcode="200,500"><![CDATA[[a-zA-Z]:\\[^/:\*\?<>\|'"]+\.\w{2,6}|\\{2}[^/:\*\?<>\|'"]+\.\w{2,6}]]></regexp>
+
+        	<!-- *uinx server web path -->
+        	<!--regexp value="LINUX " httpcode="500"><![CDATA[(?<![\w-])/[\w]{3,}(?:/[-\w.]+)+]]></regexp-->
+
+		</rule>
+		<name_zh>网站路径泄漏风险</name_zh>
+		<desc>Web服务器网站路径泄漏,导致恶意攻击者可以收集到服务器环境、目录等敏感信息。</desc>
+		<solution>建议移除网页中的Web服务器网站路径相关信息。</solution>
+	</rules>
+
+	<rules rid="1006" name="email" >
+		<risk>Information</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<regexp value="email" httpcode="all"><![CDATA[[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|asia|com|cn|org|net|gov|edu|mil|biz|info|mobi|name|aero|jobs|museum|travel|tv|us|cc|it|me|hk|jp|kr|tw|ru|la|sh)\b]]></regexp>
+		</rule>
+		<name_zh>电子邮件地址泄漏</name_zh>
+		<desc>电子邮件地址泄漏</desc>
+		<solution>建议移除电子邮件地址相关信息</solution>
+
+	</rules>
+
+	<rules rid="1007" name="flash_object" >
+		<risk>Low</risk>
+		<cats>configure error</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<regexp value="allowScriptAccess" httpcode="all"><![CDATA[<object(?<!</object>).+<param\s+name=['"]allowScriptAccess['"]\svalue=['"]always['"]|<object(?<!</object>).+allowScriptAccess=['"]always['"]|<embed(?<!</object>).+allowScriptAccess=["']always['"]]]></regexp>
+			<regexp value="allowNetworking" httpcode="all"><![CDATA[<object(?<!</object>).+<param\s+name=['"]allowNetworking['"]\svalue=['"]all['"]|<object(?<!</object>).+allowNetworking=['"]all['"]|<embed(?<!</object>).+allowNetworking=["']all['"]]]></regexp>
+		</rule>
+		<name_zh>Flash参数配置风险</name_zh>
+		<desc>AllowScriptAccess或allowNetworking参数设置为all时,将存在潜在的安全风险，使得flash可以执行其他站点的代码。</desc>
+		<solution>建议将AllowScriptAccess参数设置为“sameDomain”，可以防止一个域中的Flash文件访问另一个域的 HTML 页内的脚本。</solution>
+
+	</rules>
+
+	<rules rid="1008" name="source_code" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<regexp value="源代码" httpcode="all"><![CDATA[<[%\?]page\s{1,255}?contentType=[^!]{1,255}?[%\?]>]]></regexp>
+		</rule>
+		<desc>服务端应用程序错误或配置错误导致的Web应用服务器源代码泄露</desc>
+		<name_zh>源代码信息泄露</name_zh>
+		<solution>建议关闭服务器应用程序源代码调试信息及错误信息显示</solution>
+
+	</rules>
+
+	<rules rid="1009" name="apps_error_info" >
+		<risk>Information</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<regexp value="PHP错误信息" httpcode="all"><![CDATA[Warning[^!]{1,255}?:[^!]{1,255}?\s{1,255}?in[^!]{1,255}?\s{1,255}?on\s{1,255}?line[^!]{1,255}?Fatal[^!]{1,255}?error[^!]{1,255}?\s{1,255}?Failed]]></regexp>
+			<regexp value="aspx错误信息" httpcode="all"><![CDATA[Unclosed\s{1,255}?quotation\s{1,255}?mark\s{1,255}?after\s{1,255}?the\s{1,255}?character\s{1,255}?string]]></regexp>
+			<regexp value="jsp错误信息" httpcode="all"><![CDATA[<H1>Error\s{1,255}?page\s{1,255}?exception</H1>[^!]{1,255}?Original\s{1,255}?Exception: [^!]{1,255}?Error\s{1,255}?Code: [^!]{1,255}?\d+[^!]{1,255}?Target Servlet:[^!]{1,255}?Error Stack:[^!]{1,255}?[^!]{1,255}?java\.lang]]></regexp>
+		</rule>
+		<desc>服务端应用程序错误导致的Web应用服务器源代码泄露</desc>
+		<name_zh>服务器端应用程序错误</name_zh>
+		<solution>建议关闭服务器应用程序调试信息及错误信息显示</solution>
+
+	</rules>
+	<rules rid="1010" name="wampserver_homepage" >
+		<risk>Information</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<rule>
+			<regexp value="PHP错误信息" httpcode="all"><![CDATA[WAMPSERVER Homepage.*?Server Configuration.*?Apache Version]]></regexp>
+		</rule>
+		<desc>WAMPServer Homepage页面泄露</desc>
+		<name_zh>服务器端应用配置错误</name_zh>
+		<solution>建议禁用WAMPServer Homepage浏览功能。</solution>
+
+	</rules>
+</root>

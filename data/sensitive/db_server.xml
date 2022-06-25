@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+     <!-- Nginx -->
+	 <server name="Nginx">
+		<rules fid="3001" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>无</cve>
+			<name_zh>Nginx %00空字节执行任意代码(php)漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((0\.[5-6]\.[0-9](?!\d))|(0\.7\.(([0-5][0-9])|(6[0-5])))|(0\.8\.(([0-2][0-9])|(3[0-7]))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3002" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2014-0133</cve>
+			<name_zh>Nginx SPDY缓冲区溢出漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.((3\.1[56])|(4\.[0-3](?!\d))|(5\.((1[0-1])|([0-9](?!\d)))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3003" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2013-0337</cve>
+			<name_zh>Nginx 'access.log'不安全文件权限漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((1\.0\.([0-9](?!\d)|(1[0-5])))|(1\.1\.(([0-9](?!\d)|(1[0-9]))))|(1\.2\.0)|(1\.3\.([0-9](?!\d)|(1[0-3]))))]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3004" name="" >
+			<risk>High</risk>
+            <cve></cve>
+			<name_zh>nginx 配置错误而导致目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.1\.10]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3005" name="" >
+			<risk>High</risk>
+            <cve>cve和正则都未找到</cve>
+			<name_zh>Apache/NGINX 下 PHP-FPM 或者 PHP-CGI 拒绝服务漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.1\.10]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3006" name="" >
+			<risk>High</risk>
+            <cve>CVE-2014-3616</cve>
+			<name_zh>nginx 0.5.6 - 1.7.4 SSL session vulnerable</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((0\.5\.[6-9])|(0\.[6-9]\.[0-9])|(1\.[0-5]\.[0-9])|(1\.7\.[0-4](?!\d)))]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3007" name="" >
+			<risk>High</risk>
+            <cve></cve>
+			<name_zh>nginx文件路径处理远程命令执行漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/(0\.[6-8]\.[0-9])]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3008" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2011-4963</cve>
+			<name_zh>nginx "location" 受限制资源服务漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((1\.2\.0)|(1\.3\.0))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3009" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2010-2266</cve>
+			<name_zh>nginx 0.8.36 远程拒绝服务漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/0\.8\.36]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3010" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2009-4487</cve>
+			<name_zh>nginx 0.7.64 命令注入漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/0\.7\.64]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3011" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2013-2070</cve>
+			<name_zh>Nginx proxy_pass模块远程安全漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((1\.1\.(4|([6-9](?!\d))|1[0-3]|1[5-9]))|(1\.2\.[0-8](?!\d))|1.3.([0-9](?!\d)|1[0-6])|(1\.4\.0))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3012" name="" >
+			<risk>High</risk>
+            <cve>CVE-2011-4315</cve>
+			<name_zh>nginx DNS解析器远程堆缓冲区溢出漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((0\.[1-9])|(10\.0\.[0-9](?!\d)))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3013" name="" >
+			<risk>High</risk>
+            <cve>无</cve>
+			<name_zh>nginx 'ngx_http_close_connection()'远程整数溢出漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.((0\.(([8-9])|(1[4-5])))|(1\.1[79]))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3015" name="" >
+			<risk>High</risk>
+            <cve>CVE-2013-2028</cve>
+			<name_zh>nginx 'ngx_http_parse.c' 栈缓冲区溢出漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.((3\.9(?!\d))|(4\.0))]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3016" name="" >
+			<risk>High</risk>
+            <cve></cve>
+			<name_zh>nginx代理DNS缓存域欺骗漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/0\.[5-8]\.[0-9]]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3017" name="" >
+			<risk>High</risk>
+            <cve></cve>
+			<name_zh>nginx 0.6.x,0.7.x,0.8至0.8.57 文件解析错误</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/((0\.[6-7]\.[0-9])|(0\.8\.(([0-4][0-9])|(5[0-7]))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3019" name="" >
+			<risk>High</risk>
+            <cve></cve>
+			<name_zh>Nginx 1.0.x 标头解析内存泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[nginx\/1\.0\.([0-9](?!\d)|1[0-3])]]></regexp>
+			</rule>
+		</rules-->		
+	</server>
+	
+	<!-- Tomcat -->
+	<server name="Tomcat">
+		<rules fid="3021" name="" >
+			<risk>Medium</risk><!--High Medium  Low Information -->
+            <cve>CVE-2007-1355</cve>
+			<name_zh>Tomcat自带示例hello.jsp存在XSS跨站脚本漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((4\.0\.[0-6])|(4\.1\.((10)|(15)|(24)|(28)|(31)))|((5\.0\.[0-1][0-9])(5\.0\.2[1-9])|(5\.0\.30))|((5\.5\.[0-9](?!\d)))|((6\.0\.10)|(6\.0\.[0-9](?!\d))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3022" name="" >
+			<risk>Medium</risk><!--High Medium  Low Information -->
+            <cve>CVE-2012-3439</cve>
+			<name_zh>Apache Tomcat DIGEST身份验证多个安全漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((5\.5\.[0-9](?!\d))|(5\.5\.[1-2][0-9](?!\d))|(5\.5\.3[0-5](?!\d))|(6\.0\.[0-9](?!\d))|(6\.0\.[1-2][0-9](?!\d))|(6\.0\.3[0-5](?!\d))|(7\.0\.[0-2][0-9](?!\d)))]]></regexp>
+			</rule>
+		</rules>		
+		<!--rules fid="3023" name="" >
+			<risk>Medium</risk>
+            <cve>暂无</cve>
+			<name_zh>Hikvision iVMS-8700 Tomcat 任意文件创建漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[暂无]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3024" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2012-5568</cve>
+			<name_zh>Apache Tomcat 拒绝服务漏洞(CVE-2012-5568)</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/(((7\.0\.[0-9](?!\d))|(7\.0\.1[0-9])|(7\.0\.((21)|(22)|(28)|(23)|(25)|(20))))|((6\.0\.[0-9](?!\d))|(6\.0\.1[0-9])|(6\.0\.((20)|(24)|(26)|(27)|(28)|(30)|(31)|(32)|(33)|(35))))|(5\.5\.(([0-9](?!\d))|([1-2][0-9])|(3[0-5])))|((5\.0\.[0-9](?!\d))|(5\.0\.1[0-9])|(5\.0\.2[1-9])|(5\.0\.30))|((4\.0\.[0-6](?!\d))|(4\.1\.(([0-39](?!\d))|((10)|(12)|(15)|(24)|(28)|(29)|(31)|(36))))))]]></regexp>
+			</rule>
+		</rules>		
+		<rules fid="3025" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2014-0050</cve>
+			<name_zh>Apache Commons FileUpload/Apache Tomcat拒绝服务漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((8\.0\.[0-1])|(7\.0\.(([0-9](?!\d))|(1[0-9])|(2[0-9])|(3[0-9])|(4[0-9])|(50))))]]></regexp>
+			</rule>
+		</rules-->		
+		<!--rules fid="3026" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2013-4286</cve>
+			<name_zh>Apache Tomcat 安全限制绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/(6\.0\.(([0-3](?!\d))|(1[0-9])|(2[046789])|(3[0123567])))]]></regexp>
+			</rule>
+		</rules-->		
+		<rules fid="3027" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-2938</cve>
+			<name_zh>Apache Tomcat UTF-8目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/6\.0\.(([0-9](?!\d))|(1[0-6]))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3028" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2006-7196</cve>
+			<name_zh>Tomcat 5.5.15 cal2.jsp 跨站脚本漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((4\.0\.[0-6](?!\d))|(4\.1\.31)|(5\.0\.(([0-9](?!\d))|(1[0-9])|(2[0-9])|(30)))|(5\.5\.(([0-9](?!\d))|(1[0-5]))))]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3029" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2013-4810</cve>
+			<name_zh>Apache Tomcat/JBoss EJBInvokerServlet / JMXInvokerServlet (RMI over HTTP) Marshalled Object RCE</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[存在问题。]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3030" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2009-0781</cve>
+			<name_zh>Tomcat 自带cal2.jsp示例存在XSS跨站脚本漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((6\.0\.(([0-9](?!\d))|(1[0-6])))|(5\.5\.(([0-9](?!\d))|(1[0-9])|2[0-6]))|(4\.1\.(([0-9](?!\d))|(1[0-9])|(2[0-9])|(3[0-7]))))]]></regexp>
+			</rule>
+		</rules>		
+		<!--rules fid="3031" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2013-2067</cve>
+			<name_zh>Apache Tomcat表单验证功能安全绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((6\.0\.((21)|(24)|(26)|(27)|(28)|(29)|(30)|(31)|(32)|(33)|(35)|(36)))|(7\.0\.(([0-9](?!\d))|(1[0-9])|((20)|(21)|(22)|(23)|(25)|(28)|(30)|(32)))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3032" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-3386</cve>
+			<name_zh>Apache Tomcat Manager和Host Manager上传跨站脚本漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((6\.0\.(([0-9](?!\d))|(1[0-3])))|(5\.5\.(([0-9](?!\d))|(1[0-9])|(2[0-4]))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3033" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2009-3548</cve>
+			<name_zh>Tomcat管理员界面默认口令可导致远程任意代码执行</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((3\.((1\.1(?!\d))|(2\.[1-4](?!\d))|(3\.[1-2](?!\d))))|(4\.((0\.[0-6](?!\d))|(1\.(([0-9](?!\d))|([1-3][0-9])))))|(6\.0\.(([0-9](?!\d))|(1[0-8])|(20)))|(5\.5\.(([0-9](?!\d))|(1[0-9])|(2[0-8]))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3034" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2013-6357</cve>
+			<name_zh>Apache Tomcat 5.5.25跨站请求伪造漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((3\.(([0-3](?!\.))|(1\.1(?!\d))|(2\.[1-4](?!\d))|(3\.[1-2](?!\d))))|((4(?!\.))|(4\.((0\.[0-6](?!\d))|(1\.(([01239](?!\d))|(1[025])|(2[489])|(3[16]))))))|((5(?!\.))|((5\.0\.(([0-9](?!\d))|(1[0-9])|(2[1-9])|(30)))|(5\.5\.(([0-9](?!\d))|(1[0-9])|2[0-5])))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3035" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2013-0346</cve>
+			<name_zh>Apache Tomcat 'log/logdir'目录不安全文件权限漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/(7\.0\.(([0-9](?!\d))|([1-4][0-9])|(50)))]]></regexp>
+			</rule>
+		</rules-->		
+		<rules fid="3036" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2011-1183</cve>
+			<name_zh>Apache Tomcat web.xml访问限制绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/7\.0\.11]]></regexp>
+			</rule>
+		</rules>		
+		<!--rules fid="3037" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2011-3375</cve>
+			<name_zh>Apache Tomcat 7.0.0-7.0.21,6.0.30-6.0.33 安全绕过漏洞导致信息泄露</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((6\.0\.3[0-3])|(7.0.(([0-9](?!\d))|(1[0-9])|(2[0-1]))))]]></regexp>
+			</rule>
+		</rules-->		
+		<!--rules fid="3038" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2012-3546</cve>
+			<name_zh>Apache Tomcat FORM身份验证安全绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((7\.0\.(([0-9](?!\d))|(1[0-9])|(2[012358])))|(6\.0\.(([0-9](?!\d))|(1[0-9])|(2[046789])|(3[01235]))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3039" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2012-3546</cve>
+			<name_zh>Apache Tomcat请求对象安全限制绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Apache Tomcat\/((6\.0\.3[0-3])|(7\.0\.(([0-9](?!\d))|(1[0-9])|(2[0-1]))))]]></regexp>
+			</rule>
+		</rules-->
+	</server>
+		
+     <!-- Jetty -->
+	 <server name="Jetty">		
+		<!--rules fid="3055" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2011-4404</cve>
+			<name_zh>Jetty Web Server不明细节目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Jetty\(4\.[0-1](?!\.)]]></regexp>
+			</rule>
+		</rules-->		
+		<rules fid="3056" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2006-6969</cve>
+			<name_zh>Jetty可预测随机会话ID漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\(((4\.2\.((1[12456789])|(24)))|(5\.1\.11)|(6\.0\.1(?!\d))|(6\.1\.0 pre2))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3057" name="" >
+			<risk>Low</risk><!--High Medium  Low Information -->
+            <cve>CVE-2015-2080</cve>
+			<name_zh>JettyWebServer 9.2.3-9.2.8 shared-buffer 信息泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\(9\.2\.[3-8](?!\d)]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3058" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2009-4612</cve>
+			<name_zh>Jetty 6.1.x JSP Snoop Page Multiple Cross-Site Scripting Vulnerabilities</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\/(6\.1\.(([0-9](?!\d))|(1[0124569])|(2[0-1])))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3059" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2009-4610</cve>
+			<name_zh>jetty 6.x - 7.x xss information disclosure injection</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\/((7\.0\.0(?!\d))|(6\.((0\.[0-2](?!\d))|(1\.(([0-9](?!\d))|(1[0124569])|(20))))))]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3060" name="" >
+			<risk>Medium</risk>
+            <cve>暂无</cve>
+			<name_zh>Mortbay Jetty &lt;= 7.0.0-pre5 Dispatcher Servlet Denial of Service Exploit</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[暂无]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3061" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2002-1178</cve>
+			<name_zh>Jetty 3.1.6/3.1.7/4.1 Servlet Engine Arbitrary Command Execution Vulnerability</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\/((3\.1\.[67](?!\d))|(4\.1(?!\.)))]]></regexp>#未发现具体影响
+			</rule>
+		</rules>
+		<rules fid="3062" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2002-1533</cve>
+			<name_zh>Jetty 4.1 Servlet Engine Cross Site Scripting Vulnerability</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\/4\.1(?!\.)]]></regexp>#未发现具体影响
+			</rule>
+		</rules>
+		<rules fid="3063" name="" >
+			<risk>Medium</risk>
+            <cve>未发现</cve>
+			<name_zh>Jetty双斜线URI处理信息泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Jetty\/6\.1\.[5-7](?!\d)]]></regexp>
+			</rule>
+		</rules-->
+	</server>
+	
+     <!-- Resin -->
+	 <server name="Resin">		
+		<!--rules fid="3064" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2010-2032</cve>
+			<name_zh>Caucho Resin Professional 3.1.5 - 'resin-admin/digest.php' Multiple Cross-Site Scripting Vulnerabili</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/((4\.0\.6(?!\d))|(3\.1\.((10)|(5(?!\d)))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3065" name="" >
+			<risk>Medium</risk>
+            <cve>暂无</cve>
+			<name_zh>Resin Application Server 4.0.36 代码泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/4\.0\.36]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3066" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-2440</cve>
+			<name_zh>resin 3.1 多个代码泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/3\.1\.0(?!\d)]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3067" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2001-0304</cve>
+			<name_zh>resin 1.2 目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/1\.2\.2(?!\.)]]></regexp>
+			</rule>
+		</rules>
+		<!--rules fid="3068" name="" >
+			<risk>Medium</risk>
+            <cve>暂无</cve>
+			<name_zh>resin-doc 会议管理系统任意文件读取漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[暂无]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3069" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-2462</cve>
+			<name_zh>resin 3.1.1 跨站脚本漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/(3\.((0\.(([0-9](?!\d))|(1[0-9])|(20)))|(1\.[0-3](?!\d))))]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3070" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2006-1953</cve>
+			<name_zh>Resin 3.0.18 Windows远程目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/3\.0\.1[78]]]></regexp>
+			</rule>
+		</rules>		
+		<rules fid="3072" name="" >
+			<risk>High</risk>
+            <cve>CVE-2006-2437</cve>
+			<name_zh>Caucho Resin 某CGI程序 输入验证漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/3\.0\.1[78]]]></regexp>
+			</rule>
+		</rules>		
+		<rules fid="3073" name="" >
+			<risk>High</risk>
+            <cve>CVE-2004-0280</cve>
+			<name_zh>Caucho Technology Resin源代码泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/2\.1\.12]]></regexp>
+			</rule>
+		</rules>		
+		<rules fid="3074" name="" >
+			<risk>High</risk>
+            <cve>CVE-2000-1224</cve>
+			<name_zh>Caucho Technology Resin 1.2 JSP源泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/(1\.((2(?!\.))|(1\.5(?!\d))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3075" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-2440</cve>
+			<name_zh>Caucho Resin '\web-inf' 目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/3\.1\.0(?!\d)]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3076" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2001-0399</cve>
+			<name_zh>Caucho Technology Resin JavaBean泄漏漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/1\.[2-3](?!\.)]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3077" name="" >
+			<risk>High</risk>
+            <cve>CVE-2004-0281</cve>
+			<name_zh>Caucho Technology Resin源代码和目录列表泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/2\.1\.12]]></regexp>
+			</rule>
+		</rules>		
+		<!--rules fid="3079" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-2441</cve>
+			<name_zh>Caucho Resin 3.1 Encoded Space (%20) Request Path Disclosure</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[Resin\/3\.1\.0(?!\d)]]></regexp>
+			</rule>
+		</rules-->
+		<!--rules fid="3080" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2001-0304</cve>
+			<name_zh>caucho technology resin 1.2 - Directory Traversal vulnerability</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[Resin\/1\.2(?!\.)]]></regexp>
+			</rule>
+		</rules-->
+	</server>
+		
+     <!-- Zeus -->
+	 <server name="Zeus">		
+		<!--rules fid="3081" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2015-2183</cve>
+			<name_zh>ZeusCart 4.0 - Admin SQL注入漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[ZeusCart\/4\.0(?!\.)]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3082" name="" >
+			<risk>Medium</risk>
+            <cve>暂无</cve>
+			<name_zh>ZeusCart 4.0 - CSRF 漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[ZeusCart\/4\.0(?!\.)]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3083" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2015-2184</cve>
+			<name_zh>ZeusCart 4 信息泄漏漏洞</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[ZeusCart\/4(?!\.)]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3084" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-5216</cve>
+			<name_zh>ZeusCart小于等于 2.0 (category_list.php) SQL Injection Vulnerability</name_zh>
+			<rule>
+				<regexp url="/index.jsp" position="page" ><![CDATA[ZeusCart\/2\.0(?!\.)]]></regexp>
+			</rule>
+		</rules-->
+		<rules fid="3085" name="" >
+			<risk>Medium</risk><!--High Medium  Low Information -->
+            <cve>CVE-2000-0149</cve>
+			<name_zh>Zeus Web服务器空结束字符串漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="page" ><![CDATA[Zeus\/3\.((1\.[1-9](?!\d))|((3(?!\.))|(3\.[1-5](?!\d))))]]></regexp>
+			</rule>
+		</rules>
+	</server>
+
+     <!-- Lighttpd -->
+	 <server name="Lighttpd">
+		<rules fid="3089" name="" >
+			<risk>High</risk><!--High Medium  Low Information -->
+            <cve>CVE-2014-2324</cve>
+			<name_zh>lighttpd目录遍历漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/((1\.3\.16)|(1\.4\.(([3-9](?!\d))|([1-2][0-9])|(3[0-4]))))]]></regexp>
+			</rule>
+		</rules>
+		<rules fid="3090" name="" >
+			<risk>High</risk>
+            <cve>CVE-2011-4362</cve>
+			<name_zh>lighttpd 'http_auth.c' 远程拒绝服务漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/(1\.((0\.[2-3](?!\d))|(1\.[0-9](?!\d))|(2\.[01235678](?!\d))|(3\.(([012345689](?!\d))|(1[0-6])))|(4\.(([02-9](?!\d))|(1[0-9])|2[0-5]))))]]></regexp>
+			</rule>
+		</rules>	 
+		<rules fid="3092" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-4360</cve>
+			<name_zh>lighttpd mod_userdir区分大小写比较导致代码泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/(1\.((0\.[2-3](?!\d))|(1\.[0-9](?!\d))|(2\.[0-8](?!\d))|(3\.(([0-9](?!\d))|(1[0-6])))|(4\.(([01](?!\d))|(1[0-9])))))]]></regexp>
+			</rule>
+		</rules>	 
+		<rules fid="3093" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2005-0453</cve>
+			<name_zh>lighttpd 1.3.7 远程CGI脚本代码泄漏漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/1\.3\.[1-7](?!\d)]]></regexp>
+			</rule>
+		</rules>	 
+		<!--rules fid="3094" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-4727</cve>
+			<name_zh>lighttpd 1.4.1 Mod_FastCGI请求头部远程溢出漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/1\.((3\.(([7-8](?!\d))|(10)))|(4\.(([1-9](?!\d))|(1[0-7]))))]]></regexp>
+			</rule>
+		</rules-->	 
+		<rules fid="3095" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2007-3946</cve>
+			<name_zh>lighttpd 1.4.15 多个远程拒绝服务和信息泄露漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/1\.4\.(([1-9](?!\d))|(1[0-5]))]]></regexp>
+			</rule>
+		</rules>	 
+		<rules fid="3096" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-4360</cve>
+			<name_zh>Lighttpd 'mod_userdir'大小写区分对比安全绕过漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/(1\.((0\.[2-3](?!\d))|(1\.[0-9](?!\d))|(2\.[0-8](?!\d))|(3\.(([0-9](?!\d))|(1[0-6])))|(4\.(([0-1](?!\d))|(1[0-9])))))]]></regexp>
+			</rule>
+		</rules>	 
+		<rules fid="3097" name="" >
+			<risk>Medium</risk>
+            <cve>CVE-2008-1531</cve>
+			<name_zh>Lighttpd SSL错误拒绝服务漏洞</name_zh>
+			<rule>
+				<regexp url="/" position="server" ><![CDATA[lighttpd\/(1\.4\.((9(?!\d))|(19)))]]></regexp>
+			</rule>
+		</rules>
+	</server>
+</root>
+		

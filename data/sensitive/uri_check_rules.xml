@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<rules fid="2001" name="phpinfo" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+			<!--file url="phpinfo.php" httpcode="200"><![CDATA[PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000]]></file-->
+			<file url="/?phpinfo=1" httpcode="200"><![CDATA[PHP Version.*?System.*?Build Date]]></file>
+			<file url="phpinfo.php" httpcode="200"><![CDATA[PHP Version.*?System.*?Build Date]]></file>
+			<file url="test.php" httpcode="200"><![CDATA[PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000]]></file>
+			<file url="1.php" httpcode="200"><![CDATA[PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000]]></file>
+			<file url="index1.php" httpcode="200"><![CDATA[PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000]]></file>
+			<file url="t.php" httpcode="200"><![CDATA[PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000]]></file>
+		</uri>
+		<name_zh>PHPINFO文件信息泄漏</name_zh>
+		<desc>PHPINFO文件信息泄漏</desc>
+		<solution>建议移除PHPINFO信息</solution>
+		
+	</rules>
+	
+	<rules fid="2002" name="server_probe" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+			<file url="iprober.php" httpcode="200"><![CDATA[Prober.*?V\d\.\d{3}]]></file>
+			<file url="index1.php" httpcode="200"><![CDATA[Prober.*?V\d\.\d{3}]]></file>
+			<file url="i.php" httpcode="200"><![CDATA[<!--服务器相关参数-->.*?<!--组件信息-->.*?<!--数据库支持-->.*?<!--服务器性能检测-->]]></file>
+			<file url="tz.php" httpcode="200"><![CDATA[<td id="f31">Powered by.*?<a href="http://www.depoch.net"><b>dEpoch Studio</b>]]></file>
+			<file url="aspcheck.asp" httpcode="200"><![CDATA[<h2>ASP组件支持情况</h2><a name="G"></a>]]></file>	
+			<file url="DotNetInfo.aspx" httpcode="200"><![CDATA[<td colspan="2" class="TrHead">服务器COM组件安装检测</td>]]></file>
+			<file url="jspcheck.aspx" httpcode="200"><![CDATA[<td colspan="2" class="TrHead">服务器COM组件安装检测</td>]]></file>
+		</uri>
+		<name_zh>服务器环境探针</name_zh>
+		<desc>服务器环境探针</desc>
+		<solution>建议移除该文件</solution>
+		
+	</rules>
+	
+	<rules fid="2004" name="backup_files" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+			<file url="wwwroot.rar" httpcode="200"><![CDATA[Rar!]]></file>
+			<file url="htdocs.rar" httpcode="200"><![CDATA[Rar!]]></file>
+			<file url="backup.rar" httpcode="200"><![CDATA[Rar!]]></file>
+			<file url="backup.tar.gz" httpcode="200"><![CDATA[\x1f\x8b]]></file>
+			<file url="htdocs.tar.gz" httpcode="200"><![CDATA[\x1f\x8b]]></file>
+			<file url="index.bak" httpcode="200"><![CDATA[None]]></file>
+			<file url="index.zip" httpcode="200,401"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>备份文件泄漏</name_zh>
+		<desc>Web服务器上发现备份文件，有可能造成服务器配置信息、源代码等敏感信息泄露</desc>
+		<solution>建议删除服务器上相应的备份文件</solution>
+	</rules>
+	
+	<rules fid="2005" name="backup_files" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>1</where>
+		<uri>	
+			<file url=".old" httpcode="200"><![CDATA[None]]></file>
+			<file url=".bak" httpcode="200"><![CDATA[None]]></file>
+			<file url=".bck" httpcode="200"><![CDATA[None]]></file>
+			<file url=".copy" httpcode="200"><![CDATA[None]]></file>
+			<file url=".temp" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>备份文件泄漏</name_zh>
+		<desc>Web服务器上发现备份文件，有可能造成服务器配置信息、源代码等敏感信息泄露</desc>
+		<solution>建议删除服务器上相应的备份文件</solution>
+	</rules>	
+	
+	<rules fid="2006" name="svn_info" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>
+			<file url=".svn/entries" httpcode="200"><![CDATA[dir.*?svn://|dir.*?https://]]></file>
+			<file url="CVS/Entries" httpcode="200"><![CDATA[\d \d{2}:\d{2}:\d{2} \d{4}//]]></file>	
+			<file url=".git/config" httpcode="200"><![CDATA[branch "master"]]></file>
+			<file url=".hg/hgrc" httpcode="200"><![CDATA[\[\[paths\].*?default =]]></file>
+			<file url=".hg/requires" httpcode="200"><![CDATA[^revlogv1]]></file>
+			<file url=".bzr/README" httpcode="200"><![CDATA[^This\sis\sa\sBazaar]]></file>
+			<file url=".git/HEAD" httpcode="200"><![CDATA[^ref: refs/]]></file>
+			<file url=".git/info/refs" httpcode="200"><![CDATA[^[a-f0-9]{40}\s+refs/]]></file>
+			<file url=".git/objects/info/packs" httpcode="200"><![CDATA[^P pack-[a-f0-9]{40}\.pack]]></file>
+			<file url=".git/packed-refs" httpcode="200"><![CDATA[^[a-f0-9]{40} refs/]]></file>
+			<file url=".git/refs/heads/master" httpcode="200"><![CDATA[^[a-f0-9]{40}]]></file>
+		</uri>
+		<name_zh>SVN信息泄漏</name_zh>
+		<desc>SVN信息泄漏，能泄露服务器的源代码部署方式、登陆地址及帐号、文件目录等信息。</desc>
+		<solution>建议删除SVN相关信息。</solution>
+		
+	</rules>
+	
+	<rules fid="2007" name="swp_info" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+			<file url="index.php.swp" httpcode="200"><![CDATA[<html>.*?include\(.*?\)]]></file>
+		</uri>
+		<name_zh>VI临时文件信息泄漏</name_zh>
+		<desc>VI临时文件信息泄漏，有可能造成源代码等敏感信息泄露。</desc>
+		<solution>建议删除VI临时文件。</solution>
+		
+	</rules>
+	
+	<rules fid="2008" name="bash_history" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+			<file url=".bash_history" httpcode="200"><![CDATA[ls.*?cd.*?|dir.*?cd]]></file>
+			<file url=".bashrc" httpcode="200"><![CDATA[# ~/.bashrc: executed by bash\(1\) for non-login shells]]></file>
+		</uri>
+		<name_zh>用户Shell历史文件信息泄漏</name_zh>
+		<desc>用户Shell历史文件，能泄露用户命令操作记录等敏感信息。</desc>
+		<solution>建议删除用户Shell历史文件信息。</solution>
+		
+	</rules>
+
+	<rules fid="2010" name="jsp_samples" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="examples/jsp/" httpcode="200"><![CDATA[<title>jsp samples</title>|<title>jsp examples</title>]]></file>
+		</uri>
+		<name_zh>JSP示例文件信息泄漏</name_zh>
+		<desc>JSP默认示例文件，这些文件能泄露服务器配置信息等，有可能存在其他漏洞并被恶意攻击者利用。</desc>
+		<solution>建议删除JSP默认示例文件。</solution>
+		
+	</rules>
+
+	<rules fid="2011" name="cgi_documents" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="cgi-bin/" httpcode="200,403"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>CGI默认目录信息泄露</name_zh>
+		<desc>CGI默认目录，这些文件能泄露服务器配置信息等，有可能存在其他漏洞并被恶意攻击者利用。</desc>
+		<solution>建议删除CGI默认目录,或进行重命名，并设置相应的访问权限。</solution>
+		
+	</rules>
+
+	<rules fid="2012" name="test_samples" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>
+		<file url="test" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.cfm" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.cgi" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.chm" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.htm" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.html" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.shtml" httpcode="200"><![CDATA[None]]></file>
+		<file url="test.txt" httpcode="200"><![CDATA[None]]></file>
+		<file url="test0" httpcode="200"><![CDATA[None]]></file>
+		<file url="test1" httpcode="200"><![CDATA[None]]></file>
+		<file url="test_testing.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.cfm" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.cgi" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.htm" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.html" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.shtml" httpcode="200"><![CDATA[None]]></file>
+		<file url="testing.txt" httpcode="200"><![CDATA[None]]></file>
+		<file url="test/" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>测试文件泄露</name_zh>
+		<desc>测试文件泄露，这些文件可能是调试、部署服务器环境时遗留的，有可能泄露服务器敏感信息，并可能存在其他漏洞而被恶意攻击者利用。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2013" name="mdrds" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="_mmServerScripts/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="_mmDBScripts/" httpcode="200,401"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>Dreamware远程数据库连接测试文件泄露</name_zh>
+		<desc>Dreamware远程数据库连接测试文件。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2014" name="statics_info" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="usage/" httpcode="200,401"><![CDATA[Usage Statistics]]></file>
+		</uri>
+		<name_zh>统计信息泄露</name_zh>
+		<desc>Web应用容器默认统计信息泄露</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2015" name="default_diretory" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="include/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="lib/" httpcode="200,401"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>默认目录泄漏</name_zh>
+		<desc>Web应用程序默认目录，有可能泄露服务器配置信息、源代码等敏感信息。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2016" name="sensitive_documents" >
+		<risk>Low</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="secured/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="error/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="private/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="stats/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="db/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="temp/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="server-status/" httpcode="200"><![CDATA[None]]></file>
+		<file url="class/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="files/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="inc/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="img/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="WEB-INF/" httpcode="200"><![CDATA[None]]></file>
+		<file url="SQL/" httpcode="200"><![CDATA[None]]></file>
+		<file url="CVS/" httpcode="200"><![CDATA[<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>]]></file>
+		<file url=".idea/" httpcode="200"><![CDATA[<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>]]></file>
+		<file url="CMS/" httpcode="200"><![CDATA[None]]></file>
+		<file url="DB/" httpcode="200"><![CDATA[None]]></file>
+		<file url="!install/" httpcode="200"><![CDATA[None]]></file>
+		<file url="backup/" httpcode="200"><![CDATA[None]]></file>
+		<file url="backups/" httpcode="200"><![CDATA[None]]></file>
+		<file url="bak/" httpcode="200,401"><![CDATA[None]]></file>
+		<file url="jdbc/" httpcode="200"><![CDATA[None]]></file>
+		<file url="~root/" httpcode="200"><![CDATA[None]]></file>
+		<file url="~log/" httpcode="200"><![CDATA[None]]></file>
+		<file url="~admin/" httpcode="200"><![CDATA[None]]></file>
+		<file url="src/" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>敏感目录泄露</name_zh>
+		<desc>敏感文件，有可能泄露服务器配置、源代码等敏感信息。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2017" name="log_info" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="access.log" httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file>
+		<file url="error.log" httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file>
+		<file url="errors.log" httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file>
+		<file url="error_log" httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file>
+		<file url="logs/access.log" httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file>
+		<file url="logs/error.log " httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file> 
+		<file url="logs/error_log " httpcode="200"><![CDATA["GET.*?HTTP/1.1"\d{3}]]></file> 
+		</uri>
+		<name_zh>日志信息泄露</name_zh>
+		<desc>敏感文件，有可能泄露服务器配置、源代码等敏感信息。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+
+	<rules fid="2018" name="frontpage" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="postinfo.html" httpcode="200"><![CDATA[<!--\s*?postinfo.html version \d\.\d\d\d.*>]]></file>
+		</uri>
+		<name_zh>FrontPage配置文件</name_zh>
+		<desc>FrontPage默认配置文件</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+	
+	<rules fid="2020" name="resion_doc" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="resin-doc/viewfile/?contextpath=../../../../&amp;file=WEB-INF/web.xml" httpcode="200"><![CDATA[<title>WEB-INF/web.xml</title>]]></file>
+		</uri>
+		<name_zh>Resion-doc任意文件读取风险</name_zh>
+		<desc>敏感文件，有可能泄露服务器配置、源代码等敏感信息。</desc>
+		<solution>建议删除这些文件或目录。</solution>		
+	</rules>
+	<rules fid="2021" name="sensitive_file" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>
+		<file url="1.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="1.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="1.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="1.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="123.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="123.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="123.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="123.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="2.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="2.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="2.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="2.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="3.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="3.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="3.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="3.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="ServerVariables.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="WEB-INF/web.xml" httpcode="200"><![CDATA[<web-app.*?</web-app>]]></file>
+		<file url="WEB-INF/jboss-web.xml" httpcode="200"><![CDATA[<web-app.*?</web-app>]]></file>
+		<file url="_debugadmin.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="_test" httpcode="200"><![CDATA[None]]></file>
+		<file url="a.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="a.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="a.jsp" httpcode="200"><![CDATA[None]]></file>
+		<file url="a.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="abc.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="abc.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="abc.jsp" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>敏感文件泄露</name_zh>
+		<desc>敏感文件，有可能泄露服务器配置、源代码等敏感信息。</desc>
+		<solution>建议删除这些文件或目录。</solution>
+		
+	</rules>
+	<rules fid="2022" name="ckedit_disclosure" >
+		<risk>Medium</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="fckeditor/editor/fckeditor.html" httpcode="200"><![CDATA[None]]></file>
+		<file url="ckeditor/editor/ckeditor.html" httpcode="200"><![CDATA[None]]></file>
+		<file url="Editor/FileUpload.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="fckeditor/editor/fckeditor.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="ckeditor/editor/ckeditor.aspx" httpcode="200"><![CDATA[None]]></file>
+		<file url="fckeditor/editor/fckeditor.jsp" httpcode="200"><![CDATA[None]]></file>	
+		<file url="ckfinder/ckfinder.html" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>CKEditor编辑器泄漏</name_zh>
+		<desc>CKEditor编辑器泄漏，有可能利用编辑器漏洞直接上传文件。</desc>
+		<solution>建议禁止越权访问这些文件或目录。</solution>		
+	</rules>
+	<rules fid="2023" name="ewebeditor_disclosure" >
+		<risk>High</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="db/ewebeditor.mdb" httpcode="200"><![CDATA[None]]></file>
+		<file url="ewebeditor/admin_login.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="SouthidcEditor/Datas/SouthidcEditor.mdb" httpcode="200"><![CDATA[None]]></file>
+		<file url="ewebeditor/admin_uploadfile.asp" httpcode="200"><![CDATA[None]]></file>
+		<file url="ewebeditor/ewebeditor.asp" httpcode="200"><![CDATA[None]]></file>	
+		<file url="ewebeditor/" httpcode="200"><![CDATA[None]]></file>
+		<file url="ewebeditor/admin/config.php" httpcode="200"><![CDATA[None]]></file>
+		<file url="ewebeditor/admin/" httpcode="200"><![CDATA[None]]></file>
+		</uri>
+		<name_zh>eWebEditor编辑器泄漏</name_zh>
+		<desc>eWebEditor编辑器泄漏，有可能利用编辑器漏洞直接上传文件。</desc>
+		<solution>建议禁止越权访问这些文件或目录。</solution>		
+	</rules>
+	<rules fid="2024" name="database_disclosure" >
+		<risk>High</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="Database.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="L-BLOG.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="Leadbbs.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="PowerEasy2005.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="PowerEasy2006.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="PowerEasy4.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="PowerEasy5.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="PowerEasy6.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="download.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		<file url="ewebforum.mdb" httpcode="200"><![CDATA[Standard Jet DB]]></file>
+		</uri>
+		<name_zh>数据库文件泄露</name_zh>
+		<desc>数据库文件泄露，可直接访问到数据库文件。</desc>
+		<solution>建议禁止越权访问这些文件并修改文件名称。</solution>
+	</rules>
+	<rules fid="2025" name="sitemap_disclosure" >
+		<risk>High</risk>
+		<cats>info leak</cats>
+		<owasp>2010 A4</owasp>
+		<recursion>False</recursion>
+		<where>0</where>
+		<uri>	
+		<file url="sitemap.xml" httpcode="200"><![CDATA[</urlset>]]></file>
+		</uri>
+		<name_zh>站点地图泄露</name_zh>
+		<desc>网站地图，能够查看网站的所有url信息。</desc>
+		<solution>建议敏感的url地址不要放在sitemap.xml里面。</solution>
+	</rules>
+</root>

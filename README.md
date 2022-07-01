@@ -15,7 +15,7 @@ OWASP TOP10检测 https://github.com/andresriancho/w3af
 XSS 检测 https://github.com/hahwul/dalfox  
 网站技术  https://github.com/chushuai/wappalyzer   
 用Golang运行JavaScript https://github.com/dop251/goja  
-返连平台 https://github.com/chennqqi/godnslog
+反连平台 https://github.com/chennqqi/godnslog
 
 
 # 目录结构

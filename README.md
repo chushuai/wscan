@@ -8,6 +8,7 @@
 被动扫描 https://github.com/lqqyt2423/go-mitmproxy  
 POC扫描  https://github.com/jweny/pocassist   
 POC扫描  https://github.com/WAY29/pocV   
+POC扫描  https://github.com/zema1/yarx
 动态爬虫 https://github.com/Qianlitp/crawlergo  
 基础爬虫 https://github.com/geziyor/geziyor  
 SQL注入 https://github.com/sqlmapproject/sqlmap  
@@ -16,6 +17,7 @@ XSS 检测 https://github.com/hahwul/dalfox
 网站技术  https://github.com/chushuai/wappalyzer   
 用Golang运行JavaScript https://github.com/dop251/goja  
 反连平台 https://github.com/chennqqi/godnslog
+WEB漏洞扫描器：https://github.com/wrenchonline/glint
 
 
 # 目录结构

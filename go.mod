@@ -17,10 +17,12 @@ require (
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
+	github.com/thoas/go-funk v0.9.2 // indirect
 	github.com/urfave/cli/v2 v2.10.2 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	github.com/zema1/martian v0.0.0-20200107103851-f571c6072339 // indirect
 	go.uber.org/automaxprocs v1.5.1 // indirect
+	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553 // indirect
 	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6 // indirect
 	golang.org/x/text v0.3.7 // indirect
 )

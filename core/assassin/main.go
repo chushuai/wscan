@@ -5,12 +5,17 @@
 package main
 
 import (
+	"crypto/x509"
+	"encoding/pem"
 	"fmt"
+	"github.com/google/martian/mitm"
 	"github.com/urfave/cli/v2"
+	"log"
 	"os"
+	"time"
 )
 
-func Banner() string {
+func showBanner() {
 
 	banner := `
 ____  ___.________.    ____.   _____.___.
@@ -19,13 +24,12 @@ ____  ___.________.    ____.   _____.___.
  /     \  |    |   \/    |    \ \____   |
 \___/\  \ |____|   /\____|_   / / _____/
       \_/       \_/        \_/  \/
-
 `
-	return banner
-
+	fmt.Println(banner)
 }
 
 func WebScan(c *cli.Context) error {
+
 	return nil
 }
 
@@ -55,6 +59,20 @@ func Convert(c *cli.Context) error {
 }
 
 func GenerateCA(c *cli.Context) error {
+	var err error
+	x509c, priv, err := mitm.NewAuthority("martian.proxy", "Martian Authority", 365*24*time.Hour)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//保存公钥私钥到当前目录上
+	certOut, _ := os.Create("./server.pem")
+	pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: x509c.Raw})
+	certOut.Close()
+
+	keyOut, _ := os.Create("./server.key")
+	pem.Encode(keyOut, &pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(priv)})
+	keyOut.Close()
+	fmt.Println("The Complete from Generating Certificat ")
 	return nil
 }
 
@@ -147,7 +165,7 @@ var subCommandVersion = cli.Command{
 }
 
 func main() {
-	fmt.Println(Banner())
+	showBanner()
 	author := cli.Author{
 		Name:  "shaochuyu",
 		Email: "shaochuyu@qq.com",
@@ -175,6 +193,12 @@ func main() {
 	if err != nil {
 
 	}
+
+}
+
+//aShowVersionInf
+
+func loadLicense() {
 
 }
 

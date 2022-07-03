@@ -10,6 +10,7 @@ package mitmhelper
 //gunkit/core/assassin/collector/mitmhelper.(*HTTPMirrorModifier).ModifyResponse.func1
 //type..eq.gunkit/core/assassin/collector/mitmhelper.HTTPMirrorModifier
 //gunkit/core/assassin/collector/mitmhelper.NewHTTPMirrorModifier
+
 type HTTPMirrorModifier struct {
 }
 

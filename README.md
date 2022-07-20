@@ -18,6 +18,7 @@ XSS 检测 https://github.com/hahwul/dalfox
 用Golang运行JavaScript https://github.com/dop251/goja  
 反连平台 https://github.com/chennqqi/godnslog   
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
+JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/  
 
 
 # 目录结构

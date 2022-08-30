@@ -1,5 +1,5 @@
 # wscan
-研究WEB安全 
+一款专注于WEB安全的扫描器 
 
 # TODO:
 使用Golang，重新实现xray，并且开源

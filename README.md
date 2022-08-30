@@ -5,7 +5,7 @@
 使用Golang，重新实现xray，并且开源
 
 # 架构简析
-![](doc/img/WScan.jpg)
+![](https://github.com/chushuai/wscan/blob/main/doc/img/WScan.jpg)
 
 # 参考代码：
 被动扫描 https://github.com/zema1/martian  

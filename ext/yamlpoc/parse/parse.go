@@ -5,7 +5,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"os"
 	"sync"
-	"xray/ext/yamlpoc/structs"
+	"wscan/ext/yamlpoc/structs"
 )
 
 var PocPool = sync.Pool{

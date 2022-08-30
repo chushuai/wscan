@@ -5,7 +5,7 @@ import (
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types/ref"
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
-	"xray/ext/yamlpoc/structs"
+	"wscan/ext/yamlpoc/structs"
 )
 
 var (

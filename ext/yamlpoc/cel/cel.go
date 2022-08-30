@@ -4,7 +4,7 @@ import (
 	"strings"
 	"sync"
 
-	"xray/ext/yamlpoc"
+	"wscan/ext/yamlpoc"
 
 	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
@@ -12,8 +12,8 @@ import (
 	"github.com/google/cel-go/common/types/ref"
 	"github.com/google/cel-go/interpreter/functions"
 	exprpb "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
-	"xray/core/utils/log"
-	"xray/ext/yamlpoc/structs"
+	"wscan/core/utils/log"
+	"wscan/ext/yamlpoc/structs"
 )
 
 type RequestFuncType func(rule structs.Rule) error

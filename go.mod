@@ -1,4 +1,4 @@
-module xray
+module wscan
 
 go 1.18
 

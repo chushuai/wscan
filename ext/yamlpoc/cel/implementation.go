@@ -13,17 +13,17 @@ import (
 	"sync"
 	"time"
 	"unicode"
-	"xray/core/utils/log"
+	"wscan/core/utils/log"
 
 	"github.com/dlclark/regexp2"
 	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"
 	"github.com/google/cel-go/interpreter/functions"
-	"xray/core/utils"
-	"xray/ext/yamlpoc"
-	"xray/ext/yamlpoc/requests"
-	"xray/ext/yamlpoc/structs"
+	"wscan/core/utils"
+	"wscan/ext/yamlpoc"
+	"wscan/ext/yamlpoc/requests"
+	"wscan/ext/yamlpoc/structs"
 )
 
 var (

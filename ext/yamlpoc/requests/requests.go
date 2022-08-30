@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
-	"xray/ext/yamlpoc"
-	"xray/ext/yamlpoc/structs"
+	"wscan/ext/yamlpoc"
+	"wscan/ext/yamlpoc/structs"
 )
 
 var (

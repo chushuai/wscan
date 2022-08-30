@@ -7,8 +7,8 @@ import (
 	"sort"
 
 	"github.com/bluele/gcache"
-	"xray/core/utils"
-	"xray/ext/yamlpoc/structs"
+	"wscan/core/utils"
+	"wscan/ext/yamlpoc/structs"
 )
 
 var (

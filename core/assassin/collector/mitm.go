@@ -39,7 +39,7 @@ import (
 	"strings"
 	"sync"
 	"time"
-	vhttp "xray/core/assassin/http"
+	vhttp "wscan/core/assassin/http"
 )
 
 //gunkit/core/assassin/collector.(*MitmProxy).makeResultChan

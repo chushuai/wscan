@@ -20,6 +20,11 @@ XSS 检测 https://github.com/hahwul/dalfox
 用Golang运行JavaScript https://github.com/dop251/goja  
 反连平台 https://github.com/chennqqi/godnslog   
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
+JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
+
+# 参考文章
+推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
+HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
 JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/  
 
 

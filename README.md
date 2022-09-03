@@ -5,7 +5,7 @@
 使用Golang，重新实现xray，并且开源
 
 # 架构简析
-![](https://github.com/chushuai/wscan/blob/main/doc/img/WScan.jpg)
+![](doc/img/WScan.jpg)
 
 # 参考代码：
 被动扫描 https://github.com/zema1/martian  
@@ -29,6 +29,10 @@ JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast
 HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
 JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/  
 
+
+# 使用文档参考
+xray 安全评估工具文档  https://docs.xray.cool/#/  
+pocsuite3  https://pocsuite.org/guide/poc-specification.html
 
 
 # 目录结构

@@ -17,13 +17,6 @@ import (
 
 func GenerateCA() ([]byte, []byte) {
 	var err error
-	//
-	//	//CN = Insecure Root CA For X-Ray Scanner
-	//	//OU = Service Infrastructure Department
-	//	//O = Chaitin Tech
-	//	//STREET = Beijing
-	//	//L = Beijing
-	//	//C = CN
 	x509c, priv, err := mitm.NewAuthority("Insecure Root CA For Wscan Scanner", "Wscan Scanner", 365*10*24*time.Hour)
 	if err != nil {
 		log.Fatal(err)

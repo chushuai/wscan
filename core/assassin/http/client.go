@@ -4,182 +4,80 @@
  */
 package http
 
-/*
-gunkit/core/assassin/http.(*Client).init
-gunkit/core/assassin/http.(*Client).WithStatistics
-gunkit/core/assassin/http.(*Client).Stater
-gunkit/core/assassin/http.(*Client).Options
-gunkit/core/assassin/http.(*Client).NativeClient
-gunkit/core/assassin/http.(*Client).CloneWithNewOptions
-gunkit/core/assassin/http.(*Client).CloneWithNewJar
-gunkit/core/assassin/http.NewCookieJar
-gunkit/core/assassin/http.(*Client).CloneWithoutJar
-gunkit/core/assassin/http.(*Client).BuildRequest
-gunkit/core/assassin/http.(*Client).doWithRetries
-gunkit/core/assassin/http.(*Client).respond
-gunkit/core/assassin/http.(*Client).AddFlowCallback
-gunkit/core/assassin/http.(*Client).Respond
-gunkit/core/assassin/http.(*Client).RespondWithoutBody
-gunkit/core/assassin/http.(*Client).DoRaw
-gunkit/core/utils/log.Warn
-gunkit/core/assassin/http.NewClient
-gunkit/core/assassin/http.NewDefaultClientOptions
-gunkit/core/assassin/http.NewTransport
-gunkit/core/assassin/http.(*BytesCloser).Close
-gunkit/core/assassin/http.NewClientWithOptions
-gunkit/core/assassin/http.NewStatistics
-gunkit/core/assassin/http.(*ClientOptions).SetProxies
-gunkit/core/assassin/http.(*ClientOptions).WroteBack
-gunkit/core/assassin/http.ParsePKCS12FromFile
-gunkit/core/assassin/http.(*CookieJar).SetCookies
-gunkit/core/assassin/http.(*CookieJar).Cookies
-gunkit/core/assassin/http.ParseCookie
-gunkit/core/assassin/http.buildHistory
-gunkit/core/assassin/http.getFirstRequest
-gunkit/core/assassin/http.FlowFromResponse
-gunkit/core/assassin/http.(*Parameter).String
-gunkit/core/assassin/http.(*Parameter).Clone
-gunkit/core/assassin/http.CloneParams
-gunkit/core/assassin/http.embedMap
-gunkit/core/assassin/http.(*Request).URL
-gunkit/core/assassin/http.(*Request).SetURL
-gunkit/core/assassin/http.(*Request).GetOriginURL
-gunkit/core/assassin/http.(*Request).Origin
-gunkit/core/assassin/http.(*Request).GetBodyReader
-gunkit/core/assassin/http.(*Request).isParsed
-gunkit/core/assassin/http.(*Request).DumpHeaderWithoutClient
-gunkit/core/assassin/http.(*Request).GetRawBody
-gunkit/core/assassin/http.(*Request).HasParams
-gunkit/core/assassin/http.(*Request).ParamsCookie
-gunkit/core/assassin/http.(*Request).parseQuery
-gunkit/core/assassin/http.(*Request).parseBody
-gunkit/core/assassin/http.IsSafeMethod
-gunkit/core/assassin/http.(*Request).parseQueryData
-gunkit/core/assassin/http.(*Request).parseJSON
-gunkit/core/assassin/http.(*Request).buildBody
-gunkit/core/assassin/http.(*Request).isBodyValueJSON
-gunkit/core/assassin/http.escapeQuotes
-gunkit/core/assassin/http.(*Request).buildDataMap
-gunkit/core/assassin/http.(*Request).buildQueryData
-gunkit/core/assassin/http.(*Request).buildQuery
-gunkit/core/assassin/http.(*Request).isQueryValueJSON
-gunkit/core/assassin/http.(*Request).doCache
-gunkit/core/assassin/http.(*Request).ContentType
-gunkit/core/assassin/http.(*Request).Referrer
-gunkit/core/assassin/http.(*Request).clone
-gunkit/core/assassin/http.(*Request).WithBody
-gunkit/core/assassin/http.(*Request).WithJSONBody
-gunkit/core/assassin/http.(*Request).WithFormBody
-gunkit/core/assassin/http.(*Request).WithMultipartBody
-gunkit/core/assassin/http.(*Request).WithRawCookie
-gunkit/core/assassin/http.(*Request).WithURL
-gunkit/core/assassin/http.(*Request).GetParam
-gunkit/core/assassin/http.(*Request).ParamsAll
-gunkit/core/assassin/http.(*Request).ParamsQueryAndBody
-gunkit/core/assassin/http.(*Request).ParamsQuery
-gunkit/core/assassin/http.(*Request).ParamsBody
-gunkit/core/assassin/http.(*Request).paramsCookie
-gunkit/core/assassin/http.(*Request).ParamsCookieFull
-gunkit/core/assassin/http.(*Request).ParamsHeader
-gunkit/core/assassin/http.(*Request).DelParam
-gunkit/core/assassin/http.(*Request).Mutate
-gunkit/core/assassin/http.(*Request).Spawn
-gunkit/core/assassin/http.(*Request).DumpHeader
-gunkit/core/assassin/http.(*Request).Dump
-gunkit/core/assassin/http.(*Request).MustDump
-gunkit/core/assassin/http.(*Request).AddCookie
-gunkit/core/assassin/http.(*Request).SetValue
-gunkit/core/assassin/http.(*Request).GetValue
-gunkit/core/assassin/http.BuildRequest
-gunkit/core/assassin/http.RequestFromRawURL
-gunkit/core/assassin/http.RequestFromAncestor
-gunkit/core/assassin/http.ReadRequest
-gunkit/core/assassin/http.(*Request).Timestamp
-gunkit/core/assassin/http.(*Request).DeepClone
-gunkit/core/assassin/http.(*Request).String
-gunkit/core/assassin/http.(*Flow).Name
-gunkit/core/assassin/http.(*Flow).DeepClone
-gunkit/core/assassin/http.(*Flow).Type
-gunkit/core/assassin/http.(*Flow).Timestamp
-gunkit/core/assassin/http.(*Flow).String
-gunkit/core/assassin/http.(*Timing).GetServerProcessingTime
-gunkit/core/assassin/http.(*Timing).SetTrace
-gunkit/core/assassin/http.(*Response).GetServerProcessingTime
-gunkit/core/assassin/http.(*Response).Cookies
-gunkit/core/assassin/http.(*Response).URL
-gunkit/core/assassin/http.(*Response).ResetBody
-gunkit/core/assassin/http.(*Response).GetEncoding
-gunkit/core/assassin/http.(*Response).GetRawBody
-gunkit/core/assassin/http.(*Response).GetTitile
-gunkit/core/assassin/http.(*Response).GetUTF8Body
-gunkit/core/assassin/http.(*Response).DumpHeader
-gunkit/core/assassin/http.(*Response).Dump
-gunkit/core/assassin/http.readResponseBody
-gunkit/core/assassin/http.ResponseFromAncestor
-gunkit/core/assassin/http.FakeHTTPResponse
+import (
+	"bytes"
+	"context"
+	"golang.org/x/time/rate"
+)
 
-gunkit/core/assassin/http.init.0
-gunkit/core/assassin/http.CloneHeader
-gunkit/core/assassin/http.IsStaticURL
-gunkit/core/assassin/http.IsNeededResource
-gunkit/core/assassin/http.ReadCompressBody
-gunkit/core/assassin/http.GetTextContent
-gunkit/core/assassin/http.IsMeaninglessCookieKey
-gunkit/core/assassin/http.glob..func1
-gunkit/core/assassin/http.(*Client).doWithRetries.func1
-gunkit/core/assassin/http.(*Client).respond.func1
-gunkit/core/assassin/http.NewTransport.func1
-gunkit/core/assassin/http.NewClientWithOptions.func1
-gunkit/core/assassin/http.NewClientWithOptions.func2
-gunkit/core/assassin/http.(*Request).parseBody.func1
-gunkit/core/assassin/http.(*Request).doCache.func1
-gunkit/core/assassin/http.(*Request).clone.func1
-gunkit/core/assassin/http.(*Request).Mutate.func1
-gunkit/core/assassin/http.(*Request).Spawn.func1
-gunkit/core/assassin/http.RequestFromAncestor.func1
-gunkit/core/assassin/http.(*Timing).SetTrace.func1
-gunkit/core/assassin/utils.TimeStampMs
-gunkit/core/assassin/http.(*Timing).SetTrace.func2
-gunkit/core/assassin/http.(*Timing).SetTrace.func3
-gunkit/core/assassin/http.(*Timing).SetTrace.func4
-gunkit/core/assassin/http.(*Timing).SetTrace.func5
-gunkit/core/assassin/http.(*Timing).SetTrace.func6
-gunkit/core/assassin/http.(*Timing).SetTrace.func7
-gunkit/core/assassin/http.(*Timing).SetTrace.func8
-gunkit/core/assassin/http.ResponseFromAncestor.func1
-gunkit/core/assassin/http.GetTextContent.func1
-gunkit/core/assassin/http.init
-gunkit/core/assassin/http.(*Request).ParamsQuery-fm
-gunkit/core/assassin/http.(*Request).ParamsBody-fm
-gunkit/core/assassin/http.(*Request).ParamsCookieFull-fm
-gunkit/core/assassin/http.(*CookieJar).Lock
-gunkit/core/assassin/http.(*CookieJar).Unlock
-gunkit/core/assassin/http.(*BytesCloser).Len
-gunkit/core/assassin/http.(*BytesCloser).Read
-gunkit/core/assassin/http.(*BytesCloser).ReadAt
-gunkit/core/assassin/http.(*BytesCloser).ReadByte
-gunkit/core/assassin/http.(*BytesCloser).ReadRune
-gunkit/core/assassin/http.(*BytesCloser).Reset
-gunkit/core/assassin/http.(*BytesCloser).Seek
-gunkit/core/assassin/http.(*BytesCloser).Size
-gunkit/core/assassin/http.(*BytesCloser).UnreadByte
-gunkit/core/assassin/http.(*BytesCloser).UnreadRune
-gunkit/core/assassin/http.(*BytesCloser).WriteTo
-type..eq.gunkit/core/assassin/http.Server
-type..eq.gunkit/core/assassin/http.PKCS12Config
-type..eq.gunkit/core/assassin/http.StatRepr
-gunkit/core/assassin/http.(*Response).Lock
-gunkit/core/assassin/http.(*Response).Unlock
-gunkit/core/assassin/http.BytesCloser.Len
-gunkit/core/assassin/http.BytesCloser.Read
-gunkit/core/assassin/http.BytesCloser.ReadAt
-gunkit/core/assassin/http.BytesCloser.ReadByte
-gunkit/core/assassin/http.BytesCloser.ReadRune
-gunkit/core/assassin/http.BytesCloser.Reset
-gunkit/core/assassin/http.BytesCloser.Seek
-gunkit/core/assassin/http.BytesCloser.Size
-gunkit/core/assassin/http.BytesCloser.UnreadByte
-gunkit/core/assassin/http.BytesCloser.UnreadRune
-gunkit/core/assassin/http.BytesCloser.WriteTo
+type BytesCloser struct {
+	*bytes.Reader
+}
 
-*/
+//type Client struct {
+//	Transport     http.RoundTripper
+//	CheckRedirect func(*http.Request, []*http.Request) error
+//	Jar           http.CookieJar
+//	Timeout       int64
+//}
+
+type PKCS12Config struct {
+	Path     string
+	Password string
+}
+
+type Client struct {
+	c              *Client
+	frankC         *Client
+	qps            *rate.Limiter
+	options        ClientOptions
+	statistics     *Statistics
+	flowDispatcher *flowDispatcher
+}
+
+func (*Client) AddFlowCallback(func(*Flow)) {
+
+}
+func (*Client) BuildRequest(*Request) (*Request, error) {
+	return nil, nil
+}
+func (*Client) CloneWithNewJar() *Client {
+	return nil
+}
+func (*Client) CloneWithNewOptions(*ClientOptions, bool) *Client {
+	return nil
+}
+func (*Client) CloneWithoutJar() *Client {
+	return nil
+}
+func (*Client) DoRaw(*Request, bool) (*Response, error) {
+	return nil, nil
+}
+func (*Client) NativeClient() *Client {
+	return nil
+}
+func (*Client) Options() *ClientOptions {
+	return nil
+}
+func (*Client) Respond(context.Context, *Request) (*Response, error) {
+	return nil, nil
+}
+func (*Client) RespondWithoutBody(context.Context, *Request) (*Response, error) {
+
+	return nil, nil
+}
+func (*Client) Stater() *Statistics {
+	return nil
+}
+func (*Client) WithStatistics(*Statistics) *Client {
+	return nil
+}
+func (*Client) doWithRetries() {
+
+}
+func (*Client) init() {
+
+}
+func (*Client) respond() {
+
+}

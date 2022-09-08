@@ -14,16 +14,17 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dlclark/regexp2 v1.4.0
 	github.com/elazarl/go-bindata-assetfs v1.0.1
+	github.com/fatih/color v1.13.0
 	github.com/fsnotify/fsnotify v1.5.4
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/gogf/gf v1.16.9
+	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da
 	github.com/golang/protobuf v1.5.2
 	github.com/google/cel-go v0.11.4
 	github.com/google/martian v2.1.0+incompatible
 	github.com/google/martian/v3 v3.3.2
 	github.com/jlaffaye/ftp v0.0.0-20220829015825-b85cf1edccd4
-	github.com/jweny/pocassist v0.0.0-20220621034347-fa5ef342bb2f
 	github.com/kataras/golog v0.1.7
 	github.com/miekg/dns v1.1.50
 	github.com/natefinch/lumberjack v2.0.0+incompatible
@@ -34,7 +35,6 @@ require (
 	github.com/spaolacci/murmur3 v1.1.0
 	github.com/spf13/viper v1.12.0
 	github.com/stretchr/testify v1.8.0
-	github.com/swaggo/gin-swagger v1.5.2
 	github.com/swaggo/swag v1.8.1
 	github.com/thoas/go-funk v0.9.2
 	github.com/unknwon/com v1.0.1
@@ -85,10 +85,8 @@ require (
 	github.com/goccy/go-json v0.9.7 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.0.0 // indirect
-	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/flatbuffers v1.12.1 // indirect
-	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -108,11 +106,14 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/onsi/ginkgo v1.16.1 // indirect
+	github.com/onsi/gomega v1.11.0 // indirect
 	github.com/oschwald/maxminddb-golang v1.10.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect

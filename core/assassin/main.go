@@ -5,14 +5,11 @@
 package main
 
 import (
-	"crypto/x509"
-	"encoding/pem"
 	"fmt"
-	"github.com/google/martian/mitm"
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
-	"log"
 	"os"
-	"time"
+	"wscan/core/assassin/utils"
 )
 
 func showBanner() {
@@ -42,7 +39,6 @@ func SubdomainScan(c *cli.Context) error {
 	return nil
 }
 
-//   , sd    Run a subdomain task
 func PocLint(c *cli.Context) error {
 	return nil
 }
@@ -60,20 +56,10 @@ func Convert(c *cli.Context) error {
 }
 
 func GenerateCA(c *cli.Context) error {
-	var err error
-	x509c, priv, err := mitm.NewAuthority("martian.proxy", "Martian Authority", 365*24*time.Hour)
-	if err != nil {
-		log.Fatal(err)
+	if err := utils.GenerateCAToPath("." + string(os.PathSeparator)); err != nil {
+		return err
 	}
-	//保存公钥私钥到当前目录上
-	certOut, _ := os.Create("./server.pem")
-	pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: x509c.Raw})
-	certOut.Close()
-
-	keyOut, _ := os.Create("./server.key")
-	pem.Encode(keyOut, &pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(priv)})
-	keyOut.Close()
-	fmt.Println("The Complete from Generating Certificat ")
+	color.Green("CA certificate ca.crt and key ca.key generated")
 	return nil
 }
 
@@ -172,7 +158,7 @@ func main() {
 		Email: "shaochuyu@qq.com",
 	}
 	app := &cli.App{
-		Name:    "xray",
+		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
 		Version: "0.0.1",
 		Authors: []*cli.Author{&author},
@@ -196,8 +182,6 @@ func main() {
 	}
 
 }
-
-//aShowVersionInf
 
 func loadLicense() {
 

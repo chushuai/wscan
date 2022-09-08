@@ -3,3 +3,12 @@
 * @Date: 5/7/2022 11:30
  */
 package mitmhelper
+
+import "wscan/core/assassin/http"
+
+type FixAcceptEncodingModifier struct{}
+
+func (*FixAcceptEncodingModifier) ModifyRequest(*http.Request) error {
+
+	return nil
+}

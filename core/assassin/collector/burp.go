@@ -4,16 +4,33 @@
  */
 package collector
 
-//gunkit/core/assassin/collector.(*burpCollector).FitOut
-//gunkit/core/assassin/collector.NewFromBurpFile
-//gunkit/core/assassin/collector.(*burpCollector).FitOut.func1.1
-//gunkit/core/assassin/collector.(*burpCollector).FitOut.func1.2
-//gunkit/core/assassin/collector.(*burpCollector).FitOut.func1
-//type..eq.gunkit/core/assassin/collector.burpCollector
+import (
+	"context"
+	"github.com/panjf2000/ants/v2"
+	"io"
+	"wscan/core/assassin/http"
+	"wscan/core/assassin/resource"
+)
+
+type burpFlow struct {
+	Url      string  `xml:"url"`
+	Protocol string  `xml:"protocol"`
+	Host     string  `xml:"host"`
+	Port     string  `xml:"port"`
+	Request  []uint8 `xml:"request"`
+	Status   int     `xml:"status"`
+}
 
 type burpCollector struct {
+	client *http.Client
+	r      io.ReadCloser
+	pool   *ants.Pool
 }
 
 func NewFromBurpFile() {
 
+}
+
+func (*burpCollector) FitOut(context.Context, []string) (chan resource.Resource, error) {
+	return nil, nil
 }

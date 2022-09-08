@@ -5,14 +5,18 @@
 package collector
 
 import (
+	"context"
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"flag"
+	"github.com/panjf2000/ants/v2"
+	http2 "wscan/core/assassin/http/v1"
+	"wscan/core/assassin/resource"
+	"wscan/core/utils/checker"
 
 	// "github.com/google/martian/log"
-
 	"github.com/google/martian/v3"
 	mapi "github.com/google/martian/v3/api"
 	"github.com/google/martian/v3/cors"
@@ -30,7 +34,6 @@ import (
 	"mime"
 	"mime/multipart"
 	"net"
-	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
@@ -39,50 +42,38 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"wscan/core/assassin/http"
 	vhttp "wscan/core/assassin/http"
 )
 
-//gunkit/core/assassin/collector.(*MitmProxy).makeResultChan
-//gunkit/core/assassin/collector.(*MitmProxy).buildModifier
-//gunkit/core/assassin/collector.(*MitmProxy).loadCerts
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut
-//gunkit/core/assassin/collector.(*MitmProxy).makeResultChan.func1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func2.1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func2
-//gunkit/core/assassin/collector.NewMitmProxy.func1
-//gunkit/core/assassin/collector.(*MitmProxy).makeResultChan.func1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func2.1
-//gunkit/core/assassin/collector.(*MitmProxy).FitOut.func2
-//gunkit/core/assassin/collector.NewMitmProxy.func1
-//type..eq.gunkit/core/assassin/collector.MitmProxyHeaderConfig
-
 var GenerateCA bool
 
-type MitmProxyHeaderConfig struct {
-}
-
 type MitmProxy struct {
+	proxy      *martian.Proxy
+	conf       *MitmConfig
+	httpOpts   *vhttp.ClientOptions
+	pool       *ants.Pool
+	dupChecker *checker.RequestChecker
+	onFlow     func(*vhttp.Flow) error
 }
 
 func NewMitmProxy() {
 
 }
 
-func (*MitmProxy) FitOut() {
+func (*MitmProxy) FitOut(context.Context, []string) (chan resource.Resource, error) {
+	return nil, nil
+}
+func (*MitmProxy) OnFlow(func(*vhttp.Flow) error) {
 
 }
-
-func (*MitmProxy) makeResultChan() {
+func (*MitmProxy) buildModifier() {
 
 }
-
 func (*MitmProxy) loadCerts() {
 
 }
-
-func (*MitmProxy) buildModifier() {
+func (*MitmProxy) makeResultChan() {
 
 }
 
@@ -222,12 +213,12 @@ func postData(req *http.Request, logBody bool) (*vhttp.Variations, error) {
 	return pd, nil
 }
 
-func headers(hs http.Header) []vhttp.Header {
-	hhs := make([]vhttp.Header, 0, len(hs))
+func headers(hs http.Header) []http2.Header {
+	hhs := make([]http2.Header, 0, len(hs))
 
 	for n, vs := range hs {
 		for _, v := range vs {
-			hhs = append(hhs, vhttp.Header{
+			hhs = append(hhs, http2.Header{
 				Name:  n,
 				Value: v,
 			})

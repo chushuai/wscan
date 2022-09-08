@@ -4,24 +4,47 @@
  */
 package mitmhelper
 
-//gunkit/core/assassin/collector/mitmhelper.(*HTTPMirrorModifier).ModifyRequest
-//gunkit/core/assassin/collector/mitmhelper.(*HTTPMirrorModifier).ModifyResponse
-//gunkit/core/assassin/collector/mitmhelper.(*HTTPMirrorModifier).ModifyRequest.func1
-//gunkit/core/assassin/collector/mitmhelper.(*HTTPMirrorModifier).ModifyResponse.func1
-//type..eq.gunkit/core/assassin/collector/mitmhelper.HTTPMirrorModifier
-//gunkit/core/assassin/collector/mitmhelper.NewHTTPMirrorModifier
+import (
+	"context"
+	"github.com/panjf2000/ants/v2"
+	"io"
+	"sync"
+	"wscan/core/assassin/http"
+	"wscan/core/assassin/resource"
+	"wscan/core/utils/checker"
+)
 
 type HTTPMirrorModifier struct {
+	ctx          context.Context
+	pool         *ants.Pool
+	allowChecker *checker.RequestChecker
+	httpOpts     *http.ClientOptions
+	output       chan resource.Resource
+}
+
+func (*HTTPMirrorModifier) ModifyRequest(*http.Request) error {
+	return nil
+}
+
+func (*HTTPMirrorModifier) ModifyResponse(*http.Response) error {
+	return nil
 }
 
 func NewHTTPMirrorModifier() {
 
 }
 
-func (*HTTPMirrorModifier) ModifyRequest() {
-
+type _escFile struct {
+	compressed string
+	size       int64
+	modtime    int64
+	local      string
+	isDir      bool
+	once       sync.Once
+	data       []uint8
+	name       string
 }
-
-func (*HTTPMirrorModifier) ModifyResponse() {
-
+type multiReadCloser struct {
+	io.Reader
+	closer []io.Closer
 }

@@ -12,10 +12,6 @@ func LoadOrGenConfig() {
 
 }
 
-func lookupRad() {
-
-}
-
 func newJSONPrinter() {
 
 }

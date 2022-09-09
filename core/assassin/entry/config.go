@@ -4,26 +4,31 @@
  */
 package entry
 
+import (
+	"wscan/core/assassin/collector"
+	"wscan/core/assassin/ctrl"
+)
+
 var aConfigYaml = "config.yaml"
 
-type SubdomainConfig struct {
+type CliEntryConfig struct {
+	ctrl.Config  `yaml:",inline" json:",inline"`
+	Subdomain    SubdomainConfig                   `yaml:"subdomain" json:"subdomain"`
+	Mitm         collector.MitmConfig              `yaml:"mitm" json:"mitm"`
+	BasicCrawler collector.BasicCrawlerConfig      `yaml:"basic-crawler" json:"basic-crawler"`
+	Plugins      map[string]map[string]interface{} `yaml:"plugins" json:"plugins"`
+	Update       UpdateConfig                      `yaml:"update" json:"update"`
 }
 
 func NewSubdomainConfig() {
 
 }
 
-func (*SubdomainConfig) WroteBack() {
-	// aUnknownRunnerS ; "unknown runner: %s"
-
-}
-
-func NewExampleConfig() {
-
-}
-
-func isAllEmpty() {
-
+func NewExampleConfig() *CliEntryConfig {
+	config := CliEntryConfig{
+		Config: ctrl.NewDefaultConfig(),
+	}
+	return &config
 }
 
 func verifyFile() {
@@ -31,10 +36,6 @@ func verifyFile() {
 }
 
 func rsaVerify() {
-
-}
-
-func validMutexChoice() {
 
 }
 

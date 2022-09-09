@@ -11,3 +11,7 @@ func upgradeAction() {
 func upgrade() {
 
 }
+
+type UpdateConfig struct {
+	Disable bool `json:"disable" yaml:"disable"`
+}

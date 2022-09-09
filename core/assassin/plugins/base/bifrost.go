@@ -49,15 +49,16 @@ func (*BifrostBase) GetVulnToTest() *model.Vuln {
 func (*BifrostBase) IsRetesting() bool {
 	return false
 }
-func (*BifrostBase) NewBrowser(int) (*rod.Browser, error) {
-	return nil, nil
+func (*BifrostBase) NewBrowser(int) error {
+	return /*nil,*/ nil
 }
 func (*BifrostBase) NewRequestChecker() (*checker.RequestChecker, error) {
 	return nil, nil
 }
 func (*BifrostBase) NewURLChecker() (*checker.URLChecker, error) {
-
+	return nil, nil
 }
+
 func (*BifrostBase) StatusLogError(string) {
 
 }
@@ -84,8 +85,8 @@ func (Bifrost) GetVulnToTest() *model.Vuln {
 func (Bifrost) IsRetesting() bool {
 	return false
 }
-func (Bifrost) NewBrowser(int) (*rod.Browser, error) {
-	return nil, nil
+func (Bifrost) NewBrowser(int) error {
+	return /*nil,*/ nil
 }
 func (Bifrost) NewRequestChecker() (*checker.RequestChecker, error) {
 	return nil, nil

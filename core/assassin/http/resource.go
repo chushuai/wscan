@@ -4,24 +4,49 @@
  */
 package http
 
-import "sync"
+import (
+	"sync"
+	"wscan/core/assassin/resource"
+)
 
 type compiledProxyRule struct {
 	sync.Mutex
-	match   glob.Glob
-	servers weighted.RRW
+	//match   glob.Glob
+	//servers weighted.RRW
 }
 
 type flowDispatcher struct {
 	callbacks []func(*Flow)
 }
 
-//File: resource.go
-//	(*Request)Timestamp Lines: 14 to 17 (3)
-//	(*Request)DeepClone Lines: 17 to 20 (3)
-//	(*Request)String Lines: 20 to 25 (5)
-//	(*Flow)Name Lines: 25 to 28 (3)
-//	(*Flow)DeepClone Lines: 28 to 36 (8)
-//	(*Flow)Type Lines: 36 to 40 (4)
-//	(*Flow)Timestamp Lines: 40 to 43 (3)
-//	(*Flow)String Lines: 43 to 44 (1)
+func (r *Request) Timestamp() int64 {
+	return r.TimeStamp
+}
+
+func (*Request) String() string {
+	return ""
+}
+
+func (*Request) DeepClone() *Request {
+	return nil
+}
+
+func (*Flow) DeepClone() resource.Resource {
+	return nil
+}
+
+func (*Flow) Name() string {
+	return ""
+}
+
+func (*Flow) String() string {
+	return ""
+}
+
+func (*Flow) Timestamp() int64 {
+	return 0
+}
+
+func (*Flow) Type() int {
+	return 0
+}

@@ -16,15 +16,11 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 )
 
-
-
-type transport.BaseRequest struct {
-Cache bool `default:"true" yaml:"cache"`
-}
-
+//type transport.BaseRequest struct {
+//Cache bool `default:"true" yaml:"cache"`
+//}
 
 // type post struct {
 // 	Key          string

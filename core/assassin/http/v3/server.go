@@ -2096,7 +2096,7 @@ func (s *Server) serveConn(c net.Conn) (err error) {
 
 		connectionClose bool
 
-		continueReadingRequest bool = true
+		continueReadingRequest = true
 	)
 	for {
 		connRequestNum++

@@ -2026,7 +2026,7 @@ func testClientDoCanceledVsTimeout(t *testing.T, h2 bool) {
 			ue := err.(*url.Error)
 
 			var wantIsTimeout bool
-			var wantErr error = context.Canceled
+			var wantErr = context.Canceled
 			if name == "timeout" {
 				wantErr = context.DeadlineExceeded
 				wantIsTimeout = true

@@ -12,6 +12,8 @@ import (
 
 type Request struct {
 	*http.Request
+	TimeStamp       int64
+	FollowRedirects bool
 }
 
 //type Request struct {
@@ -34,16 +36,12 @@ type Request struct {
 //	OnParams        func([]Parameter) []Parameter
 //}
 
-func (*Request) AddCookie(*Cookie) {
+func (r *Request) AddCookie(*Cookie) {
 
 }
 
 func (*Request) ContentType() string {
 	return ""
-}
-
-func (*Request) DeepClone() *Request {
-	return nil
 }
 
 func (*Request) DelParam(*Parameter) (*Request, error) {
@@ -138,14 +136,6 @@ func (*Request) SetValue(string, interface{}) {
 
 func (*Request) Spawn() (*Request, error) {
 	return nil, nil
-}
-
-func (*Request) String() string {
-	return ""
-}
-
-func (*Request) Timestamp() int64 {
-	return 0
 }
 
 func (*Request) URL() *url.URL {

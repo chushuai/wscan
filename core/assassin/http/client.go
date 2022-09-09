@@ -7,7 +7,7 @@ package http
 import (
 	"bytes"
 	"context"
-	"golang.org/x/time/rate"
+	"net/http"
 )
 
 type BytesCloser struct {
@@ -26,13 +26,17 @@ type PKCS12Config struct {
 	Password string
 }
 
+//type Client struct {
+//	c              *Client
+//	frankC         *Client
+//	qps            *rate.Limiter
+//	options        ClientOptions
+//	statistics     *Statistics
+//	flowDispatcher *flowDispatcher
+//}
+
 type Client struct {
-	c              *Client
-	frankC         *Client
-	qps            *rate.Limiter
-	options        ClientOptions
-	statistics     *Statistics
-	flowDispatcher *flowDispatcher
+	*http.Client
 }
 
 func (*Client) AddFlowCallback(func(*Flow)) {

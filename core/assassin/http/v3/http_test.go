@@ -2654,8 +2654,8 @@ func TestRequestRawBodyCopyTo(t *testing.T) {
 }
 
 type testReader struct {
-	read    chan (int)
-	cb      chan (struct{})
+	read    chan int
+	cb      chan struct{}
 	onClose func() error
 }
 

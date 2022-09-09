@@ -1,4 +1,5 @@
 # GRequests
+
 A Go "clone" of the great and famous Requests library
 
 [![Build Status](https://travis-ci.org/levigross/grequests.svg?branch=master)](https://travis-ci.org/levigross/grequests) [![GoDoc](https://godoc.org/github.com/levigross/grequests?status.svg)](https://godoc.org/github.com/levigross/grequests)
@@ -50,9 +51,11 @@ If an error occurs all of the other properties and methods of a `Response` will 
 
 Quirks
 =======
+
 ## Request Quirks
 
-When passing parameters to be added to a URL, if the URL has existing parameters that *_contradict_* with what has been passed within `Params` – `Params` will be the "source of authority" and overwrite the contradicting URL parameter.
+When passing parameters to be added to a URL, if the URL has existing parameters that *_contradict_* with what has been
+passed within `Params` – `Params` will be the "source of authority" and overwrite the contradicting URL parameter.
 
 Lets see how it works...
 
@@ -66,7 +69,9 @@ Get("http://httpbin.org/get?Hello=World", ro)
 
 ## Response Quirks
 
-Order matters! This is because `grequests.Response` is implemented as an `io.ReadCloser` which proxies the *http.Response.Body* `io.ReadCloser` interface. It also includes an internal buffer for use in `Response.String()` and `Response.Bytes()`.
+Order matters! This is because `grequests.Response` is implemented as an `io.ReadCloser` which proxies the *
+http.Response.Body* `io.ReadCloser` interface. It also includes an internal buffer for use in `Response.String()`
+and `Response.Bytes()`.
 
 Here are a list of methods that consume the *http.Response.Body* `io.ReadCloser` interface.
 
@@ -97,7 +102,8 @@ response.String() == "" // true
 
 ```
 
-But if we were to call `response.Bytes()` or `response.String()` first, every operation will succeed until the internal buffer is cleared:
+But if we were to call `response.Bytes()` or `response.String()` first, every operation will succeed until the internal
+buffer is cleared:
 
 ```go
 response := Get("http://some-wonderful-file.txt", nil)

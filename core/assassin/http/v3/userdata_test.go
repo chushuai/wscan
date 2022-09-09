@@ -73,7 +73,7 @@ type closerValue struct {
 }
 
 func (cv *closerValue) Close() error {
-	(*cv.closeCalls)++
+	*cv.closeCalls++
 	return nil
 }
 

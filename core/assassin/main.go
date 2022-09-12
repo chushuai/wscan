@@ -27,7 +27,12 @@ func showBanner() {
 }
 
 func WebScan(c *cli.Context) error {
+	fmt.Println(c.Bool("list"))
+	fmt.Println(c.String("listen"))
+	fmt.Println(c.Bool("basic-crawler"))
+	fmt.Println(c.String("browser-crawler"))
 
+	//browser-crawler
 	return nil
 }
 
@@ -75,8 +80,84 @@ var subCommandWebScan = cli.Command{
 	Name:    "webscan",
 	Aliases: []string{"ws"},
 	Usage:   "Run a webscan task",
-	Flags:   []cli.Flag{},
-	Action:  WebScan,
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:    "list",
+			Aliases: []string{"l"},
+			Value:   "",
+			Usage:   "list plugins"},
+		&cli.StringFlag{
+			Name:    "plugins",
+			Aliases: []string{"plug"},
+			Value:   "",
+			Usage:   "specify the plugins to run, separated by ','"},
+		&cli.StringFlag{
+			Name:    "poc",
+			Aliases: []string{"l"},
+			Value:   "",
+			Usage:   "specify the poc to run, separated by ',' "},
+		&cli.StringFlag{
+			Name:    "listen",
+			Aliases: []string{},
+			Value:   "",
+			Usage:   "use proxy resource collector, value is proxy addr, (example: 127.0.0.1:1111)"},
+		&cli.BoolFlag{
+			Name:    "basic-crawler",
+			Aliases: []string{"basic"},
+			Value:   false,
+			Usage:   "use a basic spider to crawl the target and scan the requests"},
+		&cli.StringFlag{
+			Name:    "browser-crawler",
+			Aliases: []string{"browser"},
+			Value:   "",
+			Usage:   "use a browser spider to crawl the target and scan the requests"},
+		&cli.StringFlag{
+			Name:    "url-file",
+			Aliases: []string{"uf"},
+			Value:   "",
+			Usage:   "read urls from a local file and scan these urls, one url per line"},
+		&cli.StringFlag{
+			Name:    "burp-file",
+			Aliases: []string{"bf"},
+			Value:   "",
+			Usage:   "read requests from burpsuite exported file as targets"},
+		&cli.StringFlag{
+			Name:    "url",
+			Aliases: []string{"u"},
+			Value:   "",
+			Usage:   "scan a **single** url"},
+		&cli.StringFlag{
+			Name:    "data",
+			Aliases: []string{"d"},
+			Value:   "",
+			Usage:   "data string to be sent through POST (e.g. 'username=admin')"},
+		&cli.StringFlag{
+			Name:    "raw-request",
+			Aliases: []string{"rr"},
+			Value:   "",
+			Usage:   "load http raw request from a FILE"},
+		&cli.StringFlag{
+			Name:    "force-ssl",
+			Aliases: []string{"fs"},
+			Value:   "",
+			Usage:   " force usage of SSL/HTTPS for raw-request"},
+		&cli.StringFlag{
+			Name:    "json-output",
+			Aliases: []string{"jo"},
+			Value:   "",
+			Usage:   "output wscan results to FILE in json format"},
+		&cli.StringFlag{
+			Name:    "html-output",
+			Aliases: []string{"ho"},
+			Value:   "",
+			Usage:   "output wscan result to FILE in HTML format"},
+		&cli.StringFlag{
+			Name:    "webhook-output",
+			Aliases: []string{"wo"},
+			Value:   "",
+			Usage:   "post wscan result to url in json format"},
+	},
+	Action: WebScan,
 }
 
 var subCommandServiceScan = cli.Command{

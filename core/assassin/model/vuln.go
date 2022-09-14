@@ -5,9 +5,10 @@
 package model
 
 import (
-	"go.opencensus.io/resource"
 	"net/http"
 	"net/url"
+	vhttp "wscan/core/assassin/http"
+	"wscan/core/assassin/resource"
 )
 
 //gunkit/core/assassin/model.NewServiceVuln
@@ -45,6 +46,17 @@ type SourceMeta struct {
 	ReadTimeout int64  `json:"-" yaml:"-"`
 }
 
+type SubDomainResult struct {
+	SourceMeta
+	Parent string     `json:"parent" yaml:"parent"`
+	Domain string     `json:"domain" yaml:"domain"`
+	CNAME  []string   `json:"cname" yaml:"cname"`
+	IP     []*IPInfo  `json:"ip" yaml:"ip"`
+	Web    []*WebInfo `json:"web" yaml:"web"`
+	Extra  []Extra    `json:"extra" yaml:"extra"`
+	stat   uint8
+}
+
 type StatisticRecord struct {
 	NumFoundUrls            int64   `json:"num_found_urls"`
 	NumScannedUrls          int64   `json:"num_scanned_urls"`
@@ -61,19 +73,6 @@ type SubdomainStatistic struct {
 	DNS []*NSStat
 }
 
-type VulnBinding struct {
-	Plugin   string
-	Category string
-	ID       string
-}
-
-type VulnDetail struct {
-	Addr     string                 `json:"addr" yaml:"addr"`
-	Payload  string                 `json:"payload" yaml:"payload"`
-	SnapShot []interface{}          `json:"snapshot" yaml:"snapshot"`
-	Extra    map[string]interface{} `json:"extra" yaml:"extra"`
-}
-
 type WebInfo struct {
 	Link   string   `json:"link" yaml:"link"`
 	Status int      `json:"status" yaml:"link"`
@@ -87,15 +86,74 @@ type WebTarget struct {
 	Params []ParamInfo `json:"params,omitempty"`
 }
 
+type VulnBinding struct {
+	Plugin   string
+	Category string
+	ID       string
+}
+
+type VulnDetail struct {
+	Addr     string                 `json:"addr" yaml:"addr"`
+	Payload  string                 `json:"payload" yaml:"payload"`
+	SnapShot []interface{}          `json:"snapshot" yaml:"snapshot"`
+	Extra    map[string]interface{} `json:"extra" yaml:"extra"`
+}
+
 type Vuln struct {
-	client    *http.Client
-	target    resource.Resource
-	Type      int
-	Binding   *VulnBinding
-	Extra     map[string]interface{}
-	targetURL *url.URL
-	//Flow      []*http.Flow
-	Payload string
-	//Param      *http.Parameter
+	client     *http.Client
+	target     resource.Resource
+	Type       int
+	Binding    *VulnBinding
+	Extra      map[string]interface{}
+	targetURL  *url.URL
+	Flow       []*vhttp.Flow
+	Payload    string
+	Param      *vhttp.Parameter
 	CreateTime int64
+}
+
+func (*Vuln) Add(string, string) *Vuln {
+	return nil
+}
+func (*Vuln) AddMap(string, map[string]interface{}) *Vuln {
+	return nil
+}
+func (*Vuln) AddStringArray(string, []string) *Vuln {
+	return nil
+}
+func (*Vuln) AddUsernamePassword(string, string, []string) *Vuln {
+	return nil
+}
+func (*Vuln) GetPassword() (string, string) {
+	return "", ""
+}
+func (*Vuln) GetUsername() (string, string) {
+	return "", ""
+}
+func (*Vuln) MarshalJSON() ([]uint8, error) {
+	return nil, nil
+}
+func (*Vuln) SetTargetURL(*url.URL) {
+	return
+}
+func (*Vuln) String() string {
+	return ""
+}
+func (v *Vuln) Target() resource.Resource {
+	return nil
+}
+func (*Vuln) TargetURL() *url.URL {
+	return nil
+}
+func (*Vuln) ToMap() map[string]interface{} {
+	return nil
+}
+func (*Vuln) UnmarshalJSON([]uint8) error {
+	return nil
+}
+func (*Vuln) serviceRaw() map[string]interface{} {
+	return nil
+}
+func (*Vuln) webRaw() map[string]interface{} {
+	return nil
 }

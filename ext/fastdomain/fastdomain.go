@@ -5,8 +5,13 @@
 package fastdomain
 
 import (
+	"context"
+	"sync"
 	"wscan/core/assassin/http"
+	"wscan/core/assassin/model"
+	"wscan/core/utils/printer"
 	"wscan/ext/fastdomain/datasource"
+	"wscan/ext/fastdomain/geodb"
 	"wscan/ext/fastdomain/utils"
 )
 
@@ -21,4 +26,70 @@ type Config struct {
 	Sources           map[string]datasource.SubDomainConfig `json:"-" yaml:"-"`
 	HTTPConfig        *http.ClientOptions                   `json:"-" yaml:"-"`
 	ConnectionConfig  *utils.ConnectionConfig               `json:"-" yaml:"-"`
+}
+
+type FastDomain struct {
+	ctx    context.Context
+	config *Config
+	//logger        *log.Logger
+	printer    printer.Printer
+	runners    []datasource.SubDomainRunner
+	httpClient *http.Client
+	//dnsClient     *dns.Client
+	geodbClient   *geodb.Client
+	mu            sync.Mutex
+	numFound      int
+	currentTarget string
+}
+
+type uniqueChan struct {
+	m  sync.Map
+	in chan *model.SubDomainResult
+}
+
+func (*FastDomain) Close() error {
+	return nil
+}
+func (*FastDomain) FromAPI() {
+
+}
+func (*FastDomain) FromBrute() {
+
+}
+func (*FastDomain) FromCrawl() {
+
+}
+func (*FastDomain) FromDNS() {
+
+}
+func (*FastDomain) QueryIP() {
+
+}
+func (*FastDomain) Run() {
+
+}
+func (*FastDomain) Stat() {
+
+}
+func (*FastDomain) beforeOutput() {
+
+}
+func (*FastDomain) pushQueue() {
+
+}
+
+func (*uniqueChan) Chan() {
+
+}
+
+func NewConfig() *Config {
+	return &Config{
+		Servers: []string{
+			"8.8.8.8",
+			"8.8.4.4",
+			"223.5.5.5",
+			"223.6.6.6",
+			"114.114.114.114",
+		},
+	}
 }

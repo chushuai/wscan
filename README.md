@@ -1,5 +1,5 @@
 # wscan
-一款专注于WEB安全的扫描器 
+一款专注于WEB安全的扫描器，用来向Nmap致敬，转眼间Nmap已经开源25年了，Wscan也计划在未来25年内持续更新，持续开源。也欢迎所有对web安全感兴趣的人一起开发。
 
 # TODO:
 使用Golang，重新实现xray，并且开源
@@ -23,6 +23,8 @@ XSS 检测 https://github.com/hahwul/dalfox
 反连平台 https://github.com/chennqqi/godnslog   
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
+子域名爆破 https://github.com/projectdiscovery/subfinder/ 
+
 
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  

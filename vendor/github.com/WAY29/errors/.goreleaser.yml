@@ -1,0 +1,10 @@
+archives:
+    - 
+      wrap_in_directory: true
+      id: tgz
+      format: tar.gz
+      replacements:
+          darwin: macOS
+      format_overrides:
+          - goos: windows
+            format: zip

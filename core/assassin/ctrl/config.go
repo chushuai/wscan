@@ -7,11 +7,14 @@ package ctrl
 import (
 	"wscan/core/assassin/collector"
 	"wscan/core/assassin/http"
+	"wscan/core/assassin/plugins"
 	"wscan/core/assassin/plugins/base"
 	"wscan/core/assassin/reverse"
 	"wscan/core/utils/checker"
 	"wscan/core/utils/log"
 )
+
+var Logger *log.Logger
 
 type Config struct {
 	Parallel int                                   `json:"parallel" yaml:"parallel" #:"漏洞探测的 worker 数量，可以简单理解为同时有 50 个 POC 在运行"`
@@ -57,5 +60,14 @@ func NewDefaultConfig() Config {
 		Log:     &log.Config{},
 		Queue:   &collector.MitmQueueConfig{},
 	}
+	plugins := plugins.All()
+	for _, p := range plugins {
+		d := p.DefaultConfig()
+		config.Plugins[d.BaseConfig().Name] = d
+	}
 	return config
+}
+
+func init() {
+	Logger = log.GetLogger("controller")
 }

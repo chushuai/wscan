@@ -9,6 +9,7 @@ import (
 	"wscan/core/assassin/model"
 )
 
+// 所有扫描逻辑定义在Finger的回调函数中
 type Finger struct {
 	Binding         *model.VulnBinding
 	RelyOn          *model.VulnBinding

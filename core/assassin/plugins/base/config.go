@@ -4,6 +4,8 @@
  */
 package base
 
+import "context"
+
 type PluginBaseConfig struct {
 	Enabled    bool   `json:"enabled" yaml:"enabled"`
 	Name       string `json:"-" yaml:"-"`
@@ -14,11 +16,20 @@ type PluginMixinInitConfig struct {
 	Config PluginConfigInterface
 }
 
-func (*PluginMixinInitConfig) Init() {
-
-}
-func (*PluginMixinInitConfig) BaseConfig() *PluginBaseConfig {
+func (p *PluginMixinInitConfig) Init(ctx context.Context, pfi PluginConfigInterface, bb *BifrostBase) error {
+	p.Config = pfi
 	return nil
+}
+
+func (p *PluginMixinInitConfig) BaseConfig() *PluginBaseConfig {
+	if p.Config == nil {
+		return nil
+	}
+	return p.Config.BaseConfig()
+}
+
+func (p *PluginMixinInitConfig) GetConfig() PluginConfigInterface {
+	return p.Config
 }
 
 type PluginConfigInterface interface {

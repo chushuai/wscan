@@ -1,6 +1,13 @@
 # wscan
-一款专注于WEB安全的扫描器，用来向Nmap致敬，转眼间Nmap已经开源25年了，Wscan也计划在未来25年内持续更新，持续开源。也欢迎所有对web安全感兴趣的人一起开发。
+Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经开源25年了。我们也计划在未来25年内持续更新Wscan，并将其持续开源。我们欢迎所有对web安全感兴趣的人一起加入我们的开发团队。
 
+我们的目标是开发一款使用机器学习进行渗透测试的工具。与其他工具不同的是，我们的工具可以自动学习攻击和防御的模式，并根据具体的目标进行个性化的攻击。这样一来，我们的攻击效率和准确性将大大提高，同时也能降低误判的概率。
+
+我们的工具采用了机器学习技术，实现了全自动化的Web渗透测试。这意味着无需手动添加和更新规则和签名，它能够自动学习和适应新的攻击模式和漏洞。
+
+机器学习技术还能够快速处理大量的数据和流量，从而大幅提高测试效率和准确性。此外，它能够识别和发现一些人工难以察觉的漏洞和弱点，从而改善测试质量和可靠性。
+
+我们相信，使用机器学习技术进行渗透测试，将是未来网络安全的一个重要方向。我们希望我们的工具能够帮助更多的人保障网络安全，为网络安全事业做出贡献。
 # TODO:
 使用Golang，重新实现xray，并且开源
 
@@ -14,7 +21,8 @@ POC扫描  https://github.com/jweny/pocassist
 POC扫描  https://github.com/WAY29/pocV   
 POC扫描  https://github.com/zema1/yarx  
 动态爬虫 https://github.com/Qianlitp/crawlergo  
-基础爬虫 https://github.com/geziyor/geziyor  
+基础爬虫 https://github.com/geziyor/geziyor   
+基础爬虫 https://github.com/gocolly/colly  
 SQL注入 https://github.com/sqlmapproject/sqlmap  
 OWASP TOP10检测 https://github.com/andresriancho/w3af  
 XSS 检测 https://github.com/hahwul/dalfox  
@@ -23,9 +31,31 @@ XSS 检测 https://github.com/hahwul/dalfox
 反连平台 https://github.com/chennqqi/godnslog   
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
-子域名爆破 https://github.com/projectdiscovery/subfinder/ 
+子域名爆破 https://github.com/projectdiscovery/subfinder/
+OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。
+RIPS Technologies: 这是一个开源的PHP漏洞扫描器，使用机器学习算法自动化检测PHP应用程序中的漏洞。
+TensorFlow.js: 这是一个由Google开发的JavaScript机器学习库，可以用于检测Web应用程序中的漏洞和攻击。
+Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。
 
+# 攻击数据集
 
+OWASP SQL Injection Dataset: 由 OWASP 组织提供的公开数据集，包括 12 个文件，共计 1000 个 SQL 注入攻击和 1000 个正常查询。该数据集可用于评估 SQL 注入攻击检测系统的性能。
+OWASP SQL Injection Dataset: https://github.com/OWASP/SQLi-labs/tree/master/SQLi-001
+
+Sqli-Labs: 包括一系列关于 SQL 注入攻击和检测的实验室，包括多种不同的注入类型和攻击方式。
+Sqli-Labs: https://github.com/Audi-1/sqli-labs
+
+WAF-FLE: 由 ModSecurity 团队提供的公开数据集，包括 230 多个不同的注入攻击和 300 多个正常查询。该数据集可用于评估 WAF 的性能和准确性
+WAF-FLE: https://github.com/SpiderLabs/owasp-modsecurity-crs/tree/v3.4/dev/util/waf_fle/samples
+
+XSS Data Sets: 由 WASC 提供的公开数据集，包括多种不同类型的 XSS 攻击和正常请求。该数据集旨在帮助测试和评估 Web 应用程序防御 XSS 攻击的能力。
+XSS Data Sets: https://projects.webappsec.org/Document/Download/1
+
+XSS_Test_Corpus: 由 Google 提供的公开数据集，包括多种不同类型的 XSS 攻击和正常请求。该数据集旨在帮助测试和评估 XSS 检测系统的性能。
+XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
+
+XSS Game: 由 Google 提供的在线 XSS 攻击训练平台，包括多个级别的挑战和练习，涵盖了各种不同类型的 XSS 攻击和防御技术。
+Google的XSS Game平台地址是：https://xss-game.appspot.com/
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
 HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
@@ -35,6 +65,16 @@ JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/
 # 使用文档参考
 xray 安全评估工具文档  https://docs.xray.cool/#/  
 pocsuite3  https://pocsuite.org/guide/poc-specification.html
+
+
+# 使用文档参考
+以下是一些公开的 XSS 攻击数据集的下载链接：
+
+XSS Data Sets: https://projects.webappsec.org/Document/Download/1
+
+XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
+
+请注意，这些数据集可能需要进行适当的清洗和预处理，以适应您的需求和环境。同时，请注意数据集的许可证和使用限制，以避免侵犯数据集的版权和使用规定。
 
 
 # 目录结构

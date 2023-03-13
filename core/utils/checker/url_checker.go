@@ -5,6 +5,7 @@
 package checker
 
 import (
+	"fmt"
 	"net/url"
 	"wscan/core/utils/checker/filter"
 	"wscan/core/utils/checker/matcher"
@@ -62,8 +63,8 @@ type URLChecker struct {
 }
 
 type URLPattern struct {
-	err error
-	//Checker *<nil>
+	Checker            *URLChecker
+	err                error
 	urlStr             string
 	URL                *url.URL
 	Scope              string
@@ -71,8 +72,174 @@ type URLPattern struct {
 	TTL                int64
 }
 
+func (up *URLPattern) AddScope(scope string) *URLPattern {
+	up.Scope += scope
+	return up
+}
+
+// Bool() 方法返回 URLPattern 对象的 error 是否为 nil，如果是，则返回 true，否则返回 false。
+func (up *URLPattern) Bool() bool {
+	return up.err == nil
+}
+
+// 该方法将URLPattern的AutoInsertDisabled字段设为true，并返回URLPattern对象。
+func (up *URLPattern) DisableAutoInsert() *URLPattern {
+	up.AutoInsertDisabled = true
+	return up
+}
+
+// IsAllowed 返回当前URLPattern是否允许通过。
+func (up *URLPattern) IsAllowed() bool {
+	// 如果当前URLPattern没有错误，并且其对应的检查器不为nil，则调用其IsAllowed方法判断是否允许通过。
+	if up.err == nil && up.Checker != nil {
+		// return up.Checker.IsAllowed(up.URLString())
+	}
+	// 否则，返回false。
+	return false
+}
+
+//func (*checker.URLPattern) AddScope(string) *checker.URLPattern
+//func (*checker.URLPattern) Bool() bool
+//func (*checker.URLPattern) DisableAutoInsert() *checker.URLPattern
+//func (*checker.URLPattern) Error() error
+//func (*checker.URLPattern) IsAllowed() *checker.URLPattern
+//func (*checker.URLPattern) IsNewHostName() *checker.URLPattern
+//func (*checker.URLPattern) IsNewHostPort() *checker.URLPattern
+//func (*checker.URLPattern) IsNewURL() *checker.URLPattern
+//func (*checker.URLPattern) IsNewWebsiteDir() *checker.URLPattern
+//func (*checker.URLPattern) IsNewWebsitePath() *checker.URLPattern
+//func (*checker.URLPattern) IsNewWebsiteQueryKey() *checker.URLPattern
+//func (*checker.URLPattern) URLString() string
+//func (*checker.URLPattern) WithTTL(int64) *checker.URLPattern
+
 //type checker.overloadResolution struct {
 //Reference *expr.Reference
 //Type      *expr.Type
 //}
 //
+
+func NewURLPattern(urlStr string) *URLPattern {
+	p := &URLPattern{urlStr: urlStr}
+	u, err := url.Parse(urlStr)
+	if err != nil {
+		p.err = err
+		return p
+	}
+	p.URL = u
+	// p.Checker = NewURLChecker()
+	p.Scope = u.Hostname()
+	return p
+}
+
+// 方法用于为 URLPattern 对象添加一个 scope。一个 scope 可以包含多个 URLPattern 对象，URLChecker 中的 Scope 字段就是由多个 scope 组成的。在检查一个 URL 是否被允许访问时，URLChecker 会先检查该 URL 是否属于某个 scope，然后再根据具体的规则来判断是否允许访问。
+func (uc *URLChecker) AddScope(scope string) *URLChecker {
+	uc.Scope = scope
+	return uc
+}
+func (uc *URLChecker) Close() error {
+	return uc.Filter.Close()
+}
+func (uc *URLChecker) DisableAutoInsert() *URLChecker {
+	uc.AutoInsertDisabled = true
+	return uc
+}
+func (uc *URLChecker) Insert(urlStr string) {
+	uc.Filter.Insert(urlStr, uc.TTL)
+}
+
+func (uc *URLChecker) InsertWithTTL(urlStr string, ttl int64) {
+	pattern := NewURLPattern(urlStr)
+	pattern.TTL = ttl
+	pattern.AutoInsertDisabled = true
+	if pattern.err != nil {
+		return
+	}
+	//if err := uc.AddPattern(pattern); err != nil {
+	//	return
+	//}
+	//if ttl > 0 {
+	//	time.AfterFunc(time.Duration(ttl)*time.Second, func() {
+	//		uc.DeletePattern(pattern)
+	//	})
+	//}
+}
+
+func (uc *URLChecker) IsInserted(urlStr string, deleteExpired bool) bool {
+	//ttl, ok := uc.Load(urlStr)
+	//if !ok {
+	//	return false
+	//}
+	//
+	//if deleteExpired {
+	//	if ttl.(int64) <= time.Now().UnixNano() {
+	//		uc.inserted.Delete(urlStr)
+	//		return false
+	//	}
+	//}
+	return uc.Filter.IsInserted(urlStr, false, 0)
+
+}
+
+// InsertWithTTL方法用于向URLChecker中插入一个URL并指定它的存活时间，即TTL。
+func (uc *URLChecker) IsInsertedWithTTL(u string, includeSubdomains bool, now int64) bool {
+	if uc.AutoInsertDisabled {
+		return uc.Filter.IsInserted(u, includeSubdomains, uc.TTL)
+	}
+
+	// If auto-insert is enabled, try inserting the URL and check if it was inserted successfully.
+	uc.Insert(u)
+	// return c.Filter.IsInserted(u, includeSubdomains, c.TTL)
+	return false
+}
+
+// 创建一个新的URLChecker实例，该实例的作用域为给定的字符串。
+func (*URLChecker) NewSubChecker(string) *URLChecker {
+	return nil
+}
+func (c *URLChecker) Reset() error {
+	// Reset all matchers
+
+	// Reset AutoInsertDisabled and TTL
+	c.AutoInsertDisabled = false
+	c.TTL = 0
+	return nil
+}
+
+func (uc *URLChecker) TargetStr(urlStr string) *URLPattern {
+	urlPtn := &URLPattern{
+		Checker: uc,
+		urlStr:  urlStr,
+	}
+
+	//if uc.config != nil {
+	//	urlPtn.Scope = uc.config.DefaultScope
+	//	urlPtn.AutoInsertDisabled = uc.config.AutoInsertDisabled
+	//	urlPtn.TTL = uc.config.DefaultTTL
+	//}
+
+	if parsedURL, err := url.Parse(urlStr); err == nil {
+		urlPtn.URL = parsedURL
+	} else {
+		urlPtn.err = fmt.Errorf("failed to parse url string: %w", err)
+	}
+
+	return urlPtn
+}
+
+// 这个方法接受一个URL对象，返回一个URLPattern对象，其中URLPattern对象的Checker字段指向当前的URLChecker对象，URL字段指向传入的URL对象，其他字段来自于当前URLChecker对象的属性。
+func (uc *URLChecker) TargetURL(u *url.URL) *URLPattern {
+	return &URLPattern{
+		Checker:            uc,
+		urlStr:             u.String(),
+		URL:                u,
+		Scope:              uc.Scope,
+		AutoInsertDisabled: uc.AutoInsertDisabled,
+		TTL:                uc.TTL,
+	}
+}
+
+// 这个方法接收一个int64类型的ttl参数，将URLChecker的TTL属性设置为这个值，并返回*URLChecker类型的对象。这个方法允许在检查URL之前设置TTL值，以覆盖默认值。
+func (uc *URLChecker) WithTTL(ttl int64) *URLChecker {
+	uc.TTL = ttl
+	return uc
+}

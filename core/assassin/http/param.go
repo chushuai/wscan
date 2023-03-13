@@ -12,7 +12,7 @@ type Parameter struct {
 	Suffix       string
 	ContentType  string
 	Filename     string
-	Content      []uint8
+	Content      []byte
 	hidden       bool
 	hiddenValue  interface{}
 	buildEntries []string

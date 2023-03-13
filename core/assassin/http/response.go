@@ -5,8 +5,11 @@
 package http
 
 import (
+	"io/ioutil"
 	"net/http"
 	"net/url"
+	"sync"
+	logger "wscan/core/utils/log"
 )
 
 type Timing struct {
@@ -20,108 +23,76 @@ type Timing struct {
 	GotFirstResponseByte int64
 }
 
-//type Response struct {
-//	url            *url.URL
-//	Status         string
-//	StatusCode     int
-//	Proto          string
-//	Header         map[string][]string
-//	ContentLength  int64
-//	Timing         *Timing
-//	TimeStamp      int64
-//	NativeResponse *Response
-//	sync.Mutex
-//	rawBody  []uint8
-//	utf8Body []uint8
-//	encoding string
-//}
-
 type Response struct {
-	*http.Response
+	http.Response
+	// raw text Response
+	Text           string
+	url            *url.URL
+	Status         string
+	StatusCode     int
+	Proto          string
+	Header         map[string][]string
+	ContentLength  int64
+	Timing         *Timing
+	TimeStamp      int64
+	NativeResponse *Response
+	sync.Mutex
+	rawBody  []byte
+	utf8Body []byte
+	encoding string
 }
-
-//type http.Response struct{
-//	Status string
-//	StatusCode int
-//	Proto string
-//	ProtoMajor int
-//	ProtoMinor int
-//	Header map[string][]string
-//	Body io.ReadCloser
-//	ContentLength int64
-//	TransferEncoding []string
-//	Close bool
-//	Uncompressed bool
-//	Trailer map[string][]string
-//	Request *<nil>
-//	TLS *tls.ConnectionState
-//}
 
 func (Response) Cookies() []*Cookie {
 	return nil
 }
-func (Response) Dump() []uint8 {
+func (Response) Dump() []byte {
 	return nil
 }
-func (Response) DumpHeader() []uint8 {
+func (Response) DumpHeader() []byte {
 	return nil
 }
 func (Response) GetEncoding() string {
 	return ""
 }
-func (Response) GetRawBody() []uint8 {
+func (Response) GetRawBody() []byte {
 	return nil
 }
 func (Response) GetServerProcessingTime() int {
 	return 0
 }
 func (Response) GetTitile() string {
+
+	// FindSubmatch
 	return ""
 }
+
 func (Response) GetUTF8Body() ([]uint8, error) {
 	return nil, nil
 }
-func (Response) Lock() {
 
-}
 func (Response) ResetBody([]uint8) {
 
 }
-func (Response) URL() *url.URL {
-	return nil
-}
-func (Response) Unlock() {
-
-}
-func (Response) lockSlow() {
-
-}
-func (Response) unlockSlow(int32) {
-
+func (r *Response) URL() *url.URL {
+	return r.url
 }
 
-//File: response.go
-//	(*Timing)GetServerProcessingTime Lines: 44 to 53 (9)
-//	(*Timing)SetTrace Lines: 53 to 104 (51)
-//	(*Timing).SetTracefunc1 Lines: 55 to 58 (3)
-//	(*Timing).SetTracefunc2 Lines: 58 to 61 (3)
-//	(*Timing).SetTracefunc3 Lines: 61 to 64 (3)
-//	(*Timing).SetTracefunc4 Lines: 64 to 67 (3)
-//	(*Timing).SetTracefunc5 Lines: 67 to 70 (3)
-//	(*Timing).SetTracefunc6 Lines: 70 to 73 (3)
-//	(*Timing).SetTracefunc7 Lines: 73 to 76 (3)
-//	(*Timing).SetTracefunc8 Lines: 76 to 265 (189)
-//	(*Response)GetServerProcessingTime Lines: 104 to 107 (3)
-//	(*Response)Cookies Lines: 107 to 114 (7)
-//	(*Response)URL Lines: 114 to 120 (6)
-//	(*Response)ResetBody Lines: 120 to 126 (6)
-//	(*Response)GetEncoding Lines: 126 to 170 (44)
-//	(*Response)GetRawBody Lines: 170 to 176 (6)
-//	(*Response)GetTitile Lines: 176 to 193 (17)
-//	(*Response)GetUTF8Body Lines: 193 to 217 (24)
-//	(*Response)DumpHeader Lines: 217 to 224 (7)
-//	(*Response)Dump Lines: 224 to 233 (9)
-//	readResponseBody Lines: 233 to 260 (27)
-//	ResponseFromAncestor Lines: 260 to 293 (33)
-//	ResponseFromAncestorfunc1 Lines: 265 to 267 (2)
-//	FakeHTTPResponse Lines: 293 to 302 (9)
+func getTextFromResp(r *http.Response) string {
+	// TODO: 编码转换
+	if r.ContentLength == 0 {
+		return ""
+	}
+	b, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		logger.Debug("get response body err ", err)
+	}
+	_ = r.Body.Close()
+	return string(b)
+}
+
+func NewResponse(r *http.Response) *Response {
+	return &Response{
+		Response: *r,
+		Text:     getTextFromResp(r),
+	}
+}

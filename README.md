@@ -31,11 +31,11 @@ XSS 检测 https://github.com/hahwul/dalfox
 反连平台 https://github.com/chennqqi/godnslog   
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
-子域名爆破 https://github.com/projectdiscovery/subfinder/
-OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。
-RIPS Technologies: 这是一个开源的PHP漏洞扫描器，使用机器学习算法自动化检测PHP应用程序中的漏洞。
-TensorFlow.js: 这是一个由Google开发的JavaScript机器学习库，可以用于检测Web应用程序中的漏洞和攻击。
-Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。
+子域名爆破 https://github.com/projectdiscovery/subfinder/  
+OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。  
+RIPS Technologies: 这是一个开源的PHP漏洞扫描器，使用机器学习算法自动化检测PHP应用程序中的漏洞。  
+TensorFlow.js: 这是一个由Google开发的JavaScript机器学习库，可以用于检测Web应用程序中的漏洞和攻击。  
+Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。  
 
 # 攻击数据集
 

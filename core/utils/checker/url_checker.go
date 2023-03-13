@@ -98,26 +98,6 @@ func (up *URLPattern) IsAllowed() bool {
 	return false
 }
 
-//func (*checker.URLPattern) AddScope(string) *checker.URLPattern
-//func (*checker.URLPattern) Bool() bool
-//func (*checker.URLPattern) DisableAutoInsert() *checker.URLPattern
-//func (*checker.URLPattern) Error() error
-//func (*checker.URLPattern) IsAllowed() *checker.URLPattern
-//func (*checker.URLPattern) IsNewHostName() *checker.URLPattern
-//func (*checker.URLPattern) IsNewHostPort() *checker.URLPattern
-//func (*checker.URLPattern) IsNewURL() *checker.URLPattern
-//func (*checker.URLPattern) IsNewWebsiteDir() *checker.URLPattern
-//func (*checker.URLPattern) IsNewWebsitePath() *checker.URLPattern
-//func (*checker.URLPattern) IsNewWebsiteQueryKey() *checker.URLPattern
-//func (*checker.URLPattern) URLString() string
-//func (*checker.URLPattern) WithTTL(int64) *checker.URLPattern
-
-//type checker.overloadResolution struct {
-//Reference *expr.Reference
-//Type      *expr.Type
-//}
-//
-
 func NewURLPattern(urlStr string) *URLPattern {
 	p := &URLPattern{urlStr: urlStr}
 	u, err := url.Parse(urlStr)

@@ -15,6 +15,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ![](doc/img/Wscan.png)
 
 # 参考代码：
+goml机器学习库 :https://github.com/cdipaolo/goml  
 被动扫描 https://github.com/zema1/martian  
 被动扫描 https://github.com/lqqyt2423/go-mitmproxy  
 POC扫描  https://github.com/jweny/pocassist   
@@ -35,8 +36,7 @@ JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast
 OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。  
 RIPS Technologies: 这是一个开源的PHP漏洞扫描器，使用机器学习算法自动化检测PHP应用程序中的漏洞。  
 TensorFlow.js: 这是一个由Google开发的JavaScript机器学习库，可以用于检测Web应用程序中的漏洞和攻击。  
-Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。  
-
+Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。
 # 攻击数据集
 
 OWASP SQL Injection Dataset: 由 OWASP 组织提供的公开数据集，包括 12 个文件，共计 1000 个 SQL 注入攻击和 1000 个正常查询。该数据集可用于评估 SQL 注入攻击检测系统的性能。

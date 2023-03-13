@@ -102,3 +102,58 @@ username=*)(uid=admin
 /?callback=<style onload=alert('XRAY attack')>
 /?callback=<marquee/onstart=alert('XRAY attack')>
 /?callback=<object data=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFJheSBhdHRhY2snKTwvc2NyaXB0Pg==></object>
+
+````
+```bigquery
+
+robots.txt 将查找目标网站上的robots.txt文件以了解哪些页面可以被搜索引擎爬取
+/admin/ 将检查是否存在管理员控制面板
+/login/ 将检查是否存在登录页面
+/wp-admin/ 将检查WordPress网站是否有管理员登录页面
+/xmlrpc.php 将尝试使用XML-RPC协议进行WordPress攻击
+/phpinfo.php 将尝试查找phpinfo.php文件，以了解目标网站的PHP配置
+/test.php 将尝试查找test.php文件，以检测是否存在远程代码执行漏洞
+/.git/ 将检查是否存在Git源代码管理系统，如果存在，则可以发现敏感信息，如密码和API密钥
+/backup/ 将检查是否存在备份文件或目录，可能会包含敏感信息
+/api/ 将检查是否存在API端点，可能存在漏洞或可滥用的功能
+/admin/login.php 将尝试找到管理员登录页面，以进行登录漏洞检测
+/cgi-bin/ 将检查是否存在CGI脚本，可能存在命令注入漏洞
+/index.php 将检查网站首页是否存在安全漏洞
+/phpMyAdmin/ 将检查是否存在phpMyAdmin管理页面，可能存在SQL注入漏洞
+/inc/ 将检查是否存在包含敏感信息的配置文件或库文件
+/uploads/ 将检查是否存在文件上传功能，可能存在文件上传漏洞
+/etc/passwd 将尝试访问/etc/passwd文件，以了解系统用户信息
+/proc/self/environ 将尝试访问/proc/self/environ文件，以了解系统环境变量
+/README.md 将尝试查找README文件，可能会包含敏感信息
+/server-status 将检查是否存在Apache服务器状态页面，可能会包含敏感信息
+/admin.php
+/login.php
+/wp-login.php
+/xmlrpc
+/info.php
+/phpinfo
+/test
+/admin/login
+/admin/login.aspx
+/admin/index.php
+/cgi-bin/test-cgi
+/test2.php
+/config.php
+/php.ini
+/phpMyAdmin/index.php
+/phpmyadmin/index.php
+/phpmyadmin/
+/mysql/admin
+/mysql/admin.php
+/sql.php
+/adminpanel/
+/loginadmin/
+/wp-admin/admin-ajax.php
+/wp-login/
+/wp-login.php?action=register
+/wp-login.php?action=lostpassword
+/wp-config.php.bak
+/phpmyadmin/db_structure.php
+/phpmyadmin/db_search.php
+/phpmyadmin/db_sql.php
+```

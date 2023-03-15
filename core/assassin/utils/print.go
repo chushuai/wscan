@@ -4,6 +4,11 @@
  */
 package utils
 
-func ColorPrintln() {
+import (
+	"fmt"
+	"github.com/kataras/pio"
+)
 
+func ColorPrintln(s string) {
+	fmt.Println(pio.Rich(s, pio.Blue))
 }

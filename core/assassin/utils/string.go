@@ -6,9 +6,12 @@ package utils
 
 import (
 	"crypto/md5"
+	"crypto/sha256"
 	"encoding/hex"
 	"math/rand"
+	"strings"
 	"time"
+	"unicode/utf8"
 )
 
 const (
@@ -61,4 +64,32 @@ func ReverseString(s string) string {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes)
+}
+
+func StringHasPrefix(s, prefix string) bool {
+	return len(s) >= len(prefix) && s[:len(prefix)] == prefix
+}
+
+func Sha256(data []byte) string {
+	h := sha256.Sum256(data)
+	return hex.EncodeToString(h[:])
+}
+
+func MD5String(s string) string {
+	h := md5.Sum([]byte(s))
+	return hex.EncodeToString(h[:])
+}
+
+func EscapeInvalidUTF8Byte(s string, replacement string) string {
+	var b strings.Builder
+	for len(s) > 0 {
+		r, size := utf8.DecodeRuneInString(s)
+		if r == utf8.RuneError {
+			b.WriteString(replacement)
+		} else {
+			b.WriteRune(r)
+		}
+		s = s[size:]
+	}
+	return b.String()
 }

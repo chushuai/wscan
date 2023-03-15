@@ -9,7 +9,10 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 我们相信，使用机器学习技术进行渗透测试，将是未来网络安全的一个重要方向。我们希望我们的工具能够帮助更多的人保障网络安全，为网络安全事业做出贡献。
 # TODO:
-使用Golang，重新实现xray，并且开源
+使用Golang，重新实现xray，并且开源  
+2023.04.30 完成基于消息订阅的插件调度模块，可以完成简单的扫描功能
+2023.10.30 完成WEB通用漏洞扫描插件
+2023.12.30 完成通过机器学习降低误报
 
 # 架构简析
 ![](doc/img/Wscan.png)
@@ -59,22 +62,15 @@ Google的XSS Game平台地址是：https://xss-game.appspot.com/
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
 HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
-JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/  
-
-
+JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/
 # 使用文档参考
 xray 安全评估工具文档  https://docs.xray.cool/#/  
 pocsuite3  https://pocsuite.org/guide/poc-specification.html
 
 
-# 使用文档参考
-以下是一些公开的 XSS 攻击数据集的下载链接：
-
+# 以下是一些公开的 XSS 攻击数据集的下载链接
 XSS Data Sets: https://projects.webappsec.org/Document/Download/1
-
 XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
-
-请注意，这些数据集可能需要进行适当的清洗和预处理，以适应您的需求和环境。同时，请注意数据集的许可证和使用限制，以避免侵犯数据集的版权和使用规定。
 
 
 # 目录结构

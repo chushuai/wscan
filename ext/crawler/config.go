@@ -20,26 +20,6 @@ type BasicAuth struct {
 	Password string `yaml:"password" #:"密码"`
 }
 
-type ClientConfig struct {
-	Proxies             []string
-	DialTimeout         int
-	TLSHandshakeTimeout int
-	ReadTimeout         int
-	IdleConnTimeout     int
-	MaxConnsPerHost     int
-	MaxIdleConns        int
-	TLSSkipVerify       bool
-	TLSMinVersion       uint16
-	TLSMaxVersion       uint16
-	PKCS12Certificate   []uint8
-	PKCS12Password      string
-	MaxRetryTimes       int
-	MaxRedirectTimes    int
-	MaxRequestPerSecond int
-	MaxRespBodySize     int64
-	AllowedMethods      []string
-}
-
 type RestrictionsOnURLs struct {
 	DisallowedSuffix                 []string `yaml:"disallowed-suffix" #:"不允许的文件后缀"`
 	disallowedSuffix                 sync.Map
@@ -51,16 +31,6 @@ type RestrictionsOnURLs struct {
 	AllowedURLs                      []string `yaml:"allowed-urls" #:"允许的URL（正则）"`
 	allowedURLs                      []*regexp.Regexp
 	AllowVisitParentPath             bool `yaml:"-"`
-}
-
-type ClientStatistic struct {
-	SentRequestsCount               int32
-	FailedRequestsCount             int32
-	ResponsesCount                  int32
-	TotalResponseTime               int64
-	AverageResponseTime             int64
-	TotalResponseTimeInTenSeconds   int64
-	AverageResponseTimeInTenSeconds int64
 }
 
 type Config struct {
@@ -134,4 +104,8 @@ type part struct {
 	FieldName string
 	FileName  string
 	Value     []string
+}
+
+func (*Config) Correct() (*Config, error) {
+	return nil, nil
 }

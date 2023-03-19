@@ -26,7 +26,7 @@ require (
 	github.com/google/martian/v3 v3.3.2
 	github.com/jlaffaye/ftp v0.0.0-20220829015825-b85cf1edccd4
 	github.com/kataras/golog v0.1.7
-	github.com/miekg/dns v1.1.50
+	github.com/miekg/dns v1.1.52
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/oschwald/geoip2-golang v1.8.0
 	github.com/panjf2000/ants/v2 v2.5.0
@@ -44,7 +44,7 @@ require (
 	go.etcd.io/bbolt v1.3.6
 	go.opencensus.io v0.23.0
 	go.uber.org/zap v1.23.0
-	golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b
+	golang.org/x/net v0.8.0
 	golang.org/x/time v0.0.0-20211116232009-f0f3c7e86c11
 	google.golang.org/genproto v0.0.0-20220630174209-ad1d48641aa7
 	google.golang.org/protobuf v1.28.0
@@ -83,6 +83,7 @@ require (
 	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
+	github.com/go-playground/validator v9.31.0+incompatible // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
@@ -153,12 +154,12 @@ require (
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/automaxprocs v1.5.1 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
-	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220106191415-9b9b3d81d5e3 // indirect
-	golang.org/x/sys v0.0.0-20220825204002-c680a09ffe64 // indirect
-	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
-	golang.org/x/text v0.3.7 // indirect
-	golang.org/x/tools v0.1.10 // indirect
+	golang.org/x/crypto v0.7.0 // indirect
+	golang.org/x/mod v0.8.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/term v0.6.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
+	golang.org/x/tools v0.6.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220517211312-f3a8303e98df // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect

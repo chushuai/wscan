@@ -29,3 +29,26 @@ type RedisFilter struct {
 type SyncMapFilter struct {
 	*sync.Map
 }
+
+func (f *SyncMapFilter) Check(key string, addIfMissing bool) bool {
+	_, ok := f.Load(key)
+	if !ok && addIfMissing {
+		f.Store(key, struct{}{})
+	}
+	return ok
+}
+
+func (f *SyncMapFilter) Close() {
+	f.Map = &sync.Map{}
+}
+
+func (f *SyncMapFilter) Insert(key string) {
+	f.Store(key, struct{}{})
+}
+
+func (f *SyncMapFilter) Reset() {
+	f.Range(func(key, value interface{}) bool {
+		f.Map.Delete(key)
+		return true
+	})
+}

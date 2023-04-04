@@ -14,7 +14,6 @@ import (
 func TestClient_Do(t *testing.T) {
 	// 创建一个带有自定义配置的 Client
 	config := &ClientConfig{
-		Proxies:             []string{"http://localhost:8888"},
 		DialTimeout:         10,
 		TLSHandshakeTimeout: 10,
 		ReadTimeout:         30,

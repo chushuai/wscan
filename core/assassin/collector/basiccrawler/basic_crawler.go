@@ -17,6 +17,27 @@ type basicCrawlerCollector struct {
 	opts    *http.ClientOptions
 }
 
-func (*basicCrawlerCollector) FitOut(context.Context, []string) (chan resource.Resource, error) {
-	return nil, nil
+func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (chan resource.Resource, error) {
+	out := make(chan resource.Resource, 100)
+	c := crawler.NewCrawler(b.config, nil)
+	http.NewClientWithOptions(b.opts)
+	c.OnRequestNotVisit(func(request *http.Request, err error) {
+	})
+
+	c.OnResponse(func(response *http.Response) bool {
+		out <- nil
+	})
+
+	http.IsNeededResource()
+	c.Run()
+	c.Feed()
+	c.Wait()
+	return out, nil
+}
+
+func init() {
+}
+
+func NewBasicCrawlerCollector() *basicCrawlerCollector {
+	return &basicCrawlerCollector{}
 }

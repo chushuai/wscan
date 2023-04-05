@@ -40,6 +40,7 @@ func NewExampleConfig() *CliEntryConfig {
 				},
 			},
 		},
+		Plugins: make(map[string]interface{}),
 	}
 	for name, p := range config.Config.Plugins {
 		config.Plugins[name] = p

@@ -9,6 +9,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"os"
+	"wscan/core/assassin/entry"
 	"wscan/core/assassin/utils"
 )
 
@@ -27,12 +28,7 @@ func showBanner() {
 }
 
 func WebScan(c *cli.Context) error {
-	fmt.Println(c.Bool("list"))
-	fmt.Println(c.String("listen"))
-	fmt.Println(c.Bool("basic-crawler"))
-	fmt.Println(c.String("browser-crawler"))
-
-	//browser-crawler
+	entry.NewApp(c)
 	return nil
 }
 
@@ -93,7 +89,7 @@ var subCommandWebScan = cli.Command{
 			Usage:   "specify the plugins to run, separated by ','"},
 		&cli.StringFlag{
 			Name:    "poc",
-			Aliases: []string{"l"},
+			Aliases: []string{"p"},
 			Value:   "",
 			Usage:   "specify the poc to run, separated by ',' "},
 		&cli.StringFlag{
@@ -243,7 +239,18 @@ func main() {
 		Usage:   "A powerful scanner engine ",
 		Version: "0.0.1",
 		Authors: []*cli.Author{&author},
-		Flags:   []cli.Flag{},
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "config",
+				Aliases: []string{},
+				Value:   "",
+				Usage:   "从文件中加载配置（默认为“config.yaml”）"},
+			&cli.StringFlag{
+				Name:    "log-level",
+				Aliases: []string{},
+				Value:   "",
+				Usage:   "Log level, choices are debug, info, warn, error, fatal"},
+		},
 	}
 	app.Commands = []*cli.Command{
 		&subCommandWebScan,
@@ -261,7 +268,6 @@ func main() {
 	if err != nil {
 
 	}
-
 }
 
 func loadLicense() {

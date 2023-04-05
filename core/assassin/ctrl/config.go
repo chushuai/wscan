@@ -59,6 +59,7 @@ func NewDefaultConfig() Config {
 		Filter:  &checker.RequestCheckerConfig{},
 		Log:     &log.Config{},
 		Queue:   &collector.MitmQueueConfig{},
+		Plugins: make(map[string]base.PluginConfigInterface),
 	}
 	plugins := plugins.All()
 	for _, p := range plugins {

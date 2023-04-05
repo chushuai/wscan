@@ -9,6 +9,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/net/html"
 	"wscan/core/assassin/http"
+	"wscan/core/assassin/model"
 	"wscan/core/assassin/plugins/base"
 	"wscan/core/utils/checker"
 	logger "wscan/core/utils/log"
@@ -60,7 +61,15 @@ func (p *XSS) AddXSSVuln(context.Context, *http.Request, *http.Response, *http.P
 }
 
 func (p *XSS) Fingers() []*base.Finger {
-	return nil
+	fingers := []*base.Finger{}
+	fingers = append(fingers, &base.Finger{
+		CheckAction: func(ctx context.Context, bi *base.Bifrost) error {
+			return nil
+		},
+		Channel: "web-generic",
+		Binding: &model.VulnBinding{ID: "xss/reflected/default", Plugin: "xss/reflected", Category: "xss"},
+	})
+	return fingers
 }
 
 func (p *XSS) checkContentCheatHeader() {

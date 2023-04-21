@@ -1,13 +1,13 @@
 WEB通用漏扫插件编写指南
 ````
 Config
- BaseConfig()  返回基本配置。固定格式，如需修改 请参考示例。
+ BaseConfig()  返回基本配置。固定格式，无需修改 请参考示例。
 
 WebVulnPlugin
  Close() 关闭函数。
- DefaultConfig() 返回默认配置。固定格式，如需修改 请参考示例。
+ DefaultConfig() 返回默认配置。固定格式，无需修改 请参考示例。
  Fingers() 请在这里面注册你的回调函数, 每个Finger代表一个检查项目，调度的时候Finger之间是并行的
- GetConfig()  获取配置。。固定格式，如需修改 请参考示例。
+ GetConfig()  获取配置。。固定格式，无需修改 请参考示例。
  Init
 ````
 

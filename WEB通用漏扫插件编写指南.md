@@ -1,11 +1,11 @@
 WEB通用漏扫插件编写指南
 ````
 Config
- BaseConfig()  返回基本配置。固定格式，无需修改 请参考示例。
+ BaseConfig()  返回基本配置, 固定格式，无需修改。
 
 WebVulnPlugin
  Close() 关闭函数。
- DefaultConfig() 返回默认配置。固定格式，无需修改 请参考示例。
+ DefaultConfig() 返回默认配置。需要填写插件的默认配置。
  Fingers() 请在这里面注册你的回调函数, 每个Finger代表一个检查项目，调度的时候Finger之间是并行的
  GetConfig()  获取配置。。固定格式，无需修改 请参考示例。
  Init
@@ -29,7 +29,7 @@ type Config struct {
     // AESKey                []string `json:"aes_key" yaml:"aes_key" #:"自定义 shiro key，配置后将与内置 100 key 做合并"`
 }
 
-// BaseConfig 返回基本配置
+// BaseConfig 返回基本配置, 固定格式, 无需修改
 func (c *Config) BaseConfig() *base.PluginBaseConfig {
     return &c.PluginBaseConfig
 }
@@ -44,7 +44,7 @@ func (*WebVulnPlugin) Close() error {
     return nil
 }
 
-// DefaultConfig 返回默认配置
+// DefaultConfig 返回默认配置, 需要填写插件的默认配置
 func (*WebVulnPlugin) DefaultConfig() base.PluginConfigInterface {
     return &Config{}
 }

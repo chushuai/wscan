@@ -26,7 +26,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ![](doc/img/Wscan.png)
 
 # 参考代码：
-goml机器学习库 :https://github.com/cdipaolo/goml  
+机器学习库 :https://github.com/cdipaolo/goml  
 被动扫描 https://github.com/zema1/martian  
 被动扫描 https://github.com/lqqyt2423/go-mitmproxy  
 POC扫描  https://github.com/jweny/pocassist   
@@ -36,11 +36,12 @@ POC扫描  https://github.com/zema1/yarx
 基础爬虫 https://github.com/geziyor/geziyor   
 基础爬虫 https://github.com/gocolly/colly  
 SQL注入 https://github.com/sqlmapproject/sqlmap  
-OWASP TOP10检测 https://github.com/andresriancho/w3af  
 XSS 检测 https://github.com/hahwul/dalfox  
 网站技术  https://github.com/chushuai/wappalyzer   
 用Golang运行JavaScript https://github.com/dop251/goja  
-反连平台 https://github.com/chennqqi/godnslog   
+反连平台 https://github.com/chennqqi/godnslog     
+WEB漏洞扫描器 https://github.com/Arachni/arachni   
+WEB漏洞扫描器 https://github.com/andresriancho/w3af  
 WEB漏洞扫描器：https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
@@ -67,14 +68,20 @@ XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
 
 XSS Game: 由 Google 提供的在线 XSS 攻击训练平台，包括多个级别的挑战和练习，涵盖了各种不同类型的 XSS 攻击和防御技术。
 Google的XSS Game平台地址是：https://xss-game.appspot.com/
+
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
 HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
 JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/
+
 # 使用文档参考
 xray 安全评估工具文档  https://docs.xray.cool/#/  
 pocsuite3  https://pocsuite.org/guide/poc-specification.html
 
+# 扫描报告参考
+https://cdn.acunetix.com/wp-content/uploads/2022/01/11175019/scan-report-testphp.vulnweb.com-owasptopten2021-27_08_2021-12_05-PM.html  
+https://www.arachni-scanner.com/reports/report.html/#!/summary/owasp_top_10  
+https://docs.xray.cool/assets/report_example.html 
 
 # 以下是一些公开的 XSS 攻击数据集的下载链接
 XSS Data Sets: https://projects.webappsec.org/Document/Download/1

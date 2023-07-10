@@ -14,7 +14,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 在此之前，开始接收第三方提交的WEB通用插件代码，希望能够与更多的开发者们一起合作，共同完善Wscan，为用户提供更好的服务。欢迎您的参与和贡献！
 具体请参考《WEB通用漏扫插件编写指南.md》,直接提交PR即可，保证一天内回复。
 
-2023.04.22 完成了基于消息订阅的插件调度模块，可以完成简单的扫描功能 (Stars > 300 解锁)
+2023.04.22 完成了基于消息订阅的插件调度模块，可以完成简单的扫描功能 (Stars > 300 解锁)  
+2023.07.07 完成了YAML POC扫描模块 (Stars > 500 解锁)
 
 # TODO:
 传统的扫描部分采用了Golang语言重新实现了xray，并将其开源。未来的扫描部分将采用机器学习技术，旨在构建更为先进的扫描器。   
@@ -39,10 +40,11 @@ SQL注入 https://github.com/sqlmapproject/sqlmap
 XSS 检测 https://github.com/hahwul/dalfox  
 网站技术  https://github.com/chushuai/wappalyzer   
 用Golang运行JavaScript https://github.com/dop251/goja  
-反连平台 https://github.com/chennqqi/godnslog     
+反连平台 https://github.com/chennqqi/godnslog  
+WEB漏洞扫描器 https://www.zaproxy.org/    
 WEB漏洞扫描器 https://github.com/Arachni/arachni   
 WEB漏洞扫描器 https://github.com/andresriancho/w3af  
-WEB漏洞扫描器：https://github.com/wrenchonline/glint  
+WEB漏洞扫描器 https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
 OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。  

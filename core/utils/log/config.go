@@ -4,6 +4,10 @@
  */
 package log
 
+import (
+	"github.com/thoas/go-funk"
+)
+
 type LoggerConfig struct {
 	Level string
 }
@@ -27,9 +31,14 @@ type FileConfig struct {
 }
 
 func NewDefaultConfig() Config {
-	return Config{}
+	return Config{
+		Level: "info",
+	}
 }
 
-func SetConfig() {
-
+func SetConfig(c *Config) {
+	if !funk.InStrings([]string{"debug", "info", "warn", "error", "fatal"}, c.Level) {
+		defaultLogger.Fatal("invalid log level: xxx, chioces are [debug info warn error fatal]")
+	}
+	defaultLogger.SetLevel(c.Level)
 }

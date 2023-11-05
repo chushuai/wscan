@@ -123,12 +123,10 @@ func (c *Crawler) NewTask(req *http.Request, depth int) {
 	}
 	// 通过检查器检查URL是否合法
 	if !c.urlChecker.TargetStr(req.URL.String()).IsAllowed() {
-		c.logger.Printf("URL is invalid: %s\n", req.URL.String())
+		c.logger.Infof("URL is not Allowed: %s", req.URL.String())
 		return
 	}
-
 	if _, exist := c.visitedURLs.Load(req.URL.String()); exist {
-		c.logger.Printf("URL is visited: %s\n", req.URL.String())
 		return
 	}
 	c.visitedURLs.Store(req.URL.String(), struct{}{})
@@ -142,7 +140,7 @@ func (c *Crawler) NewTask(req *http.Request, depth int) {
 	// 将任务添加到任务队列中
 	c.taskQueue.PushBack(t)
 
-	c.logger.Printf("New task added: %s\n", t.req.URL.String())
+	c.logger.Infof("New task added: %s", t.req.URL.String())
 }
 
 func (c *Crawler) OnError(handler func(err error)) {
@@ -341,11 +339,11 @@ func (c *Crawler) handleTask(t *task) {
 }
 
 func (c *Crawler) newWorker(id int) {
-	c.logger.Printf("Worker #%d started\n", id)
+	c.logger.Printf("Worker #%d started", id)
 	for {
 		select {
 		case <-c.ctx.Done():
-			c.logger.Printf("Worker #%d stopped\n", id)
+			c.logger.Printf("Worker #%d stopped", id)
 			return
 		case t := <-c.taskChan:
 			c.handleTask(t)

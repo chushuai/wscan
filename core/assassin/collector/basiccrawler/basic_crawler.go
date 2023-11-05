@@ -31,6 +31,7 @@ func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (c
 			log.Fatal("requestChecker is nil")
 		}
 		c := crawler.NewCrawler(b.config, requestChecker.URLChecker)
+
 		c.OnResponse(func(response *http.Response) bool {
 			log.Infof(response.Request.URL.String())
 			req, err := vhttp.NewRequest(response.Request.Method, response.Request.URL.String(), response.Request.Body)
@@ -50,6 +51,7 @@ func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (c
 		})
 		for _, target := range targets {
 			if r, err := http.NewRequest("GET", target, nil); err == nil {
+				b.config.Restrictions.HostnameAllowed = append(b.config.Restrictions.HostnameAllowed, r.URL.Hostname())
 				c.NewTask(r, 0)
 			}
 		}

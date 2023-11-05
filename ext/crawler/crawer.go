@@ -122,10 +122,16 @@ func (c *Crawler) NewTask(req *http.Request, depth int) {
 		return
 	}
 	// 通过检查器检查URL是否合法
-	//if !c.urlChecker.Check(req.URL.String()) {
-	//	c.logger.Printf("URL is invalid: %s\n", req.URL.String())
-	//	return
-	//}
+	if !c.urlChecker.TargetStr(req.URL.String()).IsAllowed() {
+		c.logger.Printf("URL is invalid: %s\n", req.URL.String())
+		return
+	}
+
+	if _, exist := c.visitedURLs.Load(req.URL.String()); exist {
+		c.logger.Printf("URL is visited: %s\n", req.URL.String())
+		return
+	}
+	c.visitedURLs.Store(req.URL.String(), struct{}{})
 	// 新建一个任务
 	t := &task{
 		req:           req,

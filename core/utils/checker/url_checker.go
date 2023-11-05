@@ -6,6 +6,7 @@ package checker
 
 import (
 	"fmt"
+	"github.com/thoas/go-funk"
 	"net/url"
 	"wscan/core/utils/checker/filter"
 	"wscan/core/utils/checker/matcher"
@@ -93,6 +94,9 @@ func (up *URLPattern) IsAllowed() bool {
 	// 如果当前URLPattern没有错误，并且其对应的检查器不为nil，则调用其IsAllowed方法判断是否允许通过。
 	if up.err == nil && up.Checker != nil {
 		// return up.Checker.IsAllowed(up.URLString())
+		if funk.InStrings(up.Checker.config.HostnameAllowed, up.URL.Hostname()) {
+			return true
+		}
 	}
 	// 否则，返回false。
 	return false
@@ -221,5 +225,32 @@ func (uc *URLChecker) TargetURL(u *url.URL) *URLPattern {
 // 这个方法接收一个int64类型的ttl参数，将URLChecker的TTL属性设置为这个值，并返回*URLChecker类型的对象。这个方法允许在检查URL之前设置TTL值，以覆盖默认值。
 func (uc *URLChecker) WithTTL(ttl int64) *URLChecker {
 	uc.TTL = ttl
+	return uc
+}
+
+func NewURLChecker(config *URLCheckerConfig, filter filter.Filter) *URLChecker {
+	uc := &URLChecker{}
+	uc.Filter = filter
+	uc.config = config
+	uc.SchemeAllowedMatcher = matcher.NewKeyMatcher()
+	uc.SchemeDisallowedMatcher = matcher.NewKeyMatcher()
+	uc.HostnameAllowedMatcher = matcher.NewHostsMatcher()
+	uc.HostnameDisallowedMatcher = matcher.NewHostsMatcher()
+	uc.TCPPortAllowedMatcher = matcher.NewPortMatcher()
+	uc.TCPPortDisallowedMatcher = matcher.NewPortMatcher()
+	uc.PathAllowedMatcher = matcher.NewGlobMatcher()
+	uc.PathDisallowedMatcher = matcher.NewGlobMatcher()
+	uc.PathSuffixAllowedMatcher = matcher.NewKeyMatcher()
+	uc.PathSuffixDisallowedMatcher = matcher.NewKeyMatcher()
+	uc.QueryKeyAllowedMatcher = matcher.NewGlobMatcher()
+	uc.QueryKeyDisallowedMatcher = matcher.NewGlobMatcher()
+	uc.QueryRawAllowedMatcher = matcher.NewGlobMatcher()
+	uc.QueryRawDisallowedMatcher = matcher.NewGlobMatcher()
+	uc.FragmentAllowedMatcher = matcher.NewGlobMatcher()
+	uc.FragmentDisallowedMatcher = matcher.NewGlobMatcher()
+	uc.URLRegexAllowedMatcher = matcher.NewRegexpMatcher()
+	uc.URLRegexDisallowedMatcher = matcher.NewRegexpMatcher()
+	uc.URLGlobAllowedMatcher = matcher.NewGlobMatcher()
+	uc.URLGlobDisallowedMatcher = matcher.NewGlobMatcher()
 	return uc
 }

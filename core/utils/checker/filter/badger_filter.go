@@ -9,15 +9,14 @@ import (
 	"errors"
 	"github.com/dgraph-io/badger/v3"
 	"golang.org/x/net/context"
-	"log"
 	"sync"
+	"wscan/core/utils/log"
 )
 
 type BadgerFilter struct {
 	sync.Mutex
 	ctx    context.Context
 	cancel func()
-	logger *log.Logger
 	db     *badger.DB
 	dbPath string
 	closed bool
@@ -43,21 +42,26 @@ func bytesToInt64(b []byte) int64 {
 }
 
 func (bf *BadgerFilter) Insert(key string, value int64) {
+	bf.Lock()
+	defer bf.Unlock()
+
+	bf.insert(key, value)
+}
+
+func (bf *BadgerFilter) insert(key string, value int64) {
 	b := int64ToBytes(value)
 	err := bf.db.Update(func(txn *badger.Txn) error {
 		err := txn.Set([]byte(key), b)
 		return err
 	})
 	if err != nil {
-		bf.logger.Printf("Error inserting key-value pair into Badger database: %v", err)
+		log.Printf("Error inserting key-value pair into Badger database: %v", err)
 	}
 }
 
-func (bf *BadgerFilter) IsInserted(key string, shouldLock bool, value int64) bool {
-	if shouldLock {
-		bf.Lock()
-		defer bf.Unlock()
-	}
+func (bf *BadgerFilter) IsInserted(key string, insertIfMissing bool, value int64) bool {
+	bf.Lock()
+	defer bf.Unlock()
 	err := bf.db.View(func(txn *badger.Txn) error {
 		val, err := txn.Get([]byte(key))
 		if err != nil {
@@ -71,8 +75,11 @@ func (bf *BadgerFilter) IsInserted(key string, shouldLock bool, value int64) boo
 			return nil
 		})
 	})
+
 	if err != nil {
-		bf.logger.Printf("Error checking if key-value pair (%s, %d) is inserted: %s\n", key, value, err)
+		if insertIfMissing == true {
+			bf.insert(key, value)
+		}
 		return false
 	}
 	return true
@@ -81,9 +88,31 @@ func (bf *BadgerFilter) IsInserted(key string, shouldLock bool, value int64) boo
 func (bf *BadgerFilter) Reset() error {
 	bf.Lock()
 	defer bf.Unlock()
-	bf.logger.Printf("Resetting Badger filter\n")
+
+	log.Printf("Resetting Badger filter\n")
 	if err := bf.db.DropAll(); err != nil {
 		return err
 	}
 	return nil
+}
+
+func NewBadgerFilter(dbPath string) (*BadgerFilter, error) {
+	// Create a new Badger DB instance.
+	opts := badger.DefaultOptions(dbPath)
+	db, err := badger.Open(opts)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create a new context and cancel function to manage the filter's lifecycle.
+	ctx, cancel := context.WithCancel(context.Background())
+
+	// Return a new BadgerFilter instance.
+	return &BadgerFilter{
+		ctx:    ctx,
+		cancel: cancel,
+		db:     db,
+		dbPath: dbPath,
+		closed: false,
+	}, nil
 }

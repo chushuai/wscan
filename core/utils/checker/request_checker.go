@@ -5,7 +5,6 @@
 package checker
 
 import (
-	"net/url"
 	"sync"
 	"wscan/core/assassin/http"
 	"wscan/core/utils/checker/filter"
@@ -31,7 +30,7 @@ type RequestCheckerConfig struct {
 
 type ReqPattern struct {
 	*URLPattern
-	// Checker *<nil>
+	Checker     *RequestChecker
 	bodyKeys    []string
 	hash        string
 	doCacheOnce sync.Once
@@ -74,15 +73,17 @@ func (rc *RequestChecker) Reset() error {
 	return nil
 }
 
-func (rc *RequestChecker) Target(*http.Request) *ReqPattern {
-	return nil
+func (rc *RequestChecker) Target(req *http.Request) *ReqPattern {
+	return &ReqPattern{
+		//*URLPattern
+		Checker: rc,
+		//bodyKeys    []string
+		hash: "",
+		Req:  req,
+	}
 }
 
 func (rc *RequestChecker) TargetStr(string) *URLPattern {
-	return nil
-}
-
-func (rc *RequestChecker) TargetURL(*url.URL) *URLPattern {
 	return nil
 }
 

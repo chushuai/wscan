@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"wscan/core/utils/checker/filter"
 	"wscan/core/utils/checker/matcher"
+	"wscan/core/utils/log"
 )
 
 type URLCheckerConfig struct {
@@ -100,6 +101,27 @@ func (up *URLPattern) IsAllowed() bool {
 	}
 	// 否则，返回false。
 	return false
+}
+
+func NoQueryUrl(u *url.URL) string {
+	return fmt.Sprintf("%s://%s%s", u.Scheme, u.Host, u.Path)
+}
+
+func (up *URLPattern) IsNewWebsiteDir() *URLPattern {
+	key := fmt.Sprintf("web_dir_%s", NoQueryUrl(up.URL))
+	if up.Checker.Filter.IsInserted(key, true, 0) == true {
+		return nil
+	}
+	log.Infof("new website dir: %s", NoQueryUrl(up.URL))
+	return up
+}
+
+func (up *URLPattern) IsNewWebsitePath() *URLPattern {
+	key := fmt.Sprintf("web_path_%s", NoQueryUrl(up.URL))
+	if up.Checker.Filter.IsInserted(key, true, 0) == true {
+		return nil
+	}
+	return up
 }
 
 func NewURLPattern(urlStr string) *URLPattern {

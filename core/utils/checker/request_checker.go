@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"sync"
 	"wscan/core/assassin/http"
+	"wscan/core/utils/checker/filter"
 	"wscan/core/utils/checker/matcher"
 )
 
@@ -89,8 +90,18 @@ func (rc *RequestChecker) WithTTL(int64) *URLChecker {
 	return nil
 }
 
-func NewRequestChecker() *RequestChecker {
-	return nil
+func NewRequestChecker(config *RequestCheckerConfig, filter filter.Filter) *RequestChecker {
+	rc := &RequestChecker{}
+	rc.URLChecker = NewURLChecker(&config.URLCheckerConfig, filter)
+	rc.MethodAllowedMatcher = matcher.NewKeyMatcher()
+	rc.MethodAllowedMatcher.Add(config.MethodAllowed)
+	rc.MethodDisallowedMatcher = matcher.NewKeyMatcher()
+	rc.MethodDisallowedMatcher.Add(config.MethodDisallowed)
+	rc.PostKeyAllowedMatcher = matcher.NewGlobMatcher()
+	rc.PostKeyAllowedMatcher.Add(config.PostKeyAllowed)
+	rc.PostKeyDisallowedMatcher = matcher.NewGlobMatcher()
+	rc.PostKeyDisallowedMatcher.Add(config.PostKeyDisallowed)
+	return rc
 }
 
 //*checker.ReqPattern

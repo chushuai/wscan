@@ -12,7 +12,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 # 运行示例 
 Linux
 ```
-/wscan/core/assassin/wscan  --log-level=debug ws --basic-crawler https://www.baidu.com
+/wscan/core/assassin/wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/
 ```
 # 项目进展
 很高兴地宣布，基于事件订阅WEB通用插件调度和HTTP参数形变模块已经完成了开发工作，同时，动态漏扫爬虫也已经完成了。一旦项目在GitHub上获得超过300个星星，将其全部开源。 
@@ -20,7 +20,8 @@ Linux
 具体请参考《WEB通用漏扫插件编写指南.md》,直接提交PR即可，保证一天内回复。
 
 2023.04.22 完成了基于消息订阅的插件调度模块，可以完成简单的扫描功能 (Stars > 300 解锁)  
-2023.07.07 完成了YAML POC扫描模块 (Stars > 500 解锁)
+2023.07.07 完成了YAML POC扫描模块 (Stars > 500 解锁)  
+2023.11.05 发布v1.0 Linux二进制文件(/wscan/core/assassin/wscan)
 
 # TODO:
 传统的扫描部分采用了Golang语言重新实现了xray，并将其开源。未来的扫描部分将采用机器学习技术，旨在构建更为先进的扫描器。   

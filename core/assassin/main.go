@@ -237,7 +237,7 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "0.0.1",
+		Version: "1.0.0",
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

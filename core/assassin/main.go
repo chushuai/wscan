@@ -117,10 +117,10 @@ var subCommandWebScan = cli.Command{
 			Aliases: []string{"bf"},
 			Value:   "",
 			Usage:   "read requests from burpsuite exported file as targets"},
-		&cli.StringFlag{
+		&cli.BoolFlag{
 			Name:    "url",
 			Aliases: []string{"u"},
-			Value:   "",
+			Value:   false,
 			Usage:   "scan a **single** url"},
 		&cli.StringFlag{
 			Name:    "data",

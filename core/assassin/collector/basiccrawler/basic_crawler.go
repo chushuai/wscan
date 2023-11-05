@@ -33,7 +33,19 @@ func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (c
 		c := crawler.NewCrawler(b.config, requestChecker.URLChecker)
 		c.OnResponse(func(response *http.Response) bool {
 			log.Infof(response.Request.URL.String())
-			out <- &vhttp.Flow{}
+			req, err := vhttp.NewRequest(response.Request.Method, response.Request.URL.String(), response.Request.Body)
+			if err != nil {
+				log.Error(err)
+				return true
+			}
+			req.Header = response.Request.Header
+			resp := &vhttp.Response{
+				NativeResponse: response,
+			}
+			out <- &vhttp.Flow{
+				Request:  req,
+				Response: resp,
+			}
 			return true
 		})
 		for _, target := range targets {

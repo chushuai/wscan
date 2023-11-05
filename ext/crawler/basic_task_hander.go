@@ -4,7 +4,9 @@
  */
 package crawler
 
-import "github.com/PuerkitoBio/goquery"
+import (
+	"github.com/PuerkitoBio/goquery"
+)
 
 func (c *Crawler) handleBasicTask(t *task) {
 	// 过滤URL
@@ -20,7 +22,7 @@ func (c *Crawler) handleBasicTask(t *task) {
 		}
 		return
 	}
-	defer resp.Body.Close()
+	// defer resp.Body.Close()
 
 	// 处理响应
 	for _, responseHandler := range c.responseHandlers {
@@ -30,18 +32,18 @@ func (c *Crawler) handleBasicTask(t *task) {
 	}
 
 	// 解析HTML文档
-	if resp.Header.Get("Content-Type") == "text/html" {
-		doc, err := goquery.NewDocumentFromReader(resp.Body)
-		if err != nil {
-			for _, errorHandler := range c.errorHandlers {
-				errorHandler(err)
-			}
-			return
+	//if resp.GetEncoding() == "text/html" {
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		for _, errorHandler := range c.errorHandlers {
+			errorHandler(err)
 		}
-		if c.handleDocument(t.req.URL, doc, resp, t.depth) {
-			return
-		}
+		return
 	}
+	if c.handleDocument(t.req.URL, doc, resp, t.depth) {
+		return
+	}
+	//}
 
 	// 分析新URL并创建新任务
 	c.findURLAndCreateNewTask()

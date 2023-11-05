@@ -6,7 +6,6 @@ package crawler
 
 import (
 	"crypto/tls"
-	"fmt"
 	"golang.org/x/crypto/pkcs12"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
@@ -14,7 +13,6 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
-	"strconv"
 	"sync"
 	"time"
 )
@@ -87,10 +85,10 @@ func NewClient(config *ClientConfig) (*Client, error) {
 
 	// 创建一个 Transport
 	transport := &http.Transport{
-		DialContext:           (&net.Dialer{Timeout: time.Duration(config.DialTimeout) * time.Millisecond}).DialContext,
-		TLSHandshakeTimeout:   time.Duration(config.TLSHandshakeTimeout) * time.Millisecond,
-		ResponseHeaderTimeout: time.Duration(config.ReadTimeout) * time.Millisecond,
-		IdleConnTimeout:       time.Duration(config.IdleConnTimeout) * time.Millisecond,
+		DialContext:           (&net.Dialer{Timeout: time.Duration(config.DialTimeout) * time.Second}).DialContext,
+		TLSHandshakeTimeout:   time.Duration(config.TLSHandshakeTimeout) * time.Second,
+		ResponseHeaderTimeout: time.Duration(config.ReadTimeout) * time.Second,
+		IdleConnTimeout:       time.Duration(config.IdleConnTimeout) * time.Second,
 		MaxConnsPerHost:       config.MaxConnsPerHost,
 		MaxIdleConns:          config.MaxIdleConns,
 		TLSClientConfig: &tls.Config{
@@ -223,10 +221,10 @@ func (c *Client) do(req *http.Request, redirect bool) (*http.Response, error) {
 	}
 
 	// 首先获取令牌以等待请求速率符合限制
-	err := c.limiter.Wait(c.ctx)
-	if err != nil {
-		return nil, fmt.Errorf("failed to wait for rate limiter: %v", err)
-	}
+	//err := c.limiter.Wait(c.ctx)
+	//if err != nil {
+	//	return nil, fmt.Errorf("failed to wait for rate limiter: %v", err)
+	//}
 
 	// Send the request and record statistics
 	resp, err := httpClient.Do(copiedReq)
@@ -234,13 +232,13 @@ func (c *Client) do(req *http.Request, redirect bool) (*http.Response, error) {
 		c.FailedRequestsCount++
 	} else {
 		c.ResponsesCount++
-		c.TotalResponseTime += int64(time.Since(req.Context().Value("start").(time.Time)))
-		c.TotalResponseTimeInTenSeconds += int64(time.Since(req.Context().Value("start").(time.Time)))
+		//c.TotalResponseTime += 0
+		//c.TotalResponseTimeInTenSeconds += 0
 		c.respCountInTenSecond++
 	}
 
 	// Update the request's cookies
-	c.Jar.SetCookies(req.URL, resp.Cookies())
+	// c.Jar.SetCookies(req.URL, resp.Cookies())
 
 	return resp, err
 }
@@ -248,27 +246,6 @@ func (c *Client) do(req *http.Request, redirect bool) (*http.Response, error) {
 //func (*Client) makeHeadersCopier()
 func (c *Client) makeHeadersCopier() func(http.Header) {
 	return func(dst http.Header) {
-		// Copy headers from the client's configuration to the request headers
-		if len(c.config.Proxies) > 0 {
-			dst.Set("X-Forwarded-For", c.config.Proxies[0])
-			if len(c.config.Proxies) > 1 {
-				dst.Set("X-Forwarded-Host", c.config.Proxies[1])
-			}
-		}
-		if c.config.TLSSkipVerify {
-			dst.Set("Insecure-Skip-Verify", "true")
-		}
-		if c.config.TLSMinVersion != 0 {
-			dst.Set("TLS-Min-Version", strconv.Itoa(int(c.config.TLSMinVersion)))
-		}
-		if c.config.TLSMaxVersion != 0 {
-			dst.Set("TLS-Max-Version", strconv.Itoa(int(c.config.TLSMaxVersion)))
-		}
-		if c.config.PKCS12Certificate != nil {
-			dst.Set("PKCS12-Certificate", string(c.config.PKCS12Certificate))
-		}
-		if c.config.MaxRequestPerSecond > 0 {
-			dst.Set("Rate-Limit", strconv.Itoa(c.config.MaxRequestPerSecond))
-		}
+
 	}
 }

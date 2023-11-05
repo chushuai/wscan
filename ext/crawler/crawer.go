@@ -7,13 +7,14 @@ package crawler
 import (
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/net/context"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"sync"
+	"time"
 	"wscan/core/utils/checker"
 	"wscan/core/utils/collections"
+	"wscan/core/utils/log"
 )
 
 type Crawler struct {
@@ -61,11 +62,25 @@ type task struct {
 
 func NewCrawler(config *Config, urlChecker *checker.URLChecker) *Crawler {
 	crawler := &Crawler{
-		logger:     log.Default(),
+		logger:     log.GetLogger("crawler"),
 		config:     config,
 		taskQueue:  collections.NewQueue(),
 		taskChan:   make(chan *task, 100),
 		urlChecker: urlChecker,
+	}
+	crawler.ctx, crawler.cancel = context.WithCancel(context.Background())
+	if client, err := NewClient(&ClientConfig{
+		DialTimeout:         10,
+		TLSHandshakeTimeout: 10,
+		ReadTimeout:         10,
+		IdleConnTimeout:     10,
+		MaxConnsPerHost:     10,
+		MaxIdleConns:        10,
+		TLSSkipVerify:       false,
+	}); err == nil {
+		crawler.Client = client
+	} else {
+		log.Fatal(err)
 	}
 	return crawler
 }
@@ -83,19 +98,13 @@ func (c *Crawler) EndFeed() {
 }
 
 func (c *Crawler) Feed() {
-	c.logger.Println("start feed task...")
-	for {
-		if c.feedEnded {
-			c.logger.Println("feed task ended.")
-			return
+	for c.feedEnded == false {
+		if c.taskQueue.Len() != 0 {
+			c.taskChan <- c.taskQueue.TryPop().(*task)
+		} else {
+			time.Sleep(1 * time.Second)
 		}
 	}
-	// Add the URL to the visited URLs map to avoid visiting it again
-	c.visitedURLs.Store(nil, true)
-
-	// Create a new task with the URL and add it to the task queue
-	t := task{}
-	c.taskQueue.PushBack(t)
 	return
 }
 
@@ -112,22 +121,21 @@ func (c *Crawler) NewTask(req *http.Request, depth int) {
 		c.logger.Println("Invalid request.")
 		return
 	}
-
 	// 通过检查器检查URL是否合法
 	//if !c.urlChecker.Check(req.URL.String()) {
 	//	c.logger.Printf("URL is invalid: %s\n", req.URL.String())
 	//	return
 	//}
-
 	// 新建一个任务
 	t := &task{
 		req:           req,
 		redirectCount: 0,
 		depth:         depth,
 	}
-
+	c.wg.Add(1)
 	// 将任务添加到任务队列中
 	c.taskQueue.PushBack(t)
+
 	c.logger.Printf("New task added: %s\n", t.req.URL.String())
 }
 
@@ -239,12 +247,7 @@ func (c *Crawler) Run() {
 	for i := 0; i < c.config.MaxConcurrent; i++ {
 		go c.newWorker(i)
 	}
-
-	// 关闭临时文件
-	if c.tempFileForUpload != nil {
-		_ = c.tempFileForUpload.Close()
-	}
-
+	go c.Feed()
 }
 
 func (c *Crawler) Stop() {
@@ -253,6 +256,9 @@ func (c *Crawler) Stop() {
 
 func (c *Crawler) Wait() {
 	c.wg.Wait()
+	c.feedEnded = true
+	c.Stop()
+	c.logger.Infof("Crawler End")
 }
 
 func (*Crawler) clear() {
@@ -260,6 +266,7 @@ func (*Crawler) clear() {
 }
 
 func (c *Crawler) handleTask(t *task) {
+
 	// 发送 HTTP 请求
 	resp, err := c.Client.Do(t.req)
 	if err != nil {
@@ -268,7 +275,6 @@ func (c *Crawler) handleTask(t *task) {
 		return
 	}
 	defer resp.Body.Close()
-
 	c.handleResp(resp)
 
 	// 处理响应的 HTML 文档
@@ -287,8 +293,17 @@ func (c *Crawler) handleTask(t *task) {
 	}
 
 	// 判断是否需要继续遍历页面链接
-	if t.depth < c.config.MaxDepth {
+	if t.depth < c.config.MaxDepth || c.config.MaxDepth == 0 {
 		links := []string{} // ExtractLinks(resp.Body, t.req.URL)
+
+		doc.Find("a").Each(func(i int, q *goquery.Selection) {
+			href, exists := q.Attr("href")
+			if exists {
+				if newUrl, err := resp.Request.URL.Parse(href); err == nil {
+					links = append(links, newUrl.String())
+				}
+			}
+		})
 		for _, link := range links {
 			// 构建新的请求对象
 			req, err := http.NewRequest("GET", link, nil)
@@ -320,47 +335,40 @@ func (c *Crawler) handleTask(t *task) {
 }
 
 func (c *Crawler) newWorker(id int) {
-	defer func() {
-		c.wg.Done()
-	}()
-
 	c.logger.Printf("Worker #%d started\n", id)
-
 	for {
 		select {
 		case <-c.ctx.Done():
 			c.logger.Printf("Worker #%d stopped\n", id)
 			return
 		case t := <-c.taskChan:
-			c.workingTasks = append(c.workingTasks, t)
-			defer func() {
-				// c.taskDone(t)
-			}()
-			if c.visitedURLs.Load(t.req.URL.String()) != nil {
-				continue
-			}
+			c.handleTask(t)
+			c.wg.Done()
+			//if c.visitedURLs.Load(t.req.URL.String()) != nil {
+			//	continue
+			//}
 			//if c.filter != nil && !c.filter.Match(t.req.URL) {
 			//	continue
 			//}
 
 			// 处理 request handlers
-			if !c.handleReq(t.req) {
-				continue
-			}
-
-			// 发送请求
-			resp, err := c.Client.Do(t.req)
-
-			// 处理 request handlers for not visited
-			if err != nil {
-				c.handleReqNotVisit(t.req, err)
-			}
-
-			// 处理 response handlers
-			if !c.handleResp(resp) {
-				resp.Body.Close()
-				continue
-			}
+			//if !c.handleReq(t.req) {
+			//	continue
+			//}
+			//
+			//// 发送请求
+			//resp, err := c.Client.Do(t.req)
+			//
+			//// 处理 request handlers for not visited
+			//if err != nil {
+			//	c.handleReqNotVisit(t.req, err)
+			//}
+			//
+			//// 处理 response handlers
+			//if !c.handleResp(resp) {
+			//	resp.Body.Close()
+			//	continue
+			//}
 		}
 	}
 }

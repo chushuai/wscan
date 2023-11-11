@@ -14,6 +14,10 @@ type Queue struct {
 	m sync.RWMutex
 }
 
+func NewQueue() *Queue {
+	return &Queue{l: list.New()}
+}
+
 func (q *Queue) Front() *list.Element {
 	q.m.RLock()
 	defer q.m.RUnlock()

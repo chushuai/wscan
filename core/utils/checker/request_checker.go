@@ -6,7 +6,7 @@ package checker
 
 import (
 	"sync"
-	"wscan/core/assassin/http"
+	"wscan/core/http"
 	"wscan/core/utils/checker/filter"
 	"wscan/core/utils/checker/matcher"
 )

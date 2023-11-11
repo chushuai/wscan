@@ -6,10 +6,9 @@ package collector
 
 import (
 	"context"
-	"fmt"
 	"github.com/panjf2000/ants/v2"
 	"net"
-	"net/http"
+	"wscan/core/collector/mitmhelper"
 	vhttp "wscan/core/http"
 	"wscan/core/resource"
 	"wscan/core/utils/checker"
@@ -20,22 +19,6 @@ import (
 )
 
 var GenerateCA bool
-
-// requestModifier 是请求修改器，用于记录请求日志
-type requestModifier struct{}
-
-func (rm requestModifier) ModifyRequest(req *http.Request) error {
-	logger.Infof("Received request: %s %s", req.Method, req.URL) // 记录请求方法、URL等日志信息
-	return nil
-}
-
-// responseModifier 是响应修改器，用于记录响应日志
-type responseModifier struct{}
-
-func (rm responseModifier) ModifyResponse(res *http.Response) error {
-	logger.Infof("Response status: %s", res.Status) // 记录响应状态码等日志信息
-	return nil
-}
 
 type MitmProxy struct {
 	proxy      *martian.Proxy
@@ -55,20 +38,19 @@ func NewMitmProxy(conf *MitmConfig, httpOpts *vhttp.ClientOptions) *MitmProxy {
 }
 
 func (m *MitmProxy) FitOut(context.Context, []string) (chan resource.Resource, error) {
-	logger.Infof("starting mitm server at")
 	martian.Init()
-
-	l, err := net.Listen("tcp", net.JoinHostPort("127.0.0.1", m.conf.Listen))
+	l, err := net.Listen("tcp", m.conf.Listen)
 	if err != nil {
 		logger.Fatal(err)
 	}
+	logger.Infof("starting mitm server at %s", m.conf.Listen)
+	out := m.makeResultChan()
+	httpMirrorModifier := mitmhelper.NewHTTPMirrorModifier(m.pool, m.dupChecker, m.httpOpts, out)
+	m.proxy.SetRequestModifier(httpMirrorModifier)
+	m.proxy.SetResponseModifier(httpMirrorModifier)
+	go m.proxy.Serve(l)
 
-	m.proxy.SetRequestModifier(requestModifier{})
-	m.proxy.SetResponseModifier(responseModifier{})
-
-	fmt.Println("Proxy server is running on port 8080")
-
-	m.proxy.Serve(l)
+	return out, nil
 
 	//	if x509c != nil && priv != nil {
 	//
@@ -109,8 +91,8 @@ func (*MitmProxy) buildModifier() {
 func (*MitmProxy) loadCerts() {
 
 }
-func (*MitmProxy) makeResultChan() {
-
+func (m *MitmProxy) makeResultChan() chan resource.Resource {
+	return make(chan resource.Resource, 1000)
 }
 
 func init() {

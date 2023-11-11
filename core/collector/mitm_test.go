@@ -16,7 +16,7 @@ import (
 
 func Test_cProxy(t *testing.T) {
 	urli := url.URL{}
-	urlproxy, _ := urli.Parse("http://127.0.0.1:10000")
+	urlproxy, _ := urli.Parse("http://127.0.0.1:1000")
 	c := http.Client{
 		Transport: &http.Transport{
 			Proxy: http.ProxyURL(urlproxy),

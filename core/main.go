@@ -9,8 +9,8 @@ import (
 	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"os"
-	"wscan/core/assassin/entry"
-	"wscan/core/assassin/utils"
+	"wscan/core/entry"
+	"wscan/core/utils"
 )
 
 func showBanner() {
@@ -117,10 +117,10 @@ var subCommandWebScan = cli.Command{
 			Aliases: []string{"bf"},
 			Value:   "",
 			Usage:   "read requests from burpsuite exported file as targets"},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			Name:    "url",
 			Aliases: []string{"u"},
-			Value:   false,
+			Value:   "",
 			Usage:   "scan a **single** url"},
 		&cli.StringFlag{
 			Name:    "data",

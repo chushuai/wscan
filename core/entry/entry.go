@@ -7,21 +7,21 @@ package entry
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/automaxprocs/maxprocs"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
-	"wscan/core/assassin/collector"
-	"wscan/core/assassin/collector/basiccrawler"
-	"wscan/core/assassin/ctrl"
-	"wscan/core/assassin/http"
-	"wscan/core/assassin/plugins"
-	"wscan/core/assassin/plugins/base"
-	"wscan/core/assassin/utils"
+	"wscan/core/collector"
+	"wscan/core/collector/basiccrawler"
+	"wscan/core/crawler"
+	"wscan/core/ctrl"
+	"wscan/core/http"
+	"wscan/core/plugins"
+	"wscan/core/plugins/base"
+	"wscan/core/utils"
 	"wscan/core/utils/checker"
 	"wscan/core/utils/log"
-	"wscan/ext/crawler"
+	"wscan/core/utils/printer"
 )
 
 func NewApp(c *cli.Context) {
@@ -33,28 +33,36 @@ func NewApp(c *cli.Context) {
 		log.Info("Dumping example config to ./config.yaml.example")
 	}
 	maxprocs.Set()
-	var collector collector.Fitter
+	var col collector.Fitter
+	targets := []string{}
 	if c.Bool("basic-crawler") == true {
-		collector = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
+		col = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
 			RestrictionsOnRequests: crawler.RestrictionsOnRequests{MaxConcurrent: 5, MaxDepth: 0},
 			Restrictions:           cfg.Filter,
 		})
-	} else if c.Bool("url") == true {
-		for _, url := range c.Args().Slice() {
-			log.Println(url)
-		}
-		return
+		targets = c.Args().Slice()
+	} else if c.String("url") != "" {
+		col = collector.NewBasicCrawlerCollector(cfg.HTTP)
+		targets = append(targets, c.String("url"))
+	} else if c.String("raw-request") != "" {
+
+	} else if c.String("url-file") != "" {
+
 	} else if c.String("listen") != "" {
 		log.Println("listen=", c.String("listen"))
-		return
+		cfg.Mitm.Listen = c.String("listen")
+		col = collector.NewMitmProxy(&cfg.Mitm, cfg.HTTP)
 	} else {
 		log.Fatal("Warning: you should use --html-output, --webhook-output or --json-output to persist your scan result\n`url`, `listen`, `raw-request`, `url-file`, `basic-crawler` and `browser-crawler` must use one, try `--help` to see details")
 	}
-	taskChan, err := collector.FitOut(context.Background(), c.Args().Slice())
+	taskChan, err := col.FitOut(context.Background(), targets)
 	if err != nil {
 		log.Fatal(err)
 	}
-	dispatcher := ctrl.NewDispatcher(&cfg.Config)
+	multiPrinter := printer.NewMultiPrinter()
+	printers := getPrinters(c)
+	multiPrinter.AddPrinters(printers)
+	dispatcher := ctrl.NewDispatcher(&cfg.Config, multiPrinter)
 	dispatcher.Init(false)
 	dispatcher.Run(taskChan)
 	dispatcher.Release()
@@ -148,21 +156,6 @@ func LoadOrGenConfig(c *cli.Context) (*CliEntryConfig, error) {
 
 }
 
-func newJSONPrinter() {
-	// CompleteOutputPath()
-	// p := printer.NewJsonPrinter()
-	// p.AddInterceptor()
-}
-
-func NewMultiPrinter() {
-
-}
-
-func CompleteOutputPath() {
-	utils.TimeStampSecond()
-	utils.DatetimePretty()
-}
-
 func init() {
-	fmt.Println(`^badger_[0-9]{19}$`)
+
 }

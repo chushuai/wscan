@@ -59,3 +59,7 @@ func (p *MultiPrinter) Print(data interface{}) error {
 
 	return nil
 }
+
+func NewMultiPrinter() *MultiPrinter {
+	return &MultiPrinter{}
+}

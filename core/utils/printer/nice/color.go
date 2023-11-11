@@ -6,6 +6,7 @@ package nice
 
 import (
 	"github.com/kataras/pio"
+	"os"
 )
 
 type Color struct {
@@ -34,6 +35,8 @@ type Format interface {
 	Raw() interface{}
 }
 
+var PioPrinter *pio.Printer
+
 func init() {
-	//pio.NewPrinter()
+	PioPrinter = pio.NewTextPrinter("color", os.Stdout)
 }

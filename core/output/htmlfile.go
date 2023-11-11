@@ -5,8 +5,10 @@
 package output
 
 import (
+	"fmt"
 	"os"
 	"sync"
+	"wscan/core/model"
 	"wscan/core/utils/printer"
 )
 
@@ -24,27 +26,25 @@ func (*htmlFilePrinter) AddInterceptor(func(interface{}) (interface{}, error)) p
 func (*htmlFilePrinter) Close() error {
 	return nil
 }
-func (*htmlFilePrinter) Lock() {
 
-}
 func (*htmlFilePrinter) LogSubdomain(interface{}) error {
 	return nil
 }
 func (*htmlFilePrinter) LogVuln(interface{}) error {
 	return nil
 }
-func (*htmlFilePrinter) Print(interface{}) error {
+func (*htmlFilePrinter) Print(res interface{}) error {
+	switch res.(type) {
+	case **model.Vuln:
+		fmt.Println("not support html")
+	}
 	return nil
 }
-func (*htmlFilePrinter) Unlock() {
 
-}
-func (*htmlFilePrinter) lockSlow() {
-
-}
-func (*htmlFilePrinter) unlockSlow(int32) {
-
-}
 func (*htmlFilePrinter) writePrefix() error {
 	return nil
+}
+
+func NewHTMLFilePrinter() *htmlFilePrinter {
+	return &htmlFilePrinter{}
 }

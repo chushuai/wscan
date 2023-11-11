@@ -5,13 +5,12 @@
 package model
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
-	vhttp "wscan/core/assassin/http"
-	"wscan/core/assassin/resource"
+	vhttp "wscan/core/http"
+	"wscan/core/resource"
 )
-
-//gunkit/core/assassin/model.NewServiceVuln
 
 func NewWebVuln() {
 
@@ -112,48 +111,69 @@ type Vuln struct {
 	CreateTime int64
 }
 
-func (*Vuln) Add(string, string) *Vuln {
-	return nil
+func (v *Vuln) Add(key string, value string) *Vuln {
+	v.Extra[key] = value
+	return v
 }
-func (*Vuln) AddMap(string, map[string]interface{}) *Vuln {
-	return nil
+
+func (v *Vuln) AddMap(key string, value map[string]interface{}) *Vuln {
+	v.Extra[key] = value
+	return v
 }
-func (*Vuln) AddStringArray(string, []string) *Vuln {
-	return nil
+
+func (v *Vuln) AddStringArray(key string, value []string) *Vuln {
+	v.Extra[key] = value
+	return v
 }
+
 func (*Vuln) AddUsernamePassword(string, string, []string) *Vuln {
 	return nil
 }
+
 func (*Vuln) GetPassword() (string, string) {
 	return "", ""
 }
+
 func (*Vuln) GetUsername() (string, string) {
 	return "", ""
 }
+
 func (*Vuln) MarshalJSON() ([]uint8, error) {
 	return nil, nil
 }
-func (*Vuln) SetTargetURL(*url.URL) {
-	return
+
+func (v *Vuln) SetTargetURL(u *url.URL) {
+	v.targetURL = u
 }
-func (*Vuln) String() string {
-	return ""
+
+func (v *Vuln) String() string {
+	raw := fmt.Sprintf("[Vuln: %v]\n", v.Binding.Category)
+	if v.TargetURL() != nil {
+		raw += fmt.Sprintf("Target		%v\n", v.TargetURL().String())
+	}
+	return raw
 }
+
 func (v *Vuln) Target() resource.Resource {
-	return nil
+	return v.target
 }
-func (*Vuln) TargetURL() *url.URL {
-	return nil
+
+func (v *Vuln) TargetURL() *url.URL {
+	return v.targetURL
 }
+
 func (*Vuln) ToMap() map[string]interface{} {
 	return nil
 }
+
 func (*Vuln) UnmarshalJSON([]uint8) error {
 	return nil
 }
+
 func (*Vuln) serviceRaw() map[string]interface{} {
 	return nil
 }
+
 func (*Vuln) webRaw() map[string]interface{} {
 	return nil
 }

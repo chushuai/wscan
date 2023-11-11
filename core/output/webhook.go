@@ -6,13 +6,14 @@ package output
 
 import (
 	"context"
+	"net/http"
 	"net/url"
-	"wscan/core/assassin/model"
+	"wscan/core/model"
 	"wscan/core/utils/printer"
 )
 
-func NewWebHookPrinter() {
-
+func NewWebHookPrinter() *webHookPrinter {
+	return &webHookPrinter{}
 }
 
 type webHookPrinter struct {

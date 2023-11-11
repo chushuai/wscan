@@ -4,10 +4,6 @@
  */
 package utils
 
-func MapQueryToString() {
-
-}
-
-func DomainToURLFilter() {
+func ReplaceRequestURI() {
 
 }

@@ -6,8 +6,9 @@ package path_traversal
 
 import (
 	"context"
-	"wscan/core/assassin/http"
-	"wscan/core/assassin/plugins/base"
+	"wscan/core/http"
+	"wscan/core/model"
+	"wscan/core/plugins/base"
 	logger "wscan/core/utils/log"
 )
 
@@ -29,7 +30,12 @@ func (*PathTraversal) Close() error {
 }
 
 func (*PathTraversal) DefaultConfig() base.PluginConfigInterface {
-	return &Config{}
+	return &Config{
+		PluginBaseConfig: base.PluginBaseConfig{
+			Name:    "path_traversal",
+			Enabled: true,
+		},
+	}
 }
 
 func (p *PathTraversal) Fingers() []*base.Finger {
@@ -37,7 +43,7 @@ func (p *PathTraversal) Fingers() []*base.Finger {
 	fingers = append(fingers, &base.Finger{
 		CheckAction: p.execAction,
 		Channel:     "web-generic",
-		Binding:     &base.VulnBinding{ID: "path-traversal/path-traversal/default", Plugin: "path-traversal/path-traversal", Category: "path-traversal"},
+		Binding:     &model.VulnBinding{ID: "path-traversal/path-traversal/default", Plugin: "path-traversal/path-traversal", Category: "path-traversal"},
 	})
 	return fingers
 }
@@ -46,17 +52,16 @@ func (p *PathTraversal) GetConfig() base.PluginConfigInterface {
 	return p.PluginMixinInitConfig.GetConfig()
 }
 
-func (p *PathTraversal) Init(ctx context.Context, pci base.PluginConfigInterface, bb *base.BifrostBase) error {
+func (p *PathTraversal) Init(ctx context.Context, pci base.PluginConfigInterface, bb *base.ApolloBase) error {
 	logger.Info("PathTraversal Plugin init")
-	return p.PluginMixinInitConfig.Init(ctx, pci)
+	return p.PluginMixinInitConfig.Init(ctx, pci, bb)
 }
 
-func (p *PathTraversal) execAction(ctx context.Context, b *base.Bifrost) error {
+func (p *PathTraversal) execAction(ctx context.Context, b *base.Apollo) error {
 	flow := b.GetTargetFlow()
-	logger.Infof("开始检测path-traversal, URL=%s", flow.Request.URL.String())
+	logger.Debugf("开始检测path-traversal, URL=%s", flow.Request.URL().String())
 	for _, param := range flow.Request.ParamsQueryAndBody() {
 		for _, rule := range pathTraversalRules {
-			logger.Infof("%s, Test path-traversal= %s", flow.Request.URL.String(), rule.Vector)
 			req := flow.Request.Mutate(&http.Parameter{Position: param.Position, Key: param.Key, Value: param.Value, Suffix: rule.Vector})
 			res, err := b.HTTPClient.Respond(context.TODO(), req)
 			if err != nil {
@@ -65,11 +70,10 @@ func (p *PathTraversal) execAction(ctx context.Context, b *base.Bifrost) error {
 			if rule.compiled.Match([]byte(res.Text)) {
 				v := b.NewWebVuln(req, res, &param)
 				if v != nil {
-					v.SetTargetURL(&flow.Request.URL)
+					v.SetTargetURL(flow.Request.URL())
 					v.Payload = rule.Vector
 					b.OutputVuln(v)
 				}
-				logger.Infof("Found %s %s, param.Position=%s; param.Key=%s\n", rule.typ, flow.Request.URL.String(), param.Position, param.Key)
 			}
 		}
 	}

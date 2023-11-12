@@ -5,11 +5,13 @@
 package entry
 
 import (
-	"fmt"
 	"github.com/urfave/cli/v2"
-	"wscan/core/assassin/collector"
-	"wscan/core/assassin/ctrl"
+	"wscan/core/collector"
+	"wscan/core/ctrl"
+	"wscan/core/output"
 	"wscan/core/utils/checker"
+	"wscan/core/utils/log"
+	"wscan/core/utils/printer"
 )
 
 var aConfigYaml = "config.yaml"
@@ -40,6 +42,14 @@ func NewExampleConfig() *CliEntryConfig {
 				},
 			},
 		},
+		Mitm: collector.MitmConfig{
+			CACert: "./ca.crt",
+			CAKey:  "./ca.key",
+			Queue: collector.MitmQueueConfig{
+				MaxLength: 3000,
+			},
+		},
+
 		Plugins: make(map[string]interface{}),
 	}
 	for name, p := range config.Config.Plugins {
@@ -56,10 +66,19 @@ func rsaVerify() {
 
 }
 
-func getPrinters(c *cli.Context) {
-	fmt.Println(c.String("text-output"))
-	fmt.Println(c.String("json-output"))
-	fmt.Println(c.String("html-output"))
-	fmt.Println(c.String("webhook-output"))
-
+func getPrinters(c *cli.Context) (printers []printer.Printer) {
+	if c.String("json-output") != "" {
+		printers = append(printers, newJSONPrinter())
+	}
+	if c.String("html-output") != "" {
+		printers = append(printers, output.NewHTMLFilePrinter())
+	}
+	if c.String("webhook-output") != "" {
+		printers = append(printers, output.NewWebHookPrinter())
+	}
+	if len(printers) == 0 {
+		log.Warnf("ou should use --html-output, --webhook-output or --json-output to persist your scan result")
+	}
+	printers = append(printers, output.NewStdoutPrinter())
+	return
 }

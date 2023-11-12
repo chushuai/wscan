@@ -6,9 +6,9 @@ package datasource
 
 import (
 	"context"
-	"wscan/core/assassin/model"
-	"wscan/ext/fastdomain/geodb"
-	"wscan/ext/fastdomain/utils"
+	"wscan/core/fastdomain/geodb"
+	"wscan/core/fastdomain/utils"
+	"wscan/core/model"
 )
 
 type alienvault struct {

@@ -2,17 +2,17 @@
 * @Author: shaochuyu
 * @Date: 5/7/2022 11:30
  */
-package fastdomain
+package subdomain
 
 import (
 	"context"
 	"sync"
-	"wscan/core/assassin/http"
-	"wscan/core/assassin/model"
+	"wscan/core/fastdomain/datasource"
+	"wscan/core/fastdomain/geodb"
+	"wscan/core/fastdomain/utils"
+	"wscan/core/http"
+	"wscan/core/model"
 	"wscan/core/utils/printer"
-	"wscan/ext/fastdomain/datasource"
-	"wscan/ext/fastdomain/geodb"
-	"wscan/ext/fastdomain/utils"
 )
 
 type Config struct {

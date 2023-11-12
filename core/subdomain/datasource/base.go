@@ -9,10 +9,10 @@ import (
 	mapset "github.com/deckarep/golang-set"
 	"log"
 	"sync"
-	"wscan/ext/fastdomain/dns"
-	"wscan/ext/fastdomain/geodb"
-	"wscan/ext/fastdomain/model"
-	"wscan/ext/fastdomain/utils"
+	"wscan/core/fastdomain/dns"
+	"wscan/core/fastdomain/geodb"
+	"wscan/core/fastdomain/model"
+	"wscan/core/fastdomain/utils"
 )
 
 type RewriteTimeoutHTTPClient struct {

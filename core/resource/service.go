@@ -4,11 +4,9 @@
  */
 package resource
 
-import "sync"
-
-func ServiceFromAddr() {
-	//  aFingerprint ; "fingerprint"
-}
+import (
+	"sync"
+)
 
 type ServiceFingerprint struct {
 	ServiceName string   `json:"service_name"`
@@ -68,4 +66,8 @@ func (*Service) Timestamp() int64 {
 }
 func (*Service) Type() int {
 	return 0
+}
+
+func ServiceFromAddr() {
+
 }

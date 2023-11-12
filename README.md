@@ -20,14 +20,14 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 /wscan/core/wscan  --log-level=debug ws --listen=127.0.0.1:1000
 ```
 # 项目进展
-很高兴地宣布，基于事件订阅WEB通用插件调度和HTTP参数形变模块已经完成了开发工作，同时，动态漏扫爬虫也已经完成了。一旦项目在GitHub上获得超过300个星星，将其全部开源。 
+很高兴地宣布，基于事件订阅WEB通用插件调度和HTTP参数形变模块已经完成了开发工作，同时，动态漏扫爬虫也已经完成了。一旦项目在GitHub上获得超过500个星星，将其全部开源。 
 在此之前，开始接收第三方提交的WEB通用插件代码，希望能够与更多的开发者们一起合作，共同完善Wscan，为用户提供更好的服务。欢迎您的参与和贡献！
 具体请参考《WEB通用漏扫插件编写指南.md》,直接提交PR即可，保证一天内回复。
 
 2023.04.22 完成了基于消息订阅的插件调度模块，可以完成简单的扫描功能 (Stars > 300 解锁)  
 2023.07.07 完成了YAML POC扫描模块 (Stars > 500 解锁)  
-2023.11.05 发布v1.0.0 二进制版,支持简单的Web通用漏洞检测
-2023.11.12 发布v1.0.2 二进制版,支持被动扫描
+2023.11.05 发布v1.0.0 二进制版,支持简单的Web通用漏洞检测  
+2023.11.12 发布v1.0.2 二进制版,支持被动扫描  
 
 
 # TODO:
@@ -35,7 +35,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 2023.08.30 完成WEB通用漏洞扫描插件  
 2023.10.30 完成通过机器学习降低误报  
-2023.11.30 重构扫描器(代号apollo)
+2023.11.30 重构扫描器(代号apollo)  
 202X.XX.XX 使用机器学习构建Payload进行自动化扫描  
 # 架构简析
 ![](doc/img/Wscan.png)
@@ -58,32 +58,11 @@ XSS 检测 https://github.com/hahwul/dalfox
 WEB漏洞扫描器 https://www.zaproxy.org/    
 WEB漏洞扫描器 https://github.com/Arachni/arachni   
 WEB漏洞扫描器 https://github.com/andresriancho/w3af  
+WEB漏洞扫描器 https://github.com/w-digital-scanner/w13scan  
 WEB漏洞扫描器 https://github.com/wrenchonline/glint  
 JSONP劫持漏洞检测 https://github.com/jweny/check_jsonp_based_on_ast  
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
-OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。  
-RIPS Technologies: 这是一个开源的PHP漏洞扫描器，使用机器学习算法自动化检测PHP应用程序中的漏洞。  
-TensorFlow.js: 这是一个由Google开发的JavaScript机器学习库，可以用于检测Web应用程序中的漏洞和攻击。  
-Wfuzz: 这是一个开源的Web应用程序漏洞扫描器，使用机器学习算法自动化检测Web应用程序中的漏洞和攻击。
-# 攻击数据集
-
-OWASP SQL Injection Dataset: 由 OWASP 组织提供的公开数据集，包括 12 个文件，共计 1000 个 SQL 注入攻击和 1000 个正常查询。该数据集可用于评估 SQL 注入攻击检测系统的性能。
-OWASP SQL Injection Dataset: https://github.com/OWASP/SQLi-labs/tree/master/SQLi-001
-
-Sqli-Labs: 包括一系列关于 SQL 注入攻击和检测的实验室，包括多种不同的注入类型和攻击方式。
-Sqli-Labs: https://github.com/Audi-1/sqli-labs
-
-WAF-FLE: 由 ModSecurity 团队提供的公开数据集，包括 230 多个不同的注入攻击和 300 多个正常查询。该数据集可用于评估 WAF 的性能和准确性
-WAF-FLE: https://github.com/SpiderLabs/owasp-modsecurity-crs/tree/v3.4/dev/util/waf_fle/samples
-
-XSS Data Sets: 由 WASC 提供的公开数据集，包括多种不同类型的 XSS 攻击和正常请求。该数据集旨在帮助测试和评估 Web 应用程序防御 XSS 攻击的能力。
-XSS Data Sets: https://projects.webappsec.org/Document/Download/1
-
-XSS_Test_Corpus: 由 Google 提供的公开数据集，包括多种不同类型的 XSS 攻击和正常请求。该数据集旨在帮助测试和评估 XSS 检测系统的性能。
-XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
-
-XSS Game: 由 Google 提供的在线 XSS 攻击训练平台，包括多个级别的挑战和练习，涵盖了各种不同类型的 XSS 攻击和防御技术。
-Google的XSS Game平台地址是：https://xss-game.appspot.com/
+OWASP Cornucopia: 这是一个由OWASP（开放Web应用程序安全项目）开发的开源项目，它使用机器学习算法自动化检测Web应用程序中的漏洞。
 
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
@@ -99,6 +78,4 @@ https://cdn.acunetix.com/wp-content/uploads/2022/01/11175019/scan-report-testphp
 https://www.arachni-scanner.com/reports/report.html/#!/summary/owasp_top_10  
 https://docs.xray.cool/assets/report_example.html 
 
-# 以下是一些公开的 XSS 攻击数据集的下载链接
-XSS Data Sets: https://projects.webappsec.org/Document/Download/1
-XSS_Test_Corpus: https://storage.googleapis.com/xss-game/xss-test-cases.json
+

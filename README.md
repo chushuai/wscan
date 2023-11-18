@@ -15,9 +15,9 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ⬇️[下载地址](https://github.com/chushuai/wscan/releases)
 ```
 （1）主动扫描
-/wscan/core/wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/
+./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/
 （2）被动扫描
-/wscan/core/wscan  --log-level=debug ws --listen=127.0.0.1:1000
+./wscan  --log-level=debug ws --listen=127.0.0.1:1000
 ```
 # 项目进展
 很高兴地宣布，基于事件订阅WEB通用插件调度和HTTP参数形变模块已经完成了开发工作，同时，动态漏扫爬虫也已经完成了。一旦项目在GitHub上获得超过500个星星，将其全部开源。 
@@ -28,6 +28,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.07.07 完成了YAML POC扫描模块 (Stars > 500 解锁)  
 2023.11.05 发布v1.0.0 二进制版,支持简单的Web通用漏洞检测  
 2023.11.12 发布v1.0.2 二进制版,支持被动扫描  
+2023.11.12 发布v1.0.3 二进制版,支持JSOP插件
 
 
 # TODO:

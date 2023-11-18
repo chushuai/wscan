@@ -22,9 +22,11 @@ type stdoutPrinter struct {
 func (*stdoutPrinter) AddInterceptor(func(interface{}) (interface{}, error)) printer.Printer {
 	return nil
 }
+
 func (p *stdoutPrinter) Close() error {
 	return p.Printer.Close()
 }
+
 func (p *stdoutPrinter) Print(res interface{}) error {
 	p.mu.Lock()
 	defer p.mu.Unlock()
@@ -33,7 +35,9 @@ func (p *stdoutPrinter) Print(res interface{}) error {
 		vuln := res.(*model.Vuln)
 		nice.PioPrinter.Print(pio.Rich(vuln.String(), pio.Red))
 	case *model.StatisticRecord:
-		p.lastStat = res.(*model.StatisticRecord)
+		lastStat := res.(*model.StatisticRecord)
+		nice.PioPrinter.Println(pio.Rich(fmt.Sprintf("[*]  scanned: %d, pending: %d, requestSent: %d, latency: %fms, failedRatio: %f%%",
+			lastStat.NumFoundUrls, 0, lastStat.NumSentHTTPRequests, lastStat.AverageResponseTime, lastStat.RatioFailedHTTPRequests), pio.Yellow))
 	default:
 		nice.PioPrinter.Println(pio.Rich(fmt.Sprintf("%v", res), pio.Red))
 	}

@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"sync"
 	"time"
 	"wscan/core/utils/checker"
@@ -123,7 +124,7 @@ func (c *Crawler) NewTask(req *http.Request, depth int) {
 	}
 	// 通过检查器检查URL是否合法
 	if !c.urlChecker.TargetStr(req.URL.String()).IsAllowed() {
-		c.logger.Infof("URL is not Allowed: %s", req.URL.String())
+		c.logger.Debugf("URL is not Allowed: %s", req.URL.String())
 		return
 	}
 	if _, exist := c.visitedURLs.Load(req.URL.String()); exist {
@@ -335,6 +336,53 @@ func (c *Crawler) handleTask(t *task) {
 			// 添加新的任务
 			c.NewTask(req, t.depth+1)
 		}
+		doc.Find("form").Each(func(i int, s *goquery.Selection) {
+			// 提取表单动作
+			formAction, _ := s.Attr("action")
+			// 提取请求方法
+			method, _ := s.Attr("method")
+			if newUrl, err := resp.Request.URL.Parse(formAction); err == nil {
+				formData := url.Values{}
+				// 提取表单字段
+				s.Find("input, select, textarea").Each(func(j int, input *goquery.Selection) {
+					// 提取字段名称
+					fieldName, _ := input.Attr("name")
+					// 提取字段类型
+					fieldType, _ := input.Attr("type")
+					if fieldType == "file" {
+
+					}
+					if fieldType == "submit" {
+						return
+					}
+					defaultValue, _ := input.Attr("value")
+					formData.Add(fieldName, defaultValue)
+
+					log.Infof("[form] fieldName: %s; fieldType: %s; defaultValue: %s", fieldName, fieldType, defaultValue)
+
+				})
+				var req *http.Request
+				if strings.ToUpper(method) == "POST" {
+					if req, err = http.NewRequest("POST", newUrl.String(), strings.NewReader(formData.Encode())); err != nil {
+						log.Error(err)
+						return
+					}
+					req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+				} else {
+					getURL := newUrl.String() + "?" + formData.Encode()
+					if req, err = http.NewRequest("GET", getURL, nil); err != nil {
+						log.Error(err)
+						return
+					}
+				}
+				log.Infof("found form url: %s action: %s; method: %s; formData: %s", newUrl.String(), formAction, method, formData.Encode())
+				// 添加新的任务
+				c.NewTask(req, t.depth+1)
+			} else {
+				log.Error(err)
+			}
+		})
+
 	}
 }
 

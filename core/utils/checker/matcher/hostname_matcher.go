@@ -19,6 +19,13 @@ type HostsMatcher struct {
 	globs            *GlobMatcher
 }
 
+func NewHostsMatcher() *HostsMatcher {
+	hm := &HostsMatcher{}
+	hm.ips = NewKeyMatcher()
+
+	return hm
+}
+
 // 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
 
 func (m *HostsMatcher) Add(values []string) error {

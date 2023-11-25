@@ -27,6 +27,10 @@ type burpCollector struct {
 	pool   *ants.Pool
 }
 
+type Items struct {
+	Item []burpFlow `xml:"item"`
+}
+
 func (*burpCollector) FitOut(context.Context, []string) (chan resource.Resource, error) {
 	return nil, nil
 }

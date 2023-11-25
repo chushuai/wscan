@@ -7,11 +7,11 @@ package subdomain
 import (
 	"context"
 	"sync"
-	"wscan/core/fastdomain/datasource"
-	"wscan/core/fastdomain/geodb"
-	"wscan/core/fastdomain/utils"
 	"wscan/core/http"
 	"wscan/core/model"
+	"wscan/core/subdomain/datasource"
+	"wscan/core/subdomain/geodb"
+	"wscan/core/subdomain/utils"
 	"wscan/core/utils/printer"
 )
 

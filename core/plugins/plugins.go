@@ -7,6 +7,7 @@ package plugins
 import (
 	"wscan/core/plugins/base"
 	"wscan/core/plugins/crlf_injection"
+	"wscan/core/plugins/dirscan"
 	"wscan/core/plugins/jsonp"
 	"wscan/core/plugins/path_traversal"
 	"wscan/core/plugins/sql_injection"
@@ -30,5 +31,6 @@ func All() []base.Plugin {
 	plugins = append(plugins, &sql_injection.SQLInjection{})
 	plugins = append(plugins, &crlf_injection.CRLFInjection{})
 	plugins = append(plugins, &jsonp.JSONP{})
+	plugins = append(plugins, &dirscan.Dirscan{})
 	return plugins
 }

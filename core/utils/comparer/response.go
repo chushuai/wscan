@@ -5,7 +5,6 @@
 package comparer
 
 import (
-	"fmt"
 	"wscan/core/http"
 	"wscan/core/utils/comparer/htmlcompare"
 )
@@ -20,9 +19,8 @@ func getSetCookieKey() {
 func filterBody() {
 }
 
-func CompareResponse(response1, response2 *http.Response) bool {
+func CompareResponse(response1, response2 *http.Response) float32 {
 	hp := htmlcompare.NewHTMLProcessorFromString(response1.Text)
 	hp2 := htmlcompare.NewHTMLProcessorFromString(response2.Text)
-	fmt.Println("CompareHTMLProcessors=", htmlcompare.CompareHTMLProcessors(hp, hp2))
-	return htmlcompare.CompareHTMLProcessors(hp, hp2) == 1.0
+	return htmlcompare.CompareHTMLProcessors(hp, hp2)
 }

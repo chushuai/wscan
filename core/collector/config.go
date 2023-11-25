@@ -22,10 +22,6 @@ type BasicCrawlerConfig struct {
 	BasicAuth            AuthCredential                `yaml:"basic_auth" json:"basic_auth" #:"基础认证信息"`
 }
 
-type Items struct {
-	Item []burpFlow `xml:"item"`
-}
-
 type MitmConfig struct {
 	Listen          string                        `json:"-" yaml:"-"`
 	CACert          string                        `json:"ca_cert" yaml:"ca_cert" #:"CA 根证书路径"`

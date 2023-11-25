@@ -17,6 +17,10 @@ type PortMatcher struct {
 	actions    []func(int) bool
 }
 
+func NewPortMatcher() *PortMatcher {
+	return &PortMatcher{}
+}
+
 func (m *PortMatcher) Add(values []string) error {
 	m.origin = append(m.origin, values...)
 

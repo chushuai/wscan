@@ -14,7 +14,7 @@ type KeyMatcher struct {
 	sync.Map
 }
 
-func NewKeyMatcher() Matcher {
+func NewKeyMatcher() *KeyMatcher {
 	return &KeyMatcher{}
 }
 

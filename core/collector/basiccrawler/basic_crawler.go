@@ -7,6 +7,7 @@ package basiccrawler
 import (
 	"context"
 	"net/http"
+	"time"
 	"wscan/core/crawler"
 	vhttp "wscan/core/http"
 	"wscan/core/resource"
@@ -25,7 +26,10 @@ func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (c
 	b.targets = targets
 	out := make(chan resource.Resource, 100)
 	go func() {
-		defer close(out)
+		defer func() {
+			time.Sleep(10 * time.Second)
+			close(out)
+		}()
 		requestChecker := checker.NewRequestChecker(b.config.Restrictions, &filter.SyncMapFilter{})
 		if requestChecker == nil {
 			log.Fatal("requestChecker is nil")
@@ -39,10 +43,7 @@ func (b *basicCrawlerCollector) FitOut(ctx context.Context, targets []string) (c
 				log.Error(err)
 				return true
 			}
-			req.Header = response.Request.Header
-			resp := &vhttp.Response{
-				NativeResponse: response,
-			}
+			resp, err := vhttp.ResponseFromRawResponse(response)
 			out <- &vhttp.Flow{
 				Request:  req,
 				Response: resp,

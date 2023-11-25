@@ -22,7 +22,7 @@ func (*EventBus) GetCallbackCount(string) int {
 	return 0
 }
 
-// HasCallback returns true if exists any callback subscribed to the topic.
+// HasCallback检查是否存在已订阅主题的回调函数
 func (bus *EventBus) HasCallback(topic string) bool {
 	bus.lock.Lock()
 	defer bus.lock.Unlock()
@@ -33,13 +33,13 @@ func (bus *EventBus) HasCallback(topic string) bool {
 	return false
 }
 
-// Publish executes callback defined for a topic. Any additional argument will be transferred to the callback.
+// Publish 执行定义的主题回调函数。 任何额外的参数将传递给回调函数。
 func (bus *EventBus) Publish(topic string, args ...interface{}) {
-	bus.lock.Lock() // will unlock if handler is not found or always after setUpPublish
+	bus.lock.Lock() // 如果未找到处理程序或始终在setUpPublish后解锁
 	defer bus.lock.Unlock()
 	if handlers, ok := bus.handlers[topic]; ok && 0 < len(handlers) {
-		// Handlers slice may be changed by removeHandler and Unsubscribe during iteration,
-		// so make a copy and iterate the copied slice.
+		// 处理程序切片可能会在迭代期间通过removeHandler和Unsubscribe进行更改，
+		// 因此制作副本并迭代已复制的切片。
 		copyHandlers := make([]*eventHandler, len(handlers))
 		copy(copyHandlers, handlers)
 		for i, handler := range copyHandlers {
@@ -55,24 +55,28 @@ func (bus *EventBus) Publish(topic string, args ...interface{}) {
 					handler.Lock()
 					bus.lock.Lock()
 				}
-				go bus.doPublishAsync(handler, topic, args...)
+				if bus.pool != nil {
+					bus.pool.Submit(func(h *eventHandler, t string, a ...interface{}) func() {
+						return func() {
+							bus.doPublishAsync(h, t, a...)
+						}
+					}(handler, topic, args...))
+				} else {
+					go bus.doPublishAsync(handler, topic, args...)
+				}
 			}
 		}
 	}
 }
 
-// Subscribe subscribes to a topic.
-// Returns error if `fn` is not a function.
+// Subscribe 订阅主题。 如果fn不是函数，则返回错误。
 func (bus *EventBus) Subscribe(topic string, fn interface{}) error {
 	return bus.doSubscribe(topic, fn, &eventHandler{
 		reflect.ValueOf(fn), false, false, false, sync.Mutex{},
 	})
 }
 
-// SubscribeAsync subscribes to a topic with an asynchronous callback
-// Transactional determines whether subsequent callbacks for a topic are
-// run serially (true) or concurrently (false)
-// Returns error if `fn` is not a function.
+// SubscribeAsync 订阅异步回调主题, 事务性确定主题的后续回调是串行（true）还是并发（false）,如果fn不是函数，则返回错误。
 func (bus *EventBus) SubscribeAsync(topic string, fn interface{}, transactional bool) error {
 	return bus.doSubscribe(topic, fn, &eventHandler{
 		reflect.ValueOf(fn), false, true, transactional, sync.Mutex{},
@@ -87,17 +91,14 @@ func (bus *EventBus) SubscribeOnce(topic string, fn interface{}) error {
 	})
 }
 
-// SubscribeOnceAsync subscribes to a topic once with an asynchronous callback
-// Handler will be removed after executing.
-// Returns error if `fn` is not a function.
+// SubscribeOnce 订阅主题一次。 处理程序将在执行后被删除。 如果fn不是函数，则返回错误
 func (bus *EventBus) SubscribeOnceAsync(topic string, fn interface{}) error {
 	return bus.doSubscribe(topic, fn, &eventHandler{
 		reflect.ValueOf(fn), true, true, false, sync.Mutex{},
 	})
 }
 
-// Unsubscribe removes callback defined for a topic.
-// Returns error if there are no callbacks subscribed to the topic.
+// Unsubscribe 删除为主题定义的回调。 如果未订阅主题上存在任何回调，则返回错误。
 func (bus *EventBus) Unsubscribe(topic string, handler interface{}) error {
 	bus.lock.Lock()
 	defer bus.lock.Unlock()
@@ -184,6 +185,7 @@ type AsyncPool interface {
 	Submit(func()) error
 }
 
+// 虚拟的AsyncPool
 type DummyAsyncPool struct {
 	running int32
 }
@@ -191,22 +193,30 @@ type DummyAsyncPool struct {
 func (dap *DummyAsyncPool) Release() {
 
 }
+
 func (dap *DummyAsyncPool) Running() int {
 	return int(dap.running)
 }
-func (dap *DummyAsyncPool) Submit(func()) error {
-	atomic.AddInt32(&dap.running, 1)
 
+func (dap *DummyAsyncPool) Submit(fn func()) error {
 	defer atomic.AddInt32(&dap.running, -1)
+	atomic.AddInt32(&dap.running, 1)
+	fn()
 	return nil
 }
 
-func NewEventBus() {
-
+func NewEventBus() *EventBus {
+	b := &EventBus{}
+	b.handlers = make(map[string][]*eventHandler)
+	b.lock = sync.RWMutex{}
+	b.wg = sync.WaitGroup{}
+	return b
 }
 
-func NewEventBusWithAsyncPool() {
-
+func NewEventBusWithAsyncPool(pool AsyncPool) *EventBus {
+	b := NewEventBus()
+	b.pool = pool
+	return b
 }
 
 //BusSubscriber defines subscription-related bus behavior

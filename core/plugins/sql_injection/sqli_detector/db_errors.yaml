@@ -1,0 +1,110 @@
+- regex: 'System\.Data\.OleDb\.OleDbException'
+  dbms: MSSQL
+- regex: '\[SQL Server\]'
+  dbms: MSSQL
+- regex: '\[Microsoft\]\[ODBC SQL Server Driver\]'
+  dbms: MSSQL
+- regex: '\[SQLServer JDBC Driver\]'
+  dbms: MSSQL
+- regex: '\[SqlException'
+  dbms: MSSQL
+- regex: 'System.Data.SqlClient.SqlException'
+  dbms: MSSQL
+- regex: 'Unclosed quotation mark after the character string'
+  dbms: MSSQL
+- regex: 'mssql_query\(\)'
+  dbms: MSSQL
+- regex: 'odbc_exec\(\)'
+  dbms: MSSQL
+- regex: 'Microsoft OLE DB Provider for ODBC Drivers'
+  dbms: MSSQL
+- regex: 'Microsoft OLE DB Provider for SQL Server'
+  dbms: MSSQL
+- regex: 'Incorrect syntax near'
+  dbms: MSSQL
+- regex: 'Sintaxis incorrecta cerca de'
+  dbms: MSSQL
+- regex: 'Syntax error in string in query expression'
+  dbms: MSSQL
+- regex: 'ADODB\.Field \(0x800A0BCD\)<br>'
+  dbms: MSSQL
+- regex: "Procedure '[^']+' requires parameter '[^']+'"
+  dbms: MSSQL
+- regex: "ADODB.Recordset'"
+  dbms: MSSQL
+- regex: "Unclosed quotation mark before the character string"
+  dbms: MSSQL
+- regex: 'DB2 SQL error:'
+  dbms: DB2
+- regex: 'internal error \[IBM\]\[CLI Driver\]\[DB2/6000\]'
+  dbms: DB2
+- regex: 'SQLSTATE=\d+'
+  dbms: DB2
+- regex: '\[CLI Driver\]'
+  dbms: DB2
+- regex: 'Sybase message:'
+  dbms: SYBASE
+- regex: 'Syntax error in query expression'
+  dbms: ACCESS
+- regex: 'Data type mismatch in criteria expression.'
+  dbms: ACCESS
+- regex: 'Microsoft JET Database Engine'
+  dbms: ACCESS
+- regex: '\[Microsoft\]\[ODBC Microsoft Access Driver\]'
+  dbms: ACCESS
+- regex: '(PLS|ORA)-[0-9][0-9][0-9][0-9]'
+  dbms: ORACLE
+- regex: 'PostgreSQL query failed:'
+  dbms: POSTGRE
+- regex: 'supplied argument is not a valid PostgreSQL result'
+  dbms: POSTGRE
+- regex: 'pg_query\(\) \[:'
+  dbms: POSTGRE
+- regex: 'pg_exec\(\) \[:'
+  dbms: POSTGRE
+- regex: 'supplied argument is not a valid MySQL'
+  dbms: MYSQL
+- regex: 'Column count doesn''t match value count at row'
+  dbms: MYSQL
+- regex: 'mysql_fetch_array\(\)'
+  dbms: MYSQL
+- regex: 'mysql_'
+  dbms: MYSQL
+- regex: 'on MySQL result index'
+  dbms: MYSQL
+- regex: 'You have an error in your SQL syntax;'
+  dbms: MYSQL
+- regex: 'You have an error in your SQL syntax near'
+  dbms: MYSQL
+- regex: 'MySQL server version for the right syntax to use'
+  dbms: MYSQL
+- regex: '\[MySQL\]\[ODBC'
+  dbms: MYSQL
+- regex: "Column count doesn't match"
+  dbms: MYSQL
+- regex: "the used select statements have different number of columns"
+  dbms: MYSQL
+- regex: "Table '[^']+' doesn't exist"
+  dbms: MYSQL
+- regex: 'com\.informix\.jdbc'
+  dbms: INFORMIX
+- regex: 'Dynamic Page Generation Error:'
+  dbms: INFORMIX
+- regex: 'An illegal character has been found in the statement'
+  dbms: INFORMIX
+- regex: '<b>Warning</b>:  ibase_'
+  dbms: INTERBASE
+- regex: 'Dynamic SQL Error'
+  dbms: INTERBASE
+- regex: '\[DM_QUERY_E_SYNTAX\]'
+  dbms: DMLDATABASE
+- regex: 'has occurred in the vicinity of:'
+  dbms: DMLDATABASE
+- regex: 'A Parser Error \(syntax error\)'
+  dbms: DMLDATABASE
+- regex: 'java\.sql\.SQLException'
+  dbms: JAVA
+- regex: 'Unexpected end of command in statement'
+  dbms: JAVA
+- regex: '\[Macromedia\]\[SQLServer JDBC Driver\]'
+  dbms: MSSQL

@@ -12,6 +12,7 @@ import (
 	"wscan/core/http"
 	"wscan/core/model"
 	"wscan/core/plugins/base"
+	"wscan/core/utils"
 	"wscan/core/utils/checker"
 	logger "wscan/core/utils/log"
 )
@@ -60,8 +61,8 @@ type requestBuilder struct {
 // getCommonPayload is return xss
 func getXSSPayload() []string {
 	payload := []string{
-		// include verify payload
-		"<scRipt>Wscan(WSCAN_ALERT_VALUE)</scRipt>",
+		"<scRipt>WSCAN_ALERT_VALUE</scRipt>",
+		"<WSCAN_ALERT_VALUE>",
 		//"\"><SvG/onload=alert(DALFOX_ALERT_VALUE) id=dalfox>",
 		//"\"><Svg/onload=alert(DALFOX_ALERT_VALUE) class=dlafox>",
 		//"'><sVg/onload=alert(DALFOX_ALERT_VALUE) id=dalfox>",
@@ -82,6 +83,14 @@ func getXSSPayload() []string {
 		//"\"><a href=\"javascript&colon;alert(DALFOX_ALERT_VALUE)\">click",
 		//"'><a href='javascript&colon;alert(DALFOX_ALERT_VALUE)'>click",
 		//"\"><iFrAme/src=jaVascRipt:alert(DALFOX_ALERT_VALUE)></iFramE>",
+
+		//    protected static final String GENERIC_SCRIPT_ALERT = "<scrIpt>alert(1);</scRipt>";
+		//    protected static final String GENERIC_ONERROR_ALERT = "<img src=x onerror=prompt()>";
+		//    protected static final String IMG_ONERROR_LOG = "<img src=x onerror=console.log(1);>";
+		//    protected static final String SVG_ONLOAD_ALERT = "<svg onload=alert(1)>";
+		//    protected static final String B_MOUSE_ALERT = "<b onMouseOver=alert(1);>test</b>";
+		//    protected static final String ACCESSKEY_ATTRIBUTE_ALERT = "accesskey='x' onclick='alert(1)' b";
+		//    protected static final String TAG_ONCLICK_ALERT = "button onclick='alert(1)'/";
 	}
 	return payload
 }
@@ -98,19 +107,22 @@ func (p *XSS) Fingers() []*base.Finger {
 			logger.Debugf("开始检测XSS, URL=%s", flow.Request.URL().String())
 			for _, param := range flow.Request.ParamsQueryAndBody() {
 				for _, xssPayload := range getXSSPayload() {
-					logger.Debugf("%s, Test XSS Payload= %s", flow.Request.URL().String(), xssPayload)
-					req := flow.Request.Mutate(&http.Parameter{Position: param.Position, Key: param.Key, Value: param.Value, Suffix: xssPayload})
+					evidence := utils.RandStringBytes(10)
+					bomb := strings.ReplaceAll(xssPayload, "WSCAN_ALERT_VALUE", evidence)
+					req := flow.Request.Mutate(&http.Parameter{Position: param.Position, Key: param.Key, Prefix: "", Value: bomb, Suffix: ""})
 					res, err := bi.HTTPClient.Respond(context.TODO(), req)
 					if err != nil {
 						continue
 					}
-					if strings.Contains(res.Text, "WSCAN_ALERT_VALUE") {
+					if strings.Contains(res.Text, evidence) {
 						v := bi.NewWebVuln(req, res, &param)
 						if v != nil {
 							v.SetTargetURL(flow.Request.URL())
-							v.Payload = xssPayload
+							v.Payload = "<sCrIpT>alert(1)</ScRiPt>"
+							v.Param = &http.Parameter{Position: param.Position, Key: param.Key, Prefix: "", Value: "<sCrIpT>alert(1)</ScRiPt>", Suffix: ""}
 							bi.OutputVuln(v)
 						}
+						break
 					}
 				}
 			}

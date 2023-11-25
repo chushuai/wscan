@@ -10,3 +10,7 @@ type Flow struct {
 	History   []*Response
 	TimeStamp int64
 }
+
+func (f *Flow) Seconds() int {
+	return int((f.Response.TimeStamp - f.Request.TimeStamp) / int64(1000))
+}

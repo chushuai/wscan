@@ -9,6 +9,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 我们相信，使用机器学习技术进行渗透测试，将是未来网络安全的一个重要方向。我们希望我们的工具能够帮助更多的人保障网络安全，为网络安全事业做出贡献。
 
+![demo.gif](doc/img/demo.gif)
 
 # 运行示例 
 
@@ -16,6 +17,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ```
 （1）主动扫描
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/
+./wscan  --log-level=debug  ws --url http://testphp.vulnweb.com/listproducts.php?cat=1 
 （2）被动扫描
 ./wscan  --log-level=debug ws --listen=127.0.0.1:1000
 ```

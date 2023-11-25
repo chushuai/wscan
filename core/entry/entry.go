@@ -11,6 +11,7 @@ import (
 	"go.uber.org/automaxprocs/maxprocs"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
+	"strings"
 	"wscan/core/collector"
 	"wscan/core/collector/basiccrawler"
 	"wscan/core/crawler"
@@ -42,7 +43,7 @@ func NewApp(c *cli.Context) {
 		})
 		targets = c.Args().Slice()
 	} else if c.String("url") != "" {
-		col = collector.NewBasicCrawlerCollector(cfg.HTTP)
+		col = collector.NewFromURLListReader(ioutil.NopCloser(strings.NewReader(c.String("data"))), cfg.HTTP)
 		targets = append(targets, c.String("url"))
 	} else if c.String("raw-request") != "" {
 

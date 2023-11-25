@@ -1,15 +1,19 @@
-package pkg
+/**
+2 * @Author: shaochuyu
+3 * @Date: 12/9/22
+4 */
+package crawler
 
 import (
+	"bufio"
 	"fmt"
+	"io"
+	"net/http"
+	"os"
 	"regexp"
 	"strings"
 	"sync"
-	"wscan/ext/crawlergo/pkg/config"
-	"wscan/ext/crawlergo/pkg/logger"
-	model2 "wscan/ext/crawlergo/pkg/model"
-	"wscan/ext/crawlergo/pkg/tools"
-	"wscan/ext/crawlergo/pkg/tools/requests"
+	logger "wscan/core/utils/log"
 
 	mapset "github.com/deckarep/golang-set"
 	"github.com/panjf2000/ants/v2"
@@ -41,39 +45,43 @@ var validateUrl mapset.Set
 /**
 从robots.txt文件中获取路径信息
 */
-func GetPathsFromRobots(navReq model2.Request) []*model2.Request {
-	logger.Logger.Info("starting to get paths from robots.txt.")
-	var result []*model2.Request
+func GetPathsFromRobots(navReq http.Request) []*http.Request {
+	logger.Info("starting to get paths from robots.txt.")
+	var result []*http.Request
 	var urlFindRegex = regexp.MustCompile(`(?:Disallow|Allow):.*?(/.+)`)
 	var urlRegex = regexp.MustCompile(`(/.+)`)
 
 	navReq.URL.Path = "/"
-	url := navReq.URL.NoQueryUrl() + "robots.txt"
+	url := NoQueryUrl(navReq.URL) + "robots.txt"
+	http.NewRequest(GET, url, nil)
+	resp, err := http.Get(url)
 
-	resp, err := requests.Get(url, tools.ConvertHeaders(navReq.Headers),
-		&requests.ReqOptions{AllowRedirect: false,
-			Timeout: 5,
-			Proxy:   navReq.Proxy})
+	/*
+		resp, err := http.Get(url, tools.ConvertHeaders(navReq.Headers), )
+		&http.ReqOptions{AllowRedirect: false,
+					Timeout: 5,
+					Proxy:   navReq.Proxy}
+	*/
 	if err != nil {
 		//for
-		//logger.Logger.Error("request to robots.txt error ", err)
+		//logger.Error("request to robots.txt error ", err)
 		return result
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return result
 	}
-	urlList := urlFindRegex.FindAllString(resp.Text, -1)
+	urlList := urlFindRegex.FindAllString(GetHttpResponseTxt(resp), -1)
 	for _, _url := range urlList {
 		_url = strings.TrimSpace(_url)
 		_url = urlRegex.FindString(_url)
-		url, err := model2.GetUrl(_url, *navReq.URL)
+		url, err := GetUrl(_url, *navReq.URL)
 		if err != nil {
 			continue
 		}
-		req := model2.GetRequest(config.GET, url)
-		req.Source = config.FromRobots
-		result = append(result, &req)
+		req, _ := http.NewRequest(GET, url.String(), nil)
+		// req.Source = config.FromRobots
+		result = append(result, req)
 	}
 	return result
 }
@@ -81,30 +89,49 @@ func GetPathsFromRobots(navReq model2.Request) []*model2.Request {
 /**
 使用常见路径列表进行fuzz
 */
-func GetPathsByFuzz(navReq model2.Request) []*model2.Request {
-	logger.Logger.Info("starting to get paths by fuzzing.")
+func GetPathsByFuzz(navReq http.Request) []*http.Request {
+	logger.Info("starting to get paths by fuzzing.")
 	pathList := strings.Split(pathStr, "/")
 	return doFuzz(navReq, pathList)
+}
+
+func ReadFile(filePath string) []string {
+	filePaths := []string{}
+	f, err := os.OpenFile(filePath, os.O_RDONLY, 0644)
+	defer f.Close()
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		rd := bufio.NewReader(f)
+		for {
+			line, err := rd.ReadString('\n')
+			if err != nil || io.EOF == err {
+				break
+			}
+			filePaths = append(filePaths, line)
+		}
+	}
+	return filePaths
 }
 
 /**
 使用字典列表进行fuzz
 */
-func GetPathsByFuzzDict(navReq model2.Request, dictPath string) []*model2.Request {
-	logger.Logger.Infof("starting to get dict path by fuzzing: %s", dictPath)
-	pathList := tools.ReadFile(dictPath)
-	logger.Logger.Debugf("valid path count: %d", len(pathList))
+func GetPathsByFuzzDict(navReq http.Request, dictPath string) []*http.Request {
+	logger.Infof("starting to get dict path by fuzzing: %s", dictPath)
+	pathList := ReadFile(dictPath)
+	logger.Debugf("valid path count: %d", len(pathList))
 	return doFuzz(navReq, pathList)
 }
 
 type singleFuzz struct {
-	navReq model2.Request
+	navReq http.Request
 	path   string
 }
 
-func doFuzz(navReq model2.Request, pathList []string) []*model2.Request {
+func doFuzz(navReq http.Request, pathList []string) []*http.Request {
 	validateUrl = mapset.NewSet()
-	var result []*model2.Request
+	var result []*http.Request
 	pool, _ := ants.NewPool(20)
 	defer pool.Release()
 	for _, path := range pathList {
@@ -126,13 +153,13 @@ func doFuzz(navReq model2.Request, pathList []string) []*model2.Request {
 	pathFuzzWG.Wait()
 	for _, _url := range validateUrl.ToSlice() {
 		_url := _url.(string)
-		url, err := model2.GetUrl(_url)
+		url, err := GetUrl(_url)
 		if err != nil {
 			continue
 		}
-		req := model2.GetRequest(config.GET, url)
-		req.Source = config.FromFuzz
-		result = append(result, &req)
+		req, err := http.NewRequest(GET, url.String(), nil)
+		// req.Source = config.FromFuzz
+		result = append(result, req)
 	}
 	return result
 }
@@ -142,8 +169,9 @@ func doFuzz(navReq model2.Request, pathList []string) []*model2.Request {
  */
 func (s singleFuzz) doRequest() {
 	defer pathFuzzWG.Done()
-
 	url := fmt.Sprintf(`%s://%s/%s`, s.navReq.URL.Scheme, s.navReq.URL.Host, s.path)
+	http.NewRequest(GET, url, nil)
+	/*cy
 	resp, errs := requests.Get(url, tools.ConvertHeaders(s.navReq.Headers),
 		&requests.ReqOptions{Timeout: 2, AllowRedirect: false, Proxy: s.navReq.Proxy})
 	if errs != nil {
@@ -157,12 +185,12 @@ func (s singleFuzz) doRequest() {
 			return
 		}
 		location := locations[0]
-		redirectUrl, err := model2.GetUrl(location)
+		redirectUrl, err := GetUrl(location)
 		if err != nil {
 			return
 		}
 		if redirectUrl.Host == s.navReq.URL.Host {
 			validateUrl.Add(url)
 		}
-	}
+	}*/
 }

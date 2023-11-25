@@ -1,4 +1,8 @@
-package engine
+/**
+2 * @Author: shaochuyu
+3 * @Date: 12/9/22
+4 */
+package crawler
 
 import (
 	"context"
@@ -7,86 +11,8 @@ import (
 	"os"
 	"strings"
 	"time"
-	"wscan/ext/crawlergo/pkg/config"
-	"wscan/ext/crawlergo/pkg/js"
-	"wscan/ext/crawlergo/pkg/logger"
+	logger "wscan/core/utils/log"
 )
-
-/**
-在DOMContentLoaded完成后执行
-*/
-func (tab *Tab) AfterDOMRun() {
-	defer tab.WG.Done()
-
-	logger.Logger.Debug("afterDOMRun start")
-
-	// 获取当前body节点的nodeId 用于之后查找子节点
-	if !tab.getBodyNodeId() {
-		logger.Logger.Debug("no body document NodeID, exit.")
-		return
-	}
-
-	tab.domWG.Add(2)
-	go tab.fillForm()
-	go tab.setObserverJS()
-	tab.domWG.Wait()
-	logger.Logger.Debug("afterDOMRun end")
-	tab.WG.Add(1)
-	go tab.AfterLoadedRun()
-}
-
-/**
-获取的Body的NodeId 用于之后子节点无等待查询
-最多等待3秒 如果DOM依旧没有渲染完成，则退出
-*/
-func (tab *Tab) getBodyNodeId() bool {
-	var docNodeIDs []cdp.NodeID
-	ctx := tab.GetExecutor()
-	tCtx, cancel := context.WithTimeout(ctx, time.Second*3)
-	defer cancel()
-	// 获取 Frame document root
-	err := chromedp.NodeIDs(`body`, &docNodeIDs, chromedp.ByQuery).Do(tCtx)
-	if len(docNodeIDs) == 0 || err != nil {
-		// not root node yet?
-		logger.Logger.Debug("getBodyNodeId failed, maybe DOM not ready?")
-		if err != nil {
-			logger.Logger.Debug(err)
-		}
-		return false
-	}
-	tab.DocBodyNodeId = docNodeIDs[0]
-	return true
-}
-
-/**
-自动化填充表单
-*/
-func (tab *Tab) fillForm() {
-	defer tab.domWG.Done()
-	logger.Logger.Debug("fillForm start")
-	tab.fillFormWG.Add(3)
-	f := FillForm{
-		tab: tab,
-	}
-
-	go f.fillInput()
-	go f.fillMultiSelect()
-	go f.fillTextarea()
-
-	tab.fillFormWG.Wait()
-	logger.Logger.Debug("fillForm end")
-}
-
-/**
-设置Dom节点变化的观察函数
-*/
-func (tab *Tab) setObserverJS() {
-	defer tab.domWG.Done()
-	logger.Logger.Debug("setObserverJS start")
-	// 设置Dom节点变化的观察函数
-	go tab.Evaluate(js.ObserverJS)
-	logger.Logger.Debug("setObserverJS end")
-}
 
 type FillForm struct {
 	tab *Tab
@@ -105,9 +31,9 @@ func (f *FillForm) fillInput() {
 	// 首先判断input标签是否存在，减少等待时间 提前退出
 	inputNodes, inputErr := f.tab.GetNodeIDs(`input`)
 	if inputErr != nil || len(inputNodes) == 0 {
-		logger.Logger.Debug("fillInput: get form input element err")
+		logger.Debug("fillInput: get form input element err")
 		if inputErr != nil {
-			logger.Logger.Debug(inputErr)
+			logger.Debug(inputErr)
 		}
 		return
 	}
@@ -115,8 +41,8 @@ func (f *FillForm) fillInput() {
 	err := chromedp.Nodes(`input`, &nodes, chromedp.ByQueryAll).Do(tCtx)
 
 	if err != nil {
-		logger.Logger.Debug("get all input element err")
-		logger.Logger.Debug(err)
+		logger.Debug("get all input element err")
+		logger.Debug(err)
 		return
 	}
 
@@ -164,9 +90,9 @@ func (f *FillForm) fillTextarea() {
 
 	textareaNodes, textareaErr := f.tab.GetNodeIDs(`textarea`)
 	if textareaErr != nil || len(textareaNodes) == 0 {
-		logger.Logger.Debug("fillTextarea: get textarea element err")
+		logger.Debug("fillTextarea: get textarea element err")
 		if textareaErr != nil {
-			logger.Logger.Debug(textareaErr)
+			logger.Debug(textareaErr)
 		}
 		return
 	}
@@ -181,9 +107,9 @@ func (f *FillForm) fillMultiSelect() {
 	defer cancel()
 	optionNodes, optionErr := f.tab.GetNodeIDs(`select option:first-child`)
 	if optionErr != nil || len(optionNodes) == 0 {
-		logger.Logger.Debug("fillMultiSelect: get select option element err")
+		logger.Debug("fillMultiSelect: get select option element err")
 		if optionErr != nil {
-			logger.Logger.Debug(optionErr)
+			logger.Debug(optionErr)
 		}
 		return
 	}
@@ -200,7 +126,7 @@ func (f *FillForm) GetMatchInputText(name string) string {
 	}
 
 	name = strings.ToLower(name)
-	for key, item := range config.InputTextMap {
+	for key, item := range InputTextMap {
 		for _, keyword := range item["keyword"].([]string) {
 			if strings.Contains(name, keyword) {
 				if customValue, ok := f.tab.config.CustomFormValues[key]; ok {

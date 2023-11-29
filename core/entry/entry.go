@@ -38,8 +38,22 @@ func NewApp(c *cli.Context) {
 	targets := []string{}
 	if c.Bool("basic-crawler") == true {
 		col = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
+			Browser:                false,
 			RestrictionsOnRequests: crawler.RestrictionsOnRequests{MaxConcurrent: 5, MaxDepth: 0},
 			Restrictions:           cfg.Filter,
+		})
+		targets = c.Args().Slice()
+	} else if c.Bool("browser-crawler") == true {
+		col = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
+			ExecPath:        cfg.BrowserConfig.ExecPath,
+			DisableHeadless: cfg.BrowserConfig.DisableHeadless,
+			Browser:         true,
+			RestrictionsOnRequests: crawler.RestrictionsOnRequests{
+				MaxConcurrent:  cfg.BrowserConfig.MaxPageConcurrent,
+				MaxDepth:       cfg.BrowserConfig.MaxDepth,
+				MaxCountOfURLs: cfg.BrowserConfig.MaxPageVisit,
+			},
+			Restrictions: cfg.Filter,
 		})
 		targets = c.Args().Slice()
 	} else if c.String("url") != "" {

@@ -102,10 +102,10 @@ var subCommandWebScan = cli.Command{
 			Aliases: []string{"basic"},
 			Value:   false,
 			Usage:   "use a basic spider to crawl the target and scan the requests"},
-		&cli.StringFlag{
+		&cli.BoolFlag{
 			Name:    "browser-crawler",
 			Aliases: []string{"browser"},
-			Value:   "",
+			Value:   false,
 			Usage:   "use a browser spider to crawl the target and scan the requests"},
 		&cli.StringFlag{
 			Name:    "url-file",
@@ -237,7 +237,7 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "1.0.3",
+		Version: "1.0.5",
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

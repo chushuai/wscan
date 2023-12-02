@@ -1,4 +1,0 @@
-[main]
-  serialize = "{version}-{banner}"
-  tag = true
-  version = "1.6.0"

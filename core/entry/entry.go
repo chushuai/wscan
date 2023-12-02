@@ -36,14 +36,14 @@ func NewApp(c *cli.Context) {
 	maxprocs.Set()
 	var col collector.Fitter
 	targets := []string{}
-	if c.Bool("basic-crawler") == true {
+	if c.String("basic-crawler") != "" {
 		col = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
 			Browser:                false,
 			RestrictionsOnRequests: crawler.RestrictionsOnRequests{MaxConcurrent: 5, MaxDepth: 0},
 			Restrictions:           cfg.Filter,
 		})
-		targets = c.Args().Slice()
-	} else if c.Bool("browser-crawler") == true {
+		targets = append(targets, c.String("basic-crawler"))
+	} else if c.String("browser-crawler") != "" {
 		col = basiccrawler.NewBasicCrawlerCollector(cfg.HTTP, &crawler.Config{
 			ExecPath:        cfg.BrowserConfig.ExecPath,
 			DisableHeadless: cfg.BrowserConfig.DisableHeadless,
@@ -55,7 +55,7 @@ func NewApp(c *cli.Context) {
 			},
 			Restrictions: cfg.Filter,
 		})
-		targets = c.Args().Slice()
+		targets = append(targets, c.String("browser-crawler"))
 	} else if c.String("url") != "" {
 		col = collector.NewFromURLListReader(ioutil.NopCloser(strings.NewReader(c.String("data"))), cfg.HTTP)
 		targets = append(targets, c.String("url"))
@@ -81,6 +81,8 @@ func NewApp(c *cli.Context) {
 	dispatcher.Init(false)
 	dispatcher.Run(taskChan)
 	dispatcher.Release()
+
+	defer multiPrinter.Close()
 }
 
 func LoadOrGenConfig(c *cli.Context) (*CliEntryConfig, error) {

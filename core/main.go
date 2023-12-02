@@ -97,15 +97,15 @@ var subCommandWebScan = cli.Command{
 			Aliases: []string{},
 			Value:   "",
 			Usage:   "use proxy resource collector, value is proxy addr, (example: 127.0.0.1:1111)"},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			Name:    "basic-crawler",
 			Aliases: []string{"basic"},
-			Value:   false,
+			Value:   "",
 			Usage:   "use a basic spider to crawl the target and scan the requests"},
-		&cli.BoolFlag{
+		&cli.StringFlag{
 			Name:    "browser-crawler",
 			Aliases: []string{"browser"},
-			Value:   false,
+			Value:   "",
 			Usage:   "use a browser spider to crawl the target and scan the requests"},
 		&cli.StringFlag{
 			Name:    "url-file",

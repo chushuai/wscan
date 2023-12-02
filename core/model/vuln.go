@@ -5,6 +5,7 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -98,6 +99,13 @@ type VulnDetail struct {
 	Extra    map[string]interface{} `json:"extra" yaml:"extra"`
 }
 
+type WebVuln struct {
+	Plugin     string     `json:"plugin"`
+	Detail     VulnDetail `json:"detail"`
+	CreateTime int64      `json:"create_time"`
+	Target     WebTarget  `json:"target"`
+}
+
 type Vuln struct {
 	client     *http.Client
 	target     resource.Resource
@@ -149,7 +157,23 @@ func (v *Vuln) SetTargetURL(u *url.URL) {
 func (v *Vuln) String() string {
 	raw := fmt.Sprintf("[Vuln: %v]\n", v.Binding.Category)
 	if v.TargetURL() != nil {
-		raw += fmt.Sprintf("Target		%v\n", v.TargetURL().String())
+		raw += fmt.Sprintf("Target			%v\n", v.TargetURL().String())
+	}
+	if v.Payload != "" {
+		raw += fmt.Sprintf("VulnType		%v\n", v.Binding.Plugin)
+	}
+	if v.Payload != "" {
+		raw += fmt.Sprintf("Payload			%v\n", v.Payload)
+	}
+	if v.Param != nil {
+		raw += fmt.Sprintf("Position		%s\n", v.Param.Position)
+		raw += fmt.Sprintf("ParamKey		%s\n", v.Param.Key)
+		raw += fmt.Sprintf("ParamValue		%s\n", v.Param)
+	}
+	if len(v.Extra) > 0 {
+		if data, err := json.Marshal(v.Extra); err == nil {
+			raw += fmt.Sprintf("Extra			%s\n", string(data))
+		}
 	}
 	return raw
 }
@@ -176,4 +200,31 @@ func (*Vuln) serviceRaw() map[string]interface{} {
 
 func (*Vuln) webRaw() map[string]interface{} {
 	return nil
+}
+
+func (vuln *Vuln) ToWebVuln() *WebVuln {
+	webVuln := WebVuln{
+		Plugin: vuln.Binding.Plugin,
+		Detail: VulnDetail{
+			Addr:    vuln.TargetURL().String(),
+			Payload: vuln.Payload,
+			Extra:   vuln.Extra,
+		},
+		Target: WebTarget{
+			URL: vuln.TargetURL().String(),
+		},
+		CreateTime: vuln.CreateTime,
+	}
+	if vuln.Param != nil {
+		webVuln.Target.Params = []ParamInfo{
+			{Position: vuln.Param.Position, Path: []string{vuln.Param.Key}},
+		}
+	}
+	for _, flow := range vuln.Flow {
+		webVuln.Detail.SnapShot = append(webVuln.Detail.SnapShot, []string{
+			string(flow.Request.Dump()),
+			string(flow.Response.Dump()),
+		})
+	}
+	return &webVuln
 }

@@ -24,7 +24,8 @@ func (*stdoutPrinter) AddInterceptor(func(interface{}) (interface{}, error)) pri
 }
 
 func (p *stdoutPrinter) Close() error {
-	return p.Printer.Close()
+	// return p.Printer.Close()
+	return nil
 }
 
 func (p *stdoutPrinter) Print(res interface{}) error {

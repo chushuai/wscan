@@ -81,7 +81,7 @@ func getPrinters(c *cli.Context) (printers []printer.Printer) {
 		printers = append(printers, newJSONPrinter(c.String("json-output")))
 	}
 	if c.String("html-output") != "" {
-		printers = append(printers, output.NewHTMLFilePrinter())
+		printers = append(printers, output.NewHTMLFilePrinter(c.String("html-output")))
 	}
 	if c.String("webhook-output") != "" {
 		printers = append(printers, output.NewWebHookPrinter())

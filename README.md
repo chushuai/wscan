@@ -17,11 +17,11 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ⬇️[下载地址](https://github.com/chushuai/wscan/releases)
 ```
 （1）主动扫描
-./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
-./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json
-./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
+./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html  
+./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html  
+./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json  
 （2）被动扫描
-./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json
+./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
 ```
 # 项目进展
 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  
@@ -30,6 +30,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.11.19 发布v1.0.3 二进制版，支持JSONP插件  
 2023.11.26 发布v1.0.4 二进制版，修复XSS、SQL注入漏报的问题，支持对单个URL进行漏洞检测  
 2023.11.30 发布v1.0.5 二进制版，支持浏览器爬虫、支持URL、表单智能过滤  
+2023.12.02 发布v1.0.6 二进制版，支持输出JSON、HTML格式的扫描结果
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

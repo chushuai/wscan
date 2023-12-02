@@ -7,6 +7,7 @@ package entry
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/automaxprocs/maxprocs"
 	"gopkg.in/yaml.v3"
@@ -57,6 +58,7 @@ func NewApp(c *cli.Context) {
 		})
 		targets = append(targets, c.String("browser-crawler"))
 	} else if c.String("url") != "" {
+		fmt.Println(c.String("data"))
 		col = collector.NewFromURLListReader(ioutil.NopCloser(strings.NewReader(c.String("data"))), cfg.HTTP)
 		targets = append(targets, c.String("url"))
 	} else if c.String("raw-request") != "" {

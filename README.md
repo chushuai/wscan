@@ -30,7 +30,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
             enabled: true
             depth: 1
             auto_load_poc: false
-            include_poc: ["/your_pocs_dir/pocs/*.yml"]
+            include_poc:
+                - C:\wscan_windows_amd64.exe\wscan-poc-1.0.0\pocs\*.yml
             exclude_poc: [] 
 ```
 # 项目进展

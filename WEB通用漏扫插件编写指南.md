@@ -73,7 +73,7 @@ func (p *WebVulnPlugin) Init(ctx context.Context, pci base.PluginConfigInterface
 }
 
 // execAction 执行漏洞检测
-func (p *WebVulnPlugin) execAction(ctx context.Context, ab *base.Bifrost) error {
+func (p *WebVulnPlugin) execAction(ctx context.Context, ab *base.ApolloBase) error {
     flow := ab.GetTargetFlow()
     logger.Infof("开始检测web漏洞, URL=%s", flow.Request.URL.String())
     

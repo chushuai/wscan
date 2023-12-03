@@ -23,6 +23,15 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ./wscan  --log-level=debug ws  --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
 （2）被动扫描
 ./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
+（3）POC扫描
+    3.1 POC下载地址 https://github.com/chushuai/wscan-poc/releases
+    3.2 Wscan首次运行时，将会生成一个名为config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
+        prometheus:
+            enabled: true
+            depth: 1
+            auto_load_poc: false
+            include_poc: ["/your_pocs_dir/pocs/*.yml"]
+            exclude_poc: [] 
 ```
 # 项目进展
 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  

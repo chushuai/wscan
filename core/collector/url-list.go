@@ -35,7 +35,10 @@ func (c *urlListCollect) FitOut(ctx context.Context, targets []string) (chan res
 			close(out)
 		}()
 		for _, target := range targets {
-			req, _ := http.NewRequest(method, target, bytes.NewReader(postData))
+			req, _ := http.NewRequest(method, target, nil)
+			if len(postData) > 0 {
+				req = req.WithFormBody(bytes.NewReader(postData))
+			}
 			resp, err := c.client.Respond(ctx, req)
 			if err != nil {
 				log.Error(err)
@@ -54,6 +57,3 @@ func NewFromURLListReader(r io.ReadCloser, opts *http.ClientOptions) *urlListCol
 	ulc.r = r
 	return ulc
 }
-
-// http://testphp.vulnweb.com/listproducts.php/listproducts.php?cat=1%3CscRipt%3EWscan%28WSCAN_ALERT_VALUE%29%3C%2FscRipt%3E
-// /listproducts.php?cat=1%3CscRipt%3EWscan%28WSCAN_ALERT_VALUE%29%3C%2FscRipt%3E

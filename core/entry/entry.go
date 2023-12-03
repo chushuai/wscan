@@ -5,13 +5,15 @@
 package entry
 
 import (
+	"bufio"
 	"context"
 	"encoding/json"
-	"fmt"
+	"github.com/thoas/go-funk"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/automaxprocs/maxprocs"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
+	"os"
 	"strings"
 	"wscan/core/collector"
 	"wscan/core/collector/basiccrawler"
@@ -58,13 +60,24 @@ func NewApp(c *cli.Context) {
 		})
 		targets = append(targets, c.String("browser-crawler"))
 	} else if c.String("url") != "" {
-		fmt.Println(c.String("data"))
 		col = collector.NewFromURLListReader(ioutil.NopCloser(strings.NewReader(c.String("data"))), cfg.HTTP)
 		targets = append(targets, c.String("url"))
 	} else if c.String("raw-request") != "" {
 
 	} else if c.String("url-file") != "" {
-
+		col = collector.NewFromURLListReader(ioutil.NopCloser(strings.NewReader(c.String("data"))), cfg.HTTP)
+		urlFile, err := os.Open(c.String("url-file"))
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer urlFile.Close()
+		scanner := bufio.NewScanner(urlFile)
+		for scanner.Scan() {
+			url := strings.TrimSpace(scanner.Text())
+			if url != "" && funk.ContainsString(targets, url) == false {
+				targets = append(targets, url)
+			}
+		}
 	} else if c.String("listen") != "" {
 		log.Println("listen=", c.String("listen"))
 		cfg.Mitm.Listen = c.String("listen")

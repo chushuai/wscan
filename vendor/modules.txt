@@ -121,8 +121,10 @@ github.com/dgraph-io/ristretto/z
 github.com/dgraph-io/ristretto/z/simd
 # github.com/dgrijalva/jwt-go v3.2.0+incompatible
 ## explicit
-# github.com/dlclark/regexp2 v1.4.0
-## explicit
+# github.com/dlclark/regexp2 v1.10.0
+## explicit; go 1.13
+github.com/dlclark/regexp2
+github.com/dlclark/regexp2/syntax
 # github.com/dustin/go-humanize v1.0.0
 ## explicit
 github.com/dustin/go-humanize
@@ -250,15 +252,11 @@ github.com/google/martian/mitm
 # github.com/google/martian/v3 v3.3.2
 ## explicit; go 1.11
 github.com/google/martian/v3
-github.com/google/martian/v3/fifo
 github.com/google/martian/v3/filter
 github.com/google/martian/v3/h2
-github.com/google/martian/v3/header
-github.com/google/martian/v3/httpspec
 github.com/google/martian/v3/log
 github.com/google/martian/v3/mitm
 github.com/google/martian/v3/nosigpipe
-github.com/google/martian/v3/parse
 github.com/google/martian/v3/proxyutil
 github.com/google/martian/v3/trafficshape
 github.com/google/martian/v3/verify

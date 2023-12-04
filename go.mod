@@ -12,7 +12,7 @@ require (
 	github.com/deckarep/golang-set v1.8.0
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/dlclark/regexp2 v1.4.0
+	github.com/dlclark/regexp2 v1.10.0
 	github.com/elazarl/go-bindata-assetfs v1.0.1
 	github.com/fatih/color v1.13.0
 	github.com/fsnotify/fsnotify v1.5.4

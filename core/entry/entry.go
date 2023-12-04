@@ -146,6 +146,17 @@ func LoadOrGenConfig(c *cli.Context) (*CliEntryConfig, error) {
 		}
 	}
 
+	if c.String("plugins") != "" {
+		enabledPlugins := strings.Split(c.String("plugins"), ",")
+		for name, pc := range cfg.Config.Plugins {
+			if funk.ContainsString(enabledPlugins, name) == true {
+				pc.BaseConfig().Enabled = true
+			} else {
+				pc.BaseConfig().Enabled = false
+			}
+		}
+	}
+
 	cfg.Filter = &checker.RequestCheckerConfig{
 		URLCheckerConfig: checker.URLCheckerConfig{
 			SchemeAllowed:        []string{},

@@ -41,3 +41,7 @@
 ## SUPPORT
 * 【1】支持从url-file加载扫描目标
 * 【2】支持Yaml POC扫描插件
+
+# 1.0.8 2023-12-0x
+## SUPPORT
+* 【1】支持通过命令行指定要启用的plugins

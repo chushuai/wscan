@@ -33,6 +33,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
             include_poc:
                 - C:\wscan_windows_amd64.exe\wscan-poc-1.0.0\pocs\*.yml
             exclude_poc: [] 
+    3.3 通过命令行启用--plug=prometheus，并且指定--url-file(一行一个url)绝对路径，即可大范围POC检测
+        ./wscan --log-level=debug ws --plug=prometheus  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
 ```
 # 项目进展
 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  
@@ -95,7 +97,7 @@ https://cdn.acunetix.com/wp-content/uploads/2022/01/11175019/scan-report-testphp
 https://www.arachni-scanner.com/reports/report.html/#!/summary/owasp_top_10  
 https://docs.xray.cool/assets/report_example.html 
 
-![](./doc/img/report.png)
+![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/118a026213bf2aca4f016218f626cf15.png)
 
 
 

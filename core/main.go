@@ -77,10 +77,10 @@ var subCommandWebScan = cli.Command{
 	Aliases: []string{"ws"},
 	Usage:   "Run a webscan task",
 	Flags: []cli.Flag{
-		&cli.StringFlag{
+		&cli.BoolFlag{
 			Name:    "list",
 			Aliases: []string{"l"},
-			Value:   "",
+			Value:   false,
 			Usage:   "list plugins"},
 		&cli.StringFlag{
 			Name:    "plugins",
@@ -237,7 +237,7 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "1.0.7",
+		Version: "1.0.9",
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

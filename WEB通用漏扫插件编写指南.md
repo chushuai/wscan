@@ -47,7 +47,11 @@ func (*WebVulnPlugin) Close() error {
 
 // DefaultConfig 返回默认配置, 需要填写插件的默认配置
 func (*WebVulnPlugin) DefaultConfig() base.PluginConfigInterface {
-    return &Config{}
+	config := &Config{PluginBaseConfig: base.PluginBaseConfig{
+		Name:    "web-vuln-plugin",
+		Enabled: true,
+	}}
+	return config
 }
 
 // Fingers 返回漏洞检测配置
@@ -73,34 +77,30 @@ func (p *WebVulnPlugin) Init(ctx context.Context, pci base.PluginConfigInterface
 }
 
 // execAction 执行漏洞检测
-func (p *WebVulnPlugin) execAction(ctx context.Context, ab *base.ApolloBase) error {
-    flow := ab.GetTargetFlow()
-    logger.Infof("开始检测web漏洞, URL=%s", flow.Request.URL.String())
-    
-    payloads = []string{"具体payload"}
-    // 遍历url和body中的参数
-    for _, param := range flow.Request.ParamsQueryAndBody() {
-        for _, payload := range payloads {
-            logger.Infof("%s, Test vulnerability= %s", flow.Request.URL.String(), rule.Vector)
-            // 对指定的参数进行形变，支持url、json、xml等类型的参数
-            req := flow.Request.Mutate(&http.Parameter{Position: param.Position, Key: param.Key, Value: param.Value, Suffix: payload})
-            // 发送请求
-            res, err := b.HTTPClient.Respond(context.TODO(), req)
-            if err != nil {
-                continue
-            }
-            if rule.compiled.Match([]byte(res.Text)) {
-                v := ab.NewWebVuln(req, res, &param)
-                if v != nil {
-                    v.SetTargetURL(&flow.Request.URL)
-                    v.Payload = payload
-                    b.OutputVuln(v)
-                }
-            }
-        }
-    }
+func (p *WebVulnPlugin)  execAction(ctx context.Context, ab *base.Apollo) error {
+	flow := ab.GetTargetFlow()
+	logger.Infof("开始检测web漏洞, URL=%s", flow.Request.URL().String())
 
-    return nil
+	payloads := []string{"具体payload"}
+	// 遍历url和body中的参数
+	for _, param := range flow.Request.ParamsQueryAndBody() {
+		for _, payload := range payloads {
+			// 对指定的参数进行形变，支持url、json、xml等类型的参数
+			req := flow.Request.Mutate(&http.Parameter{Position: param.Position, Key: param.Key, Value: param.Value, Suffix: payload})
+			// 发送请求
+			res, err := ab.HTTPClient.Respond(context.TODO(), req)
+			if err == nil {
+				v := ab.NewWebVuln(req, res, &param)
+				if v != nil {
+					v.SetTargetURL(flow.Request.URL())
+					v.Payload = payload
+					ab.OutputVuln(v)
+				}
+			}
+ 
+		}
+	}
+	return nil
 }
 
 

@@ -1,0 +1,2848 @@
+version: "1"
+category:
+  - name: dirscan/code/svn
+    title: svn
+  - name: dirscan/backup/default
+    title: backup_files
+  - name: dirscan/service/probe
+    title: server_probe
+  - name: dirscan/backup/php
+    title: phpinfo
+  - name: dirscan/temp/swp
+    title: swp_info
+  - name: dirscan/backup/bash
+    title: bash_history
+  - name: dirscan/backup/jsp
+    title: jsp_samples
+  - name: dirscan/default/cgi
+    title: cgi_documents
+  - name: dirscan/sample/test
+    title: test_samples
+  - name: dirscan/test/dreamware
+    title: mdrds
+  - name: dirscan/sensitive/statistic
+    title: statics_info
+  - name: dirscan/default/dir
+    title: default_diretory
+  - name: dirscan/sensitive/dir
+    title: sensitive_documents
+  - name: dirscan/directory/logs
+    title: log_info
+  - name: dirscan/config/frontpage
+    title: frontpage
+  - name: dirscan/file/resion
+    title: resion_doc
+  - name: dirscan/sensitive/file
+    title: sensitive_file
+  - name: dirscan/editor/CKEditor
+    title: ckedit_disclosure
+  - name: dirscan/editor/eWebEditor
+    title: ewebeditor_disclosure
+  - name: dirscan/database/file
+    title: database_disclosure
+  - name: dirscan/sensitive/sitemap
+    title: sitemap_disclosure
+rules:
+  - category: dirscan/code/svn
+    paths:
+      - .svn/entries
+    suffix: []
+    expression: response.status == 200 && "dir.*?svn://|dir.*?https://".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - CVS/Entries
+    suffix: []
+    expression: response.status == 200 && "\d \d{2}:\d{2}:\d{2} \d{4}//".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/config
+    suffix: []
+    expression: response.status == 200 && "branch "master"".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .hg/hgrc
+    suffix: []
+    expression: response.status == 200 && "\[\[paths\].*?default =".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .hg/requires
+    suffix: []
+    expression: response.status == 200 && "^revlogv1".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .bzr/README
+    suffix: []
+    expression: response.status == 200 && "^This\sis\sa\sBazaar".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/HEAD
+    suffix: []
+    expression: 'response.status == 200 && "^ref: refs/".bmatches(response.body)'
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/info/refs
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40}\s+refs/".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/objects/info/packs
+    suffix: []
+    expression: response.status == 200 && "^P pack-[a-f0-9]{40}\.pack".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/packed-refs
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40} refs/".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/refs/heads/master
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - wwwroot.rar
+    suffix: []
+    expression: response.status == 200 && "Rar!".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - htdocs.rar
+    suffix: []
+    expression: response.status == 200 && "Rar!".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - backup.rar
+    suffix: []
+    expression: response.status == 200 && "Rar!".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - backup.tar.gz
+    suffix: []
+    expression: response.status == 200 && "\x1f\x8b".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - htdocs.tar.gz
+    suffix: []
+    expression: response.status == 200 && "\x1f\x8b".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - index.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - index.zip
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .old
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .bck
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .copy
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .temp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - iprober.php
+    suffix: []
+    expression: response.status == 200 && "Prober.*?V\d\.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - index1.php
+    suffix: []
+    expression: response.status == 200 && "Prober.*?V\d\.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - i.php
+    suffix: []
+    expression: response.status == 200 && "<!--服务器相关参数-->.*?<!--组件信息-->.*?<!--数据库支持-->.*?<!--服务器性能检测-->".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - tz.php
+    suffix: []
+    expression: response.status == 200 && "<td id="f31">Powered by.*?<a href="http://www.depoch.net"><b>dEpoch
+      Studio</b>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - aspcheck.asp
+    suffix: []
+    expression: response.status == 200 && "<h2>ASP组件支持情况</h2><a name=".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - DotNetInfo.aspx
+    suffix: []
+    expression: response.status == 200 && "服务器COM组件安装检测</td>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - jspcheck.aspx
+    suffix: []
+    expression: response.status == 200 && "<td colspan="2" class="TrHead">服务器COM组件安装检测</td>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - /?phpinfo=1
+    suffix: []
+    expression: response.status == 200 && "PHP Version.*?System.*?Build Date".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - phpinfo.php
+    suffix: []
+    expression: response.status == 200 && "PHP Version.*?System.*?Build Date".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - test.php
+    suffix: []
+    expression: response.status == 200 && "PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - 1.php
+    suffix: []
+    expression: response.status == 200 && "PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - index1.php
+    suffix: []
+    expression: response.status == 200 && "PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - t.php
+    suffix: []
+    expression: response.status == 200 && "PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/temp/swp
+    paths:
+      - index.php.swp
+    suffix: []
+    expression: response.status == 200 && "<html>.*?include\(.*?\)".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/temp/swp
+    paths:
+      - .bash_history
+    suffix: []
+    expression: response.status == 200 && "ls.*?cd.*?|dir.*?cd".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/temp/swp
+    paths:
+      - .bashrc
+    suffix: []
+    expression: response.status == 200 && "".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/jsp
+    paths:
+      - examples/jsp/
+    suffix: []
+    expression: response.status == 200 && "<title>jsp samples</title>|<title>jsp examples</title>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default/cgi
+    paths:
+      - cgi-bin/
+    suffix: []
+    expression: response.status == 200 || response.status == 403
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.cfm
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.cgi
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.chm
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.htm
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.shtml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test0
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test1
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test_testing.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.cfm
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.cgi
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.htm
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.shtml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/test/dreamware
+    paths:
+      - _mmServerScripts/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/test/dreamware
+    paths:
+      - _mmDBScripts/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/statistic
+    paths:
+      - usage/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && "Usage Statistics".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default/dir
+    paths:
+      - include/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/default/dir
+    paths:
+      - lib/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - secured/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - error/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - private/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - stats/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - db/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - temp/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - server-status/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - class/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - files/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - inc/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - img/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - WEB-INF/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - SQL/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - CVS/
+    suffix: []
+    expression: response.status == 200 && "<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body
+      bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - .idea/
+    suffix: []
+    expression: response.status == 200 && "<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body
+      bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - CMS/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - DB/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - '!install/'
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - backup/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - backups/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - bak/
+    suffix: []
+    expression: response.status == 200 || response.status == 401
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - jdbc/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - ~root/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - ~log/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - ~admin/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - src/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - access.log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - error.log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - errors.log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - error_log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - logs/access.log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - 'logs/error.log '
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - 'logs/error_log '
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.1.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/config/frontpage
+    paths:
+      - postinfo.html
+    suffix: []
+    expression: response.status == 200 && "<!--\s*?postinfo.html version \d\.\d\d\d.*>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/file/resion
+    paths:
+      - resin-doc/viewfile/?contextpath=../../../../&file=WEB-INF/web.xml
+    suffix: []
+    expression: response.status == 200 && "<title>WEB-INF/web.xml</title>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 123.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 123.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 123.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 123.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 2.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 2.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 2.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 2.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 3.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 3.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 3.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 3.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - ServerVariables.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - WEB-INF/web.xml
+    suffix: []
+    expression: response.status == 200 && "<web-app.*?</web-app>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - WEB-INF/jboss-web.xml
+    suffix: []
+    expression: response.status == 200 && "<web-app.*?</web-app>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - _debugadmin.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - _test
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - a.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - a.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - a.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - a.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - abc.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - abc.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - abc.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - fckeditor/editor/fckeditor.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - ckeditor/editor/ckeditor.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - Editor/FileUpload.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - fckeditor/editor/fckeditor.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - ckeditor/editor/ckeditor.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - fckeditor/editor/fckeditor.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - ckfinder/ckfinder.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - db/ewebeditor.mdb
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin_login.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - SouthidcEditor/Datas/SouthidcEditor.mdb
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin_uploadfile.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/ewebeditor.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin/config.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - Database.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - L-BLOG.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - Leadbbs.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - PowerEasy2005.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - PowerEasy2006.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - PowerEasy4.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - PowerEasy5.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - PowerEasy6.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - download.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - ewebforum.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/sitemap
+    paths:
+      - sitemap.xml
+    suffix: []
+    expression: response.status == 200 && "</urlset>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/crossdomain
+    paths:
+      - /crossdomain.xml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: config/ide
+    paths:
+      - /.idea/workspace.xml
+    suffix: []
+    expression: response.status == 200 && "project".bmatches(response.body)
+    partial: false
+    root: true
+  - category: dirscan/default
+    paths:
+      - index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - help/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - cacti/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - memadmin/index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - data.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - resin-admin/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/id_rsa.pub
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .vimrc
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/id_dsa.pub
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jmx-console/HtmlAdaptor
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - id_rsa.pub
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jenkins/script
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/authorized_keys
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - index.php~
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - sftp-config.json
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.php~
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - index.php.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - phpmyadmin/index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - info.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.php.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - _phpmyadmin/index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.php.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .git/index
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - phpMyAdmin/index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/id_rsa
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.inc.php.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - pma/index.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - php.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/id_dsa
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .index.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - id_dsa
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - zabbix/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .config.inc.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - id_rsa
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config/.config.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - proxy.pac
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .zsh_history
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .config.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - p.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .DS_Store
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.do
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .settings.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - readme.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .database.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - readme.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .db.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - readme
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .mysql.php.swp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - README.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - httpd.conf
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - deploy.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login.do
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - README.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - core
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - README
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - setup.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - LICENSE.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - composer.json
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - solr/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - backup.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - LICENSE.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - login
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - composer.lock
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.json
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - rsync.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - LICENSE
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - sync.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CHANGELOG.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ""
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - test.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CHANGELOG.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - signin
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - manager/html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - run.sh
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CHANGELOG
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - user/login
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.inc
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - changelog.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - data.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config/database.yml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - changelog.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - database.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - database.yml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.do
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - changelog
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/known_hosts
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CONTRIBUTING.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - test.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CONTRIBUTING.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .htpasswd
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CONTRIBUTING
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - etc/passwd
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .htpasswd.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - backup.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .htaccess
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ../../../../../../../../../../etc/passwd
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - htpasswd.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - webshell.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dump.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .htaccess.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - '%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/etc/passwd'
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - webshell.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - create.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upfile.do
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - nohup.out
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - webshell.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.php.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - webshell.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.php.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.sqlite
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - webshell.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - install.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - logs/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.sqlite3
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - INSTALL.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .rediscli_history
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - INSTALL.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - a.out
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - INSTALL
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 1.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - source/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - MAINTAINERS.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - MAINTAINERS.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - MAINTAINERS
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - s.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - index.cgi.bak
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - UPGRADE.md
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - s.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - web.config
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - UPGRADE.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - s.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - statistics.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - UPGRADE
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - s.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - s.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - requirements.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .zshrc
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - x.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - key
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .bash_profile
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - x.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.conf
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - keys
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .bash_logout
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - x.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - secret_key
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - x.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - secret
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - x.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 127.0.0.1.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .secret
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ooxx.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .idea/modules.xml
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 0.1.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .key
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ooxx.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .mysql_history
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 0.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .secret_key
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ooxx.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - temp.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 127.sql
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ooxx.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - tmp.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - ooxx.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dama.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - readme.html
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.inc
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dama.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - server-status
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config/config.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dama.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - key.txt
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config/config.inc
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dama.asp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - dama.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - examples/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - settings.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - application.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - examples/servlets/servlet/SessionExample
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - test.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - conf.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - app.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - resin-doc/resource/tutorial/jndi-appconfig/test%3FinputFile=/etc/profile
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - configs/application.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - configuration.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - resin-doc/viewfile/%3Fcontextpath=/&servletpath=&file=index.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config/config.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - phpspy.php
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jspspy.jsp
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - vendor/composer/LICENSE
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - conf/config.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jspspy.jspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - application/configs/application.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - aspxspy.aspx
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug/pprof/
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - php.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .user.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - db.ini
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .env
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - app.cfg
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - server.cfg
+    suffix: []
+    expression: response.status == 200
+    partial: false
+    root: false

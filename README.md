@@ -53,7 +53,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
           - JSONRequest
         type: "RCE"
         ...
-    4.2 config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
+    4.2 您需要修改config.yaml文件中的以下内容，以指定include_tmpl的路径。
         enabled: true
         depth: 0
         auto_load_tmpl: false 
@@ -82,7 +82,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.12.02 发布v1.0.6 二进制版，支持输出JSON、HTML格式的扫描结果  
 2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件   
 2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins  
-2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)
+2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)  
+2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测.
 
 
 # 开源时间表

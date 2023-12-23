@@ -11,12 +11,6 @@ type ClientConfig struct {
 	RMIServerAddr string `json:"rmi_server_addr" yaml:"rmi_server_addr" #:"和 http_base_url 类似，实际用来访问 rmi 服务的地址"`
 }
 
-type CommonResponseComponent struct {
-	StatusCode string              `json:"statusCode"`
-	Header     []map[string]string `json:"header"`
-	Body       string              `json:"body"`
-}
-
 type Config struct {
 	DBFilePath       string           `json:"db_file_path" yaml:"db_file_path" #:"反连平台数据库文件位置, 这是一个 KV 数据库"`
 	Token            string           `json:"token" yaml:"token" #:"反连平台认证的 Token, 独立部署时不能为空"`
@@ -24,6 +18,12 @@ type Config struct {
 	DNSServerConfig  DNSServerConfig  `json:"dns" yaml:"dns"`
 	RMIServerConfig  RMIServerConfig  `json:"rmi" yaml:"rmi"`
 	ClientConfig     ClientConfig     `json:"client" yaml:"client"`
+}
+
+type CommonResponseComponent struct {
+	StatusCode string              `json:"statusCode"`
+	Header     []map[string]string `json:"header"`
+	Body       string              `json:"body"`
 }
 
 type DNSResponseConfig struct {

@@ -313,7 +313,7 @@ func (self *HTTPServer) HttpRequestLog(w http.ResponseWriter, r *http.Request) {
 //go:embed template
 var template embed.FS
 
-func (self *HTTPServer) ListingHttpManagementServer() {
+func (self *HTTPServer) Start() {
 	mux := http.NewServeMux()
 	mux.Handle("/template/", http.FileServer(http.FS(template)))
 	mux.HandleFunc("/", index)

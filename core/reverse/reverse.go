@@ -25,14 +25,33 @@ type Reverse struct {
 
 func NewReverse(config *Config) *Reverse {
 	r := &Reverse{config: config,
-		reverseHTTPServer: NewHTTPServer(config)}
-
+		reverseHTTPServer: NewHTTPServer(config),
+		db:                &DB{},
+	}
+	if ds, err := NewDNSServer(config, r.db); err == nil {
+		r.reverseDNSServer = ds
+	}
 	return r
 }
 
 func (r *Reverse) Start() {
-	r.reverseHTTPServer.ListingHttpManagementServer()
+	wg := sync.WaitGroup{}
+	if r.config.HTTPServerConfig.Enabled == true {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			r.reverseHTTPServer.Start()
+		}()
 
+	}
+	if r.config.DNSServerConfig.Enabled == true {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			r.reverseDNSServer.Start()
+		}()
+	}
+	wg.Wait()
 }
 
 func (r *Reverse) Close() error {

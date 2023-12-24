@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"sync"
 	"time"
+	"wscan/core/utils"
 	logger "wscan/core/utils/log"
 )
 
@@ -36,7 +37,7 @@ type BulkRespData struct {
 	Msg            []string
 }
 
-type queryInfo struct {
+type QueryInfo struct {
 	Query string
 }
 
@@ -56,17 +57,6 @@ func (self *HTTPServer) VerifyToken(token string) bool {
 	return flag
 }
 
-func (self *HTTPServer) GetUser(domain string) string {
-	user := "admin"
-	//for i, v := range Config.HTTP.User {
-	//	if strings.Contains(domain, v) {
-	//		user = i
-	//		break
-	//	}
-	//}
-	return user
-}
-
 func index(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/template", http.StatusMovedPermanently)
 }
@@ -74,9 +64,10 @@ func index(w http.ResponseWriter, r *http.Request) {
 func (self *HTTPServer) GetDnsData(w http.ResponseWriter, r *http.Request) {
 	key := r.Header.Get("token")
 	if self.VerifyToken(key) {
+		userDir := self.config.GetUserDir(key)
 		fmt.Fprint(w, JsonRespData(RespData{
 			HTTPStatusCode: "200",
-			Msg:            D.Get(key),
+			Msg:            D.Get(userDir),
 		}))
 	} else {
 		fmt.Fprint(w, JsonRespData(RespData{
@@ -114,7 +105,7 @@ func (self *HTTPServer) JsonRespData(resp interface{}) string {
 func (self *HTTPServer) Clean(w http.ResponseWriter, r *http.Request) {
 	key := r.Header.Get("token")
 	if self.VerifyToken(key) {
-		D.Clear(key)
+		D.Clear(self.config.GetUserDir(key))
 		fmt.Fprint(w, JsonRespData(RespData{
 			HTTPStatusCode: "200",
 			Msg:            "success",
@@ -130,7 +121,7 @@ func (self *HTTPServer) Clean(w http.ResponseWriter, r *http.Request) {
 func (self *HTTPServer) verifyDns(w http.ResponseWriter, r *http.Request) {
 	DnsDataRwLock.RLock()
 	defer DnsDataRwLock.RUnlock()
-	var Q queryInfo
+	var Q QueryInfo
 	key := r.Header.Get("token")
 	if self.VerifyToken(key) {
 		body, _ := io.ReadAll(r.Body)
@@ -139,7 +130,8 @@ func (self *HTTPServer) verifyDns(w http.ResponseWriter, r *http.Request) {
 			HTTPStatusCode: "200",
 			Msg:            "false",
 		}
-		for _, v := range DnsData[key] {
+		userDir := self.config.GetUserDir(key)
+		for _, v := range DnsData[userDir] {
 			if v.Subdomain == Q.Query {
 				resp.Msg = "true"
 				break
@@ -158,7 +150,7 @@ func (self *HTTPServer) verifyDns(w http.ResponseWriter, r *http.Request) {
 func (self *HTTPServer) verifyHttp(w http.ResponseWriter, r *http.Request) {
 	DnsDataRwLock.RLock()
 	defer DnsDataRwLock.RUnlock()
-	var Q queryInfo
+	var Q QueryInfo
 	key := r.Header.Get("token")
 	if self.VerifyToken(key) {
 		body, _ := io.ReadAll(r.Body)
@@ -167,7 +159,8 @@ func (self *HTTPServer) verifyHttp(w http.ResponseWriter, r *http.Request) {
 			HTTPStatusCode: "200",
 			Msg:            "false",
 		}
-		for _, v := range DnsData[key] {
+		userDir := self.config.GetUserDir(key)
+		for _, v := range DnsData[userDir] {
 			if v.Subdomain == Q.Query && v.Type == "HTTP" {
 				resp.Msg = "true"
 				break
@@ -192,7 +185,8 @@ func (self *HTTPServer) BulkVerifyDns(w http.ResponseWriter, r *http.Request) {
 		body, _ := io.ReadAll(r.Body)
 		json.Unmarshal(body, &Q)
 		var result []string
-		for _, v := range DnsData[key] {
+		userDir := self.config.GetUserDir(key)
+		for _, v := range DnsData[userDir] {
 			for _, q := range Q {
 				if v.Subdomain == q {
 					result = append(result, q)
@@ -244,7 +238,8 @@ func (self *HTTPServer) BulkVerifyHttp(w http.ResponseWriter, r *http.Request) {
 		body, _ := io.ReadAll(r.Body)
 		json.Unmarshal(body, &Q)
 		var result []string
-		for _, v := range DnsData[key] {
+		userDir := self.config.GetUserDir(key)
+		for _, v := range DnsData[userDir] {
 			for _, q := range Q {
 				if v.Subdomain == q && v.Type == "HTTP" {
 					result = append(result, q)
@@ -296,13 +291,12 @@ func isIpaddress(ip string) bool {
 }
 
 func (self *HTTPServer) HttpRequestLog(w http.ResponseWriter, r *http.Request) {
-	user := self.GetUser(r.URL.Path)
 	clientIp := r.RemoteAddr
 	xip := r.Header.Get("X-Forwarded-For")
 	if xip != "" && isIpaddress(xip) {
 		clientIp = xip
 	}
-	D.Set(user, DnsInfo{
+	D.Set(self.config.GetUserDir(self.config.Token), DnsInfo{
 		Type:      "HTTP",
 		Subdomain: r.URL.Path,
 		Ipaddress: clientIp,
@@ -314,6 +308,15 @@ func (self *HTTPServer) HttpRequestLog(w http.ResponseWriter, r *http.Request) {
 var template embed.FS
 
 func (self *HTTPServer) Start() {
+	if self.config.HTTPServerConfig.Enabled == false {
+		logger.Fatal("http server is not enabled")
+	}
+	if self.config.Token == "" {
+		logger.Fatalf(" you must set Token in config file, for example: %s", utils.RandLetters(8))
+	}
+	if self.config.HTTPServerConfig.ListenPort == "" {
+		logger.Fatalf(" you must set listen_port, for example: %s", utils.RandInt(8000, 9000))
+	}
 	mux := http.NewServeMux()
 	mux.Handle("/template/", http.FileServer(http.FS(template)))
 	mux.HandleFunc("/", index)
@@ -324,12 +327,15 @@ func (self *HTTPServer) Start() {
 	mux.HandleFunc("/api/bulkVerifyDns", self.BulkVerifyDns)
 	mux.HandleFunc("/api/verifyHttp", self.verifyHttp)
 	mux.HandleFunc("/api/BulkVerifyHttp", self.BulkVerifyHttp)
-	mux.HandleFunc("/"+"dnslog"+"/", self.HttpRequestLog)
+	mux.HandleFunc("/"+self.config.GetUserDir(self.config.Token)+"/", self.HttpRequestLog)
 	server := &http.Server{
 		Addr:    ":" + self.config.HTTPServerConfig.ListenPort,
 		Handler: mux,
 	}
-	logger.Info("Http address: http://" + "0.0.0.0:" + self.config.HTTPServerConfig.ListenPort)
+	logger.Infof("reverse server url: http://%s:%s, token:%s", self.config.HTTPServerConfig.ListenIP,
+		self.config.HTTPServerConfig.ListenPort, self.config.Token)
+	logger.Infof("reverse user dir: http://%s:%s/%s/", self.config.HTTPServerConfig.ListenIP,
+		self.config.HTTPServerConfig.ListenPort, self.config.GetUserDir(self.config.Token))
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

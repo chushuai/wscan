@@ -73,22 +73,22 @@ type DnsInfo struct {
 	Time      int64
 }
 
-func (d *DnsInfo) Set(token string, data DnsInfo) {
+func (d *DnsInfo) Set(userDir string, data DnsInfo) {
 	DnsDataRwLock.Lock()
 	defer DnsDataRwLock.Unlock()
-	if DnsData[token] == nil {
-		DnsData[token] = []DnsInfo{data}
+	if DnsData[userDir] == nil {
+		DnsData[userDir] = []DnsInfo{data}
 	} else {
-		DnsData[token] = append(DnsData[token], data)
+		DnsData[userDir] = append(DnsData[userDir], data)
 	}
 }
 
-func (d *DnsInfo) Get(token string) string {
+func (d *DnsInfo) Get(userDir string) string {
 	DnsDataRwLock.RLock()
 	defer DnsDataRwLock.RUnlock()
 	res := ""
-	if DnsData[token] != nil {
-		v, _ := json.Marshal(DnsData[token])
+	if DnsData[userDir] != nil {
+		v, _ := json.Marshal(DnsData[userDir])
 		res = string(v)
 	}
 	if res == "" {
@@ -97,8 +97,8 @@ func (d *DnsInfo) Get(token string) string {
 	return res
 }
 
-func (d *DnsInfo) Clear(token string) {
-	DnsData[token] = []DnsInfo{}
+func (d *DnsInfo) Clear(userDir string) {
+	DnsData[userDir] = []DnsInfo{}
 	DnsData["other"] = []DnsInfo{}
 }
 

@@ -70,7 +70,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
         non_blocked_as_passed: false
     4.3 通过命令行启用--plug=custom_tmpl，即可对目标网站进行自定义Payload测试。
         ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
-
+(5) 独立部署反连模块
+./wscan  reverse
 ```
 # 项目进展
 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  
@@ -83,8 +84,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件   
 2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins  
 2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)  
-2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测.
-
+2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测  
+2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能    
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。
@@ -121,6 +122,7 @@ SQL注入 https://github.com/sqlmapproject/sqlmap
 XSS 检测 https://github.com/hahwul/dalfox  
 网站技术  https://github.com/chushuai/wappalyzer   
 JavaScript https://github.com/dop251/goja    
+反连平台 https://github.com/lanyi1998/DNSlog-GO 
 反连平台 https://github.com/chennqqi/godnslog  
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
 WEB漏洞扫描器 https://www.zaproxy.org/  

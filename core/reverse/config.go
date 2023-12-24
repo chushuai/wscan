@@ -4,6 +4,12 @@
  */
 package reverse
 
+import (
+	"fmt"
+	"math"
+	"wscan/core/utils"
+)
+
 type ClientConfig struct {
 	RemoteServer  bool   `json:"remote_server" yaml:"remote_server" #:"是否是独立的远程 server，如果是要在下面配置好远程的服务端地址"`
 	HTTPBaseURL   string `json:"http_base_url" yaml:"http_base_url" #:"默认将根据 ListenIP 和 ListenPort 生成，该地址是存在漏洞的目标反连回来的地址, 当反连平台前面有反代、绑定域名、端口映射时需要自行配置"`
@@ -18,6 +24,10 @@ type Config struct {
 	DNSServerConfig  DNSServerConfig  `json:"dns" yaml:"dns"`
 	RMIServerConfig  RMIServerConfig  `json:"rmi" yaml:"rmi"`
 	ClientConfig     ClientConfig     `json:"client" yaml:"client"`
+}
+
+func (*Config) GetUserDir(token string) string {
+	return fmt.Sprintf("%d", int64(math.Abs(float64(utils.Mmh3Hash32([]byte(token))))))
 }
 
 type CommonResponseComponent struct {

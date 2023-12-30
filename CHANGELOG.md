@@ -60,3 +60,10 @@
 ## SUPPORT 
 * 【1】支持独立部署反连模块，同时Yaml POC支持反连功能。  
 * 【2】支持使用--poc参数指定待扫描POC  
+
+# 1.0.12 2023-12-30
+## BUGFIX
+* 【1】修复XRAY YAML POC不支持多层目录扫描的问题
+* 【2】修复XRAY YAML POC CEL由于缺少Header导致执行失败的问题
+## SUPPORT 
+* 【1】支持Goby JSON POC插件，多层URL目录POC扫描  

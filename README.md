@@ -20,7 +20,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
-./wscan  --log-level=debug ws  --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
+./wscan  --log-level=debug ws --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
+./wscan  --log-level=debug ws --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 （2）被动扫描
 ./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
 （3）POC扫描
@@ -60,12 +61,12 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
         include_tmpl:
           - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
         exclude_tmpl: [ ]
-        block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403"
+        block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403
           - 403
         pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
           - 200
           - 404
-        block_regex: "" # # 被WAF阻止网页的正则表达式
+        block_regex: "" # 被WAF阻止网页的正则表达式
         pass_regex: "" # 未被WAF阻止网页的正则表达式
         non_blocked_as_passed: false
     4.3 通过命令行启用--plug=custom_tmpl，即可对目标网站进行自定义Payload测试。
@@ -84,8 +85,9 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件   
 2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins  
 2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)  
-2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测  
-2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能    
+2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测     
+2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能  
+2023.12.30 发布v1.0.12 二进制版，支持Goby JSON POC插件，多层URL目录POC扫描  
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。
@@ -122,8 +124,8 @@ SQL注入 https://github.com/sqlmapproject/sqlmap
 XSS 检测 https://github.com/hahwul/dalfox  
 网站技术  https://github.com/chushuai/wappalyzer   
 JavaScript https://github.com/dop251/goja    
-反连平台 https://github.com/lanyi1998/DNSlog-GO 
-反连平台 https://github.com/chennqqi/godnslog  
+反连平台 https://github.com/lanyi1998/DNSlog-GO   
+反连平台 https://github.com/chennqqi/godnslog    
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
 WEB漏洞扫描器 https://www.zaproxy.org/  
 WEB漏洞扫描器 https://github.com/andresriancho/w3af  

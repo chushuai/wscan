@@ -26,7 +26,6 @@ func (*S009) Finger() *base.Finger {
 			logger.Infof("开始检测S2-009, %s", flow.Request.URL())
 			payload := ExecPayload009
 			payload = strings.Replace(payload, "{cmd}", "ifconfig", -1)
-
 			req, err := http.NewRequest("GET", utils.UrlJoinPath(flow.Request.URL().String(), payload), nil)
 			if err != nil {
 				logger.Error(err)

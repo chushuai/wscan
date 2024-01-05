@@ -28,7 +28,7 @@ func (*S032) Finger() *base.Finger {
 	return &base.Finger{
 		CheckAction: func(ctx context.Context, ab *base.Apollo) error {
 			flow := ab.GetTargetFlow()
-			logger.Infof("开始检测S2-016, %s", flow.Request.URL())
+			logger.Infof("开始检测S2-032, %s", flow.Request.URL())
 			r1 := utils.RandInt(1000000, 10000000)
 			r2 := utils.RandInt(1000000, 10000000)
 			payload := ExecPayload032

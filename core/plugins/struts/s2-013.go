@@ -31,7 +31,7 @@ func (*S013) Finger() *base.Finger {
 			logger.Infof("开始检测S2-013, %s", flow.Request.URL())
 			r1 := utils.RandInt(1000000, 10000000)
 			r2 := utils.RandInt(1000000, 10000000)
-			payload := UploadPaylaod013
+			payload := ExecPayload013
 			payload = strings.Replace(payload, "{cmd}", "echo `expr {{r1}} + {{r2}}`", -1)
 			payload = strings.Replace(payload, "{{r1}}", strconv.Itoa(r1), -1)
 			payload = strings.Replace(payload, "{{r2}}", strconv.Itoa(r2), -1)

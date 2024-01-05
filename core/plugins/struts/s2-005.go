@@ -56,6 +56,6 @@ func (*S005) Finger() *base.Finger {
 			return nil
 		},
 		Channel: "web-directory",
-		Binding: &model.VulnBinding{ID: "struts/s2-015/default", Plugin: "struts/s2-015", Category: "struts/s2-015"},
+		Binding: &model.VulnBinding{ID: "struts/s2-005/default", Plugin: "struts/s2-005", Category: "struts/s2-005"},
 	}
 }

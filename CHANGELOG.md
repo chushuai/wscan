@@ -67,3 +67,9 @@
 * 【2】修复XRAY YAML POC CEL由于缺少Header导致执行失败的问题
 ## SUPPORT 
 * 【1】支持Goby JSON POC插件，多层URL目录POC扫描  
+
+# 1.0.13 2024-01-07
+## SUPPORT
+* 【1】支持XXE、SSRF、Fastjson漏洞检测，但需开启内置的反连模块
+* 【2】支持struts2系列漏洞批量检测
+* 【3】基于真假的SQL注入，保存True、False的快照到结果中

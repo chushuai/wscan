@@ -16,15 +16,15 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 ⬇️[下载地址](https://github.com/chushuai/wscan/releases)
 ```
-（1）主动扫描
+(1) 主动扫描
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
 ./wscan  --log-level=debug ws --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
-（2）被动扫描
+(2) 被动扫描
 ./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
-（3）POC扫描
+(3) POC扫描
     3.1 POC下载地址 https://github.com/chushuai/wscan-poc/releases
     3.2 Wscan首次运行时，将会生成一个名为config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
         prometheus:
@@ -75,19 +75,20 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 ./wscan  reverse
 ```
 # 项目进展
-2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测  
-2023.11.12 发布v1.0.1 二进制版，静态爬虫  
-2023.11.12 发布v1.0.2 二进制版，支持被动扫描  
-2023.11.19 发布v1.0.3 二进制版，支持JSONP插件  
-2023.11.26 发布v1.0.4 二进制版，修复XSS、SQL注入漏报的问题，支持对单个URL进行漏洞检测  
-2023.11.30 发布v1.0.5 二进制版，支持浏览器爬虫、支持URL、表单智能过滤  
-2023.12.02 发布v1.0.6 二进制版，支持输出JSON、HTML格式的扫描结果  
-2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件   
-2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins  
-2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)  
-2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测     
-2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能  
-2023.12.30 发布v1.0.12 二进制版，支持Goby JSON POC插件，多层URL目录POC扫描  
+* 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测
+* 2023.11.12 发布v1.0.1 二进制版，静态爬虫
+* 2023.11.12 发布v1.0.2 二进制版，支持被动扫描
+* 2023.11.19 发布v1.0.3 二进制版，支持JSONP插件
+* 2023.11.26 发布v1.0.4 二进制版，修复XSS、SQL注入漏报的问题，支持对单个URL进行漏洞检测
+* 2023.11.30 发布v1.0.5 二进制版，支持浏览器爬虫、支持URL、表单智能过滤
+* 2023.12.02 发布v1.0.6 二进制版，支持输出JSON、HTML格式的扫描结果
+* 2023.12.03 发布v1.0.7 二进制版，支持Yaml POC扫描插件
+* 2023.12.04 发布v1.0.8 二进制版，支持通过命令行指定要启用的plugins
+* 2023.12.09 发布v1.0.9 二进制版，支持自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)
+* 2023.12.12 发布v1.0.10 二进制版，目录扫描内置400条常见规则、支持自定义扫描路径爆破。支持ASP、PHP通用命令执行检测
+* 2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能
+* 2023.12.30 发布v1.0.12 二进制版，支持Goby JSON POC插件，多层URL目录POC扫描
+* 2024.01.07 发布v1.0.13 二进制版，支持XXE、SSRF、Fastjson、 Struts2系列漏洞批量检测
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。
@@ -108,7 +109,7 @@ Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan�
 # 架构简析
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/a93d6e157be316b086faba9b6eebeebf.png)
 
-# 参考代码：
+# 参考代码
 机器学习 https://github.com/cdipaolo/goml  
 基于模板扫描 https://github.com/projectdiscovery/nuclei/    
 基于模板扫描 https://github.com/wallarm/gotestwaf  

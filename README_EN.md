@@ -22,7 +22,7 @@ We believe that using machine learning technology for penetration testing will b
 (2) Passive Scan
 ./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
 
-（3）POC Scan
+(3）POC Scan
     3.1 POC download address https://github.com/chushuai/wscan-poc/releases
     3.2 When Wscan is first run, a file named config.yaml will be generated. You need to modify the following content in this file to specify the path of include_poc.
         prometheus:

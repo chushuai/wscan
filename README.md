@@ -1,4 +1,8 @@
 [**English Version**](./README_EN.md)
+# 法律免责声明
+未经事先双方同意，使用 Wscan 扫描目标是非法的。 Wscan 仅用于安全测试目的。
+在使用之前， 请务必阅读并同意 [License](https://github.com/chushuai/wscan/blob/main/LICENSE.md) 文件中的条款，否则请勿安装使用本工具。
+
 # wscan
 Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经开源25年了。我们也计划在未来25年内持续更新Wscan，并将其持续开源。我们欢迎所有对web安全感兴趣的人一起加入我们的开发团队。
 
@@ -89,6 +93,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 * 2023.12.24 发布v1.0.11 二进制版，支持独立部署反连模块，同时Yaml POC支持反连功能
 * 2023.12.30 发布v1.0.12 二进制版，支持Goby JSON POC插件，多层URL目录POC扫描
 * 2024.01.07 发布v1.0.13 二进制版，支持XXE、SSRF、Fastjson、 Struts2系列漏洞批量检测
+* 2024.01.15 发布v1.0.14 二进制版，支持thinkphp系列漏洞批量检测
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

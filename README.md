@@ -18,7 +18,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 # 运行示例 
 
-⬇️[下载地址](https://github.com/chushuai/wscan/releases)
+⬇️[下载地址](https://github.com/chushuai/wscan/releases) [🏠最佳实践](https://github.com/chushuai/wscan/blob/main/最佳实践.md)
 ```
 (1) 主动扫描
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html

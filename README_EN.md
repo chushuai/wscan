@@ -10,7 +10,7 @@ Machine learning technology can also quickly process large amounts of data and t
 We believe that using machine learning technology for penetration testing will be a crucial direction for the future of network security. We hope that our tool can help more people safeguard network security and contribute to the field of network security.
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/9f9e48711df62c154bde487c989dd3a9.gif)
 # Example Usage 
-⬇️[Download Link](https://github.com/chushuai/wscan/releases)
+⬇️[Download Link](https://github.com/chushuai/wscan/releases) [🏠BestPractices](https://github.com/chushuai/wscan/blob/main/doc/BestPractices.md)
 ```
 (1) Active Scan
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
@@ -90,6 +90,9 @@ We believe that using machine learning technology for penetration testing will b
 * 2023.12.12 - Release v1.0.10 binary version, directory scanning includes 400 common rules, supporting custom scanning path bruteforce. Supporting ASP and PHP general command execution detection
 * 2023.12.24 - Release v1.0.11 binary version, supporting standalone deployment of anti-connection module, with Yaml POC supporting anti-connection function
 * 2023.12.30 - Release v1.0.12 binary version, supporting Goby JSON POC plugin, multi-layer URL directory POC scanning
+* 2024.01.07 Released v1.0.13 binary version, supporting XXE, SSRF, Fastjson, Struts2 series vulnerability batch detection
+* 2024.01.15 Released v1.0.14 binary version, supporting batch detection of thinkphp series vulnerabilities
+* 2024.01.18 Released v1.0.15 binary version, supporting PHP, JSP, ASP, ASPX file upload detection, passive scanning, and intelligent request filtering
 
 # The open-source schedule is outlined as follows  
 Wscan's goal is to create an open-source and non-profit project. However, due to the substantial workload involved in Wscan,

@@ -23,15 +23,15 @@ A vulnerability scanner is not omnipotent, and it may not detect some very deep 
 | `brute-force` |     √  |    √  | The community edition supports detecting HTTP basic authentication and simple form weak passwords, with built-in common username and password dictionaries                          |
 | `jsonp`      |    √   |  √    | Detecting the jsonp interface that contains sensitive information that can be read across domains                                      |
 | `ssrf`       |    √   |   √   | SSRF detection module, supporting common bypass techniques and anti-connection platform detection                                      |
-| `baseline`   |    developing   |  √    | Detect low SSL versions, missing or incorrectly added HTTP headers, and more                                   |
+| `baseline`   |    √   |  √    | Detect low SSL versions, missing or incorrectly added HTTP headers, and more                                   |
 | `redirect`   |   √    |  √    | Support HTML meta redirect, 30x redirect, etc.                                        |
 | `crlf-injection` |     √  | √     | Detect HTTP header injection, support query, body and other parameters                               |
 | `xstream`    |     developing  |√      | Detect XStream series vulnerabilities                                                 |
 | `struts`     |    √   | √     | Detect whether the target website has Struts2 series vulnerabilities, including common vulnerabilities such as s2-016, s2-032, s2-045, s2-059, and s2-061.|
 | `thinkphp`   |  √     | √     | Detecting vulnerabilities in websites developed using ThinkPHP                                            |
-| `shiro`      |    developing   |   √   | Detecting Shiro deserialization vulnerabilities检测Shiro反序列化漏洞                                                   |
+| `shiro`      |    developing   |   √   | Detecting Shiro deserialization vulnerabilities                                                |
 | `fastjson`   |  √     |  √    | Detect fastjson vulnerability                                                 |
-| `Nuclei YAML POC` |    developing    |  ×     | Nuclei standard POC detection plugin                                               |
+| `Nuclei YAML POC` |    √    |  ×     | Nuclei standard POC detection plugin                                               |
 | `Xray YAML POC` |     √     | √        | POC detection plugin for Xray standard                                                 |
 | `Goby JSON POC` |     √       |     ×      | Gody standard POC detection plugin                                                 |
 | `WAF bypass detection`    |     √         |  ×           |       Customize various special payloads to test whether Waf can intercept them                                                          |
@@ -73,14 +73,23 @@ When Wscan is run for the first time, it will generate a file named config.yaml.
 ```
 
 # POC scanning
-Wscan does not have any built-in POC plugins, but Wscan's Prometheus plugin engine already supports XRAY and Goby standard POC plugins, 
-and Nuclei-type plugins will be arranged soon. Unlike other scanners, 
-Wscan can customize the depth of POC detection, 
-thus discovering more web security issues.
+## Download plugin package
+Wscan does not have any built-in POC plugins, but its Prometheus plugin engine already supports Nuclei, XRAY, and Goby standard POC plugins.  
+Unlike other scanners, Wscan can customize the depth of POC detection, allowing it to discover more web security issues.
+### Step1 
+Xray/Goby POC plugin package download address
+```
+https://github.com/chushuai/wscan-poc/releases
+```
 
-POC plugin package download address https://github.com/chushuai/wscan-poc/releases
+### Step2
+Nuclei POC plugin package download address
+``` 
+https://github.com/projectdiscovery/nuclei-templates/tree/main/http
+```
+
 ## Special scanning
-Ⅰ. Simultaneously scan XRAY and Goby POC plugins. In this mode, only the POC detection plugin is enabled, and other types of plugins are not enabled.
+Ⅰ. Simultaneously scan Nuclei, XRAY, and Goby POC plugins. In this mode, only the POC detection plugin is enabled, and other types of plugins are not enabled.
 ```
 ./wscan --log-level=debug ws  --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 ./wscan --log-level=debug ws  --poc=/your_wscan_poc/wscan-poc/pocs/*  --url-file=/url_file.txt  --html-output=wscan_scan_result.html

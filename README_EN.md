@@ -90,9 +90,10 @@ We believe that using machine learning technology for penetration testing will b
 * 2023.12.12 - Release v1.0.10 binary version, directory scanning includes 400 common rules, supporting custom scanning path bruteforce. Supporting ASP and PHP general command execution detection
 * 2023.12.24 - Release v1.0.11 binary version, supporting standalone deployment of anti-connection module, with Yaml POC supporting anti-connection function
 * 2023.12.30 - Release v1.0.12 binary version, supporting Goby JSON POC plugin, multi-layer URL directory POC scanning
-* 2024.01.07 Released v1.0.13 binary version, supporting XXE, SSRF, Fastjson, Struts2 series vulnerability batch detection
-* 2024.01.15 Released v1.0.14 binary version, supporting batch detection of thinkphp series vulnerabilities
-* 2024.01.18 Released v1.0.15 binary version, supporting PHP, JSP, ASP, ASPX file upload detection, passive scanning, and intelligent request filtering
+* 2024.01.07 - Release v1.0.13 binary version, supporting XXE, SSRF, Fastjson, Struts2 series vulnerability batch detection
+* 2024.01.15 - Release v1.0.14 binary version, supporting batch detection of thinkphp series vulnerabilities
+* 2024.01.18 - Release v1.0.15 binary version, supporting PHP, JSP, ASP, ASPX file upload detection, passive scanning, and intelligent request filtering
+* 2024.01.21 - Release v1.0.16 binary version, supporting Nuclei Yaml POC plugin, Shiro framework recognition, and default key cracking plugin
 
 # The open-source schedule is outlined as follows  
 Wscan's goal is to create an open-source and non-profit project. However, due to the substantial workload involved in Wscan,
@@ -111,3 +112,7 @@ to ensure the robustness of the project and organized community participation.
 8.  HTTP Parameter Deformation Module; Traditional Scan Modules All Open Source; Users can modify, compile, and build scanners on their own (Open source when Stars > 1k)  
 9.  Machine Learning Module to Reduce False Positives (Open source when Stars > 3k)  
 10. Machine Learning Module for Automatic Payload Generation (Open source when Stars > 4k)  
+
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=chushuai/wscan,chaitin/xray,projectdiscovery/nuclei&type=Date)](https://star-history.com/#chushuai/wscan&chaitin/xray&projectdiscovery/nuclei&Date)

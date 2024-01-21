@@ -88,3 +88,10 @@
 ## SUPPORT
 * 【1】支持PHP、JSP、ASP、ASPX任意文件上传检测
 * 【2】被动扫描支持智能请求过滤
+
+
+# 1.0.16 2024-01-21
+## SUPPORT
+* 【1】支持 baseline/sensitive/application_error
+* 【2】支持 Nuclei Yaml POC插件
+* 【3】支持 Shiro 框架识别与默认key破解插件

@@ -1,0 +1,32 @@
+run:
+  skip-dirs-use-default: false
+
+linters:
+  enable:
+    - gofumpt
+    - revive
+    - gocyclo
+    - bodyclose
+
+gocyclo:
+  min-complexity: 15
+
+issues:
+  exclude-use-default: false
+
+  exclude-rules:
+    # To support old golang version
+    - path: lib/launcher/os_unix.go
+      source: "// \\+build !windows"
+      linters:
+        - gofumpt
+
+    # To support old golang version
+    - path: lib/launcher/os_windows.go
+      source: "// \\+build windows"
+      linters:
+        - gofumpt
+
+    - source: 'io/ioutil'
+      linters:
+        - staticcheck

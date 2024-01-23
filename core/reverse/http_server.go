@@ -309,13 +309,20 @@ var template embed.FS
 
 func (self *HTTPServer) Start() {
 	if self.config.HTTPServerConfig.Enabled == false {
-		logger.Fatal("http server is not enabled")
+		logger.Warn("http server is not enabled")
+		return
 	}
 	if self.config.Token == "" {
 		logger.Fatalf(" you must set Token in config file, for example: %s", utils.RandLetters(8))
 	}
 	if self.config.HTTPServerConfig.ListenPort == "" {
-		logger.Fatalf(" you must set listen_port, for example: %s", utils.RandInt(8000, 9000))
+		if _, port, err := utils.GetRandomLocalAddr(); err == nil {
+			self.config.HTTPServerConfig.ListenPort = fmt.Sprintf("%d", port)
+		}
+	}
+	if self.config.ClientConfig.HTTPBaseURL == "" {
+		self.config.ClientConfig.HTTPBaseURL = fmt.Sprintf("http://%s:%s", self.config.HTTPServerConfig.ListenIP,
+			self.config.HTTPServerConfig.ListenPort)
 	}
 	mux := http.NewServeMux()
 	mux.Handle("/template/", http.FileServer(http.FS(template)))
@@ -329,13 +336,11 @@ func (self *HTTPServer) Start() {
 	mux.HandleFunc("/api/BulkVerifyHttp", self.BulkVerifyHttp)
 	mux.HandleFunc("/"+self.config.GetUserDir(self.config.Token)+"/", self.HttpRequestLog)
 	server := &http.Server{
-		Addr:    ":" + self.config.HTTPServerConfig.ListenPort,
+		Addr:    fmt.Sprintf("%s:%s", self.config.HTTPServerConfig.ListenIP, self.config.HTTPServerConfig.ListenPort),
 		Handler: mux,
 	}
 	logger.Infof("reverse server url: http://%s:%s, token:%s", self.config.HTTPServerConfig.ListenIP,
 		self.config.HTTPServerConfig.ListenPort, self.config.Token)
-	logger.Infof("reverse user dir: http://%s:%s/%s/", self.config.HTTPServerConfig.ListenIP,
-		self.config.HTTPServerConfig.ListenPort, self.config.GetUserDir(self.config.Token))
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

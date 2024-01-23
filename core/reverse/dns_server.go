@@ -5,6 +5,7 @@
 package reverse
 
 import (
+	"errors"
 	"fmt"
 	"github.com/miekg/dns"
 	"golang.org/x/net/dns/dnsmessage"
@@ -13,6 +14,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"wscan/core/utils"
 	logger "wscan/core/utils/log"
 )
 
@@ -31,30 +33,40 @@ func NewDNSServer(config *Config, db *DB) (*DNSServer, error) {
 	}
 
 	if config.DNSServerConfig.Enabled {
-		dns.HandleFunc(config.DNSServerConfig.Domain, dnsServer.handleDNSRequest)
-		server := &dns.Server{Addr: net.JoinHostPort(config.DNSServerConfig.ListenIP, "53"), Net: "udp"}
+		server := &dns.Server{Addr: net.JoinHostPort(config.DNSServerConfig.ListenIP, "533"), Net: "udp"}
 		dnsServer.Server = server
 	}
 
 	return dnsServer, nil
 }
 
+func GenRandDomain(config *Config) (string, error) {
+	if config.DNSServerConfig.Enabled == false {
+		return "", errors.New("")
+	}
+	if config.DNSServerConfig.Domain != "" {
+		return fmt.Sprintf("%s.%s", utils.RandLetters(8), config.DNSServerConfig.Domain), nil
+	}
+	return "", errors.New("DNSLOG configuration error")
+}
+
 // Start starts the DNS server.
 func (ds *DNSServer) Start() {
-	//if ds.Server != nil {
-	//	go func() {
-	//		err := ds.Server.ListenAndServe()
-	//		if err != nil {
-	//			logger.Fatalf("Failed to start DNS server: %v", err)
-	//		}
-	//	}()
-	//}
-	conn, err := net.ListenUDP("udp", &net.UDPAddr{Port: 53})
+	if ds.config.DNSServerConfig.ListenIP == "" {
+		ds.config.DNSServerConfig.ListenIP = "0.0.0.0"
+	}
+
+	dnsIP := net.ParseIP(ds.config.DNSServerConfig.ListenIP)
+	if dnsIP == nil {
+		logger.Fatal("DNS Server ip format error")
+	}
+	logger.Infof("reverse dns listen 0.0.0.0:53")
+	conn, err := net.ListenUDP("udp", &net.UDPAddr{IP: dnsIP, Port: 53})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	defer conn.Close()
-	log.Println("DNS Listing Start...")
+
 	for {
 		buf := make([]byte, 512)
 		_, addr, _ := conn.ReadFromUDP(buf)
@@ -95,14 +107,15 @@ func (ds *DNSServer) serverDNS(addr *net.UDPAddr, conn *net.UDPConn, msg dnsmess
 
 	//域名过滤
 	if strings.Contains(queryNameStr, ds.config.DNSServerConfig.Domain) {
-		user := "admin" //Core.GetUser(queryDoamin[len(queryDoamin)-1])
-		D.Set(user, DnsInfo{
+		D.Set(ds.config.GetUserDir(ds.config.Token), DnsInfo{
 			Type:      "DNS",
 			Subdomain: queryNameStr[:len(queryNameStr)-1],
 			Ipaddress: addr.IP.String(),
 			Time:      time.Now().Unix(),
 		})
 	}
+
+	fmt.Println(D)
 	switch queryType {
 	case dnsmessage.TypeA:
 		resource = NewAResource(queryName, [4]byte{127, 0, 0, 1})

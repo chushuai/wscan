@@ -95,3 +95,9 @@
 * 【1】支持 baseline/sensitive/application_error
 * 【2】支持 Nuclei Yaml POC插件
 * 【3】支持 Shiro 框架识别与默认key破解插件
+
+
+# 1.0.17 2024-03-08
+## BUGFIX
+* 【1】优化了页面相似度分析算法，解决了Boolean SQL注入误报问题
+* 【2】修复动态爬虫没有使用深拷贝导致POST数据缺失问题

@@ -153,7 +153,7 @@ var subCommandWebScan = cli.Command{
 			Value:   "",
 			Usage:   "post wscan result to url in json format"},
 	},
-	Action: WebScan,
+	Action: entry.NewApp,
 }
 
 var subCommandServiceScan = cli.Command{
@@ -172,28 +172,12 @@ var subCommandSubdomain = cli.Command{
 	Action:  SubdomainScan,
 }
 
-var subCommandPocLint = cli.Command{
-	Name:    "poclint",
-	Aliases: []string{"pl"},
-	Usage:   "lint yaml poc",
-	Flags:   []cli.Flag{},
-	Action:  PocLint,
-}
-
-var subCommandTransform = cli.Command{
-	Name:    "transform",
-	Aliases: []string{},
-	Usage:   "transform other script to gamma",
-	Flags:   []cli.Flag{},
-	Action:  Transform,
-}
-
 var subCommandReverse = cli.Command{
 	Name:    "reverse",
 	Aliases: []string{},
 	Usage:   "Run a standalone reverse server",
 	Flags:   []cli.Flag{},
-	Action:  Reverse,
+	Action:  entry.ReverseAction,
 }
 
 var subCommandConvert = cli.Command{
@@ -212,14 +196,6 @@ var subCommandGenCA = cli.Command{
 	Action:  GenerateCA,
 }
 
-var subCommandUpgrade = cli.Command{
-	Name:    "upgrade",
-	Aliases: []string{},
-	Usage:   "check new version and upgrade self if any updates found",
-	Flags:   []cli.Flag{},
-	Action:  Upgrade,
-}
-
 var subCommandVersion = cli.Command{
 	Name:    "version",
 	Aliases: []string{},
@@ -230,6 +206,7 @@ var subCommandVersion = cli.Command{
 
 func main() {
 	showBanner()
+	entry.LoadOrGenConfig(nil)
 	author := cli.Author{
 		Name:  "shaochuyu",
 		Email: "shaochuyu@qq.com",
@@ -237,7 +214,7 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "1.0.9",
+		Version: "1.0.17",
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{
@@ -256,12 +233,9 @@ func main() {
 		&subCommandWebScan,
 		&subCommandServiceScan,
 		&subCommandSubdomain,
-		&subCommandPocLint,
-		&subCommandTransform,
 		&subCommandReverse,
 		&subCommandConvert,
 		&subCommandGenCA,
-		&subCommandUpgrade,
 		&subCommandVersion,
 	}
 	err := app.Run(os.Args)

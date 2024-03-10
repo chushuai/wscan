@@ -101,3 +101,11 @@
 ## BUGFIX
 * 【1】优化了页面相似度分析算法，解决了Boolean SQL注入误报问题
 * 【2】修复动态爬虫没有使用深拷贝导致POST数据缺失问题
+
+
+# 1.0.18 2024-03-08
+## SUPPORT
+* 【1】支持自定义FUZZ插件，对body、query中的参数进行模糊测试
+* 【2】将custom_tmpl插件重命名为waftest
+* 【3】config.yml添加版本号，自动更新覆盖旧的配置 
+* 【4】支持http、socks5代理扫描

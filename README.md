@@ -40,9 +40,38 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
             exclude_poc: [] 
     3.3 通过命令行启用--plug=prometheus，并且指定--url-file(一行一个url)绝对路径，即可进行大范围POC检测
         ./wscan --log-level=debug ws --plug=prometheus  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
-(4) 自定义WEB通用漏洞扫描模板(Waf绕过/Waf测试)
-    4.1 不同于POC测试，自定义WEB通用漏洞扫描插件，会对指定位置的参数进行FUZZ,
-        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/custom_tmpl/tmpl/owasp
+        
+(4) 自定义FUZZ插件，对body、query中的参数进行模糊测试
+    4.1 不同于POC测试，自定义FUZZ插件，会对指定位置的参数进行FUZZ, 并支持自定义CEL表达式来验证是否存在漏洞
+        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/custom/tmpl/
+        插件样例
+        ---
+        name: "custom-sqli"
+        set:
+          r1: randomInt(800000000, 1000000000)
+        payload:
+          - extractvalue(1,concat(char(126),md5({{r1}})))
+        placeholder:
+          - query
+          - body
+          - header
+          - cookie
+        expression:  response.body.bcontains(bytes(substr(md5(string(r1)), 0, 31)))
+        ---
+        
+    4.2 您需要修改config.yaml文件中的以下内容，以指定custom的路径。
+          custom:
+            enabled: true
+            depth: 0
+            auto_load_tmpl: false
+            include_tmpl:
+                - /wscan/core/plugins/custom/tmpl/*.yml
+            exclude_tmpl: []
+    4.3 通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
+        ./wscan --log-level=debug ws --plug=custom --url http://testphp.vulnweb.com/listproducts.php?artist=1  --html-output=wscan_scan_result.html
+(5) Waf绕过/Waf测试
+    5.1 不同于POC测试，自定义WEB通用漏洞扫描插件，会对指定位置的参数进行FUZZ,
+        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/waftest/tmpl/owasp
         插件样例
         ---
         payload:
@@ -58,24 +87,26 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
           - JSONRequest
         type: "RCE"
         ...
-    4.2 您需要修改config.yaml文件中的以下内容，以指定include_tmpl的路径。
-        enabled: true
-        depth: 0
-        auto_load_tmpl: false 
-        include_tmpl:
-          - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
-        exclude_tmpl: [ ]
-        block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403
-          - 403
-        pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
-          - 200
-          - 404
-        block_regex: "" # 被WAF阻止网页的正则表达式
-        pass_regex: "" # 未被WAF阻止网页的正则表达式
-        non_blocked_as_passed: false
-    4.3 通过命令行启用--plug=custom_tmpl，即可对目标网站进行自定义Payload测试。
+        
+    5.2 您需要修改config.yaml文件中的以下内容，以指定include_tmpl的路径。
+        waftest:
+            enabled: true
+            depth: 0
+            auto_load_tmpl: false 
+            include_tmpl:
+              - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
+            exclude_tmpl: [ ]
+            block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403
+              - 403
+            pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
+              - 200
+              - 404
+            block_regex: "" # 被WAF阻止网页的正则表达式
+            pass_regex: "" # 未被WAF阻止网页的正则表达式
+            non_blocked_as_passed: false
+    5.3 通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
         ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
-(5) 独立部署反连模块
+(6) 独立部署反连模块
 ./wscan  reverse
 ```
 # 项目进展
@@ -96,7 +127,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 * 2024.01.15 发布v1.0.14 二进制版，支持thinkphp系列漏洞批量检测
 * 2024.01.18 发布v1.0.15 二进制版，支持PHP、JSP、ASP、ASPX任意文件上传检测、被动扫描支持智能请求过滤
 * 2024.01.21 发布v1.0.16 二进制版，支持Nuclei Yaml POC插件、Shiro 框架识别与默认key破解插件
-* 2024-03-08 发布v1.0.17 二进制版，优化了页面相似度分析算法，解决了Boolean SQL注入误报问题
+* 2024.03.08 发布v1.0.17 二进制版，优化了页面相似度分析算法，解决了Boolean SQL注入误报问题
+* 2024.03.09 发布v1.0.18 二进制版，支持自定义FUZZ插件，对body、query中的参数进行模糊测试
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

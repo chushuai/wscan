@@ -3,7 +3,7 @@
 3 * @Date: 12/9/23
 4 */
 
-package custom_tmpl
+package waftest
 
 import (
 	"github.com/thoas/go-funk"

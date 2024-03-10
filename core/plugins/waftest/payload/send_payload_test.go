@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"testing"
-	"wscan/core/plugins/custom_tmpl/payload/encoder"
-	"wscan/core/plugins/custom_tmpl/payload/placeholder"
+	"wscan/core/plugins/waftest/payload/encoder"
+	"wscan/core/plugins/waftest/payload/placeholder"
 )
 
 func TestSendPayload(t *testing.T) {

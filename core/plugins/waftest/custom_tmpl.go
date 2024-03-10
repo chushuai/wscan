@@ -3,7 +3,7 @@
 3 * @Date: 12/9/23
 4 */
 
-package custom_tmpl
+package waftest
 
 import (
 	"context"
@@ -73,7 +73,7 @@ func (*CustomTmpl) Close() error {
 }
 
 func (*CustomTmpl) DefaultConfig() base.PluginConfigInterface {
-	return &Config{PluginBaseConfig: base.PluginBaseConfig{Name: "custom_tmpl", Enabled: true}, Depth: 0, PassStatusCodes: []int{
+	return &Config{PluginBaseConfig: base.PluginBaseConfig{Name: "waftest", Enabled: true}, Depth: 0, PassStatusCodes: []int{
 		200, 404,
 	}, BlockStatusCodes: []int{403}}
 }

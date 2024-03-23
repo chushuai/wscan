@@ -46,7 +46,9 @@ func (p *Xstream) Fingers() []*base.Finger {
 	fingers = append(fingers, (&CVE_2020_26259{}).Finger())
 	fingers = append(fingers, (&CVE_2020_26217{}).Finger())
 	fingers = append(fingers, (&CVE_2013_7285{}).Finger())
-
+	fingers = append(fingers, (&CVE_2021_21351{}).Finger())
+	fingers = append(fingers, (&CVE_2020_26258{}).Finger())
+	fingers = append(fingers, (&CVE_2021_39152{}).Finger())
 	return fingers
 }
 

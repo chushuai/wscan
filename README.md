@@ -128,7 +128,8 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 * 2024.01.18 发布v1.0.15 二进制版，支持PHP、JSP、ASP、ASPX任意文件上传检测、被动扫描支持智能请求过滤
 * 2024.01.21 发布v1.0.16 二进制版，支持Nuclei Yaml POC插件、Shiro 框架识别与默认key破解插件
 * 2024.03.08 发布v1.0.17 二进制版，优化了页面相似度分析算法，解决了Boolean SQL注入误报问题
-* 2024.03.09 发布v1.0.18 二进制版，支持自定义FUZZ插件，对body、query中的参数进行模糊测试
+* 2024.03.10 发布v1.0.18 二进制版，支持自定义FUZZ插件，对body、query中的参数进行模糊测试
+* 2024.03.25 发布v1.0.18 二进制版，新增xstream系列漏洞检测插件
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。
@@ -166,12 +167,13 @@ XSS 检测 https://github.com/hahwul/dalfox
 网站技术  https://github.com/chushuai/wappalyzer   
 JavaScript https://github.com/dop251/goja    
 反连平台 https://github.com/lanyi1998/DNSlog-GO   
-反连平台 https://github.com/chennqqi/godnslog    
+反连平台 https://github.com/chennqqi/godnslog  
 子域名爆破 https://github.com/projectdiscovery/subfinder/  
 WEB漏洞扫描器 https://www.zaproxy.org/  
 WEB漏洞扫描器 https://github.com/andresriancho/w3af  
 WEB漏洞扫描器 https://github.com/w-digital-scanner/w13scan  
-WEB漏洞扫描器 https://github.com/Arachni/arachni
+WEB漏洞扫描器 https://github.com/Arachni/arachni  
+WEB漏洞扫描器 https://github.com/yaklang/yaklang  
 # 参考文章
 推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
 HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  

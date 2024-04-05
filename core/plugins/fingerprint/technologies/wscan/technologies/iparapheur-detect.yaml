@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>iparapheur</title>") and response.body.bcontains(b"Libriciel SCOP") and response.status == 200
+        - ( response.body.bcontains(b"<title>iparapheur</title>") && response.body.bcontains(b"Libriciel SCOP") ) && response.status == 200

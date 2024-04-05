@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Splash") and response.body.bcontains(b"splash.loadExample") and response.status == 200
+        - ( response.body.bcontains(b"<title>Splash") && response.body.bcontains(b"splash.loadExample") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Ticket BBCode editor - SCEditor</title>") and response.body.bcontains(b"title="SCEditor"") and response.status == 200
+        - ( response.body.bcontains(b"<title>Ticket BBCode editor - SCEditor</title>") && response.body.bcontains(b"title=\"SCEditor\"") ) && response.status == 200

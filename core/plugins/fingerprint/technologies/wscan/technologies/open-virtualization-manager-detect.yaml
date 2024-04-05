@@ -6,4 +6,4 @@ pscan:
     path:
         - /ovirt-engine/
     expressions:
-        - response.body.bcontains(b"Welcome to Open Virtualization Manager") or response.body.bcontains(b"<title>Ovirt-Engine</title>") or response.body.bcontains(b"<title>oVirt Engine</title>") or response.body.bcontains(b"<title>oVirt Engine Error</title>")
+        - ( response.body.bcontains(b"Welcome to Open Virtualization Manager") || response.body.bcontains(b"<title>Ovirt-Engine</title>") || response.body.bcontains(b"<title>oVirt Engine</title>") || response.body.bcontains(b"<title>oVirt Engine Error</title>") )

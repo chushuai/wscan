@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Operations Automation Default Page</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Operations Automation Default Page</title>") && response.status == 200

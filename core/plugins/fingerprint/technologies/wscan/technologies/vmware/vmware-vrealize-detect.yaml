@@ -6,4 +6,4 @@ pscan:
     path:
         - /ui/login.action
     expressions:
-        - response.status == 200 and response.raw_header.bcontains(b"text/html") and response.body.bcontains(b"<title>vRealize Operations Manager</title>")
+        - response.status == 200 && response.raw_header.bcontains(b"text/html") && response.body.bcontains(b"<title>vRealize Operations Manager</title>")

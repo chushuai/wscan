@@ -6,4 +6,4 @@ pscan:
     path:
         - /index.php
     expressions:
-        - response.body.bcontains(b"<html id="XenForo"") or response.body.bcontains(b"<html id="XF"") and response.status == 200
+        - ( response.body.bcontains(b"<html id=\"XenForo\"") || response.body.bcontains(b"<html id=\"XF\"") ) && response.status == 200

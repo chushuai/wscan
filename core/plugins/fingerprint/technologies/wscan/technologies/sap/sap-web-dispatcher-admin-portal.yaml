@@ -6,4 +6,4 @@ pscan:
     path:
         - /sap/wdisp/admin/public/default.html
     expressions:
-        - response.raw_header.bcontains(b"Basic realm="WEB ADMIN"") or response.raw_header.bcontains(b"SAP NetWeaver Application Server") and response.status == 401 or response.status == 200 and response.body.bcontains(b"SAP Web Dispatcher") or response.body.bcontains(b"<title>Administration</title>")
+        - ( response.raw_header.bcontains(b"Basic realm=\"WEB ADMIN\"") || response.raw_header.bcontains(b"SAP NetWeaver Application Server") ) && ( response.status == 401 || response.status == 200 ) && ( response.body.bcontains(b"SAP Web Dispatcher") || response.body.bcontains(b"<title>Administration</title>") )

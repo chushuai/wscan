@@ -6,4 +6,4 @@ pscan:
     path:
         - /jolokia/version
     expressions:
-        - response.body.bcontains(b""timestamp":") and response.body.bcontains(b""protocol":") and response.body.bcontains(b""agent":") and response.status == 200
+        - ( response.body.bcontains(b"\"timestamp\":") && response.body.bcontains(b"\"protocol\":") && response.body.bcontains(b"\"agent\":") ) && response.status == 200

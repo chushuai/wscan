@@ -6,4 +6,4 @@ pscan:
     path:
         - /api/v1/namespaces/default/services
     expressions:
-        - response.status == 200 and response.body.bcontains(b""ServiceList":") and response.body.bcontains(b""items":")
+        - response.status == 200 && ( response.body.bcontains(b"\"ServiceList\":") && response.body.bcontains(b"\"items\":") )

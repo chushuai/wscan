@@ -6,4 +6,4 @@ pscan:
     path:
         - /cobbler_api
     expressions:
-        - response.status == 200 and response.body.bcontains(b"<name>version</name>")
+        - response.status == 200 && response.body.bcontains(b"<name>version</name>")

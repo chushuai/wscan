@@ -9,4 +9,4 @@ pscan:
         - /nextcloud/login
         - /nextcloud/index.php/login
     expressions:
-        - response.body.bcontains(b"var nc_lastLogin") and response.body.bcontains(b"var nc_pageLoad") and response.status == 200
+        - ( response.body.bcontains(b"var nc_lastLogin") && response.body.bcontains(b"var nc_pageLoad") ) && response.status == 200

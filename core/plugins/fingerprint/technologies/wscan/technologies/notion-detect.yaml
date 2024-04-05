@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Notion – One workspace. Every team.") or response.body.bcontains(b"Notion Labs, Inc.") and response.status == 200
+        - ( response.body.bcontains(b"Notion – One workspace. Every team.") || response.body.bcontains(b"Notion Labs, Inc.") ) && response.status == 200

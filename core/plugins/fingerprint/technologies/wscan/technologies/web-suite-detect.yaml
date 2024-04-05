@@ -8,4 +8,4 @@ pscan:
         - /ws2020/
         - /ws2021/
     expressions:
-        - response.body.bcontains(b"www.bqe.com">BQE Software Inc.</a>") and response.body.bcontains(b"Web Suite") and response.status == 200
+        - ( response.body.bcontains(b"www.bqe.com\">BQE Software Inc.</a>") && response.body.bcontains(b"Web Suite") ) && response.status == 200

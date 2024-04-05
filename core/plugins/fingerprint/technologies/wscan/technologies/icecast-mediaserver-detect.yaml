@@ -6,4 +6,4 @@ pscan:
     path:
         - /server_version.xsl
     expressions:
-        - response.body.bcontains(b"Icecast Streaming Media Server") and response.status == 200
+        - response.body.bcontains(b"Icecast Streaming Media Server") && response.status == 200

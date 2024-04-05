@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>GraphiQL") and response.status == 200
+        - response.body.bcontains(b"<title>GraphiQL") && response.status == 200

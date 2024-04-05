@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"content=".*CVSweb.*"".bmatches(response.body) and response.status == 200'
+        - '"content=".*CVSweb.*"".bmatches(response.body) && response.status == 200'

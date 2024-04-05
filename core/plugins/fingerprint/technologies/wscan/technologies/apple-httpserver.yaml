@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"X-Apple-Jingle-Correlation-Key") or response.raw_header.bcontains(b"AppleHttpServer") or response.raw_header.bcontains(b"X-Apple-Request-UUID")
+        - ( response.raw_header.bcontains(b"X-Apple-Jingle-Correlation-Key") || response.raw_header.bcontains(b"AppleHttpServer") || response.raw_header.bcontains(b"X-Apple-Request-UUID") )

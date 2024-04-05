@@ -6,4 +6,4 @@ pscan:
     path:
         - /index.dhtml
     expressions:
-        - response.body.bcontains(b"XEROX WORKCENTRE") and response.body.bcontains(b"/header.php?tab=status") and response.status == 200
+        - ( response.body.bcontains(b"XEROX WORKCENTRE") && response.body.bcontains(b"/header.php?tab=status") ) && response.status == 200

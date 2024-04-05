@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"<title>(.*)AVideo(.*)</title>".bmatches(response.body) or "AVideo Analytics".bmatches(response.body) and response.raw_header.bcontains(b"/install/index.php") and response.status == 200'
+        - ( "<title>(.*)AVideo(.*)</title>".bmatches(response.body) || "AVideo Analytics".bmatches(response.body) ) && response.raw_header.bcontains(b"/install/index.php") && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Powered by lighttpd</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Powered by lighttpd</title>") && response.status == 200

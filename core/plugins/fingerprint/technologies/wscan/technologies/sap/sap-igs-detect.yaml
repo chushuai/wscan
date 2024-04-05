@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"SAP IGS") and response.body.bcontains(b"is running") and response.status == 200 and response.raw_header.bcontains(b"SAP Internet Graphics Server")
+        - ( response.body.bcontains(b"SAP IGS") && response.body.bcontains(b"is running") ) && response.status == 200 && response.raw_header.bcontains(b"SAP Internet Graphics Server")

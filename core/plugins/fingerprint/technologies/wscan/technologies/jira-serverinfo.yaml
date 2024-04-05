@@ -6,4 +6,4 @@ pscan:
     path:
         - /rest/api/latest/serverInfo
     expressions:
-        - response.body.bcontains(b""baseUrl"") and response.body.bcontains(b""deploymentType"") and response.status == 200
+        - ( response.body.bcontains(b"\"baseUrl\"") && response.body.bcontains(b"\"deploymentType\"") ) && response.status == 200

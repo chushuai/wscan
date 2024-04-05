@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.status == 200
+        - '"<h1>AutobahnPython([ 0-9.]+)<\\/h1>".bmatches(response.body) && response.status == 200'

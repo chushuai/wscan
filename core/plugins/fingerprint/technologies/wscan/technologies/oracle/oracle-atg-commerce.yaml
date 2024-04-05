@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"x-atg-version") or response.raw_header.bcontains(b"atg_session_id") and response.status == 200
+        - ( response.raw_header.bcontains(b"x-atg-version") || response.raw_header.bcontains(b"atg_session_id") ) && response.status == 200

@@ -10,4 +10,4 @@ pscan:
         - /web/index.html
         - /web/manifest.json
     expressions:
-        - response.body.bcontains(b"name="application-name" content="Jellyfin"") or response.body.bcontains(b"class="page homePage libraryPage allLibraryPage backdropPage pageWithAbsoluteTabs withTabs"") or response.body.bcontains(b"The Free Software Media System") and response.status == 200
+        - ( response.body.bcontains(b"name=\"application-name\" content=\"Jellyfin\"") || response.body.bcontains(b"class=\"page homePage libraryPage allLibraryPage backdropPage pageWithAbsoluteTabs withTabs\"") || response.body.bcontains(b"The Free Software Media System") ) && response.status == 200

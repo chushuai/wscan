@@ -7,4 +7,4 @@ pscan:
         - /.well-known/matrix/server
         - /.well-known/matrix/client
     expressions:
-        - response.raw_header.bcontains(b"text/html") and response.status == 200
+        - '""m\\.([a-z]+)":".bmatches(response.body) && response.raw_header.bcontains(b"text/html") && response.status == 200'

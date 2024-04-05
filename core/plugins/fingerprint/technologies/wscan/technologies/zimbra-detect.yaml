@@ -6,4 +6,4 @@ pscan:
     path:
         - /js/zimbraMail/share/model/ZmSettings.js
     expressions:
-        - response.body.bcontains(b"Zimbra Collaboration Suite Web Client") and response.raw_header.bcontains(b"application/x-javascript")
+        - response.body.bcontains(b"Zimbra Collaboration Suite Web Client") && response.raw_header.bcontains(b"application/x-javascript")

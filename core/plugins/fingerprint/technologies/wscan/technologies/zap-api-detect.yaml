@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.body.bcontains(b"<title>ZAP API UI</title>") or response.body.bcontains(b"Welcome to the OWASP Zed Attack Proxy (ZAP)") or response.body.bcontains(b"Access-Control-Allow-Headers: ZAP-Header")'
+        - '( response.body.bcontains(b"<title>ZAP API UI</title>") || response.body.bcontains(b"Welcome to the OWASP Zed Attack Proxy (ZAP)") || response.body.bcontains(b"Access-Control-Allow-Headers: ZAP-Header") )'

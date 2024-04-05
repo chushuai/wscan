@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"piwigo.org">Piwigo</a>") or response.body.bcontains(b"Piwigo (aka PWG), see piwigo.org") and response.status == 200
+        - ( response.body.bcontains(b"piwigo.org\">Piwigo</a>") || response.body.bcontains(b"Piwigo (aka PWG), see piwigo.org") ) && response.status == 200

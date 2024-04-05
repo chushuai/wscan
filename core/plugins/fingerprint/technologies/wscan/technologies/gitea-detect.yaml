@@ -7,4 +7,4 @@ pscan:
         - /
         - /user/login
     expressions:
-        - response.body.bcontains(b"Powered by Gitea") and response.status == 200
+        - response.body.bcontains(b"Powered by Gitea") && response.status == 200

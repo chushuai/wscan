@@ -7,4 +7,4 @@ pscan:
         - /
     expressions:
         - response.raw_header.bcontains(b"rx_sesskey1")
-        - response.body.bcontains(b"<meta name="generator" content="Rhymix" />")
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"Rhymix\" />")

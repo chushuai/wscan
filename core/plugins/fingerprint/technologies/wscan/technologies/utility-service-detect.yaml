@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Utility Services Administration</title>") or response.body.bcontains(b">Utility-Services") and response.status == 200
+        - ( response.body.bcontains(b"<title>Utility Services Administration</title>") || response.body.bcontains(b">Utility-Services") ) && response.status == 200

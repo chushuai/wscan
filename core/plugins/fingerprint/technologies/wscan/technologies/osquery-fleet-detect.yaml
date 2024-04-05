@@ -6,4 +6,4 @@ pscan:
     path:
         - /login
     expressions:
-        - response.body.bcontains(b"Fleet") and response.body.bcontains(b"osquery") and response.body.bcontains(b"/assets/bundle") and response.status == 200
+        - ( response.body.bcontains(b"Fleet") && response.body.bcontains(b"osquery") && response.body.bcontains(b"/assets/bundle") ) && response.status == 200

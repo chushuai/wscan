@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"Basic realm="dubbo"")
+        - response.raw_header.bcontains(b"Basic realm=\"dubbo\"")

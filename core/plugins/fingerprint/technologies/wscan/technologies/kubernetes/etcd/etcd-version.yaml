@@ -6,4 +6,4 @@ pscan:
     path:
         - /version
     expressions:
-        - response.body.bcontains(b""etcdserver"") and response.body.bcontains(b""etcdcluster"") and response.raw_header.bcontains(b"application/json") and response.status == 200
+        - ( response.body.bcontains(b"\"etcdserver\"") && response.body.bcontains(b"\"etcdcluster\"") ) && response.raw_header.bcontains(b"application/json") && response.status == 200

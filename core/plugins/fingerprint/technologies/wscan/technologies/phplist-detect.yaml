@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"content="phpList") or response.body.bcontains(b"phpList Ltd") or response.body.bcontains(b"phpList</a>")
+        - ( response.body.bcontains(b"content=\"phpList") || response.body.bcontains(b"phpList Ltd") || response.body.bcontains(b"phpList</a>") )

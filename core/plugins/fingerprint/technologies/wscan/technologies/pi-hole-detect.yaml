@@ -10,5 +10,5 @@ pscan:
         - /admin/index.php?login
         - /index.php?login
     expressions:
-        - response.body.bcontains(b"Pi-hole") and response.body.bcontains(b"Web Interface") and response.body.bcontains(b"FTL")
-        - 'response.body.bcontains(b"<title>Pi-hole") or response.body.bcontains(b"Pi-hole: Your black hole for Internet advertisements") or response.body.bcontains(b"Pi-hole: A black hole for Internet advertisements") or response.body.bcontains(b"<pre>sudo pihole -a -p</pre>")'
+        - ( response.body.bcontains(b"Pi-hole") && response.body.bcontains(b"Web Interface") && response.body.bcontains(b"FTL") )
+        - '( response.body.bcontains(b"<title>Pi-hole") || response.body.bcontains(b"Pi-hole: Your black hole for Internet advertisements") || response.body.bcontains(b"Pi-hole: A black hole for Internet advertisements") || response.body.bcontains(b"<pre>sudo pihole -a -p</pre>") )'

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Node-RED</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Node-RED</title>") && response.status == 200

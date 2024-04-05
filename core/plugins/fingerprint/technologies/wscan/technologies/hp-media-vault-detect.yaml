@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>HP Media Vault") and response.status == 200
+        - response.body.bcontains(b"<title>HP Media Vault") && response.status == 200

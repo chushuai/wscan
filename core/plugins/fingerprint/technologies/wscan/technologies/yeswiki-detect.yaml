@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"yeswiki-search") or response.body.bcontains(b"yeswiki-base") and response.status == 200
+        - ( response.body.bcontains(b"yeswiki-search") || response.body.bcontains(b"yeswiki-base") ) && response.status == 200

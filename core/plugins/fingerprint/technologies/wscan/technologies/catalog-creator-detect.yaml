@@ -7,4 +7,4 @@ pscan:
         - /
         - /index.php
     expressions:
-        - response.body.bcontains(b"Powered by CATALOGcreator") or response.body.bcontains(b"content="CATALOGcreator") and response.status == 200
+        - ( response.body.bcontains(b"Powered by CATALOGcreator") || response.body.bcontains(b"content=\"CATALOGcreator") ) && response.status == 200

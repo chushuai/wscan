@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Express</title>") and response.body.bcontains(b"Welcome to Express") and response.raw_header.bcontains(b"text/html") and response.status == 200
+        - ( response.body.bcontains(b"<title>Express</title>") && response.body.bcontains(b"Welcome to Express") ) && response.raw_header.bcontains(b"text/html") && response.status == 200

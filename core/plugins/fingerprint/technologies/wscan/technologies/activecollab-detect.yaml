@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"http://www.activecollab.com") or response.body.bcontains(b"<form method="post" id="system_form_2" class="uniForm focusFirstField">") and response.status == 200
+        - ( response.body.bcontains(b"http://www.activecollab.com") || response.body.bcontains(b"<form method=\"post\" id=\"system_form_2\" class=\"uniForm focusFirstField\">") ) && response.status == 200

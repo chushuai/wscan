@@ -6,4 +6,4 @@ pscan:
     path:
         - /{{randstr}}
     expressions:
-        - response.body.bcontains(b"Airflow 404 = lots of circles") and response.status == 404
+        - response.body.bcontains(b"Airflow 404 = lots of circles") && response.status == 404

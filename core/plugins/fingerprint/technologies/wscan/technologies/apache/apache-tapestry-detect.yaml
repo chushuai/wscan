@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"content="Apache Tapestry Framework") or response.body.bcontains(b"content="Tapestry Application Framework")
+        - ( response.body.bcontains(b"content=\"Apache Tapestry Framework") || response.body.bcontains(b"content=\"Tapestry Application Framework") )

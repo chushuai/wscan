@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"IIS") and response.status == 200
+        - response.raw_header.bcontains(b"IIS") && response.status == 200

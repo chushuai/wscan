@@ -6,4 +6,4 @@ pscan:
     path:
         - /version
     expressions:
-        - response.status == 200 and response.body.bcontains(b""major":") and response.body.bcontains(b""minor":") and response.body.bcontains(b""goVersion":")
+        - response.status == 200 && ( response.body.bcontains(b"\"major\":") && response.body.bcontains(b"\"minor\":") && response.body.bcontains(b"\"goVersion\":") )

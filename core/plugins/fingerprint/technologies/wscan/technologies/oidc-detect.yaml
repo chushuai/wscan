@@ -6,4 +6,4 @@ pscan:
     path:
         - /.well-known/openid-configuration
     expressions:
-        - response.status == 200 and response.body.bcontains(b"issuer") and response.body.bcontains(b"authorization_endpoint")
+        - response.status == 200 && ( response.body.bcontains(b"issuer") && response.body.bcontains(b"authorization_endpoint") )

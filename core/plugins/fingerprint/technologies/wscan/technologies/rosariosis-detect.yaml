@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"RosarioSIS=") and response.status == 200
+        - response.raw_header.bcontains(b"RosarioSIS=") && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Hetzner Cloud") and response.body.bcontains(b"Hetzner Logo") and response.status == 200
+        - ( response.body.bcontains(b"Hetzner Cloud") && response.body.bcontains(b"Hetzner Logo") ) && response.status == 200

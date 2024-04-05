@@ -7,4 +7,4 @@ pscan:
         - /js/elfinder.min.js
         - /js/elFinder.version.js
     expressions:
-        - response.body.bcontains(b"elFinder - file manager for web") or response.body.bcontains(b"elFinder.prototype.version =") and response.status == 200
+        - ( response.body.bcontains(b"elFinder - file manager for web") || response.body.bcontains(b"elFinder.prototype.version =") ) && response.status == 200

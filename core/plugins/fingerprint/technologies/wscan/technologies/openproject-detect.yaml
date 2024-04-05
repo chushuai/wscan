@@ -8,5 +8,6 @@ pscan:
         - /api/v3
         - /activity.atom
     expressions:
-        - response.body.bcontains(b"OpenProject") and response.body.bcontains(b"instanceName")
+        - ( ".*OpenProject.Foundation.\\(OPF\\)".bmatches(response.body) || "<generator uri=.*openproject.org.*>".bmatches(response.body) )
+        - ( response.body.bcontains(b"OpenProject") && response.body.bcontains(b"instanceName") )
         - response.raw_header.bcontains(b"_open_project_session")

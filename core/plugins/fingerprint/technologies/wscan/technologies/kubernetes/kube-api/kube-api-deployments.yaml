@@ -6,4 +6,4 @@ pscan:
     path:
         - /apis/apps/v1/namespaces/default/deployments
     expressions:
-        - response.status == 200 and response.body.bcontains(b""DeploymentList":") and response.body.bcontains(b""items":")
+        - response.status == 200 && ( response.body.bcontains(b"\"DeploymentList\":") && response.body.bcontains(b"\"items\":") )

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Powered by <b>Nimsoft WASP ") or response.body.bcontains(b"<title>WASP</title>") and response.status == 200
+        - ( response.body.bcontains(b"Powered by <b>Nimsoft WASP ") || response.body.bcontains(b"<title>WASP</title>") ) && response.status == 200

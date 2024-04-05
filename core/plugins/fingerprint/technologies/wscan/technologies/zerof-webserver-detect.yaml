@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>ZEROF Web Server</title>") and response.status == 200
+        - response.body.bcontains(b"<title>ZEROF Web Server</title>") && response.status == 200

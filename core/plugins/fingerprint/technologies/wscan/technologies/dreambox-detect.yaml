@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.status == 200 and response.body.bcontains(b"<title>Dreambox WebControl</title>")
+        - response.status == 200 && response.body.bcontains(b"<title>Dreambox WebControl</title>")

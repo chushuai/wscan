@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"yimioa.apk") and response.body.bcontains(b"isSavePwd:") and response.status == 200
+        - ( response.body.bcontains(b"yimioa.apk") && response.body.bcontains(b"isSavePwd:") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /ui/vault/auth
     expressions:
-        - response.body.bcontains(b"<meta name="vault/config/environment"")
+        - response.body.bcontains(b"<meta name=\"vault/config/environment\"")

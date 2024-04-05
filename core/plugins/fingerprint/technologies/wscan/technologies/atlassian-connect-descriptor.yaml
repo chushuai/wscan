@@ -6,4 +6,4 @@ pscan:
     path:
         - /atlassian-connect.json
     expressions:
-        - response.body.bcontains(b""name":") and response.body.bcontains(b""vendor":") and response.body.bcontains(b""key":") and response.body.bcontains(b""baseUrl":") and response.body.bcontains(b""authentication":") and response.raw_header.bcontains(b"application/json") and response.status == 200
+        - ( response.body.bcontains(b"\"name\":") && response.body.bcontains(b"\"vendor\":") && response.body.bcontains(b"\"key\":") && response.body.bcontains(b"\"baseUrl\":") && response.body.bcontains(b"\"authentication\":") ) && response.raw_header.bcontains(b"application/json") && response.status == 200

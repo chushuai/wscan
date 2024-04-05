@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"PHP-Fusion") and response.status == 200
+        - response.body.bcontains(b"PHP-Fusion") && response.status == 200

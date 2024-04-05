@@ -7,4 +7,4 @@ pscan:
         - /
         - /user
     expressions:
-        - response.body.bcontains(b"Homepage | Gila CMS") or response.body.bcontains(b"<meta name="generator" content="Gila CMS">") and response.status == 200
+        - ( response.body.bcontains(b"Homepage | Gila CMS") || response.body.bcontains(b"<meta name=\"generator\" content=\"Gila CMS\">") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /_framework/blazor.boot.json
     expressions:
-        - response.body.bcontains(b"dotnet.wasm") and response.body.bcontains(b""entryAssembly"") and response.body.bcontains(b""Microsoft.JSInterop.WebAssembly.dll"") and response.status == 200
+        - ( response.body.bcontains(b"dotnet.wasm") && response.body.bcontains(b"\"entryAssembly\"") && response.body.bcontains(b"\"Microsoft.JSInterop.WebAssembly.dll\"") ) && response.status == 200

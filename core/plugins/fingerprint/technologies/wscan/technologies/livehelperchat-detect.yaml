@@ -9,3 +9,4 @@ pscan:
         - /doc/README.txt
     expressions:
         - '"(?i)Live.Helper.Chat".bmatches(response.body)'
+        - '"(?i)Copyright.\\(c\\).2019.Remigijus.Kiminas".bmatches(response.body)'

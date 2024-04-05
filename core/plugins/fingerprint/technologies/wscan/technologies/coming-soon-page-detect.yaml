@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Coming Soon") and response.body.bcontains(b"Future home of something quite cool.") and response.raw_header.bcontains(b"text/html") and response.status == 200
+        - ( response.body.bcontains(b"Coming Soon") && response.body.bcontains(b"Future home of something quite cool.") ) && response.raw_header.bcontains(b"text/html") && response.status == 200

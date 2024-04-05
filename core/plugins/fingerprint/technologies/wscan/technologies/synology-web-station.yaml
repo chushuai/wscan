@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Hello! Welcome to Synology Web Station!</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Hello! Welcome to Synology Web Station!</title>") && response.status == 200

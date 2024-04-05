@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html">AWS Elastic Beanstalk overview</a></li>") or response.body.bcontains(b"<li><a href="http://docs.amazonwebservices.com/elasticbeanstalk/latest/dg/">AWS Elastic Beanstalk overview</a></li>") and response.status == 200
+        - ( response.body.bcontains(b"<li><a href=\"http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html\">AWS Elastic Beanstalk overview</a></li>") || response.body.bcontains(b"<li><a href=\"http://docs.amazonwebservices.com/elasticbeanstalk/latest/dg/\">AWS Elastic Beanstalk overview</a></li>") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /&?=?
     expressions:
-        - 'response.raw_header.bcontains(b"Server: Versa") and response.raw_header.bcontains(b"FlexVNF") and response.status == 200'
+        - '( response.raw_header.bcontains(b"Server: Versa") && response.raw_header.bcontains(b"FlexVNF") ) && response.status == 200'

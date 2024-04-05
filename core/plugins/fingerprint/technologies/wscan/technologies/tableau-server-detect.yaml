@@ -6,5 +6,5 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.raw_header.bcontains(b"X-Tableau: Tableau Server") or response.raw_header.bcontains(b"Server: Tableau")'
-        - response.body.bcontains(b"VizPortalRun") or response.body.bcontains(b"vizportal")
+        - '( response.raw_header.bcontains(b"X-Tableau: Tableau Server") || response.raw_header.bcontains(b"Server: Tableau") )'
+        - ( response.body.bcontains(b"VizPortalRun") || response.body.bcontains(b"vizportal") )

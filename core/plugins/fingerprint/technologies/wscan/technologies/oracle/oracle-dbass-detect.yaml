@@ -6,4 +6,4 @@ pscan:
     path:
         - /dbaas_monitor/login
     expressions:
-        - response.body.bcontains(b"<title>DBaaS Monitor</title>") and response.status == 200
+        - response.body.bcontains(b"<title>DBaaS Monitor</title>") && response.status == 200

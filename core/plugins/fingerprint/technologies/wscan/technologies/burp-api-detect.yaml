@@ -6,4 +6,4 @@ pscan:
     path:
         - /v0.1/
     expressions:
-        - response.body.bcontains(b"<title>Burp API</title>") and response.raw_header.bcontains(b"X-Burp-Version") and response.status == 200
+        - response.body.bcontains(b"<title>Burp API</title>") && response.raw_header.bcontains(b"X-Burp-Version") && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome to ntop") and response.status == 200
+        - response.body.bcontains(b"Welcome to ntop") && response.status == 200

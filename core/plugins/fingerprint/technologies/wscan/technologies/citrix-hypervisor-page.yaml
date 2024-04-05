@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome to Citrix Hypervisor") and response.body.bcontains(b"XenCenter") and response.status == 200
+        - ( response.body.bcontains(b"Welcome to Citrix Hypervisor") && response.body.bcontains(b"XenCenter") ) && response.status == 200

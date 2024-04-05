@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome to CakePHP") and response.body.bcontains(b"CakePHP Issues") and response.status == 200
+        - ( response.body.bcontains(b"Welcome to CakePHP") && response.body.bcontains(b"CakePHP Issues") ) && response.status == 200

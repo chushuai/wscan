@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"Apache+".bmatches(response.raw_header) and response.status == 200'
+        - '"Apache+".bmatches(response.raw_header) && response.status == 200'

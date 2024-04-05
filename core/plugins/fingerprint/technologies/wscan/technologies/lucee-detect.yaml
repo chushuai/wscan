@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"(?i)X-Lucee-Version".bmatches(response.raw_header) or "(?i)X-CB-Server: LUCEE".bmatches(response.raw_header) or "(?i)X-IDG-Appserver: Lucee".bmatches(response.raw_header) and response.status == 200'
+        - '( "(?i)X-Lucee-Version".bmatches(response.raw_header) || "(?i)X-CB-Server: LUCEE".bmatches(response.raw_header) || "(?i)X-IDG-Appserver: Lucee".bmatches(response.raw_header) ) && response.status == 200'

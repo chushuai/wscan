@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"REDCap") and response.body.bcontains(b"Vanderbilt University") and response.status == 200
+        - ( response.body.bcontains(b"REDCap") && response.body.bcontains(b"Vanderbilt University") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Debug Config</title>") and response.body.bcontains(b"MultiScreen Service") and response.status == 200
+        - ( response.body.bcontains(b"<title>Debug Config</title>") && response.body.bcontains(b"MultiScreen Service") ) && response.status == 200

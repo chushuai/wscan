@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome to Docmosis Tornado") and response.body.bcontains(b"Please log in:") and response.status == 200
+        - ( response.body.bcontains(b"Welcome to Docmosis Tornado") && response.body.bcontains(b"Please log in:") ) && response.status == 200

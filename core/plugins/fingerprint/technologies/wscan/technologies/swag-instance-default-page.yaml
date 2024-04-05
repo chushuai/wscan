@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Welcome to your SWAG instance</title>") and response.raw_header.bcontains(b"text/html") and response.status == 200
+        - response.body.bcontains(b"<title>Welcome to your SWAG instance</title>") && response.raw_header.bcontains(b"text/html") && response.status == 200

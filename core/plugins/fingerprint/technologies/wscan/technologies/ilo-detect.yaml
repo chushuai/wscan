@@ -6,4 +6,4 @@ pscan:
     path:
         - /xmldata?item=all
     expressions:
-        - response.status == 200 and response.raw_header.bcontains(b"text/xml") and response.body.bcontains(b"<RIMP>") and response.body.bcontains(b"<HSI>")
+        - response.status == 200 && response.raw_header.bcontains(b"text/xml") && ( response.body.bcontains(b"<RIMP>") && response.body.bcontains(b"<HSI>") )

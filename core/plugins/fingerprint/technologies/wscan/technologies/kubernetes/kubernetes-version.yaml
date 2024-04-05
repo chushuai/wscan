@@ -6,4 +6,4 @@ pscan:
     path:
         - /version
     expressions:
-        - response.body.bcontains(b"gitVersion") and response.body.bcontains(b"goVersion") and response.body.bcontains(b"platform")
+        - ( response.body.bcontains(b"gitVersion") && response.body.bcontains(b"goVersion") && response.body.bcontains(b"platform") )

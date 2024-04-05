@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"Magento\/([0-9.]+) ".bmatches(response.body)'
+        - '"Magento\\/([0-9.]+) ".bmatches(response.body)'

@@ -7,4 +7,4 @@ pscan:
         - /
     expressions:
         - 'response.raw_header.bcontains(b"Set-Cookie: grav-site-")'
-        - response.body.bcontains(b"<meta name="generator" content="GravCMS" />")
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"GravCMS\" />")

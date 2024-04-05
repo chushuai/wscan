@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Oracle iPlanet Web Server") and response.status == 200
+        - response.body.bcontains(b"Oracle iPlanet Web Server") && response.status == 200

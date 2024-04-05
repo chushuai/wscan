@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"汉王人脸考勤管理系统") and response.status == 200
+        - response.body.bcontains(b"汉王人脸考勤管理系统") && response.status == 200

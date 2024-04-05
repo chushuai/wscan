@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.raw_header.bcontains(b"server: kong") or response.raw_header.bcontains(b"x-kong-response-latency") or response.raw_header.bcontains(b"x-kong-upstream-latency") or response.raw_header.bcontains(b"x-kong-proxy-latency")'
+        - '( response.raw_header.bcontains(b"server: kong") || response.raw_header.bcontains(b"x-kong-response-latency") || response.raw_header.bcontains(b"x-kong-upstream-latency") || response.raw_header.bcontains(b"x-kong-proxy-latency") )'

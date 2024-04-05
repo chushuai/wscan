@@ -22,4 +22,4 @@ pscan:
         - /dashboard/UserControl/CMS/Page/Telerik.Web.UI.DialogHandler.aspx/Desktopmodules/Admin/dnnWerk.Users/DialogHandler.aspx?dp=1
         - /Telerik.Web.UI.DialogHandler.axd?dp=1
     expressions:
-        - response.status == 200 and response.body.bcontains(b"Invalid length for a Base-64 char array")
+        - response.status == 200 && response.body.bcontains(b"Invalid length for a Base-64 char array")

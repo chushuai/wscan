@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.status == 200
+        - '"^<title>Welcome to CodeIgniter\\s?(?:[0-9]!)?</title>$".bmatches(response.body) && response.status == 200'

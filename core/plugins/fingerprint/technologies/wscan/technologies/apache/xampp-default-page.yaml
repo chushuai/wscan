@@ -6,4 +6,4 @@ pscan:
     path:
         - /dashboard/
     expressions:
-        - response.body.bcontains(b"<title>Welcome to XAMPP</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Welcome to XAMPP</title>") && response.status == 200

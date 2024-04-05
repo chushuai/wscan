@@ -6,4 +6,4 @@ pscan:
     path:
         - /graphql
     expressions:
-        - 'response.raw_header.bcontains(b"Content-Type: application/json") and response.body.bcontains(b"GraphQL introspection is not allowed by Apollo Server") and response.status == 400'
+        - 'response.raw_header.bcontains(b"Content-Type: application/json") && response.body.bcontains(b"GraphQL introspection is not allowed by Apollo Server") && response.status == 400'

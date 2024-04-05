@@ -7,4 +7,4 @@ pscan:
         - /
         - /whoAmI/
     expressions:
-        - response.raw_header.bcontains(b"x-jenkins:") and response.body.bcontains(b"Jenkins")
+        - response.raw_header.bcontains(b"x-jenkins:") && response.body.bcontains(b"Jenkins")

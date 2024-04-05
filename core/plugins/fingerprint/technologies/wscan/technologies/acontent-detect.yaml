@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.body.bcontains(b"<title>AContent : Home</title>") or response.body.bcontains(b"AContent - Copyright 2010 by IDRC/IDI http://inclusivedesign.ca/") and response.status == 200'
+        - '( response.body.bcontains(b"<title>AContent : Home</title>") || response.body.bcontains(b"AContent - Copyright 2010 by IDRC/IDI http://inclusivedesign.ca/") ) && response.status == 200'

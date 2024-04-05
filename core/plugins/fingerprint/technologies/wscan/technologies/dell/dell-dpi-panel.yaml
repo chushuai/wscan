@@ -6,4 +6,4 @@ pscan:
     path:
         - /index2.html
     expressions:
-        - response.body.bcontains(b"title="DELL DPI Remote Power Management") or response.body.bcontains(b"<TITLE>DELL DPI Remote Power Management") and response.status == 200
+        - ( response.body.bcontains(b"title=\"DELL DPI Remote Power Management") || response.body.bcontains(b"<TITLE>DELL DPI Remote Power Management") ) && response.status == 200

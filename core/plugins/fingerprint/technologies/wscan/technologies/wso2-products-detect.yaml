@@ -6,4 +6,4 @@ pscan:
     path:
         - /services/Version
     expressions:
-        - response.body.bcontains(b"version.services.core.carbon.wso2.org") and response.status == 200
+        - response.body.bcontains(b"version.services.core.carbon.wso2.org") && response.status == 200

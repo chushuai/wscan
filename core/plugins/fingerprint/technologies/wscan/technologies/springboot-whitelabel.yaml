@@ -5,4 +5,4 @@ info:
 pscan:
     path: []
     expressions:
-        - response.body.bcontains(b"<h1>Whitelabel Error Page</h1>") and response.raw_header.bcontains(b"text/html")
+        - response.body.bcontains(b"<h1>Whitelabel Error Page</h1>") && response.raw_header.bcontains(b"text/html")

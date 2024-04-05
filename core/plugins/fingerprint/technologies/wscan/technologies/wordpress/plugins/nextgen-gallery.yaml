@@ -6,4 +6,4 @@ pscan:
     path:
         - /wp-content/plugins/nextgen-gallery/readme.txt
     expressions:
-        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'
+        - '"(?i)Stable.tag:\\s?([\\w.]+)".bmatches(response.body)'

@@ -7,4 +7,4 @@ pscan:
         - /
         - /elfinder.html
     expressions:
-        - response.body.bcontains(b"<!-- Element where elFinder will be created (REQUIRED) -->") and response.status == 200
+        - response.body.bcontains(b"<!-- Element where elFinder will be created (REQUIRED) -->") && response.status == 200

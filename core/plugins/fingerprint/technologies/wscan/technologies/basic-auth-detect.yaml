@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"(?i)www-authenticate: basic".bmatches(response.raw_header) and response.status == 401'
+        - '"(?i)www-authenticate: basic".bmatches(response.raw_header) && response.status == 401'

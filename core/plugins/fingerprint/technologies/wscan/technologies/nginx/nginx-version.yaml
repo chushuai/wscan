@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"nginx/[0-9.]+".bmatches(response.raw_header) and response.status == 200'
+        - '"nginx/[0-9.]+".bmatches(response.raw_header) && response.status == 200'

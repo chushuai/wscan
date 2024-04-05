@@ -9,4 +9,4 @@ pscan:
         - /favicon.ico
         - /actuator/favicon.ico
     expressions:
-        - response.body.bcontains(b""_links":") and response.body.bcontains(b""self":") and response.body.bcontains(b""health"")
+        - ( response.body.bcontains(b"\"_links\":") && response.body.bcontains(b"\"self\":") && response.body.bcontains(b"\"health\"") )

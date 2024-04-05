@@ -7,4 +7,4 @@ pscan:
         - /
     expressions:
         - response.raw_header.bcontains(b"X-TYPO3-Parsetime:")
-        - response.body.bcontains(b"<meta name="generator" content="TYPO3")
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"TYPO3")

@@ -7,4 +7,4 @@ pscan:
         - /
     expressions:
         - 'response.raw_header.bcontains(b"Set-Cookie: wondercms_")'
-        - response.body.bcontains(b"Powered by WonderCMS") and response.body.bcontains(b"https://www.wondercms.com")
+        - ( response.body.bcontains(b"Powered by WonderCMS") && response.body.bcontains(b"https://www.wondercms.com") )

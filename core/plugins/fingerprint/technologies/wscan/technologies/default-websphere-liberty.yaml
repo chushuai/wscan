@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"WebSphere Liberty") and response.status == 200
+        - response.body.bcontains(b"WebSphere Liberty") && response.status == 200

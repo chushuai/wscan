@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome To RunCloud") and response.status == 200
+        - response.body.bcontains(b"Welcome To RunCloud") && response.status == 200

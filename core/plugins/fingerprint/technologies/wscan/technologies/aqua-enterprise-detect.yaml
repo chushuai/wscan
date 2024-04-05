@@ -6,4 +6,4 @@ pscan:
     path:
         - /api
     expressions:
-        - '""version"".bmatches(response.body) and ""enable_sso"".bmatches(response.body) and ""num_protected_kube_nodes"".bmatches(response.body) and response.status == 200'
+        - ( ""version"".bmatches(response.body) && ""enable_sso"".bmatches(response.body) && ""num_protected_kube_nodes"".bmatches(response.body) ) && response.status == 200

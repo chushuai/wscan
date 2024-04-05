@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Sucuri WebSite Firewall - Not Configured</title>") and response.status == 404
+        - response.body.bcontains(b"<title>Sucuri WebSite Firewall - Not Configured</title>") && response.status == 404

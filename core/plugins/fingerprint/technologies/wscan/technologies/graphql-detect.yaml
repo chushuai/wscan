@@ -129,4 +129,4 @@ pscan:
         - /v4/playground
         - /v4/subscriptions
     expressions:
-        - response.status == 200 and response.raw_header.bcontains(b"application/json")
+        - response.status == 200 && response.raw_header.bcontains(b"application/json") && ( "__schema".bmatches(response.body) || "(Introspection|INTROSPECTION|introspection).*?".bmatches(response.body) || ".*?operation not found.*?".bmatches(response.body) )

@@ -6,4 +6,4 @@ pscan:
     path:
         - /login.php
     expressions:
-        - response.body.bcontains(b"<title>EyesOfNetwork</title>") and response.status == 200
+        - response.body.bcontains(b"<title>EyesOfNetwork</title>") && response.status == 200

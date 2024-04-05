@@ -7,4 +7,4 @@ pscan:
         - /WebReport/ReportServer
         - /ReportServer
     expressions:
-        - response.status == 200 and response.body.bcontains(b"DeploySuccess._init")
+        - response.status == 200 && response.body.bcontains(b"DeploySuccess._init")

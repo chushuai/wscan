@@ -6,4 +6,4 @@ pscan:
     path:
         - /sitecore/shell/sitecore.version.xml
     expressions:
-        - response.status == 200 and response.body.bcontains(b"Sitecore Corporation")
+        - response.status == 200 && response.body.bcontains(b"Sitecore Corporation")

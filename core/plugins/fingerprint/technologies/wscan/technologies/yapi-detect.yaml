@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>YApi-高效、易用、功能强大的可视化接口管理平台</title>") and response.status == 200
+        - response.body.bcontains(b"<title>YApi-高效、易用、功能强大的可视化接口管理平台</title>") && response.status == 200

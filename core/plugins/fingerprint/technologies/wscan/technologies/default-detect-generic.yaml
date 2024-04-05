@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Default</title>") or response.body.bcontains(b"<title>Welcome to</title>")
+        - ( response.body.bcontains(b"<title>Default</title>") || response.body.bcontains(b"<title>Welcome to</title>") )

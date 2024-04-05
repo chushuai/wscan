@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Couchbase Sync Gateway") and response.raw_header.bcontains(b"application/json")
+        - response.body.bcontains(b"Couchbase Sync Gateway") && response.raw_header.bcontains(b"application/json")

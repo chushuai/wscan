@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<TITLE>Olivetti CRF</TITLE>") and response.status == 200
+        - response.body.bcontains(b"<TITLE>Olivetti CRF</TITLE>") && response.status == 200

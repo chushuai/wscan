@@ -6,4 +6,4 @@ pscan:
     path:
         - /.redmine-cli
     expressions:
-        - response.body.bcontains(b"default") and response.body.bcontains(b"my_id") and response.body.bcontains(b"root_url") and response.status == 200
+        - ( response.body.bcontains(b"default") && response.body.bcontains(b"my_id") && response.body.bcontains(b"root_url") ) && response.status == 200

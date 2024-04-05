@@ -8,4 +8,4 @@ pscan:
         - /axis2/
         - /axis/
     expressions:
-        - response.body.bcontains(b"Validate") and response.body.bcontains(b"Welcome") and response.body.bcontains(b"Axis") and response.body.bcontains(b"deployed") and response.body.bcontains(b"installation") and response.body.bcontains(b"Admin") and response.status == 200
+        - ( response.body.bcontains(b"Validate") && response.body.bcontains(b"Welcome") && response.body.bcontains(b"Axis") && response.body.bcontains(b"deployed") && response.body.bcontains(b"installation") && response.body.bcontains(b"Admin") ) && response.status == 200

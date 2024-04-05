@@ -10,4 +10,5 @@ pscan:
         - /modules/custom.xml
         - /
     expressions:
-        - response.body.bcontains(b"<version>") and response.body.bcontains(b"<creationDate>") and response.body.bcontains(b"</metafile>")
+        - ( response.body.bcontains(b"<version>") && response.body.bcontains(b"<creationDate>") && response.body.bcontains(b"</metafile>") )
+        - ( "(?i)<meta.name="generator".content="(Joomla!).*/>".bmatches(response.body) || "(?i)Joomla_([\\d.|\\d]+)_version_history".bmatches(response.body) || "FILES_JOOMLA_XML_DESCRIPTION".bmatches(response.body) )

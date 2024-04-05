@@ -6,5 +6,5 @@ pscan:
     path:
         - /api/v1/nodes
     expressions:
-        - response.body.bcontains(b""NodeList":") and response.body.bcontains(b""items":")
-        - 'response.body.bcontains(b""containerRuntimeVersion"") and response.body.bcontains(b""kubeletVersion": "v")'
+        - ( response.body.bcontains(b"\"NodeList\":") && response.body.bcontains(b"\"items\":") )
+        - '( response.body.bcontains(b"\"containerRuntimeVersion\"") && response.body.bcontains(b"\"kubeletVersion\": \"v") )'

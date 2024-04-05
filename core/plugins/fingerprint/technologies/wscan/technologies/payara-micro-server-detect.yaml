@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.body.bcontains(b"Payara Micro #badassfish - Error report") and response.status == 404'
+        - 'response.body.bcontains(b"Payara Micro #badassfish - Error report") && response.status == 404'

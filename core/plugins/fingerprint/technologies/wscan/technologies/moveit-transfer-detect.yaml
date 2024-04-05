@@ -7,4 +7,4 @@ pscan:
         - /
         - /human.aspx
     expressions:
-        - response.body.bcontains(b"stylesheet_MOVEit") or response.body.bcontains(b"moveit.transfer") or response.body.bcontains(b"MOVEitPopUp") or response.body.bcontains(b"MOVEit Automation") and response.status == 200
+        - ( response.body.bcontains(b"stylesheet_MOVEit") || response.body.bcontains(b"moveit.transfer") || response.body.bcontains(b"MOVEitPopUp") || response.body.bcontains(b"MOVEit Automation") ) && response.status == 200

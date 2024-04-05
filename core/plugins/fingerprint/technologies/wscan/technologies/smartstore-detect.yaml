@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"<meta name="generator" content="Smartstore (.*)" />".bmatches(response.body) and response.status == 200'
+        - '"<meta name="generator" content="Smartstore (.*)" />".bmatches(response.body) && response.status == 200'

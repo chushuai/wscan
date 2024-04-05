@@ -6,4 +6,4 @@ pscan:
     path:
         - /welcome_webcenter.html
     expressions:
-        - response.body.bcontains(b"FOR ORACLE") and response.body.bcontains(b"WebCenter Framework") and response.status == 200
+        - ( response.body.bcontains(b"FOR ORACLE") && response.body.bcontains(b"WebCenter Framework") ) && response.status == 200

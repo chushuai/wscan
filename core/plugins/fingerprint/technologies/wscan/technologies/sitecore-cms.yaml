@@ -6,4 +6,4 @@ pscan:
     path:
         - /-/media/doo-doo.ashx
     expressions:
-        - '"Location: /sitecore/service/notfound.aspx".bmatches(response.raw_header) and response.status == 302'
+        - '"Location: /sitecore/service/notfound.aspx".bmatches(response.raw_header) && response.status == 302'

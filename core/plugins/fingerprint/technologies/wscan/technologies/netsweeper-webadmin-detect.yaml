@@ -7,4 +7,4 @@ pscan:
         - /webadmin/start/
         - /webadmin/tools/systemstatus_remote.php
     expressions:
-        - '"Powered by netsweeper".bmatches(response.body) or "Netsweeper Inc".bmatches(response.body) and response.status == 200'
+        - ( "Powered by netsweeper".bmatches(response.body) || "Netsweeper Inc".bmatches(response.body) ) && response.status == 200

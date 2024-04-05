@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"subrion.org" title="Open Source CMS">Subrion CMS") or response.body.bcontains(b"Subrion CMS - Open Source Content Management System") and response.status == 200
+        - ( response.body.bcontains(b"subrion.org\" title=\"Open Source CMS\">Subrion CMS") || response.body.bcontains(b"Subrion CMS - Open Source Content Management System") ) && response.status == 200

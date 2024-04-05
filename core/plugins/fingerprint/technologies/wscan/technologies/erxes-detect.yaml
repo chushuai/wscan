@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"<title>erxes(.*)</title>".bmatches(response.body) and response.status == 200'
+        - '"<title>erxes(.*)</title>".bmatches(response.body) && response.status == 200'

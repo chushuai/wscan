@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Kubernetes Operational View") and response.status == 200
+        - response.body.bcontains(b"<title>Kubernetes Operational View") && response.status == 200

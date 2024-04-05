@@ -7,4 +7,4 @@ pscan:
         - /
         - /i18n/en.json
     expressions:
-        - response.body.bcontains(b"JHipster") or response.body.bcontains(b"@jhipster") or response.body.bcontains(b"Welcome, Java Hipster!") or response.body.bcontains(b"jhipster-error")
+        - ( response.body.bcontains(b"JHipster") || response.body.bcontains(b"@jhipster") || response.body.bcontains(b"Welcome, Java Hipster!") || response.body.bcontains(b"jhipster-error") )

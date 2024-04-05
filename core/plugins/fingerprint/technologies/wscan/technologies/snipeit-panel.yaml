@@ -6,4 +6,4 @@ pscan:
     path:
         - /login
     expressions:
-        - response.body.bcontains(b"window.snipeit") and response.status == 200
+        - response.body.bcontains(b"window.snipeit") && response.status == 200

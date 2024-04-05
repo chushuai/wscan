@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title>Welcome to Kingsoft Web Server!</title>") and response.status == 200
+        - response.body.bcontains(b"<title>Welcome to Kingsoft Web Server!</title>") && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"_dash-config") and response.body.bcontains(b"DashRenderer") and response.status == 200
+        - ( response.body.bcontains(b"_dash-config") && response.body.bcontains(b"DashRenderer") ) && response.status == 200

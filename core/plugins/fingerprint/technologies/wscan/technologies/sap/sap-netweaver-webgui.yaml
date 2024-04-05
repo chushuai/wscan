@@ -6,4 +6,4 @@ pscan:
     path:
         - /sap/bc/gui/sap/its/webgui
     expressions:
-        - response.body.bcontains(b"sap-system-login") or response.body.bcontains(b"<title>Logon</title>")
+        - ( response.body.bcontains(b"sap-system-login") || response.body.bcontains(b"<title>Logon</title>") )

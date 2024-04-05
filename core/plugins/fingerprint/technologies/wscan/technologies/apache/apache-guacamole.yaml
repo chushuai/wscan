@@ -6,4 +6,4 @@ pscan:
     path:
         - /translations/en.json
     expressions:
-        - response.body.bcontains(b"Apache Guacamole") and response.status == 200
+        - response.body.bcontains(b"Apache Guacamole") && response.status == 200

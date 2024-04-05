@@ -6,4 +6,4 @@ pscan:
     path:
         - /error
     expressions:
-        - response.body.bcontains(b""status":999") and response.status == 500
+        - response.body.bcontains(b"\"status\":999") && response.status == 500

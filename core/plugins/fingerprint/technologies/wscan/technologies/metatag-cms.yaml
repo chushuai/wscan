@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"text/html") and "(?i)<meta\s+?name="?generator"?\s+?content="[^"]+?"".bmatches(response.body)
+        - response.raw_header.bcontains(b"text/html") && "(?i)<meta\\s+?name="?generator"?\\s+?content="[^"]+?"".bmatches(response.body)

@@ -6,4 +6,4 @@ pscan:
     path:
         - /LICENSE.txt
     expressions:
-        - response.body.bcontains(b"GNU Board") and response.body.bcontains(b"http://sir.kr") and response.raw_header.bcontains(b"text/plain")
+        - ( response.body.bcontains(b"GNU Board") && response.body.bcontains(b"http://sir.kr") ) && response.raw_header.bcontains(b"text/plain")

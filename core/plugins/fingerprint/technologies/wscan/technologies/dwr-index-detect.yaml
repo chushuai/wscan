@@ -6,4 +6,4 @@ pscan:
     path:
         - /dwr/index.html
     expressions:
-        - response.body.bcontains(b"<title>DWR Test Index</title>") and response.status == 200
+        - response.body.bcontains(b"<title>DWR Test Index</title>") && response.status == 200

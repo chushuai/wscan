@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Congratulations | Cloud Run") and response.body.bcontains(b"alt="A group celebrating") and response.status == 200
+        - ( response.body.bcontains(b"Congratulations | Cloud Run") && response.body.bcontains(b"alt=\"A group celebrating") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Jspxcms") and response.status == 200
+        - response.body.bcontains(b"Jspxcms") && response.status == 200

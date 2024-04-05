@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"(?:TCP_HIT|TCP_MISS).*deploy\.akamaitechnologies\.com".bmatches(response.raw_header)'
+        - '"(?:TCP_HIT|TCP_MISS).*deploy\\.akamaitechnologies\\.com".bmatches(response.raw_header)'

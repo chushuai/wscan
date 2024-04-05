@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"content="Powered by Monstra") and response.status == 200
+        - response.body.bcontains(b"content=\"Powered by Monstra") && response.status == 200

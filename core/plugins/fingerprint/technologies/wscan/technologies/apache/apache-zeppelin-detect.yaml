@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<title ng-bind="$root.pageTitle">Zeppelin</title>") and response.status == 200
+        - response.body.bcontains(b"<title ng-bind=\"$root.pageTitle\">Zeppelin</title>") && response.status == 200

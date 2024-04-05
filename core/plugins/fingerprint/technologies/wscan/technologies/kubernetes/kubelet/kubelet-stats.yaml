@@ -6,4 +6,4 @@ pscan:
     path:
         - /stats/summary
     expressions:
-        - response.status == 200 and response.body.bcontains(b""node":") and response.body.bcontains(b""nodeName":")
+        - response.status == 200 && ( response.body.bcontains(b"\"node\":") && response.body.bcontains(b"\"nodeName\":") )

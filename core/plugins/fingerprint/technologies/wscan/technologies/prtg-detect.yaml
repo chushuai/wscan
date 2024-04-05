@@ -8,4 +8,4 @@ pscan:
         - /prtg/index.htm
         - /PRTG/index.htm
     expressions:
-        - response.status == 200 and response.body.bcontains(b"PRTG Network Monitor") and "PRTG".bmatches(response.raw_header)
+        - response.status == 200 && response.body.bcontains(b"PRTG Network Monitor") && "PRTG".bmatches(response.raw_header)

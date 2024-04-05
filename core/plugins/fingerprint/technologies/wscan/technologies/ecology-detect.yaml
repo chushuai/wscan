@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"ecology_JSessionid") and response.status == 200
+        - response.raw_header.bcontains(b"ecology_JSessionid") && response.status == 200

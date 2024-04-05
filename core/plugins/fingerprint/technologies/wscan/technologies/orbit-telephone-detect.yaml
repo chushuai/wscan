@@ -6,4 +6,4 @@ pscan:
     path:
         - /index.html
     expressions:
-        - 'response.body.bcontains(b"<title>Orbit Telephone System: Administration</title>") and response.status == 200'
+        - 'response.body.bcontains(b"<title>Orbit Telephone System: Administration</title>") && response.status == 200'

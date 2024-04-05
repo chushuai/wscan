@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - 'response.raw_header.bcontains(b"Server: Mongoose") and response.status == 200'
+        - 'response.raw_header.bcontains(b"Server: Mongoose") && response.status == 200'

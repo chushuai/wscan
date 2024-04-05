@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"x-goog-metageneration") or response.raw_header.bcontains(b"X-Goog-Metageneration")
+        - ( response.raw_header.bcontains(b"x-goog-metageneration") || response.raw_header.bcontains(b"X-Goog-Metageneration") )

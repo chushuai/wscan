@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"Welcome to Sitecore") or response.body.bcontains(b"alt="Sitecore"") and response.status == 200
+        - ( response.body.bcontains(b"Welcome to Sitecore") || response.body.bcontains(b"alt=\"Sitecore\"") ) && response.status == 200

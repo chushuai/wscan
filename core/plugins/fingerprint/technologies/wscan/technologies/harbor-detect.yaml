@@ -6,4 +6,4 @@ pscan:
     path:
         - /api/v2.0/systeminfo
     expressions:
-        - response.body.bcontains(b""auth_mode"") and response.body.bcontains(b""harbor_version"") and response.status == 200
+        - ( response.body.bcontains(b"\"auth_mode\"") && response.body.bcontains(b"\"harbor_version\"") ) && response.status == 200

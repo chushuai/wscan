@@ -6,4 +6,4 @@ pscan:
     path:
         - /sysmgmt/2015/bmc/info
     expressions:
-        - response.status == 200 and response.body.bcontains(b"BuildVersion") or response.body.bcontains(b"SystemModelName")
+        - response.status == 200 && ( response.body.bcontains(b"BuildVersion") || response.body.bcontains(b"SystemModelName") )

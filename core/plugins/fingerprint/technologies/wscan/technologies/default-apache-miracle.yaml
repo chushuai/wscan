@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"<TITLE>Apache Miracle Linux Web Server</TITLE>") and response.status == 200
+        - response.body.bcontains(b"<TITLE>Apache Miracle Linux Web Server</TITLE>") && response.status == 200

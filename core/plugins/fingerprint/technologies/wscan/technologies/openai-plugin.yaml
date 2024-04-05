@@ -6,4 +6,4 @@ pscan:
     path:
         - /.well-known/ai-plugin.json
     expressions:
-        - response.body.bcontains(b""schema_version":") and response.body.bcontains(b""name_for_model":")
+        - ( response.body.bcontains(b"\"schema_version\":") && response.body.bcontains(b"\"name_for_model\":") )

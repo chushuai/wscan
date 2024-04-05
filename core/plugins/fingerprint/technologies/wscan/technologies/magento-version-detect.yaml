@@ -5,6 +5,7 @@ info:
 pscan:
     path: []
     expressions:
+        - '"^Magento/.*$".bmatches(response.body)'
         - response.body.bcontains(b"Copyright (c) 2014 Magento Inc.")
         - response.body.bcontains(b"Copyright (c) 2013 Magento Inc.")
         - response.body.bcontains(b"Copyright (c) 2012 Magento Inc.")

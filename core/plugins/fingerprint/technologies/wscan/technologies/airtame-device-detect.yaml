@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"To access the settings of your Airtame") and response.body.bcontains(b"https://airtame.com/download") and response.status == 200
+        - ( response.body.bcontains(b"To access the settings of your Airtame") && response.body.bcontains(b"https://airtame.com/download") ) && response.status == 200

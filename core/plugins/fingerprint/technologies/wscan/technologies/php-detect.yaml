@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.raw_header.bcontains(b"PHP") and response.status == 200
+        - response.raw_header.bcontains(b"PHP") && response.status == 200

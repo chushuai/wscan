@@ -5,4 +5,4 @@ info:
 pscan:
     path: []
     expressions:
-        - response.body.bcontains(b"config-auth client="vpn"") and response.status == 200
+        - response.body.bcontains(b"config-auth client=\"vpn\"") && response.status == 200

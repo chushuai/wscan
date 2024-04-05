@@ -6,4 +6,4 @@ pscan:
     path:
         - /system/console
     expressions:
-        - response.raw_header.bcontains(b"realm="karaf")
+        - response.raw_header.bcontains(b"realm=\"karaf")

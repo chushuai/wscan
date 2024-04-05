@@ -5,4 +5,4 @@ info:
 pscan:
     path: []
     expressions:
-        - response.status == 200 and response.body.bcontains(b"ha-folder-root") or response.body.bcontains(b"RetrieveServiceContentResponse") and response.raw_header.bcontains(b"text/xml")
+        - response.status == 200 && ( response.body.bcontains(b"ha-folder-root") || response.body.bcontains(b"RetrieveServiceContentResponse") ) && response.raw_header.bcontains(b"text/xml")

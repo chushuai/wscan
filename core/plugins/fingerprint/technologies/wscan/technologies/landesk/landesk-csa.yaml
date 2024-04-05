@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"LANDESK(R)") and response.body.bcontains(b"Cloud Services Appliance")
+        - ( response.body.bcontains(b"LANDESK(R)") && response.body.bcontains(b"Cloud Services Appliance") )

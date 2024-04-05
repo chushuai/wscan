@@ -7,4 +7,4 @@ pscan:
         - /admin
         - /backend
     expressions:
-        - response.body.bcontains(b"Realisiert mit Shopware") or response.body.bcontains(b"Realised with Shopware") or response.body.bcontains(b"Shopware Administration (c) shopware AG") or response.body.bcontains(b"<title>Shopware 5 - Backend (c) shopware AG</title>") or response.body.bcontains(b"Shopware.Application.start") and response.status == 200
+        - ( response.body.bcontains(b"Realisiert mit Shopware") || response.body.bcontains(b"Realised with Shopware") || response.body.bcontains(b"Shopware Administration (c) shopware AG") || response.body.bcontains(b"<title>Shopware 5 - Backend (c) shopware AG</title>") || response.body.bcontains(b"Shopware.Application.start") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /api/v1/namespaces/default/pods
     expressions:
-        - response.status == 200 and response.body.bcontains(b""PodList":") and response.body.bcontains(b""items":")
+        - response.status == 200 && ( response.body.bcontains(b"\"PodList\":") && response.body.bcontains(b"\"items\":") )

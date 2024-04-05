@@ -6,4 +6,4 @@ pscan:
     path:
         - /cgi-bin/upload/web-ftp.cgi
     expressions:
-        - response.body.bcontains(b"Web-FTP") or response.body.bcontains(b"square login") and response.status == 200
+        - ( response.body.bcontains(b"Web-FTP") || response.body.bcontains(b"square login") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"ConnectWise Control Remote Support Software") and response.status == 200
+        - response.body.bcontains(b"ConnectWise Control Remote Support Software") && response.status == 200

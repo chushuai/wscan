@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"<title>.*?Apache(|\d+) .*?(Default|Test).*?</title>".bmatches(response.body) or "<title>(Default|Test).*? Apache(|\d+).*?</title>".bmatches(response.body)'
+        - ( "<title>.*?Apache(|\\d+) .*?(Default|Test).*?</title>".bmatches(response.body) || "<title>(Default|Test).*? Apache(|\\d+).*?</title>".bmatches(response.body) )

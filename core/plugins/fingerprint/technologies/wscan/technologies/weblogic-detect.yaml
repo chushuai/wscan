@@ -6,4 +6,4 @@ pscan:
     path:
         - /{{randstr}}
     expressions:
-        - response.body.bcontains(b"From RFC 2068") and response.body.bcontains(b"Error 404--Not Found") and response.status == 404
+        - ( response.body.bcontains(b"From RFC 2068") && response.body.bcontains(b"Error 404--Not Found") ) && response.status == 404

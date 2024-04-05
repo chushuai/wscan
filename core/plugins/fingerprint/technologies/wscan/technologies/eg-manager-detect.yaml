@@ -6,4 +6,4 @@ pscan:
     path:
         - /final/
     expressions:
-        - response.body.bcontains(b"<title> eG Innovations, Inc.</title>") or response.body.bcontains(b"eG Innovations, Inc. All Rights Reserved") and response.status == 200
+        - ( response.body.bcontains(b"<title> eG Innovations, Inc.</title>") || response.body.bcontains(b"eG Innovations, Inc. All Rights Reserved") ) && response.status == 200

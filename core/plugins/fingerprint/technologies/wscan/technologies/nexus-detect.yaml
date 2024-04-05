@@ -6,4 +6,4 @@ pscan:
     path:
         - /service/rest/swagger.json
     expressions:
-        - response.body.bcontains(b"Nexus Repository Manager") and response.status == 200
+        - response.body.bcontains(b"Nexus Repository Manager") && response.status == 200

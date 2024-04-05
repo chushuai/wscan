@@ -6,4 +6,4 @@ pscan:
     path:
         - /sslvpn/Login
     expressions:
-        - response.body.bcontains(b"Check Point Mobile") and response.body.bcontains(b"Check Point Software Technologies") and response.status == 403
+        - ( response.body.bcontains(b"Check Point Mobile") && response.body.bcontains(b"Check Point Software Technologies") ) && response.status == 403

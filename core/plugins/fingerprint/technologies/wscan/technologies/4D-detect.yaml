@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"/4DACTION/") or response.body.bcontains(b"/4DSTATS") or response.body.bcontains(b"/4DHTMLSTATS") or response.body.bcontains(b"/4DCACHECLEAR") or response.body.bcontains(b"/4DWEBTEST") and response.status == 200
+        - ( response.body.bcontains(b"/4DACTION/") || response.body.bcontains(b"/4DSTATS") || response.body.bcontains(b"/4DHTMLSTATS") || response.body.bcontains(b"/4DCACHECLEAR") || response.body.bcontains(b"/4DWEBTEST") ) && response.status == 200

@@ -6,4 +6,4 @@ pscan:
     path:
         - /pdb/meta/v1/version
     expressions:
-        - response.status == 200 and response.raw_header.bcontains(b"application/json") and ""version"\s:\s"([0-9.]+)"".bmatches(response.body)
+        - response.status == 200 && response.raw_header.bcontains(b"application/json") && ""version"\\s:\\s"([0-9.]+)"".bmatches(response.body)

@@ -8,5 +8,5 @@ pscan:
         - /CHANGELOG.txt
         - /core/install.php
     expressions:
-        - response.body.bcontains(b"Initial release") and response.body.bcontains(b"Drupal 1.0.0")
-        - response.body.bcontains(b"content="Drupal")
+        - ( response.body.bcontains(b"Initial release") && response.body.bcontains(b"Drupal 1.0.0") )
+        - response.body.bcontains(b"content=\"Drupal")

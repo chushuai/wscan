@@ -6,4 +6,4 @@ pscan:
     path:
         - /oauth/token
     expressions:
-        - response.status == 401 or response.status == 400 and response.body.bcontains(b"error":"invalid_client"")
+        - ( response.status == 401 || response.status == 400 ) && response.body.bcontains(b"error\":\"invalid_client\"")

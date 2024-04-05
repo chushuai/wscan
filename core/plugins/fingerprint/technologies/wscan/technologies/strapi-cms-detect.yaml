@@ -6,4 +6,4 @@ pscan:
     path:
         - /admin/init
     expressions:
-        - response.body.bcontains(b""data"") and response.body.bcontains(b""uuid"") and response.body.bcontains(b""hasAdmin"") and response.status == 200
+        - ( response.body.bcontains(b"\"data\"") && response.body.bcontains(b"\"uuid\"") && response.body.bcontains(b"\"hasAdmin\"") ) && response.status == 200

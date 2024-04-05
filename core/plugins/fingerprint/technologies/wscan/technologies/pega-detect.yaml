@@ -6,4 +6,4 @@ pscan:
     path:
         - /prweb/PRRestService/unauthenticatedAPI/v1/docs
     expressions:
-        - response.body.bcontains(b""description" :"The Pega API") and response.status == 200 and response.raw_header.bcontains(b"application/json")
+        - response.body.bcontains(b"\"description\" :\"The Pega API") && response.status == 200 && response.raw_header.bcontains(b"application/json")

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - '"content="Chevereto(.*)">".bmatches(response.body) and response.status == 200'
+        - '"content="Chevereto(.*)">".bmatches(response.body) && response.status == 200'

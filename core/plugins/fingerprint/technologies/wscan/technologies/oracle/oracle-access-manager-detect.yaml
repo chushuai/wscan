@@ -6,4 +6,4 @@ pscan:
     path:
         - /oamfed/idp/soap
     expressions:
-        - response.body.bcontains(b"processing the SOAP Request") and response.raw_header.bcontains(b"text/xml") and response.status == 200
+        - response.body.bcontains(b"processing the SOAP Request") && response.raw_header.bcontains(b"text/xml") && response.status == 200

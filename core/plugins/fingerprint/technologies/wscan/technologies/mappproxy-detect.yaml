@@ -7,4 +7,4 @@ pscan:
         - /
         - /demo
     expressions:
-        - response.body.bcontains(b"Welcome to MapProxy") or response.body.bcontains(b"MapProxy Demo") and response.raw_header.bcontains(b"text/html")
+        - ( response.body.bcontains(b"Welcome to MapProxy") || response.body.bcontains(b"MapProxy Demo") ) && response.raw_header.bcontains(b"text/html")

@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.headers["server"].contains("OpenSSL") and response.status == 200
+        - response.headers["server"].contains("OpenSSL") && response.status == 200

@@ -6,5 +6,5 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"gitbook.page.hasChanged") and response.body.bcontains(b"<meta name="generator" content="GitBook")
-        - '"<title>.*[Gg]it[bB]ook</title>".bmatches(response.body) or "<title>.*· [Gg]it[bB]ook.*</title>".bmatches(response.body)'
+        - ( response.body.bcontains(b"gitbook.page.hasChanged") && response.body.bcontains(b"<meta name=\"generator\" content=\"GitBook") )
+        - ( "<title>.*[Gg]it[bB]ook</title>".bmatches(response.body) || "<title>.*· [Gg]it[bB]ook.*</title>".bmatches(response.body) )

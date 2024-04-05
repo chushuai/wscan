@@ -12,4 +12,4 @@ pscan:
         - /system-diagnostics
         - /nifi-api/access/config
     expressions:
-        - '"supportsLogin".bmatches(response.body) or "disconnectedNodeAcknowledged".bmatches(response.body) or "(aggregate|node)Snapshots?".bmatches(response.body) and response.status == 200'
+        - ( "supportsLogin".bmatches(response.body) || "disconnectedNodeAcknowledged".bmatches(response.body) || "(aggregate|node)Snapshots?".bmatches(response.body) ) && response.status == 200

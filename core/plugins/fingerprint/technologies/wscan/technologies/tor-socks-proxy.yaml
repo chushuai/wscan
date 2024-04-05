@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"This is a SOCKS Proxy") and response.body.bcontains(b"HTTPTunnelPort") and response.body.bcontains(b"SOCKSPort") and response.status == 501
+        - ( response.body.bcontains(b"This is a SOCKS Proxy") && response.body.bcontains(b"HTTPTunnelPort") && response.body.bcontains(b"SOCKSPort") ) && response.status == 501

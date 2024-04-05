@@ -6,4 +6,5 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"content="PbootCMS")
+        - response.body.bcontains(b"content=\"PbootCMS")
+        - '"<title>PbootCMS(.*)</title>".bmatches(response.body)'

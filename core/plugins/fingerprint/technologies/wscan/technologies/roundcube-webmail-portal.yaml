@@ -7,4 +7,4 @@ pscan:
         - /
         - /webmail/
     expressions:
-        - response.body.bcontains(b"Roundcube Webmail") and response.status == 200
+        - response.body.bcontains(b"Roundcube Webmail") && response.status == 200

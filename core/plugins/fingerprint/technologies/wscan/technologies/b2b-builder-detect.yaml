@@ -6,4 +6,4 @@ pscan:
     path:
         - /
     expressions:
-        - response.body.bcontains(b"content="B2Bbuilder"") or response.body.bcontains(b"translateButtonId = "B2Bbuilder"") and response.status == 200
+        - ( response.body.bcontains(b"content=\"B2Bbuilder\"") || response.body.bcontains(b"translateButtonId = \"B2Bbuilder\"") ) && response.status == 200

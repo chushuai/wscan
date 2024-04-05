@@ -6,4 +6,4 @@ pscan:
     path:
         - /_something_.cfm
     expressions:
-        - response.body.bcontains(b"ColdFusion documentation") and response.status == 404
+        - response.body.bcontains(b"ColdFusion documentation") && response.status == 404

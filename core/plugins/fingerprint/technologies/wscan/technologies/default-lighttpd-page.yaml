@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lighttpd Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Powered by lighttpd</title>") and response.status == 200

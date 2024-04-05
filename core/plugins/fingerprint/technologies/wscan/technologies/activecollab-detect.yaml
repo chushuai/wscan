@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: activecollab detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://www.activecollab.com") or response.body.bcontains(b"<form method="post" id="system_form_2" class="uniForm focusFirstField">") and response.status == 200

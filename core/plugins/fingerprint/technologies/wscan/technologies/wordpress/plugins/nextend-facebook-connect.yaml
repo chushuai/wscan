@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Nextend Social Login and Register Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/nextend-facebook-connect/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

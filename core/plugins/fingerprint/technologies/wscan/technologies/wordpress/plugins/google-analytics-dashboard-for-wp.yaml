@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ExactMetrics – Google Analytics Dashboard for WordPress (Website Stats Plugin) Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/google-analytics-dashboard-for-wp/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

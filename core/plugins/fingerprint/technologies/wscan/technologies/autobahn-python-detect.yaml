@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Autobahn-Python Webserver Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200

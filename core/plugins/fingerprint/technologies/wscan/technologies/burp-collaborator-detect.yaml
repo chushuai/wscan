@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Burp Collaborator Server - Detect
+    author: lum8rjack
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: Burp Collaborator https://burpcollaborator.net/") and response.status == 200'

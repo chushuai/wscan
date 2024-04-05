@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Amazon Cognito Developer Authentication Sample - Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions: []

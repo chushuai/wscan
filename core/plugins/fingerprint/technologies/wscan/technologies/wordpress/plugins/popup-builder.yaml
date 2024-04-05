@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Popup Builder – Create highly converting, mobile friendly marketing popups. Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/popup-builder/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

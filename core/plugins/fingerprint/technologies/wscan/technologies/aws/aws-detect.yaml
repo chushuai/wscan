@@ -1,0 +1,17 @@
+engine: fingerprint
+info:
+    name: AWS Service - Detect
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-Amz-Content-Sha256:") or response.raw_header.bcontains(b"X-Amz-Date:") or response.raw_header.bcontains(b"X-Amz-Version-Id:") or response.raw_header.bcontains(b"X-Amz-Id-2:") or response.raw_header.bcontains(b"X-Amz-Delete-Marker:")
+        - 'response.raw_header.bcontains(b"Server: awselb/2.0") or response.raw_header.bcontains(b"Set-Cookie: AWSALB=") or response.raw_header.bcontains(b"Set-Cookie: AWSALBCORS=")'
+        - response.raw_header.bcontains(b"X-Amz-Cf-Id:") or response.raw_header.bcontains(b"X-Amz-Cf-Pop:")
+        - 'response.raw_header.bcontains(b"arn: arn:aws:codebuild") or response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Buildarn:") or response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Content-Sha256:") or response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Content-Md5:")'
+        - 'response.raw_header.bcontains(b"X-Amz-Apigw-Id:") or response.raw_header.bcontains(b"X-Amzn-Requestid:") or response.raw_header.bcontains(b"X-Amzn-Errortype: MissingAuthenticationTokenException") or response.raw_header.bcontains(b"X-Amzn-Remapped-Connection:") or response.raw_header.bcontains(b"X-Amzn-Remapped-Content-Length:") or response.raw_header.bcontains(b"X-Amzn-Remapped-Date:")'
+        - response.raw_header.bcontains(b"X-Amz-Server-Side-Encryption:")
+        - response.raw_header.bcontains(b"X-Amzn-Trace-Id:")
+        - response.raw_header.bcontains(b"X-Amzn-Waf-Action:")
+        - response.raw_header.bcontains(b"X-Amz-Crc32:") or response.raw_header.bcontains(b"X-Amz-Target:")

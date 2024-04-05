@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Interactsh Server
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Interactsh Server") and response.status == 200

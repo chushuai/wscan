@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: Joomla! Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /administrator/manifests/files/joomla.xml
+        - /language/en-GB/en-GB.xml
+        - /README.txt
+        - /modules/custom.xml
+        - /
+    expressions:
+        - response.body.bcontains(b"<version>") and response.body.bcontains(b"<creationDate>") and response.body.bcontains(b"</metafile>")

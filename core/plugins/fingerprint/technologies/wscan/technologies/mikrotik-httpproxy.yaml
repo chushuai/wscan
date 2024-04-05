@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: MikroTik httpproxy
+    author: its0x08, dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: Mikrotik HttpProxy")'

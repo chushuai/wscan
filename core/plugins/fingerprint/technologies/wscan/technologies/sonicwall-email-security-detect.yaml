@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: SonicWall Email Security Panel - Detect
+    author: gy741
+pscan:
+    path:
+        - /favicon.ico
+    expressions: []

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Telerik Web UI Fileupload Handler
+    author: organiccrap
+pscan:
+    path:
+        - /Telerik.Web.UI.WebResource.axd?type=rau
+    expressions:
+        - response.body.bcontains(b"RadAsyncUpload handler is registered succesfully")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Olivetti CRF Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<TITLE>Olivetti CRF</TITLE>") and response.status == 200

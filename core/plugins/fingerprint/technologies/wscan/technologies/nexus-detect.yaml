@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Nexus Repository Manager (NRM) Instance Detection Template
+    author: righettod
+pscan:
+    path:
+        - /service/rest/swagger.json
+    expressions:
+        - response.body.bcontains(b"Nexus Repository Manager") and response.status == 200

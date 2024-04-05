@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: BIG-IP Configuration Utility detected
+    author: dwisiswant0
+pscan:
+    path:
+        - /mgmt/tm/sys/management-ip
+    expressions:
+        - 'response.raw_header.bcontains(b"WWW-Authenticate: Basic realm") and response.raw_header.bcontains(b"Enterprise Manager")'
+        - response.body.bcontains(b"check your user-id and password and try again")

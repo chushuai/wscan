@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Couchbase Sync Gateway
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Couchbase Sync Gateway") and response.raw_header.bcontains(b"application/json")

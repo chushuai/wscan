@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Symfony Default Page
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to Symfony!") and response.body.bcontains(b"Documentation") and response.status == 404

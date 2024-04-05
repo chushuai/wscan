@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Wuzhicms Detected
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Powered by wuzhicms") or response.body.bcontains(b"五指CMS") and response.status == 200

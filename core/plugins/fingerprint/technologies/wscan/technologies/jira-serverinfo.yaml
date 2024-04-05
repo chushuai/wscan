@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jira Rest API Server Information
+    author: pdteam
+pscan:
+    path:
+        - /rest/api/latest/serverInfo
+    expressions:
+        - response.body.bcontains(b""baseUrl"") and response.body.bcontains(b""deploymentType"") and response.status == 200

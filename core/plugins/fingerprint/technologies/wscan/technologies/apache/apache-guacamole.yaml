@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Guacamole Login Page and version detection
+    author: r3dg33k
+pscan:
+    path:
+        - /translations/en.json
+    expressions:
+        - response.body.bcontains(b"Apache Guacamole") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: B2BBuilder Detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content="B2Bbuilder"") or response.body.bcontains(b"translateButtonId = "B2Bbuilder"") and response.status == 200

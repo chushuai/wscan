@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Open Journal Systems Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200

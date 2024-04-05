@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Microsoft SharePoint Detect
+    author: p-l-
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?i)(Microsoftsharepointteamservices:)".bmatches(response.raw_header)'

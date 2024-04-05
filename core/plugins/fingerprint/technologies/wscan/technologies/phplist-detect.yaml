@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpList - Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content="phpList") or response.body.bcontains(b"phpList Ltd") or response.body.bcontains(b"phpList</a>")

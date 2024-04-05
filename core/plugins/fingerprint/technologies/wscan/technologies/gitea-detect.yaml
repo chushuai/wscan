@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Gitea Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /user/login
+    expressions:
+        - response.body.bcontains(b"Powered by Gitea") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Erxes Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>erxes(.*)</title>".bmatches(response.body) and response.status == 200'

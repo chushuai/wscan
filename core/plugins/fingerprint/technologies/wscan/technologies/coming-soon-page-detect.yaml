@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Coming Soon Page Detect
+    author: tess
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Coming Soon") and response.body.bcontains(b"Future home of something quite cool.") and response.raw_header.bcontains(b"text/html") and response.status == 200

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: VMware Detection
+    author: elouhi
+pscan:
+    path: []
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"ha-folder-root") or response.body.bcontains(b"RetrieveServiceContentResponse") and response.raw_header.bcontains(b"text/xml")

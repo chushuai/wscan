@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Microsoft Internet Information Services 8
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"<title>Microsoft Internet Information Services 8</title>")

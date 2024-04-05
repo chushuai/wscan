@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vBulletin Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Powered By vBulletin") or response.body.bcontains(b"content="vBulletin") or response.body.bcontains(b"id="vbulletin_css")

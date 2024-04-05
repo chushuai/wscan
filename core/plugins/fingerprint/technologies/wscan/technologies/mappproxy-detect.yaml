@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Mapproxy - Detect
+    author: philippedelteil
+pscan:
+    path:
+        - /
+        - /demo
+    expressions:
+        - response.body.bcontains(b"Welcome to MapProxy") or response.body.bcontains(b"MapProxy Demo") and response.raw_header.bcontains(b"text/html")

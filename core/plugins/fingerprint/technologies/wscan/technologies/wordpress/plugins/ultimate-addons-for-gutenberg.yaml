@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Spectra – WordPress Gutenberg Blocks Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/ultimate-addons-for-gutenberg/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

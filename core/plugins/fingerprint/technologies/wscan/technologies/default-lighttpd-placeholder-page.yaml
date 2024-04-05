@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Lighttpd Placeholder Page
+    author: idealphase
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"If you find a bug in this Lighttpd package, or in Lighttpd itself") and response.body.bcontains(b"<h1> Placeholder page </h1>") and response.status == 200

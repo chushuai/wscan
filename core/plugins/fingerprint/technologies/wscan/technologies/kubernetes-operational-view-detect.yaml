@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubernetes Operational View Detect
+    author: idealphase
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Kubernetes Operational View") and response.status == 200

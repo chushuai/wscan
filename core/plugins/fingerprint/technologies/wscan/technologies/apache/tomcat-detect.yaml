@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Tomcat Detection
+    author: philippedelteil, dhiyaneshdk, adamcrosser
+pscan:
+    path:
+        - /
+        - /{{randstr}}
+        - /docs/introduction.html
+    expressions: []

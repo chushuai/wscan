@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Nginx Default Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Welcome to nginx!</title>")

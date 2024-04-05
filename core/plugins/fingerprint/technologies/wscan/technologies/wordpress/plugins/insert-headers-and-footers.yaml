@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: WPCode – Insert Headers and Footers + Custom Code Snippets – WordPress Code Manager Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/insert-headers-and-footers/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: AWS Cloudfront service detection
+    author: jiheon-dev
+pscan:
+    path:
+        - /
+    expressions: []

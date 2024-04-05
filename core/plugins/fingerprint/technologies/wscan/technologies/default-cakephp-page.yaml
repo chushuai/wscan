@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: CakePHP Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to CakePHP") and response.body.bcontains(b"CakePHP Issues") and response.status == 200

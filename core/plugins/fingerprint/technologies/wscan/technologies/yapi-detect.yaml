@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: YApi Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>YApi-高效、易用、功能强大的可视化接口管理平台</title>") and response.status == 200

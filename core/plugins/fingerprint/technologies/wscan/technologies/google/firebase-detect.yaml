@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: firebase detect
+    author: organiccrap
+pscan:
+    path:
+        - /.settings/rules.json?auth=FIREBASE_SECRET
+    expressions:
+        - response.body.bcontains(b"Could not parse auth token")

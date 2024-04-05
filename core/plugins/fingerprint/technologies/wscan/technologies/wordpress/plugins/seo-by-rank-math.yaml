@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Rank Math SEO Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/seo-by-rank-math/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

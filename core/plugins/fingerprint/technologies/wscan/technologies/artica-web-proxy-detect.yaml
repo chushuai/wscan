@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Artica Web Proxy Detect
+    author: dwisiswant0
+pscan:
+    path:
+        - /fw.login.php
+    expressions:
+        - response.body.bcontains(b"Welcome to the Artica Web Administration Interface") and response.status == 200

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Detect Springboot Actuators
+    author: that_juan_, dwisiswant0, wdahlenb, dr0pd34d
+pscan:
+    path:
+        - /
+        - /actuator
+        - /favicon.ico
+        - /actuator/favicon.ico
+    expressions:
+        - response.body.bcontains(b""_links":") and response.body.bcontains(b""self":") and response.body.bcontains(b""health"")

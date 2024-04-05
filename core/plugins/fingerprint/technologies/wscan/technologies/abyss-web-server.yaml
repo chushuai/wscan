@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Abyss Web Server
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to Abyss Web Server") and response.status == 200

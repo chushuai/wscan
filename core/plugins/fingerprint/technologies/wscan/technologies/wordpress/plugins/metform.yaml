@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Metform Elementor Contact Form Builder Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/metform/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Icecast Streaming Media Server Information Panel - Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /server_version.xsl
+    expressions:
+        - response.body.bcontains(b"Icecast Streaming Media Server") and response.status == 200

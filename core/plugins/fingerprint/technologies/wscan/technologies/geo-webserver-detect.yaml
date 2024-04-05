@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: GeoWebServer Detector Panel - Detect
+    author: dhiyaneshdk, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"<TITLE>GeoWebServer</TITLE>")

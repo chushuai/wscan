@@ -1,0 +1,7 @@
+engine: fingerprint
+info:
+    name: Go Ethereum JSON-RPC HTTP Server - Detect
+    author: nullfuzz
+pscan:
+    path: []
+    expressions: []

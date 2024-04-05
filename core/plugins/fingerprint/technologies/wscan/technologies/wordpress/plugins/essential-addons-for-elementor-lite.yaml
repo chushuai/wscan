@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Essential Addons for Elementor – Best Elementor Widgets With Kits, Templates & WooCommerce Builders Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/essential-addons-for-elementor-lite/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

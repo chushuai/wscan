@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: GraphiQL Detect
+    author: adam crosser
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>GraphiQL") and response.status == 200

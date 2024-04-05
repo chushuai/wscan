@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: VMware vRealize
+    author: milo2012
+pscan:
+    path:
+        - /ui/login.action
+    expressions:
+        - response.status == 200 and response.raw_header.bcontains(b"text/html") and response.body.bcontains(b"<title>vRealize Operations Manager</title>")

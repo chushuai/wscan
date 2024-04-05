@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: XAMPP Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /dashboard/
+    expressions:
+        - response.body.bcontains(b"<title>Welcome to XAMPP</title>") and response.status == 200

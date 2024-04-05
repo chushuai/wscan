@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: AeroCMS Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - '"content="(.*)AeroCMS(.*)".bmatches(response.body) and response.status == 200'

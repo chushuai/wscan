@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Linkerd detection via bad rule
+    author: dudez
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?mi)^Via\s*?:.*?linkerd.*$".bmatches(response.raw_header)'
+        - '"(?mi)^l5d-err:.*$".bmatches(response.raw_header)'
+        - '"(?mi)^l5d-success-class: 0.*$".bmatches(response.raw_header)'
+        - response.body.bcontains(b"expected but end of input found at")

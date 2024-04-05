@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: MonsterInsights – Google Analytics Dashboard for WordPress (Website Stats Made Easy) Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/google-analytics-for-wordpress/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

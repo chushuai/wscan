@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Pinterest for WooCommerce Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/pinterest-for-woocommerce/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

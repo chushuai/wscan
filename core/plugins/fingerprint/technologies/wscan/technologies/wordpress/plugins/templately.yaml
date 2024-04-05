@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Templately – Gutenberg & Elementor Template Library' 5000+ Free & Pro Ready Templates & Cloud! Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/templately/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

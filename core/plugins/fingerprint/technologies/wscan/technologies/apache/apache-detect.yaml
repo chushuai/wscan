@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Detection
+    author: philippedelteil
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Apache+".bmatches(response.raw_header) and response.status == 200'

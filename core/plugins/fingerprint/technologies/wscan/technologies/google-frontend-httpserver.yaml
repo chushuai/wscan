@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Google frontend HttpServer
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"Google Frontend")

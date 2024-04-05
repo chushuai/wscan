@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubelet Scan
+    author: sharath
+pscan:
+    path:
+        - /pods
+    expressions:
+        - response.status == 200 and response.body.bcontains(b""PodList":") and response.body.bcontains(b""items":")

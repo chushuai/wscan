@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: WSO2 Products - Detect
+    author: righettod
+pscan:
+    path:
+        - /services/Version
+    expressions:
+        - response.body.bcontains(b"version.services.core.carbon.wso2.org") and response.status == 200

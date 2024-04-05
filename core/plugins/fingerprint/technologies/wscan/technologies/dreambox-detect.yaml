@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: DreamBox Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"<title>Dreambox WebControl</title>")

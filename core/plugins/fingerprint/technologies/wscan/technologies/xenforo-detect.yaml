@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: XenForo Forum Detection
+    author: dhiyaneshdk, daffainfo
+pscan:
+    path:
+        - /index.php
+    expressions:
+        - response.body.bcontains(b"<html id="XenForo"") or response.body.bcontains(b"<html id="XF"") and response.status == 200

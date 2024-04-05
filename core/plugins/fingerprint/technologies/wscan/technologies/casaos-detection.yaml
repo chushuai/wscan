@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: CasaOS Detection
+    author: pdteam
+pscan:
+    path:
+        - /v1/sys/debug
+    expressions: []

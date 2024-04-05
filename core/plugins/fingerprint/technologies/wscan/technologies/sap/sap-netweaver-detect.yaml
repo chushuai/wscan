@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SAP NetWeaver ICM Detection
+    author: randomstr1ng
+pscan:
+    path:
+        - /
+    expressions:
+        - '"sap-server:".bmatches(response.raw_header) or "Sap-Server:".bmatches(response.raw_header) or "SAP NetWeaver Application Server".bmatches(response.raw_header)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Matrix Server Detect
+    author: erethon
+pscan:
+    path:
+        - /.well-known/matrix/server
+        - /.well-known/matrix/client
+    expressions:
+        - response.raw_header.bcontains(b"text/html") and response.status == 200

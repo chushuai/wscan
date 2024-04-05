@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Roundcube webmail
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+        - /webmail/
+    expressions:
+        - response.body.bcontains(b"Roundcube Webmail") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Redmine CLI Configuration File
+    author: geeknik
+pscan:
+    path:
+        - /.redmine-cli
+    expressions:
+        - response.body.bcontains(b"default") and response.body.bcontains(b"my_id") and response.body.bcontains(b"root_url") and response.status == 200

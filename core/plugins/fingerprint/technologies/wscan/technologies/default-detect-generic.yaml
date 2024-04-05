@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Default Web Application Detection
+    author: andydoering
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Default</title>") or response.body.bcontains(b"<title>Welcome to</title>")

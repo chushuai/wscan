@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Nextcloud Detect
+    author: skeltavik
+pscan:
+    path:
+        - /
+        - /login
+        - /nextcloud/login
+        - /nextcloud/index.php/login
+    expressions:
+        - response.body.bcontains(b"var nc_lastLogin") and response.body.bcontains(b"var nc_pageLoad") and response.status == 200

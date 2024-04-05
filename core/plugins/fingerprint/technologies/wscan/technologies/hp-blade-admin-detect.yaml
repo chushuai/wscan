@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: HP BladeSystem Onboard Administrator Panel - Detector
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>HP BladeSystem Onboard Administrator</title>") and response.status == 200

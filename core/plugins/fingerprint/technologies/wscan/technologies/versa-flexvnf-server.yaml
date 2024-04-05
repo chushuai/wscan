@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Versa FlexVNF Server
+    author: c-sh0
+pscan:
+    path:
+        - /&?=?
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: Versa") and response.raw_header.bcontains(b"FlexVNF") and response.status == 200'

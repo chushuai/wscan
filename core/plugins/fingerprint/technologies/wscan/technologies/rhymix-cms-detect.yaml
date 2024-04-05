@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Rhymix CMS Detect
+    author: gy741
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"rx_sesskey1")
+        - response.body.bcontains(b"<meta name="generator" content="Rhymix" />")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Etcd Version - Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /version
+    expressions:
+        - response.body.bcontains(b""etcdserver"") and response.body.bcontains(b""etcdcluster"") and response.raw_header.bcontains(b"application/json") and response.status == 200

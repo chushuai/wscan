@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Sucuri Security – Auditing, Malware Scanner and Security Hardening Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/sucuri-scanner/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

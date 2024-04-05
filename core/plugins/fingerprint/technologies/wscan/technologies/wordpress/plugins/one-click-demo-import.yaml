@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: One Click Demo Import Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/one-click-demo-import/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

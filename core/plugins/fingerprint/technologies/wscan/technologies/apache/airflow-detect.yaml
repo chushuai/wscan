@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Airflow
+    author: pdteam
+pscan:
+    path:
+        - /{{randstr}}
+    expressions:
+        - response.body.bcontains(b"Airflow 404 = lots of circles") and response.status == 404

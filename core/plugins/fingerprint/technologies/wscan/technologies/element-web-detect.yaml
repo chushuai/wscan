@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Element Web - Detect
+    author: davidegirardi
+pscan:
+    path:
+        - /manifest.json
+        - /version
+    expressions: []

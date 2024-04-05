@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: FanRuanOA-detect
+    author: yanyun
+pscan:
+    path:
+        - /WebReport/ReportServer
+        - /ReportServer
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"DeploySuccess._init")

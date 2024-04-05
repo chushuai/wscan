@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Grav CMS Detect
+    author: cyllective
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: grav-site-")'
+        - response.body.bcontains(b"<meta name="generator" content="GravCMS" />")

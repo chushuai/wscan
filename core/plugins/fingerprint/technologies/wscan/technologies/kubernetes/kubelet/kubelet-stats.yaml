@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubelet Stats
+    author: sharath
+pscan:
+    path:
+        - /stats/summary
+    expressions:
+        - response.status == 200 and response.body.bcontains(b""node":") and response.body.bcontains(b""nodeName":")

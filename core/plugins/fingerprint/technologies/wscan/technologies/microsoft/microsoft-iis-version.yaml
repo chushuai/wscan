@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Microsoft IIS version detect
+    author: wlayzz
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"IIS") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Express Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Express</title>") and response.body.bcontains(b"Welcome to Express") and response.raw_header.bcontains(b"text/html") and response.status == 200

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: JavaServer Faces Detection
+    author: brenocss, moritz nentwig
+pscan:
+    path:
+        - /
+    expressions: []

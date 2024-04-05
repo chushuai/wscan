@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Dell DPI Remote Power Management - Detect
+    author: megamansec
+pscan:
+    path:
+        - /index2.html
+    expressions:
+        - response.body.bcontains(b"title="DELL DPI Remote Power Management") or response.body.bcontains(b"<TITLE>DELL DPI Remote Power Management") and response.status == 200

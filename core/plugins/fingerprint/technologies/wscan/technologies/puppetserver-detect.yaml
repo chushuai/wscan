@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Puppetserver Detection
+    author: c-sh0
+pscan:
+    path:
+        - /puppet-ca/v1/certificate_request/{{randstr}}
+    expressions:
+        - response.status == 404 and response.raw_header.bcontains(b"x-puppet-version") and response.body.bcontains(b"{{randstr}}")

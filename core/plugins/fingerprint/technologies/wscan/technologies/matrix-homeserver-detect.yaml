@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Matrix Homeserver - Version Detection
+    author: davidegirardi
+pscan:
+    path:
+        - /_matrix/federation/v1/version
+    expressions:
+        - response.body.bcontains(b""server":") and response.body.bcontains(b""name":") and response.body.bcontains(b""version":")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SAP Spartacus detect
+    author: techbrunchfr
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<cx-storefront")

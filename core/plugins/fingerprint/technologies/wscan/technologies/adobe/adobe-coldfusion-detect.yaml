@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: Adobe ColdFusion Detector
+    author: philippedelteil
+pscan:
+    path:
+        - /CFIDE/administrator/images/mx_login.gif
+        - /cfide/administrator/images/mx_login.gif
+        - /CFIDE/administrator/images/background.jpg
+        - /cfide/administrator/images/background.jpg
+        - /CFIDE/administrator/images/componentutilslogin.jpg
+        - /cfide/administrator/images/componentutilslogin.jpg
+    expressions: []

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SAP Internet Graphics Server (IGS) Detection
+    author: _generic_human_
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"SAP IGS") and response.body.bcontains(b"is running") and response.status == 200 and response.raw_header.bcontains(b"SAP Internet Graphics Server")

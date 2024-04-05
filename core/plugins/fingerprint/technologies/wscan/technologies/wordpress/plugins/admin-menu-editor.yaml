@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Admin Menu Editor Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/admin-menu-editor/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

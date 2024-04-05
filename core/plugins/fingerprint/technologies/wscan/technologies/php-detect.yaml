@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PHP Detect
+    author: y0no
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"PHP") and response.status == 200

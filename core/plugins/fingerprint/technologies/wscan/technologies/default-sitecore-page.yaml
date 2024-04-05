@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Sitecore Default Page - Detect
+    author: dhiyaneshdk, randomdhiraj
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to Sitecore") or response.body.bcontains(b"alt="Sitecore"") and response.status == 200

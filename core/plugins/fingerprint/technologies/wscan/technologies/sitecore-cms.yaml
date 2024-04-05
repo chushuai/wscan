@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Sitecore CMS - Detect
+    author: randomdhiraj
+pscan:
+    path:
+        - /-/media/doo-doo.ashx
+    expressions:
+        - '"Location: /sitecore/service/notfound.aspx".bmatches(response.raw_header) and response.status == 302'

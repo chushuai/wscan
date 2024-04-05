@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Pagespeed Detection
+    author: geeknik
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-Mod-Pagespeed:")

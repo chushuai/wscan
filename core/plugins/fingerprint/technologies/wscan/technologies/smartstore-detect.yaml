@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SmartStore Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<meta name="generator" content="Smartstore (.*)" />".bmatches(response.body) and response.status == 200'

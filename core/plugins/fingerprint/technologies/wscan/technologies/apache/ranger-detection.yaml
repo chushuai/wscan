@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Apache Ranger Detection
+    author: for3stco1d
+pscan:
+    path:
+        - /login.jsp
+        - /images/favicon.ico
+    expressions:
+        - response.body.bcontains(b"<title> Ranger - Sign In</title>")

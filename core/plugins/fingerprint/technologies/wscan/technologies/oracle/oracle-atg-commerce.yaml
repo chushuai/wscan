@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle ATG Commerce Panel - Detect
+    author: dale clarke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"x-atg-version") or response.raw_header.bcontains(b"atg_session_id") and response.status == 200

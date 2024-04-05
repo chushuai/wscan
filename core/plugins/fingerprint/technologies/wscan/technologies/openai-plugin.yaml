@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OpenAI Plugin Detection
+    author: pdteam
+pscan:
+    path:
+        - /.well-known/ai-plugin.json
+    expressions:
+        - response.body.bcontains(b""schema_version":") and response.body.bcontains(b""name_for_model":")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Strapi CMS detect
+    author: cyllective, daffainfo, idealphase
+pscan:
+    path:
+        - /admin/init
+    expressions:
+        - response.body.bcontains(b""data"") and response.body.bcontains(b""uuid"") and response.body.bcontains(b""hasAdmin"") and response.status == 200

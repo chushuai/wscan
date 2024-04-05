@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Oracle-iPlanet-Web-Server
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Oracle iPlanet Web Server") and response.status == 200

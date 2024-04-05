@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: MoinMoin wiki detect
+    author: cyllective
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a>") or response.body.bcontains(b"<a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a>") and response.status == 200

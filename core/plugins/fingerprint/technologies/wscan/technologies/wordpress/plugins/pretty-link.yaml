@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Pretty Links – Affiliate Links, Link Branding, Link Tracking & Marketing Plugin Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/pretty-link/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

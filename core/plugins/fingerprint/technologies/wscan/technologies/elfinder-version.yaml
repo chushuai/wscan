@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: elFinder 2.1.58 - Remote Code Execution
+    author: idealphase
+pscan:
+    path:
+        - /js/elfinder.min.js
+        - /js/elFinder.version.js
+    expressions:
+        - response.body.bcontains(b"elFinder - file manager for web") or response.body.bcontains(b"elFinder.prototype.version =") and response.status == 200

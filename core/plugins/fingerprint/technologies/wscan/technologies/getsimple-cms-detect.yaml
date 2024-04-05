@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: GetSimple CMS Detection
+    author: pikpikcu, philippedelteil
+pscan:
+    path:
+        - /
+        - /readme.txt
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"Powered by  GetSimple") or response.body.bcontains(b"GetSimple CMS is a flatfile CMS")

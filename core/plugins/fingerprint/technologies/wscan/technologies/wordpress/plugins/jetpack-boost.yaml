@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jetpack Boost – Website Speed, Performance and Critical CSS Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/jetpack-boost/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

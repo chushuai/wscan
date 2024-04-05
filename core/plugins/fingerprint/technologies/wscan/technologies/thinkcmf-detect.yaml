@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ThinkCMF Panel - Detect
+    author: pikpikcu, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name="author" content="ThinkCMF">") and response.status == 200

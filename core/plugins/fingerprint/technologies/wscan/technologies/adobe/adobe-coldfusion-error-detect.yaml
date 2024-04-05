@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Adobe ColdFusion Detector
+    author: philippedelteil
+pscan:
+    path:
+        - /_something_.cfm
+    expressions:
+        - response.body.bcontains(b"ColdFusion documentation") and response.status == 404

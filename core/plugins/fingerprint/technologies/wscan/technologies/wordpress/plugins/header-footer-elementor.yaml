@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Elementor Header & Footer Builder Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/header-footer-elementor/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

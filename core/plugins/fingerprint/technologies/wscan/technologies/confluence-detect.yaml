@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Confluence Detection
+    author: philippedelteil, adamcrosser, 6mile
+pscan:
+    path:
+        - /dologin.action
+        - /
+        - /pages
+        - /confluence
+        - /wiki
+    expressions: []

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle Access Manager Detect
+    author: tess
+pscan:
+    path:
+        - /oamfed/idp/soap
+    expressions:
+        - response.body.bcontains(b"processing the SOAP Request") and response.raw_header.bcontains(b"text/xml") and response.status == 200

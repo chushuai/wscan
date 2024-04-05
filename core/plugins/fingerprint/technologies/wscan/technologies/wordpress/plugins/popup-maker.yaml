@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Popup Maker – Popup for opt-ins, lead gen, & more Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/popup-maker/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

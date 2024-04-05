@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Magento End-of-life Detect
+    author: dogancanbakir
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Magento\/([0-9.]+) ".bmatches(response.body)'

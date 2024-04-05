@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: SpringBoot WhiteLabel Error Page - Detect
+    author: matt miller
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"<h1>Whitelabel Error Page</h1>") and response.raw_header.bcontains(b"text/html")

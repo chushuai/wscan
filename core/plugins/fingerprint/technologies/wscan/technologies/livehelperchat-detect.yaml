@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Live Helper Chat Detect
+    author: pikpikcu, ricardomaia
+pscan:
+    path:
+        - /
+        - /doc/CHANGELOG.txt
+        - /doc/README.txt
+    expressions:
+        - '"(?i)Live.Helper.Chat".bmatches(response.body)'

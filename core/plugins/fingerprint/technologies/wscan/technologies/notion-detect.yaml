@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Notion Detect
+    author: tess
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Notion – One workspace. Every team.") or response.body.bcontains(b"Notion Labs, Inc.") and response.status == 200

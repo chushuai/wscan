@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: TileServer GL Page - Detect
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>TileServer GL - Server for vector and raster maps with GL styles</title>") and response.status == 200

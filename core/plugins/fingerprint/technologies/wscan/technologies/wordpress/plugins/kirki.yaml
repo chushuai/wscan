@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kirki Customizer Framework Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/kirki/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Atlassian Connect Descriptor - Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /atlassian-connect.json
+    expressions:
+        - response.body.bcontains(b""name":") and response.body.bcontains(b""vendor":") and response.body.bcontains(b""key":") and response.body.bcontains(b""baseUrl":") and response.body.bcontains(b""authentication":") and response.raw_header.bcontains(b"application/json") and response.status == 200

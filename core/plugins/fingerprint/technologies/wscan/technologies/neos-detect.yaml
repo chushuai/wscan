@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Neos CMS detection
+    author: k11h-de
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"This website is powered by Neos")

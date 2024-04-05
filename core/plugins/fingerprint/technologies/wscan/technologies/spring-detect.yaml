@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Java Spring Detection
+    author: adam crosser
+pscan:
+    path:
+        - /error
+    expressions:
+        - response.body.bcontains(b""status":999") and response.status == 500

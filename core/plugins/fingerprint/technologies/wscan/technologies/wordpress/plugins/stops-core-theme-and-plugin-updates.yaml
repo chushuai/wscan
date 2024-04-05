@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Easy Updates Manager Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/stops-core-theme-and-plugin-updates/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

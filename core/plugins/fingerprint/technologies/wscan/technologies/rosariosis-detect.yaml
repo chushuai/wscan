@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Rosariosis Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"RosarioSIS=") and response.status == 200

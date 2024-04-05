@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Jenkins Detection
+    author: philippdelteil, daffainfo, c-sh0, adamcrosser
+pscan:
+    path:
+        - /
+        - /whoAmI/
+    expressions:
+        - response.raw_header.bcontains(b"x-jenkins:") and response.body.bcontains(b"Jenkins")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OMGF | GDPR/DSGVO Compliant, Faster Google Fonts. Easy. Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/host-webfonts-local/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

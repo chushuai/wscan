@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Agentejo Cockpit
+    author: dwisiswant0
+pscan:
+    path:
+        - /auth/login
+    expressions:
+        - response.body.bcontains(b"<title>Authenticate Please!</title>")

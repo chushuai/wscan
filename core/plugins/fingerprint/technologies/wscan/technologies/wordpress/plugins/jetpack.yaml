@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jetpack – WP Security, Backup, Speed, & Growth Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/jetpack/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

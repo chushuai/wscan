@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Chevereto detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - '"content="Chevereto(.*)">".bmatches(response.body) and response.status == 200'

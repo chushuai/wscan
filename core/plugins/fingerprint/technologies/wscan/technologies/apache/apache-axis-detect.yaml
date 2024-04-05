@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: apache-axis-detect
+    author: dogasantos
+pscan:
+    path:
+        - /
+        - /axis2/
+        - /axis/
+    expressions:
+        - response.body.bcontains(b"Validate") and response.body.bcontains(b"Welcome") and response.body.bcontains(b"Axis") and response.body.bcontains(b"deployed") and response.body.bcontains(b"installation") and response.body.bcontains(b"Admin") and response.status == 200

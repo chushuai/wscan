@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: REDCap detector
+    author: philippedelteil, retr0
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"REDCap") and response.body.bcontains(b"Vanderbilt University") and response.status == 200

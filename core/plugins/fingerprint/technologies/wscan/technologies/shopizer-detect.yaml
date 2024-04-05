@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Shopizer Detection
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /shop/
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"Powered by <a href="http://www.shopizer.com"")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: DWR detect test page detection
+    author: pussycat0x
+pscan:
+    path:
+        - /dwr/index.html
+    expressions:
+        - response.body.bcontains(b"<title>DWR Test Index</title>") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Header Footer Code Manager Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/header-footer-code-manager/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

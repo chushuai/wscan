@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ShareFile Storage Server - Detect
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ShareFile Storage Server") and response.status == 200

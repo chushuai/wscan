@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: TablePress – Tables in WordPress made easy Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/tablepress/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

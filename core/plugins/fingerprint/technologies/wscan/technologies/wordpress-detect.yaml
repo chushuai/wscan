@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: WordPress Detect
+    author: pdteam, daffainfo, ricardomaia, topscoder, adamcrosser
+pscan:
+    path:
+        - /
+        - /wp-admin/install.php
+        - /feed/
+        - /?feed=rss2
+    expressions:
+        - response.status == 200

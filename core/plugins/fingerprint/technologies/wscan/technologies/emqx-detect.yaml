@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Emqx Detection
+    author: for3stco1d
+pscan:
+    path:
+        - /static/emq.ico
+    expressions:
+        - ""

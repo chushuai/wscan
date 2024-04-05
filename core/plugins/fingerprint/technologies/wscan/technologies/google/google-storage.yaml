@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Google Bucket detection
+    author: 0xteles
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"x-goog-metageneration") or response.raw_header.bcontains(b"X-Goog-Metageneration")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Amazon-S3 Bucket
+    author: melbadry9
+pscan:
+    path:
+        - /%c0
+    expressions:
+        - '"(?:InvalidURI|InvalidArgument|NoSuchBucket)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Nginx version detect
+    author: philippedelteil, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - '"nginx/[0-9.]+".bmatches(response.raw_header) and response.status == 200'

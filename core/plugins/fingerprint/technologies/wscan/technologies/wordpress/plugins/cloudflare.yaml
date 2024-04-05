@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Cloudflare Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/cloudflare/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

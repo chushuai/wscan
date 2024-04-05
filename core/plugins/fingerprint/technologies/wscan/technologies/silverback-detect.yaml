@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Silverback MDM - Detection
+    author: nodauf
+pscan:
+    path:
+        - /sts/Content/Images/favicon.ico
+    expressions: []

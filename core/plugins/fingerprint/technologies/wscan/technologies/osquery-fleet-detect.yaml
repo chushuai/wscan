@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OSQuery Fleet Detection Panel - Detect
+    author: adam crosser
+pscan:
+    path:
+        - /login
+    expressions:
+        - response.body.bcontains(b"Fleet") and response.body.bcontains(b"osquery") and response.body.bcontains(b"/assets/bundle") and response.status == 200

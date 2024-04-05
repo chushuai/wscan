@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: CVSweb - Detect
+    author: lu4nx
+pscan:
+    path:
+        - /
+    expressions:
+        - '"content=".*CVSweb.*"".bmatches(response.body) and response.status == 200'

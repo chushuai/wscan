@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: DedeCMS Detect
+    author: ritikchaddha, pphuahua
+pscan:
+    path:
+        - /
+        - /robots.txt
+    expressions:
+        - ""

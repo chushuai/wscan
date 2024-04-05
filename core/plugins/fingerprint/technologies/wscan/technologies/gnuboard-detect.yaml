@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Gnuboard CMS - Detect
+    author: gy741
+pscan:
+    path:
+        - /LICENSE.txt
+    expressions:
+        - response.body.bcontains(b"GNU Board") and response.body.bcontains(b"http://sir.kr") and response.raw_header.bcontains(b"text/plain")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Zimbra Detect
+    author: udinchan
+pscan:
+    path:
+        - /js/zimbraMail/share/model/ZmSettings.js
+    expressions:
+        - response.body.bcontains(b"Zimbra Collaboration Suite Web Client") and response.raw_header.bcontains(b"application/x-javascript")

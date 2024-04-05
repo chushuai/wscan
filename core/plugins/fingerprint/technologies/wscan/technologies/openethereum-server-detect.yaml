@@ -1,0 +1,7 @@
+engine: fingerprint
+info:
+    name: OpenEthereum JSON-RPC HTTP Server Detect
+    author: nullfuzz
+pscan:
+    path: []
+    expressions: []

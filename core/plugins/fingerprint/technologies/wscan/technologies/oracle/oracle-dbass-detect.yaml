@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle DBaaS Monitor Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /dbaas_monitor/login
+    expressions:
+        - response.body.bcontains(b"<title>DBaaS Monitor</title>") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache2 Ubuntu Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<title>Apache2 Ubuntu Default Page: It works</title>")'

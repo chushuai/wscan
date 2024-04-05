@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Limit Login Attempts Reloaded Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/limit-login-attempts-reloaded/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PrestaShop Tech Detection
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a\s+[^>]+>PrestaShop".bmatches(response.body) or "<!-- /Block [a-z ]+ module (?:HEADER|TOP)?\s?-->".bmatches(response.body) or "<!-- /Module Block [a-z ]+ -->".bmatches(response.body)'

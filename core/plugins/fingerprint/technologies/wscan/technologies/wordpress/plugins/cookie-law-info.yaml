@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: CookieYes | GDPR Cookie Consent & Compliance Notice (CCPA Ready) Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/cookie-law-info/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

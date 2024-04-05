@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: WooCommerce Shipping & Tax Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/woocommerce-services/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

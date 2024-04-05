@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Subrion CMS Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"subrion.org" title="Open Source CMS">Subrion CMS") or response.body.bcontains(b"Subrion CMS - Open Source Content Management System") and response.status == 200

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Drupal Detection
+    author: 1nf1n7y
+pscan:
+    path:
+        - /
+        - /CHANGELOG.txt
+        - /core/install.php
+    expressions:
+        - response.body.bcontains(b"Initial release") and response.body.bcontains(b"Drupal 1.0.0")
+        - response.body.bcontains(b"content="Drupal")

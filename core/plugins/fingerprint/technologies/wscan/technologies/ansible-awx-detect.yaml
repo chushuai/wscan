@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Ansible AWX Detection
+    author: adam crosser
+pscan:
+    path:
+        - /api/
+    expressions:
+        - response.body.bcontains(b""description":"AWX REST API"") and response.status == 200

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: PHP Proxy Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /proxy
+    expressions:
+        - response.body.bcontains(b"<title>PHP-Proxy</title>") and response.status == 200

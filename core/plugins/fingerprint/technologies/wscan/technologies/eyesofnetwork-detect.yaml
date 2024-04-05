@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: EyesOfNetwork Detect
+    author: praetorian-thendrickson
+pscan:
+    path:
+        - /login.php
+    expressions:
+        - response.body.bcontains(b"<title>EyesOfNetwork</title>") and response.status == 200

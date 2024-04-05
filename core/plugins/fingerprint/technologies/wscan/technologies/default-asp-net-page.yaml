@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ASP.Net Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Home Page - My ASP.NET Application")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: IIS-7 Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>IIS7</title>")

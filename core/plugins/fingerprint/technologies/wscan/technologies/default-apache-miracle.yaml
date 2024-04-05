@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Default Apache Miracle Linux Web Server Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<TITLE>Apache Miracle Linux Web Server</TITLE>") and response.status == 200

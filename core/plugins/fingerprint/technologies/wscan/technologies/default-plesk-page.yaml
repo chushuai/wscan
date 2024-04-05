@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Plesk Default Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Web Server's Default Page</title>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Really Simple CAPTCHA Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/really-simple-captcha/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kube API Namespaces
+    author: sharath
+pscan:
+    path:
+        - /api/v1/namespaces
+    expressions:
+        - response.status == 200 and response.body.bcontains(b""NamespaceList":") and response.body.bcontains(b""items":")

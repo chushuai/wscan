@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect OpenID Connect provider
+    author: jarijaas
+pscan:
+    path:
+        - /.well-known/openid-configuration
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"issuer") and response.body.bcontains(b"authorization_endpoint")

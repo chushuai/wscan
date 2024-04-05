@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: HashiCorp Vault Detect
+    author: adam crosser
+pscan:
+    path:
+        - /ui/vault/auth
+    expressions:
+        - response.body.bcontains(b"<meta name="vault/config/environment"")

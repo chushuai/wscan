@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Payara Server Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Payara Server - Server Running</title>")

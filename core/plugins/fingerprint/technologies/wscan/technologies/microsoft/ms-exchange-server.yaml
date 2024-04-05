@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Microsoft Exchange Server Detect
+    author: pikpikcu, dhiyaneshdk
+pscan:
+    path:
+        - /owa/auth/logon.aspx
+    expressions:
+        - '"(?i)(X-Owa-Version:)".bmatches(response.raw_header)'
+        - '"/owa/auth/[0-9.]+/".bmatches(response.body)'
+        - response.body.bcontains(b"<title>Exchange Log In</title>") or response.body.bcontains(b"<title>Microsoft Exchange - Outlook Web Access</title>")

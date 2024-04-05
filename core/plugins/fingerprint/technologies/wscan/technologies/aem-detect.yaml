@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Favicon based AEM Detection
+    author: shifacyclewala, hackergautam
+pscan:
+    path:
+        - /libs/granite/core/content/login/favicon.ico
+    expressions: []

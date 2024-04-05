@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: CATALOGcreator Page Login Panel - Detect
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+        - /index.php
+    expressions:
+        - response.body.bcontains(b"Powered by CATALOGcreator") or response.body.bcontains(b"content="CATALOGcreator") and response.status == 200

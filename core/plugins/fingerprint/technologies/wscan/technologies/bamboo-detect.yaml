@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Bamboo - Detection
+    author: bhutch
+pscan:
+    path:
+        - /
+    expressions: []

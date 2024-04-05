@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kube API Deployments
+    author: sharath
+pscan:
+    path:
+        - /apis/apps/v1/namespaces/default/deployments
+    expressions:
+        - response.status == 200 and response.body.bcontains(b""DeploymentList":") and response.body.bcontains(b""items":")

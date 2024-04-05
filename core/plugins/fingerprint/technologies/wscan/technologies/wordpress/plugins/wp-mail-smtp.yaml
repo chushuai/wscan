@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: WP Mail SMTP by WPForms – The Most Popular SMTP and Email Log Plugin Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/wp-mail-smtp/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

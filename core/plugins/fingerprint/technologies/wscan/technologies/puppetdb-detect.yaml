@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PuppetDB Detection
+    author: c-sh0
+pscan:
+    path:
+        - /pdb/meta/v1/version
+    expressions:
+        - response.status == 200 and response.raw_header.bcontains(b"application/json") and ""version"\s:\s"([0-9.]+)"".bmatches(response.body)

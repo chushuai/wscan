@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: elFinder - Install Detection
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /elfinder.html
+    expressions:
+        - response.body.bcontains(b"<!-- Element where elFinder will be created (REQUIRED) -->") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Tapestry Framework detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content="Apache Tapestry Framework") or response.body.bcontains(b"content="Tapestry Application Framework")

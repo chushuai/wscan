@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Shiro Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Apache Shiro Quickstart</title>") and response.status == 200

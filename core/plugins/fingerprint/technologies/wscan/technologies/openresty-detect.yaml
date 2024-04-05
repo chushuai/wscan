@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OpenResty detection
+    author: jcockhren
+pscan:
+    path:
+        - /
+    expressions:
+        - response.headers["server"].contains("openresty")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Cisco ASA - Detect
+    author: sdcampbell
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"config-auth client="vpn"") and response.status == 200

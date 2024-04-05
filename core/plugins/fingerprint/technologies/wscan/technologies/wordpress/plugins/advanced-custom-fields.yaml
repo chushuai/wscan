@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Advanced Custom Fields (ACF) Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/advanced-custom-fields/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

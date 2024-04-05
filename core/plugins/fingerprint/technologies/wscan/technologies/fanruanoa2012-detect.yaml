@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: FanRuanOA2012-detect
+    author: yanyun
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"down.download?FM_SYS_ID")

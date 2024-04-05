@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Metatag CMS Detection
+    author: dadevel
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"text/html") and "(?i)<meta\s+?name="?generator"?\s+?content="[^"]+?"".bmatches(response.body)

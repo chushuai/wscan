@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Aqua Enterprise Detect
+    author: daffainfo
+pscan:
+    path:
+        - /api
+    expressions:
+        - '""version"".bmatches(response.body) and ""enable_sso"".bmatches(response.body) and ""num_protected_kube_nodes"".bmatches(response.body) and response.status == 200'

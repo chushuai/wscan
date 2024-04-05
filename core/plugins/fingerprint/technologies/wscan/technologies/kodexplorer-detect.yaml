@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: KodExplorer-detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?i)<title>.* - Powered by KodExplorer</title>".bmatches(response.body)'

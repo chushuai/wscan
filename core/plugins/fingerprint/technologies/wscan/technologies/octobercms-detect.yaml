@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: OctoberCMS detect
+    author: cyllective
+pscan:
+    path:
+        - /
+        - /modules/system/assets/js/framework.combined-min.js
+    expressions:
+        - response.raw_header.bcontains(b"october_session")
+        - response.body.bcontains(b"OctoberCMS")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OneBlog Detect
+    author: pikpikcu, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>OneBlog开源博客后台管理系统</title>") or response.body.bcontains(b"<meta name="keywords" content="OneBlog") and response.status == 200

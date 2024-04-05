@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Detect websites using Google bucket storage
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions: []

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Lexmark Device Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>Lexmark (.*)</title>".bmatches(response.body) and response.status == 200'

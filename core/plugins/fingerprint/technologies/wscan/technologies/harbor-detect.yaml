@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Harbor Detect
+    author: pikpikcu, daffainfo
+pscan:
+    path:
+        - /api/v2.0/systeminfo
+    expressions:
+        - response.body.bcontains(b""auth_mode"") and response.body.bcontains(b""harbor_version"") and response.status == 200

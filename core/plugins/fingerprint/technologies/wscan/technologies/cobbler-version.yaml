@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Cobbler Version Detection
+    author: c-sh0
+pscan:
+    path:
+        - /cobbler_api
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"<name>version</name>")

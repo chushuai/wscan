@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Node-RED Dashboard - Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Node-RED</title>") and response.status == 200

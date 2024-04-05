@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect websites using AWS bucket storage
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - ""

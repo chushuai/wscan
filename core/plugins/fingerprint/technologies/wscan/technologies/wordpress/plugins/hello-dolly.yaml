@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Hello Dolly Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/hello-dolly/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

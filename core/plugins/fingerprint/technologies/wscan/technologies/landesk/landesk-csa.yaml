@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: LANDESK(R) Cloud Services Appliance Detect
+    author: 0xnirvana
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"LANDESK(R)") and response.body.bcontains(b"Cloud Services Appliance")

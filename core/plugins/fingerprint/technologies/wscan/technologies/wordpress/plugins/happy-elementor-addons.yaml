@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Happy Addons for Elementor Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/happy-elementor-addons/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

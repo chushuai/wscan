@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Swag Instance Default Page Panel - Detect
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Welcome to your SWAG instance</title>") and response.raw_header.bcontains(b"text/html") and response.status == 200

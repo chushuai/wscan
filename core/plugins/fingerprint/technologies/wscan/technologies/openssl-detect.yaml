@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Openssl Detect
+    author: h4kux, princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.headers["server"].contains("OpenSSL") and response.status == 200

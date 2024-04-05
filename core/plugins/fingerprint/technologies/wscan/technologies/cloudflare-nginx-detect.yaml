@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Cloudflare Nginx Detect
+    author: idealphase
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: cloudflare-nginx") and response.status == 200'

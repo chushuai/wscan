@@ -1,0 +1,7 @@
+engine: fingerprint
+info:
+    name: Cloudfoundry Detect
+    author: uomogrande
+pscan:
+    path: []
+    expressions: []

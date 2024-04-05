@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SAP Web Dispatcher admin portal detection
+    author: randomstr1ng
+pscan:
+    path:
+        - /sap/wdisp/admin/public/default.html
+    expressions:
+        - response.raw_header.bcontains(b"Basic realm="WEB ADMIN"") or response.raw_header.bcontains(b"SAP NetWeaver Application Server") and response.status == 401 or response.status == 200 and response.body.bcontains(b"SAP Web Dispatcher") or response.body.bcontains(b"<title>Administration</title>")

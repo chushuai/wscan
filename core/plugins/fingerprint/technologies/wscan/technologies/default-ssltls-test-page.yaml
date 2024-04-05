@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SSL/TLS-aware Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<TITLE>Test Page for the SSL/TLS-aware Apache Installation on Web Site</TITLE>")

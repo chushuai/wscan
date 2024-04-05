@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Synology Web Station Page - Detect
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Hello! Welcome to Synology Web Station!</title>") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ImpressCMS Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200

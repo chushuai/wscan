@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Goliath Detection
+    author: geeknik
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Goliath+".bmatches(response.raw_header)'

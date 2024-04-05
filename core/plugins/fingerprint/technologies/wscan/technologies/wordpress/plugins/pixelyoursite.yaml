@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PixelYourSite – Your smart PIXEL (TAG) Manager Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/pixelyoursite/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

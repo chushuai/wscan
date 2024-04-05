@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Zend Server Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Zend Server Test Page</title>") and response.raw_header.bcontains(b"text/html") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Meta Box – WordPress Custom Fields Framework Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/meta-box/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

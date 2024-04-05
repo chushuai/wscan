@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: YesWiki Panel - Detect
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"yeswiki-search") or response.body.bcontains(b"yeswiki-base") and response.status == 200

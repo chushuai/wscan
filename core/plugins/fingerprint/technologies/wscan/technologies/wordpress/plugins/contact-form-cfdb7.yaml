@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Contact Form 7 Database Addon – CFDB7 Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/contact-form-cfdb7/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

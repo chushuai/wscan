@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: Apache NiFi detect
+    author: dwisiswant0
+pscan:
+    path:
+        - /access/config
+        - /controller/config
+        - /controller/registry-clients
+        - /counters
+        - /flow/registries
+        - /system-diagnostics
+        - /nifi-api/access/config
+    expressions:
+        - '"supportsLogin".bmatches(response.body) or "disconnectedNodeAcknowledged".bmatches(response.body) or "(aggregate|node)Snapshots?".bmatches(response.body) and response.status == 200'

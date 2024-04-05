@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Tengine Default Page
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to tengine") and response.body.bcontains(b"Thank you for using tengine") and response.status == 200

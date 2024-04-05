@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: GitBook Detect
+    author: ffffffff0x, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"gitbook.page.hasChanged") and response.body.bcontains(b"<meta name="generator" content="GitBook")
+        - '"<title>.*[Gg]it[bB]ook</title>".bmatches(response.body) or "<title>.*· [Gg]it[bB]ook.*</title>".bmatches(response.body)'

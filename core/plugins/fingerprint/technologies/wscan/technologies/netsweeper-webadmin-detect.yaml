@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Netsweeper WebAdmin - Detect
+    author: dwisiswant0
+pscan:
+    path:
+        - /webadmin/start/
+        - /webadmin/tools/systemstatus_remote.php
+    expressions:
+        - '"Powered by netsweeper".bmatches(response.body) or "Netsweeper Inc".bmatches(response.body) and response.status == 200'

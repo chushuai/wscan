@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Akamai Cache Detection
+    author: nybble04
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:TCP_HIT|TCP_MISS).*deploy\.akamaitechnologies\.com".bmatches(response.raw_header)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Piwigo Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"piwigo.org">Piwigo</a>") or response.body.bcontains(b"Piwigo (aka PWG), see piwigo.org") and response.status == 200

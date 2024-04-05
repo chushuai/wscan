@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Google Cloud Run Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Congratulations | Cloud Run") and response.body.bcontains(b"alt="A group celebrating") and response.status == 200

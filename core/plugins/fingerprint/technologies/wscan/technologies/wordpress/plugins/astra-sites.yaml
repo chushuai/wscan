@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Starter Templates — Elementor, WordPress & Beaver Builder Templates Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/astra-sites/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Hugo Detect
+    author: daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=generator content="Hugo") and response.status == 200

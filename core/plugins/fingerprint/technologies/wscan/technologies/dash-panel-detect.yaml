@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Dash Panel Detect
+    author: tess
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"_dash-config") and response.body.bcontains(b"DashRenderer") and response.status == 200

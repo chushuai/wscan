@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: W3 Total Cache Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/w3-total-cache/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

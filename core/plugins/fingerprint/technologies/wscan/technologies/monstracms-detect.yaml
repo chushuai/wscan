@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: MonstraCMS Detection
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content="Powered by Monstra") and response.status == 200

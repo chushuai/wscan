@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect tor SOCKS proxy
+    author: geeknik
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"This is a SOCKS Proxy") and response.body.bcontains(b"HTTPTunnelPort") and response.body.bcontains(b"SOCKSPort") and response.status == 501

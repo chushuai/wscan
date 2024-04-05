@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Disable Comments – Remove Comments & Stop Spam [Multi-Site Support] Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/disable-comments/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

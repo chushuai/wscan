@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OpenHAP Detection
+    author: fabaff
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"openHAB") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: OAuth 2.0 Authorization Server Detection Template
+    author: righettod
+pscan:
+    path:
+        - /oauth/token
+    expressions:
+        - response.status == 401 or response.status == 400 and response.body.bcontains(b"error":"invalid_client"")

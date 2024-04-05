@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Azure Container Instance Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Welcome to Azure Container Instances!</title>") and response.status == 200

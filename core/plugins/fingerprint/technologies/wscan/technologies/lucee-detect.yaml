@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Lucee
+    author: geeknik
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?i)X-Lucee-Version".bmatches(response.raw_header) or "(?i)X-CB-Server: LUCEE".bmatches(response.raw_header) or "(?i)X-IDG-Appserver: Lucee".bmatches(response.raw_header) and response.status == 200'

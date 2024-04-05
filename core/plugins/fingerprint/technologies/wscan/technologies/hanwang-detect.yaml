@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hanwang-detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"汉王人脸考勤管理系统") and response.status == 200

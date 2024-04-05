@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Contact Form by WPForms – Drag & Drop Form Builder for WordPress Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/wpforms-lite/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

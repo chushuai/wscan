@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: LimeSurvey Survey Software - Detect
+    author: matt galligan
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content="LimeSurvey") or response.body.bcontains(b"alt="LimeSurvey Survey Software") or response.body.bcontains(b"data-limesurvey-lang=") or response.body.bcontains(b"alt="Powered by LimeSurvey") and response.status == 200

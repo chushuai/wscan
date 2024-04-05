@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Variation Swatches for WooCommerce Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/woo-variation-swatches/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

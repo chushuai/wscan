@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: AppCms Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powerd by AppCMS (.*) -->".bmatches(response.body) and response.status == 200'

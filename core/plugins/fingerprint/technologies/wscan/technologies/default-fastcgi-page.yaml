@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Fastcgi Default Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>TurnKey NGINX PHP FastCGI Server</title>")

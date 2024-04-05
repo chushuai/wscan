@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: Pi-hole Login Panel - Detect
+    author: geeknik
+pscan:
+    path:
+        - /
+        - /admin/index.php
+        - /admin/login.php
+        - /admin/index.php?login
+        - /index.php?login
+    expressions:
+        - response.body.bcontains(b"Pi-hole") and response.body.bcontains(b"Web Interface") and response.body.bcontains(b"FTL")
+        - 'response.body.bcontains(b"<title>Pi-hole") or response.body.bcontains(b"Pi-hole: Your black hole for Internet advertisements") or response.body.bcontains(b"Pi-hole: A black hole for Internet advertisements") or response.body.bcontains(b"<pre>sudo pihole -a -p</pre>")'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Mongoose Server
+    author: lu4nx
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: Mongoose") and response.status == 200'

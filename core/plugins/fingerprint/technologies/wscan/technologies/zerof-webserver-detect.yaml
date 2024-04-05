@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ZEROF Web Server Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>ZEROF Web Server</title>") and response.status == 200

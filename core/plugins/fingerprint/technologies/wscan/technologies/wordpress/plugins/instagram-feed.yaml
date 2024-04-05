@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Smash Balloon Social Photo Feed – Best Social Feed Plugin for WordPress Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/instagram-feed/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

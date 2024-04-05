@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Detect MRTG
+    author: geeknik
+pscan:
+    path:
+        - /
+        - /mrtg/
+        - /MRTG/
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"MRTG Index Page") and response.body.bcontains(b"Multi Router Traffic Grapher")

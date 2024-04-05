@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Table of Contents Plus Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/table-of-contents-plus/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

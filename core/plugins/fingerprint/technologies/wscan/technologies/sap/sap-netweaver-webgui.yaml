@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SAP NetWeaver WebGUI Detection
+    author: randomstr1ng
+pscan:
+    path:
+        - /sap/bc/gui/sap/its/webgui
+    expressions:
+        - response.body.bcontains(b"sap-system-login") or response.body.bcontains(b"<title>Logon</title>")

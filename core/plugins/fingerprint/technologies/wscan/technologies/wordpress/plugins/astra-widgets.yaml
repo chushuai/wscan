@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Astra Widgets Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/astra-widgets/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

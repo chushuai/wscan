@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Velvet Blues Update URLs Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/velvet-blues-update-urls/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

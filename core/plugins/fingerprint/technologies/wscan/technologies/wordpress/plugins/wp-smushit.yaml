@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Smush – Optimize, Compress and Lazy Load Images Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/wp-smushit/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

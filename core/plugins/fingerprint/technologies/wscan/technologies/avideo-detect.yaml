@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Avideo Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>(.*)AVideo(.*)</title>".bmatches(response.body) or "AVideo Analytics".bmatches(response.body) and response.raw_header.bcontains(b"/install/index.php") and response.status == 200'

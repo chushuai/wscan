@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Elasticsearch -  SQL Client Detection
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Elasticsearch-sql client</title>") and response.status == 200

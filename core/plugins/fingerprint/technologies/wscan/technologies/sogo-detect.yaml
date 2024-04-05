@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: SOGo Detect
+    author: righettod
+pscan:
+    path:
+        - /
+        - /SOGo
+    expressions:
+        - response.body.bcontains(b"content="SOGo Web Interface"") or response.body.bcontains(b"sg-default="SOGo") and response.status == 200

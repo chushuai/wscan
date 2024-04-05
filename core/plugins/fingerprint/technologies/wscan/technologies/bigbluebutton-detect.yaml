@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: BigBlueButton Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>BigBlueButton</title>") and response.status == 200

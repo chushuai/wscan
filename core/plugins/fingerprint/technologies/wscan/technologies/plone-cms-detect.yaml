@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Plone CMS detect
+    author: cyllective
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name="generator" content="Plone - ") or response.body.bcontains(b"<div xmlns:css="http://namespaces.plone.org/diazo/css"") or response.body.bcontains(b"/++plone++static/plone-compiled.css") or response.body.bcontains(b"/++plone++static/tinymce-styles.css") or response.body.bcontains(b">Powered by Plone &amp; Python</a>")

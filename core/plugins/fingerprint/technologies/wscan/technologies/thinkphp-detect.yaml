@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ThinkPHP - Detect
+    author: pwnhxl
+pscan:
+    path:
+        - /
+        - /?s={{randstr}}&c={{randstr}}&a={{randstr}}&m={{randstr}}
+    expressions:
+        - response.body.bcontains(b"/Library/Think/") or response.body.bcontains(b"{ Fast & Simple OOP PHP Framework } -- [ WE CAN DO IT JUST THINK ]") or response.body.bcontains(b"/thinkphp/library/think/")
+        - 'response.raw_header.bcontains(b"X-Powered-By: ThinkPHP")'

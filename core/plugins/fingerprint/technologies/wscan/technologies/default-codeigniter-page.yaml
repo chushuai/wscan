@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Default CodeIgniter Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.status == 200

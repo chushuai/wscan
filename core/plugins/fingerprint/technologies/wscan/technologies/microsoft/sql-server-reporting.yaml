@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Microsoft SQL Server Reporting
+    author: puzzlepeaches
+pscan:
+    path:
+        - /Reports/Pages/Folder.aspx
+    expressions:
+        - response.body.bcontains(b"Report Manager")

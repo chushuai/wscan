@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Graylog REST API
+    author: pr3r00t
+pscan:
+    path:
+        - /api/api-browser/
+    expressions:
+        - response.body.bcontains(b"Graylog") and response.body.bcontains(b"REST API browser") and response.body.bcontains(b"swagger") and response.status == 200

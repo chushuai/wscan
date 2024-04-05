@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Lucy Security Admin Panel
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+        - /admin/login
+    expressions:
+        - response.body.bcontains(b"title="Lucy"") or response.body.bcontains(b"aria-label="Lucy") and response.status == 200

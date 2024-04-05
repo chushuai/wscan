@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SiteOrigin Widgets Bundle Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/so-widgets-bundle/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

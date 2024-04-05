@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Switching Protocol Detection
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions: []

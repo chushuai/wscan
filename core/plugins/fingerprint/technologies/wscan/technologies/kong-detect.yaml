@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Kong
+    author: geeknik, joshlarsen
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"server: kong") or response.raw_header.bcontains(b"x-kong-response-latency") or response.raw_header.bcontains(b"x-kong-upstream-latency") or response.raw_header.bcontains(b"x-kong-proxy-latency")'

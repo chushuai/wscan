@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Translate WordPress with GTranslate Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/gtranslate/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

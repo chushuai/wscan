@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: TYPO3 Detection
+    author: dadevel
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-TYPO3-Parsetime:")
+        - response.body.bcontains(b"<meta name="generator" content="TYPO3")

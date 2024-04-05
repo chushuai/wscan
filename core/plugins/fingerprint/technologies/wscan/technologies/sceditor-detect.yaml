@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SCEditor Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Ticket BBCode editor - SCEditor</title>") and response.body.bcontains(b"title="SCEditor"") and response.status == 200

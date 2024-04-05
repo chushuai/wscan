@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Advantech R-SeeNet Detection
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>R-SeeNet (.*)</title>".bmatches(response.body)'

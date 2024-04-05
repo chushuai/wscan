@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Karaf Detect
+    author: s0obi
+pscan:
+    path:
+        - /system/console
+    expressions:
+        - response.raw_header.bcontains(b"realm="karaf")

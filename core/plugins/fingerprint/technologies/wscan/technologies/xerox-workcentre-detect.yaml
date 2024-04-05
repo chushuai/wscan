@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Xerox Workcentre Detect
+    author: pussycat0x
+pscan:
+    path:
+        - /index.dhtml
+    expressions:
+        - response.body.bcontains(b"XEROX WORKCENTRE") and response.body.bcontains(b"/header.php?tab=status") and response.status == 200

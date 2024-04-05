@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Owncloud StatusPage detection
+    author: myztique, invisiblethreat
+pscan:
+    path:
+        - /status.php
+    expressions:
+        - response.body.bcontains(b""versionstring":") and response.body.bcontains(b""installed":") and response.body.bcontains(b""edition":")

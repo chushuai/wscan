@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Honeypot Detection
+    author: j4vaovo
+pscan:
+    path:
+        - /?{{rand1}}=../../../../../../../../etc/passwd&{{rand3}}=1%20and%20updatexml(1,concat(0x7e,(select%20md5({{rand2}}))),1)
+    expressions:
+        - response.body.bcontains(b"{{md5({{rand2}})}}")

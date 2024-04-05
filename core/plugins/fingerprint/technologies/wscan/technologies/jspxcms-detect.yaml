@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jspxcms Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Jspxcms") and response.status == 200

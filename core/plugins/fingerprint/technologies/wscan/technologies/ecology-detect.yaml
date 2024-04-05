@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Ecology Detection
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"ecology_JSessionid") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Dell iDRAC9
+    author: kophjager007
+pscan:
+    path:
+        - /sysmgmt/2015/bmc/info
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"BuildVersion") or response.body.bcontains(b"SystemModelName")

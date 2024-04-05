@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: OpenProject - Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /
+        - /api/v3
+        - /activity.atom
+    expressions:
+        - response.body.bcontains(b"OpenProject") and response.body.bcontains(b"instanceName")
+        - response.raw_header.bcontains(b"_open_project_session")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Wordfence Security – Firewall, Malware Scan, and Login Security Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/wordfence/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

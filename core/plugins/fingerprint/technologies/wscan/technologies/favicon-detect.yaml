@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: favicon-detection
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions: []

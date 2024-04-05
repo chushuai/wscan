@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PhpPgAdmin Version Information - Detect
+    author: dr0pd34d
+pscan:
+    path:
+        - /phppgadmin/intro.php
+    expressions:
+        - '"<span class="appname">phpPgAdmin</span> <span class="version">.*</span>".bmatches(response.body) and response.status == 200'

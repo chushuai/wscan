@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Omni Commerce Connect (OCC) Rest APIs
+    author: techbrunchfr
+pscan:
+    path:
+        - /occ/v2/d2OzBcy
+    expressions:
+        - response.body.bcontains(b"Base site d2OzBcy doesn't exist")

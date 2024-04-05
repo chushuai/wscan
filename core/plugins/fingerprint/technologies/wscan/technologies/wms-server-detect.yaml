@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Wms-Server detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"WMSServer/")

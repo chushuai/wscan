@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle HTTPServer12c
+    author: tess, dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Oracle HTTP Server 12c</title>") and response.raw_header.bcontains(b"text/html") and response.status == 200

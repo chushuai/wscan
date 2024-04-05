@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: RSSHub Detect
+    author: ritikchaddha
+pscan:
+    path:
+        - /favicon.ico
+    expressions: []

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Dell iDRAC8
+    author: kophjager007
+pscan:
+    path:
+        - /data?get=prodServerGen
+    expressions:
+        - response.status == 200 and response.body.bcontains(b"13G")

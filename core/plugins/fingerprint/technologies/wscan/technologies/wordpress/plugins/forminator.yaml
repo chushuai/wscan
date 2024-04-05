@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Forminator – Contact Form, Payment Form & Custom Form Builder Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/forminator/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

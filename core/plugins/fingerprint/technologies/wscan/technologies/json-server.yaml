@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Json Server
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>JSON Server</title>") and response.status == 200

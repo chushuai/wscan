@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Fedora Default Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Test Page for the HTTP Server on Fedora</title>")

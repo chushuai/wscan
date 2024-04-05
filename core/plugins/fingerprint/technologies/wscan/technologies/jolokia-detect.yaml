@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jolokia Version Disclosure
+    author: mavericknerd, dwisiswant0
+pscan:
+    path:
+        - /jolokia/version
+    expressions:
+        - response.body.bcontains(b""timestamp":") and response.body.bcontains(b""protocol":") and response.body.bcontains(b""agent":") and response.status == 200

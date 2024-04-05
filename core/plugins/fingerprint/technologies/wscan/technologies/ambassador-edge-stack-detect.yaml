@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Ambassador Edge Stack - Detect
+    author: ja1sh
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Ambassador Edge Stack</p>") and response.status == 200 or response.status == 404

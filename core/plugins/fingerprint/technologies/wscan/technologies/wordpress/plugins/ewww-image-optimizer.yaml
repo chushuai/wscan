@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: EWWW Image Optimizer Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/ewww-image-optimizer/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

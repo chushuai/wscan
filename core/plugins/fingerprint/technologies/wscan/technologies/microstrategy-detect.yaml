@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: MicroStrategy Instances Detection Template
+    author: philippedelteil, retr02332
+pscan:
+    path:
+        - /{{path}}
+    expressions: []

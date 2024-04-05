@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Jetty Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<TITLE>Powered By Jetty</TITLE>")

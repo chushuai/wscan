@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: PDF Invoices & Packing Slips for WooCommerce Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/woocommerce-pdf-invoices-packing-slips/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

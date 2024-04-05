@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: EmpireCMS Detect
+    author: princechaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<meta (.*)EmpireCMS(.*)>".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: RunCloud Default Page
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome To RunCloud") and response.status == 200

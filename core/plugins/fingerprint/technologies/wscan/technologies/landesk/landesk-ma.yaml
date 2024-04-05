@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: LANDESK(R) Management Agent Detect
+    author: 0xnirvana
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"LANDesk(R)") and response.body.bcontains(b"Management Agent")

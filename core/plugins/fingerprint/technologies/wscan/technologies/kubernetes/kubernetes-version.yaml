@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubernetes Version Exposure
+    author: raesene, idealphase
+pscan:
+    path:
+        - /version
+    expressions:
+        - response.body.bcontains(b"gitVersion") and response.body.bcontains(b"goVersion") and response.body.bcontains(b"platform")

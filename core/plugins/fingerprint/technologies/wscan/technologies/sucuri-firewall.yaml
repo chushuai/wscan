@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Sucuri Website Firewall - Not Configured
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Sucuri WebSite Firewall - Not Configured</title>") and response.status == 404

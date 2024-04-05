@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Jeecg-Boot Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /jeecg-boot/
+    expressions:
+        - response.body.bcontains(b"Jeecg-Boot")

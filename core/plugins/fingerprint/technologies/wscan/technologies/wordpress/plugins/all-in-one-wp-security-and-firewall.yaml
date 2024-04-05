@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: All-In-One Security (AIOS) – Security and Firewall Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/all-in-one-wp-security-and-firewall/readme.txt
+    expressions:
+        - '"(?i)Stable.tag:\s?([\w.]+)".bmatches(response.body)'

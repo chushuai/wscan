@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Citrix Hypervisor Page Detection
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Welcome to Citrix Hypervisor") and response.body.bcontains(b"XenCenter") and response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Versa Director API Endpoint Detection
+    author: c-sh0
+pscan:
+    path:
+        - :9182
+    expressions:
+        - '"(?i)"more_info":"http://nms.versa.com/errors/4001"".bmatches(response.body) and response.status == 401'

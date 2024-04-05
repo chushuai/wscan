@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: GilaCMS Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+        - /user
+    expressions:
+        - response.body.bcontains(b"Homepage | Gila CMS") or response.body.bcontains(b"<meta name="generator" content="Gila CMS">") and response.status == 200

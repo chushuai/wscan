@@ -131,6 +131,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 * 2024.03.10 发布v1.0.18 二进制版，支持自定义FUZZ插件，对body、query中的参数进行模糊测试
 * 2024.03.25 发布v1.0.19 二进制版，新增xstream系列漏洞检测插件
 * 2024.03.27 发布v1.0.20 二进制版，主被动扫描支持hostname、path作为过滤条件
+* 2024.04.06 发布v1.0.21 二进制版，主被动扫描支持WEB组件识别，内置800+组件识别插件
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。
@@ -151,38 +152,12 @@ Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan�
 # 架构简析
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/a93d6e157be316b086faba9b6eebeebf.png)
 
-# 参考代码
-机器学习 https://github.com/cdipaolo/goml  
-基于模板扫描 https://github.com/projectdiscovery/nuclei/    
-基于模板扫描 https://github.com/wallarm/gotestwaf  
-被动扫描 https://github.com/zema1/martian  
-被动扫描 https://github.com/lqqyt2423/go-mitmproxy  
-POC扫描  https://github.com/jweny/pocassist   
-POC扫描  https://github.com/WAY29/pocV   
-POC扫描  https://github.com/zema1/yarx    
-动态爬虫 https://github.com/Qianlitp/crawlergo  
-基础爬虫 https://github.com/geziyor/geziyor   
-基础爬虫 https://github.com/gocolly/colly  
-SQL注入 https://github.com/sqlmapproject/sqlmap  
-XSS 检测 https://github.com/hahwul/dalfox  
-网站技术  https://github.com/chushuai/wappalyzer   
-JavaScript https://github.com/dop251/goja    
-反连平台 https://github.com/lanyi1998/DNSlog-GO   
-反连平台 https://github.com/chennqqi/godnslog  
-子域名爆破 https://github.com/projectdiscovery/subfinder/  
-WEB漏洞扫描器 https://www.zaproxy.org/  
-WEB漏洞扫描器 https://github.com/andresriancho/w3af  
-WEB漏洞扫描器 https://github.com/w-digital-scanner/w13scan  
-WEB漏洞扫描器 https://github.com/Arachni/arachni  
-WEB漏洞扫描器 https://github.com/yaklang/yaklang  
-# 参考文章
-推开 xray 之门 https://koalr.me/posts/a-tour-of-xray/  
-HTTP 被动代理的那些事 https://koalr.me/posts/passive-scan-via-http-proxy/  
-JSONP https://securitycafe.ro/2017/01/18/practical-jsonp-injection/
 
-# 使用文档参考
-xray 安全评估工具文档  https://docs.xray.cool/#/  
-pocsuite3  https://pocsuite.org/guide/poc-specification.html
+# 返连平台
+在进行漏洞检测的时候，我们会发现有很多的漏洞在执行了一些命令后，从表面上看没有任何回应的，比如命令执行漏洞，log4j rce，fastjson，ssrf等等， 但由于前端并没有对应的展示，导致我们并不能知道文件是否成功读取，那么当面对这类的漏洞，我们就需要一个反连平台， 通过让目标执行ping、curl等命令，对反连平台发起请求，反连平台在接受到请求后， 就能告诉我们，命令触发了，也就代表了漏洞存在了。
+
+注意： Wscan支持http、dns、rmi、ldap四种返连类型，其中http、rmi、ldap复用同一个端口。
+![](doc/img/返连平台.jpg)
 
 # 扫描报告参考
 https://cdn.acunetix.com/wp-content/uploads/2022/01/11175019/scan-report-testphp.vulnweb.com-owasptopten2021-27_08_2021-12_05-PM.html  

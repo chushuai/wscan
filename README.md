@@ -16,9 +16,41 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/9f9e48711df62c154bde487c989dd3a9.gif)
 
+
+# 检测模块
+
+|       检测模块       | Wscan | Xray | 说明                                                              |
+|--------------|-------|------|-----------------------------------------------------------------|
+| `xss`        |   √    |   √   | 利用语义分析的方式检测XSS漏洞                                                |
+| `sqldet`     |   √    |   √   | 支持报错注入、布尔注入和时间盲注等                                               |
+| `cmd-injection` |      √ |   √   | 支持 shell 命令注入、PHP 代码执行、模板注入等                                    |
+| `dirscan`    |    √   |   √   | 检测备份文件、临时文件、debug 页面、配置文件等10余类敏感路径和文件                           |
+| `path-traversal` |     √  |   √   | 支持常见平台和编码                                                       |
+| `xxe`        |    √   |    √  | 支持有回显和反连平台检测                                                    |
+| `upload`     |     √  |    √  | 支持常见的后端语言                                                       |
+| `brute-force` |     √  |    √  | 社区版支持检测 HTTP 基础认证和简易表单弱口令，内置常见用户名和密码字典                          |
+| `jsonp`      |    √   |  √    | 检测包含敏感信息可以被跨域读取的 jsonp 接口                                       |
+| `ssrf`       |    √   |   √   | ssrf 检测模块，支持常见的绕过技术和反连平台检测                                      |
+| `baseline`   |    √   |  √    | 检测低 SSL 版本、缺失的或错误添加的 http 头等                                    |
+| `redirect`   |   √    |  √    | 支持 HTML meta 跳转、30x 跳转等                                         |
+| `crlf-injection` |     √  | √     | 检测 HTTP 头注入，支持 query、body 等位置的参数                                |
+| `xstream`    |    √  |√      | 检测XStream系列漏洞                                                   |
+| `struts`     |    √   | √     | 检测目标网站是否存在Struts2系列漏洞，包括s2-016、s2-032、s2-045、s2-059、s2-061等常见漏洞 |
+| `thinkphp`   |  √     | √     | 检测ThinkPHP开发的网站的相关漏洞                                            |
+| `shiro`      |   √    |   √   | 检测Shiro反序列化漏洞                                                   |
+| `fastjson`   |  √     |  √    | 检测fastjson系列漏洞                                                  |
+| `Nuclei YAML POC` |    √     |  ×     | Nuclei 标准的POC检测插件                                               |
+| `Xray YAML POC` |     √     | √        | Xray 标准的POC检测插件                                                 |
+| `Goby JSON POC` |     √       |     ×      | Gody 标准的POC检测插件                                                 |
+| `自定义FUZZ插件`    |     √         |  ×           |      对body、query中的参数进行模糊测试                                                        |
+| `Waf绕过/Waf测试`    |     √         |  ×           |       自定义各种特殊的Payload，测试Waf是否能拦截                                                         |
+| `WEB组件识别`    |     √         |  ×           |       识别网站应用的组件及相关技术                                                         |
 # 运行示例 
 
-⬇️[下载地址](https://github.com/chushuai/wscan/releases) [🏠最佳实践](https://github.com/chushuai/wscan/blob/main/doc/最佳实践.md)
+⬇️[下载地址](https://github.com/chushuai/wscan/releases) 
+[🏠最佳实践](https://github.com/chushuai/wscan/blob/main/doc/最佳实践.md)
+[👻WEB指纹插件编写指南](https://github.com/chushuai/wscan/blob/main/doc/WEB指纹插件编写指南.md) 
+[🎯WEB通用漏扫插件编写指南](https://github.com/chushuai/wscan/blob/main/doc/WEB通用漏扫插件编写指南.md)
 ```
 (1) 主动扫描
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
@@ -159,10 +191,8 @@ Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan�
 注意： Wscan支持http、dns、rmi、ldap四种返连类型，其中http、rmi、ldap复用同一个端口。
 ![](doc/img/返连平台.jpg)
 
-# 扫描报告参考
-https://cdn.acunetix.com/wp-content/uploads/2022/01/11175019/scan-report-testphp.vulnweb.com-owasptopten2021-27_08_2021-12_05-PM.html  
-https://www.arachni-scanner.com/reports/report.html/#!/summary/owasp_top_10  
-https://docs.xray.cool/assets/report_example.html 
+# 扫描报告
+Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏洞验证逻辑。
 
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/118a026213bf2aca4f016218f626cf15.png)
 

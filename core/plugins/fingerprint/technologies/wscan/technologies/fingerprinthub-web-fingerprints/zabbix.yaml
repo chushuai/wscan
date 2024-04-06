@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zabbix (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Zabbix SIA") && response.body.bcontains(b"zabbix") )
+        - response.body.bcontains(b"images/general/zabbix.ico")

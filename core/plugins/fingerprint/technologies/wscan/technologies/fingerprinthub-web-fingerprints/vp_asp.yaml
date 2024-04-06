@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: vp-asp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.vpasp.com\">")
+        - response.body.bcontains(b"src=\"vs350.js")
+        - response.body.bcontains(b"shopdisplayproducts.asp?id=")

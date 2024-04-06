@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: evercookie (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"evercookie.js")
+        - response.body.bcontains(b"var ec = new evercookie();")

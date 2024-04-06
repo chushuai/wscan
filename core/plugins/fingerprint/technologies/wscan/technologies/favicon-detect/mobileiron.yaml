@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: mobileiron (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("545827989" == mmh3(base64_py(body)))
+        - status_code==200 && ("967636089" == mmh3(base64_py(body)))
+        - status_code==200 && ("362091310" == mmh3(base64_py(body)))
+        - status_code==200 && ("2086228042" == mmh3(base64_py(body)))

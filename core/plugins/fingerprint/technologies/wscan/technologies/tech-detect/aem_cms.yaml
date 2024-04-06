@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aem_cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/etc/clientlibs/") || response.body.bcontains(b"/content/dam/") )

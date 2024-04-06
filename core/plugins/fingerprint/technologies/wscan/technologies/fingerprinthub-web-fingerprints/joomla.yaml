@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: joomla (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"keywords\" content=\"joomla, Joomla\" />")
+        - response.body.bcontains(b"content=\"joomla")
+        - response.body.bcontains(b"/media/system/js/core.js")
+        - response.body.bcontains(b"/media/system/js/mootools-core.js")

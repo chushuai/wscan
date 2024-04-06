@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: livefyre (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+(?:id|class)="livefyre".bmatches(response.body)'

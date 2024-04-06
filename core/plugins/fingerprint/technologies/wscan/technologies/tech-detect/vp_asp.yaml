@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vp-asp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]+>Powered By VP-ASP Shopping Cart</a>".bmatches(response.body)'

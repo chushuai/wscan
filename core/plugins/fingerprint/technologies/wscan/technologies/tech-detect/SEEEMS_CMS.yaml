@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SEEEMS-CMS (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"SEEEMS.CMS") || response.body.bcontains(b"SEEEMS.FRAMEWORK") )

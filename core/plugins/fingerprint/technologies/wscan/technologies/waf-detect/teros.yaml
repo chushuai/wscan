@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: teros (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)st8(id|.wa|.wf)?.?(\\d+|\\w+)?".bmatches(response.body)'

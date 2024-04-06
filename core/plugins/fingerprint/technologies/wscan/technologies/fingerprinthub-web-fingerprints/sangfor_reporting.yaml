@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sangfor-reporting (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"user_blur();")
+        - response.body.bcontains(b"ad report")

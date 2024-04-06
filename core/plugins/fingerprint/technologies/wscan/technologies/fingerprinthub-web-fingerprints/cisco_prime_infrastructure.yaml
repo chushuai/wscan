@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: cisco-prime-infrastructure (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class=\"xwtproductname\" >cisco prime infrastructure")
+        - response.body.bcontains(b"/webacs/lib/xwt/themes/prime/prime-xwt.css")
+        - response.body.bcontains(b"webacs/welcomeaction.do")
+        - 'response.raw_header.bcontains(b"Server: prime")'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: thinkphp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"X-Powered-By: ThinkPHP")'
+        - response.body.bcontains(b"href=\"http://www.thinkphp.cn\">thinkphp</a><sup>")

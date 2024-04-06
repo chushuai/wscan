@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: fastadmin-framework (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"copyright © fastadmin.net")
+        - response.body.bcontains(b"<a href=\"/\" class=\"navbar-brand\">fastadmin</a>")
+        - response.body.bcontains(b"fastadmin.net")
+        - ( response.body.bcontains(b"FastAdmin") && response.body.bcontains(b"fastadmin.net") )

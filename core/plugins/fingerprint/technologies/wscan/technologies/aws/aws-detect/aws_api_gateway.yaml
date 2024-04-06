@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-api-gateway (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.raw_header.bcontains(b"X-Amz-Apigw-Id:") || response.raw_header.bcontains(b"X-Amzn-Requestid:") || response.raw_header.bcontains(b"X-Amzn-Errortype: MissingAuthenticationTokenException") || response.raw_header.bcontains(b"X-Amzn-Remapped-Connection:") || response.raw_header.bcontains(b"X-Amzn-Remapped-Content-Length:") || response.raw_header.bcontains(b"X-Amzn-Remapped-Date:") )'

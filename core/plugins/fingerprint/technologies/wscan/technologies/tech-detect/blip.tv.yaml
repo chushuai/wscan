@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: blip.tv (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<(?:param|embed|iframe)[^>]+blip\\.tv/play".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: xtoa-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/app_qjuserinfo/qjuserinfoadd.jsp")
+        - response.body.bcontains(b"/images/default/first/xtoa_logo.png")
+        - response.body.bcontains(b"src=\"systemfiles/js/iawebclientactivexcheck.js\"")

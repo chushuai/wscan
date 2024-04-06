@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: subrion-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.subrion.com")
+        - response.body.bcontains(b"content=\"subrion cms")

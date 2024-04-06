@@ -6,4 +6,5 @@ pscan:
     path:
         - /manifest.json
         - /version
-    expressions: []
+    expressions:
+        - ( status_code_1 == 200 && contains(content_type_1, "application/json") && contains(json_minify(body_1), "\"name\":\"Element\"") && status_code_2 == 200 )

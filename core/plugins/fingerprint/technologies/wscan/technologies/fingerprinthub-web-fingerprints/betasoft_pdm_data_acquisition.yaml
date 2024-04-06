@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: betasoft-pdm-data-acquisition (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"align=\"center\" class=\"login_pdm\">")
+        - 'response.body.bcontains(b"background: no-repeat url(../images/login/pdmdenglu1_28.png);")'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: université-toulouse-1-capitole (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1632780968" == mmh3(base64_py(body)))

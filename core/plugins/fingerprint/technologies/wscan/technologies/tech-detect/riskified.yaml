@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: riskified (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<[^>]*beacon\\.riskified\\.com".bmatches(response.body) || "<[^>]*c\\.riskified\\.com".bmatches(response.body) )

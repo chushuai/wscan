@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 7moor-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"ds_do_action domain_aboutus\"")
+        - response.body.bcontains(b"/javascripts/qiniu/qiniu.js")

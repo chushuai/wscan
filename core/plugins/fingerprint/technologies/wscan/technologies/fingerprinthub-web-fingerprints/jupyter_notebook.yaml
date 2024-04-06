@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: jupyter-notebook (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"ipython-main-app\" class=\"container\">")
+        - response.body.bcontains(b"<div id=\"ipython_notebook\" class=\"nav navbar-brand\">")
+        - response.body.bcontains(b"<title>Jupyter Notebook</title>")

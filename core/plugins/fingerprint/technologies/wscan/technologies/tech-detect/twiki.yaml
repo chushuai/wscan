@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: twiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img [^>]*(?:title|alt)="This site is powered by the TWiki collaboration platform".bmatches(response.body)'

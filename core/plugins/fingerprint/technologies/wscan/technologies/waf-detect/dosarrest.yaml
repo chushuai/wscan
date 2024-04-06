@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: dosarrest (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)dosarrest".bmatches(response.body) || "(?i)x.dis.request.id".bmatches(response.body) )

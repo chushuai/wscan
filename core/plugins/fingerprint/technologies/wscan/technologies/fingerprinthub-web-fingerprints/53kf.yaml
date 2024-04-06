@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: 53kf (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"chat.53kf.com/company.php") && response.body.bcontains(b"chat.53kf.com/kf.php") )
+        - response.body.bcontains(b"powered by 53kf")
+        - response.body.bcontains(b"tb.53kf.com/code/")

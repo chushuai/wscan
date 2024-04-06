@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kyxscms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"goodbook-tabcont")
+        - response.body.bcontains(b"<script src=\"/public/static/layer/layer.js\">")
+        - response.body.bcontains(b"href=\"/template/home/default_web/css/style.css\"")

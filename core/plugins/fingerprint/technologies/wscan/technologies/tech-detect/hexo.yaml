@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hexo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="https?://hexo\\.io/?"[^>]*>Hexo</".bmatches(response.body)'

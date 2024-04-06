@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: oracle-siebel-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ot='siebwebmainwindow'>")
+        - response.body.bcontains(b"scripting is used to manage data interactions between the siebel server/web server")
+        - response.body.bcontains(b"onload=\"gotourl('start.swe?swecmd=start')")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sap-commerce-cloud (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+/(?:sys_master|hybr|_ui/(?:responsive/)?(?:desktop|common(?:/images|/img)?))/".bmatches(response.body)'

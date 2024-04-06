@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: landmark-dus (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"landmark")
+        - response.body.bcontains(b"href=\"/landmark.admin.web_deploy/")

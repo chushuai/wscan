@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: alpine.js (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+[^\\w-]x-data[^\\w-][^<]+".bmatches(response.body)'

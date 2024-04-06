@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: squarespace (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- This is Squarespace\\. -->".bmatches(response.body)'

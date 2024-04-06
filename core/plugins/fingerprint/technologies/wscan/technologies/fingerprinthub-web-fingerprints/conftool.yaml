@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: conftool (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h2 align=center>conftool conference administration")
+        - response.body.bcontains(b"<a href='http://www.conftool.net'>conference management software")

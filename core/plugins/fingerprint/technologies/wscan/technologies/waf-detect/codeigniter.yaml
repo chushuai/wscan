@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: codeigniter (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)the.uri.you.submitted.has.disallowed.characters".bmatches(response.body)'

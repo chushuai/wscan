@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pfsense (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Login to pfSense") && response.body.bcontains(b"<title>pfSense - Login</title>") && response.body.bcontains(b"maintained by Netgate") )

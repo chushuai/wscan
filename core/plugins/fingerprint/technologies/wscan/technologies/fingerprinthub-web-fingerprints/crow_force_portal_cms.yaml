@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: crow-force-portal-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"中企动力提供技术支持")

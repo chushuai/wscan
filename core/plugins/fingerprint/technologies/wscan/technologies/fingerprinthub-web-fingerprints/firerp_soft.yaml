@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: firerp-soft (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"mm_preloadimages('images/bt/bt_login_b.gif")

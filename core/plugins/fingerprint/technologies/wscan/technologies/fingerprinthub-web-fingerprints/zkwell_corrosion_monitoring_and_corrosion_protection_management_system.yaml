@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zkwell-corrosion-monitoring-and-corrosion-protection-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"background-image:url(images/devicebg.jpg)")

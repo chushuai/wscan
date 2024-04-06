@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: esvon-classifieds (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by esvon")

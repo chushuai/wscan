@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: screwturn-wiki-web-service (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a class=\"externallink\" href=\"http:")
+        - response.body.bcontains(b"title=\"screwturn wiki\" target=\"_blank\">screwturn wiki")

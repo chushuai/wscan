@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jahia-dx (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<script id="staticAssetAggregatedJavascrip".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: prometheus-time-series-collection-and-processing-server (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1399433489" == mmh3(base64_py(body)))

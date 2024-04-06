@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-mesos (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"/static/img/mesos_logo.png\" alt=\"apache mesos\">")

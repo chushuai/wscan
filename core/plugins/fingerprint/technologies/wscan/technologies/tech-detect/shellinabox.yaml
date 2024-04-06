@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shellinabox (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<title>Shell In A Box</title>".bmatches(response.body) || "must be enabled for ShellInABox</noscript>".bmatches(response.body) )

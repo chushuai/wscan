@@ -7,3 +7,5 @@ pscan:
     expressions:
         - response.body.bcontains(b"FETCH-CSRF-TOKEN")
         - response.body.bcontains(b"masterTokenValue")
+        - ( status_code_3==400 && contains(body, "Token-Per-Page functionality is disabled") )
+        - ( status_code_3==200 && contains(body, "{\"pageTokens") )

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: uewaf (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)http(s)?.//ucloud".bmatches(response.body) || "(?i)uewaf(.deny.pages)".bmatches(response.body) )

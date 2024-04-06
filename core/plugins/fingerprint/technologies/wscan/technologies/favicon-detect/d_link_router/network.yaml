@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: d-link-router/network (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1703788174" == mmh3(base64_py(body)))
+        - status_code==200 && ("517158172" == mmh3(base64_py(body)))
+        - status_code==200 && ("1038500535" == mmh3(base64_py(body)))

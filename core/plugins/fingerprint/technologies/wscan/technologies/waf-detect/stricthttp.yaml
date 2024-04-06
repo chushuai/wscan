@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: stricthttp (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)the.request.was.rejected.because.the.url.contained.a.potentially.malicious.string".bmatches(response.body)'
+        - ( "(?i)rejected.by.url.scan".bmatches(response.body) || "(?i)/rejected.by.url.scan".bmatches(response.body) )

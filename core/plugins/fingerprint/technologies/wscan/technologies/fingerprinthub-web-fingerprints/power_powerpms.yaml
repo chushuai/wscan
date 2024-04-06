@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: power-powerpms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"apphub.server.registertohub(qrcodeid)")
+        - response.body.bcontains(b"/app_themes/default/assets/css/style.min.css")
+        - response.body.bcontains(b"/scripts/boot.js")

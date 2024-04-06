@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: php-fusion (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="[^>]+php-fusion".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: primefaces (JavaServer Faces Detection)
+    author: brenocss, moritz nentwig
+pscan:
+    path:
+        - /
+    expressions:
+        - ( contains(body, 'primefaces') && contains(body, 'javax.faces.resource') || contains(body, 'javax.faces.ViewState') )

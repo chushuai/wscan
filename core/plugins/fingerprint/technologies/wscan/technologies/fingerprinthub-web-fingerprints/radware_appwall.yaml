@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: radware-appwall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"unauthorized activity has been detected.")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jumpserver-fortres-machine (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<input type=\"password\" class=\"form-control\" name=\"password\" placeholder=\"密码\" required=\"\">") && response.body.bcontains(b"csrfmiddlewaretoken") )

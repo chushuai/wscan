@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: comscore (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe[^>]* (?:id="comscore"|scr=[^>]+comscore)|\\.scorecardresearch\\.com/beacon\\.js|COMSCORE\\.beacon".bmatches(response.body)'

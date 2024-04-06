@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: vbulletin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"vbulletin")
+        - response.body.bcontains(b"powered by vbulletin&trade;")
+        - response.body.bcontains(b"<!-- do not remove this copyright notice -->powered by < a href=\"https://www.vbulletin.com\" id=\"vbulletinlink\">")

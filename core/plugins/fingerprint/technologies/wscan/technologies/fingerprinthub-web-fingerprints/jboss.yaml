@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jboss (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://jboss.org\">")
+        - response.body.bcontains(b"jboss.css")

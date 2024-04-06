@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: founder-operation-management-and-decision-support-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/portal/img/logo.png\"")
+        - response.body.bcontains(b"src=\"/desktop/ui/custom/getimage?img=iphoneview.png\"")

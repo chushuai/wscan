@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: inspur-ec-government-approval-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onlinequery/querylist.aspx")
+        - response.body.bcontains(b"langchao.ecgap.outportal")

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: huawei-anyoffice (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"mdmserver")
+        - response.body.bcontains(b"onclick=\"changelanguage")
+        - response.body.bcontains(b"cancelchangepwbtn")
+        - response.body.bcontains(b"<form id=\"jvform\" action=\"admin/business/login")
+        - response.body.bcontains(b"src=\"assets/conn-service/admin/")

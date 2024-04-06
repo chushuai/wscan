@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: weave-scope-dashboard (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>Weave Scope</title>") && response.body.bcontains(b"__WEAVEWORKS_CSRF_TOKEN") && response.body.bcontains(b"__CSRF_TOKEN_PLACEHOLDER__") )

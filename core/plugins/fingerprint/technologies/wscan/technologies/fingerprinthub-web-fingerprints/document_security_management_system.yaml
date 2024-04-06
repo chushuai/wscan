@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: document-security-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/drm/template/css/login.css\"")
+        - response.body.bcontains(b"action=\"/drm/login.do\"")
+        - response.body.bcontains(b"src=\"/drm/encjs/barrett.js\"")

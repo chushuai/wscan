@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Creative Mail – Easier WordPress & WooCommerce Email Marketing Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/creative-mail-by-constant-contact/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sinosoft-technology-e-government-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"app_themes/1/style.css")
+        - response.body.bcontains(b"window.location = \"homepages/index.aspx")
+        - response.body.bcontains(b"homepages/content_page.aspx")

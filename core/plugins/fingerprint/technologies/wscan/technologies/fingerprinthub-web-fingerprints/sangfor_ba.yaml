@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sangfor-ba (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"haovuytkjlnvxpuhsecmbljplpvjz = function(str, key) ")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lightbox (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link [^>]*href="[^"]+lightbox(?:\\.min)?\\.css".bmatches(response.body)'

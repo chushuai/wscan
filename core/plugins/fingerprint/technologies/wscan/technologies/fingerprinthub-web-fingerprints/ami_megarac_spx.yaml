@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ami-megarac-spx (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<modelname>ami megarac spx</modelname>")

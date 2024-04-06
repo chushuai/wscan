@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: particles.js (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div id="particles-js">".bmatches(response.body)'

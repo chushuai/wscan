@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zbintel-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"background=\"images/login_sample_bgz.jpg\"")

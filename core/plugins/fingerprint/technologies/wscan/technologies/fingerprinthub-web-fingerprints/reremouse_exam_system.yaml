@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: reremouse-exam-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"蝙蝠在线考试系统")
+        - response.body.bcontains(b"博库医学在线考试系统，技术支持：杭州博库科技有限公司")
+        - response.body.bcontains(b"src=\"/resources/js/upscroll.js\"")

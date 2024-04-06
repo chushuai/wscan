@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: phpatm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"viewer_bottom.php?file=")
+        - response.body.bcontains(b"powered by phpatm")
+        - response.body.bcontains(b"powered by php advanced transfer manager")

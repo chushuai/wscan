@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cmailserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<font size=2>username ( contatto email )</font>")
+        - response.body.bcontains(b"<input type=checkbox name=\"saveuserpass")

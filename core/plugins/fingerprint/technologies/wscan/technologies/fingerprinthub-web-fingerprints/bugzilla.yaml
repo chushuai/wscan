@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bugzilla (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"enter_bug.cgi")
+        - response.body.bcontains(b"/cgi-bin/bugzilla/")

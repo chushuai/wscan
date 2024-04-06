@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oracle-commerce-cloud (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+id="oracle-cc"".bmatches(response.body)'

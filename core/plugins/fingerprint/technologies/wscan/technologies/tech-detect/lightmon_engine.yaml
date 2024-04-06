@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lightmon-engine (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Lightmon Engine Copyright Lightmon".bmatches(response.body)'

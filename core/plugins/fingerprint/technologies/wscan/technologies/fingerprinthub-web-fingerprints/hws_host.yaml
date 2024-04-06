@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hws-host (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"护卫神·主机大师 前台管理登录\"")

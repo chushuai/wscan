@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: avaya-application-enablement-services (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<b>application enablement services&nbsp;</b>")
+        - response.body.bcontains(b"avaya")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: myre-php (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<!-- begin: menu footer don''t change anything")'
+        - response.body.bcontains(b"<b><u>my last viewed</u></b>")

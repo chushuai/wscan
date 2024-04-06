@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: f5-bigip (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"f5 networks, inc.")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sugarcrm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\" javascript:void window.open('http://support.sugarcrm.com')\">support</a>")
+        - 'response.body.bcontains(b"<img style=''margin-top: 2px'' border=''0'' width=''106'' height=''23'' src=''include/images/poweredby_sugarcrm.png'' alt=''powered by sugarcrm''>")'
+        - response.body.bcontains(b"<script>var module_sugar_grp1 = 'users';</script><script>var action_sugar_grp1 = 'login';</script><script>jscal_today")

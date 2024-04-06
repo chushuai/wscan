@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cms-tool.net (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"CMS Tool www.cms-tool.net\"")
+        - response.body.bcontains(b"content=\"CMS Tool www.cms-tool.net\"")

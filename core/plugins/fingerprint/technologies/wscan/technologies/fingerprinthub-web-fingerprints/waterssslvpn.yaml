@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: waterssslvpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"welcome.cgi?p=logo&signinid=url_default")

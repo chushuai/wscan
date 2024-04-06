@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (WooCommerce PayPal Checkout Payment Gateway Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/woocommerce-gateway-paypal-express-checkout/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

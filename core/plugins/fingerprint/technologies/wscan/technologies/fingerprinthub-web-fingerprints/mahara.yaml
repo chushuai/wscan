@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: mahara (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"this site is powered by mahara")
+        - response.body.bcontains(b"id=\"powered-by\"><a href=\"http://mahara.org/")
+        - response.body.bcontains(b"{\"namedfieldempty\":")

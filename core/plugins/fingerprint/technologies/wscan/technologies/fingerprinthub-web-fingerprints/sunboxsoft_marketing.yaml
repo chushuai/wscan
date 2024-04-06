@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sunboxsoft-marketing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/sunbox/assets/js/ace.min.js")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: netauth (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"image/loginauthorize.png\"")
+        - response.body.bcontains(b"onmouseover=\"mm_swapimage('image1','','image/loginok_after.gif',1)\"")

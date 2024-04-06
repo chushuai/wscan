@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: modsecurityowasp (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)not.acceptable".bmatches(response.body) || "(?i)additionally\\S.a.406.not.acceptable".bmatches(response.body) )

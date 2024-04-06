@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-alb (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.raw_header.bcontains(b"Server: awselb/2.0") || response.raw_header.bcontains(b"Set-Cookie: AWSALB=") || response.raw_header.bcontains(b"Set-Cookie: AWSALBCORS=") )'

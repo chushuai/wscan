@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jsdelivr (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+?//cdn\\.jsdelivr\\.net/".bmatches(response.body)'

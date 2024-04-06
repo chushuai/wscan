@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cndatacom-smsp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/smrc/resources/default/")

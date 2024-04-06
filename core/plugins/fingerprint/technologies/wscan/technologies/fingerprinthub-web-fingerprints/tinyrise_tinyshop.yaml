@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tinyrise-tinyshop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var server_url = '/__con__/__act__';")
+        - response.body.bcontains(b"tiny_token_")

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: comexe-ras (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"type=\"application/npras")
+        - ( response.body.bcontains(b"href=\"pic/iras.ico") && response.body.bcontains(b"href=\"pic/ras.ico") )
+        - response.body.bcontains(b"科迈ras")
+        - response.body.bcontains(b"远程技术支持请求：<a href=\"http://www.comexe.cn")
+        - response.body.bcontains(b"href=\"cmxlogin.php\"")

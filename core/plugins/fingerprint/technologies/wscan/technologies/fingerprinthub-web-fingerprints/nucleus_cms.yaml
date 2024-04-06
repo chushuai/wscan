@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: nucleus-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"target=\"_blank\">nucleus cms")
+        - response.body.bcontains(b"nucleus_lf_name")
+        - response.body.bcontains(b"title=\"nucleus\" href=\"http://nucleuscms.org/")

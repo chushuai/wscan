@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: argosoft-mail-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"argosoft mail server plus for")

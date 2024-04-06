@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: malcare (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)malcare".bmatches(response.body) || "(?i).>login.protection<.+.><.+>powered.by<.+.>(<.+.>)?(.?malcare.-.pro|blogvault)?".bmatches(response.body) || "(?i).>firewall<.+.><.+>powered.by<.+.>(<.+.>)?(.?malcare.-.pro|blogvault)?".bmatches(response.body) )

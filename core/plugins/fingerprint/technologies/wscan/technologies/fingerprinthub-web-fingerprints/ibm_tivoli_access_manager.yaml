@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ibm-tivoli-access-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!--- do not translate or modify any part of the hidden parameter(s) --->")
+        - response.body.bcontains(b"var warningstring = \"<b>warning:</b> to maintain your login session, make sure that your browser is configured to accept cookies.\";")

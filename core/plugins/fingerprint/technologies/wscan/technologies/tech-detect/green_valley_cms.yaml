@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: green-valley-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]+/dsresource\\?objectid=".bmatches(response.body)'

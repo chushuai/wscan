@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apereo-cas (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"cas &#8211; central authentication service")

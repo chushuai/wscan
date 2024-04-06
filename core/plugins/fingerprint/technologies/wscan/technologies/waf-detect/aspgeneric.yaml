@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: aspgeneric (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)this.generic.403.error.means.that.the.authenticated".bmatches(response.body) || "(?i)request.could.not.be.understood".bmatches(response.body) || "(?i)<.+>a.potentially.dangerous.request(.querystring)?.+".bmatches(response.body) || "(?i)runtime.error".bmatches(response.body) || "(?i).>a.potentially.dangerous.request.path.value.was.detected.from.the.client+".bmatches(response.body) || "(?i)asp.net.sessionid".bmatches(response.body) || "(?i)errordocument.to.handle.the.request".bmatches(response.body) || "(?i)an.application.error.occurred.on.the.server".bmatches(response.body) || "(?i)error.log.record.number".bmatches(response.body) || "(?i)error.page.might.contain.sensitive.information".bmatches(response.body) || "(?i)<.+>server.error.in.'/'.application.+".bmatches(response.body) || "(?i)\\basp.net\\b".bmatches(response.body) )

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: drupal (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-167656799" == mmh3(base64_py(body)))
+        - status_code==200 && ("1174841451" == mmh3(base64_py(body)))

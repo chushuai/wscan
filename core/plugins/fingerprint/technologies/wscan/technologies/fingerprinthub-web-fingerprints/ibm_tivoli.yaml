@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ibm-tivoli (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"banner/tivoli/tv_icbanner.html")
+        - response.body.bcontains(b"tivoli netview uses an open source web server")

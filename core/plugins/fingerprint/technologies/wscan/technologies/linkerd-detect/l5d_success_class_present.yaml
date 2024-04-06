@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: l5d-success-class-present (Linkerd detection via bad rule)
+    author: dudez
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?mi)^l5d-success-class: 0.*$".bmatches(response.raw_header)'

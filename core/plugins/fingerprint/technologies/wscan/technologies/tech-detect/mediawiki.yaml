@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mediawiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<body[^>]+class="mediawiki"".bmatches(response.body) || "<(?:a|img)[^>]+>Powered by MediaWiki</a>".bmatches(response.body) || "<a[^>]+/Special:WhatLinksHere/".bmatches(response.body) )

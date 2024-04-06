@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: iwebshop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"_skinpath")
+        - response.body.bcontains(b"_themepath")
+        - ( response.body.bcontains(b"_weburl") && response.body.bcontains(b"class=\"pro_title\">iwebshop支付测试") )

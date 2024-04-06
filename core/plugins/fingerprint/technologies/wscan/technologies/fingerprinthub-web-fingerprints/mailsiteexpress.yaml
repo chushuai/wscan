@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mailsiteexpress (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onsubmit=\"openexpress(document.expresslogin)")
+        - response.body.bcontains(b"rockliffe systems, inc.")

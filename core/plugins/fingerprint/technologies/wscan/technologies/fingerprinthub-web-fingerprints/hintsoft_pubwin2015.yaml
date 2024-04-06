@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hintsoft-pubwin2015 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/newlogin_01.jpg")

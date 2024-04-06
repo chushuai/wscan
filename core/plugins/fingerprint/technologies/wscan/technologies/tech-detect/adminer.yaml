@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adminer (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "Adminer</a> <span class="version">([\\d.]+)</span>".bmatches(response.body) || "onclick="bodyClick\\(event\\);" onload="verifyVersion\\('([\\d.]+)'\\);">".bmatches(response.body) )

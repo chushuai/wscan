@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: micro-focus-open-enterprise-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h3>micro focus open enterprise server 提供市场中的最佳网络、文件和打印服务。</h3>")

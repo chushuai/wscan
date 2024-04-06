@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: polymer (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<polymer-[^>]+|<link[^>]+rel="import"[^>]+/polymer\\.html")".bmatches(response.body)'

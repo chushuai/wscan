@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: salien-software-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"images/login/msn/favicon.ico\"")
+        - response.body.bcontains(b"北京市时林电脑公司")

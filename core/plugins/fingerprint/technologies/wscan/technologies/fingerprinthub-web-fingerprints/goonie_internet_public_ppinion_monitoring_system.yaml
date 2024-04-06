@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: goonie-internet-public-ppinion-monitoring-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alert(\"菜单层数量和内容层数量不一样!\")")
+        - response.body.bcontains(b"网络舆情监控系统")

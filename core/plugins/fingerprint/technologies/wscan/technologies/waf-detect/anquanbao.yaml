@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: anquanbao (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i).aqb_cc.error.".bmatches(response.body)'

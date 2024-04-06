@@ -7,4 +7,6 @@ pscan:
         - /
         - /{{randstr}}
         - /docs/introduction.html
-    expressions: []
+    expressions:
+        - contains(tolower(header), "tomcat")
+        - ( contains(tolower(body), "apache tomcat") || contains(tolower(body), "/manager/html") || contains(tolower(body), "/manager/status") )

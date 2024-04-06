@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pritlog (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://pritlog.com/\">pritlog")
+        - response.body.bcontains(b"<em id=\"jserror\">please enable javascript for full functionality")

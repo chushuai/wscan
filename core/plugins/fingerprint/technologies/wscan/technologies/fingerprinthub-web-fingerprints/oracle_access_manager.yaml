@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oracle-access-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"footerversion\">oracle access manager version")

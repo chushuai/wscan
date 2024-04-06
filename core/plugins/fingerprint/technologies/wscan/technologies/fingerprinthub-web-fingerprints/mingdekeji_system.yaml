@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mingdekeji-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"imges/zgsh.ico\"")
+        - response.body.bcontains(b"荆州明德科技")

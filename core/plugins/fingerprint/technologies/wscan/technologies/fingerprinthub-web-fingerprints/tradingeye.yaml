@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tradingeye (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"dpivision.com ltd\" />")
+        - response.body.bcontains(b"id=\"credits\"><a href=\"http://www.tradingeye.com/\">powered by tradingeye</a>")

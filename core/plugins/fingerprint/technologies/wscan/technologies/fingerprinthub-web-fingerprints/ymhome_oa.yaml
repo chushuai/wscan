@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ymhome-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/yimioa.apk")

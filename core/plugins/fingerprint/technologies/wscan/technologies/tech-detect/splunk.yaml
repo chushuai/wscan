@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: splunk (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<p class="footer">&copy; [-\\d]+ Splunk Inc\\.(?: Splunk ([\\d\\.]+(?: build [\\d\\.]*\\d)?))?[^<]*</p>".bmatches(response.body)'

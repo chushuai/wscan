@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sitecore (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]+src="[^>]*/~/media/[^>]+\\.ashx".bmatches(response.body)'

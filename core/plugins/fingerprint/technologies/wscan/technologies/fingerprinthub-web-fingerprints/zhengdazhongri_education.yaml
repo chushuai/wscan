@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zhengdazhongri-education (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/lgline.gif")
+        - ( response.body.bcontains(b"lb_hint") && response.body.bcontains(b"onclick=\"safecodeclick\" src=\"safecode.aspx") )

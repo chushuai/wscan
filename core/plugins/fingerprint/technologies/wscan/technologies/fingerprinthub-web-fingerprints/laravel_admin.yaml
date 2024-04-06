@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: laravel-admin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"vendor/laravel-admin/")
+        - response.body.bcontains(b"欢迎登录laravel-admin</p>")

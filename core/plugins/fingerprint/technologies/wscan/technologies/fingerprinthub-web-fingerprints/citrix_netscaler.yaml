@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: citrix-netscaler (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: citrix_ns_id")'
+        - response.body.bcontains(b"netscape/firefox/opera")

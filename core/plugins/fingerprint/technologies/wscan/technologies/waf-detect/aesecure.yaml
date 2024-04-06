@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: aesecure (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)aesecure.denied.png".bmatches(response.body)'

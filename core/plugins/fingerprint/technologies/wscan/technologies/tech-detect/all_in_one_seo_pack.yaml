@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: all-in-one-seo-pack (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- All in One SEO Pack ([\\d.]+) ".bmatches(response.body)'

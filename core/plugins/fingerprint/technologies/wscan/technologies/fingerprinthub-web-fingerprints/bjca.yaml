@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bjca (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<li><a href=\"/install/certapp_bd.exe\">下载证书应用环境</a></li>")

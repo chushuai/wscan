@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: weblate (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Weblate") && response.body.bcontains(b"<meta name=\"author\" content=\"Michal Čihař\" />") )

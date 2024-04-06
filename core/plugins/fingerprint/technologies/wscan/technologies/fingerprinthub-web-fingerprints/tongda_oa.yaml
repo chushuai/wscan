@@ -1,0 +1,18 @@
+engine: fingerprint
+info:
+    name: tongda-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/static/images/tongda.ico\"")
+        - response.body.bcontains(b"<a href='http://www.tongda2000.com/' target='_black'>通达官网</a>")
+        - response.body.bcontains(b"/images/tongda.ico")
+        - response.body.bcontains(b"Office Anywhere")
+        - ( response.body.bcontains(b"login") && response.body.bcontains(b"tongda2000") )
+        - response.body.bcontains(b"/static/templates/2013_01/index.css/")
+        - response.body.bcontains(b"javascript:document.form1.uname.focus()")
+        - response.body.bcontains(b"<link rel=\"shortcut icon\" href=\"/images/tongda.ico\" />")
+        - response.body.bcontains(b"oa提示：不能登录oa")
+        - response.body.bcontains(b"紧急通知：今日10点停电")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: salesforce-commerce-cloud (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+demandware\\.edgesuite".bmatches(response.body)'

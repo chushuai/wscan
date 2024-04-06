@@ -9,3 +9,4 @@ pscan:
     expressions:
         - response.body.bcontains(b"Hikvision Digital Technology")
         - response.raw_header.bcontains(b"Hikvision-Webs")
+        - '''999357577'' == mmh3(base64_py(body))'

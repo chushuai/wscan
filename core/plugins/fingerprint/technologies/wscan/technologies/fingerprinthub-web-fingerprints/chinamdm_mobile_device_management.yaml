@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: chinamdm-mobile-device-management (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"innerhtml=\"chinamdm移动终端管理系统")
+        - response.body.bcontains(b"justsy/user/searchmenusbyusername/")

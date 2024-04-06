@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: flower-celery-monitoring-tool (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a class=\"brand\" href=\"/\">flower</a>")

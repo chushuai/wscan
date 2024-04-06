@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: codesafe (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"baseurl : ''app'',        //配置模块根路径到静态资源根目录。")'

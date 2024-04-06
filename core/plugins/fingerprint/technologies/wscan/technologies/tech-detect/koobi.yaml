@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: koobi (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^K>-]+Koobi ([a-z\\d.]+)".bmatches(response.body)'

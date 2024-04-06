@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cisco-meeting-app (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"cisco_meeting_application\">")

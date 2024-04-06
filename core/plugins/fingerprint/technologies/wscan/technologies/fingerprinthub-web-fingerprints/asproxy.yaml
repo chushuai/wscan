@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: asproxy (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"surf the web invisibly using asproxy power")
+        - response.body.bcontains(b"btnasproxydisplaybutton")

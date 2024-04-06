@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: drugpak (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by drugpak")
+        - response.body.bcontains(b"/dplimg/dpstyle.css")

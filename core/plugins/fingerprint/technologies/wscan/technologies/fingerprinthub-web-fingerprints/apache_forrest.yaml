@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-forrest (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"apache forrest")
+        - response.body.bcontains(b"name=\"forrest")

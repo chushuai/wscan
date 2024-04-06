@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-lenya (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Apache Lenya\"")

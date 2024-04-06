@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: meitrack (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"trackerlogin.aspx")
+        - response.body.bcontains(b"_trackermain_gtvtseries")

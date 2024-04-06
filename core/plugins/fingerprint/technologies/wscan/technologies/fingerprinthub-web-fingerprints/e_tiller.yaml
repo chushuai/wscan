@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: e-tiller (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"reader/view_abstract.aspx")
+        - response.body.bcontains(b"北京勤云")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: thehostingtool (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://thehostingtool.com\" target=\"_blank\">thehostingtool</a>")
+        - response.body.bcontains(b"<td width=\"20%\"><strong>server os:</strong></td>")
+        - response.body.bcontains(b"page=status&sub=phpinfo\">phpinfo</a>)</td>")

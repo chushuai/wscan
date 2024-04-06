@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: incapsula (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)incap_ses|visid_incap".bmatches(response.body) || "(?i)incapsula".bmatches(response.body) || "(?i)incapsula.incident.id".bmatches(response.body) )

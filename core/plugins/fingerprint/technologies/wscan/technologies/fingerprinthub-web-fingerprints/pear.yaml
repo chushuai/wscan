@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pear (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"installed packages, channel pear")
+        - response.body.bcontains(b"content=\"webbased pear package manager")

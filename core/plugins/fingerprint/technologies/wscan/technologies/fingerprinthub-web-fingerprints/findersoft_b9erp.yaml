@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: findersoft-b9erp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"name=\"dbnameddl\"")

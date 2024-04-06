@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: xinnet-mail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"cgijson/getloginimg.php?img=logo")
+        - response.body.bcontains(b"/webmail//cssv2/tamail.css")

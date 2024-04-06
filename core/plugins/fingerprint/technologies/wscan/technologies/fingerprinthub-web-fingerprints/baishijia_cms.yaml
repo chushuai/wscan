@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: baishijia-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/resource/images/cms.ico")

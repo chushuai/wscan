@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pcitc-remotesystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"validatecode.aspx\"")
+        - response.body.bcontains(b"class=\"f-loading-mask ui-widget ui-widget-content\"")

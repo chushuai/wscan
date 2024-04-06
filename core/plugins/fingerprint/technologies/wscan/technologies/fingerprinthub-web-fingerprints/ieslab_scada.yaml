@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ieslab-scada (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"copyrightpt12")
+        - response.body.bcontains(b"青岛积成电子有限公司")

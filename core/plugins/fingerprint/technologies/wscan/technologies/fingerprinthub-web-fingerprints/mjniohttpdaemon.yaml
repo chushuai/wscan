@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mjniohttpdaemon (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: mjniohttpdaemon")'
+        - 'response.raw_header.bcontains(b"Set-Cookie: mjniohttpdsessionid")'

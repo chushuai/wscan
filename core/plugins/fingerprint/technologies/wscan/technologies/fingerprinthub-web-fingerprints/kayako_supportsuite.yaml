@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: kayako-supportsuite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by kayako esupport")
+        - response.body.bcontains(b"help desk software by kayako esupport")

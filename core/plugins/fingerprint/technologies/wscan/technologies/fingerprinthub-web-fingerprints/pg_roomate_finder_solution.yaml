@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pg-roomate-finder-solution (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by pg roomate finder solution")
+        - response.body.bcontains(b"powered by <a href=\"http://www.realtysoft.pro")

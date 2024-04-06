@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cachethq (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"https://cachethq.io") && response.body.bcontains(b"Atom") )

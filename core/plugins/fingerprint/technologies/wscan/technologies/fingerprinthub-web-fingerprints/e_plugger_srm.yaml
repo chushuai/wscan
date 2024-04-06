@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: e-plugger-srm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"lan12-jingbian-hong") && response.body.bcontains(b"科研管理系统，北京易普拉格科技") )

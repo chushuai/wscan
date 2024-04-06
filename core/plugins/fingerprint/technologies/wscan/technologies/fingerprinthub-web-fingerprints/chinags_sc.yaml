@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chinags-sc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/animation/images/teacher_2.png\"")

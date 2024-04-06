@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: faq-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<td><font size=\"-1\">&nbsp;</font><p><b><font size=\"-1\">faq admin area</font></b></td>")
+        - response.body.bcontains(b"<a href=\"admin/\">admin area</a></td></tr></table></body></html>")

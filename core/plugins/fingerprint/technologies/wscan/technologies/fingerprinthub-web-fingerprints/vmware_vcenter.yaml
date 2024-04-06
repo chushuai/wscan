@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: vmware-vcenter (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/converter/vmware-converter-client.exe")
+        - response.body.bcontains(b"content=\"vmware vcenter")
+        - response.body.bcontains(b"/vmw_nsx_logo-black-triangle-500w.png")

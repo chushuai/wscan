@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yadongsoft-fs3 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"神盾fs<sup>3</sup>文档安全共享系统v2.0</div>")

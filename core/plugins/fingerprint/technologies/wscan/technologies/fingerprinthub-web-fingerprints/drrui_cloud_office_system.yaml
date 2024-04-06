@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: drrui-cloud-office-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/studentsign/tologin.di")
+        - response.body.bcontains(b"/user/toupdatepasswordpage.di")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: volusion (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<link [^>]*href="[^"]*/vspfiles/".bmatches(response.body) || "<body [^>]*data-vn-page-name".bmatches(response.body) )

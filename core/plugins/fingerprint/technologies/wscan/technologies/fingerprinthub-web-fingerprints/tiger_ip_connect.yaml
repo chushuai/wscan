@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: tiger-ip-connect (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<link rel=\"stylesheet\" href=\"/include/firedigit.css\">")
+        - response.body.bcontains(b"<link rel=\"stylesheet\" href=\"/include/tms.css\">")
+        - response.body.bcontains(b"/include/tiger.css")

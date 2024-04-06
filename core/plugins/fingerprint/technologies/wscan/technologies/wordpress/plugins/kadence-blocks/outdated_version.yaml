@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Gutenberg Blocks by Kadence Blocks – Page Builder Features Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/kadence-blocks/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

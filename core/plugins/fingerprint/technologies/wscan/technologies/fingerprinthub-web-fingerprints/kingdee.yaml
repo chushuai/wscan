@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: kingdee (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Kingdee.EntryRole") && response.body.bcontains(b"loginKDLogo") )
+        - response.body.bcontains(b"金蝶国际软件集团有限公司版权所有")
+        - response.body.bcontains(b"var formidafterlogin = '\"bos_mainconsolesutra\"")
+        - response.body.bcontains(b"class=\"kd-div-loading-ct\"")
+        - response.body.bcontains(b"logo-kingdee.png")
+        - response.body.bcontains(b"eassessionid")
+        - response.body.bcontains(b"/eassso/common")

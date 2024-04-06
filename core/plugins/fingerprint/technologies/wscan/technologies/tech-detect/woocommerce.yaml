@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: woocommerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!-- WooCommerce".bmatches(response.body) || "<link rel='[^']+' id='woocommerce-(?:layout|smallscreen|general)-css'  href='https?://[^/]+/wp-content/plugins/woocommerce/assets/css/woocommerce(?:-layout|-smallscreen)?\\.css?ver=([\\d.]+)'".bmatches(response.body) )

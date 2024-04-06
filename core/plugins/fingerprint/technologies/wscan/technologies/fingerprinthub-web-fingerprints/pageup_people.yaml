@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pageup-people (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by pageup people")
+        - response.body.bcontains(b"class=\"pageuplink\" href=\"http://www.pageuppeople.com")

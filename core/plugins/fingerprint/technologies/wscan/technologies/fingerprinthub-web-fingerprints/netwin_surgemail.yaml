@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: netwin-surgemail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"href=\"/about_mail.htm\">about surgemail") && response.body.bcontains(b"surgemail welcome page") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zizhujianzhan (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"模板系统xinnet")
+        - response.body.bcontains(b"href=\"msnim:chat?contact=xinnet@hotmail.com")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sangfor-osm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.href=\"https://\"+window.location.host+\"/fort/login")

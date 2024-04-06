@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpwind (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Powered|Code) by <a href="[^"]+phpwind\\.net".bmatches(response.body)'

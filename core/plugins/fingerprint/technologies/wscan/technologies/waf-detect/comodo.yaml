@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: comodo (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)protected.by.comodo.waf".bmatches(response.body)'

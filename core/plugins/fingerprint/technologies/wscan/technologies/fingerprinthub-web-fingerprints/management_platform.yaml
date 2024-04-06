@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京天源迪科信息技术有限公司")
+        - ( response.body.bcontains(b"casloginview") && response.body.bcontains(b"i-verfiy") )

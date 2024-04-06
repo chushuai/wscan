@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: coremail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/coremail/bundle/")
+        - response.body.bcontains(b"<a href=\"http://www.coremail.cn\" target=\"_blank\">")
+        - response.body.bcontains(b"coremail/common")
+        - response.body.bcontains(b"/coremail/common/")
+        - response.body.bcontains(b"action=\"/coremail/index.jsp")
+        - 'response.body.bcontains(b"fmt_logoalt: \"coremail 电子邮件系统")'

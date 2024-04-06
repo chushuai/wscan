@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Coverity (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-994319624" == mmh3(base64_py(body)))

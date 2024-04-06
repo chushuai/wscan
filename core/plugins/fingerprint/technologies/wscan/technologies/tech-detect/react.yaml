@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: react (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<[^>]+data-react".bmatches(response.body) || "Web site created using create-react-app".bmatches(response.body) )

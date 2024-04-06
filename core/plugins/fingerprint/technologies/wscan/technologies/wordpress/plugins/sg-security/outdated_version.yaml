@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Security Optimizer – The All-In-One WordPress Protection Plugin Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/sg-security/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

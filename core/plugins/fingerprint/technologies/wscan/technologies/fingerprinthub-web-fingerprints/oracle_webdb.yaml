@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oracle-webdb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: oracle_webdb_listener")'

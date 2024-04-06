@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ibm-lotus-inotes (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"lotus inotes login screen")

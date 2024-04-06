@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cogent-datahub (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/images/cogent.gif")

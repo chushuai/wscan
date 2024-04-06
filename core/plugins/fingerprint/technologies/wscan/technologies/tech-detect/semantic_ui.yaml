@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: semantic-ui (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+semantic(?:\\.min)\\.css"".bmatches(response.body)'

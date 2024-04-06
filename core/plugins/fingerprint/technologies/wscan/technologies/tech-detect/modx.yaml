@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: modx (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<a[^>]+>Powered by MODX</a>".bmatches(response.body) || "<(?:link|script)[^>]+assets/snippets/".bmatches(response.body) || "<form[^>]+id="ajaxSearch_form".bmatches(response.body) || "<input[^>]+id="ajaxSearch_input".bmatches(response.body) )

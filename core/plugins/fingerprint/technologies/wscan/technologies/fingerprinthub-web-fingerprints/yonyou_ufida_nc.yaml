@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: yonyou-ufida-nc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"ufida_iufo_over.png") && response.body.bcontains(b"ufida_nc.png") )
+        - ( response.body.bcontains(b"logo/images/") && response.body.bcontains(b"ufida") )
+        - response.body.bcontains(b"logo/images/ufida_nc.png")
+        - response.body.bcontains(b"<div id=\"nc_text\">")
+        - response.body.bcontains(b"<div id=\"nc_img\" onmouseover=\"overimage('nc');")

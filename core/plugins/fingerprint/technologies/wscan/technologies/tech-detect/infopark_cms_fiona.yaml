@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: infopark-cms-fiona (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Rails Connector for Infopark CMS Fiona")

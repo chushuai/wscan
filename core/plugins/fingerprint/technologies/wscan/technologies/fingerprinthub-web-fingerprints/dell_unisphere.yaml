@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dell-unisphere (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"unisphere for sc series")
+        - response.body.bcontains(b"用于 sc 系列的 unisphere")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: iwebsns (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/jooyea/images/sns_idea1.jpg")
+        - response.body.bcontains(b"/jooyea/images/snslogo.gif")

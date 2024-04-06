@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fourseasonsvpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"imgs/fs-black-box.jpg") && response.body.bcontains(b"fs vpn") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zhongshengsoft-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"clientutil.isff=!clientutil.isie")
+        - response.body.bcontains(b"alert(\"餐厅编号不能为空\")")

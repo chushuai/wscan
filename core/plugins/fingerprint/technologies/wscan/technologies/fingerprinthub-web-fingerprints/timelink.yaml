@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: timelink (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"link international corp. all rights reserved")
+        - response.body.bcontains(b"<link rel=\"shortcut icon\" type=\"image/png\" href=\"/timelink/images/favicon.ico\"/>")

@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: discuz (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"content=\"Discuz!") && response.body.bcontains(b"discuz_uid") )
+        - response.body.bcontains(b"content=\"discuz")
+        - ( response.body.bcontains(b"discuz_uid") && response.body.bcontains(b"portal.php?mod=") )
+        - response.body.bcontains(b"href=\"/forum.php?")
+        - response.body.bcontains(b"id=\"discuz_tips")
+        - response.body.bcontains(b"powered by <strong><a href=\"http://www.discuz.net")

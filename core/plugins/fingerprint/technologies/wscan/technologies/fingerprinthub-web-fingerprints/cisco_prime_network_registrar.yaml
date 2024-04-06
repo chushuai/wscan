@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cisco-prime-network-registrar (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"productname=\"network registrar")

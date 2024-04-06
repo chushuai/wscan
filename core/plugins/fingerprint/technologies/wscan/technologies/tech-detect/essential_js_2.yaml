@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: essential-js-2 (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+ class ?= ?"(?:e-control|[^"]+ e-control)(?: )[^"]* e-lib\\b".bmatches(response.body)'

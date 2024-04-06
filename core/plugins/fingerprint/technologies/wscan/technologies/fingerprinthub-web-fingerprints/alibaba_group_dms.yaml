@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: alibaba-group-dms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"copyright &copy;  dms  all rights reserved （alibaba 数据管理产品）")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: oracle-primerva (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"primavera systems, inc")
+        - response.body.bcontains(b"class=\"introareabuildid")
+        - response.body.bcontains(b"com.primavera.detectplugin.detectpluginapplet.class")

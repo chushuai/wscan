@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: stackpath (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)action.that.triggered.the.service.and.blocked".bmatches(response.body) || "(?i)<h2>sorry,.you.have.been.blocked.?<.h2>".bmatches(response.body) )

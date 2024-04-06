@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adriver (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<embed[^>]+(?:src="https?://mh\\d?\\.adriver\\.ru/|flashvars="[^"]*(?:http:%3A//(?:ad|mh\\d?)\\.adriver\\.ru/|adriver_banner))|<(?:(?:iframe|img)[^>]+src|a[^>]+href)="https?://ad\\.adriver\\.ru/)".bmatches(response.body)'

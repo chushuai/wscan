@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: headjs (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]*data-headjs-load".bmatches(response.body)'

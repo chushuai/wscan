@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: motioneye-camera (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-923693877" == mmh3(base64_py(body)))

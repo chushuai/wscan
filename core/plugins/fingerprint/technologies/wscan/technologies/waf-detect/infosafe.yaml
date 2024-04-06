@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: infosafe (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)infosafe".bmatches(response.body) || "(?i)by.(http(s)?(.//)?)?7i24.(com|net)".bmatches(response.body) || "(?i)infosafe.\\d.\\d".bmatches(response.body) || "(?i)var.infosafekey=".bmatches(response.body) )

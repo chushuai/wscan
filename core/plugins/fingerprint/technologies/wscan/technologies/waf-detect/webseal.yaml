@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: webseal (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)webseal.error.message.template".bmatches(response.body) || "(?i)webseal.server.received.an.invalid.http.request".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: farapy (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powered by FaraPy.".bmatches(response.body)'

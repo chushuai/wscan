@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: openstack (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("786533217" == mmh3(base64_py(body)))
+        - status_code==200 && ("-923088984" == mmh3(base64_py(body)))
+        - status_code==200 && ("1232596212" == mmh3(base64_py(body)))

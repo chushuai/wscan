@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: liveinternet (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<script[^<>]*>[^]{0,128}?src\\s*=\\s*['"]//counter\\.yadro\\.ru/hit(?:;\\S+)?\\?(?:t\\d+\\.\\d+;)?r".bmatches(response.body) || "<!--LiveInternet counter-->".bmatches(response.body) || "<!--/LiveInternet-->".bmatches(response.body) || "<a href="http://www\\.liveinternet\\.ru/click"".bmatches(response.body) )

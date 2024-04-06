@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: xdoa-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://www.xdoa.cn</a>")
+        - response.body.bcontains(b"北京创信达科技有限公司")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: koken (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<html lang="en" class="k-source-essays k-lens-essays">".bmatches(response.body) || "<!--\\s+KOKEN DEBUGGING".bmatches(response.body) )

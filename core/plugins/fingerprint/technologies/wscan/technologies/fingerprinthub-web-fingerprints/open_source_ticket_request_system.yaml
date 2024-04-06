@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: open-source-ticket-request-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/otrs-web/images/")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tengweioa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/_common/scripts/global.js")
+        - response.body.bcontains(b"/valcode.aspx")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: freetextbox (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- \\* FreeTextBox v\\d \\((\\d+\\.\\d+\\.\\d+)".bmatches(response.body)'

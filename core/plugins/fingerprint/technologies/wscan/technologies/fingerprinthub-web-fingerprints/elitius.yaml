@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: elitius (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"elitius")
+        - response.body.bcontains(b"target=\"_blank\" title=\"affiliate")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: thinksns (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"_static/image/favicon.ico")
+        - response.body.bcontains(b"powered by <a href=\"http://www.thinksns.com\">")

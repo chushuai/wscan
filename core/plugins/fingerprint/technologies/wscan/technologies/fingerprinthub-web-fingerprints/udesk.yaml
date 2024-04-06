@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: udesk (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"assets-cli.udesk.cn/im_client/js/udeskapi.js")
+        - response.body.bcontains(b"udesk.cn/im_client/?web_plugin_id=")

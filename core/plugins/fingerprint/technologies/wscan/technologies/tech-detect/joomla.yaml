@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: joomla (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<div[^>]+id="wrapper_r"|<(?:link|script)[^>]+(?:feed|components)/com_|<table[^>]+class="pill)".bmatches(response.body)'

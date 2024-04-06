@@ -1,0 +1,20 @@
+engine: fingerprint
+info:
+    name: microsoft-exchange (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.raw_header.bcontains(b"Location: /owa/") && response.raw_header.bcontains(b"Server: Microsoft") )'
+        - response.body.bcontains(b"<!-- owapage = asp.auth_logon_aspx")
+        - response.body.bcontains(b"/exchweb/bin/auth/owalogon.asp")
+        - response.body.bcontains(b"/exchweb/bin/auth/owalogon.asp?url=")
+        - response.body.bcontains(b"href=\"/owa/auth/")
+        - response.body.bcontains(b"window.location.replace(\"/owa/\" + window.location.hash);</script></head><body></body>")
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" contect=\"0;url=/owa\">")
+        - response.body.bcontains(b"themes/resources/segoeui-semibold.ttf")
+        - ( response.body.bcontains(b"<div class=\"signinheader\">outlook</div>") && response.body.bcontains(b"owalogocontainer") )
+        - ( response.body.bcontains(b"/owa/") && response.body.bcontains(b"owapage = asp.auth_logon_aspx") )
+        - ( response.body.bcontains(b"/owa/") && response.body.bcontains(b"showpasswordcheck") )
+        - response.body.bcontains(b"outlook")

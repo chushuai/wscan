@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nmap-log (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"interesting ports on") && response.body.bcontains(b"starting nmap") )

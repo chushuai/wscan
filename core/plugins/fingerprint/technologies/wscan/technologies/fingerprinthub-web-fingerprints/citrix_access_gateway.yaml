@@ -1,0 +1,17 @@
+engine: fingerprint
+info:
+    name: citrix-access-gateway (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"\"/vpn/resources/{lang}\"")
+        - 'response.raw_header.bcontains(b"Location: /vpn/index.html")'
+        - response.body.bcontains(b"href=\"/vpn/images/accessgateway.ico")
+        - response.body.bcontains(b"class=\"citrixreceiverlogoaboutbox\"")
+        - response.body.bcontains(b"/vpn/js/gateway_login_view.js?")
+        - response.body.bcontains(b"cloud.ottoworkfroce.eu/vpn/index.html")
+        - response.body.bcontains(b"vpn/js/lsgateway_login_view.js")
+        - response.body.bcontains(b"class=\"_ctxstxt_netscalergateway\"")
+        - response.body.bcontains(b"receiver/images/common/icon_vpn.ico")

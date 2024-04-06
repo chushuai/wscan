@@ -6,4 +6,5 @@ pscan:
     path:
         - /
     expressions:
+        - compare_versions(version, '<=2.4')
         - '"Magento\\/([0-9.]+) ".bmatches(response.body)'

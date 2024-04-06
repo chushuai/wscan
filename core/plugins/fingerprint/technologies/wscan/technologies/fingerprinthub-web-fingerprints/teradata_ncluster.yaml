@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: teradata-ncluster (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"redirecting to aster ncluster management console (amc)")

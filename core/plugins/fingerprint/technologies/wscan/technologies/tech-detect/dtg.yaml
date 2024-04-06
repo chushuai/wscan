@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dtg (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]+Site Powered by DTG".bmatches(response.body)'

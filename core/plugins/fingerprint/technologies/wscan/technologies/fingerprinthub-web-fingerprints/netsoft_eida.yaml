@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: netsoft-eida (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.href = \"/appframe/login_v2/login.jsp\";")
+        - response.body.bcontains(b"href=\"/images/common/favicon.ico\"")

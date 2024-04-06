@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: netwin-dbabble (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/cgi/dbabble.cgi")
+        - response.body.bcontains(b">dbabble online help</a>")
+        - response.body.bcontains(b"action=\"/dbabble")

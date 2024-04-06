@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mailchimp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<form [^>]*data-mailchimp-url".bmatches(response.body) || "<form [^>]*id="mc-embedded-subscribe-form"".bmatches(response.body) || "<form [^>]*name="mc-embedded-subscribe-form"".bmatches(response.body) || "<input [^>]*id="mc-email"".bmatches(response.body) || "<!-- Begin MailChimp Signup Form -->".bmatches(response.body) )

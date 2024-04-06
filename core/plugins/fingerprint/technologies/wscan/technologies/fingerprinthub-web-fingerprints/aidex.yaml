@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aidex (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://www.aidex.de/")

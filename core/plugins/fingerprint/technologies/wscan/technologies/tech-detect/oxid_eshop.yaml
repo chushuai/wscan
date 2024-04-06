@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oxid-eshop (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^-]*OXID eShop".bmatches(response.body)'

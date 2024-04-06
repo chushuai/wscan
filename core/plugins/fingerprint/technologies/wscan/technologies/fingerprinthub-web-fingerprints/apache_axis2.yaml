@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-axis2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"axis2-admin") && response.body.bcontains(b"axis2-web") )

@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /
-    expressions: []
+    expressions:
+        - ( contains(body, "Amazon Cognito Developer Authentication Sample") && contains(body, "Congratulations!") && status_code == 200 )

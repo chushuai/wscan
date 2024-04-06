@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: synology-webstation (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"paragraph\">web station has been enabled. to finish setting up your website, please see the \"web service")

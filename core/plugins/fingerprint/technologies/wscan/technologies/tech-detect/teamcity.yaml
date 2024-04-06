@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: teamcity (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<span class="versionTag"><span class="vWord">Version</span> ([\\d\\.]+)".bmatches(response.body)'

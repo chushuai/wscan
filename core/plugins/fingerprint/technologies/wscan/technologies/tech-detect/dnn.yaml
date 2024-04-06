@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dnn (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!-- by DotNetNuke Corporation".bmatches(response.body) || "<!-- DNN Platform".bmatches(response.body) || "/js/dnncore.js?cdv".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bangyong-pm2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pm2项目管理系统bs版增强工具.zip")

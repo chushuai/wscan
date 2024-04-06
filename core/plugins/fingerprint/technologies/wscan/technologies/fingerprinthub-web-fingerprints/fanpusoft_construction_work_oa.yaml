@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fanpusoft-construction-work-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/dwr/interface/loginservice.js")

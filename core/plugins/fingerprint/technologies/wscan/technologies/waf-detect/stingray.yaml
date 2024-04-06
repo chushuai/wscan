@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: stingray (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)\\AX-Mapping-".bmatches(response.body)'

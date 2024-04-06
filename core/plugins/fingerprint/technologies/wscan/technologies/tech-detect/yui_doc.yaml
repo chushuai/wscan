@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yui-doc (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<html[^>]* yuilibrary\\.com/rdf/[\\d.]+/yui\\.rdf|<body[^>]+class="yui3-skin-sam)".bmatches(response.body)'

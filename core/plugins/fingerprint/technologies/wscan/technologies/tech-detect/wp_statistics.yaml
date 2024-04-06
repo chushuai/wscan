@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wp-statistics (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Analytics by WP-Statistics v([\\d.]+) -".bmatches(response.body)'

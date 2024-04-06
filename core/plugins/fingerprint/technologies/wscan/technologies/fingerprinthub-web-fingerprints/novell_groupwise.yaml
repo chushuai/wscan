@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novell-groupwise (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- start novell services")
+        - 'response.raw_header.bcontains(b"Set-Cookie: njscn=")'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sql-buddy (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<title>SQL Buddy</title>|<[^>]+onclick="sideMainClick\\("home\\.php)".bmatches(response.body)'

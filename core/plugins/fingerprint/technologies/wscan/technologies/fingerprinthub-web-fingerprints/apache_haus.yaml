@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-haus (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/apachehaus.ico")
+        - response.body.bcontains(b"copyright &copy; 2008-2017 <a href=\"http://www.apachehaus.com\">the apache haus</a>")

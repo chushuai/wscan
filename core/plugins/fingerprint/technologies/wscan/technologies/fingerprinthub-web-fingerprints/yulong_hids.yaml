@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yulong-hids (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>驭龙</h1>")
+        - response.body.bcontains(b"<h2>yulong - a cool hids system.</h2>")

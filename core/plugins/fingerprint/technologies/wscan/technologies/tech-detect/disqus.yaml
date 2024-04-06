@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: disqus (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div[^>]+id="disqus_thread"".bmatches(response.body)'

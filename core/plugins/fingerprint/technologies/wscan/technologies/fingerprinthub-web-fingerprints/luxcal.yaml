@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: luxcal (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"luxcal")
+        - response.body.bcontains(b"class='footlb'>lux")
+        - response.body.bcontains(b"content=\"roel buining")

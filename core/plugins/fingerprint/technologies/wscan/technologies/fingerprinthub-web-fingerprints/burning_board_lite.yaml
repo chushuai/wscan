@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: burning-board-lite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <b><a href=\"http://www.woltlab.de")
+        - response.body.bcontains(b"powered by <b>burning board")

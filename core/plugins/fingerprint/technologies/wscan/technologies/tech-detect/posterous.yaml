@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: posterous (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div class="posterous".bmatches(response.body)'

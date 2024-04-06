@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: bintec-elmeg (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-375623619" == mmh3(base64_py(body)))
+        - status_code==200 && ("1770799630" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apostrophecms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+data-apos-refreshable[^>]".bmatches(response.body)'

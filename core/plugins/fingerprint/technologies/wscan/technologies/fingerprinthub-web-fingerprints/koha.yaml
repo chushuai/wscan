@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: koha (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"koha ")
+        - response.body.bcontains(b"name=\"koha_login_context")

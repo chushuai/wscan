@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lithium (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '" <a [^>]+Powered by Lithium".bmatches(response.body)'

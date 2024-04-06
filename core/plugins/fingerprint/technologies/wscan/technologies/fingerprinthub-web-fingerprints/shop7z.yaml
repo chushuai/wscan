@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: shop7z (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"www_zzjs_net_loding\"")
+        - response.body.bcontains(b"function www_zzjs_net_change")

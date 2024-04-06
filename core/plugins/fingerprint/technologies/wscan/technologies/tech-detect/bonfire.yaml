@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bonfire (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a[^>]+href="https?://(?:www\\.)?cibonfire\\.com[^>]*>Bonfire v([^<]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dokeos (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Portal <a[^>]+>Dokeos|@import "[^"]+dokeos_blue)".bmatches(response.body)'

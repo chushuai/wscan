@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: videosoon (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"power by linksoon - videosoon")
+        - response.body.bcontains(b"href=\"skin/anysoondefault/anystyles.css")

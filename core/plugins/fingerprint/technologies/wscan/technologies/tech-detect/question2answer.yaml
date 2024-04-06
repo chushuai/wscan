@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: question2answer (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powered by Question2Answer".bmatches(response.body)'

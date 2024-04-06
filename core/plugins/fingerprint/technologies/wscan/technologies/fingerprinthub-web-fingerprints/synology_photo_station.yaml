@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: synology-photo-station (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"photo_new/syno_photo_main.js")
+        - response.body.bcontains(b"content=\"photo station 6\"")
+        - response.body.bcontains(b"content=\"service_not_available\"")
+        - response.body.bcontains(b"content=\"photo station")
+        - response.body.bcontains(b"content=\"album")

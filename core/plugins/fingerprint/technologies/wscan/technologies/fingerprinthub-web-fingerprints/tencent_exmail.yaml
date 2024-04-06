@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tencent-exmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/cgi-bin/getinvestigate?flowid=")
+        - response.body.bcontains(b"content=\"登录腾讯企业邮箱")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pcitc-cameras-and-surveillance (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/slider/banner-gis.png")

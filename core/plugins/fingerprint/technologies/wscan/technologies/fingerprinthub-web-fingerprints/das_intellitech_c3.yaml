@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: das-intellitech-c3 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.href=\"single/empmain2.aspx")

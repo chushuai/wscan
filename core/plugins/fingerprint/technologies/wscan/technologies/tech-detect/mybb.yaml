@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mybb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<script [^>]+\\s+<!--\\s+lang\\.no_new_posts|<a[^>]* title="Powered By MyBB)".bmatches(response.body)'

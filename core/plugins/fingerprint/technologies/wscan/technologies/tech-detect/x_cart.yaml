@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: x-cart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( "Powered by X-Cart(?: (\\d+))? <a[^>]+href="http://www\\.x-cart\\.com/"[^>]*>".bmatches(response.body) || "<a[^>]+href="[^"]*(?:\\?|&)xcart_form_id=[a-z\\d]{32}(?:&|$)".bmatches(response.body) )'

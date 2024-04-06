@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: parallels-plesk-panel (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-652508439" == mmh3(base64_py(body)))
+        - status_code==200 && ("-519765377" == mmh3(base64_py(body)))
+        - status_code==200 && ("-771764544" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mantuoluo-medication (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h2>曼陀罗医疗</h2>")

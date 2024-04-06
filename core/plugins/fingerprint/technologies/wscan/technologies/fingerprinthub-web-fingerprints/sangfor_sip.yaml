@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sangfor-sip (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.sessionstorage.removeitem('serialcheckobj')")
+        - response.body.bcontains(b"src=\"/apps/secvisual/static/js/runtime.js?")
+        - 'response.body.bcontains(b"url: ''../auth_manage/auth_manage/on_login''")'

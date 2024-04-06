@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hitachi (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - len(body)==894 && status_code==200 && ("41e9c43dc5e994ca7a40f4f92b50d01d" == md5(body))

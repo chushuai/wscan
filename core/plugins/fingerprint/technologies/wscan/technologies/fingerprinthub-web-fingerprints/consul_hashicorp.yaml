@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: consul-hashicorp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"consul-ui/config/environment")
+        - response.body.bcontains(b"consulhost")
+        - response.body.bcontains(b"consul instance")
+        - response.body.bcontains(b"www.consul.io")

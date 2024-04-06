@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sdcncsi (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<em class=\"wk-fl\">在沃系统</em>")
+        - response.body.bcontains(b"refreshcaptchaimgfun")

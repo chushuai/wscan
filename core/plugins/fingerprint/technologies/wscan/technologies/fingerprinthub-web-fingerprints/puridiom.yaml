@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: puridiom (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"/puridiom/system/header.jsp")
+        - response.body.bcontains(b"src=\"/puridiom/system/processing.jsp")

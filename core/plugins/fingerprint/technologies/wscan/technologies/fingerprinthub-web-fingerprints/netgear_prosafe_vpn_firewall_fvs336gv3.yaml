@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: netgear-prosafe-vpn-firewall-fvs336gv3 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"gigabit dual wan ssl vpn firewall fvs336gv3</div>")

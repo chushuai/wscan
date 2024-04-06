@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tcexam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a name=\"topofdoc\" id=\"topofdoc\"></a>")
+        - response.body.bcontains(b"content=\"nicola asuni - tecnick.com s.r.l.\" />")

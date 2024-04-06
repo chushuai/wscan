@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 3dcart (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by 3dcart")
+        - 'response.raw_header.bcontains(b"X-Powered-By: 3dcart")'

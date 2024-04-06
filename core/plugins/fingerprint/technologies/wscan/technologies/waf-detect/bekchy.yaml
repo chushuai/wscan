@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: bekchy (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)bekchy.(-.)?access.denied".bmatches(response.body) || "(?i)(http(s)?://)(www.)?bekchy.com(/report)?".bmatches(response.body) )

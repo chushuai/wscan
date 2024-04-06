@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chinatelecomcustomerbroadbandaddressquerysystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<strong>客户宽带地址查询")

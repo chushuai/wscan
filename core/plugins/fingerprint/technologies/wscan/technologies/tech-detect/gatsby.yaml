@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gatsby (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div id="___gatsby">".bmatches(response.body) || "<style id="gatsby-inlined-css">".bmatches(response.body) )

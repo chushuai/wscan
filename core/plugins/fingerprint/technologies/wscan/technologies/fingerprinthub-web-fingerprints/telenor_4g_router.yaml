@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: telenor-4g-router (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<form id=\"default_login\" name=\"default_login\" method=\"post\" action=\"/goform/user_login\">")
+        - response.body.bcontains(b"please power off and plug in (u)sim card. then power on again. or pin is permanently blocked, please contact the provider")

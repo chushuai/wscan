@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /libs/granite/core/content/login/favicon.ico
-    expressions: []
+    expressions:
+        - status_code==200 && ("-144483185" == mmh3(base64_py(body)))

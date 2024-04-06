@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: bigip (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)\\ATS\\w{4,}=".bmatches(response.body) || "(?i)bigipserver(.i)?|bigipserverinternal".bmatches(response.body) || "(?i)^TS[a-zA-Z0-9]{3,8}=".bmatches(response.body) || "(?i)BigIP|BIG-IP|BIGIP".bmatches(response.body) || "(?i)bigipserver".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: typo3-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<link[^>]+ href="/?typo3(?:conf|temp)/".bmatches(response.body) || "<img[^>]+ src="/?typo3(?:conf|temp)/".bmatches(response.body) || "This website is powered by TYPO3".bmatches(response.body) )

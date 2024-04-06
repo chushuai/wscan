@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webbased-pear-package-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pear_frontend_web")
+        - response.body.bcontains(b"<img src=\"?img=pear\" width=\"104\" height=\"50\" vspace=\"2\" hspace=\"5\" alt=\"pear\">")

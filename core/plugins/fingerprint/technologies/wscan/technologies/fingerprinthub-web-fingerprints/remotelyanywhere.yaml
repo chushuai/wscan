@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: remotelyanywhere (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/img/ralogo.png\" alt=\"remotelyanywhere")
+        - 'response.raw_header.bcontains(b"Server: remotelyanywhere")'

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: manageengine-deviceexpert (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/deviceexpert.js")
+        - response.body.bcontains(b"password manager pro does not allow")
+        - response.body.bcontains(b"selectpasswordpolicy")
+        - response.body.bcontains(b"changepasswordpolicy")

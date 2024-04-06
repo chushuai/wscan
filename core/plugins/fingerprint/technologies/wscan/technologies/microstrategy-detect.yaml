@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /{{path}}
-    expressions: []
+    expressions:
+        - ( contains(body, "MicroStrategy, Incorporated.") || contains(body, "microstrategy.servletName") || contains(body, "mstrHiddenInput") )

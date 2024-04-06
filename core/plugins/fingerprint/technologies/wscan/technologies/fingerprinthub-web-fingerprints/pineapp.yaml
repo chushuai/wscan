@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pineapp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/admin/css/images/pineapp.ico")

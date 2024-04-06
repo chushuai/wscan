@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: phpsysinfo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var stargeturl = \"index.php?disp=dynamic")
+        - response.body.bcontains(b"content=\"phpsysinfo")
+        - response.body.bcontains(b"href=\"http://phpsysinfo.sourceforge.net/\">phpsysinfo")
+        - response.body.bcontains(b"/templates/phpsysinfo.css")

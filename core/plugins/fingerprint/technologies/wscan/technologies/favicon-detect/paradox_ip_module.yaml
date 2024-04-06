@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: paradox-ip-module (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("727253975" == mmh3(base64_py(body)))

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vrv-desktop-application-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<span id=\"lblvalidcompany\" class=\"validcompany\">vrv")
+        - response.body.bcontains(b"var vver = $('#hidverify').val();")

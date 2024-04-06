@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: phpmyadmin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"phpmyadmin.css.php")
+        - 'response.raw_header.bcontains(b"Set-Cookie: phpmyadmin=")'
+        - response.body.bcontains(b"pma_password")

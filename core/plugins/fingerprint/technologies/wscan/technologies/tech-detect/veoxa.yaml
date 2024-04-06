@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: veoxa (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img [^>]*src="[^"]+tracking\\.veoxa\\.com".bmatches(response.body)'

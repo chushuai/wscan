@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dedecms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<a href=http://www.dedecms.com target='_blank'>Power by DedeCms</a>") || response.body.bcontains(b"power by dedecms") || response.body.bcontains(b"http://www.dedecms.com") || response.body.bcontains(b"/templets/default/style/dedecms.css") || response.body.bcontains(b"<div><h3>dedecms error warning!</h3>") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: angular (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+ ng-version="([\\d.]+)"".bmatches(response.body)'
+        - ( response.body.bcontains(b"ng-app=\"") || response.body.bcontains(b"<ng-app") || response.body.bcontains(b"*ngIf=") || response.body.bcontains(b"ng-controller=") )

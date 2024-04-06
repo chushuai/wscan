@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: xampp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"font-size: 1.2em; color: red;\">new xampp")'
+        - response.body.bcontains(b"content=\"xampp ")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: invenio (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Powered by|System)\\s+(?:CERN )?<a (?:class="footer" )?href="http://(?:cdsware\\.cern\\.ch(?:/invenio)?|invenio-software\\.org|cern\\.ch/invenio)(?:/)?">(?:CDS )?Invenio</a>\\s*v?([\\d\\.]+)?".bmatches(response.body)'

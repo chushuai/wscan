@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: google-analytics (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<amp-analytics [^>]*type=["'']googleanalytics["'']".bmatches(response.body)'

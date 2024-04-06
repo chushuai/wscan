@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: infomaster (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/masterview.css")
+        - response.body.bcontains(b"/masterview.js")
+        - response.body.bcontains(b"/masterview/mpleftnavstyle/panelbar.mpifma.css")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sx-shop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alert(\"ihr suchbegriff muss mind. aus 3 zeichen bestehen.\");")
+        - response.body.bcontains(b"content=\"source worx - software development\">")

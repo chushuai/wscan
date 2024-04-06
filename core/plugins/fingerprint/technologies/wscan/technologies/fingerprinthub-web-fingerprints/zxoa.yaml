@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zxoa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"obj.src = \"createcheckcode.aspx?id\"+strmath;")
+        - response.body.bcontains(b"name=\"button1\" value=\"\" onclick=\"javascript:return checkfrom();\" id=\"button1\" class=\"loginbtn\" />")

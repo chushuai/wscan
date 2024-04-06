@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: webknight (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)\\bwebknight".bmatches(response.body) || "(?i)webknight".bmatches(response.body) )

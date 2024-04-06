@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: combeenation (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe[^>]+src="[^>]+portal\\.combeenation\\.com".bmatches(response.body)'

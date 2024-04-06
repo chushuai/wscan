@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: php (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.raw_header.bcontains(b"X-Powered-By: PHP") || response.raw_header.bcontains(b"PHPSESSID") )'

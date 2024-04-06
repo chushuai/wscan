@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: microsoft-remote-web-workplace (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"copyright (c) microsoft corporation")
+        - response.body.bcontains(b"action=\"logon.aspx?")

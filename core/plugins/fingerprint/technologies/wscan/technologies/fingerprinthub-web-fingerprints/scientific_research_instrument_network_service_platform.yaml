@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: scientific-research-instrument-network-service-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"content: \"/lfsms/user/login2?go=\" + go")'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bigware (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Diese <a href=[^>]+bigware\\.de|<a href=[^>]+/main_bigware_\\d+\\.php)".bmatches(response.body)'

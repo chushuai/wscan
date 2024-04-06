@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tomatocms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"tomato.core.widget.loader.baseurl = 'http://")
+        - response.body.bcontains(b"<a href=\"http://www.tomatocms.com\" title=\"powered by tomatocms\" target=\"_blank\">")

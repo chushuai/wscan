@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adobe-coldfusion (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/cfajax/")
+        - response.body.bcontains(b"<cfscript>")

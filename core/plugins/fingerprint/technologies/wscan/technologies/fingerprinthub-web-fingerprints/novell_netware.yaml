@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novell-netware (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"code=\"nwshealth.class")
+        - 'response.raw_header.bcontains(b"Server: netware http stack")'

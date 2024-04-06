@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: softether-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<li>manage this vpn server or vpn bridge<ul>")

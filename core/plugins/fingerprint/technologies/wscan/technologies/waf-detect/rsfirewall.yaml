@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: rsfirewall (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)com.rsfirewall.403.forbidden".bmatches(response.body) || "(?i)com.rsfirewall.event".bmatches(response.body) || "(?i)(\\b)?rsfirewall(\\b)?".bmatches(response.body) || "(?i)rsfirewall".bmatches(response.body) )

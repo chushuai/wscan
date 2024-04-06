@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: growforce-email (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://webmail.zmail300.cn")
+        - response.body.bcontains(b"href=\"/page/help/mailconfig/config/index.html")

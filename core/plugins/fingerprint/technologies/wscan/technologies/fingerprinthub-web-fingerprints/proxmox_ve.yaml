@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: proxmox-ve (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"boxheadline\">proxmox virtual environment")
+        - response.body.bcontains(b"href='http://www.proxmox.com' target='_blank' class=\"boxheadline")
+        - response.body.bcontains(b"ext.create('pve.stdworkspace')")

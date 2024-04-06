@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: supermap-gis (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京超图软件股份有限公司")

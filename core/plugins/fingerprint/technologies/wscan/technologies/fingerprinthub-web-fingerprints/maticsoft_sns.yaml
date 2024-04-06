@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: maticsoft-sns (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"maticsoftsns")
+        - response.body.bcontains(b"maticsoft")
+        - response.body.bcontains(b"/areas/sns/")

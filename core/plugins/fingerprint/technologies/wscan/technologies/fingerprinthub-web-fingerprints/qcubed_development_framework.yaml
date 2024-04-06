@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: qcubed-development-framework (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"codeversion\">qcubed development framework")
+        - response.body.bcontains(b"<b>qcubed version:</b>")

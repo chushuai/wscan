@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: watchguard (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)(request.denied.by.)?watchguard.firewall".bmatches(response.body) || "(?i)watchguard(.technologies(.inc)?)?".bmatches(response.body) )

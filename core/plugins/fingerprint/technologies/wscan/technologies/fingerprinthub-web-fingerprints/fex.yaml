@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: fex (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: fexsrv")'
+        - response.body.bcontains(b"href=\"mailto:fexmaster@ostc.de")

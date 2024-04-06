@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pcitc-logistics-management-mystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b" href=\"/newimages/login/logo_icon.ico")

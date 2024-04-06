@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mongoexpress (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Mongo Express") && response.body.bcontains(b"mongo-express-logo.png") )

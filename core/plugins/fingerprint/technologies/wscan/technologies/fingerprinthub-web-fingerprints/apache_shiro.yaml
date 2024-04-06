@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-shiro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: rememberMe=deleteMe")'
+        - response.body.bcontains(b"</i> shiro</li>")

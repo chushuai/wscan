@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xtcommerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div class="copyright">[^<]+<a[^>]+>xt:Commerce".bmatches(response.body)'

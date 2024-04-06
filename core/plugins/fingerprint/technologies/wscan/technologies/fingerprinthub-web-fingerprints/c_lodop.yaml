@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: c-lodop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>关于c-lodop免费和注册授权</h1>")
+        - response.body.bcontains(b"document.getelementbyid(\"reqid\").value==document.getelementbyid(\"licid\").value")

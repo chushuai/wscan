@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (MailPoet – Newsletters, Email Marketing, and Automation Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/mailpoet/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

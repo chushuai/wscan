@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: armor (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)blocked.by.website.protection.from.armour".bmatches(response.body)'

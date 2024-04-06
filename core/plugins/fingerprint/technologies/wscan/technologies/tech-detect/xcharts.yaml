@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xcharts (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]* href="[^"]*xcharts(?:\\.min)?\\.css".bmatches(response.body)'

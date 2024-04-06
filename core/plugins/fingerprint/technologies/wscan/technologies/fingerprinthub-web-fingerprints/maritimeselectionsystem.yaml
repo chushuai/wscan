@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: maritimeselectionsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"海事选船系统</el-col>")

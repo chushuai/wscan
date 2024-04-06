@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: wireless-access-point-controller (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var oemproductname = \"mvc_howay6000\"")
+        - response.body.bcontains(b"<select id = \"selclangswitch\" class=\"langswitch\" onchange = \"switchpagelanguage()\">")
+        - response.body.bcontains(b"苏州汉明科技有限公司")
+        - response.body.bcontains(b"var oemproductname = \"mvc_howay6100\")")
+        - response.body.bcontains(b"src=\"images/acchtext.png\"")
+        - response.body.bcontains(b"版权所有 &copy 2009-2017</div>")

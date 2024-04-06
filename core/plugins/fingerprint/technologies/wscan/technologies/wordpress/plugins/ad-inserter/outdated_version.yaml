@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Ad Inserter – Ad Manager & AdSense Ads Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/ad-inserter/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

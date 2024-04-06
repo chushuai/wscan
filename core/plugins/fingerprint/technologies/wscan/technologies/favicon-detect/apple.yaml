@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: apple (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1232159009" == mmh3(base64_py(body)))
+        - status_code==200 && ("1382324298" == mmh3(base64_py(body)))
+        - status_code==200 && ("-1498185948" == mmh3(base64_py(body)))

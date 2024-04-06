@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cnway-ilims (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/extjs/adapter/ext/ext-base-js")
+        - response.body.bcontains(b"/js/allpagefunction.js")

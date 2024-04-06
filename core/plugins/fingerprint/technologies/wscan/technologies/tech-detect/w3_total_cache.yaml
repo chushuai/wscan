@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: w3-total-cache (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+W3 Total Cache".bmatches(response.body)'

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: avaya-aura-utility-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"vmstitle\">avaya aura&#8482;&nbsp;utility server")
+        - response.body.bcontains(b"/webhelp/base/utility_toc.htm")
+        - response.body.bcontains(b"avaya aura&reg;&nbsp;utility services")
+        - response.body.bcontains(b"avaya inc. all rights reserved")

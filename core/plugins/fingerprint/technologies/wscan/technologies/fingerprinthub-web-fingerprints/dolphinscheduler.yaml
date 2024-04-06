@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dolphinscheduler (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>dolphinscheduler</title>")
+        - response.body.bcontains(b"let node_env = 'true'")

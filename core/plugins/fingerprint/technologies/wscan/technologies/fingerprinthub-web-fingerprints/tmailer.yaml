@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tmailer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/tmailer/img/logo/favicon.ico")

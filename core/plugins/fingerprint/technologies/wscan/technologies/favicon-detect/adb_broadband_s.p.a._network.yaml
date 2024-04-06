@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adb-broadband-s.p.a.-network (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-587741716" == mmh3(base64_py(body)))

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: dodenterpriseprotection (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)dod.enterprise.level.protection.system".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bigdump (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- <h1>BigDump: Staggered MySQL Dump Importer ver\\. ([\\d.b]+)".bmatches(response.body)'

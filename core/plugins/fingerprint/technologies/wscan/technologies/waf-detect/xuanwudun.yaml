@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: xuanwudun (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)class=.(db)?waf.?(-row.)?>".bmatches(response.body)'

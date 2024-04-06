@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: loyaa-information-automatic-editing-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/loyaa/common.lib.js")

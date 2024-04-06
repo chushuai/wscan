@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jit-web-connector (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"location.href='/cgi-bin/cgiproxy.exe?action=start';")

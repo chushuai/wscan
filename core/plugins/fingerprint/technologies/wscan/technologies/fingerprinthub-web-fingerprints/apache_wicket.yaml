@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-wicket (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"xmlns:wicket=")
+        - response.body.bcontains(b"/org.apache.wicket.")

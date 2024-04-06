@@ -10,3 +10,4 @@ pscan:
         - /actuator/favicon.ico
     expressions:
         - ( response.body.bcontains(b"\"_links\":") && response.body.bcontains(b"\"self\":") && response.body.bcontains(b"\"health\"") )
+        - status_code==200 && ("116323821" == mmh3(base64_py(body)))

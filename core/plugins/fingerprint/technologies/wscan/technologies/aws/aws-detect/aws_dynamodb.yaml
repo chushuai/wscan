@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-dynamodb (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"X-Amz-Crc32:") || response.raw_header.bcontains(b"X-Amz-Target:") )

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: winwebmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"winwebmail server")
+        - response.body.bcontains(b"images/owin.css")
+        - response.body.bcontains(b"<td class=newsdiv-mid2>邮局管理员可自行分配邮箱！</td>")
+        - response.body.bcontains(b"type=\"hidden\" name=\"secex\"")
+        - response.body.bcontains(b"href=\"images\hwem.css\"")

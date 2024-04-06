@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: finecms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by finecms")
+        - response.body.bcontains(b"dayrui@gmail.com")
+        - response.body.bcontains(b"copyright\" content=\"finecms")
+        - response.body.bcontains(b"/statics/js/dayrui.js")

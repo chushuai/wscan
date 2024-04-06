@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: crhms-medical-insurance-review-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.open(url, \"中公网医疗信息管理系统\", option")

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: nvidia-mellanox-mlnx-os (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<div style=''display: none;'' id=\"setstatusiconstatediv\"></div>")'
+        - response.body.bcontains(b"/mlx-default.css")
+        - response.body.bcontains(b"'/admin/launch?script=")
+        - response.body.bcontains(b"url=/admin/launch?script=")

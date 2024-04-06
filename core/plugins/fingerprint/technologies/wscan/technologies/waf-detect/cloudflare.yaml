@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: cloudflare (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)cloudflare.ray.id.|var.cloudflare.".bmatches(response.body) || "(?i)cloudflare.nginx".bmatches(response.body) || "(?i)..cfduid=([a-z0-9]{43})?".bmatches(response.body) || "(?i)cf[-|_]ray(..)?([0-9a-f]{16})?[-|_]?(dfw|iad)?".bmatches(response.body) || "(?i).>attention.required!.\\|.cloudflare<.+".bmatches(response.body) || "(?i)http(s)?.//report.(uri.)?cloudflare.com(/cdn.cgi(.beacon/expect.ct)?)?".bmatches(response.body) || "(?i)ray.id".bmatches(response.body) || "(?i)__cfduid".bmatches(response.body) )

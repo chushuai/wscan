@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bigace (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Powered by <a href="[^>]+BIGACE|<!--\\s+Site is running BIGACE)".bmatches(response.body)'

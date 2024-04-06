@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: kampyle (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://cf.kampyle.com/k_button.js")
+        - response.body.bcontains(b"start kampyle feedback form button")

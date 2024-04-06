@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: xheditor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"xheditor_lang/zh-cn.js")
+        - response.body.bcontains(b"class=\"xheditor")
+        - response.body.bcontains(b".xheditor(")

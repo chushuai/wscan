@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pg-real-estate-solution (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b">pg real estate solution - real estate web site design")

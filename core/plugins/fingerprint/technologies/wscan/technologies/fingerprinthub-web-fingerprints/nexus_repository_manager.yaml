@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: nexus-repository-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Nexus Repository Manager</title>")
+        - response.body.bcontains(b" nexus repository manager")
+        - response.body.bcontains(b"progressmessage('initializing ...')")

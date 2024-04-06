@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dmxready-portfolio-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/css/portfoliomanager/styles_display_page.css")
+        - response.body.bcontains(b"rememberme_portfoliomanager")

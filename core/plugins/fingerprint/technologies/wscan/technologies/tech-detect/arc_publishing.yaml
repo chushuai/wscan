@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: arc-publishing (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div [^>]*id="pb-root"".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: diancms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"diancms_sitename")
+        - response.body.bcontains(b"diancms_用户登陆引用")

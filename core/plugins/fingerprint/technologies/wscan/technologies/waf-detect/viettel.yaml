@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: viettel (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<title>access.denied(...)?viettel.waf</title>".bmatches(response.body) || "(?i)viettel.waf.system".bmatches(response.body) || "(?i)(http(s).//)?cloudrity.com(.vn)?".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zurb-foundation (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<link[^>]+foundation[^>"]+css".bmatches(response.body) || "<div [^>]*class="[^"]*(?:small|medium|large)-\\d{1,2} columns".bmatches(response.body) )

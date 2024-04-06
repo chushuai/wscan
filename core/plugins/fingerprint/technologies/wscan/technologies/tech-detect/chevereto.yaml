@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chevereto (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="https?://chevereto\\.com">".bmatches(response.body)'

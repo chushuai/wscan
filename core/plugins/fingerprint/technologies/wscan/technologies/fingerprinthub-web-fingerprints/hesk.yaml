@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: hesk (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"hesk_javascript.js")
+        - response.body.bcontains(b"hesk_style.css")
+        - response.body.bcontains(b"powered by <a href=\"http://www.hesk.com")
+        - response.body.bcontains(b"powered by <a href=\"https://www.hesk.com")

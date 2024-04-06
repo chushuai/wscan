@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: infowarelab-system-management-center (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<div class=\"main_supporterbar\">") && response.body.bcontains(b"class=\"main_loginbar") )

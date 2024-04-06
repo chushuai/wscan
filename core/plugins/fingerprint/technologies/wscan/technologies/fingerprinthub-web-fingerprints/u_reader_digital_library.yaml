@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: u-reader-digital-library (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"ureader")
+        - response.body.bcontains(b"class=\"login-show-title\">dynomedia inc.</p>")

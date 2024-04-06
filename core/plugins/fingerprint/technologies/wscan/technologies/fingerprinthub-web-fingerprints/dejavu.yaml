@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dejavu (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Dejavu, the missing Web UI for Elasticsearch")

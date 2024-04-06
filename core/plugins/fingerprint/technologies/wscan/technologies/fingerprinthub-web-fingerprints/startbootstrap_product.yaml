@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: startbootstrap-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"img/portfolio/thumbnails/4.jpg\"")
+        - response.body.bcontains(b"we've got what you need!</h2>")

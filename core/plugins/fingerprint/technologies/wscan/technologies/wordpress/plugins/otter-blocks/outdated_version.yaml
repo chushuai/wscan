@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Otter Blocks – Gutenberg Blocks, Page Builder for Gutenberg Editor & FSE Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/otter-blocks/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

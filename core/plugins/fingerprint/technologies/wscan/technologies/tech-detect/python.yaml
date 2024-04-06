@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: python (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"Python/2.") || response.raw_header.bcontains(b"Python/3.") || response.raw_header.bcontains(b"CPython/3.") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: kerio-webstar (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: kerio_webstar")'
+        - 'response.raw_header.bcontains(b"Server: webstar")'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fast-esp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<form[^>]+id="fastsearch"".bmatches(response.body)'

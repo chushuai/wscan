@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: shenri-elevator (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/frameworks/images/ico.ico")
+        - response.body.bcontains(b"images/login/btnmobile.gif")
+        - response.body.bcontains(b"copyright 2015 shenri habiliment co.,ltd. all rights reserved")

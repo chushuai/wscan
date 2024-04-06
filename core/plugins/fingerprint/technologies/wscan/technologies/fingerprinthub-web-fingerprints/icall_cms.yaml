@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: icall-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var img_obj = document.getelementbyid('showing');")

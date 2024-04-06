@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: web2project (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"</head><body>fatal error. you haven't created a config file yet.<br/><a href=")

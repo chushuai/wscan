@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chelen-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"iaus/media/js/login/login.js")

@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /
-    expressions: []
+    expressions:
+        - ( contains(to_lower(body), "<title>log into atlassian - atlassian bamboo</title>") || contains(to_lower(body), "meta name=\"application-name\" content=\"bamboo\" />") )

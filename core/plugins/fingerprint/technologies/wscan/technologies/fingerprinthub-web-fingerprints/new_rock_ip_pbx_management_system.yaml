@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: new-rock-ip-pbx-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var data = formatparams(params.data)")

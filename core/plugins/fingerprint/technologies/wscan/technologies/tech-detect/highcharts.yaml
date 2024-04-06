@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: highcharts (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<svg[^>]*><desc>Created with Highcharts ([\\d.]*)".bmatches(response.body)'

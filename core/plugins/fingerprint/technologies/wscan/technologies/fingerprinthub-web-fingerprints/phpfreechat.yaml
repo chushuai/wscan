@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpfreechat (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by phpfreechat")
+        - response.body.bcontains(b"src=\"http://www.phpfreechat.net/pub/")

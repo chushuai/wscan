@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hitron-technologies-inc. (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("711742418" == mmh3(base64_py(body)))

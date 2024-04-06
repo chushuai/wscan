@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mgb-opensource-guestbook (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"mgb opensource guestbook")
+        - response.body.bcontains(b"title=\"mgb homepage")

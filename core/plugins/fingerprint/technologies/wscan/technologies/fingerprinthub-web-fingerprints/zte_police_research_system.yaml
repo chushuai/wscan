@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zte-police-research-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"深圳市中兴信息技术有限公司版权所有")
+        - response.body.bcontains(b"src=\"img/gonanlogo.jpg")

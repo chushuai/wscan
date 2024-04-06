@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shopify (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+=[''"]//cdn\\.shopify\\.com".bmatches(response.body)'

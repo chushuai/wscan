@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: barracuda (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)\\Abarra.counter.session=?".bmatches(response.body) || "(?i)(\\A|\\b)?barracuda.".bmatches(response.body) || "(?i)barracuda.networks.{1,2}inc".bmatches(response.body) )

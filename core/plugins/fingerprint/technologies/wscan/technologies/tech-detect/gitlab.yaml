@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gitlab (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<meta content="https?://[^/]+/assets/gitlab_logo-".bmatches(response.body) || "<header class="navbar navbar-fixed-top navbar-gitlab with-horizontal-nav">".bmatches(response.body) )

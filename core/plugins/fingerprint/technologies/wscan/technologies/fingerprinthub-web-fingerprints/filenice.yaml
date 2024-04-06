@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: filenice (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"the fantabulous mechanical eviltwin code machine")
+        - response.body.bcontains(b"filenice/filenice.js")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: n2ws (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"static/style/cpm_style.css")

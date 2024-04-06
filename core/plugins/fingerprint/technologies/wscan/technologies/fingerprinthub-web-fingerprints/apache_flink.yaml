@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-flink (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Apache Flink Web Dashboard</title>")
+        - response.body.bcontains(b"<img alt=\"apache flink dashboard\" src=\"images/flink-logo.png")

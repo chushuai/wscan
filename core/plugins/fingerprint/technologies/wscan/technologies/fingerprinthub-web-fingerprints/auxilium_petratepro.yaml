@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: auxilium-petratepro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"index.php?cmd=11")

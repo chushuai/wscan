@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pageadmin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"pageadmin cms\"")
+        - response.body.bcontains(b"/e/images/favicon.ico")

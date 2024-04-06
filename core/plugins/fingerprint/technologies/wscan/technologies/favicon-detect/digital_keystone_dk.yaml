@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: digital-keystone-dk (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-373674173" == mmh3(base64_py(body)))

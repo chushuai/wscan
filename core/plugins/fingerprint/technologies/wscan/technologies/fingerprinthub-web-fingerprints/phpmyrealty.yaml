@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpmyrealty (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<!-- main content table : stop -->")'
+        - response.body.bcontains(b"powered by <a href=\"http://www.phpmyrealty.com")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vrv-nac (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"modal_delay\"")
+        - ( response.body.bcontains(b"localstorage.setitem('doctitle','北信源网络接入控制系统')") && response.body.bcontains(b"欢迎登录北信源网络接入控制系统") )

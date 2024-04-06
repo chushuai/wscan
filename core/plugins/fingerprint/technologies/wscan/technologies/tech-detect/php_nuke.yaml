@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: php-nuke (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+Powered by PHP-Nuke".bmatches(response.body)'

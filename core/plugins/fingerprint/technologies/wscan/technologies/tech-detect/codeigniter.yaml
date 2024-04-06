@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: codeigniter (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input[^>]+name="ci_csrf_token"".bmatches(response.body)'

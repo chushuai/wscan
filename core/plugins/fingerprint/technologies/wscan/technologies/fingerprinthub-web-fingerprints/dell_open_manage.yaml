@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dell-open-manage (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img title=\"open manage\" alt=\"open manage")

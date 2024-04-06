@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jtl-shop (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<input[^>]+name="JTLSHOP|<a href="jtl\\.php)".bmatches(response.body)'

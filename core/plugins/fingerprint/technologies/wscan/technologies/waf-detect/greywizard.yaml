@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: greywizard (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)greywizard(.\\d.\\d(.\\d)?)?".bmatches(response.body) || "(?i)grey.wizard.block".bmatches(response.body) || "(?i)(http(s)?.//)?(\\w+.)?greywizard.com".bmatches(response.body) || "(?i)grey.wizard".bmatches(response.body) )

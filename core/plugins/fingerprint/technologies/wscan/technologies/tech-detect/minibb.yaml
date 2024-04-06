@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: minibb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="[^"]+minibb[^<]+</a>[^<]+\\n<!--End of copyright link".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: oracle-adf-faces (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"oracle adf")
+        - response.body.bcontains(b"<!-- created by oracle adf faces")
+        - response.body.bcontains(b"var _adfwindowopenerror")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpoa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"url(template/default/images/admin_img/msg.png)")
+        - response.body.bcontains(b"admin_img/msg_bg.png")

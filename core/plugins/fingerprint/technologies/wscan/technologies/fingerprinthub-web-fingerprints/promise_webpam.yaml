@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: promise-webpam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"js/promise/themes/apple/images/logo_promise.png")
+        - response.body.bcontains(b"src=\"js/dojo/promise.js")

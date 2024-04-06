@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: gm-electronic-security-document-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"</span>国迈安全私有云部. <span>all rights reserved")
+        - response.body.bcontains(b"国迈安全私有云部 all rights reserved")

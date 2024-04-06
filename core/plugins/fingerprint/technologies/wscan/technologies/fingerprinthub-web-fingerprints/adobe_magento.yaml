@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adobe-magento (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/skin/frontend/")
+        - response.body.bcontains(b"blank_img")

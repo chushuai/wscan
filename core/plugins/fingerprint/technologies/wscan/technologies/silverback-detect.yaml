@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /sts/Content/Images/favicon.ico
-    expressions: []
+    expressions:
+        - status_code==200 && ("635899646" == mmh3(base64_py(body)))

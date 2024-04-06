@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: haoshitong-cloud-conference (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/common/logina_1.gif")
+        - response.body.bcontains(b"content=\"fsmeeting")
+        - response.body.bcontains(b"type=\"hidden\" id=\"app.index.configsuclogin")

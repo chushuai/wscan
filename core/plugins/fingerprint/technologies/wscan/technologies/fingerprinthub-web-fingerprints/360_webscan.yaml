@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: 360-webscan (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"webscan.360.cn/status/pai/hash")

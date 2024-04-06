@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yahoo-advertising (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<iframe[^>]+adserver\\.yahoo\\.com".bmatches(response.body) || "<img[^>]+clicks\\.beap\\.bc\\.yahoo\\.com".bmatches(response.body) )

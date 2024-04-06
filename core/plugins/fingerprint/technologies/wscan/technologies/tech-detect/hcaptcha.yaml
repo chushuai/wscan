@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hcaptcha (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<style[^>]+[^<]+#cf-hcaptcha-container[^<]+</style>".bmatches(response.body)'

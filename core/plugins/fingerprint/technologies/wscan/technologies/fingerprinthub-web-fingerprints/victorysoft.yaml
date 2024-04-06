@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: victorysoft (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"value=\"style2012/style1/scripts/expressinstall.swf\"")
+        - response.body.bcontains(b"href=\"webstyles/webstyle1/style1/css.css\"")

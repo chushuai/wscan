@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: devaldi-flexpaper (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"login to the flexpaper console")
+        - response.body.bcontains(b"href=\"http://flexpaper.devaldi.com/plugins.htm\"")

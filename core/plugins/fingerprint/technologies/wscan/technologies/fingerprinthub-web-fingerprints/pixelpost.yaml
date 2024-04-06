@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: pixelpost (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"powered by pixelpost")
+        - response.body.bcontains(b"powered by <a href=\"http://www.pixelpost.org")
+        - response.body.bcontains(b"title=\"pixelpost - ")

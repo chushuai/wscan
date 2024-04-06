@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: synology-router-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"hostname\" : \"synologyrouter\"")'
+        - response.body.bcontains(b"content=\"synologyrouter")

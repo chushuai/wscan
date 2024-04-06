@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: exacq (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("476213314" == mmh3(base64_py(body)))

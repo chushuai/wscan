@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tumblr (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe src="[^>]+tumblr\\.com".bmatches(response.body)'

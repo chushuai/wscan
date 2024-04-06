@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: universal-devices-ud (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("16202868" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (OMGF | GDPR/DSGVO Compliant, Faster Google Fonts. Easy. Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/host-webfonts-local/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

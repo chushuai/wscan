@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: whooshkaa (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe src="[^>]+whooshkaa\\.com".bmatches(response.body)'

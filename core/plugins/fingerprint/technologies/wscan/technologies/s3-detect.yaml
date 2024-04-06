@@ -7,3 +7,4 @@ pscan:
         - /%c0
     expressions:
         - '"(?:InvalidURI|InvalidArgument|NoSuchBucket)".bmatches(response.body)'
+        - ( contains(to_lower(server), "amazons3") || contains(to_lower(header), "x-amz-id") || contains(to_lower(header), "x-amz-request-id") )

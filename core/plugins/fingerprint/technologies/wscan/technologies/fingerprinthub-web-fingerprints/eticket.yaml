@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: eticket (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by eticket")
+        - response.body.bcontains(b"<a href=\"http://www.eticketsupport.com\" target=\"_blank\">")
+        - response.body.bcontains(b"/eticket/eticket.css")

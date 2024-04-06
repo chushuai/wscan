@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: technicolor-/-thomson-speedtouch-network-/-adsl (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("156312019" == mmh3(base64_py(body)))

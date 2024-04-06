@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vos3000 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/vos3000.ico")

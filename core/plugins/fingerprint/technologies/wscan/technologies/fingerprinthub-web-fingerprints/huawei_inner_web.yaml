@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: huawei-inner-web (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"hidden_frame.html")

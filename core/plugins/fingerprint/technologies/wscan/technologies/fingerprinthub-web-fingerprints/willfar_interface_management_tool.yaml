@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: willfar-interface-management-tool (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"the wasion software foundation")
+        - response.body.bcontains(b"alt=\"接口应用管理工具\"")

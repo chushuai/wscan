@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gov.uk-frontend (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<body[^>]+govuk-template__body".bmatches(response.body) || "<a[^>]+govuk-link".bmatches(response.body) )

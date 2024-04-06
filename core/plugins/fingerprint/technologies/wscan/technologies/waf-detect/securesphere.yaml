@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: securesphere (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<h2>error<.h2>".bmatches(response.body) || "(?i)<title>error<.title>".bmatches(response.body) || "(?i)<b>error<.b>".bmatches(response.body) || "(?i)<td.class="(errormessage|error)".height="[0-9]{1,3}".width="[0-9]{1,3}">".bmatches(response.body) || "(?i)the.incident.id.(is|number.is).".bmatches(response.body) || "(?i)page.cannot.be.displayed".bmatches(response.body) || "(?i)contact.support.for.additional.information".bmatches(response.body) )

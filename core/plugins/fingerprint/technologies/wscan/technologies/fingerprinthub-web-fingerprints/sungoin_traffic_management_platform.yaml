@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sungoin-traffic-management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"尚景流量管理平台")

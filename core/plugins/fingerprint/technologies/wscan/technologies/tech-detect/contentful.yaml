@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: contentful (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+(?:https?:)?//(?:assets|downloads|images|videos)\\.(?:ct?fassets\\.net|contentful\\.com)".bmatches(response.body)'

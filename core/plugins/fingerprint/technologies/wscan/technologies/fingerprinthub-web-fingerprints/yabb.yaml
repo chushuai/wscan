@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yabb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"yabbtime.gettime()")
+        - response.body.bcontains(b"/yabb.js")

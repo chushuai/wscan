@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: aspcms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"aspcms")
+        - response.body.bcontains(b"/inc/aspcms_advjs.asp")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: falipu-iot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"t1\">安全、稳定、安全</div>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bootstrap-table (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+href="[^>]*bootstrap-table(?:\\.min)?\\.css".bmatches(response.body)'

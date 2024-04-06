@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: coppermine (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--Coppermine Photo Gallery ([\\d.]+)".bmatches(response.body)'

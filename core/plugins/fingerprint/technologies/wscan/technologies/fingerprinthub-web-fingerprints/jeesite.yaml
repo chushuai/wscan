@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: jeesite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"jeesite.css")
+        - response.body.bcontains(b"jeesite.js")
+        - response.body.bcontains(b"jeesite.com")
+        - 'response.raw_header.bcontains(b"Set-Cookie: jeesite.session.id=")'

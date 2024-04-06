@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: shopex (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"shopex")
+        - response.body.bcontains(b"@author litie[aita]shopex.cn")
+        - response.body.bcontains(b"http://www.shopex.cn' target='_blank'")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hanyuan-wanfa-fax-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"background=\"images/centerfax0.gif\"")
+        - response.body.bcontains(b"background-image:url(images/bgfax0.jpg);")

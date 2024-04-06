@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: stripe (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input[^>]+data-stripe".bmatches(response.body)'

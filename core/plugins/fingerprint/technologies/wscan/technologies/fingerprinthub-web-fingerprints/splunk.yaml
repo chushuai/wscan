@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: splunk (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Splunk Inc.\"")
+        - '( response.raw_header.bcontains(b"Server: Splunkd") || response.raw_header.bcontains(b"Set-Cookie: splunkweb_uid") )'
+        - response.body.bcontains(b"<title>303 See Other</title>")
+        - '( response.raw_header.bcontains(b"Server: Splunkd") || response.raw_header.bcontains(b"Set-Cookie: ROUTEID") )'

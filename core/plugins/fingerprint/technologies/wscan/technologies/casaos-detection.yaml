@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /v1/sys/debug
-    expressions: []
+    expressions:
+        - contains(to_lower(body), 'casaos version')

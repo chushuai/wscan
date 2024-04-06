@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: claroline (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"target=\"_blank\">claroline</a>")
+        - response.body.bcontains(b"http://www.claroline.net\" rel=\"copyright")

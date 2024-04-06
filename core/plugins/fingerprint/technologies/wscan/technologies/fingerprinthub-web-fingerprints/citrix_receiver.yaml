@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: citrix-receiver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"clients/html5client/src/receiverthirdpartynotices.html\"")
+        - ( response.body.bcontains(b"logonbelt-topshadow") && response.body.bcontains(b"upgradeavailable-already-installed-separator bar-separator") )

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: vmware-esx (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"vmware esxi")
+        - response.body.bcontains(b"document.write(\"<title>\" + id_eesx_welcome + \"</title>\");")
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0;url='/ui'\"/>")
+        - response.body.bcontains(b"content=\"vmware esx ")
+        - response.body.bcontains(b"document.write(id_esx_viclientdesc);")

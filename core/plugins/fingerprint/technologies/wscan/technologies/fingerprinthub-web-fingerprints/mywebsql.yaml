@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mywebsql (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"target=\"_blank\" href=\"http://mywebsql.net")
+        - response.body.bcontains(b"method=\"post\" action=\"\" name=\"dbform\" ")

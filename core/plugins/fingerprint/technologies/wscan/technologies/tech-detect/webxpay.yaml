@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webxpay (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="https://www\\.webxpay\\.com">WEBXPAY<".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ibm-ts3310 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http-equiv=\"refresh\" content=\"0; url=/main_login.htm\"")

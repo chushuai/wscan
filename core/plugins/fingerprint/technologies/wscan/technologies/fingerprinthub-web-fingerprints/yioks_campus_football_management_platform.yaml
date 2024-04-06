@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yioks-campus-football-management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<script>document.location='/index.mpl?a=login'</script>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: uvicorn (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.headers["server"].contains("uvicorn")

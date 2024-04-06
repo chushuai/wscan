@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: surdoc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>欢迎使用360书生云盘！</h1>")
+        - response.body.bcontains(b"<p>copyright@2016 pan.surdoc.net all rights</p>")

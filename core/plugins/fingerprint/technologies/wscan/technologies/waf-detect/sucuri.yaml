@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: sucuri (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)access.denied.-.sucuri.website.firewall".bmatches(response.body) || "(?i)sucuri.webSite.firewall.-.cloudProxy.-.access.denied".bmatches(response.body) || "(?i)questions\\?.+cloudproxy@sucuri\\.net".bmatches(response.body) || "(?i)http(s)?.\\/\\/(cdn|supportx.)?sucuri(.net|com)?".bmatches(response.body) )

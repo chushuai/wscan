@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xmb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powered by XMB".bmatches(response.body)'

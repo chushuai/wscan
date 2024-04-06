@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: wordfence (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)generated.by.wordfence".bmatches(response.body) || "(?i)your.access.to.this.site.has.been.limited".bmatches(response.body) || "(?i).>wordfence<.".bmatches(response.body) )

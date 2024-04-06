@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: didiyun (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)(http(s)?://)(sec-waf.|www.)?didi(static|yun)?.com(/static/cloudwafstatic)?".bmatches(response.body) || "(?i)didiyun".bmatches(response.body) )

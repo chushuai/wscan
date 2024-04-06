@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bootstrap (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<style>/\\*!\\* Bootstrap v(\\d\\.\\d\\.\\d)".bmatches(response.body) || "<link[^>]+?href=[^"]/css/([\\d.]+)/bootstrap\\.(?:min\\.)?css".bmatches(response.body) || "<link[^>]+?href="[^"]*bootstrap(?:\\.min)?\\.css".bmatches(response.body) || "<div[^>]+class="[^"]*glyphicon glyphicon-".bmatches(response.body) )

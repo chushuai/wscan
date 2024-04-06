@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vmware-vrealize (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"正在重定向到 vrealize operations manager web")

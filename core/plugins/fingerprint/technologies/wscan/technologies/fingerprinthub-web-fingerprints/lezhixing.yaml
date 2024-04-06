@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: lezhixing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/datacenter/authentication/login.do\" method=\"post")
+        - response.body.bcontains(b"location.href=contextpath+\"/login/password/password.jsp")
+        - ( response.body.bcontains(b"/static/thirdparty/jquery/") && response.body.bcontains(b"var contextpath = \"/datacenter") )

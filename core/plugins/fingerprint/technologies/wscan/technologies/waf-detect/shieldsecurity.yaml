@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: shieldsecurity (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)blocked.by.the.shield".bmatches(response.body) || "(?i)transgression(\\(s\\))?.against.this".bmatches(response.body) || "(?i)url.{1,2}form.or.cookie.data.wasn.t.appropriate".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aolansoft-studentsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"vcode.aspx")

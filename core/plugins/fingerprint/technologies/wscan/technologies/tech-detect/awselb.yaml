@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: awselb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"awselb".bmatches(response.raw_header)'

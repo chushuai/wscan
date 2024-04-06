@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: magento-1.4.1-1.5 (Magento Version Detect)
+    author: sullo, dogancanbakir
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"Copyright (c) 2010 Magento Inc.")

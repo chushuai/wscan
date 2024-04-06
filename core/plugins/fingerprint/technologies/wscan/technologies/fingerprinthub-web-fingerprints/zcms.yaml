@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: zcms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"_ZCMS_ShowNewMessage") && response.body.bcontains(b"zcms_skin") )
+        - ( response.body.bcontains(b"_zcms_shownewmessage") && response.body.bcontains(b"zcms_skin") )
+        - response.body.bcontains(b"app=zcms")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Breeze – WordPress Cache Plugin Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/breeze/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

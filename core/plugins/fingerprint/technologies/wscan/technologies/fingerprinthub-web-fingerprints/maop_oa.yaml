@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: maop-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pwd yahei16")
+        - response.body.bcontains(b"www.oooa.cn")
+        - response.body.bcontains(b"href=\"http://www.oooa.cn\">重庆猫扑网络科技有限公司</a>")

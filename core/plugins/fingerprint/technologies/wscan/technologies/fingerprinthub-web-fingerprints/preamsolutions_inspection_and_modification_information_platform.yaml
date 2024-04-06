@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: preamsolutions-inspection-and-modification-information-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/gqjx/loginmgr.do?method=dologin")

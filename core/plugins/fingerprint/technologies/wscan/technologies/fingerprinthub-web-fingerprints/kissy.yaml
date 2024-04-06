@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kissy (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"kissy.ready")
+        - response.body.bcontains(b"kissy-min.js")
+        - response.body.bcontains(b"kissy.js")

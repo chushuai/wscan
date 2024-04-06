@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: smf (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"credits/?" title="Simple Machines Forum" target="_blank" class="new_win">SMF ([0-9.]+)</a>".bmatches(response.body)'

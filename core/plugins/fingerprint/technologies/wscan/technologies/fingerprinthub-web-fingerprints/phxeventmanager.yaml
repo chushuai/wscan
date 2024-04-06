@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: phxeventmanager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<td><div class=\"minicalmonth")
+        - response.body.bcontains(b"src=\"pem-includes/xajax/xajax_js/xajax_core.js")
+        - response.body.bcontains(b"powered by phxeventmanager")

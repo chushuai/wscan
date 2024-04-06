@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: eisoo-anyshare (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"res/libs/webuploader/webuploader.css")
+        - response.body.bcontains(b"src=\"/res/libs/base64.min.js\"")

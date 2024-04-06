@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: keyhelp-keyweb-ag (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1267819858" == mmh3(base64_py(body)))
+        - status_code==200 && ("726817668" == mmh3(base64_py(body)))

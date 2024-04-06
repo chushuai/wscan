@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: favicon (Emqx Detection)
+    author: for3stco1d
+pscan:
+    path:
+        - /static/emq.ico
+    expressions:
+        - status_code==200 && ('-670975485' == mmh3(base64_py(body)))

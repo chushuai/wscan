@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: shadowd (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<h\\d>\\d{3}.forbidden<.h\\d>".bmatches(response.body) && "(?i)request.forbidden.by.administrative.rules.".bmatches(response.body) )

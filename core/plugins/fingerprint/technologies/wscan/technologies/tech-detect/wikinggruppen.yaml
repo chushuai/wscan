@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wikinggruppen (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- WIKINGGRUPPEN".bmatches(response.body)'

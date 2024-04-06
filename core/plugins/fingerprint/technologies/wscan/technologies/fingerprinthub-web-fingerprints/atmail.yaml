@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: atmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by atmail")
+        - response.body.bcontains(b"/index.php/mail/auth/processlogin")
+        - response.body.bcontains(b"<input id=\"mailserverinput")

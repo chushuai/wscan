@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: kaspersky-secure-mail-gateway (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"kaspersky secure mail gateway")

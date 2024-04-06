@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pansoft-financial-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pansoftplugins/multithreading/pancalc.js")
+        - response.body.bcontains(b"src=\"/login/img/loading.gif\"")

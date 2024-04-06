@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: 263-meeting (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<frame src=\"/jsp/conference/meetinglist.jsp\" name=\"mainframe\"/>")

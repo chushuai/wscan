@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bbpress (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- if you like showing off the fact that your server rocks -->")
+        - response.body.bcontains(b"is proudly powered by <a href=\"http://bbpress.org")

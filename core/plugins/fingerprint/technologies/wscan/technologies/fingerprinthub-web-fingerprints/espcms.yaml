@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: espcms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by espcms")
+        - response.body.bcontains(b"infolist_fff")
+        - response.body.bcontains(b"/templates/default/style/tempates_div.css")

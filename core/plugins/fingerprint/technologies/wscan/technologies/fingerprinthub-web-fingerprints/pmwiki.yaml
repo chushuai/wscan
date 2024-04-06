@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pmwiki (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<span class='commentout-pmwikiorg'>")
+        - response.body.bcontains(b"<a href=\"http://www.pmwiki.org/\" target=")

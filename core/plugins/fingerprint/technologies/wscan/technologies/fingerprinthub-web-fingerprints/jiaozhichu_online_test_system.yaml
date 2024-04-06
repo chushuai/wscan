@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jiaozhichu-online-test-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"jiaozhichu")
+        - response.body.bcontains(b"href=\"/ksxt/h5/images/jiaozhichu.ico")

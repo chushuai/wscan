@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: debian (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>welcome to nginx on debian!</h1>")

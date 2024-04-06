@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: quixplorer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"target=\"_blank\">the quix project</a></small>")

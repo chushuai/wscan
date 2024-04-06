@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: paraview-uams (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- <title>派拉统一身份管理系统</title> -->")

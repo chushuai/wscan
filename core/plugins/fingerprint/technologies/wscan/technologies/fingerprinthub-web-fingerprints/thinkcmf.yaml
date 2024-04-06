@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: thinkcmf (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"X-Powered-By: ThinkCMF")'
+        - response.body.bcontains(b"content=\"thinkcmf")
+        - 'response.raw_header.bcontains(b"X-Powered-By: thinkcmf")'
+        - response.body.bcontains(b"made by <a href=\"http://www.thinkcmf.com\" target=\"_blank\">thinkcmf</a>")
+        - response.body.bcontains(b"<a title=\"官方网站\" href=\"http://www.thinkcmf.com\">ThinkCMF</a>")

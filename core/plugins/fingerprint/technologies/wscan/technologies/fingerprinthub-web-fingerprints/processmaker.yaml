@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: processmaker (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"processmaker ver")
+        - response.body.bcontains(b"href=\"http://www.processmaker.com\" alt=\"processmaker")
+        - response.body.bcontains(b"alt=\"powered by processmaker")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: swiki (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<a href=\"http://minnow.cc.gatech.edu/swiki\" title=\"comswiki: powered by squeak\"><img src=\"/defaultscheme/comswiki.gif\" border=0 width=277 height=88 alt=\"comswiki: powered by squeak\"></a><br>")'

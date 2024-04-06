@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zabbix (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<body[^>]+zbxCallPostScripts".bmatches(response.body)'

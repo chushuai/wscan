@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mersive-solstice (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("938616453" == mmh3(base64_py(body)))

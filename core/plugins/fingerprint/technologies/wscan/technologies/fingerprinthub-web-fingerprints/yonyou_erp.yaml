@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yonyou-erp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"login_main_bg")
+        - response.body.bcontains(b"login_owner")

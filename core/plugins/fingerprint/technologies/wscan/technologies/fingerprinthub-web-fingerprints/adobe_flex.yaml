@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adobe-flex (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"adobe flex")
+        - response.body.bcontains(b"learn more about flex at http://flex.org")

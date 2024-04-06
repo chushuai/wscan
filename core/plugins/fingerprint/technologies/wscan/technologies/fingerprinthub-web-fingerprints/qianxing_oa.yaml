@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: qianxing-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"input name=\"s1\" type=\"image\"")
+        - response.body.bcontains(b"count/mystat.asp")

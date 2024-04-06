@@ -54,4 +54,6 @@ pscan:
         - /api/views/search/metadata
         - /api/views/search/sync
         - /api/users
-    expressions: []
+    expressions:
+        - ( status_code == 200 && contains_any(header, 'X-Graylog-Node-Id', 'Graylog', 'graylog') && contains_any(body, 'X-Graylog-Node-Id', 'Graylog', 'graylog') && contains_any(body, 'swagger') )
+        - ( status_code == 401 && contains(header, 'X-Graylog-Node-Id') || contains(header, 'Graylog Server') )

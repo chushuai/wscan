@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shopatron (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<body class="shopatron".bmatches(response.body) || "<img[^>]+mediacdn\\.shopatron\\.com".bmatches(response.body) )

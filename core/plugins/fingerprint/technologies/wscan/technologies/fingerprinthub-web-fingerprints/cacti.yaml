@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cacti (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: cacti=")'
+        - response.body.bcontains(b"/plugins/jqueryskin/include/login.css")

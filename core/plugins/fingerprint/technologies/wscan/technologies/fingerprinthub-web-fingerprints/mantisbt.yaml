@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mantisbt (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by mantis bugtracker")
+        - response.body.bcontains(b"alt=\"mantis bugtracker")

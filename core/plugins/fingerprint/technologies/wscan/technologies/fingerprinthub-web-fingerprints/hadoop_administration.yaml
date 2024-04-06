@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hadoop-administration (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/static/hadoop.css")
+        - response.body.bcontains(b"class=\"navbar-brand\">hadoop</div>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: emerson-environmentalenergymonitoringsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alert(\"网络断连或者idu-s没有启动.")

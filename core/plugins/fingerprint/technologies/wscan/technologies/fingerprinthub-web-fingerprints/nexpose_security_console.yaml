@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: nexpose-security-console (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/nexpose-dark.min.css")
+        - response.body.bcontains(b"nexposeccpassword")
+        - response.body.bcontains(b"/nexpose-features.js")

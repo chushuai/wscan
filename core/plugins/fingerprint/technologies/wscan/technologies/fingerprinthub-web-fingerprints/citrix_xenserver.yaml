@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: citrix-xenserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"citrix systems, inc. xenserver")
+        - response.body.bcontains(b"<a href=\"xencentersetup.exe\">xencenter installer</a>")

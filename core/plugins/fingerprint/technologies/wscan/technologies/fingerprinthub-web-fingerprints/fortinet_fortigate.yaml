@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fortinet-fortigate (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"top.location=window.location;top.location=\"/remote/login\";")

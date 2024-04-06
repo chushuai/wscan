@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jxt-consulting (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"jxt-popup-wrapper")
+        - response.body.bcontains(b"powered by jxt consulting")

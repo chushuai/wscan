@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: hanweb-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"produced by 大汉网络")
+        - response.body.bcontains(b"<a href='http://www.hanweb.com' style='display:none'>")
+        - response.body.bcontains(b"<meta name='generator' content='大汉版通'>")
+        - response.body.bcontains(b"<meta name='author' content='大汉网络'>")
+        - response.body.bcontains(b"/jcms_files/jcms")

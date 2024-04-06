@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: spiceworks (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"author\" content=\"spiceworks, inc.\" />")
+        - response.body.bcontains(b"<link href=\"/stylesheets/general.css?")
+        - response.body.bcontains(b"<h1><img alt=\"spiceworks\" src=\"/images/logos/large.png")

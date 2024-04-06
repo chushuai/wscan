@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: open-web-analytics (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- (?:Start|End) Open Web Analytics Tracker -->".bmatches(response.body)'

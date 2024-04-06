@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: founder-all-media-editing-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/newsedit/newsedit/css/login_1.css")

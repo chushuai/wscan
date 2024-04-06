@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: kaijiang-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/kjoa/sheep/login/login.js")

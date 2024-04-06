@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nsfocus-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/logo_login_nsfocus.png")

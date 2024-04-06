@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sheca-cert (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"content: \"获取一证通信息异常。请检查数字证书是否正常运行")'
+        - response.body.bcontains(b"<li class=\"in\" id=\"cert_li\">")

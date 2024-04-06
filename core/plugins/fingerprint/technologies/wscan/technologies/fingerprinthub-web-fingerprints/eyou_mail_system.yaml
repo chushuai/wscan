@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: eyou-mail-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"亿邮电子邮件系统")
+        - response.body.bcontains(b"/tpl/login/user/images/dbg.png")
+        - response.body.bcontains(b"var loginssl = document.form_login.login_ssl.value;")

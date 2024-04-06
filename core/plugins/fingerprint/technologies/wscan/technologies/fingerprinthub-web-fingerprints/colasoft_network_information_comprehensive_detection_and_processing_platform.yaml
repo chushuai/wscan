@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: colasoft-network-information-comprehensive-detection-and-processing-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"colasoft\"")
+        - response.body.bcontains(b"科来网络信息综合检测处理平台")

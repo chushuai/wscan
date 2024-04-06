@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: grasp-erp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b" alert(\"欢迎使用 【管家婆分销erp)")

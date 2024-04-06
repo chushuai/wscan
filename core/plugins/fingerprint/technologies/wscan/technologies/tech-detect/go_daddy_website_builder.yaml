@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: go-daddy-website-builder (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Starfield Technologies; Go Daddy Website Builder")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: smartermail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href='http://www.smartertools.com/smartermail/mail-server-software.aspx' target='_blank>smartermail")

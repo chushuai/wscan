@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: thinkmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href='http://www.thinkcloud.cn' target='_blank'>thinkcloud</a>.all right reserved</div>")
+        - response.body.bcontains(b"app_download\":\"\",\"thinkmail官网")
+        - response.body.bcontains(b"/webmail\"+\"/common/validatecode.do")
+        - response.body.bcontains(b"/resource/se/common/jquery.js")

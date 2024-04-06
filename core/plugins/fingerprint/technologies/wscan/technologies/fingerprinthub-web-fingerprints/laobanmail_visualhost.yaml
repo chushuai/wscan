@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: laobanmail-visualhost (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/public/js/util/xg_oyang.js")

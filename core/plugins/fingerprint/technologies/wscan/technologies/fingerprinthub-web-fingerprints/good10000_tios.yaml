@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: good10000-tios (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"value=\"https://mail.sinopec.com/owa/\"")
+        - response.body.bcontains(b"北京万佳信科技有限公司")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: siteguard (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)>Powered.by.SiteGuard.Lite<".bmatches(response.body) || "(?i)refuse.to.browse".bmatches(response.body) )

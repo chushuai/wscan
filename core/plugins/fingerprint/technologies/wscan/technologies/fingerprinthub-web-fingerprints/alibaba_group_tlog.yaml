@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: alibaba-group-tlog (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"tlog 实时数据处理")

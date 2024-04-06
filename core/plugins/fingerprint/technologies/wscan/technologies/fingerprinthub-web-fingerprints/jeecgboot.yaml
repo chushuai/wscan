@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jeecgboot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"JeecgBoot") && response.body.bcontains(b"polyfill_") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pivotal-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<frame name=\"hidden\" src=\"xmlloader.asp?type=portal")
+        - response.body.bcontains(b"title=\"hidden\" src=\"xmlloader.asp?type=portal")

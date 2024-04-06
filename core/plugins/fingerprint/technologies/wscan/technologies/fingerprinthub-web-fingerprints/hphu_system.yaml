@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hphu-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"id='psssdiv'") && response.body.bcontains(b"src='kss_inc/js/jquery.1.3.2.pack.js'") )

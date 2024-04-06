@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: filevista (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<a href=\"http://www.gleamtech.com/products/filevista/web-file-manager") && response.body.bcontains(b"welcome to filevista") )

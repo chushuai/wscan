@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aurelia (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<[^>]+aurelia-app=[^>]".bmatches(response.body) || "<[^>]+data-main=[^>]aurelia-bootstrapper".bmatches(response.body) || "<[^>]+au-target-id=[^>]\\d".bmatches(response.body) )

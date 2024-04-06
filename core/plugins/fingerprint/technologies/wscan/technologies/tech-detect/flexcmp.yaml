@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: flexcmp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+FlexCMP[^>v]+v\\. ([\\d.]+)".bmatches(response.body)'

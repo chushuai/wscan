@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: collaborative-management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"广州协商科技有限公司")
+        - response.body.bcontains(b"/web/submitlogon2.do")
+        - response.body.bcontains(b"css/hitalklogin.css")
+        - response.body.bcontains(b"/activex/sinoccshell.cab")
+        - response.body.bcontains(b"/web/submitlogon2.do ")

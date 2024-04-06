@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: chinatelecom-guestsupportsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"nhmis.css\"")
+        - response.body.bcontains(b"var requiredfieldvalidator2 = document.all ")

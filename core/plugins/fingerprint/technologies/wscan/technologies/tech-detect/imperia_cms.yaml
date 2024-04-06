@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: imperia-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<imp:live-info sysid="[0-9a-f-]+"(?: node_id="[0-9/]*")? *\\/>".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: openfiler (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.openfiler.com/\">openfiler")
+        - response.body.bcontains(b"</strong>openfiler nas/san appliance")

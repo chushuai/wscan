@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ghost-cms (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1015932800" == mmh3(base64_py(body)))
+        - status_code==200 && ("-1231681737" == mmh3(base64_py(body)))

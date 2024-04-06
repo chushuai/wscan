@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: nginxgeneric (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)nginx".bmatches(response.body) || "(?i)you.do(not|n.t)?.have.permission.to.access.this.document".bmatches(response.body) )

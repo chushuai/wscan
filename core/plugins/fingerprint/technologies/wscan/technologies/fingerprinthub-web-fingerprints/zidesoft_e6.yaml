@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zidesoft-e6 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/static/images/login/btn-login.gif\"")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: juhe-uams (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"login.aspx\" id=\"ctl00\"")
+        - 'response.body.bcontains(b"background-color: #4a93be;")'

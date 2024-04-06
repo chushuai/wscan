@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: microsoft-sharepoint (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"microsoft sharepoint")
+        - response.body.bcontains(b"content=\"sharepoint team")
+        - response.body.bcontains(b"id=\"msowebpartpage_postbacksource")

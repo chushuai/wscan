@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hanwei-mobile-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"images/zshlogo.jpg\" />")
+        - response.body.bcontains(b"信任汉威的开发证书")

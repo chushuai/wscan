@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (WPCode – Insert Headers and Footers + Custom Code Snippets – WordPress Code Manager Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/insert-headers-and-footers/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

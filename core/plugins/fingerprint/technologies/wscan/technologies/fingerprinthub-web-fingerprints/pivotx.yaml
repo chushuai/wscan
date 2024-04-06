@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: pivotx (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"includes/js/pivotx.js")
+        - response.body.bcontains(b"templates_internal/assets/pivotx.png\" alt=\"pivotx")
+        - response.body.bcontains(b"content=\"pivotx")

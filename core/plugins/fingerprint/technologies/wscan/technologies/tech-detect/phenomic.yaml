@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phenomic (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+id="phenomic(?:root)?"".bmatches(response.body)'

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: aliyundun (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)error(s)?.aliyun(dun)?.(com|net)".bmatches(response.body) || "(?i)http(s)?://(www.)?aliyun.(com|net)".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ewei-plagform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"易维平台</h1>")

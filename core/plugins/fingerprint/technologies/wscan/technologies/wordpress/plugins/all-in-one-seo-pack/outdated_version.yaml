@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (All in One SEO – Best WordPress SEO Plugin – Easily Improve SEO Rankings & Increase Traffic Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/all-in-one-seo-pack/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

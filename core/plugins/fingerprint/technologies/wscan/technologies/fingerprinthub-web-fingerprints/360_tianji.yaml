@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: 360-tianji (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/resource/img/login/logo_403.png\" alt=\"360天机\"/></a>")

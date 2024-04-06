@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wiserice-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/resources/metronic/scripts/hz-tools.js")
+        - response.body.bcontains(b"<h4>请在下框里画图形来提交登录")

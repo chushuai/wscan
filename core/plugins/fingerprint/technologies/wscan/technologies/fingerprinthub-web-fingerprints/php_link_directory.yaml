@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: php-link-directory (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by phplinkdirectory")
+        - response.body.bcontains(b"content=\"php link directory")

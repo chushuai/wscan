@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: neusoft-neteye-bitsaver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/ntars/loginaction.do")
+        - response.body.bcontains(b"href=\"/ntars/css/")

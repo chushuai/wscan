@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: docmail-cwindow (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.docmail.cn/android/app/docmail.apk")
+        - response.body.bcontains(b"content=\"北京国信冠群技术有限公司,国信冠群,邮件")
+        - response.body.bcontains(b"<a href=\"http://www.docmail.cn\" target=\"_blank\">")

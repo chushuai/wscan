@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sun-java-system-calendar-express (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"imx/login-logo.gif\" width=\"186\" height=\"79\" alt=\"sun microsystems, inc.\">")

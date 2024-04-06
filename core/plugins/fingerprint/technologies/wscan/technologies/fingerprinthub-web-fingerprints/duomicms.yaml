@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: duomicms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"duomicms_member") && response.body.bcontains(b"多米") )

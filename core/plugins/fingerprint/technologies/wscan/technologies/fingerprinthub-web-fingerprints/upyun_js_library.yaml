@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: upyun-js-library (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"b0.upaiyun.com")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jamf-pro-login (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1262005940" == mmh3(base64_py(body)))

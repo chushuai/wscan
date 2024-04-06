@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Migration, Backup, Staging – WPvivid Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/wpvivid-backuprestore/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

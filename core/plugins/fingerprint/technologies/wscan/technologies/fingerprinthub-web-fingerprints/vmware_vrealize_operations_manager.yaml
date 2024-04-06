@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vmware-vrealize-operations-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Identity Manager") && response.body.bcontains(b"VMware") )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: google-font-api (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]* href=[^>]+fonts\\.(?:googleapis|google)\\.com".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: npoint (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"n点虚拟主机管理系统")
+        - response.body.bcontains(b"js/ajax_x.js")
+        - response.body.bcontains(b"/inc/usercode.asp?npoint=")

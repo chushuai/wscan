@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gerrit (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( ">Gerrit Code Review</a>\\s*"\\s*\\(([0-9.]+)\\)".bmatches(response.body) || "<(?:div|style) id="gerrit_".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: scrollreveal (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+data-sr(?:-id)".bmatches(response.body)'

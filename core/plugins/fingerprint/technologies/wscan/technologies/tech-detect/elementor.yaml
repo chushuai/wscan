@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: elementor (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div class=(?:"|')[^"']*elementor".bmatches(response.body) || "<section class=(?:"|')[^"']*elementor".bmatches(response.body) || "<link [^>]*href=(?:"|')[^"']*elementor/assets".bmatches(response.body) || "<link [^>]*href=(?:"|')[^"']*uploads/elementor/css".bmatches(response.body) )

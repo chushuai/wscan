@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jboss-eap (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h3>your jboss enterprise application platform is running.</h3>")

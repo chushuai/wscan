@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: extmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"setcookie('extmail_username") && response.body.bcontains(b"欢迎使用extmail") )

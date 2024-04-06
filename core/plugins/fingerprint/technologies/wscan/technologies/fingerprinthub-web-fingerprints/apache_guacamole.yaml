@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-guacamole (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"images/guacamole-logo")
+        - ( response.body.bcontains(b"guacamole - clientless remote desktop") && response.body.bcontains(b"scripts/guac-ui.js") )

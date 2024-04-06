@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: freenas (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"welcome to freenas")
+        - response.body.bcontains(b"/images/ui/freenas-logo.png")

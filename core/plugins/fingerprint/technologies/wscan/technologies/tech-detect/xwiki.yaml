@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xwiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]data-xwiki-[^>]>".bmatches(response.body)'

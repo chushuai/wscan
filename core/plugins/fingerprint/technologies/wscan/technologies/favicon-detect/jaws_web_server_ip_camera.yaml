@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: jaws-web-server-ip-camera (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("90066852" == mmh3(base64_py(body)))
+        - status_code==200 && ("768231242" == mmh3(base64_py(body)))

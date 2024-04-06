@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: femr (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/res/vendor/bootstrap-3.3.5/css/bootstrap.min.css")
+        - response.body.bcontains(b"/res/images/login-bg-1.png")

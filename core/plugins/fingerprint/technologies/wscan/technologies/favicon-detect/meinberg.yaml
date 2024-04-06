@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: meinberg (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - len(body)==1406 && status_code==200 && ("4b2524b4f28eac7d0e872b0e1323c02d" == md5(body))

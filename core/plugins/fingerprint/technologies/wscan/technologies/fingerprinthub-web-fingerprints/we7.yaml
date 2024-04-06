@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: we7 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>微擎") && response.body.bcontains(b"w7.cc") )

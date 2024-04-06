@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: huawei-fusioncloud-desktop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"href=/webui/default/img/logo.ico") && response.body.bcontains(b"huawei") )

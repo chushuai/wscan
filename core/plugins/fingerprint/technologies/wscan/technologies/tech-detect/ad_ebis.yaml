@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ad-ebis (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!-- EBiS contents tag".bmatches(response.body) || "<!--EBiS tag".bmatches(response.body) || "<!-- Tag EBiS".bmatches(response.body) || "<!-- EBiS common tag".bmatches(response.body) )

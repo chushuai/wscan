@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: project-wonderful (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div[^>]+id="pw_adbox_".bmatches(response.body)'

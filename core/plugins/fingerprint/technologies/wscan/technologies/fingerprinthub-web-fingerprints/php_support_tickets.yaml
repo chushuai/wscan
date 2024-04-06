@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: php-support-tickets (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"php support tickets\">php support tickets")
+        - response.body.bcontains(b"content=\"triangle solutions ltd")

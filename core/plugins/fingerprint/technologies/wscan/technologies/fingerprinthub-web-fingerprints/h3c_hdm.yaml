@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: h3c-hdm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/video_record.jnlp")
+        - response.body.bcontains(b"<iframe frameborder=\"0\" class=\"framelayout\" src=\"./page/blank.html\" name=\"mainframe\" id=\"mainframe")

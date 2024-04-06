@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gzsa-intranet-security (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"gzsa. all rights reserved</span>")

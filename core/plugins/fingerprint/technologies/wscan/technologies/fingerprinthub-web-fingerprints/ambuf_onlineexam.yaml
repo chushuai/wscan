@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ambuf-onlineexam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京众恒志信科技")

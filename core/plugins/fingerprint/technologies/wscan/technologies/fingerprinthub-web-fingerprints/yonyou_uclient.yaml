@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yonyou-uclient (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http-equiv=refresh content=0;url=index.jsp")

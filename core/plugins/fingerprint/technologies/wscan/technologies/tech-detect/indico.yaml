@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: indico (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by\\s+(?:CERN )?<a href="http://(?:cdsware\\.cern\\.ch/indico/|indico-software\\.org|cern\\.ch/indico)">(?:CDS )?Indico( [\\d\\.]+)?".bmatches(response.body)'

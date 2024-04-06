@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: redmine (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"authenticity_token") && response.body.bcontains(b"redmine") )
+        - response.body.bcontains(b"content=\"redmine")
+        - response.body.bcontains(b"powered by <a href=\"http://www.redmine.org/")

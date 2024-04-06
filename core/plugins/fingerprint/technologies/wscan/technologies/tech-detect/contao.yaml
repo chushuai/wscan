@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: contao (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!--[^>]+powered by (?:TYPOlight|Contao)[^>]*-->".bmatches(response.body) || "<link[^>]+(?:typolight|contao)\\.css".bmatches(response.body) )

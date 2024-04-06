@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: asm (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)the.requested.url.was.rejected..please.consult.with.your.administrator.".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: recaptcha (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div[^>]+id="recaptcha_image".bmatches(response.body) || "<link[^>]+recaptcha".bmatches(response.body) || "<div[^>]+class="g-recaptcha"".bmatches(response.body) )

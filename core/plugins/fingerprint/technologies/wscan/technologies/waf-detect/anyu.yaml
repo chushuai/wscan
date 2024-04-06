@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: anyu (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)sorry.{1,2}your.access.has.been.intercept(ed)?.by.anyu".bmatches(response.body) || "(?i)anyu".bmatches(response.body) || "(?i)anyu-?.the.green.channel".bmatches(response.body) )

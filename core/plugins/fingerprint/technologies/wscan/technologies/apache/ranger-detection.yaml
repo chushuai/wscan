@@ -8,3 +8,4 @@ pscan:
         - /images/favicon.ico
     expressions:
         - response.body.bcontains(b"<title> Ranger - Sign In</title>")
+        - status_code==200 && ('1302629996' == mmh3(base64_py(body)))

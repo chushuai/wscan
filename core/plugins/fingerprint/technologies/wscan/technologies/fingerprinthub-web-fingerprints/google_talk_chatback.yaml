@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: google-talk-chatback (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"www.google.com/talk/service/")

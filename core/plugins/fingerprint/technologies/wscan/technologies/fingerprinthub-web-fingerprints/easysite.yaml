@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: easysite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"generator\" content=\"easysite")
+        - response.body.bcontains(b"copyright 2009 by huilan")
+        - response.body.bcontains(b"_desktopmodules_picturenews")

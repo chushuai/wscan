@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: beyeon-iot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"版权所有:郑州蓝视科技有限公司")
+        - response.body.bcontains(b"var app_smp_type_name = '门店';var app_grp_type_name = '集团'")

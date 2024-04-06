@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: thinkphp-yfcmf (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/public/others/maxlength.js") && response.body.bcontains(b"yfcmf") )
+        - response.body.bcontains(b"/yfcmf/yfcmf.js")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: svelte (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+class=\\"[^\\"]+\\ssvelte-[\\w]*\\"".bmatches(response.body)'

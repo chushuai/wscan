@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mixcall-seat-management-center (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"深圳市深海捷科技有限公司")
+        - response.body.bcontains(b"/admin/modules/admin/statics/images/")

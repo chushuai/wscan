@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cwp-controlpanel (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/login/cwp_theme/original/img/ico/favicon.ico\"")
+        - response.body.bcontains(b"src=\"/login/cwp_theme/original/img/new_logo_small.png\"")

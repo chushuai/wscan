@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: huawei-auth-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"75718c9a-f029-11d1-a1ac-00c04fb6c223")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: twonkyserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"description\" content=\"twonkymedia digital home\">")

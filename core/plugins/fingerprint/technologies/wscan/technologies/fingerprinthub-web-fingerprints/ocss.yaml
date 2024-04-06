@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ocss (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"爱施德移动渠道管理系统")
+        - response.body.bcontains(b"<option value=\"age_sys\">代理商内部员工</option>")
+        - response.body.bcontains(b"爱施德 aisidi.com")

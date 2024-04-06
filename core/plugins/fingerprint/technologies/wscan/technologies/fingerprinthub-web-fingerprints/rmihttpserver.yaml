@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: rmihttpserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"cloudclient httpserver is running...")

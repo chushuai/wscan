@@ -5,4 +5,5 @@ info:
 pscan:
     path:
         - /static/login/favicon.ico
-    expressions: []
+    expressions:
+        - status_code==200 && ("-1101206929" == mmh3(base64_py(body)))

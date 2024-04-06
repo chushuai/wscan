@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kingosoft (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"setkingoencypt.jsp")
+        - ( response.body.bcontains(b"/jkingo.js") && response.body.bcontains(b"kingosoft") )
+        - response.body.bcontains(b"青果")

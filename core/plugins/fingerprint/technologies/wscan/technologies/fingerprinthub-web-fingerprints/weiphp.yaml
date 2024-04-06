@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: weiphp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"本系统由<a href=\"http://www.weiphp.cn\" target=\"_blank\">weiphp</a>强力驱动")
+        - response.body.bcontains(b"content=\"weiphp")
+        - response.body.bcontains(b"/css/weiphp.css")

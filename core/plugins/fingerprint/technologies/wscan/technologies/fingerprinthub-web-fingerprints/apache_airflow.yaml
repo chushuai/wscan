@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: apache-airflow (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Airflow")
+        - response.body.bcontains(b"src=\"/static/pin_100.png\"")
+        - response.body.bcontains(b"<span>airflow</span>")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: minergate-claymore-miner (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"eth — total speed:")
+        - 'response.body.bcontains(b"eth: gpu0")'

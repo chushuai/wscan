@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mk-auth (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1490343308" == mmh3(base64_py(body)))

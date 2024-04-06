@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sophos-cyberoam-sslvpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"sslvpnuserportalloginform") && response.body.bcontains(b"cyberoam ssl vpn portal") )

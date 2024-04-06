@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 360-enterprise-security (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"360entinst") && response.body.bcontains(b"关于全网部署360私有云的通知") )
+        - response.body.bcontains(b"天擎")

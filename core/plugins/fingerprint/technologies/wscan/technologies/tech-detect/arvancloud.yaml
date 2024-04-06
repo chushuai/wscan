@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: arvancloud (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"ArvanCloud") || response.raw_header.bcontains(b"AR-Request-ID:") )

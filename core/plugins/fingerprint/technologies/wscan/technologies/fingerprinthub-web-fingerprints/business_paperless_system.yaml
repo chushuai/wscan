@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: business-paperless-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"//获取营业台席pc机 ip地址 mac地址")

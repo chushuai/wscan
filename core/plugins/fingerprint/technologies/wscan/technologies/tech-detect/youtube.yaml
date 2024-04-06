@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: youtube (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<(?:param|embed|iframe)[^>]+youtube(?:-nocookie)?\\.com/(?:v|embed)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: skillsoft-skillport-lms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<table border=\"0\" width=\"100%\" id=\"logobanner\"><tr width=\"100%\"><td  width=\"82%\"><img src=\"https://customer.skillport.com/spcustom/")

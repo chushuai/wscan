@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: lanyeye (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<font>兰眼下一代威胁感知系统</font>")
+        - response.body.bcontains(b"/skin/admin/img/login/laneye.png")

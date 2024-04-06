@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: paypal (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input[^>]+_s-xclick".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: swell (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<[^>]*swell\\.is".bmatches(response.body) || "<[^>]*swell\\.store".bmatches(response.body) || "<[^>]*schema\\.io".bmatches(response.body) )

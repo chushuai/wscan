@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jekyll (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "Powered by <a href="https?://jekyllrb\\.com"[^>]*>Jekyll</".bmatches(response.body) || "<!-- Created with Jekyll Now -".bmatches(response.body) || "<!-- Begin Jekyll SEO tag".bmatches(response.body) )

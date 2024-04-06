@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: colasoft-tsa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"data-i18n=\"[html]username\">#username&nbsp;&nbsp;</td>")
+        - response.body.bcontains(b"nfr=\"true\"")

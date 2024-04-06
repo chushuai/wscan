@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: remobjects-sdk-/-remoting-sdk-for-.net-http-server-microsoft (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("72005642" == mmh3(base64_py(body)))

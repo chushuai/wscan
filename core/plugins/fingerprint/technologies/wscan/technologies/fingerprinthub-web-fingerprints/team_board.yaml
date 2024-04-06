@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: team-board (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"licence.asp\"><b style='color:#ff9900'>")
+        - response.body.bcontains(b"href=http://www.team5.cn\"><b>team ")
+        - response.body.bcontains(b"team5.cn by daymoon")

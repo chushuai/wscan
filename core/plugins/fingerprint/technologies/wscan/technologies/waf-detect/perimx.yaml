@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: perimx (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)access.to.this.page.has.been.denied.because.we.believe.you.are.using.automation.tool".bmatches(response.body) || "(?i)http(s)?://(www.)?perimeterx.\\w+.whywasiblocked".bmatches(response.body) || "(?i)perimeterx".bmatches(response.body) || "(?i)(..)?client.perimeterx.*/[a-zA-Z]{8,15}/*.*.js".bmatches(response.body) )

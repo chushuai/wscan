@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zte-corporation-gateway/appliance (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("459900502" == mmh3(base64_py(body)))

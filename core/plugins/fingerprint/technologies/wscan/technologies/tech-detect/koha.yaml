@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: koha (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<input name="koha_login_context" value="intranet" type="hidden">".bmatches(response.body) || "<a href="/cgi-bin/koha/".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: clockwork (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"X-Clockwork-Id:") || response.raw_header.bcontains(b"X-Clockwork-Version:") )

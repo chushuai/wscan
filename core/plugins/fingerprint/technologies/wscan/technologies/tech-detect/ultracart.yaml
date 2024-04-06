@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ultracart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<form [^>]*action="[^"]*\\/cgi-bin\\/UCEditor\\?(?:[^"]*&)?merchantId=[^"]".bmatches(response.body)'

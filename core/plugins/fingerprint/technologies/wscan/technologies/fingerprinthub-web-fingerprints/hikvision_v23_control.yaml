@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: hikvision-v23-control (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"hikvision v2.3控件网页demo")
+        - response.body.bcontains(b"杭州海康威视数字技术股份有限公司")
+        - response.body.bcontains(b"if(m_bdvrcontrol.stoptalk())")

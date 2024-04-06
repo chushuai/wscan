@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: flarum (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div id="flarum-loading"".bmatches(response.body)'

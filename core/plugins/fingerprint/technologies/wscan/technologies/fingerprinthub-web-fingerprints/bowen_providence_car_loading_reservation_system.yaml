@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bowen-providence-car-loading-reservation-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/public/base/js/plugins/crypto/rsa.js")

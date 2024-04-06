@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: rsupport-remotecall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://www.remotecall.com")
+        - response.body.bcontains(b"msg_abortservice")

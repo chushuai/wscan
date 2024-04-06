@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fast-search-for-sharepoint (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input[^>]+ name="ParametricSearch".bmatches(response.body)'

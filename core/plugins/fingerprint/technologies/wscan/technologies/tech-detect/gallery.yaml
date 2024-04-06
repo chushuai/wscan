@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gallery (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div id="gsNavBar" class="gcBorder1">".bmatches(response.body) || "<a href="http://gallery\\.sourceforge\\.net"><img[^>]+Powered by Gallery\\s*(?:(?:v|Version)\\s*([0-9.]+))?".bmatches(response.body) )

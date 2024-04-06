@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: opengeo-suite (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-609520537" == mmh3(base64_py(body)))

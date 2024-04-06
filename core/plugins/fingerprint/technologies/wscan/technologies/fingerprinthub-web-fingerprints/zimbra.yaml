@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: zimbra (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ImgZimbraIcon")
+        - 'response.raw_header.bcontains(b"Set-Cookie: ZM_LOGIN_CSRF")'
+        - response.body.bcontains(b"window._zimbramail")
+        - response.body.bcontains(b"content=\"zimbra")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpinfo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>phpinfo") && response.body.bcontains(b"Virtual Directory Support") )

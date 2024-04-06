@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: speed-test (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"classid=\"clsid:53028063-426b-446d-85f9-62e9e3dc5501\"")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: liferay (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by liferay portal")
+        - response.body.bcontains(b"liferay.aui")
+        - response.body.bcontains(b"liferay.currenturl")

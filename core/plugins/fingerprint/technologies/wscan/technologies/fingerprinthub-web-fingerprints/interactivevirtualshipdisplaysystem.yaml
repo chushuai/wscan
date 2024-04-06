@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: interactivevirtualshipdisplaysystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"交互式虚拟船舶展示系统</a>")

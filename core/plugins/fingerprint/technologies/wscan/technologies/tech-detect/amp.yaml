@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: amp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]* (?:amp|⚡)[^-]".bmatches(response.body)'

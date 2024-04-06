@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: clearwell-e-discovery (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: clearwell")'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: oracle (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - len(body)==1150 && status_code==200 && ("421e176ae0837bcc6b879ef55adbc897" == md5(body))

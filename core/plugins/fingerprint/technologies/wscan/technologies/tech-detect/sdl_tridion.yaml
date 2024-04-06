@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sdl-tridion (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]+_tcm\\d{2,3}-\\d{6}\\.".bmatches(response.body)'

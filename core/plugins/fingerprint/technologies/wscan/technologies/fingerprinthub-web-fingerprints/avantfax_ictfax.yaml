@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: avantfax-ictfax (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"images/avantfax-big.png\" border=\"0\" alt=\"ictfax")
+        - response.body.bcontains(b"content=\"ictfax")

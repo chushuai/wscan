@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: atlassian-statuspage (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]*href="https?://(?:www\\.)?statuspage\\.io/powered-by[^>]+>".bmatches(response.body)'

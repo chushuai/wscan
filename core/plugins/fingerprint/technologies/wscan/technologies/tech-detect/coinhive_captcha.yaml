@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: coinhive-captcha (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<div[^>]+class="coinhive-captcha[^>]+data-key|<div[^>]+data-key[^>]+class="coinhive-captcha)".bmatches(response.body)'

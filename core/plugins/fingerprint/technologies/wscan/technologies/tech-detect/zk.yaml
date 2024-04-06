@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zk (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- ZK [.\\d\\s]+-->".bmatches(response.body)'

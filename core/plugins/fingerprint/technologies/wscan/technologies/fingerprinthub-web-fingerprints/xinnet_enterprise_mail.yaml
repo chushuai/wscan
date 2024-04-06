@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xinnet-enterprise-mail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京新网数码信息技术有限公司 版权所有</span>")

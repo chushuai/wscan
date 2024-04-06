@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: h_ui (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"h-ui.js") && response.body.bcontains(b"h-ui.min.js") )
+        - ( response.body.bcontains(b"/css/h-ui.min.css") && response.body.bcontains(b"html5shi.js") )
+        - ( response.body.bcontains(b"/css/h-ui.login.css") && response.body.bcontains(b"/h-ui.admin/") )

@@ -9,4 +9,5 @@ pscan:
         - /pages
         - /confluence
         - /wiki
-    expressions: []
+    expressions:
+        - ( contains(to_lower(header), '-confluence-') || contains(to_lower(body), 'confluence-base-url') )

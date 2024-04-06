@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ajenti-server-admin-panel (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"action=\"/ajenti:auth\"") && response.body.bcontains(b"src=\"/ajenti:static/") )

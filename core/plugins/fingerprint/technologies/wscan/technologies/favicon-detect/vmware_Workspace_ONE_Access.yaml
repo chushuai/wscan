@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vmware-Workspace-ONE-Access (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1250474341" == mmh3(base64_py(body)))

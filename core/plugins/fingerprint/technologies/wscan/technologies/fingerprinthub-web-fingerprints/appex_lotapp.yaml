@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: appex-lotapp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"appex network corporation")
+        - response.body.bcontains(b"/change_lan.php?lanid=en")

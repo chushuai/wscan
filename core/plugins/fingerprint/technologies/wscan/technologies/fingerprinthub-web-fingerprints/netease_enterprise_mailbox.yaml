@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: netease-enterprise-mailbox (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"frmvalidator")
+        - response.body.bcontains(b"<span class=\"warn\">请您从网易企业邮箱用户登录页登录</span>")
+        - ( response.body.bcontains(b"content=\"网易企业邮箱") && response.body.bcontains(b"src=\"http://mimg.qiye.163.com/") )

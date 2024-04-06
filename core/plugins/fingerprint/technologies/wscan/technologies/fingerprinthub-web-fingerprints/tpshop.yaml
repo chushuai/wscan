@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tpshop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"tpshop.css") && response.body.bcontains(b"tpshop_config") )

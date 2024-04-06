@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: activeweb-content-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"awnocachebegin__awnocachebegin__awnocachebegin__awnocachebegin__awnocachebegin")
+        - response.body.bcontains(b"activeweb cache extension")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: openconf (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: openconf=")'
+        - response.body.bcontains(b"powered by <a href=\"http://www.openconf.org")
+        - response.body.bcontains(b"src=\"openconf.js?")

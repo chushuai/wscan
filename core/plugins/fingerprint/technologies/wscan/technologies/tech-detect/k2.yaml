@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: k2 (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--(?: JoomlaWorks "K2"| Start K2)".bmatches(response.body)'

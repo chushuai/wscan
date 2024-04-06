@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: heading-e-commerce-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.replace('/bin/hdnet.dll/login')")

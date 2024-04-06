@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wp-rocket (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+WP Rocket".bmatches(response.body)'

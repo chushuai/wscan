@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: google (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("708578229" == mmh3(base64_py(body)))

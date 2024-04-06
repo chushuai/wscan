@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: shopnc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by shopnc")
+        - response.body.bcontains(b"copyright 2007-2014 shopnc inc")
+        - response.body.bcontains(b"content=\"shopnc")

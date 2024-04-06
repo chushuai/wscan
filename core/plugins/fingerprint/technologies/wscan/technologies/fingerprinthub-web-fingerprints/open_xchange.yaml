@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: open-xchange (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"you need to enable javascript to access the open-xchange server")
+        - response.body.bcontains(b"id=\"browserchecktext_id")

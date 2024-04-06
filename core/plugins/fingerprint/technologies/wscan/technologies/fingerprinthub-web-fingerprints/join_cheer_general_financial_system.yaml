@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: join-cheer-general-financial-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京久其软件股份有限公司 版权所有")
+        - ( response.body.bcontains(b"/netrep/intf") && response.body.bcontains(b"/netrep/message2/") )
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0\";url=\"../netrep\">")

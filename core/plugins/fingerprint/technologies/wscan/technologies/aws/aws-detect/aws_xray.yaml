@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-xray (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-Amzn-Trace-Id:")

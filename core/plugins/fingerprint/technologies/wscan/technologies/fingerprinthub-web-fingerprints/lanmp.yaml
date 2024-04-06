@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lanmp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<strong>恭喜") && response.body.bcontains(b"LANMP") && response.body.bcontains(b"wdlinux.cn") && response.body.bcontains(b"本页可删除") )

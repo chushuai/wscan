@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: colasoft-mdp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"科来 版权所有 保留所有权利")
+        - response.body.bcontains(b"<div id=\"processtime\" time=\"0.000033\" >#processtime</div>")

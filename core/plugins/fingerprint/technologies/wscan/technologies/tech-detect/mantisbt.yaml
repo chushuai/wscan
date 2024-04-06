@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mantisbt (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]+ alt="Powered by Mantis Bugtracker".bmatches(response.body)'

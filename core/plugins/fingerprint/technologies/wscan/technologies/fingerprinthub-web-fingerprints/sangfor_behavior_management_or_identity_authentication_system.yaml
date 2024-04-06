@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sangfor-behavior-management-or-identity-authentication-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"/webauth/\">")
+        - response.body.bcontains(b"身份认证系统")
+        - response.body.bcontains(b"class=\"info-inner\"")

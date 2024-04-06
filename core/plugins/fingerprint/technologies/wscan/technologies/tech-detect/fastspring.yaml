@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fastspring (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<a [^>]*href="https?://sites\\.fastspring\\.com".bmatches(response.body) || "<form [^>]*action="https?://sites\\.fastspring\\.com".bmatches(response.body) )

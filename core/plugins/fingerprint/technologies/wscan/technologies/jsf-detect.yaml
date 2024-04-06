@@ -5,4 +5,7 @@ info:
 pscan:
     path:
         - /
-    expressions: []
+    expressions:
+        - (contains(body, 'javax.faces.resource') || contains(body, 'javax.faces.ViewState'))
+        - ( contains(body, 'primefaces') && contains(body, 'javax.faces.resource') || contains(body, 'javax.faces.ViewState') )
+        - ( contains(body, 'richfaces') && contains(body, 'javax.faces.resource') || contains(body, 'javax.faces.ViewState') )

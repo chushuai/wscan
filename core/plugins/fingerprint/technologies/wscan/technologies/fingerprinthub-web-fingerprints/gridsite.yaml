@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: gridsite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.gridsite.org/\">gridsite")
+        - response.body.bcontains(b"gridsite-admin.cgi?cmd")

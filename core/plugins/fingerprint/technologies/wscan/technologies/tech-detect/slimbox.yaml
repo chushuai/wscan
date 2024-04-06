@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: slimbox (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link [^>]*href="[^/]*slimbox(?:-rtl)?\\.css".bmatches(response.body)'

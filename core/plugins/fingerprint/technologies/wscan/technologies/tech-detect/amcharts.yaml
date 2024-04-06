@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: amcharts (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<svg[^>]*><desc>JavaScript chart by amCharts ([\\d.]*)".bmatches(response.body)'

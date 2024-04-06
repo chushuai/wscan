@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: yundun (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)YUNDUN".bmatches(response.body) || "(?i)^yd.cookie=".bmatches(response.body) || "(?i)http(s)?.//(www\\.)?(\\w+.)?yundun(.com)?".bmatches(response.body) || "(?i)<title>.403.forbidden:.access.is.denied.{0,2}<.{0,2}title>".bmatches(response.body) )

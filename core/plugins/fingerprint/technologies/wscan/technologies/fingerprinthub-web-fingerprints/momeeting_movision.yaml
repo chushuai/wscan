@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: momeeting-movision (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"meeting movision\"")
+        - response.body.bcontains(b"document.title=\"登录-摩云视讯\"")
+        - response.body.bcontains(b"<!-- 科达视讯云 摩云视讯 电信有区别 -->")

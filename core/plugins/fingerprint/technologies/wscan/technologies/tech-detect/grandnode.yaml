@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: grandnode (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<!--GrandNode |<a[^>]+grandnode - Powered by |Powered by: <a[^>]+nopcommerce)".bmatches(response.body)'

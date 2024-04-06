@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hitachi-virtual-storage-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/cgismryset/smryset.cgi/clk\"")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ultimate-bulletin-board (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"ubb.threads")
+        - response.body.bcontains(b"<a href=\"http://www.groupee.com/landing/goto.php?a=ubb.classic\">powered by ubb.classic&trade")

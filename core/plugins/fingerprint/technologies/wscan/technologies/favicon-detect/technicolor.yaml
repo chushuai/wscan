@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: technicolor (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1594377337" == mmh3(base64_py(body)))
+        - status_code==200 && ("-2138771289" == mmh3(base64_py(body)))

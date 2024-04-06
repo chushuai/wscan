@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cubecart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:Powered by <a href=[^>]+cubecart\\.com|<p[^>]+>Powered by CubeCart)".bmatches(response.body)'

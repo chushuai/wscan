@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: watchguard (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("15831193" == mmh3(base64_py(body)))

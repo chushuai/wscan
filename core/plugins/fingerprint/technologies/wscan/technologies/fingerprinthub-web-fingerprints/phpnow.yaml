@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: phpnow (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://phpnow.org/go.php?id=1005\">")
+        - response.body.bcontains(b"content=\"yinzcn@gmail.com")
+        - response.body.bcontains(b"by <a href=\"http://phpnow.org\">phpnow.org")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: strato (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="http://www\\.strato\\.de/" target="_blank">".bmatches(response.body)'

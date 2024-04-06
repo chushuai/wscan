@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: faqrobot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"faq客服机器人")
+        - response.body.bcontains(b"南京云问网络技术有限公司")

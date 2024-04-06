@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sophos-web-appliance (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"url(resources/images/en/login_swa.jpg)")

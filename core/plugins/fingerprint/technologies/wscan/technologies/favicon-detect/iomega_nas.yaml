@@ -1,0 +1,20 @@
+engine: fingerprint
+info:
+    name: iomega-nas (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-689902428" == mmh3(base64_py(body)))
+        - status_code==200 && ("-600508822" == mmh3(base64_py(body)))
+        - status_code==200 && ("656868270" == mmh3(base64_py(body)))
+        - status_code==200 && ("-2056503929" == mmh3(base64_py(body)))
+        - status_code==200 && ("-1656695885" == mmh3(base64_py(body)))
+        - status_code==200 && ("331870709" == mmh3(base64_py(body)))
+        - status_code==200 && ("1241049726" == mmh3(base64_py(body)))
+        - status_code==200 && ("998138196" == mmh3(base64_py(body)))
+        - status_code==200 && ("322531336" == mmh3(base64_py(body)))
+        - status_code==200 && ("-401934945" == mmh3(base64_py(body)))
+        - status_code==200 && ("-613216179" == mmh3(base64_py(body)))

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ilas (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<iframe name=\"content\"  src=\"index_middle.html\" frameborder=\"auto")
+        - response.body.bcontains(b"<select id=\"selprovince\"   onchange=\"getcity(this.options[this.selectedindex].value)\">")

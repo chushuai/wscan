@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: modsecurity (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)ModSecurity|NYOB".bmatches(response.body) || "(?i)mod_security".bmatches(response.body) || "(?i)this.error.was.generated.by.mod.security".bmatches(response.body) || "(?i)web.server at".bmatches(response.body) || "(?i)page.you.are.(accessing|trying)?.(to|is)?.(access)?.(is|to)?.(restricted)?".bmatches(response.body) || "(?i)blocked.by.mod.security".bmatches(response.body) )

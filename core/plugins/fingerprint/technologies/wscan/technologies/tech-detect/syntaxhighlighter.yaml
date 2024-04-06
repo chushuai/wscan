@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: syntaxhighlighter (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<(?:script|link)[^>]*sh(?:Core|Brush|ThemeDefault)".bmatches(response.body)'

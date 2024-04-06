@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: enterpriseloginmanagementsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"txtusername\").focus(); //默认焦点")
+        - response.body.bcontains(b"themes/scripts/functionjs.js")

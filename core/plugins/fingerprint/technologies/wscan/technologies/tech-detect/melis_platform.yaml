@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: melis-platform (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!-- Rendered with Melis CMS V2".bmatches(response.body) || "<!-- Rendered with Melis Platform".bmatches(response.body) )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: rbs-change (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]+xmlns:change=".bmatches(response.body)'

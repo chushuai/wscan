@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: gitlab (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"gon.default_issues_tracker")
+        - response.body.bcontains(b"content=\"gitlab community edition\"")
+        - response.body.bcontains(b"content=\"gitlab ")
+        - response.body.bcontains(b"<a href=\"https://about.gitlab.com/\">about gitlab")
+        - response.body.bcontains(b"class=\"col-sm-7 brand-holder pull-left\"")

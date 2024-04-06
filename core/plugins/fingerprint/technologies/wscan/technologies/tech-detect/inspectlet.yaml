@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: inspectlet (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- (?:Begin|End) Inspectlet Embed Code -->".bmatches(response.body)'

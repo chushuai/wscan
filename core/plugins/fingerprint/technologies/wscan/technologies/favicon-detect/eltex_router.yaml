@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: eltex-router (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1877797890" == mmh3(base64_py(body)))

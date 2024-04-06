@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lnmp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"lnmp一键安装包")

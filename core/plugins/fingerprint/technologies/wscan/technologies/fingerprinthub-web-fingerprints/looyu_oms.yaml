@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: looyu-oms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"http://gate.looyu.com/")

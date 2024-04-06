@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: smf (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.simplemachines.org/about/copyright.php\" title=\"free forum software\" target=\"_blank")
+        - response.body.bcontains(b"<img class=\"floatright\" id=\"smflogo\" src=")
+        - response.body.bcontains(b"document.getelementbyid(\"upshrink\").src = smf_images_url + ")

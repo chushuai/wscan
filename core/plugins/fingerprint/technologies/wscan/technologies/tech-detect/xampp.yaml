@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xampp (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>XAMPP(?: Version ([\\d\\.]+))?</title>".bmatches(response.body)'

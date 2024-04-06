@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: news (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img id=\"createcheckcode\" src=\"login/picturecheckcode\" name=\"check_code\" ng-click=\"reloadcheckcode()")
+        - response.body.bcontains(b"ng-disabled=\"!loginform.$valid\"")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: sonicwall (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)This.request.is.blocked.by.the.SonicWALL".bmatches(response.body) || "(?i)Dell.SonicWALL".bmatches(response.body) || "(?i)\\bDell\\b".bmatches(response.body) || "(?i)Web.Site.Blocked.+\\bnsa.banner".bmatches(response.body) || "(?i)SonicWALL".bmatches(response.body) || "(?i).>policy.this.site.is.blocked<.".bmatches(response.body) )

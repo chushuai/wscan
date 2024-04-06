@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: slideshowpro-director (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"simple-footer\"><span>slideshowpro director")
+        - response.body.bcontains(b"</div> <!--close login-container--></body>")

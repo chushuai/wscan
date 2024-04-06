@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pcitc-sslvpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"new_style/placeholderfriend.js\"")

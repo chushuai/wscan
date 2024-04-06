@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpmyadmin (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( "!\\[CDATA\\[[^<]*PMA_VERSION:\\"([\\d.]+)".bmatches(response.body) || "(?: \\| phpMyAdmin ([\\d.]+)<\\/title>|PMA_sendHeaderLocation\\(|<link [^>]*href="[^"]*phpmyadmin\\.css\\.php)".bmatches(response.body) )'

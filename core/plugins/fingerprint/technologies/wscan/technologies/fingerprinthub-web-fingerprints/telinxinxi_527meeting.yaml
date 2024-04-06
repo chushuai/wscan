@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: telinxinxi-527meeting (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"527meeting")
+        - response.body.bcontains(b" content=\"轻会议\"")

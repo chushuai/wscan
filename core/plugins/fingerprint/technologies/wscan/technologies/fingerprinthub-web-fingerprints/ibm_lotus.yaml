@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: ibm-lotus (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/names.nsf?login\" name=\"_dominoform")
+        - response.body.bcontains(b"软标科技")
+        - ( response.body.bcontains(b"domcfg.nsf") && response.body.bcontains(b"login.nsf") )
+        - ( response.body.bcontains(b"esoaisapp/login.jsp") && response.body.bcontains(b"main.nsf") )

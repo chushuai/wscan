@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vanilla (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<body id="(?:DiscussionsPage|vanilla)".bmatches(response.body)'

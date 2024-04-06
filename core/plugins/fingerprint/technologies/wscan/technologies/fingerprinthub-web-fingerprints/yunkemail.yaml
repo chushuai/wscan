@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yunkemail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/alimail/error/browserlog")
+        - response.body.bcontains(b"content=\"阿里企业邮箱")

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: bees_cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"beescms") && response.body.bcontains(b"template/default/images/slides.min.jquery.js") )
+        - response.body.bcontains(b"/default/images/xslider.js")
+        - response.body.bcontains(b"/default/images/search_btn.gif")
+        - response.body.bcontains(b"powerd by beescms")
+        - response.body.bcontains(b"mx_form/mx_form.php")

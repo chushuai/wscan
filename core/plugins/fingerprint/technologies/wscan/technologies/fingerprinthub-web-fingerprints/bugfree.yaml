@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bugfree (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"logo\" alt=bugfree")
+        - response.body.bcontains(b"class=\"loginbgimage\" alt=\"bugfree")

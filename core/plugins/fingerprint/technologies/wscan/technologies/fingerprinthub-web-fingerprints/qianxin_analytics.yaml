@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: qianxin-analytics (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/static/build/animate_nprogress_timepiacker_tooltipster.min.css")

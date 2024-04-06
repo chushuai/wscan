@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dd-wrt-dd-wrt-milli_httpd (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("252728887" == mmh3(base64_py(body)))

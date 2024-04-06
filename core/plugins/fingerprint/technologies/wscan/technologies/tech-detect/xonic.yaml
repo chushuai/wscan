@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xonic (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="http://www\\.xonic-solutions\\.de/index\\.php" target="_blank">xonic-solutions Shopsoftware</a>".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: netbotz-network-monitoring-device (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/netbotz.css")
+        - response.body.bcontains(b"href=\"http://www.netbotz.com\" target")

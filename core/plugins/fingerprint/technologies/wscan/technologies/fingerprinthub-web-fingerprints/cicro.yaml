@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cicro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"cicro") && response.body.bcontains(b"content=\"cicro") && response.body.bcontains(b"cws") )
+        - response.body.bcontains(b"index.files/cicro_userdefine.css")

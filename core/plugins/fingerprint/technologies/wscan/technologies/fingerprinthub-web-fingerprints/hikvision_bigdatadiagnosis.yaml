@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hikvision-bigdatadiagnosis (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"大数据诊断工具</strong>")

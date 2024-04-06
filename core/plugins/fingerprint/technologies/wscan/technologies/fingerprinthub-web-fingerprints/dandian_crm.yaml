@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dandian-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"url=general/erp/login/")
+        - response.body.bcontains(b"content=\"单点crm系统")

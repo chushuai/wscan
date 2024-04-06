@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: magento (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<script [^>]+data-requiremodule="mage/".bmatches(response.body) || "<script [^>]+data-requiremodule="Magento_".bmatches(response.body) || "<script type="text/x-magento-init">".bmatches(response.body) )

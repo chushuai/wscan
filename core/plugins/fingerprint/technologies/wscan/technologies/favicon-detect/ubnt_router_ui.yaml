@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ubnt-router-ui (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1677255344" == mmh3(base64_py(body)))

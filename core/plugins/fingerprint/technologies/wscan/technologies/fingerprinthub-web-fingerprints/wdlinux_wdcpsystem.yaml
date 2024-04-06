@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: wdlinux-wdcpsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.wdlinux.cn/bbs/index.php")
+        - response.body.bcontains(b"linux云主机")
+        - 'response.raw_header.bcontains(b"Set-Cookie: wdcpsessionid")'

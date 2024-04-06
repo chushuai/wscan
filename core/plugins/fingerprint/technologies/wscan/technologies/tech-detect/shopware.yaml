@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shopware (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>Shopware ([\\d\\.]+) [^<]+".bmatches(response.body)'

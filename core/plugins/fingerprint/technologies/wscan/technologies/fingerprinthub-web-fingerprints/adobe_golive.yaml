@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adobe-golive (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"generator\" content=\"adobe golive")

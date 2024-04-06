@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bugzilla (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "href="enter_bug\\.cgi">".bmatches(response.body) || "<main id="bugzilla-body"".bmatches(response.body) || "<a href="https?://www\\.bugzilla\\.org/docs/([0-9.]+)/[^>]+>Help<".bmatches(response.body) || "<span id="information" class="header_addl_info">version ([\\d.]+)<".bmatches(response.body) )

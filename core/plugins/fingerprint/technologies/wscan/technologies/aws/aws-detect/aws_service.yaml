@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-service (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"X-Amz-Content-Sha256:") || response.raw_header.bcontains(b"X-Amz-Date:") || response.raw_header.bcontains(b"X-Amz-Version-Id:") || response.raw_header.bcontains(b"X-Amz-Id-2:") || response.raw_header.bcontains(b"X-Amz-Delete-Marker:") )

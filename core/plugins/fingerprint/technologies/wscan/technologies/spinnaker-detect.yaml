@@ -7,3 +7,4 @@ pscan:
         - /
     expressions:
         - response.body.bcontains(b"<spinnaker ng-if=\"!authenticating\"></spinnaker>")
+        - contains(tolower(header), 'x-spinnaker-priority')

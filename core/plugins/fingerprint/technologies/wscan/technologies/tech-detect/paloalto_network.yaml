@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: paloalto-network (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<!-- BEGIN PAN_FORM_CONTENT -->") && response.body.bcontains(b"js/pan/") )

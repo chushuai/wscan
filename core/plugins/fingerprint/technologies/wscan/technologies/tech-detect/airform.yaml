@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: airform (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<form[^>]+?action="[^"]*airform\\.io[^>]+?>".bmatches(response.body)'

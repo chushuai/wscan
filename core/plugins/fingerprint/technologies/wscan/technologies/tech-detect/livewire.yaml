@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: livewire (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]{1,512}\\bwire:".bmatches(response.body)'

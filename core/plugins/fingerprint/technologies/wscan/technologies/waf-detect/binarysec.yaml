@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: binarysec (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)x.binarysec.via".bmatches(response.body) || "(?i)x.binarysec.nocache".bmatches(response.body) || "(?i)binarysec".bmatches(response.body) )

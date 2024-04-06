@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: justsystems-homepage-builder (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"JustSystems Homepage Builder")

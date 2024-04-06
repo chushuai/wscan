@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ngi-diam4 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/diam4/inc/lang/fr/lang.min.js\"")

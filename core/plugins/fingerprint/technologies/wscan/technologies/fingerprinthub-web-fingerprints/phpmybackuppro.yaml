@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpmybackuppro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"please login (use your mysql username and password): <a href=\"index.php?login=true")'

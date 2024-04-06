@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jltech (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"jlwcs") && response.body.bcontains(b"京伦建站系统 ") )

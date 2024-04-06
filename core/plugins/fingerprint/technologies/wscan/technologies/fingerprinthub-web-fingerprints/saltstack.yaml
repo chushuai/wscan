@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: saltstack (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>SaltStack</title>")
+        - 'response.raw_header.bcontains(b"Server: TornadoServer")'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webissues (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"header-right\">webissues")
+        - response.body.bcontains(b"<div><input type=\"hidden\" name=\"__formid\" id=\"field-login-__formid\" value=\"login\" />")

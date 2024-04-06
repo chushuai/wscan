@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: listserv (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by the listserv email list manager")
+        - response.body.bcontains(b"<title>welcome to listserv")

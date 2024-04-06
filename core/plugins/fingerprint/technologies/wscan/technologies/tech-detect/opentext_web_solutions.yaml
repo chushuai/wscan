@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: opentext-web-solutions (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+published by Open Text Web Solutions".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pc4uploader (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by pc4uploader")
+        - response.body.bcontains(b"pc4uploader <font color")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: drwebantivirus (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: drwebserver")'
+        - response.body.bcontains(b"/avdesk/includes/system/templates/images/logo_en.png")

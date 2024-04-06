@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: huaease-medication (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"专业的web医学影像浏览器")

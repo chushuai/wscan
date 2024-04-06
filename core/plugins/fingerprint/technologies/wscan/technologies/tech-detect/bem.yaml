@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bem (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+data-bem".bmatches(response.body)'

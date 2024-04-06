@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: pexip (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h2>pexip infinity</h2>")
+        - response.body.bcontains(b"<h2>会议平台</h2>")
+        - response.body.bcontains(b"pexip infinity")
+        - response.body.bcontains(b"pex-app")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sizmek (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<a [^>]*href="[^/]*//[^/]*serving-sys\\.com/|<img [^>]*src="[^/]*//[^/]*serving-sys\\.com/)".bmatches(response.body)'

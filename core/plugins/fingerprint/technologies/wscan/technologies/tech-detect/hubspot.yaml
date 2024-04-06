@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hubspot (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Start of Async HubSpot".bmatches(response.body)'

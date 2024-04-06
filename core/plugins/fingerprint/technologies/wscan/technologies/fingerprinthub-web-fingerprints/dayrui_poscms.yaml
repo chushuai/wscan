@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dayrui-poscms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/statics/admin/global/plugins/font-awesome/css/font-awesome.min.css")

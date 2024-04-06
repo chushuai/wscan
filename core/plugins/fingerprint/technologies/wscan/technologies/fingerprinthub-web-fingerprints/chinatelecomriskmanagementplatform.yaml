@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chinatelecomriskmanagementplatform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"风险治理平台</div>")

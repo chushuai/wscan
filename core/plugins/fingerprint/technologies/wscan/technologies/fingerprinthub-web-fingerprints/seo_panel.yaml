@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: seo-panel (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p class=\"note error\">javascript is turned off in your web browser. turn it on to take full advantage of this site, then refresh the page.</p>")
+        - ( response.body.bcontains(b"var wantproceed = 'do you really want to proceed?';") && response.body.bcontains(b"var wantproceed = 'wollen sie wirklich fortfahren?';") )

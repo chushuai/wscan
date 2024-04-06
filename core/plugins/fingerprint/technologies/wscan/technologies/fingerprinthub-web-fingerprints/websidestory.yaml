@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: websidestory (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://websidestory.com")
+        - response.body.bcontains(b"websidestory code")
+        - response.body.bcontains(b"websidestory,inc. all rights reserved. u.s.patent no. 6,393,479b1")
+        - response.body.bcontains(b"<!-- websidestory html for search -->")

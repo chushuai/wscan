@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bloomreach (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+/binaries/(?:[^/]+/)*content/gallery/".bmatches(response.body)'

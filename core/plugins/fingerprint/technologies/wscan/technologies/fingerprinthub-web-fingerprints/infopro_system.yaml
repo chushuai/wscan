@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: infopro-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<input type=\"submit\" name=\"cmdsubmit\" value=\" 登 录 \" onclick=\"javascript:webform_dopostbackwithoptions(new webform_postbackoptions(&quot;cmdsubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))\" id=\"cmdsubmit\" class=\"colorbutton")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: op5-monitor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/monitor/application/views/themes/default/css/default/common.css")

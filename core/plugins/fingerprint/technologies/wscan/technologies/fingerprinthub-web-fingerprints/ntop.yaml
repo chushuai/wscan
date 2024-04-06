@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ntop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"global traffic statistics")
+        - response.body.bcontains(b"ntopmenuid")
+        - response.body.bcontains(b"/css/ntopng.css")

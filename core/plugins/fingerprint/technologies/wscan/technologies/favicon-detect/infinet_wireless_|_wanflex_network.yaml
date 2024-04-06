@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: infinet-wireless-|-wanflex-network (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1648531157" == mmh3(base64_py(body)))

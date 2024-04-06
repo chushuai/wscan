@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: 360 (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).wzws.waf.cgi.".bmatches(response.body) || "(?i)wangzhan\\.360\\.cn".bmatches(response.body) || "(?i)qianxin.waf".bmatches(response.body) || "(?i)360wzws".bmatches(response.body) || "(?i)transfer.is.blocked".bmatches(response.body) )

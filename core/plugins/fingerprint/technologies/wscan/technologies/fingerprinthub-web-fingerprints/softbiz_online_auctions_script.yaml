@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: softbiz-online-auctions-script (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.softbizscripts.com")

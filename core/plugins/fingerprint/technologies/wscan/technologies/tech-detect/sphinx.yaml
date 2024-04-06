@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sphinx (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Created using <a href="https?://(?:www\\.)?sphinx-doc\\.org/">Sphinx</a> ([0-9.]+)\\.".bmatches(response.body)'

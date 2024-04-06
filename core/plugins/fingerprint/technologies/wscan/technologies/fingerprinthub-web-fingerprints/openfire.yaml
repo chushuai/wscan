@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: openfire (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"background: transparent url(images/login_logo.gif) no-repeat")'
+        - response.body.bcontains(b"class=\"row justify-content-center\"")
+        - response.body.bcontains(b"<title>openfire 管理界面</title>")

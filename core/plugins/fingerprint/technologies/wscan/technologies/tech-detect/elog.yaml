@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: elog (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>ELOG Logbook Selection</title>".bmatches(response.body)'

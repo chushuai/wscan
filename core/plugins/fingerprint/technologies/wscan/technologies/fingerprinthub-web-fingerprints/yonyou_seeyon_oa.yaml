@@ -1,0 +1,17 @@
+engine: fingerprint
+info:
+    name: yonyou-seeyon-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/seeyon/USER-DATA/IMAGES/LOGIN/login.gif")
+        - response.body.bcontains(b"/seeyon/common/")
+        - response.body.bcontains(b"M3 Server")
+        - response.body.bcontains(b"M1-Server")
+        - response.body.bcontains(b"/seeyon/user-data/images/login/login.gif")
+        - ( response.body.bcontains(b"seeyon") && response.body.bcontains(b"seeyonproductid") )
+        - response.body.bcontains(b"var _ctxpath = '/seeyon'")
+        - response.body.bcontains(b"a8-v5企业版")
+        - response.body.bcontains(b"/seeyon/")

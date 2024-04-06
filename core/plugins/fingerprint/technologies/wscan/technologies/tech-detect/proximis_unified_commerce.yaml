@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: proximis-unified-commerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]+data-ng-app="RbsChangeApp"".bmatches(response.body)'

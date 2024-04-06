@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pdf.js (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<\\/div>\\s*<!-- outerContainer -->\\s*<div\\s*id="printContainer"><\\/div>".bmatches(response.body)'

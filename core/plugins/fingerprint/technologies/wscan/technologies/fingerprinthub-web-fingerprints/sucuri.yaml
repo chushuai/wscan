@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sucuri (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"sucuri website firewall - cloudproxy - access denied")
+        - response.body.bcontains(b"cloudproxy@sucuri.net")

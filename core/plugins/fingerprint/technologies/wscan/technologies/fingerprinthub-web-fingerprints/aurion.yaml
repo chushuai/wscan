@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: aurion (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- aurion teal will be used as the login-time default")
+        - response.body.bcontains(b"/aurion.js")

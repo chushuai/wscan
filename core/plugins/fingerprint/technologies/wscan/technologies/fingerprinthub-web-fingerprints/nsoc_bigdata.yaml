@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: nsoc-bigdata (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h2>nsoc大数据分析系统</h2>")
+        - response.body.bcontains(b"src=\"/nfw/static/framework/images/views.png")
+        - response.body.bcontains(b"<b>nsoc云安全解决方案")

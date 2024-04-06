@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cbss-automated-testing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p>copyright&copy cbss 项目组 自动化测试小组</p>")

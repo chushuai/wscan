@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: east-simulation-nettrmp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"document.getelementbyid(\"hllogininfo\").click()")
+        - response.body.bcontains(b"nettrmp登录界面")

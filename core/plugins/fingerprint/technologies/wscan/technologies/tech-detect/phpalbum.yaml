@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpalbum (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--phpalbum ([.\\d\\s]+)-->".bmatches(response.body)'

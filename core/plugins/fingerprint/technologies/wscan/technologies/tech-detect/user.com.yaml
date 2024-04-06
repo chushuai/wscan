@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: user.com (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div[^>]+/id="ue_widget"".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bridge5asia-amss (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"education area management support system : amss++")'
+        - response.body.bcontains(b"/statics/js/mdo-angular-cryptography.js")

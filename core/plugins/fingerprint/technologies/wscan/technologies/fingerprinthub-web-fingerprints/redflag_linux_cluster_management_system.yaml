@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: redflag-linux-cluster-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<b>登录到红旗集群管理系统</b></td>")

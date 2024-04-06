@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: campus-card-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"harbin synjones electronic")
+        - response.body.bcontains(b"document.formpostds.action=\"xxsearch.action")
+        - response.body.bcontains(b"/shouyeziti.css")

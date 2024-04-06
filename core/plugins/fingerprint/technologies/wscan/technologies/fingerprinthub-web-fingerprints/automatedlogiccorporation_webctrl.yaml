@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: automatedlogiccorporation-webctrl (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/_common/lvl5/about/eula.jsp\"")

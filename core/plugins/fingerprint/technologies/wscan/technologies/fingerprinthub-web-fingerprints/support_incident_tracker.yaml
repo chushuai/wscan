@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: support-incident-tracker (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class='windowtitle'>sit! - login</div>")
+        - response.body.bcontains(b"content=\"sit! support incident tracker")

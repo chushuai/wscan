@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: uebimiau-webmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<script type=\"text/javascript\" src=\"themes/default/js/webmail.js\"></script>") && response.body.bcontains(b"uebimiau") )

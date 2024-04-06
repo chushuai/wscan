@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: t-soft (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="http://www\\.tsoft\\.com\\.tr" target="_blank" title="T-Soft E-ticaret Sistemleri">".bmatches(response.body)'

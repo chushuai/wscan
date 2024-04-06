@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xbrother-monitor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"if (!getcookie(\"x_gu_sid\"")

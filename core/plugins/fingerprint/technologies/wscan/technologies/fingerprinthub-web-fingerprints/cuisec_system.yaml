@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cuisec-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"r=e&&e.__esmodule?function")

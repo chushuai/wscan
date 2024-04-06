@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aspentech-aspen-infoplus21 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/aspencui/css/appstyles.js")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ubiquiti-airos (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-697231354" == mmh3(base64_py(body)))
+        - status_code==200 && ("1020814938" == mmh3(base64_py(body)))

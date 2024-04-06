@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vcalendar (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.vcalendar.org\">vcalendar</a>")
+        - response.body.bcontains(b"<link href=\"styles/basic/style.css\"")

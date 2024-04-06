@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: interred (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"interred")
+        - response.body.bcontains(b"created with interred")

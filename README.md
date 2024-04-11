@@ -103,7 +103,7 @@ Wscan不内置任何POC插件，但Wscan的prometheus插件引擎已支持Nuclei
 
 我们把下载的 X-ray 和 Nuclei 插件包放入同一个目录，并在配置文件中指定插件包的路径。
 
-![](doc/img/wscan_poc.jpg)
+![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/d12ba15768350ccb6dcfb57f37208802.jpg)
 #### Step1
 XRAY、Goby POC插件包下载地址
 
@@ -221,7 +221,7 @@ waftest:
 在进行漏洞检测的时候，我们会发现有很多的漏洞在执行了一些命令后，从表面上看没有任何回应的，比如命令执行漏洞，log4j rce，fastjson，ssrf等等，
 但由于前端并没有对应的展示，导致我们并不能知道文件是否成功读取，那么当面对这类的漏洞，我们就需要一个反连平台，
 通过让目标执行ping、curl等命令，对反连平台发起请求，反连平台在接受到请求后， 就能告诉我们，命令触发了，也就代表了漏洞存在了。
-![](doc/img/返连平台.jpg)
+![](https://ctstack-oss.oss-cn-beijing.aliyuncs.com/tool/github/f8f71df3274cc8c750764e33181a8e3e.jpg)
 
 注意： **Wscan支持http、dns、rmi、ldap四种返连类型，其中http、rmi、ldap复用同一个端口。**
 

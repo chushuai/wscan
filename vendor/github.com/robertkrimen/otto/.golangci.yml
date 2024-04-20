@@ -1,0 +1,76 @@
+run:
+  timeout: 6m
+
+linters-settings:
+  govet:
+    settings:
+      shadow:
+        strict: true
+    enable-all: true
+  goconst:
+    min-len: 2
+    min-occurrences: 4
+  revive:
+    enable-all-rules: false
+    rules:
+    - name: var-naming
+      disabled: true
+
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - lll
+    - gochecknoglobals
+    - gochecknoinits
+    - scopelint
+    - funlen
+    - godox
+    - exhaustivestruct
+    - goerr113
+    - wsl
+    - nlreturn
+    - gomnd
+    - paralleltest
+    - wrapcheck
+    - testpackage
+    - gocognit
+    - nestif
+    - exhaustive
+    - forcetypeassert
+    - gocyclo
+    - cyclop
+    - varnamelen
+    - maintidx
+    - ireturn
+    - exhaustruct
+    - nosnakecase
+    - dupword
+    - structcheck
+    - deadcode
+    - golint
+    - varcheck
+    - ifshort
+    - interfacer
+    - maligned
+    # Just causes noise
+    - depguard
+    # Go 1.22+ only
+    - copyloopvar
+    - intrange
+
+issues:
+  exclude-use-default: false
+  max-same-issues: 0
+  exclude:
+    - Deferring unsafe method "Close" on type "io\.ReadCloser"
+  exclude-dirs:
+    - terst
+  exclude-files:
+    - dbg/dbg.go
+    - token/token_const.go
+  exclude-rules:
+    # Field alignment in tests isn't a performance issue.
+    - text: fieldalignment
+      path: _test\.go
+

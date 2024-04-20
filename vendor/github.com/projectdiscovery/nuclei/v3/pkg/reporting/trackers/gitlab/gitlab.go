@@ -1,10 +1,13 @@
 package gitlab
 
 import (
+	"fmt"
 
 	"github.com/xanzy/go-gitlab"
 
 	"github.com/projectdiscovery/nuclei/v3/pkg/output"
+	"github.com/projectdiscovery/nuclei/v3/pkg/reporting/exporters/markdown/util"
+	"github.com/projectdiscovery/nuclei/v3/pkg/reporting/format"
 	"github.com/projectdiscovery/retryablehttp-go"
 )
 
@@ -58,7 +61,53 @@ func New(options *Options) (*Integration, error) {
 
 // CreateIssue creates an issue in the tracker
 func (i *Integration) CreateIssue(event *output.ResultEvent) error {
+	summary := format.Summary(event)
+	description := format.CreateReportDescription(event, util.MarkdownFormatter{})
+	labels := []string{}
+	severityLabel := fmt.Sprintf("Severity: %s", event.Info.SeverityHolder.Severity.String())
+	if i.options.SeverityAsLabel && severityLabel != "" {
+		labels = append(labels, severityLabel)
+	}
+	if label := i.options.IssueLabel; label != "" {
+		labels = append(labels, label)
+	}
+	//customLabels := gitlab.Labels(labels)
+	assigneeIDs := []int{i.userID}
+	if i.options.DuplicateIssueCheck {
+		searchIn := "title"
+		searchState := "all"
+		issues, _, err := i.client.Issues.ListProjectIssues(i.options.ProjectName, &gitlab.ListProjectIssuesOptions{
+			In:     &searchIn,
+			State:  &searchState,
+			Search: &summary,
+		})
+		if err != nil {
+			return err
+		}
+		if len(issues) > 0 {
+			issue := issues[0]
+			_, _, err := i.client.Notes.CreateIssueNote(i.options.ProjectName, issue.IID, &gitlab.CreateIssueNoteOptions{
+				Body: &description,
+			})
+			if err != nil {
+				return err
+			}
+			if issue.State == "closed" {
+				reopen := "reopen"
+				_, resp, err := i.client.Issues.UpdateIssue(i.options.ProjectName, issue.IID, &gitlab.UpdateIssueOptions{
+					StateEvent: &reopen,
+				})
+				fmt.Sprintln(resp, err)
+			}
+			return err
+		}
+	}
+	_, _, err := i.client.Issues.CreateIssue(i.options.ProjectName, &gitlab.CreateIssueOptions{
+		Title:       &summary,
+		Description: &description,
+		//Labels:      &customLabels,
+		AssigneeIDs: &assigneeIDs,
+	})
 
-
-	return nil
+	return err
 }

@@ -254,11 +254,11 @@ reverse:
 #### Ⅱ.客户端配置
 ```yaml
 reverse:
+    token: "xxxx"
     client:
         remote_server: true
         http_base_url: ""
         dns_server_ip: ""
-        rmi_server_addr: ""
 ```
 ## 扫描报告
 Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏洞验证逻辑。
@@ -289,6 +289,7 @@ Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏�
 * 2024.03.25 发布v1.0.19 二进制版，新增xstream系列漏洞检测插件
 * 2024.03.27 发布v1.0.20 二进制版，主被动扫描支持hostname、path作为过滤条件
 * 2024.04.06 发布v1.0.21 二进制版，主被动扫描支持WEB组件识别，内置3700+WEB组件识别插件
+* 2024.07.08 发布v1.0.22 二进制版，实现利用语义分析的方式检测XSS漏洞，XSS检测准确率大幅提升
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

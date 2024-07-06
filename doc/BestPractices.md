@@ -142,10 +142,10 @@ reverse:
 ### Ⅱ.client configuration
 ```
 reverse:
+    token: ""
     client:
         remote_server: true
         http_base_url: ""
         dns_server_ip: ""
-        rmi_server_addr: ""
 ```
 

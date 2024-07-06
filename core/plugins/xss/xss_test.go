@@ -6,28 +6,146 @@
 package xss
 
 import (
-	"encoding/json"
 	"fmt"
-	dalfox "github.com/hahwul/dalfox/v2/lib"
+	"net/http"
 	"testing"
 )
 
-func PrintJson(data interface{}) {
-	if ret, err := json.Marshal(data); err == nil {
-		fmt.Println(string(ret))
-	}
+// http://127.0.0.1:8080/?a=b
+func TestScriptXSS(t *testing.T) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		a := r.URL.Query().Get("a")
+
+		// 设置响应头
+		w.Header().Set("Server", "Apache-Coyote/1.1")
+		//w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Content-Type", "text/html;charset=ISO-8859-1")
+
+		// 设置响应体
+		body := `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XSS Injection Demo</title>
+</head>
+<body>
+
+<h1>XSS Injection Demo</h1>
+
+<!-- 潜在的 XSS 注入点 -->
+<script>
+    // 这里是潜在的 XSS 注入点，展示用户输入的内容
+    var userInput = ` + a + `;
+    document.getElementById("result").innerHTML += "<p>通过脚本获取的输入内容: " + userInput + "</p>";
+</script>
+
+</body>
+</html>`
+		w.Header().Set("Content-Length", fmt.Sprint(len(body)))
+		// 发送响应体
+		fmt.Fprint(w, body)
+	})
+	// 启动HTTP服务器
+	fmt.Println("Server is running at http://127.0.01:8080")
+	http.ListenAndServe(":8080", nil)
 }
 
-func TestXSS(t *testing.T) {
-	opt := dalfox.Options{}
-	result, err := dalfox.NewScan(dalfox.Target{
-		URL:     "http://testphp.vulnweb.com/listproducts.php?artist=123&asdf=ff&cat=123%22%3E%3Csvg%2Fclass%3D%22dalfox%22onLoad%3Dalert%2845%29%3E",
-		Method:  "GET",
-		Options: opt,
+// http://127.0.0.1:8080/?a=--!%3E%3Csvg%20onload=alert`1`
+func TestCommentXSS(t *testing.T) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		a := r.URL.Query().Get("a")
+
+		// 设置响应头
+		w.Header().Set("Server", "Apache-Coyote/1.1")
+		//w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Content-Type", "text/html;charset=ISO-8859-1")
+
+		// 设置响应体
+		body := `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XSS Injection Demo</title>
+</head>
+<body>
+
+<h1>XSS Injection Demo</h1>
+
+<!-- ` + a + `  -->
+</body>
+</html> `
+		w.Header().Set("Content-Length", fmt.Sprint(len(body)))
+		// 发送响应体
+		fmt.Fprint(w, body)
 	})
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		PrintJson(result)
-	}
+	// 启动HTTP服务器
+	fmt.Println("Server is running at http://127.0.01:8080")
+	http.ListenAndServe(":8080", nil)
+}
+
+// http://127.0.0.1:8080/?a=%22%20onmousemove=prompt(1)%20%22
+func TestAttibuteValueXSS(t *testing.T) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		a := r.URL.Query().Get("a")
+
+		// 设置响应头
+		w.Header().Set("Server", "Apache-Coyote/1.1")
+		//w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Content-Type", "text/html;charset=ISO-8859-1")
+
+		// 设置响应体
+		body := `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XSS Injection Demo</title>
+</head>
+<body>
+
+<h1>XSS Injection Demo</h1>
+
+ 
+<a  a="111` + a + `">iiiii</a>
+</body>
+</html> `
+		w.Header().Set("Content-Length", fmt.Sprint(len(body)))
+		// 发送响应体
+		fmt.Fprint(w, body)
+	})
+	// 启动HTTP服务器
+	fmt.Println("Server is running at http://127.0.01:8080")
+	http.ListenAndServe(":8080", nil)
+}
+
+func TestAttibuteKeyXSS(t *testing.T) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		a := r.URL.Query().Get("a")
+
+		// 设置响应头
+		w.Header().Set("Server", "Apache-Coyote/1.1")
+		//w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Content-Type", "text/html;charset=ISO-8859-1")
+
+		// 设置响应体
+		body := `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XSS Injection Demo</title>
+</head>
+<body>
+
+<h1>XSS Injection Demo</h1>
+<input type="hidden" name="langue" value="\"ozmhl=\"\"">
+ 
+<a  ` + a + `="111">iiiii</a>
+</body>
+</html> `
+		w.Header().Set("Content-Length", fmt.Sprint(len(body)))
+		// 发送响应体
+		fmt.Fprint(w, body)
+	})
+	// 启动HTTP服务器
+	fmt.Println("Server is running at http://127.0.01:8080")
+	http.ListenAndServe(":8080", nil)
 }

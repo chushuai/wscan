@@ -137,3 +137,12 @@
 * 【2】Yaml POC支持ldap_url, rmi_url
 * 【3】新增--no-scan参数，绕过漏洞扫描，只进行主动或被动爬取
 * 【4】优化动态爬虫，避免对Data URLs（URL中编码的文件）发起请求
+
+# 1.0.24 2024-07-20
+## SUPPORT
+* 【1】支持对 JSON 格式的参数进行模糊测试
+* 【2】使用--json-crawler-output输出动静态爬虫的扫描结果
+## BUGFIX
+* 【1】修复不支持不安全证书的问题
+* 【2】修复指定config文件了，还是会自动生成config.yaml 文件
+* 【3】修复由于处理 EventRequestPaused 事件时 HTTP 头部构建错误而导致的爬取结果缺失的问题

@@ -11,6 +11,7 @@ import (
 	"os"
 	"wscan/core/entry"
 	"wscan/core/utils"
+	logger "wscan/core/utils/log"
 )
 
 func showBanner() {
@@ -57,6 +58,10 @@ func Convert(c *cli.Context) error {
 }
 
 func GenerateCA(c *cli.Context) error {
+	_, err := entry.LoadOrGenConfig(c)
+	if err != nil {
+		logger.Fatal(err)
+	}
 	if err := utils.GenerateCAToPath("." + string(os.PathSeparator)); err != nil {
 		return err
 	}
@@ -137,6 +142,16 @@ var subCommandWebScan = cli.Command{
 			Aliases: []string{"fs"},
 			Value:   "",
 			Usage:   " force usage of SSL/HTTPS for raw-request"},
+		&cli.BoolFlag{
+			Name:    "no-scan",
+			Aliases: []string{"ns"},
+			Value:   false,
+			Usage:   "No vulnerability detection, only enable crawlers"},
+		&cli.StringFlag{
+			Name:    "json-crawler-output",
+			Aliases: []string{"jco"},
+			Value:   "",
+			Usage:   "output wscan crawler results to FILE in json format"},
 		&cli.StringFlag{
 			Name:    "json-output",
 			Aliases: []string{"jo"},
@@ -156,36 +171,12 @@ var subCommandWebScan = cli.Command{
 	Action: entry.NewApp,
 }
 
-var subCommandServiceScan = cli.Command{
-	Name:    "servicescan",
-	Aliases: []string{"ss"},
-	Usage:   "Run a service scan task",
-	Flags:   []cli.Flag{},
-	Action:  ServiceScan,
-}
-
-var subCommandSubdomain = cli.Command{
-	Name:    "subdomain",
-	Aliases: []string{"sd"},
-	Usage:   "Run a subdomain task",
-	Flags:   []cli.Flag{},
-	Action:  SubdomainScan,
-}
-
 var subCommandReverse = cli.Command{
 	Name:    "reverse",
 	Aliases: []string{},
 	Usage:   "Run a standalone reverse server",
 	Flags:   []cli.Flag{},
 	Action:  entry.ReverseAction,
-}
-
-var subCommandConvert = cli.Command{
-	Name:    "convert",
-	Aliases: []string{},
-	Usage:   "convert results from json to html or from html to json",
-	Flags:   []cli.Flag{},
-	Action:  Convert,
 }
 
 var subCommandGenCA = cli.Command{
@@ -206,7 +197,6 @@ var subCommandVersion = cli.Command{
 
 func main() {
 	showBanner()
-	entry.LoadOrGenConfig(nil)
 	author := cli.Author{
 		Name:  "shaochuyu",
 		Email: "shaochuyu@qq.com",
@@ -214,14 +204,14 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "1.0.22",
+		Version: "1.0.24",
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:    "config",
 				Aliases: []string{},
 				Value:   "",
-				Usage:   "从文件中加载配置（默认为“config.yaml”）"},
+				Usage:   "Load configuration from file (default to config. yaml)"},
 			&cli.StringFlag{
 				Name:    "log-level",
 				Aliases: []string{},
@@ -231,21 +221,14 @@ func main() {
 	}
 	app.Commands = []*cli.Command{
 		&subCommandWebScan,
-		&subCommandServiceScan,
-		&subCommandSubdomain,
 		&subCommandReverse,
-		&subCommandConvert,
 		&subCommandGenCA,
 		&subCommandVersion,
 	}
 	err := app.Run(os.Args)
 	if err != nil {
-
+		logger.Fatal(err.Error())
 	}
-}
-
-func loadLicense() {
-
 }
 
 func Run(c *cli.Context) error {

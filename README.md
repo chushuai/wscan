@@ -69,6 +69,7 @@ Wscan首次运行时，将会生成一个名为config.yaml的文件。将plugins
 ./wscan  --log-level=debug ws --browser  http://testphp.vulnweb.com/ --html-output=wscan_scan_result.html
 ./wscan  --log-level=debug ws --url http://testphp.vulnweb.com/listproducts.php?cat=1  --json-output=wscan_scan_result.json
 ./wscan  --log-level=debug ws --url-file=/wscan/url_file.txt --html-output=wscan_scan_result.html 
+./wscan  --log-level=debug ws -d "uname=111&pass=111" --url http://testphp.vulnweb.com/userinfo.php 
 
 ```
 ### Ⅱ.专项扫描
@@ -301,6 +302,7 @@ Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏�
 * 2024.07.07 发布v1.0.23 二进制版，支持通用log4j-rce漏洞检测
 * 2024.07.20 发布v1.0.24 二进制版，支持对 JSON 格式的参数进行模糊测试，使用 --json-crawler-output 输出动静态爬虫的扫描结果，并大幅提升动态爬虫的爬取能力
 * 2024.07.21 发布v1.0.25 二进制版，自动判断Nuclei插件是否支持多级目录扫描; 支持cookie注入
+* 2024-07-26 发布v1.0.26 二进制版，支持自定用户名密码字典，增强表单爆破能力
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

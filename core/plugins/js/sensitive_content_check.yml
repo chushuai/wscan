@@ -1,0 +1,79 @@
+rules:
+  - regex: '[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)+'
+    title: 邮箱信息
+  - regex: \b(?:secret|secret_key|token|secret_token|auth_token|access_token|username|password|aws_access_key_id|aws_secret_access_key|secretkey|authtoken|accesstoken|access-token|authkey|client_secret|bucket|email|HEROKU_API_KEY|SF_USERNAME|PT_TOKEN|id_dsa|clientsecret|client-secret|encryption-key|pass|encryption_key|encryptionkey|secretkey|secret-key|bearer|JEKYLL_GITHUB_TOKEN|HOMEBREW_GITHUB_API_TOKEN|api_key|api_secret_key|api-key|private_key|client_key|client_id|sshkey|ssh_key|ssh-key|privatekey|DB_USERNAME|oauth_token|irc_pass|dbpasswd|xoxa-2|xoxrprivate-key|private_key|consumer_key|consumer_secret|access_token_secret|SLACK_BOT_TOKEN|slack_api_token|api_token|ConsumerKey|ConsumerSecret|SESSION_TOKEN|session_key|session_secret|slack_token|slack_secret_token|bot_access_token|passwd|api|eid|sid|api_key|apikey|userid|user_id|user-id)["\s]*(?::|=|=:|=>)["\s]*[a-z0-9A-Z]{8,64}"?
+    title: Token或密码
+  - regex: \b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b
+    title: IP地址
+  - regex: '[\w]+\.cloudfront\.net'
+    title: Cloudfront云泄露
+  - regex: '[\w\-.]+\.appspot\.com'
+    title: Appspot云泄露
+  - regex: '[\w\-.]*s3[\w\-.]*\.?amazonaws\.com\/?[\w\-.]*'
+    title: 亚马逊云泄露
+  - regex: ([\w\-.]*\.?digitaloceanspaces\.com\/?[\w\-.]*)
+    title: Digitalocean云泄露
+  - regex: (storage\.cloud\.google\.com\/[\w\-.]+)
+    title: Google云泄露
+  - regex: ([\w\-.]*\.?storage.googleapis.com\/?[\w\-.]*)
+    title: Google存储API泄露
+  - regex: (?:139|138|137|136|135|134|147|150|151|152|157|158|159|178|182|183|184|187|188|198|130|131|132|155|156|166|185|186|145|175|176|133|153|177|173|180|181|189|199|170|171)[0-9]{8}
+    title: 手机号
+  - regex: ([-]+BEGIN [^\s]+ PRIVATE KEY[-]+[\s]*[^-]*[-]+END [^\s]+ PRIVATE KEY[-]+)
+    title: SSH密钥
+  - regex: access_key.*?["'](.*?)["']
+    title: Access Key
+  - regex: accesskeyid.*?["'](.*?)["']
+    title: Access Key ID 1
+  - regex: accesskeyid.*?["'](.*?)["']
+    title: Access Key ID 2
+  - regex: AKIA[0-9A-Z]{16}
+    title: 亚马逊AWS API
+  - regex: s3\.amazonaws.com[/]+|[a-zA-Z0-9_-]*\.s3\.amazonaws.com
+    title: 亚马逊AWS 3S API 1
+  - regex: ([a-zA-Z0-9-\.\_]+\.s3\.amazonaws\.com|s3://[a-zA-Z0-9-\.\_]+|s3-[a-zA-Z0-9-\.\_\/]+|s3.amazonaws.com/[a-zA-Z0-9-\.\_]+|s3.console.aws.amazon.com/s3/buckets/[a-zA-Z0-9-\.\_]+)
+    title: 亚马逊AWS 3S API 2
+  - regex: amzn\\.mws\\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+    title: 亚马逊AWS 3S API 3
+  - regex: '@author[: ]+(.*?) '
+    title: 作者信息
+  - regex: api[key|_key|\s+]+[a-zA-Z0-9_\-]{5,100}
+    title: API
+  - regex: basic [a-zA-Z0-9=:_\+\/-]{5,100}
+    title: 基础信息
+  - regex: bearer [a-zA-Z0-9_\-\.=:_\+\/]{5,100}
+    title: Bearer
+  - regex: EAACEdEose0cBA[0-9A-Za-z]+
+    title: Facebook Token
+  - regex: '[a-zA-Z0-9_-]*:[a-zA-Z0-9_\-]+@github\.com*'
+    title: Github Token
+  - regex: AIza[0-9A-Za-z-_]{35}
+    title: Google API
+  - regex: 6L[0-9A-Za-z-_]{38}|^6[0-9a-zA-Z_-]{39}$
+    title: Google验证码
+  - regex: ya29\.[0-9A-Za-z\-_]+
+    title: Google OAuth
+  - regex: ey[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$
+    title: JWT鉴权
+  - regex: key-[0-9a-zA-Z]{32}
+    title: Mailgun服务密钥
+  - regex: access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}
+    title: Paypal/Braintree访问凭证
+  - regex: '-----BEGIN PGP PRIVATE KEY BLOCK-----'
+    title: PGP密钥
+  - regex: (?i)(password\s*[`=:\"]+\s*[^\s]+|password is\s*[`=:\"]*\s*[^\s]+|pwd\s*[`=:\"]*\s*[^\s]+|passwd\s*[`=:\"]+\s*[^\s]+)
+    title: 密码泄露
+  - regex: '-----BEGIN EC PRIVATE KEY-----'
+    title: RSA密钥
+  - regex: '-----BEGIN DSA PRIVATE KEY-----'
+    title: DSA密钥
+  - regex: rk_live_[0-9a-zA-Z]{24}
+    title: Stripe账号泄露 1
+  - regex: sk_live_[0-9a-zA-Z]{24}
+    title: Stripe账号泄露 2
+  - regex: AC[a-zA-Z0-9_\-]{32}
+    title: Twillio 账号泄露 1
+  - regex: SK[0-9a-fA-F]{32}
+    title: Twillio 账号泄露 2
+  - regex: AP[a-zA-Z0-9_\-]{32}
+    title: Twillio 账号泄露 3

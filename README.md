@@ -45,6 +45,7 @@ Wscan是一款专注于WEB安全的扫描器，它向Nmap致敬，而Nmap已经�
 | `自定义FUZZ插件`    |     √         |  ×           |      对body、query中的参数进行模糊测试                                                        |
 | `Waf绕过/Waf测试`    |     √         |  ×           |       自定义各种特殊的Payload，测试Waf是否能拦截                                                         |
 | `WEB组件识别`    |     √         |  ×           |       识别网站应用的组件及相关技术                                                         |
+| `JavaScript敏感内容检测`      |   √             |     ×         | 识别JavaScript包含的AK/SK、ApiKey、电话、邮箱等敏感内容                                                                           |
 # 最佳实践 
 
 ⬇️[下载地址](https://github.com/chushuai/wscan/releases) 
@@ -305,6 +306,7 @@ Wscan支持JSON、HTML等多种格式的扫描报告，其中包含详尽的漏�
 * 2024.07.26 发布v1.0.26 二进制版，支持自定用户名密码字典，增强表单爆破能力
 * 2024.07.29 发布v1.0.27 二进制版，cmd-injection插件，新增ssti系列漏洞检测payload
 * 2024.07.30 发布v1.0.28 二进制版，修复动静态爬虫HTTP代理不生效的问题
+* 2024.08.04 发布v1.0.29 二进制版，支持JavaScript敏感内容检测，识别JavaScript包含的AK/SK、ApiKey、电话、邮箱等敏感内容
 
 # 开源时间表
 Wscan的目标是创建一个开源且非盈利的项目。然而，由于Wscan的工作量庞大，代码仍在快速迭代中。

@@ -13,6 +13,8 @@ import (
 	"wscan/core/plugins/custom"
 	"wscan/core/plugins/dirscan"
 	"wscan/core/plugins/fastjson"
+	"wscan/core/plugins/fingerprint"
+	"wscan/core/plugins/js"
 	"wscan/core/plugins/jsonp"
 	"wscan/core/plugins/path_traversal"
 	"wscan/core/plugins/prometheus"
@@ -62,5 +64,7 @@ func All() []base.Plugin {
 	plugins = append(plugins, &shiro.Shiro{})
 	plugins = append(plugins, &custom.Custom{})
 	plugins = append(plugins, &xstream.Xstream{})
+	plugins = append(plugins, &fingerprint.Fingerprint{})
+	plugins = append(plugins, &js.JS{})
 	return plugins
 }

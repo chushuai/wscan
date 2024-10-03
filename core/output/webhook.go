@@ -5,15 +5,24 @@
 package output
 
 import (
+	"bytes"
 	"context"
-	"net/http"
+	"encoding/json"
+	"fmt"
+	"github.com/kataras/pio"
 	"net/url"
+	"wscan/core/http"
 	"wscan/core/model"
+	logger "wscan/core/utils/log"
 	"wscan/core/utils/printer"
+	"wscan/core/utils/printer/nice"
 )
 
-func NewWebHookPrinter() *webHookPrinter {
-	return &webHookPrinter{}
+func NewWebHookPrinter(url *url.URL) *webHookPrinter {
+	return &webHookPrinter{
+		url:    url,
+		client: http.NewClient(),
+	}
 }
 
 type webHookPrinter struct {
@@ -23,27 +32,66 @@ type webHookPrinter struct {
 	client *http.Client
 }
 
-func (*webHookPrinter) AddInterceptor(func(interface{}) (interface{}, error)) printer.Printer {
-	return nil
+type WebHookRequest struct {
+	Type string      `json:"type" yaml:"type"`
+	Data interface{} `json:"data"`
 }
-func (*webHookPrinter) Close() error {
-	return nil
-}
-func (*webHookPrinter) LogStats(*model.StatisticRecord) error {
-	return nil
-}
-func (*webHookPrinter) LogSubdomain(*model.SubDomainResult) error {
-	return nil
-}
-func (*webHookPrinter) LogVuln(*model.Vuln) error {
-	return nil
-}
-func (*webHookPrinter) Print(interface{}) error {
-	return nil
-}
-func (*webHookPrinter) sendReq() {
 
+func (p *webHookPrinter) AddInterceptor(func(interface{}) (interface{}, error)) printer.Printer {
+	return nil
 }
-func (*webHookPrinter) truncResult([]uint8) []uint8 {
+
+func (p *webHookPrinter) Close() error {
+	return nil
+}
+
+func (p *webHookPrinter) LogStats(lastStat *model.StatisticRecord) error {
+	p.sendReq(&WebHookRequest{
+		Type: "web_statistic",
+		Data: lastStat,
+	})
+	return nil
+}
+
+func (p *webHookPrinter) LogSubdomain(*model.SubDomainResult) error {
+	return nil
+}
+func (p *webHookPrinter) LogVuln(vuln *model.Vuln) error {
+	p.sendReq(&WebHookRequest{
+		Type: "web_vuln",
+		Data: vuln.ToWebVuln(),
+	})
+	return nil
+}
+
+func (p *webHookPrinter) Print(res interface{}) error {
+	switch res.(type) {
+	case *model.Vuln:
+		vuln := res.(*model.Vuln)
+		p.LogVuln(vuln)
+	case *model.StatisticRecord:
+		lastStat := res.(*model.StatisticRecord)
+		p.LogStats(lastStat)
+	case *model.CrawlerResult:
+		return nil
+	default:
+		nice.PioPrinter.Println(pio.Rich(fmt.Sprintf("%v", res), pio.Red))
+	}
+	return nil
+}
+
+func (p *webHookPrinter) sendReq(webHookReq *WebHookRequest) {
+	data, _ := json.Marshal(webHookReq)
+	req, err := http.NewRequest("POST", p.url.String(), bytes.NewReader(data))
+	if err != nil {
+		logger.Error(err)
+	}
+	_, err = p.client.DoRaw(req)
+	if err != nil {
+		logger.Error(err)
+	}
+}
+
+func (*webHookPrinter) truncResult([]byte) []byte {
 	return nil
 }

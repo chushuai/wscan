@@ -1,4 +1,4 @@
-[**中文**](README.md)
+[**中文**](README_CN.md)
 # wscan
 Wscan is a web security scanner that focuses on WEB security. It pays homage to Nmap, which has been open source for 25 years. We also plan to continuously update and keep Wscan open source for the next 25 years. We welcome anyone interested in web security to join our development team.
 

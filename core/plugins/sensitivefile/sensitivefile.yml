@@ -1,0 +1,229 @@
+version: "1.0"
+category:
+  - name: sensitive_file_exposure
+    title: "Sensitive File Exposure Detection"
+entries:
+  # ---- Environment / Config Files ----
+  - name: ".env"
+    pattern: '(APP_ENV|DB_PASSWORD|DB_HOST|DB_DATABASE|REDIS_HOST|APP_DEBUG|MAIL_HOST|MAIL_PORT|MAIL_DRIVER|CACHE_DRIVER|QUEUE_DRIVER|APP_KEY)\s*='
+    description: "Environment configuration file exposing database credentials, API keys, and application secrets"
+    severity: high
+
+  - name: "._env"
+    pattern: '(APP_ENV|DB_PASSWORD|DB_HOST|DB_DATABASE|REDIS_HOST|APP_DEBUG|MAIL_HOST|MAIL_PORT|MAIL_DRIVER|CACHE_DRIVER|QUEUE_DRIVER|APP_KEY)\s*='
+    description: "Alternate environment file (._env) exposing credentials"
+    severity: high
+
+  - name: "config/secrets.yml"
+    pattern: '(production:|development:|test:|secret_key_base:|secret:|password:)\s'
+    description: "Rails secrets configuration file exposing secret_key_base and credentials"
+    severity: critical
+
+  - name: "database.yml"
+    pattern: '(development:|production:|test:|adapter:|encoding:|database:|username:|password:|host:)\s'
+    description: "Ruby on Rails database configuration file exposing database credentials"
+    severity: critical
+
+  - name: "appsettings.json"
+    pattern: '"(ConnectionStrings|AppSettings|Secret|ApiKey|Password|JwtKey|TokenKey|EncryptionKey)"'
+    description: "ASP.NET application settings file exposing connection strings and secrets"
+    severity: critical
+
+  - name: "wp-config.php"
+    pattern: '(DB_PASSWORD|DB_USER|DB_NAME|DB_HOST|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY)'
+    description: "WordPress configuration file exposing database credentials and authentication keys"
+    severity: critical
+
+  # ---- SSH / Private Key Files ----
+  - name: "id_rsa"
+    pattern: '-----BEGIN RSA PRIVATE KEY-----'
+    description: "RSA private key file exposed, allowing unauthorized SSH access"
+    severity: critical
+
+  - name: "id_dsa"
+    pattern: '-----BEGIN DSA PRIVATE KEY-----'
+    description: "DSA private key file exposed, allowing unauthorized SSH access"
+    severity: critical
+
+  - name: "id_ecdsa"
+    pattern: '-----BEGIN EC PRIVATE KEY-----'
+    description: "ECDSA private key file exposed, allowing unauthorized SSH access"
+    severity: critical
+
+  - name: ".ssh/id_rsa"
+    pattern: '-----BEGIN RSA PRIVATE KEY-----'
+    description: "RSA private key in .ssh directory exposed"
+    severity: critical
+
+  - name: ".ssh/authorized_keys"
+    pattern: 'ssh-(rsa|dss|ed25519|ecdsa)\s'
+    description: "SSH authorized keys file exposed"
+    severity: high
+
+  # ---- Shell History Files ----
+  - name: ".bash_history"
+    pattern: '(ls|cd|cat|vim|ssh|git|mysql|curl|wget|sudo|chmod|chown|mkdir|rm|cp|mv|grep|find|apt|yum|pip|npm|docker|kubectl)\s'
+    description: "Bash history file exposing previously executed commands and potential credentials"
+    severity: medium
+
+  - name: ".mysql_history"
+    pattern: '(CREATE|GRANT|FLUSH|SELECT|UPDATE|INSERT|DELETE|DROP|ALTER|SHOW|USE)\s'
+    description: "MySQL command history file exposing SQL operations and database interactions"
+    severity: medium
+
+  - name: ".psql_history"
+    pattern: '(CREATE|SELECT|INSERT|UPDATE|DELETE|ALTER|DROP|GRANT|\\d|\\c|\\l|\\q)\s'
+    description: "PostgreSQL command history file exposing SQL operations"
+    severity: medium
+
+  - name: ".zsh_history"
+    pattern: '(ls|cd|cat|vim|ssh|git|mysql|curl|wget|sudo|chmod|pip|npm|docker)\s'
+    description: "Zsh history file exposing previously executed commands"
+    severity: medium
+
+  # ---- FTP / Server Config ----
+  - name: "sftp-config.json"
+    pattern: '"host"\s*:\s*".*?"\s*,\s*"user"\s*:\s*".*?"\s*,\s*"password"\s*:\s*".*?"'
+    description: "SFTP configuration file (Sublime Text) exposing server credentials"
+    severity: critical
+
+  - name: "recentservers.xml"
+    pattern: '<Pass>'
+    description: "FileZilla recent servers file exposing FTP server passwords"
+    severity: critical
+
+  # ---- Apache / Web Server Config ----
+  - name: ".htaccess"
+    pattern: '(RewriteEngine|RewriteCond|RewriteRule|AuthType|AuthName|AuthUserFile|php_flag|php_value|deny|allow|Options)\s'
+    description: "Apache configuration file exposing rewrite rules and authentication settings"
+    severity: medium
+
+  - name: ".htpasswd"
+    pattern: ':\$apr1\$|:\{SHA\}|:\$2[ayb]\$'
+    description: "Apache password file exposing hashed credentials"
+    severity: high
+
+  # ---- System / Metadata Files ----
+  - name: ".DS_Store"
+    pattern: 'Bud1'
+    description: "macOS directory metadata file exposing directory structure"
+    severity: low
+
+  - name: ".gitignore"
+    pattern: '(node_modules|vendor|\.env|secret|password|\.key|\.pem|\.log|\.cache|\.sql|backup|dump)\s'
+    description: "Git ignore file revealing project structure and potentially sensitive excluded paths"
+    severity: low
+
+  - name: "robots.txt"
+    pattern: '(Disallow|Allow)\s*:\s*/'
+    description: "Robots.txt file revealing restricted paths and administrative areas"
+    severity: info
+
+  - name: "crossdomain.xml"
+    pattern: 'allow-access-from\s+domain'
+    description: "Cross-domain policy file exposing permitted cross-origin access domains"
+    severity: medium
+
+  # ---- Source Control ----
+  - name: ".git/HEAD"
+    pattern: 'ref:\s+refs/heads/'
+    description: "Git HEAD file indicating exposed git repository"
+    severity: high
+
+  - name: ".svn/entries"
+    pattern: 'dir\s'
+    description: "SVN entries file indicating exposed Subversion repository"
+    severity: high
+
+  # ---- Docker / Container ----
+  - name: "docker-compose.yml"
+    pattern: '(environment|password|secret|MYSQL_ROOT_PASSWORD|POSTGRES_PASSWORD|API_KEY|TOKEN)\s*:'
+    description: "Docker Compose file exposing container environment variables and passwords"
+    severity: critical
+
+  - name: "docker-compose.yaml"
+    pattern: '(environment|password|secret|MYSQL_ROOT_PASSWORD|POSTGRES_PASSWORD|API_KEY|TOKEN)\s*:'
+    description: "Docker Compose YAML file exposing container environment variables and passwords"
+    severity: critical
+
+  - name: "Dockerfile"
+    pattern: '(FROM|ENV|ARG|RUN|COPY|EXPOSE|CMD)\s'
+    description: "Dockerfile exposing build instructions and potential environment secrets"
+    severity: medium
+
+  # ---- Cloud / Infrastructure ----
+  - name: ".terraform.tfstate"
+    pattern: '(resource|provider|output|variable|"secret"|token|access_key)\s'
+    description: "Terraform state file exposing infrastructure configuration and secrets"
+    severity: critical
+
+  - name: "terraform.tfstate"
+    pattern: '(resource|provider|output|variable|"secret"|token|access_key)\s'
+    description: "Terraform state file (without dot prefix) exposing infrastructure configuration"
+    severity: critical
+
+  # ---- IDE / Development ----
+  - name: ".idea/workspace.xml"
+    pattern: '(project|component|option|name)\s'
+    description: "IntelliJ IDEA workspace file revealing project structure and development paths"
+    severity: low
+
+  - name: "nbproject/project.properties"
+    pattern: '(javac|src|build|dist|libs)\s*='
+    description: "NetBeans project properties file exposing project configuration"
+    severity: low
+
+  - name: ".vscode/settings.json"
+    pattern: '"remote\.path"|"remote\.ssh"|"terminal\.integrated"|"python\.path"'
+    description: "VS Code settings file revealing development environment configuration"
+    severity: low
+
+  # ---- Log / Debug Files ----
+  - name: "error.log"
+    pattern: '(ERROR|FATAL|Exception|Stacktrace|Traceback|segfault|panic)\s'
+    description: "Error log file exposing application errors, stack traces, and internal paths"
+    severity: medium
+
+  - name: "debug.log"
+    pattern: '(DEBUG|INFO|WARN|ERROR|FATAL)\s'
+    description: "Debug log file exposing application debug information"
+    severity: medium
+
+  # ---- Backup / Dump ----
+  - name: "${dirname}.sql"
+    pattern: '(INSERT\s+INTO|CREATE\s+TABLE|DROP\s+TABLE|MySQL|mysqldump|pg_dump)\s'
+    description: "SQL dump file named after the directory, exposing database contents"
+    severity: critical
+
+  - name: "${dirname}.bak"
+    pattern: '(<?php|<!DOCTYPE|<html|<script|<asp|import\s|package\s|class\s)\s'
+    description: "Backup file named after the directory, potentially exposing source code"
+    severity: high
+
+  - name: "backup.sql"
+    pattern: '(INSERT\s+INTO|CREATE\s+TABLE|DROP\s+TABLE|MySQL|mysqldump|pg_dump)\s'
+    description: "Generic SQL backup file exposing database contents"
+    severity: critical
+
+  - name: "db.sql"
+    pattern: '(INSERT\s+INTO|CREATE\s+TABLE|DROP\s+TABLE|MySQL|mysqldump)\s'
+    description: "Database SQL file exposing database contents"
+    severity: critical
+
+  # ---- PHP Config ----
+  - name: "phpinfo.php"
+    pattern: 'phpinfo\(\)|PHP\s+Version'
+    description: "PHP info file exposing detailed PHP configuration and server environment"
+    severity: medium
+
+  # ---- AWS / Cloud Keys ----
+  - name: ".aws/credentials"
+    pattern: '(aws_access_key_id|aws_secret_access_key)\s*='
+    description: "AWS credentials file exposing access keys"
+    severity: critical
+
+  # ---- Kubernetes ----
+  - name: "kubeconfig.yml"
+    pattern: '(cluster|user|context|namespace|certificate|token)\s*:'
+    description: "Kubernetes configuration file exposing cluster access credentials"
+    severity: critical

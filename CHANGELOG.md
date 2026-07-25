@@ -1,6 +1,6 @@
 # 1.0.51  2026-07-25
 ## SUPPORT
-* 【1】WebUI 漏洞详情补全漏洞描述库：将 `scannable_vuln.json` 的 523 条漏洞描述导出为单文件 XML（`core/web/vulndb/*.xml`），`go:embed` 嵌入二进制；后端按漏洞 ID（含插件 ID 别名映射）查库，向前端填充 name/description/impact/recommendation/CVSS/tags/references，扫描详情漏洞卡片与分组标题展示完整顾问文案。
+* 【1】WebUI 漏洞详情补全漏洞描述库：将 `scannable_vuln.json` 中扫描插件可映射到的漏洞描述导出为单文件 XML（`core/web/vulndb/*.xml`，42 条），`go:embed` 嵌入二进制；后端按漏洞 ID（含插件 ID 别名映射）查库，向前端填充 name/description/impact/recommendation/CVSS/tags/references，扫描详情漏洞卡片与分组标题展示完整顾问文案。生成脚本按白名单（`vulndb_allowlist.txt`）过滤，移除插件映射不到的条目。
 
 # 1.0.50  2026-07-25
 ## SUPPORT

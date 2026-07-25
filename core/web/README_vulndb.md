@@ -16,7 +16,14 @@ From the repo root, before building:
 python3 core/web/gen_vulndb.py
 ```
 
-This writes 523 `.xml` files into this directory. `go build` then embeds them.
+This writes one `.xml` per reachable vuln type into this directory. `go build`
+then embeds them.
+
+Only vuln types our scan plugins can surface are emitted. The allowlist
+(`core/web/vulndb_allowlist.txt`, one id per line) holds the reachable vulndb
+ids — a plugin Binding.ID that either matches a DB id directly or maps to one
+through `vulnIDAliases` in `vulndb.go`. Regenerate the allowlist by collecting
+those ids (alias targets + direct plugin-id stems).
 
 ## Mapping plugin IDs to DB entries
 

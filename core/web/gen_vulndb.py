@@ -16,6 +16,7 @@ from xml.sax.saxutils import escape
 
 SRC = "core/scannable_vuln.json"
 DST = "core/web/vulndb"
+ALLOWLIST = "core/web/vulndb_allowlist.txt"
 
 
 def main():
@@ -25,6 +26,13 @@ def main():
     if not apps:
         print("no byAppId entries found", file=sys.stderr)
         sys.exit(1)
+
+    # Only emit vuln types our scan plugins can actually surface. The allowlist
+    # holds the vulndb ids (xml stems) reachable via a plugin Binding.ID — either
+    # a direct match or through the vulnIDAliases map in vulndb.go. Keeping the
+    # embedded DB to just these entries shrinks the binary and avoids shipping
+    # advisory text for vuln classes no plugin detects.
+    allow = load_allowlist()
 
     os.makedirs(DST, exist_ok=True)
     # wipe existing generated xml files so removed entries don't linger
@@ -37,6 +45,8 @@ def main():
         fname = key
         if not fname.endswith(".xml"):
             fname = fname + ".xml"
+        if stem(fname) not in allow:
+            continue
         path = os.path.join(DST, fname)
         with open(path, "w", encoding="utf-8") as out:
             out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
@@ -95,6 +105,20 @@ def write_num(out, tag, val):
     if val is None:
         return
     out.write("  <%s>%s</%s>\n" % (tag, escape(str(val)), tag))
+
+
+def load_allowlist():
+    allow = set()
+    try:
+        with open(ALLOWLIST, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    allow.add(line)
+    except FileNotFoundError:
+        # no allowlist -> emit everything (legacy behaviour)
+        return None
+    return allow
 
 
 if __name__ == "__main__":

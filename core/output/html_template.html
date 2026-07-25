@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wscan Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--bg:#13141b;--bg2:#1a1b26;--surface:#1f2133;--surface2:#272940;--border:#2e3148;--border2:#3b3e5a;--text:#e4e6f0;--text2:#a9abc2;--text3:#6e7191;--accent:#6c72ff;--accent2:#818cf8;--accent-bg:rgba(108,114,255,.1);--red:#f05252;--red-bg:rgba(240,82,82,.1);--orange:#f5803e;--orange-bg:rgba(245,128,62,.1);--yellow:#e2b340;--yellow-bg:rgba(226,179,64,.1);--cyan:#3ec9d6;--cyan-bg:rgba(62,201,214,.1);--gray:#7c7f9a;--gray-bg:rgba(124,127,154,.1);--green:#34d399;--code-bg:#0d0e14}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--accent);color:#fff}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:13px;-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Header */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:24px 36px 20px}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;font-family:'JetBrains Mono',monospace}
+.brand h1{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.brand h1 span{color:var(--accent2)}
+.header-meta{font-size:11px;color:var(--text3);text-align:right;line-height:1.7}
+.header-meta b{color:var(--text2);font-weight:500}
+
+/* Summary */
+.summary{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+.s-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.s-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:.5}
+.s-item.danger::before{background:var(--red)}
+.s-item .val{font-size:22px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;letter-spacing:-.02em}
+.s-item .val.danger{color:var(--red)}
+.s-item .val.accent{color:var(--accent2)}
+.s-item .lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;font-weight:600}
+
+/* Sev pills */
+.sev-bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sev-bar .lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-right:6px}
+.spill{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:16px;font-size:11px;font-weight:600;cursor:pointer;transition:all .12s;border:1px solid transparent;user-select:none}
+.spill:hover{filter:brightness(1.1)}
+.spill.off{opacity:.3;border-style:dashed}
+.spill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.spill.critical{color:var(--red);background:var(--red-bg);border-color:rgba(240,82,82,.2)}.spill.critical .dot{background:var(--red)}
+.spill.high{color:var(--orange);background:var(--orange-bg);border-color:rgba(245,128,62,.2)}.spill.high .dot{background:var(--orange)}
+.spill.medium{color:var(--yellow);background:var(--yellow-bg);border-color:rgba(226,179,64,.2)}.spill.medium .dot{background:var(--yellow)}
+.spill.low{color:var(--cyan);background:var(--cyan-bg);border-color:rgba(62,201,214,.2)}.spill.low .dot{background:var(--cyan)}
+.spill.info{color:var(--gray);background:var(--gray-bg);border-color:rgba(124,127,154,.15)}.spill.info .dot{background:var(--gray)}
+
+/* Toolbar */
+.toolbar{display:flex;gap:8px;padding:10px 36px;border-bottom:1px solid var(--border);background:var(--bg2);align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:10}
+.toolbar input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:7px 12px 7px 32px;border-radius:8px;font-size:12px;outline:none;font-family:'Inter',sans-serif;flex:1;min-width:160px;max-width:340px;transition:border-color .15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236e7191' stroke-width='2'%3E%3Ccircle cx='6' cy='6' r='5'/%3E%3Cpath d='m10 10 3.5 3.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center}
+.toolbar input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-bg)}
+.toolbar input::placeholder{color:var(--text3)}
+.toolbar select{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:7px 28px 7px 12px;border-radius:8px;font-size:12px;outline:none;font-family:'Inter',sans-serif;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%236e7191'%3E%3Cpath d='M5 7L1 3h8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.toolbar select:focus{border-color:var(--accent)}
+.toolbar .cnt{margin-left:auto;font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.toolbar .cnt b{color:var(--accent2);font-weight:600}
+
+/* Vuln list */
+.vlist{padding:12px 36px 48px}
+.vcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:all .12s}
+.vcard:hover{border-color:var(--border2)}
+.vcard.sev-critical{border-left:4px solid var(--red)}
+.vcard.sev-high{border-left:4px solid var(--orange)}
+.vcard.sev-medium{border-left:4px solid var(--yellow)}
+.vcard.sev-low{border-left:4px solid var(--cyan)}
+.vcard.sev-info{border-left:4px solid var(--gray)}
+
+.vhead{padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.vhead:hover{background:var(--surface2)}
+.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.badge.critical{color:var(--red);background:var(--red-bg)}
+.badge.high{color:var(--orange);background:var(--orange-bg)}
+.badge.medium{color:var(--yellow);background:var(--yellow-bg)}
+.badge.low{color:var(--cyan);background:var(--cyan-bg)}
+.badge.info{color:var(--gray);background:var(--gray-bg)}
+.vplugin{font-size:13px;font-weight:600;color:#fff;flex-shrink:0}
+.vurl{font-size:11px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;font-family:'JetBrains Mono',monospace}
+.vts{font-size:10px;color:var(--text3);flex-shrink:0;font-variant-numeric:tabular-nums}
+.varrow{color:var(--text3);font-size:10px;transition:transform .12s;flex-shrink:0}
+.vcard.open .varrow{transform:rotate(90deg);color:var(--accent2)}
+
+.vbody{display:none;border-top:1px solid var(--border);padding:14px 16px;background:var(--bg2)}
+.vcard.open .vbody{display:block}
+
+.mgrid{display:grid;grid-template-columns:90px 1fr;gap:4px 14px;font-size:12px;margin-bottom:12px}
+.mgrid .k{color:var(--text3);font-weight:500}
+.mgrid .v{color:var(--text2);word-break:break-all}
+.mgrid .v.pload{background:var(--code-bg);color:var(--accent2);padding:7px 10px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;white-space:pre-wrap;border:1px solid var(--border)}
+
+.stabs{display:flex;gap:4px;margin-bottom:8px}
+.stabs button{background:var(--surface);border:1px solid var(--border);color:var(--text3);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif}
+.stabs button:hover{border-color:var(--accent);color:var(--accent2)}
+.stabs button.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent2)}
+.spane{display:none}
+.spane.on{display:block}
+.spane pre{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text2);overflow-x:auto;max-height:380px;overflow-y:auto;line-height:1.55}
+
+.json-btn{display:inline-flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--border);color:var(--text3);padding:5px 14px;border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif;margin-bottom:8px}
+.json-btn:hover{border-color:var(--accent);color:var(--accent2);background:var(--accent-bg)}
+.json-btn.on{border-color:var(--accent);color:var(--accent2);background:var(--accent-bg)}
+.json-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.json-view{display:none;margin-bottom:8px}
+.json-view.on{display:block}
+.json-view pre{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text2);overflow-x:auto;max-height:500px;overflow-y:auto;line-height:1.55;white-space:pre-wrap;word-break:break-all}
+.json-view .jcopy{position:sticky;top:8px;float:right;margin-bottom:8px;background:var(--surface2);border:1px solid var(--border);color:var(--text3);padding:3px 10px;border-radius:5px;font-size:10px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .12s}
+.json-view .jcopy:hover{border-color:var(--accent);color:var(--accent2)}
+
+.empty{text-align:center;padding:60px 32px}
+.empty h2{font-size:15px;color:var(--text3);margin-bottom:4px;font-weight:600}
+.empty p{font-size:12px;color:var(--text3);opacity:.7}
+
+@media(max-width:768px){.header,.toolbar,.vlist{padding-left:16px;padding-right:16px}.summary{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script>var webVulns=[];var serviceVulns=[];var subdomains=[];var scanSummary=null;</script>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-icon">W</div>
+      <h1><span>Wscan</span> Report</h1>
+    </div>
+    <div class="header-meta" id="headerMeta"></div>
+  </div>
+  <div class="summary" id="summaryGrid">
+    <div class="s-item danger"><div class="val danger" id="sVulns">-</div><div class="lbl">Vulns</div></div>
+    <div class="s-item"><div class="val accent" id="sFound">-</div><div class="lbl">Found URLs</div></div>
+    <div class="s-item"><div class="val" id="sScanned">-</div><div class="lbl">Scanned</div></div>
+    <div class="s-item"><div class="val" id="sRequests">-</div><div class="lbl">Requests</div></div>
+    <div class="s-item"><div class="val" id="sDuration">-</div><div class="lbl">Duration</div></div>
+  </div>
+  <div class="sev-bar">
+    <span class="lbl">Filter</span>
+    <span class="spill critical" onclick="toggleSev(this,'critical')"><span class="dot"></span><span id="bCritical">0</span> Critical</span>
+    <span class="spill high" onclick="toggleSev(this,'high')"><span class="dot"></span><span id="bHigh">0</span> High</span>
+    <span class="spill medium" onclick="toggleSev(this,'medium')"><span class="dot"></span><span id="bMedium">0</span> Medium</span>
+    <span class="spill low" onclick="toggleSev(this,'low')"><span class="dot"></span><span id="bLow">0</span> Low</span>
+    <span class="spill info" onclick="toggleSev(this,'info')"><span class="dot"></span><span id="bInfo">0</span> Info</span>
+  </div>
+</div>
+
+<div class="toolbar">
+  <input id="searchBox" placeholder="Search URL, plugin, payload..." oninput="render()">
+  <select id="pluginFilter" onchange="render()"><option value="">All Plugins</option></select>
+  <span class="cnt" id="countLabel"></span>
+</div>
+
+<div class="vlist" id="list"></div>
+
+<script>
+var activeSevs={critical:true,high:true,medium:true,low:true,info:true};
+
+function sevOrder(s){return{critical:4,high:3,medium:2,low:1,info:0}[s]||0}
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function fmtJson(obj){try{return JSON.stringify(obj,null,2)}catch(e){return String(obj)}}
+function fmtTs(ts){if(!ts)return'-';return new Date(ts).toLocaleString()}
+function fmtDur(s){if(!s)return'-';s=parseInt(s);if(s<60)return s+'s';var h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60,o='';if(h)o+=h+'h ';if(m)o+=m+'m ';return o+r+'s'}
+
+function toggleSev(el,sev){
+  activeSevs[sev]=!activeSevs[sev];
+  el.classList.toggle('off',!activeSevs[sev]);
+  render();
+}
+
+function getFiltered(){
+  var q=document.getElementById('searchBox').value.toLowerCase();
+  var pf=document.getElementById('pluginFilter').value;
+  return webVulns.filter(function(v){
+    var s=v.severity||'info';
+    if(!activeSevs[s])return false;
+    if(pf&&v.plugin!==pf)return false;
+    if(q){var h=(v.plugin+' '+(v.detail&&v.detail.addr||'')+' '+(v.detail&&v.detail.payload||'')).toLowerCase();if(h.indexOf(q)<0)return false}
+    return true;
+  }).sort(function(a,b){return sevOrder(b.severity)-sevOrder(a.severity)});
+}
+
+function render(){
+  var list=getFiltered();
+  var el=document.getElementById('list');
+  document.getElementById('countLabel').innerHTML='<b>'+list.length+'</b> / '+webVulns.length;
+  if(!list.length){el.innerHTML='<div class="empty"><h2>No vulnerabilities found</h2><p>Adjust filters or the scan completed clean.</p></div>';return}
+  var h='';
+  list.forEach(function(v,i){
+    var sev=v.severity||'info';
+    var addr=(v.detail&&v.detail.addr)||'-';
+    var payload=(v.detail&&v.detail.payload)||'';
+    var param=(v.detail&&v.detail.extra&&v.detail.extra.param);
+    var snaps=(v.detail&&v.detail.snapshot)||[];
+    h+='<div class="vcard sev-'+sev+'" id="vc'+i+'" onclick="toggleCard('+i+')">';
+    h+='<div class="vhead">';
+    h+='<span class="badge '+sev+'">'+esc(sev)+'</span>';
+    h+='<span class="vplugin">'+esc(v.plugin)+'</span>';
+    h+='<span class="vurl">'+esc(addr)+'</span>';
+    h+='<span class="vts">'+fmtTs(v.create_time)+'</span>';
+    h+='<span class="varrow">&#9654;</span>';
+    h+='</div>';
+    h+='<div class="vbody" onclick="event.stopPropagation()">';
+    h+='<div class="mgrid">';
+    h+='<span class="k">Plugin</span><span class="v">'+esc(v.plugin)+'</span>';
+    h+='<span class="k">Severity</span><span class="v">'+esc(sev)+'</span>';
+    h+='<span class="k">Target</span><span class="v">'+esc(addr)+'</span>';
+    if(param)h+='<span class="k">Parameter</span><span class="v">'+esc(param.position||'')+'.'+esc(param.key||'')+' = '+esc(param.value||'')+'</span>';
+    if(payload)h+='<span class="k">Payload</span><span class="v pload">'+esc(payload)+'</span>';
+    if(v.detail&&v.detail.extra){var ex=v.detail.extra;Object.keys(ex).forEach(function(k){if(k==='param')return;h+='<span class="k">'+esc(k)+'</span><span class="v">'+esc(typeof ex[k]==='object'?JSON.stringify(ex[k]):ex[k])+'</span>'})}
+    h+='</div>';
+    h+='<button class="json-btn" onclick="toggleJson(event,'+i+')"><svg viewBox="0 0 24 24"><path d="M4 6h2m12 0h2M4 18h2m12 0h2M6 6v12M18 6v12"/><path d="M9 9h6v6H9z"/></svg>View JSON</button>';
+    h+='<div class="json-view" id="jv'+i+'"><button class="jcopy" onclick="copyJson(event,'+i+')">Copy</button><pre id="jp'+i+'">'+esc(fmtJson(v))+'</pre></div>';
+    if(snaps.length){
+      h+='<div class="stabs">';
+      snaps.forEach(function(s,j){h+='<button onclick="switchSnap(event,'+j+')"'+(j===0?' class="on"':'')+'>Request #'+(j+1)+'</button>'});
+      h+='</div>';
+      snaps.forEach(function(s,j){
+        h+='<div class="spane'+(j===0?' on':'')+'">';
+        h+='<pre>'+esc(s[0]||'')+'\n\n'+esc(s[1]||'')+'</pre>';
+        h+='</div>';
+      });
+    }
+    h+='</div></div>';
+  });
+  el.innerHTML=h;
+}
+
+function toggleCard(i){var c=document.getElementById('vc'+i);if(c)c.classList.toggle('open')}
+function switchSnap(e,j){e.stopPropagation();var btn=e.target,tabs=btn.parentElement;tabs.querySelectorAll('button').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');var panes=tabs.parentElement.querySelectorAll('.spane');panes.forEach(function(p,i){p.classList.toggle('on',i===j)})}
+function toggleJson(e,i){e.stopPropagation();var btn=e.target.closest('.json-btn'),v=document.getElementById('jv'+i);if(!v)return;var on=v.classList.toggle('on');btn.classList.toggle('on',on)}
+function copyJson(e,i){e.stopPropagation();var el=document.getElementById('jp'+i);if(!el)return;var txt=el.textContent;navigator.clipboard.writeText(txt).catch(function(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)})}
+
+function updateStats(){
+  var c={critical:0,high:0,medium:0,low:0,info:0};
+  webVulns.forEach(function(v){var s=v.severity||'info';c[s]++});
+  document.getElementById('bCritical').textContent=c.critical;
+  document.getElementById('bHigh').textContent=c.high;
+  document.getElementById('bMedium').textContent=c.medium;
+  document.getElementById('bLow').textContent=c.low;
+  document.getElementById('bInfo').textContent=c.info;
+  var plugins={};webVulns.forEach(function(v){plugins[v.plugin]=1});
+  var sel=document.getElementById('pluginFilter');sel.innerHTML='<option value="">All Plugins</option>';
+  Object.keys(plugins).sort().forEach(function(p){sel.innerHTML+='<option value="'+esc(p)+'">'+esc(p)+'</option>'});
+}
+
+function updateSummary(){
+  if(!scanSummary)return;
+  document.getElementById('sVulns').textContent=scanSummary.vuln_count||0;
+  document.getElementById('sFound').textContent=scanSummary.found_urls||0;
+  document.getElementById('sScanned').textContent=scanSummary.scanned_urls||0;
+  document.getElementById('sRequests').textContent=scanSummary.requests||0;
+  document.getElementById('sDuration').textContent=fmtDur(scanSummary.duration);
+  document.getElementById('headerMeta').innerHTML='Start <b>'+esc(scanSummary.start_time||'-')+'</b><br>End <b>'+esc(scanSummary.end_time||'-')+'</b>';
+}
+
+var _t=null;
+function schedule(){if(_t)clearTimeout(_t);_t=setTimeout(function(){updateStats();render()},80)}
+
+function init(){
+  new MutationObserver(function(ms){
+    for(var i=0;i<ms.length;i++){var a=ms[i].addedNodes;for(var j=0;j<a.length;j++){
+      if(a[j].nodeName==='SCRIPT'){
+        if(a[j].className==='web-vulns'){schedule();return}
+        if(a[j].className==='scan-summary'){try{eval(a[j].textContent);updateSummary()}catch(e){}}
+      }
+    }}
+  }).observe(document.body,{childList:true});
+  updateStats();render();updateSummary();
+}
+init();
+</script>
+</body>
+</html>

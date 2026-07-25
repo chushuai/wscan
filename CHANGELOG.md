@@ -1,3 +1,8 @@
+# 1.0.52  2026-07-26
+## SUPPORT
+* 【1】WebUI 推送通知改为 wscan 原生直连 IM 群机器人 incoming webhook,不再依赖 cc-connect 桥接:新增 `core/web/notify.go`,原生支持飞书/Lark、企业微信、钉钉三个平台,均走标准 HTTPS POST,无第三方 SDK 依赖;飞书/钉钉支持加签 secret 完整性校验,企业微信/钉钉支持 @全体。
+* 【2】补齐前端已调用但后端缺失的 `/api/ai-notify`(GET 读取 / POST 保存推送配置)与 `/api/ai-notify/test`(POST 发测试消息)handler,配置持久化到 `data/webui_notify.json`;前端「全局配置 → 推送」页与「新建 AI 渗透」模态框的推送表单同步改造为平台选择 + webhook URL + 加签 secret 字段,移除原 cc-connect 的 bin/project/sessionKey 配置。
+
 # 1.0.51  2026-07-25
 ## SUPPORT
 * 【1】WebUI 漏洞详情补全漏洞描述库：按扫描插件可映射到的漏洞类型生成单文件 XML（`core/web/vulndb/*.xml`，93 条，含 AWVS 描述库复用与手写补齐），`go:embed` 嵌入二进制；后端按漏洞 ID（含插件 ID 别名映射）查库，向前端填充 name/description/impact/recommendation/CVSS/tags/references，扫描详情漏洞卡片与分组标题展示完整顾问文案。映射严格按语义一一对应，匹配不上的插件（CSP 各类问题、cookiekey 弱密钥、thinkphp、xstream 各 CVE、tomcat/jboss/weblogic/spring 暴露检查等）单独补充对应 XML 描述。

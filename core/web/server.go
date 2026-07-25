@@ -376,6 +376,8 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/target-groups", s.handleTargetGroups)
 	mux.HandleFunc("/api/target-groups/", s.handleTargetGroup)
 	mux.HandleFunc("/api/report", s.handleReport)
+	mux.HandleFunc("/api/ai-notify", s.handleAiNotify)
+	mux.HandleFunc("/api/ai-notify/test", s.handleAiNotifyTest)
 }
 
 // ---- status / tasks ----
@@ -1883,3 +1885,50 @@ func applyPluginSelection(cfg *entry.CliEntryConfig, names []string) {
 // stub to keep the base import referenced if future per-plugin introspection is
 // added (Binding/Severity come from fingers, not the plugin interface).
 var _ = base.PluginBaseConfig{}
+
+// handleAiNotify GET 返回当前推送配置,POST 保存配置。
+// 契约:{ok, config}。
+func (s *Server) handleAiNotify(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		var cfg NotifyConfig
+		if err := readJSON(r, &cfg); err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		if cfg.Platform == "" {
+			cfg.Platform = platformFeishu
+		}
+		if err := saveNotifyConfig(&cfg); err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		writeJSON(w, map[string]any{"ok": true, "config": cfg})
+		return
+	}
+	writeJSON(w, map[string]any{"ok": true, "config": getNotifyConfig()})
+}
+
+// handleAiNotifyTest 用当前持久化的配置发一条测试消息到所选 IM 平台。
+// 契约:{ok} 或 {ok:false, error}。
+func (s *Server) handleAiNotifyTest(w http.ResponseWriter, r *http.Request) {
+	cfg := getNotifyConfig()
+	// 测试时临时强制启用,即便用户尚未勾选 enabled,也能验证链路。
+	testCfg := *cfg
+	testCfg.Enabled = true
+	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
+	defer cancel()
+	msg := fmt.Sprintf("[wscan] 推送测试 · 平台 %s · %s", platformLabel(testCfg.Platform), time.Now().Format("2006-01-02 15:04:05"))
+	res := sendNotify(ctx, &testCfg, msg)
+	if res.OK {
+		writeJSON(w, map[string]any{"ok": true})
+		return
+	}
+	detail := res.Body
+	if detail == "" {
+		detail = "no response body"
+	}
+	if res.Err != nil {
+		detail = res.Err.Error()
+	}
+	writeJSON(w, map[string]any{"ok": false, "error": fmt.Sprintf("%s (HTTP %d): %s", platformLabel(testCfg.Platform), res.Status, detail)})
+}

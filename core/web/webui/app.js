@@ -444,16 +444,15 @@ const I18N = {
   'llm.testFail2': ['未配置 LLM', 'LLM not configured'],
   // --- config: notify ---
   'notify.principle': ['原理', 'How it works'],
-  'notify.principleDesc': [' webui 不直连任何 IM。本机运行 <code>cc-connect</code> 并绑定好 project+IM 平台后,渗透事件经 <code>cc-connect send</code> 投递到飞书/微信/钉钉等平台。', ' The webui does not connect to any IM directly. Run <code>cc-connect</code> locally and bind a project+IM platform; pentest events are delivered via <code>cc-connect send</code> to Feishu/WeChat/DingTalk etc.'],
+  'notify.principleDesc': [' wscan 原生调用飞书 / 企业微信 / 钉钉的<b>群机器人 incoming webhook</b>,把扫描事件直接推到对应 IM,无需自建应用或外部桥接。在 IM 群里添加「自定义机器人」拿到 webhook URL 填入即可;飞书/钉钉可选填加签 secret。', ' wscan natively calls the <b>group-bot incoming webhook</b> of Feishu / WeCom / DingTalk to push scan events directly — no app or external bridge required. Add a "custom bot" in your IM group, paste the webhook URL; Feishu/DingTalk optionally accept a signing secret.'],
   'notify.enableLbl': ['启用推送', 'Enable notifications'],
   'notify.enable': ['启用', 'Enable'],
-  'notify.bin': ['cc-connect 可执行文件', 'cc-connect executable'],
-  'notify.binPh': ['cc-connect 或绝对路径', 'cc-connect or absolute path'],
-  'notify.project': ['Project 名称', 'Project name'],
-  'notify.projectPh': ['cc-connect 里的 project', 'project in cc-connect'],
-  'notify.session': ['Session Key', 'Session Key'],
-  'notify.sessionPh': ['目标会话 key(可留空)', 'target session key (optional)'],
-  'notify.atAll': [' @全体 (钉钉等支持)', ' @all (DingTalk etc.)'],
+  'notify.platform': ['推送平台', 'Platform'],
+  'notify.webhook': ['Webhook URL', 'Webhook URL'],
+  'notify.webhookPh': ['群机器人 incoming webhook 地址', 'group-bot incoming webhook URL'],
+  'notify.secret': ['加签 Secret', 'Signing secret'],
+  'notify.secretPh': ['飞书/钉钉可选,企业微信无需', 'Feishu/DingTalk optional; WeCom none'],
+  'notify.atAll': [' @全体 (企业微信/钉钉支持)', ' @all (WeCom/DingTalk)'],
   'notify.events': ['触发事件', 'Trigger events'],
   'notify.evtFact': ['发现新 Fact', 'New Fact found'],
   'notify.evtGoal': ['目标达成', 'Goal reached'],
@@ -463,7 +462,7 @@ const I18N = {
   'notify.testing': ['测试中…', 'Testing…'],
   'notify.testOk': ['测试消息已发送(请到 IM 确认)', 'Test message sent (check your IM)'],
   'notify.testFail': ['推送失败: ', 'Push failed: '],
-  'notify.testFail2': ['cc-connect 未运行/路径不对', 'cc-connect not running / wrong path'],
+  'notify.testFail2': ['webhook 地址不对或网络不通', 'webhook URL wrong or network unreachable'],
   // --- config: email ---
   'email.zeroDep': ['零依赖', 'Zero-dependency'],
   'email.desc': [' 直接讲 SMTP 协议(net/tls),支持隐式 TLS(465)/STARTTLS(587)、AUTH LOGIN。扫描完成与发现高危漏洞时触发。', ' Speaks SMTP directly (net/tls), supports implicit TLS (465)/STARTTLS (587), AUTH LOGIN. Triggered on scan completion and high-severity vuln discovery.'],
@@ -682,8 +681,8 @@ const I18N = {
   'ai.notify': ['推送通知', 'Notifications'],
   'ai.notifyCfg': ['前往配置', 'Go to config'],
   'ai.notifyOn': [' 已启用 · ', ' Enabled · '],
-  'ai.notifyDefault': ['(默认 project)', '(default project)'],
-  'ai.notifyPush': [' → 经 cc-connect 推送', ' → via cc-connect'],
+  'ai.notifyDefault': ['(未配 webhook)', '(no webhook)'],
+  'ai.notifyPush': [' → 经 webhook 推送', ' → via webhook'],
   'ai.notifyOff': [' 未启用 (新建时勾选,或在「全局配置 → 推送」页开启)', ' Disabled (check when creating, or enable under "Config → Notify")'],
   'ai.timelineDesc': ['<span class="live"></span>黑板实时事件流 · Fact 已确认发现 / Intent 探索方向 / tool_call 工具调用', '<span class="live"></span>Live blackboard events · Fact confirmed / Intent direction / tool_call invocations'],
   'ai.timelineEmpty': ['黑板为空 — 等待 dispatcher 启动 worker 跑 OODA 循环', 'Blackboard empty — waiting for the dispatcher to start the OODA loop'],
@@ -761,21 +760,20 @@ const I18N = {
   'aiM.cfg': ['配置', 'Configure'],
   'aiM.fldTools': ['工具范围', 'Tool scope'],
   'aiM.toolsDesc': ['勾选 worker 可调用的工具(默认全开)。scope 严格限制在 Origin 主机。', 'Check tools the worker may call (all on by default). Scope is strictly limited to the Origin host.'],
-  'aiM.fldNotify': ['通知推送 (cc-connect → 飞书/微信/钉钉等 IM)', 'Notifications (cc-connect → Feishu/WeChat/DingTalk etc.)'],
-  'aiM.notifyDesc': ['webui 不直连 IM,由后端 spawn <code>cc-connect send</code> 把事件(发现 Fact / 目标达成 / 停止)投到它绑定的 IM 平台。', 'The webui does not connect to IM directly; the backend spawns <code>cc-connect send</code> to deliver events (Fact found / Goal reached / stopped) to the IM platform it is bound to.'],
+  'aiM.fldNotify': ['通知推送 (飞书/企业微信/钉钉)', 'Notifications (Feishu/WeCom/DingTalk)'],
+  'aiM.notifyDesc': ['wscan 原生调用群机器人 webhook,把事件(发现 Fact / 目标达成 / 停止)推到所选 IM 平台,无需外部桥接。', 'wscan natively calls the group-bot webhook to push events (Fact found / Goal reached / stopped) to the selected IM platform; no external bridge.'],
   'aiM.enablePush': ['启用推送', 'Enable push'],
-  'aiM.ccBin': ['cc-connect 可执行文件', 'cc-connect executable'],
-  'aiM.projName': ['Project 名称', 'Project name'],
-  'aiM.projPh': ['cc-connect 里的 project 名', 'project name in cc-connect'],
-  'aiM.sessKey': ['Session Key (会话)', 'Session Key'],
-  'aiM.sessPh': ['目标会话 key', 'target session key'],
-  'aiM.platform': ['投递平台 (仅备注)', 'Platform (note only)'],
-  'aiM.atAll': [' @全体 (钉钉等支持)', ' @all (DingTalk etc.)'],
+  'aiM.webhook': ['Webhook URL', 'Webhook URL'],
+  'aiM.webhookPh': ['群机器人 incoming webhook 地址', 'group-bot incoming webhook URL'],
+  'aiM.secret': ['加签 Secret', 'Signing secret'],
+  'aiM.secretPh': ['飞书/钉钉可选', 'Feishu/DingTalk optional'],
+  'aiM.platform': ['推送平台', 'Platform'],
+  'aiM.atAll': [' @全体 (企业微信/钉钉支持)', ' @all (WeCom/DingTalk)'],
   'aiM.testPush': [' 测试推送', ' Test push'],
   'aiM.start': [' 启动 AI 渗透', ' Start AI pentest'],
   'aiM.testSent': ['测试消息已发送(请到 IM 确认)', 'Test message sent (check your IM)'],
   'aiM.testFail': ['推送失败: ', 'Push failed: '],
-  'aiM.testFail2': ['cc-connect 未运行或路径不对', 'cc-connect not running or wrong path'],
+  'aiM.testFail2': ['webhook 地址不对或网络不通', 'webhook URL wrong or network unreachable'],
   'aiM.noOrigin': ['请输入目标 URL', 'Please enter a target URL'],
   'aiM.noGoal': ['请输入目标成果', 'Please enter a goal'],
   'aiM.createFail': ['创建失败: ', 'Create failed: '],
@@ -2371,10 +2369,11 @@ function renderStub(title,blurb,hint){
 let _aiDetailTab='timeline';   // detail view active tab
 let _aiSSE=null;               // EventSource for current detail project
 let _aiCur=null;               // current detail project detail cache (project/facts/intents/hints/events)
-let _aiNotify=null;            // cc-connect 推送配置(/api/ai-notify)
+let _aiNotify=null;            // IM 推送配置(/api/ai-notify)
 let _aiLlm=null;               // LLM 配置(/api/ai-pentest/llm-config)
 const AI_WORKERS=[['claudecode',''],['llm',''],['mock','']];
-const AI_IM_PLATFORMS=['飞书/Lark','企业微信','微信','钉钉','Telegram','Discord','Slack','TuiTui(推推)','QQ','自建 IM'];
+const AI_IM_PLATFORMS=[['feishu','飞书 / Lark'],['wecom','企业微信'],['dingtalk','钉钉']];
+function platformName(v){const p=AI_IM_PLATFORMS.find(x=>x[0]===v);return p?p[1]:(v||'');}
 const AI_STATUS_TXT={active:'running',completed:'done',stopped:'stopped'};
 // AI worker 可调用的工具(对应后端 ai_tools.js),仅用于前端展示
 const AI_TOOLS=[
@@ -2493,7 +2492,7 @@ async function renderAIDetail(id){
     '</div>';
   $('aiTabs').querySelectorAll('.tab').forEach(t=>t.onclick=()=>{_aiDetailTab=t.dataset.t;aiRenderPane();aiSyncTabs();});
   aiRenderPane();aiSyncTabs();
-  aiLoadNotify().then(()=>{const el=$('aiNotifyState');if(el){const c=_aiNotify&&_aiNotify.config;el.innerHTML=c&&c.enabled?(ic('check')+t('ai.notifyOn')+esc(c.project||t('ai.notifyDefault'))+t('ai.notifyPush')):(ic('triangle-alert')+t('ai.notifyOff'));}});
+  aiLoadNotify().then(()=>{const el=$('aiNotifyState');if(el){const c=_aiNotify&&_aiNotify.config;el.innerHTML=c&&c.enabled?(ic('check')+t('ai.notifyOn')+(c.webhook?esc(platformName(c.platform))+' '+t('ai.notifyPush'):t('ai.notifyDefault'))):(ic('triangle-alert')+t('ai.notifyOff'));}});
   const ncfg=$('aiNotifyCfg');if(ncfg)ncfg.onclick=()=>{location.hash='#/config';};
   const stopBtn=$('aiStopBtn');if(stopBtn)stopBtn.onclick=async()=>{await api('/api/ai-pentest/'+proj.id+'/stop',{method:'POST'});renderAIDetail(proj.id);};
   const roBtn=$('aiReopenBtn');if(roBtn)roBtn.onclick=async()=>{await api('/api/ai-pentest/'+proj.id+'/start',{method:'POST'});renderAIDetail(proj.id);};
@@ -2609,7 +2608,7 @@ async function openNewAIModal(){
   await Promise.all([aiLoadLlm(),aiLoadNotify()]);
   const ll=(_aiLlm&&_aiLlm.config)||{provider:'openai',base_url:'',api_key:'',model:''};
   const cc=(_aiLlm&&_aiLlm.claude)||{available:false};
-  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,bin:'cc-connect',project:'',sessionKey:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
+  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,platform:'feishu',webhook:'',secret:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
   const hasLlm=!!(ll.api_key&&ll.base_url);
   // claudecode worker 仅在本机装了 claude CLI + 有 ANTHROPIC 认证时可选;否则灰掉。
   const ccOpt='<option value="claudecode"'+(cc.available?'':' disabled')+'>'+t('aiM.ccOpt')+(cc.available?'':t('aiM.ccNotDet'))+t('aiM.ccDet')+'</option>';
@@ -2630,11 +2629,10 @@ async function openNewAIModal(){
     '<fieldset><legend>'+t('aiM.fldNotify')+'</legend>'+
     '<div class="muted tiny" style="margin-bottom:6px">'+t('aiM.notifyDesc')+'</div>'+
     '<label style="width:auto"><input type="checkbox" id="aiNotifyOn" style="width:auto"'+(nc.enabled?' checked':'')+'> '+t('aiM.enablePush')+'</label>'+
-    '<div class="row" style="margin-top:6px"><div><label>'+t('aiM.ccBin')+'</label><input id="aiNotifyBin" value="'+esc(nc.bin||'cc-connect')+'" placeholder="'+t('aiM.projPh')+'"></div>'+
-    '<div><label>'+t('aiM.projName')+'</label><input id="aiNotifyProj" value="'+esc(nc.project||'')+'" placeholder="'+t('aiM.projPh')+'"></div></div>'+
-    '<div class="row"><div><label>'+t('aiM.sessKey')+'</label><input id="aiNotifySess" value="'+esc(nc.sessionKey||'')+'" placeholder="'+t('aiM.sessPh')+'"></div>'+
-    '<div><label>'+t('aiM.platform')+'</label><select id="aiNotifyPlat">'+AI_IM_PLATFORMS.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div></div>'+
-    '<label style="width:auto"><input type="checkbox" id="aiNotifyAtAll" style="width:auto"'+(nc.atAll?' checked':'')+'> '+t('aiM.atAll')+'</label></fieldset>',
+    '<div class="row" style="margin-top:6px"><div><label>'+t('aiM.platform')+'</label><select id="aiNotifyPlat">'+AI_IM_PLATFORMS.map(p=>'<option value="'+p[0]+'"'+(nc.platform===p[0]?' selected':'')+'>'+p[1]+'</option>').join('')+'</select></div></div>'+
+    '<label>'+t('aiM.webhook')+'</label><input id="aiNotifyWebhook" value="'+esc(nc.webhook||'')+'" placeholder="'+t('aiM.webhookPh')+'">'+
+    '<label>'+t('aiM.secret')+'</label><input id="aiNotifySecret" value="'+esc(nc.secret||'')+'" placeholder="'+t('aiM.secretPh')+'">'+
+    '<label style="width:auto;margin-top:6px"><input type="checkbox" id="aiNotifyAtAll" style="width:auto"'+(nc.atAll?' checked':'')+'> '+t('aiM.atAll')+'</label></fieldset>',
     '<button class="sec" onclick="closeModal()">'+t('c.cancel')+'</button><button class="sec" id="aiNotifyTest">'+ic('bell','btn-ic')+t('aiM.testPush')+'</button><button id="aiStart">'+ic('play','btn-ic')+t('aiM.start')+'</button>');
   api('/api/targets').then(ts=>{const sel=$('aiTgt');(ts||[]).forEach(t=>{const o=document.createElement('option');o.value=t.address;o.text=t.address;sel.appendChild(o);});});
   $('aiTgt').onchange=()=>{if($('aiTgt').value)$('aiOrigin').value=$('aiTgt').value;};
@@ -2704,9 +2702,9 @@ async function openLlmModal(){
 // 从新建模态框读取推送配置并 POST 到后端持久化
 async function saveAiNotifyFromModal(){
   const cfg={enabled:$('aiNotifyOn')?$('aiNotifyOn').checked:false,
-    bin:($('aiNotifyBin')?$('aiNotifyBin').value:'cc-connect').trim(),
-    project:($('aiNotifyProj')?$('aiNotifyProj').value:'').trim(),
-    sessionKey:($('aiNotifySess')?$('aiNotifySess').value:'').trim(),
+    platform:($('aiNotifyPlat')?$('aiNotifyPlat').value:'feishu'),
+    webhook:($('aiNotifyWebhook')?$('aiNotifyWebhook').value:'').trim(),
+    secret:($('aiNotifySecret')?$('aiNotifySecret').value:'').trim(),
     atAll:$('aiNotifyAtAll')?$('aiNotifyAtAll').checked:false,
     events:((_aiNotify&&_aiNotify.config&&_aiNotify.config.events)||{fact:true,goal:true,stopped:true})};
   try{const r=await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});_aiNotify=r;}catch(e){}
@@ -2772,12 +2770,12 @@ function wireCfgLlm(){
 }
 // --- 推送 tab ---
 function cfgNotifyPane(){
-  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,bin:'cc-connect',project:'',sessionKey:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
+  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,platform:'feishu',webhook:'',secret:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
   return '<div class="card"><div class="muted tiny" style="margin-bottom:10px"><span class="stub-badge">'+t('notify.principle')+'</span>'+t('notify.principleDesc')+'</div>'+
     '<div class="row"><div><label>'+t('notify.enableLbl')+'</label><label style="width:auto"><input type="checkbox" id="cfgAnOn" style="width:auto"'+(nc.enabled?' checked':'')+'> '+t('notify.enable')+'</label></div>'+
-    '<div><label>'+t('notify.bin')+'</label><input id="cfgAnBin" value="'+esc(nc.bin||'cc-connect')+'" placeholder="'+t('notify.binPh')+'"></div></div>'+
-    '<div class="row"><div><label>'+t('notify.project')+'</label><input id="cfgAnProj" value="'+esc(nc.project||'')+'" placeholder="'+t('notify.projectPh')+'"></div>'+
-    '<div><label>'+t('notify.session')+'</label><input id="cfgAnSess" value="'+esc(nc.sessionKey||'')+'" placeholder="'+t('notify.sessionPh')+'"></div></div>'+
+    '<div><label>'+t('notify.platform')+'</label><select id="cfgAnPlat">'+AI_IM_PLATFORMS.map(p=>'<option value="'+p[0]+'"'+(nc.platform===p[0]?' selected':'')+'>'+p[1]+'</option>').join('')+'</select></div></div>'+
+    '<label>'+t('notify.webhook')+'</label><input id="cfgAnWebhook" value="'+esc(nc.webhook||'')+'" placeholder="'+t('notify.webhookPh')+'">'+
+    '<label>'+t('notify.secret')+'</label><input id="cfgAnSecret" value="'+esc(nc.secret||'')+'" placeholder="'+t('notify.secretPh')+'">'+
     '<label style="width:auto;margin-top:8px"><input type="checkbox" id="cfgAnAtAll" style="width:auto"'+(nc.atAll?' checked':'')+'> '+t('notify.atAll')+'</label>'+
     '<fieldset style="margin-top:10px"><legend>'+t('notify.events')+'</legend>'+
     '<label style="width:auto"><input type="checkbox" class="cfgAnEvt" data-k="fact" style="width:auto"'+(nc.events&&nc.events.fact!==false?' checked':'')+'> '+t('notify.evtFact')+'</label> &nbsp;'+
@@ -2787,9 +2785,9 @@ function cfgNotifyPane(){
     '<div id="cfgAnTestMsg" class="muted tiny" style="margin-top:6px"></div></div>';
 }
 function wireCfgNotify(){
-  const collect=()=>({enabled:$('cfgAnOn').checked,bin:($('cfgAnBin').value||'cc-connect').trim(),project:($('cfgAnProj').value||'').trim(),sessionKey:($('cfgAnSess').value||'').trim(),atAll:$('cfgAnAtAll').checked,events:{fact:document.querySelector('.cfgAnEvt[data-k=fact]').checked,goal:document.querySelector('.cfgAnEvt[data-k=goal]').checked,stopped:document.querySelector('.cfgAnEvt[data-k=stopped]').checked}});
+  const collect=()=>({enabled:$('cfgAnOn').checked,platform:$('cfgAnPlat').value,webhook:($('cfgAnWebhook').value||'').trim(),secret:($('cfgAnSecret').value||'').trim(),atAll:$('cfgAnAtAll').checked,events:{fact:document.querySelector('.cfgAnEvt[data-k=fact]').checked,goal:document.querySelector('.cfgAnEvt[data-k=goal]').checked,stopped:document.querySelector('.cfgAnEvt[data-k=stopped]').checked}});
   $('cfgAnSave').onclick=async()=>{const r=await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});$('cfgMsg').textContent=(r&&r.ok)?t('notify.saved'):t('llm.saveFail');_aiNotify=r;};
-  $('cfgAnTest').onclick=async()=>{$('cfgAnTestMsg').textContent=t('notify.testing');await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});const r=await api('/api/ai-notify/test',{method:'POST'});if(r&&r.ok) $('cfgAnTestMsg').textContent=t('notify.testOk');else $('cfgAnTestMsg').textContent=t('notify.testFail')+esc((r&&r.error)||(r&&r.stderr)||t('notify.testFail2'));};
+  $('cfgAnTest').onclick=async()=>{$('cfgAnTestMsg').textContent=t('notify.testing');await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});const r=await api('/api/ai-notify/test',{method:'POST'});if(r&&r.ok) $('cfgAnTestMsg').textContent=t('notify.testOk');else $('cfgAnTestMsg').textContent=t('notify.testFail')+esc((r&&r.error)||t('notify.testFail2'));};
 }
 // --- 代理 tab ---
 function cfgProxyPane(){

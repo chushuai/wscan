@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WScan · Web 漏洞扫描</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="topbar">
+  <div class="logo"><span class="mark">W</span> WScan <span class="sub">· Web 漏洞扫描</span></div>
+  <span class="spacer"></span>
+  <span class="status" id="srvStatus">就绪</span>
+  <button id="btnNewScan"></button>
+  <button class="btn-icon" id="themeToggle" title="切换明暗主题" aria-label="切换明暗主题"></button>
+  <button class="btn-icon" id="langToggle" title="" aria-label=""></button>
+  <span class="avatar" title="本地运行">L</span>
+</div>
+<div id="layout">
+  <nav id="sidebar"></nav>
+  <main id="content"><div id="view"></div></main>
+</div>
+<div id="modal"><div class="modal-box" id="modalBox"></div></div>
+<script src="/icons.js"></script>
+<script src="/app.js"></script>
+<script>
+  // 主题切换按钮用 Lucide 图标(sun/moon),随当前主题切换图标语义。
+  // 语言切换按钮用 globe 图标;curLang / setLang 定义于 app.js。
+  (function(){
+    var root=document.documentElement;
+    var saved=localStorage.getItem('webscan-theme');
+    if(!saved) saved='dark';
+    if(saved==='dark')root.classList.add('dark');
+    var btn=document.getElementById('themeToggle');
+    var langBtn=document.getElementById('langToggle');
+    var newScan=document.getElementById('btnNewScan');
+    function syncIcon(){
+      if(btn&&window.ic) btn.innerHTML=root.classList.contains('dark')?ic('sun'):ic('moon');
+      if(newScan&&window.ic) newScan.innerHTML=ic('plus','btn-ic')+' '+(typeof t==='function'?t('top.newScan'):'新建扫描');
+    };
+    if(btn)btn.onclick=function(){
+      var d=root.classList.toggle('dark');
+      localStorage.setItem('webscan-theme',d?'dark':'light');
+      syncIcon();
+    };
+    if(langBtn)langBtn.onclick=function(){
+      if(typeof setLang!=='function')return;
+      setLang(curLang==='en'?'zh':'en');
+    };
+    // 初始语言: app.js 顶部已按 navigator.language / localStorage 设好 curLang。
+    document.documentElement.lang=(curLang==='en')?'en':'zh-CN';
+    if(typeof applyStaticI18n==='function')applyStaticI18n();
+    syncIcon();
+    if(typeof syncLangIcon==='function')syncLangIcon();
+  })();
+</script>
+</body>
+</html>

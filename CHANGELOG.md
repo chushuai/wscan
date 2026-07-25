@@ -1,3 +1,7 @@
+# 1.0.50  2026-07-25
+## BUGFIX
+* 【1】修复扫描详情页漏洞列表不显示的问题（`renderVulns` 用 `const t=taskCache[curTask]` 覆盖了全局翻译函数 `t`，导致 `t('vul.empty')` 抛出 `t is not a function`，漏洞面板空白）。
+
 # 1.0.49  2026-07-25
 ## SUPPORT
 * 【1】WebUI 扫描任务结果持久化（落盘 data/webui_scans.json），服务重启后历史扫描任务与漏洞结果保留并可继续查看。

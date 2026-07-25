@@ -1459,16 +1459,16 @@ function updateScanCtrl(t){
 // Update only the top stat bar + count badges from a task object. Pure local
 // DOM patches (textContent / width) — never rebuilds a list, so it is always
 // safe to call mid-scan without collapsing an expanded detail.
-function updateStatBar(t){
-  const p=t.progress||{}; const pages=t.pages||[];
-  $('stStatus').innerHTML=t.status==='running'?'<span class="live"></span>'+t('st.running'):(t.status==='done'?t('st.done'):(t.status==='error'?t('st.error'):(t.status==='paused'?t('st.paused'):(t.status==='stopped'?t('st.stopped'):t.status))));
-  $('stVulns').textContent=t.vulnCount;$('cVuln').textContent=t.vulnCount;vulTotal=t.vulnCount||0;
+function updateStatBar(task){
+  const p=task.progress||{}; const pages=task.pages||[];
+  $('stStatus').innerHTML=task.status==='running'?'<span class="live"></span>'+t('st.running'):(task.status==='done'?t('st.done'):(task.status==='error'?t('st.error'):(task.status==='paused'?t('st.paused'):(task.status==='stopped'?t('st.stopped'):task.status))));
+  $('stVulns').textContent=task.vulnCount;$('cVuln').textContent=task.vulnCount;vulTotal=task.vulnCount||0;
   $('cUrl').textContent=pages.length;$('cSite').textContent=pages.length;
   $('stCrawled').textContent=p.phase==='scanning'?(p.totalPages!=null?p.totalPages:pages.length):(p.crawled!=null?p.crawled:pages.length);
   $('stScan').textContent=p.phase==='scanning'?((p.done||0)+'/'+(p.total||0)):'0/0';
   $('stElapsed').textContent=((p.elapsedMs||0)/1000|0)+'s';
-  $('gbar').style.width=progressPct(t.status,p)+'%';
-  updateScanCtrl(t);
+  $('gbar').style.width=progressPct(task.status,p)+'%';
+  updateScanCtrl(task);
 }
 // true if the *visible* pane has an expanded detail (an open vuln card or a
 // visible result detail row). Only visible panes count, so expanding a row on
@@ -2035,8 +2035,8 @@ function detVulnCard(v){
 // so there's no flicker during a scan's 500ms-coalesced re-renders.
 function renderVulns(){
   const el=$('paneVulns');if(!el)return;
-  const t=taskCache[curTask];
-  if(!t||!vulTotal){el.innerHTML=empty(t('vul.empty'));vulLastTask=curTask;return;}
+  const task=taskCache[curTask];
+  if(!task||!vulTotal){el.innerHTML=empty(t('vul.empty'));vulLastTask=curTask;return;}
   const gbtn='<button class="sec" onclick="vulGroup=!vulGroup;vulPage=0;renderVulns()"'+(vulGroup?' style="background:var(--acc);color:#fff"':'')+'>'+(vulGroup?t('vul.groupOn'):t('vul.groupOff'))+'</button>';
   // task switched: show a loading placeholder immediately so the previous task's
   // vulns never flash; same task: keep current content until the fetch resolves.

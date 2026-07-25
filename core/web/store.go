@@ -132,12 +132,9 @@ func toInt(v any) (int, bool) {
 // groupForFrontend computes the UI-facing view of a group: member count and
 // the summed vuln breakdown across its members.
 func (s *Server) groupForFrontend(g map[string]any) map[string]any {
-	members, _ := g["members"].([]any)
-	memberIDs := make([]string, 0, len(members))
+	memberIDs := groupMemberIDs(g)
 	breakdown := map[string]int{}
-	for _, m := range members {
-		id := fmt.Sprint(m)
-		memberIDs = append(memberIDs, id)
+	for _, id := range memberIDs {
 		for _, t := range s.targets() {
 			if fmt.Sprint(t["id"]) == id {
 				if vb, ok := t["vulnBreakdown"].(map[string]any); ok {
@@ -160,6 +157,23 @@ func (s *Server) groupForFrontend(g map[string]any) map[string]any {
 		"vulnBreakdown": breakdown,
 	}
 	return out
+}
+
+// groupMemberIDs normalizes a group's "members" field (which may be []string
+// when freshly created in memory or []any after a JSON reload) to []string.
+func groupMemberIDs(g map[string]any) []string {
+	raw := g["members"]
+	switch v := raw.(type) {
+	case []string:
+		return append([]string{}, v...)
+	case []any:
+		out := make([]string, 0, len(v))
+		for _, m := range v {
+			out = append(out, fmt.Sprint(m))
+		}
+		return out
+	}
+	return []string{}
 }
 
 // groupsLocked loads groupCache from disk on first use. Caller must hold groupMu.

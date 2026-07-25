@@ -541,7 +541,7 @@ func (s *Server) handleTargetGroup(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, map[string]any{"error": err.Error()})
 			return
 		}
-		// members arrive from the SPA as an array of id strings; coerce to []string.
+		// members arrive from the SPA as an array of id strings; normalize to []string.
 		if raw, ok := body["members"]; ok {
 			var arr []string
 			if list, ok := raw.([]any); ok {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="weblogic_console_exposed">
+  <name>Oracle WebLogic Console Exposed</name>
+  <description>The Oracle WebLogic administration console (/console) is reachable on a public interface. It allows administration of the domain and is protected only by console credentials.</description>
+  <impact>Exposing the admin console invites credential brute force and exploitation of console CVEs. A successful login gives full control of the domain.</impact>
+  <recommendation>Do not expose the WebLogic console on public interfaces. Restrict to a management network, enforce strong credentials, and keep patched.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>weblogic</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

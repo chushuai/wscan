@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="possible_sensitive_files">
+  <name>Possible sensitive files</name>
+  <description>A possible sensitive file has been found. This file is not directly linked from the website. This check looks for common sensitive resources like password files, configuration files, log files, include files, statistics data, database dumps. Each one of these files could help an attacker to learn more about his target.</description>
+  <impact>This file may expose sensitive information that could help a malicious user to prepare more advanced attacks.</impact>
+  <recommendation>Restrict access to this file or remove it from the website.</recommendation>
+  <severity>1</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Possible sensitive files:&lt;ul&gt;{{#.}}&lt;li&gt;{{url}}&lt;strong&gt;{{fname}}&lt;/strong&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>test_files</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Web Server Security and Database Server Security</title>
+      <url>https://www.acunetix.com/websitesecurity/webserver-security/</url>
+    </reference>
+  </references>
+</vuln>

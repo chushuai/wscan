@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="tomcat_example_apps">
+  <name>Apache Tomcat Example Applications Exposed</name>
+  <description>The Tomcat distribution ships with example web applications (docs, examples, manager/help) under the webapps directory. These are deployed and reachable, leaking server info and in some cases offering functional endpoints.</description>
+  <impact>Examples leak version and configuration details and should never be present on a production server. They expand the attack surface.</impact>
+  <recommendation>Remove the example webapps (docs, examples, ROOT default page) from the Tomcat webapps directory in production deployments.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>tomcat</tag>
+    <tag>information_disclosure</tag>
+    <tag>CWE-489</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

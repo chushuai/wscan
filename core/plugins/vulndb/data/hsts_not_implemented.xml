@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="hsts_not_implemented">
+  <name>HTTP Strict Transport Security (HSTS) Policy Not Enabled</name>
+  <description>HTTP Strict Transport Security (HSTS) tells a browser that a web site is only accessable using HTTPS.
+It was detected that your web application doesn't implement HTTP Strict Transport Security (HSTS) as the Strict Transport Security header is missing from the response.</description>
+  <impact>HSTS can be used to prevent and/or mitigate some types of man-in-the-middle (MitM) attacks</impact>
+  <recommendation>It's recommended to implement HTTP Strict Transport Security (HSTS) into your web application. Consult web references for more information</recommendation>
+  <severity>2</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>URLs where HSTS is not enabled:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}}&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-16</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>hstspreload.org</title>
+      <url>https://hstspreload.org/</url>
+    </reference>
+    <reference>
+      <title>Strict-Transport-Security</title>
+      <url>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</url>
+    </reference>
+  </references>
+</vuln>

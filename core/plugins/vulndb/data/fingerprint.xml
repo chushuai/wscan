@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="fingerprint">
+  <name>Technology Fingerprint Identified</name>
+  <description>The server or application exposes identifying signals (HTTP headers such as Server, X-Powered-By, X-AspNet-Version; default error pages; favicon hashes; generator meta tags) that disclose the web server, framework, programming language, and in some cases the precise version.</description>
+  <impact>Version disclosure lets an attacker map the install to known CVEs and focus exploitation. On its own it is informational but it materially raises the risk of every other finding.</impact>
+  <recommendation>Suppress fingerprinting headers and default landing pages. Set server_tokens off (nginx), ServerSignature Off / ServerTokens Prod (Apache), and remove X-Powered-By / X-AspNet-Version headers. Keep patched so that even a known fingerprint has no exploitable CVE.</recommendation>
+  <severity>0</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>fingerprint</tag>
+    <tag>information_disclosure</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-200: Information Exposure</title>
+      <url>https://cwe.mitre.org/data/definitions/200.html</url>
+    </reference>
+  </references>
+</vuln>

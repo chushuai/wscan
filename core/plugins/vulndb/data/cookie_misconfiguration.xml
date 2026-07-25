@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="cookie_misconfiguration">
+  <name>Cookies with missing, inconsistent or contradictory properties</name>
+  <description>At least one of the following cookies properties causes the cookie to be invalid or incompatible with either a different property of the same cookie, of with the environment the cookie is being used in. Although this is not a vulnerability in itself, it will likely lead to unexpected behavior by the application, which in turn may cause secondary security issues.</description>
+  <impact>Cookies will not be stored, or submitted, by web browsers.</impact>
+  <recommendation>Ensure that the cookies configuration complies with the applicable standards.</recommendation>
+  <severity>1</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>List of cookies with missing, inconsistent or contradictory properties:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;br/&gt;Cookie was set with: &lt;pre&gt;{{headerSetCookie}}&lt;/pre&gt;&lt;br/&gt;This cookie has the following issues:&lt;br/&gt;&lt;pre&gt;{{nicelyFormattedOutput}}&lt;/pre&gt;&lt;br/&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-284</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>MDN | Set-Cookie</title>
+      <url>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie</url>
+    </reference>
+    <reference>
+      <title>Securing cookies with cookie prefixes</title>
+      <url>https://www.sjoerdlangkemper.nl/2017/02/09/cookie-prefixes/</url>
+    </reference>
+    <reference>
+      <title>Cookies: HTTP State Management Mechanism</title>
+      <url>https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-05</url>
+    </reference>
+    <reference>
+      <title>SameSite Updates - The Chromium Projects</title>
+      <url>https://www.chromium.org/updates/same-site</url>
+    </reference>
+    <reference>
+      <title>draft-west-first-party-cookies-07: Same-site Cookies</title>
+      <url>https://tools.ietf.org/html/draft-west-first-party-cookies-07</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="cookiekey_weak_key">
+  <name>Cookie / Session Secret Weak Key</name>
+  <description>A signed cookie or session token (Django, Flask, Express, JWT, Rack, Laravel, Beaker, Bottle, Pyramid, Tornado, web2py, Yii2) is signed or encrypted using a weak, default, or well-known secret key. The plugin brute-forced the signing key against a dictionary of common keys and matched.</description>
+  <impact>Once the signing key is known, an attacker can forge session cookies, escalate privileges, or — for frameworks that serialize objects in the cookie (e.g. Flask Pickle, Beaker, Django signed-cookie sessions) — achieve remote code execution by submitting a crafted, signed payload.</impact>
+  <recommendation>Generate a long, random, unique secret key per deployment and store it in a secrets manager / environment. Never ship default keys (e.g. 'secret', 'changeme', the framework example). Rotate the key if it may have leaked. Prefer server-side session storage over signed cookies where possible.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>weak_crypto</tag>
+    <tag>session</tag>
+    <tag>CWE-321</tag>
+    <tag>CWE-798</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-321: Use of Hard-coded Cryptographic Key</title>
+      <url>https://cwe.mitre.org/data/definitions/321.html</url>
+    </reference>
+    <reference>
+      <title>CWE-798: Use of Hard-coded Credentials</title>
+      <url>https://cwe.mitre.org/data/definitions/798.html</url>
+    </reference>
+  </references>
+</vuln>

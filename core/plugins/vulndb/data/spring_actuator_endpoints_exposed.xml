@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="spring_actuator_endpoints_exposed">
+  <name>Spring Boot Actuator Endpoints Exposed</name>
+  <description>Spring Boot Actuator endpoints (such as /actuator, /env, /heapdump, /jolokia, /trace) are enabled and reachable without authentication. Several expose sensitive runtime data or allow interaction with the application.</description>
+  <impact>Endpoints like /env and /heapdump leak secrets (database credentials, session tokens, environment variables); /jolokia and /shutdown can lead to remote code execution or denial of service.</impact>
+  <recommendation>Disable or restrict actuator endpoints in production. Expose only /health over the management port on a protected network, require authentication, and never expose /env, /heapdump, /jolokia, or /shutdown publicly.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>spring</tag>
+    <tag>information_disclosure</tag>
+    <tag>rce</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Spring Boot Actuator</title>
+      <url>https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html</url>
+    </reference>
+  </references>
+</vuln>

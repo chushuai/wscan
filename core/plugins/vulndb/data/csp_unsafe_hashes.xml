@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_unsafe_hashes">
+  <name>CSP Uses unsafe-hashes</name>
+  <description>The Content-Security-Policy uses 'unsafe-hashes' to allow specific inline event handlers by hash. While more constrained than unsafe-inline, it still permits inline handlers and weakens CSP.</description>
+  <impact>Inline event handlers are permitted, which keeps a path open for HTML-injection-based XSS even if script injection is blocked.</impact>
+  <recommendation>Move event handlers into external scripts and remove 'unsafe-hashes'.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>csp</tag>
+    <tag>CWE-79</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

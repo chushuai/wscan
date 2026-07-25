@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="expression_language_injection">
+  <name>Expression language injection</name>
+  <description>This script is possibly vulnerable to Expression Language Injection attacks.&lt;br/&gt;&lt;br/&gt;To provide easy ways of outputting data from an object model that more closely resembles pure scripting languages, Expression Language (EL) was developed as part of JSTL (Java Server Pages Standard Tag Library). &lt;br/&gt;&lt;br/&gt;
+JSP EL is a specification (JSR-245 and JSR 252 [2]) and there are many implementations:
+&lt;li&gt; JSP 2.0/2.1: Used by most recently built applications, and delivered as part of the JSTL.&lt;/li&gt;
+&lt;li&gt; Jakarta: An older EL implementation built by Apache.&lt;/li&gt;
+&lt;li&gt; OGNL: A powerful EL popularized by Struts2/WebWork.&lt;/li&gt;
+&lt;li&gt; MVEL: A general purpose EL usable for console applications.&lt;/li&gt;
+&lt;li&gt; SPEL: Springs custom EL for scripting (not used in JSPs).&lt;/li&gt; &lt;br/&gt;&lt;br/&gt;
+Expression Language Injection occurs when user input is evaluated by a J2EE servers
+Expression Language resolvers, and a common opportunity for this vulnerability to occur today
+is with the usage of Spring JSP tags.</description>
+  <impact>The impacts of this attack range from a simple HttpOnly bypass to a server-side information
+leakage technique. This information leakage will differ in severity mostly based on what J2EE
+technologies are in use and what is in scope of the vulnerable code. One of the most dangerous
+abuse scenarios involves an attacker controlled page inferring a users session ID on a browser
+thats currently logged into the vulnerable application.</impact>
+  <recommendation>Perform data validation best practice against untrusted input and to ensure that output encoding is applied when data arrives on the EL layer, so that
+no metacharacter is found by the interpreter within the user content before evaluation. The most obvious patterns to detect include ${ and #{, but it may be possible to encode or fragment this data.</recommendation>
+  <severity>3</severity>
+  <score>9.100000381469727</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:H/SI:H/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{#matched_text}}Pattern found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}{{#expression}}EL expression: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/expression}}</details_template>
+  <tags>
+    <tag>eli_injection</tag>
+    <tag>CWE-917</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Expression Language Injection</title>
+      <url>https://www.mindedsecurity.com/fileshare/ExpressionLanguageInjection.pdf</url>
+    </reference>
+  </references>
+</vuln>

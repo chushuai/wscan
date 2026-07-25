@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="application_error_traceback">
+  <name>Application Error / Stack Trace Disclosed</name>
+  <description>The application returns a detailed error message or stack trace to the client when an unexpected condition occurs. The trace reveals implementation details: file paths, library versions, SQL fragments, and sometimes credentials or session data.</description>
+  <impact>Information leakage from stack traces helps an attacker fingerprint the stack and craft targeted attacks. Repeated triggering can also enable denial of service.</impact>
+  <recommendation>Disable detailed error output in production. Return a generic error page and log full traces server-side only. Set framework debug flags to false and use a production error handler.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>CWE-209</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-209: Information Exposure Through Error Message</title>
+      <url>https://cwe.mitre.org/data/definitions/209.html</url>
+    </reference>
+  </references>
+</vuln>

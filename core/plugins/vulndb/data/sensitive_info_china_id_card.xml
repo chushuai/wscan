@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="sensitive_info_china_id_card">
+  <name>Chinese Resident ID Card Number Disclosed</name>
+  <description>A response body contains what matches the format of a Chinese resident identity card number (18 digits, valid region/date/checksum).</description>
+  <impact>Disclosure of resident ID numbers is a privacy breach subject to China's Personal Information Protection Law (PIPL) and may enable identity fraud.</impact>
+  <recommendation>Remove the ID numbers from the response. Avoid storing or transmitting resident IDs in plaintext; mask or tokenize them and restrict access.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>sensitive_data</tag>
+    <tag>PII</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>PIPL</title>
+      <url>http://www.npc.gov.cn/englishnpc/c23934/202112/1abd8829788946ecab270e469b13c39c.shtml</url>
+    </reference>
+  </references>
+</vuln>

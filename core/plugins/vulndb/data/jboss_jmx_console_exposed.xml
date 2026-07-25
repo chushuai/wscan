@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="jboss_jmx_console_exposed">
+  <name>JBoss JMX Console Exposed</name>
+  <description>The JBoss JMX Console web application is reachable without authentication. The JMX console exposes management operations on MBeans, including deployment of new applications.</description>
+  <impact>An unauthenticated attacker can deploy a malicious WAR via the JMX console and gain remote code execution.</impact>
+  <recommendation>Remove the JMX console from the public interface, enforce authentication, and restrict access to a management network. Upgrade to a supported JBoss/WildFly version.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>jboss</tag>
+    <tag>rce</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="thinkphp_rce">
+  <name>ThinkPHP Remote Code Execution</name>
+  <description>The ThinkPHP framework version in use is vulnerable to remote code execution through the well-known RCE chains: the invokeFunction / Method arbitrary class invocation chain (5.x), the method filter chain, and the preg_replace e-modifier chain. The framework routes user-controlled input into ReflectionClass / call_user_func paths without sanitization.</description>
+  <impact>Unauthenticated remote code execution with web-server privileges. These ThinkPHP RCE chains are heavily weaponized in the wild.</impact>
+  <recommendation>Upgrade ThinkPHP to the latest patched version. Apply the official RCE patches, restrict access to the framework entrypoints, and run a WAF rule set that blocks the known payloads.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>thinkphp</tag>
+    <tag>rce</tag>
+    <tag>CWE-94</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>ThinkPHP RCE analysis</title>
+      <url>https://blog.thinkphp.cn/869075</url>
+    </reference>
+  </references>
+</vuln>

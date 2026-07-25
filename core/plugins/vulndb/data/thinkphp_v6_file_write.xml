@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="thinkphp_v6_file_write">
+  <name>ThinkPHP v6 Arbitrary File Write</name>
+  <description>ThinkPHP 6 allows an unauthenticated attacker to write arbitrary files (including PHP code) via abuse of the session handler / file-based session storage with a controlled session filename, leading to remote code execution.</description>
+  <impact>Unauthenticated remote code execution through writing a PHP file into a web-accessible path.</impact>
+  <recommendation>Upgrade ThinkPHP 6 to a fixed version. Do not store sessions in a web-accessible path, and configure the session handler securely.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>thinkphp</tag>
+    <tag>rce</tag>
+    <tag>CWE-434</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="code_execution">
+  <name>Command Injection</name>
+  <description>This script is vulnerable to code execution attacks.&lt;br/&gt;&lt;br/&gt;Code injection vulnerabilities occur where the output or content served from a Web application can be manipulated in such a way that it triggers server-side code execution. In some poorly written Web applications that allow users to modify server-side files (such as by posting to a message board or guestbook) it is sometimes possible to inject code in the scripting language of the application itself.</description>
+  <impact>A malicious user may execute arbitrary system commands with the permissions of the web server.</impact>
+  <recommendation>Your script should filter metacharacters from user input.</recommendation>
+  <severity>4</severity>
+  <score>9.100000381469727</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:P</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{#details}}A DNS request was initiated for a &lt;strong&gt;.bxss.me&lt;/strong&gt; subdomain which indicates that the web application is vulnerable to RCE.&lt;br/&gt; DNS request details: &lt;br/&gt;&lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/details}}
+{{#matched_text}}Possible execution result: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}
+{{#reflection_point}}The input is reflected in: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{.}}&lt;/span&gt;&lt;/strong&gt;{{/reflection_point}}
+{{#proof_title}}&lt;strong&gt;Proof of Exploit&lt;/strong&gt;&lt;br/&gt;{{proof_title}}&lt;br/&gt;&lt;pre&gt;{{proof_contents}}&lt;/pre&gt;{{/proof_title}}</details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>CWE-94</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Security Focus - Penetration Testing for Web Applications (Part Two)</title>
+      <url>https://www.symantec.com/connect/articles/penetration-testing-web-applications-part-two</url>
+    </reference>
+    <reference>
+      <title>OWASP PHP Top 5</title>
+      <url>https://www.owasp.org/index.php/PHP_Top_5</url>
+    </reference>
+  </references>
+</vuln>

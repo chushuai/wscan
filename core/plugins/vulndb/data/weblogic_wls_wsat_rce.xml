@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="weblogic_wls_wsat_rce">
+  <name>Oracle WebLogic WLS-WSAT RCE</name>
+  <description>The WebLogic WLS-WSAT component (and related wls9-async / _async endpoints) is vulnerable to deserialization of untrusted data, allowing unauthenticated remote code execution. Affects WebLogic 10.3.6.0, 12.1.3.0, 12.2.1.0-12.2.1.2.</description>
+  <impact>Unauthenticated remote code execution with the privileges of the WebLogic server.</impact>
+  <recommendation>Apply the Oracle CPU patches. Remove or restrict the wls-wsat and wls9-async web applications. Restrict access to the WebLogic admin paths.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>weblogic</tag>
+    <tag>rce</tag>
+    <tag>deserialization</tag>
+    <tag>CWE-502</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Oracle CPU Apr 2017</title>
+      <url>https://www.oracle.com/security-alerts/cpuapr2017.html</url>
+    </reference>
+  </references>
+</vuln>

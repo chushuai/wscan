@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="struts2_remote_code_execution">
+  <name>Multiple critical vulnerabilities in Apache Struts2</name>
+  <description>Apache Struts2 is a web framework for creating Java web applications. It is
+using the OpenSymphony XWork and OGNL libraries. By default, XWork''s
+ParametersInterceptor treats parameter names provided to actions as OGNL
+expressions. A OGNL (Object Graph Navigation Language) expression is a limited
+language similar to Java that is tokenized and parsed by the OGNL parser which
+invokes appropriate Java methods.  Under certain circumstances it''s possible to send custom OGNL statements and execute
+malicious Java code.</description>
+  <impact>A remote attacker can send custom OGNL statements and execute arbitrary Java code on the vulnerable server.</impact>
+  <recommendation>Upgrade to Struts version 2.3.1.1</recommendation>
+  <severity>3</severity>
+  <score>7.199999809265137</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:P/A:P/E:POC/RL:OF/RC:C</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:L</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>known_vulnerabilities</tag>
+    <tag>CWE-264</tag>
+    <tag>CVE-2012-0393</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Multiple critical vulnerabilities in Apache Struts2</title>
+      <url>https://www.exploit-db.com/exploits/18329</url>
+    </reference>
+    <reference>
+      <title>22 January 2011 - Struts 2.3.1.2 General Availability Release</title>
+      <url>https://struts.apache.org/announce.html</url>
+    </reference>
+  </references>
+</vuln>

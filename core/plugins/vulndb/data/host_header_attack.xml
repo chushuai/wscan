@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="host_header_attack">
+  <name>Host header attack</name>
+  <description>In many cases, developers are trusting the HTTP Host header value and using it to generate links, import scripts and even generate password resets links with its value. This is a very bad idea, because the HTTP Host header can be controlled by an attacker. This can be exploited using web-cache poisoning and by abusing alternative channels like password reset emails.</description>
+  <impact>An attacker can manipulate the Host header as seen by the web application and cause the application to behave in unexpected ways.</impact>
+  <recommendation>The web application should use the SERVER_NAME instead of the Host header.
+It should also create a dummy vhost that catches all requests with unrecognized Host headers. This can also be done under Nginx by specifying a non-wildcard SERVER_NAME, and under Apache by using a non-wildcard serverName and turning the UseCanonicalName directive on. Consult references for detailed information.</recommendation>
+  <severity>2</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:L/AC:H/Au:N/C:P/I:P/A:N/E:U/RL:W</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{#marker}}
+Host header &lt;strong&gt;&lt;span class="bb-dark"&gt;{{marker}}&lt;/span&gt;&lt;/strong&gt; was reflected inside an &lt;strong&gt;{{tagName}}&lt;/strong&gt; tag (&lt;strong&gt;{{tagAttr}}&lt;/strong&gt; attribute).
+{{/marker}}</details_template>
+  <tags>
+    <tag>abuse_of_functionality</tag>
+    <tag>CWE-20</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Practical HTTP Host header attacks</title>
+      <url>https://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html</url>
+    </reference>
+    <reference>
+      <title>Apache</title>
+      <url>http://httpd.apache.org/docs/trunk/vhosts/examples.html#defaultallports</url>
+    </reference>
+    <reference>
+      <title>nginx</title>
+      <url>https://www.nginx.com/resources/wiki/start/topics/examples/server_blocks/</url>
+    </reference>
+    <reference>
+      <title>Automated Detection of Host Header Attacks</title>
+      <url>https://www.acunetix.com/blog/articles/automated-detection-of-host-header-attacks/</url>
+    </reference>
+  </references>
+</vuln>

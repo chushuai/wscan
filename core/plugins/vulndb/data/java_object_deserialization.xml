@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="java_object_deserialization">
+  <name>Deserialization of Untrusted Data (Java Object Deserialization)</name>
+  <description>Serialization is the process of turning some object into a data format that can be restored later. People often serialize objects in order to save them to storage, or to send as part of communications. Deserialization is the reverse of that process -- taking data structured from some format, and rebuilding it into an object. &lt;br/&gt;&lt;br/&gt;
+
+It was determined that your web application is performing Java object deserialization of user-supplied data. Arbitrary object deserialization is inherently unsafe, and should never be performed on untrusted data. Consult Web references section for more information about this issue.</description>
+  <impact>Web applications that accept untrusted data to deserialize may be exploited to run arbitrary code in some situations (e.g. have Apache commons-collections library in the classpath).</impact>
+  <recommendation>Java Object Deserialization should not be performed on user-supplied data.</recommendation>
+  <severity>3</severity>
+  <score>8.899999618530273</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:C/A:C</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:H/A:H</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:L/VI:H/VA:H/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{#acusensor}}{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;{{test_value}}&lt;/strong&gt;.{{/acusensor}} {{#payload}}{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to the Java Deserialization gadget &lt;strong&gt;&lt;span class="bb-dark"&gt;{{payload}}&lt;/span&gt;&lt;/strong&gt;.&lt;br/&gt;&lt;br/&gt;  A DNS query was initiated for a &lt;strong&gt;.bxss.me&lt;/strong&gt; subdomain which indicates that this script is vulnerable to Java Object Deserialization.  {{#acumonitor_data}}&lt;br/&gt;&lt;br/&gt;DNS query details: &lt;br/&gt;&lt;pre&gt;{{.}}&lt;/pre&gt;{{/acumonitor_data}}{{/payload}}</details_template>
+  <tags>
+    <tag>abuse_of_functionality</tag>
+    <tag>acumonitor</tag>
+    <tag>insecure_deserialization</tag>
+    <tag>CWE-502</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>AppSecCali 2015: Marshalling Pickles</title>
+      <url>http://frohoff.github.io/appseccali-marshalling-pickles/</url>
+    </reference>
+    <reference>
+      <title>ysoserial</title>
+      <url>https://github.com/frohoff/ysoserial</url>
+    </reference>
+    <reference>
+      <title>Deserialization of untrusted data</title>
+      <url>https://www.owasp.org/index.php/Deserialization_of_untrusted_data</url>
+    </reference>
+    <reference>
+      <title>Deserialization Cheat Sheet</title>
+      <url>https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html</url>
+    </reference>
+  </references>
+</vuln>

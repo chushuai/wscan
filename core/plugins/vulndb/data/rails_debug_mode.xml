@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="rails_debug_mode">
+  <name>Ruby on Rails Debug Mode Enabled</name>
+  <description>The Rails application is running with the development environment or config.consider_all_requests_local = true in production. Unhandled exceptions return a detailed stack trace and environment dump to the client.</description>
+  <impact>Stack traces expose internal file paths, framework version, gems, and sometimes secrets from environment variables, aiding an attacker in crafting targeted exploits.</impact>
+  <recommendation>Run Rails in the production environment (RAILS_ENV=production) and ensure config.consider_all_requests_local is false in production config. Serve a generic error page instead.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>debug_mode</tag>
+    <tag>information_disclosure</tag>
+    <tag>CWE-489</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Rails Configuring Applications</title>
+      <url>https://guides.rubyonrails.org/configuring.html</url>
+    </reference>
+  </references>
+</vuln>

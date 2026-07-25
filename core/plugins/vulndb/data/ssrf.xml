@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="ssrf">
+  <name>Server-Side Request Forgery</name>
+  <description>SSRF as in Server Side Request Forgery is a vulnerability that allows an attacker to force server interfaces into sending packets initiated by the victim server to the local interface or to another server behind the firewall. Consult Web References for more information about this problem.</description>
+  <impact>The impact varies according to the affected server interface.</impact>
+  <recommendation>Your script should properly sanitize user input.</recommendation>
+  <severity>4</severity>
+  <score>9</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{input}} was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{testValue}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;
+{{#addData}}&lt;br/&gt;Additional data: &lt;strong&gt;{{.}}&lt;/strong&gt;{{/addData}}
+{{#subdomain}}&lt;br/&gt;An HTTP request was initiated for the domain &lt;strong&gt;{{.}}.bxss.me&lt;/strong&gt; which indicates that this script is vulnerable to SSRF.{{/subdomain}}
+{{#reqData}}&lt;br/&gt;&lt;br/&gt;HTTP request details: &lt;br/&gt;&lt;pre&gt;{{.}}&lt;/pre&gt;{{/reqData}}</details_template>
+  <tags>
+    <tag>ssrf</tag>
+    <tag>CWE-918</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>SSRF VS. BUSINESS-CRITICAL APPLICATIONS</title>
+      <url>https://web.archive.org/web/20200816051754/https://media.blackhat.com/bh-us-12/Briefings/Polyakov/BH_US_12_Polyakov_SSRF_Business_Slides.pdf</url>
+    </reference>
+  </references>
+</vuln>

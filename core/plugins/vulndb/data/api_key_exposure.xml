@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="api_key_exposure">
+  <name>API Key / Secret Token Exposure</name>
+  <description>An API key, secret token, or credential appears in a response body, URL parameter, or client-reachable resource. Keys may be cloud provider keys, third-party API keys, or internal access tokens.</description>
+  <impact>A leaked key grants the holder whatever permissions the key carries — often read or write access to cloud storage, databases, payment providers, or the application's own APIs. Cloud keys are routinely automated for cryptomining or data exfiltration within minutes.</impact>
+  <recommendation>Remove the key from any client-visible surface. Rotate the exposed key immediately, restrict it by IP or scope, and store secrets server-side in a secrets manager rather than in client code or responses.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>sensitive_data</tag>
+    <tag>CWE-200</tag>
+    <tag>CWE-312</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-200: Information Exposure</title>
+      <url>https://cwe.mitre.org/data/definitions/200.html</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="waf_detected">
+  <name>Web Application Firewall Detected</name>
+  <description>This server is protected by an IPS (Intrusion Prevention System), IDS (Intrusion Detection System) or an WAF (Web Application Firewall). Acunetix detected this by sending various malicious payloads and detecting changes in the response code, headers and body.</description>
+  <impact>You may receive incorrect/incomplete results when scanning a server protected by an IPS/IDS/WAF. Also, if the WAF detects a number of attacks coming from the scanner, the IP address can be blocked after a few attempts.</impact>
+  <recommendation>If possible, it's recommended to scan an internal (development) version of the web application where the WAF is not active.</recommendation>
+  <severity>0</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{#details}}{{.}}{{/details}}</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-16</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Web Application Firewall Detected | Invicti</title>
+      <url>https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/web-application-firewall-detected/</url>
+    </reference>
+  </references>
+</vuln>

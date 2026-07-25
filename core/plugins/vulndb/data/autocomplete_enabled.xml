@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="autocomplete_enabled">
+  <name>Form Autocomplete Enabled on Sensitive Field</name>
+  <description>A form containing a password, credit card, or other sensitive input has the autocomplete attribute enabled (or unset, the default), allowing the browser to cache and suggest the value on this and other sites.</description>
+  <impact>Sensitive values may be stored by the browser and leaked to other users of the device or to malware with browser data access.</impact>
+  <recommendation>Set autocomplete="off" (or a more specific off token like new-password / cc-number) on sensitive input fields.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-522</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-522: Insufficiently Protected Credentials</title>
+      <url>https://cwe.mitre.org/data/definitions/522.html</url>
+    </reference>
+  </references>
+</vuln>

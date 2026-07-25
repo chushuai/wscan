@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_unsafe_inline_script">
+  <name>CSP Allows Unsafe Inline Script</name>
+  <description>The Content-Security-Policy script-src directive permits 'unsafe-inline', allowing inline &lt;script&gt; elements and event handlers. This neutralizes CSP's primary XSS mitigation.</description>
+  <impact>An attacker who can inject HTML can inject inline scripts that execute, defeating the XSS protection CSP is meant to provide.</impact>
+  <recommendation>Remove 'unsafe-inline' from script-src. Use nonces or hashes for legitimate inline scripts, and move inline scripts to external files.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>csp</tag>
+    <tag>xss</tag>
+    <tag>CWE-79</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-79</title>
+      <url>https://cwe.mitre.org/data/definitions/79.html</url>
+    </reference>
+  </references>
+</vuln>

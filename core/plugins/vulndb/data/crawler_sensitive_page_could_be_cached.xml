@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crawler_sensitive_page_could_be_cached">
+  <name>Sensitive pages could be cached</name>
+  <description>One or more pages contain possible sensitive information (e.g. a password parameter) and could be potentially cached. Even in secure SSL channels sensitive data could be stored by intermediary proxies and SSL terminators. To prevent this, a Cache-Control header should be specified.</description>
+  <impact>Possible sensitive information disclosure.</impact>
+  <recommendation>Prevent caching by adding &amp;quot;Cache Control: No-store&amp;quot; and &amp;quot;Pragma: no-cache&amp;quot; to the HTTP response header.</recommendation>
+  <severity>1</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>List of pages that could be cached:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}}&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>configuration</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP - Caching of Sensitive Information</title>
+      <url>https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses</url>
+    </reference>
+    <reference>
+      <title>MDN Web Docs - Cache-Control</title>
+      <url>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</url>
+    </reference>
+    <reference>
+      <title>CWE-524: Use of Cache Containing Sensitive Information</title>
+      <url>https://cwe.mitre.org/data/definitions/524.html</url>
+    </reference>
+  </references>
+</vuln>

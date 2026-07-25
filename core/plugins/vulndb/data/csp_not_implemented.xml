@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_not_implemented">
+  <name>Content Security Policy (CSP) Not Implemented</name>
+  <description>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. &lt;br/&gt;&lt;br/&gt;
+
+Content Security Policy (CSP) can be implemented by adding a &lt;strong&gt;Content-Security-Policy&lt;/strong&gt; header. The value of this header is a string containing the policy directives describing your Content Security Policy. To implement CSP, you should define lists of allowed origins for the all of the types of resources that your site utilizes. For example, if you have a simple site that needs to load scripts, stylesheets, and images hosted locally, as well as from the jQuery library from their CDN, the CSP header could look like the following:
+
+&lt;pre&gt;&lt;code&gt;
+Content-Security-Policy:
+default-src ''self'';
+script-src ''self'' https://code.jquery.com;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;br/&gt;&lt;br/&gt;
+
+It was detected that your web application doesn''t implement Content Security Policy (CSP) as the CSP header is missing from the response. It''s recommended to implement Content Security Policy (CSP) into your web application.</description>
+  <impact>CSP can be used to prevent and/or mitigate attacks that involve content/code injection, such as cross-site scripting/XSS attacks, attacks that require embedding a malicious resource, attacks that involve malicious use of iframes, such as clickjacking attacks, and others.</impact>
+  <recommendation>It's recommended to implement Content Security Policy (CSP) into your web application. Configuring Content Security Policy involves adding the &lt;strong&gt;Content-Security-Policy&lt;/strong&gt; HTTP header to a web page and giving it values to control resources the user agent is allowed to load for that page.</recommendation>
+  <severity>0</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Paths without CSP header:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}}&lt;/li&gt;&lt;br/&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-1021</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Content Security Policy (CSP)</title>
+      <url>https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</url>
+    </reference>
+    <reference>
+      <title>Implementing Content Security Policy</title>
+      <url>https://hacks.mozilla.org/2016/02/implementing-content-security-policy/</url>
+    </reference>
+  </references>
+</vuln>

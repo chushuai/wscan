@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crawler_session_cookie_scoped_to_parent_domain">
+  <name>Session cookies scoped to parent domain</name>
+  <description>One ore more session cookies are scoped to the parent domain instead of a sub-domain. If a cookie is scoped to a parent domain, then this cookie will be accessible by the parent domain and also by any other sub-domains of the parent domain. This could lead to security problems.</description>
+  <impact>None</impact>
+  <recommendation>If possible, the session cookies should be scoped strictly to a sub-domain.</recommendation>
+  <severity>1</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Session cookies scoped to parent domain:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;br/&gt;&lt;pre&gt;{{match}}&lt;/pre&gt;&lt;br/&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-284</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP - Session Management Cheat Sheet</title>
+      <url>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="basic_auth_over_http">
+  <name>Basic authentication over HTTP</name>
+  <description>In the context of an HTTP transaction, basic access authentication is a method for an HTTP user agent to provide a user name and password when making a request. &lt;br/&gt;&lt;br/&gt;
+One or more directories are protected using Basic Authentication over an HTTP connection. With Basic Authentication the user credentials are sent as cleartext and because HTTPS is not used, they are vulnerable to packet sniffing.</description>
+  <impact>User credentials are sent as cleartext and are vulnerable to packet sniffing.</impact>
+  <recommendation>Use Basic Authentication over an HTTPS connection.</recommendation>
+  <severity>3</severity>
+  <score>4.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Pages with basic authentication over HTTP:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}}&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>sensitive_data_not_over_ssl</tag>
+    <tag>CWE-522</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Basic access authentication</title>
+      <url>https://en.wikipedia.org/wiki/Basic_access_authentication</url>
+    </reference>
+  </references>
+</vuln>

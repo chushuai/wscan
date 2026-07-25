@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="sensitive_info_china_bank_card">
+  <name>Chinese Bank Card Number Disclosed</name>
+  <description>A response body contains what matches the format of a Chinese bank card number (16-19 digits with a valid Luhn checksum).</description>
+  <impact>Disclosure of bank card numbers is a financial-data privacy breach and may enable fraud.</impact>
+  <recommendation>Remove the card numbers from the response. Tokenize or mask PAN data and comply with PCI-DSS handling requirements.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>sensitive_data</tag>
+    <tag>PCI</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

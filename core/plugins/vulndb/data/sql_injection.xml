@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="sql_injection">
+  <name>SQL Injection</name>
+  <description>SQL injection (SQLi) refers to an injection attack wherein an attacker can execute malicious SQL statements that control a web application's database server.</description>
+  <impact>An attacker can use SQL injection to bypass a web application's authentication and authorization mechanisms and retrieve the contents of an entire database. SQLi can also be used to add, modify and delete records in a database, affecting data integrity. Under the right circumstances, SQLi can also be used by an attacker to execute OS commands, which may then be used to escalate an attack even further.</impact>
+  <recommendation>Use parameterized queries when dealing with SQL queries that contain user input. Parameterized queries allow the database to understand which parts of the SQL query should be considered as user input, therefore solving SQL injection.</recommendation>
+  <severity>4</severity>
+  <score>10</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:P</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{#orig_value}}
+{{#input_type}}
+{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{/input_type}}
+
+Tests performed: 
+&lt;ul&gt;
+{{#tests}} 
+&lt;li&gt;{{value}} =&amp;gt; &lt;strong&gt;{{output}}&lt;/strong&gt;&lt;/li&gt;
+{{/tests}}
+&lt;/ul&gt;
+&lt;br/&gt;&lt;br/&gt;Original value: &lt;strong&gt;{{orig_value}}&lt;/strong&gt;
+{{/orig_value}}
+
+{{^orig_value}}
+{{#input_type}}
+{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{/input_type}}
+
+{{#matched_text}}Error message found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}
+{{#verified}}Injected pattern found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/verified}}
+{{#reflection_point}}The input is reflected in: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{.}}&lt;/span&gt;&lt;/strong&gt;{{/reflection_point}}
+{{/orig_value}}
+
+{{#proof_title}}&lt;br/&gt;&lt;h5&gt;Proof of Exploit&lt;/h5&gt;{{proof_title}}&lt;br/&gt;&lt;pre&gt;{{proof_contents}}&lt;/pre&gt;{{/proof_title}}</details_template>
+  <tags>
+    <tag>sql_injection</tag>
+    <tag>CWE-89</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>SQL Injection (SQLi) - Acunetix</title>
+      <url>https://www.acunetix.com/websitesecurity/sql-injection/</url>
+    </reference>
+    <reference>
+      <title>Types of SQL Injection (SQLi) - Acunetix</title>
+      <url>https://www.acunetix.com/websitesecurity/sql-injection2/</url>
+    </reference>
+    <reference>
+      <title>Prevent SQL injection vulnerabilities in PHP applications and fix them - Acunetix</title>
+      <url>https://www.acunetix.com/blog/articles/prevent-sql-injection-vulnerabilities-in-php-applications/</url>
+    </reference>
+    <reference>
+      <title>SQL Injection - OWASP</title>
+      <url>https://www.owasp.org/index.php/SQL_Injection</url>
+    </reference>
+    <reference>
+      <title>Bobby Tables: A guide to preventing SQL injection</title>
+      <url>https://bobby-tables.com/</url>
+    </reference>
+    <reference>
+      <title>SQL Injection Cheet Sheets - Pentestmonkey</title>
+      <url>http://pentestmonkey.net/category/cheat-sheet/sql-injection</url>
+    </reference>
+  </references>
+</vuln>

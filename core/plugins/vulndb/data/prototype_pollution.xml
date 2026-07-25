@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="prototype_pollution">
+  <name>Prototype pollution</name>
+  <description>Prototype pollution is a vulnerability where an attacker is able to modify &lt;strong&gt;Object.prototype&lt;/strong&gt;. Because nearly all objects in JavaScript are instances of Object, a typical object inherits properties (including methods) from &lt;strong&gt;Object.prototype&lt;/strong&gt;. Changing &lt;strong&gt;Object.prototype&lt;/strong&gt; can result in a wide range of issues, sometimes even resulting in remote code execution. &lt;br/&gt;&lt;br/&gt;
+The most common way to cause prototype pollution is to use an unsafe merge or extend function to recursively copy properties from an untrusted source object.</description>
+  <impact>An attacker is able to modify &lt;strong&gt;Object.prototype&lt;/strong&gt;. An attacker can use this to tamper with the application logic and sometimes escalate to remote code execution.</impact>
+  <recommendation>Use a JavaScript library that is using a safe merge or extend function to recursively copy properties from an untrusted source object.</recommendation>
+  <severity>3</severity>
+  <score>8.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:P/A:P</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:L/SC:L/SI:L/SA:L</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>abuse_of_functionality</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Analysis and Exploitation of Prototype Pollution attacks on NodeJs</title>
+      <url>https://blog.0daylabs.com/2019/02/15/prototype-pollution-javascript/</url>
+    </reference>
+    <reference>
+      <title>Exploiting prototype pollution - RCE in Kibana (CVE-2019-7609)</title>
+      <url>https://research.securitum.com/prototype-pollution-rce-kibana-cve-2019-7609/</url>
+    </reference>
+  </references>
+</vuln>

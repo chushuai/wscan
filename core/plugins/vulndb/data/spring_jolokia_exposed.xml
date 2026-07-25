@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="spring_jolokia_exposed">
+  <name>Spring Boot Jolokia Endpoint Exposed</name>
+  <description>The Jolokia endpoint (exposed via Actuator or directly) is reachable without authentication. Jolokia is a JMX-HTTP bridge that allows invoking MBean operations, including those that load classes or execute commands (e.g. ch.qos.logback.classic.jmx.JMXConfigurator reloadByURL, which can fetch and parse an attacker-controlled XML).</description>
+  <impact>Remote code execution via JMX MBean operations or denial of service.</impact>
+  <recommendation>Disable the jolokia actuator endpoint. Restrict the management port to a protected network and require authentication. Upgrade Spring Boot.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>spring</tag>
+    <tag>rce</tag>
+    <tag>CWE-502</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Jolokia</title>
+      <url>https://jolokia.org/</url>
+    </reference>
+  </references>
+</vuln>

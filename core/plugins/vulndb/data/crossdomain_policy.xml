@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crossdomain_policy">
+  <name>Overly Permissive crossdomain.xml Policy</name>
+  <description>A crossdomain.xml policy file is served that grants Flash/ Silverlight plug-ins from arbitrary domains (allow-access-from domain="*") the ability to read data from this origin, bypassing the same-origin policy.</description>
+  <impact>Although Flash is largely deprecated, an overly broad crossdomain.xml remains a legacy information-disclosure vector and signals poor security hygiene.</impact>
+  <recommendation>Remove crossdomain.xml if Flash/Silverlight clients are not required. Otherwise restrict allow-access-from to specific trusted domains.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-942</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-942: Permissive Cross-domain Policy</title>
+      <url>https://cwe.mitre.org/data/definitions/942.html</url>
+    </reference>
+  </references>
+</vuln>

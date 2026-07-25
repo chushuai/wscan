@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="struts2_remote_code_execution_s2016">
+  <name>Code Evaluation (Apache Struts) S2-016</name>
+  <description>The Struts 2 DefaultActionMapper supports a method for short-circuit navigation state changes by prefixing parameters with &amp;quot;action:&amp;quot; or &amp;quot;redirect:&amp;quot;, followed by a desired navigational target expression. This mechanism was intended to help with attaching navigational information to buttons within forms.
+&lt;br/&gt;&lt;br/&gt;
+In Struts 2 before 2.3.15.1 the information following &amp;quot;action:&amp;quot;, &amp;quot;redirect:&amp;quot; or &amp;quot;redirectAction:&amp;quot; is not properly sanitized. Since said information will be evaluated as OGNL expression against the value stack, this introduces the possibility to inject server side code.
+
+&lt;br/&gt;&lt;br/&gt;
+Affected Software:&lt;br/&gt;
+Struts 2.0.0 - Struts 2.3.15</description>
+  <impact>Remote code execution</impact>
+  <recommendation>Developers should immediately upgrade to Struts 2.3.15.1</recommendation>
+  <severity>4</severity>
+  <score>10</score>
+  <cvss2>AV:N/AC:M/Au:N/C:C/I:C/A:C/E:POC/RL:OF/RC:C</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>CWE-20</tag>
+    <tag>CVE-2013-2251</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Apache Struts 2 S2-016</title>
+      <url>https://cwiki.apache.org/confluence/display/WW/S2-016</url>
+    </reference>
+  </references>
+</vuln>

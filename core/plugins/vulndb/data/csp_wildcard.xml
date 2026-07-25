@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_wildcard">
+  <name>CSP Contains Wildcard Source</name>
+  <description>The Content-Security-Policy uses a wildcard source (e.g. script-src * or *.com), allowing scripts or styles from any origin or any subdomain of a public suffix.</description>
+  <impact>An attacker who controls any matching origin (or any subdomain of the wildcarded domain) can inject executable content, defeating CSP.</impact>
+  <recommendation>Replace wildcards with an explicit allowlist of trusted origins. Avoid * and broad *.com patterns.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>csp</tag>
+    <tag>CWE-79</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="elasticsearch_exposed">
+  <name>Elasticsearch Instance Exposed</name>
+  <description>An Elasticsearch node is reachable on its HTTP port (9200/9300) without authentication. The REST API exposes index contents, cluster state, and, on older versions, allows script execution through the search and update APIs.</description>
+  <impact>Unauthenticated read of all indexed data, and on versions prior to the script security changes, remote code execution via script injection. The cluster can also be damaged or wiped.</impact>
+  <recommendation>Bind Elasticsearch to a private interface, enable security (XPack / RBAC, TLS), and never expose port 9200 to the internet. Place it behind a firewall or VPN.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>exposed_service</tag>
+    <tag>elasticsearch</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Elasticsearch Security</title>
+      <url>https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html</url>
+    </reference>
+  </references>
+</vuln>

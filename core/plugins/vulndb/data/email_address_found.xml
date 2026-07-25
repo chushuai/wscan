@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="email_address_found">
+  <name>Generic Email Address Disclosure</name>
+  <description>One or more email addresses have been found on this website. The majority of spam comes from email addresses harvested off the internet. The spam-bots (also known as email harvesters and email extractors) are programs that scour the internet looking for email addresses on any website they come across.  Spambot programs look for strings like myname@mydomain.com and then record any addresses found.</description>
+  <impact>Email addresses posted on Web sites may attract spam.</impact>
+  <recommendation>Check references for details on how to solve this problem.</recommendation>
+  <severity>0</severity>
+  <score>0</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Emails found:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;strong&gt;{{match}}&lt;/strong&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Anti-spam techniques</title>
+      <url>https://en.wikipedia.org/wiki/Anti-spam_techniques</url>
+    </reference>
+  </references>
+</vuln>

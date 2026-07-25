@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="open_redirect">
+  <name>Open Redirect</name>
+  <description>The application accepts a user-controlled URL or parameter value and uses it as the target of an HTTP redirect (via a 3xx Location header or a client-side redirect) without sufficient validation. An attacker can craft a link that appears to come from the trusted site but redirects the victim to an arbitrary external domain.</description>
+  <impact>Open redirects are abused in phishing campaigns: the victim sees a familiar hostname and is transparently forwarded to an attacker-controlled site. They can also bypass anti-CSRF or SSO flows that rely on a trusted return URL, and in some cases lead to SSRF when the redirect target is fetched server-side.</impact>
+  <recommendation>Do not redirect to absolute URLs taken directly from user input. Use a server-side allowlist of permitted redirect destinations, or map untrusted values to known keys. If only relative redirects are needed, validate that the resolved path stays within the origin and reject absolute URLs and protocol-relative URLs (//host).</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>open_redirect</tag>
+    <tag>CWE-601</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP Open Redirect</title>
+      <url>https://owasp.org/www-community/attacks/Redirect_After_Login</url>
+    </reference>
+    <reference>
+      <title>CWE-601</title>
+      <url>https://cwe.mitre.org/data/definitions/601.html</url>
+    </reference>
+  </references>
+</vuln>

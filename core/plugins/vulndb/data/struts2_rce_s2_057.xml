@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="struts2_rce_s2_057">
+  <name>Apache Struts Remote Code Execution (S2-057)</name>
+  <description>Apache Struts versions 2.3 to 2.3.34 and 2.5 to 2.5.16 suffer from possible Remote Code Execution when using results with no namespace and in same time, its upper action(s) have no or wildcard namespace.&lt;br/&gt;
+&lt;br/&gt;
+
+Successfully exploiting this issue may allow an attacker to execute arbitrary code in the context of the affected application.</description>
+  <impact>An unauthenticated attacker may execute arbitrary code in the context of the affected application.</impact>
+  <recommendation>Upgrade to Apache Struts version 2.3.35 or 2.5.17.</recommendation>
+  <severity>3</severity>
+  <score>8.100000381469727</score>
+  <cvss2>AV:N/AC:L/Au:N/C:C/I:C/A:C/E:POC/RL:OF</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>CWE-917</tag>
+    <tag>CVE-2018-11776</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>S2-057</title>
+      <url>https://cwiki.apache.org/confluence/display/WW/S2-057</url>
+    </reference>
+    <reference>
+      <title>St2-057</title>
+      <url>https://github.com/jas502n/St2-057/blob/master/README.md</url>
+    </reference>
+  </references>
+</vuln>

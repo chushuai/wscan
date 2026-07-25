@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crawler_cookie_without_secure">
+  <name>Cookies Not Marked as Secure</name>
+  <description>One or more cookies does not have the Secure flag set. When a cookie is set with the Secure flag, it instructs the browser that the cookie can only be accessed over secure SSL/TLS channels. This is an important security protection for session cookies.</description>
+  <impact>Cookies could be sent over unencrypted channels.</impact>
+  <recommendation>If possible, you should set the Secure flag for these cookies.</recommendation>
+  <severity>1</severity>
+  <score>3.0999999046325684</score>
+  <cvss2>AV:N/AC:H/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:A/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Cookies without Secure flag set:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;br/&gt;&lt;pre&gt;{{match}}&lt;/pre&gt;&lt;br/&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-614</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>SameSite None Cookie Not Marked as Secure - Invicti</title>
+      <url>https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/samesite-none-cookie-not-marked-as-secure/</url>
+    </reference>
+  </references>
+</vuln>

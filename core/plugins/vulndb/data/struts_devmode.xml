@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="struts_devmode">
+  <name>Struts 2 development mode</name>
+  <description>Struts 2 has a setting (which can be set to true or false in struts.properties) called devMode (= development mode). When this setting is enabled, Struts 2 will provide additional logging and debug information, which can significantly speed up development. &lt;br/&gt;&lt;br/&gt;
+The development mode flag enables an OGNL injection backdoor allowing the developers to check their Value Stacks with ease and from a handy OGNL console or request parameter. This handy feature for developers turns into a security nightmare if application is released into production servers with this flag on.</description>
+  <impact>An attacker can execute arbitrary commands on the affected server.</impact>
+  <recommendation>Struts 2 development mode should be disabled on production servers.</recommendation>
+  <severity>3</severity>
+  <score>5.800000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Pages with struts dev mode enabled:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;strong&gt;{{match}}&lt;/strong&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>configuration</tag>
+    <tag>CWE-489</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Struts 2 Devmode: An OGNL Backdoor</title>
+      <url>http://www.pwntester.com/blog/2014/01/21/struts-2-devmode-an-ognl-backdoor/</url>
+    </reference>
+    <reference>
+      <title>Development Mode</title>
+      <url>https://struts.apache.org/core-developers/development-mode.html</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="solr_exposed">
+  <name>Apache Solr Exposed</name>
+  <description>An Apache Solr instance is reachable without authentication. Solr exposes its admin REST API, which on many versions allows reading arbitrary files, modifying cores, and in some versions running Velocity templates that lead to RCE.</description>
+  <impact>Information disclosure and, on vulnerable versions, remote code execution via Velocity response writers or the configupload/Cloud features.</impact>
+  <recommendation>Do not expose Solr to untrusted networks. Enable Solr's authentication and authorization, keep patched, and run behind a firewall.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>exposed_service</tag>
+    <tag>solr</tag>
+    <tag>rce</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Solr Security</title>
+      <url>https://solr.apache.org/guide/solr/latest/configuration-guide/security.html</url>
+    </reference>
+  </references>
+</vuln>

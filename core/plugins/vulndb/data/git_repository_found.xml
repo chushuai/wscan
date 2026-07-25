@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="git_repository_found">
+  <name>GIT Detected</name>
+  <description>Git metadata directory (.git) was found in this folder. An attacker can extract sensitive information by requesting the hidden metadata directory that version control tool Git creates. The metadata directories are used for development purposes to keep track of development changes to a set of source code before it is committed back to a central repository (and vice-versa). When code is rolled to a live server from a repository, it is supposed to be done as an export rather than as a local working copy, and hence this problem.</description>
+  <impact>These files may expose sensitive information that may help an malicious user to prepare more advanced attacks.</impact>
+  <recommendation>Remove these files from production systems or restrict access to the .git directory. To deny access to all the .git folders you need to add the following lines in the appropriate context (either global config, or vhost/directory, or from .htaccess):
+&lt;code&gt;&lt;pre&gt;
+&amp;lt;Directory ~ &amp;quot;\.git&amp;quot;&amp;gt;
+Order allow,deny
+Deny from all
+&amp;lt;/Directory&amp;gt;
+&lt;/pre&gt;&lt;/code&gt;</recommendation>
+  <severity>2</severity>
+  <score>5.800000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N</cvss4>
+  <details_template>Git files found at : &lt;span class="bb-dark"&gt;{{git_uri}}&lt;/span&gt;&lt;br/&gt;&lt;br/&gt; Repository files/directories: &lt;br/&gt; &lt;ul&gt; {{#git_files}}     &lt;li&gt;{{.}}&lt;/li&gt; {{/git_files}} &lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>source_code_disclosure</tag>
+    <tag>test_files</tag>
+    <tag>dev_files</tag>
+    <tag>CWE-527</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Apache Tips &amp; Tricks: Deny access to some folders</title>
+      <url>http://www.ducea.com/2006/08/11/apache-tips-tricks-deny-access-to-some-folders/</url>
+    </reference>
+  </references>
+</vuln>

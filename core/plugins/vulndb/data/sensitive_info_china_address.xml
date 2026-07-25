@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="sensitive_info_china_address">
+  <name>Chinese Address / Location Disclosed</name>
+  <description>A response body contains detailed address or location information (Chinese province/city/district and street-level address patterns).</description>
+  <impact>Disclosure of detailed addresses is a privacy breach under PIPL and may enable physical attacks or doxxing.</impact>
+  <recommendation>Remove detailed address fields from responses shown to untrusted users. Store only what is needed and mask sensitive portions.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>sensitive_data</tag>
+    <tag>PII</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

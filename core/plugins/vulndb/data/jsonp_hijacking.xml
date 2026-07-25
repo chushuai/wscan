@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="jsonp_hijacking">
+  <name>JSONP Endpoint / JSON Hijacking</name>
+  <description>A JSONP callback endpoint (or a JSON endpoint without an explicit JSON content type that older browsers would treat as script) returns sensitive data. A malicious page can include it via a &lt;script&gt; tag and read the data through the callback.</description>
+  <impact>Cross-site read of sensitive JSON/JSONP data, bypassing the same-origin policy for any user who is logged in to the vulnerable site.</impact>
+  <recommendation>Avoid JSONP; return plain JSON with Content-Type: application/json and CSRF protection. If JSONP is unavoidable, validate the callback name and require an anti-CSRF token. Set X-Content-Type-Options: nosniff.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>jsonp</tag>
+    <tag>CWE-79</tag>
+    <tag>CWE-352</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>JSON Hijacking</title>
+      <url>https://haacked.com/archive/2009/06/25/json-hijacking.aspx/</url>
+    </reference>
+  </references>
+</vuln>

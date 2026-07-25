@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="tomcat_ghostcat_cve_2020_1938">
+  <name>Apache Tomcat Ghostcat (CVE-2020-1938)</name>
+  <description>The AJP connector in Apache Tomcat 9.0.0.M1 to 9.0.34, 8.5.0 to 8.5.54, and 7.0.0 to 7.0.99 did not validate the AJP request attributes. An attacker who can reach the AJP port (8009) can read or include any file the Tomcat process can read, and in some configurations execute included JSP files.</description>
+  <impact>Arbitrary file read and, where JSP inclusion is reachable, remote code execution.</impact>
+  <recommendation>Upgrade Tomcat to a fixed version. Do not expose the AJP port to untrusted networks. Set the secret attribute on the AJP connector and require it.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>tomcat</tag>
+    <tag>file_read</tag>
+    <tag>CVE-2020-1938</tag>
+    <tag>CWE-20</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CVE-2020-1938</title>
+      <url>https://nvd.nist.gov/vuln/detail/CVE-2020-1938</url>
+    </reference>
+  </references>
+</vuln>

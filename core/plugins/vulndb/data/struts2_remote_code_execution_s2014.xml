@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="struts2_remote_code_execution_s2014">
+  <name>Struts2/XWork remote command execution (S2-014)</name>
+  <description>A vulnerability introduced by forcing parameter inclusion in the URL and Anchor Tag allows remote command execution, session access and manipulation and XSS attacks. A request that included a specially crafted request parameter could be used to inject arbitrary OGNL code into the stack, afterward used as request parameter of an URL or A tag , which will cause a further evaluation. &lt;br/&gt;&lt;br/&gt;The issue was originally addressed by Struts 2.3.14.1 and Security Announcement S2-013. However, the solution introduced with 2.3.14.1 did not address all possible attack vectors, such that every version of Struts 2 before 2.3.14.2 is still vulnerable to such attacks.</description>
+  <impact>Remote command execution, remote server context manipulation, injection of malicious client side code.</impact>
+  <recommendation>It is strongly recommended to upgrade to Struts 2.3.14.2, which contains the corrected OGNL and XWork library.</recommendation>
+  <severity>3</severity>
+  <score>9.100000381469727</score>
+  <cvss2>AV:N/AC:M/Au:N/C:C/I:C/A:C/E:POC/RL:OF/RC:C</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>known_vulnerabilities</tag>
+    <tag>CWE-94</tag>
+    <tag>CVE-2013-1966</tag>
+    <tag>CVE-2013-2115</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>S2-014</title>
+      <url>https://cwiki.apache.org/confluence/display/WW/S2-014</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="ssl_certificate_expired">
+  <name>SSL/TLS Certificate Expired or Invalid</name>
+  <description>The server's TLS certificate is expired, not yet valid, or otherwise invalid (self-signed without trust, hostname mismatch, revoked). Browsers will warn or block users; automated clients may refuse the connection.</description>
+  <impact>An expired or invalid certificate breaks encryption trust: users are trained to click through warnings, which enables man-in-the-middle attacks. Valid clients fail to connect, and the service may be flagged as insecure by scanners.</impact>
+  <recommendation>Renew certificates before expiry, monitor expiration dates, and automate renewal (e.g. ACME/Let's Encrypt). Ensure the certificate matches the served hostname and is issued by a trusted CA.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>ssl_tls</tag>
+    <tag>CWE-295</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-295: Improper Certificate Validation</title>
+      <url>https://cwe.mitre.org/data/definitions/295.html</url>
+    </reference>
+  </references>
+</vuln>

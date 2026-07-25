@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="xss">
+  <name>Cross-site Scripting</name>
+  <description>Cross-site Scripting (XSS) refers to client-side code injection attack wherein an attacker can execute malicious scripts into a legitimate website or web application. XSS occurs when a web application makes use of unvalidated or unencoded user input within the output it generates.</description>
+  <impact>Malicious JavaScript has access to all the same objects as the rest of the web page, including access to cookies and local storage, which are often used to store session tokens. If an attacker can obtain a user's session cookie, they can then impersonate that user.&lt;br/&gt;&lt;br/&gt;
+
+Furthermore, JavaScript can read and make arbitrary modifications to the contents of a page being displayed to a user. Therefore, XSS in conjunction with some clever social engineering opens up a lot of possibilities for an attacker.</impact>
+  <recommendation>Apply context-dependent encoding and/or validation to user input rendered on a page</recommendation>
+  <severity>3</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:N/VI:L/VA:N/SC:L/SI:L/SA:N</cvss4>
+  <details_template>{{#repro}}&lt;div class="bb-coolbox"&gt;&lt;span class="bb-dark"&gt;{{.}}&lt;/span&gt;&lt;/div&gt;&lt;br/&gt;{{/repro}}
+{{#uri}}URI was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{uri}}&lt;/span&gt;&lt;/strong&gt;{{/uri}}
+{{#input_type}}
+{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;
+{{#reflection_point}}The input is reflected in: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{.}}&lt;/span&gt;&lt;/strong&gt;{{/reflection_point}}
+{{/input_type}}
+{{#extra_details}}&lt;br/&gt;{{.}}{{/extra_details}}</details_template>
+  <tags>
+    <tag>xss</tag>
+    <tag>CWE-79</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Cross-site Scripting (XSS) Attack - Acunetix</title>
+      <url>https://www.acunetix.com/websitesecurity/cross-site-scripting/</url>
+    </reference>
+    <reference>
+      <title>Types of XSS - Acunetix</title>
+      <url>https://www.acunetix.com/websitesecurity/xss/</url>
+    </reference>
+    <reference>
+      <title>XSS Filter Evasion Cheat Sheet</title>
+      <url>https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet</url>
+    </reference>
+    <reference>
+      <title>Excess XSS, a comprehensive tutorial on cross-site scripting</title>
+      <url>https://excess-xss.com/</url>
+    </reference>
+    <reference>
+      <title>Cross site scripting</title>
+      <url>https://en.wikipedia.org/wiki/Cross-site_scripting</url>
+    </reference>
+  </references>
+</vuln>

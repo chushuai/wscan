@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="directory_traversal">
+  <name>Directory traversal</name>
+  <description>This script is vulnerable to directory traversal attacks.&lt;br/&gt;&lt;br/&gt;Directory Traversal is a vulnerability which allows attackers to access restricted directories and read files outside of the web server's root directory.</description>
+  <impact>By exploiting directory traversal vulnerabilities, attackers step out of the root directory and access files in other directories. As a result, attackers might view restricted files or execute commands, leading to a full compromise of the Web server.</impact>
+  <recommendation>Your script should filter metacharacters from user input.</recommendation>
+  <severity>3</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:P</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{#matched_text}}File contents found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}
+{{#reflection_point}}File contents found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/reflection_point}}
+{{#proof_title}}&lt;strong&gt;Proof of Exploit&lt;/strong&gt;&lt;br/&gt;{{proof_title}}&lt;br/&gt;&lt;pre&gt;{{proof_contents}}&lt;/pre&gt;{{/proof_title}}</details_template>
+  <tags>
+    <tag>directory_traversal</tag>
+    <tag>CWE-22</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Acunetix Directory Traversal Attacks</title>
+      <url>https://www.acunetix.com/websitesecurity/directory-traversal/</url>
+    </reference>
+  </references>
+</vuln>

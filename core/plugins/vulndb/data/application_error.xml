@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="application_error">
+  <name>Programming Error Messages</name>
+  <description>&lt;div class="bb-coolbox"&gt;&lt;span class="bb-dark"&gt;This alert requires manual confirmation&lt;/span&gt;&lt;/div&gt;&lt;br/&gt;
+Acunetix found one or more error/warning messages. 
+Application error or warning messages may expose sensitive information about an application''s internal workings to an attacker.&lt;br/&gt;
+These messages may also contain the location of the file that produced an unhandled exception.&lt;br/&gt; 
+Consult the ''Attack details'' section for more information about the affected page(s).</description>
+  <impact>Error messages may disclose sensitive information which can be used to escalate attacks.</impact>
+  <recommendation>Verify that these page(s) are disclosing error or warning messages and properly configure the application to log errors to a file instead of displaying the error to the user.</recommendation>
+  <severity>1</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Application error messages:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;strong&gt;{{match}}&lt;/strong&gt;&lt;/li&gt;&lt;br/&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>error_handling</tag>
+    <tag>CWE-209</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>PHP Runtime Configuration</title>
+      <url>https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors</url>
+    </reference>
+    <reference>
+      <title>Improper Error Handling</title>
+      <url>https://www.owasp.org/index.php/Improper_Error_Handling</url>
+    </reference>
+  </references>
+</vuln>

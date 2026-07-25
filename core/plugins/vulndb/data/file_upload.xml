@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="file_upload">
+  <name>Unrestricted File Upload</name>
+  <description>This script is vulnerable to unrestricted file upload. Various web applications allow users to upload files (such as pictures, images, sounds, ...). Uploaded files may pose a significant risk if not handled correctly. A remote attacker could send a multipart/form-data POST request with a specially-crafted filename or mime type and execute arbitrary code. Acunetix was able to upload a file containing executable code and get this code executed. Check &lt;strong&gt;Attack details&lt;/strong&gt; for more information about this attack.</description>
+  <impact>It may be possible for an attacker to use this vulnerability to execute arbitrary code.</impact>
+  <recommendation>Restrict file types accepted for upload: check the file extension and only allow certain files to be uploaded. Use a whitelist approach instead of a blacklist. Check for double extensions such as .php.png. Check for files without a filename like .htaccess (on ASP.NET, check for configuration files like web.config). Change the permissions on the upload folder so the files within it are not executable. If possible, rename the files that are uploaded.</recommendation>
+  <severity>3</severity>
+  <score>9.100000381469727</score>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Successfully uploaded file &lt;strong&gt;&lt;span class="bb-dark"&gt;{{filename}}&lt;/span&gt;&lt;/strong&gt; with content type &lt;strong&gt;&lt;span class="bb-dark"&gt;{{ct}}&lt;/span&gt;&lt;/strong&gt;.
+&lt;br/&gt;The file is available at: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{uri}}&lt;/span&gt;&lt;/strong&gt;.</details_template>
+  <tags>
+    <tag>abuse_of_functionality</tag>
+    <tag>arbitrary_file_creation</tag>
+    <tag>unauthenticated_file_upload</tag>
+    <tag>CWE-434</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP Unrestricted File Upload</title>
+      <url>https://www.owasp.org/index.php/Unrestricted_File_Upload</url>
+    </reference>
+    <reference>
+      <title>Why File Upload Forms are a major security threat</title>
+      <url>https://www.acunetix.com/websitesecurity/upload-forms-threat/</url>
+    </reference>
+  </references>
+</vuln>

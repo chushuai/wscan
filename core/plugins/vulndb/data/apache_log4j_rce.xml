@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="apache_log4j_rce">
+  <name>Apache Log4j2 JNDI Remote Code Execution</name>
+  <description>Apache Log4j is a commonly used logging library. Log4j is pretty flexible and has multiple advanced features. One of these features are &lt;strong&gt;lookup&lt;/strong&gt; plugins (such as JNDI).&lt;br/&gt;&lt;br/&gt;
+
+Apache Log4j2 &amp;lt;= 2.14.1 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From Log4j 2.15.0, this behavior has been disabled by default.</description>
+  <impact>An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled.</impact>
+  <recommendation>Upgrade to the latest version of Apache Log4j2.&lt;br/&gt;&lt;br/&gt;
+
+In previous releases (&amp;gt;=2.10) this behavior can be mitigated by setting system property &lt;strong&gt;log4j2.formatMsgNoLookups&lt;/strong&gt; to &lt;strong&gt;true&lt;/strong&gt; or by removing the JndiLookup class from the classpath (example: zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class). &lt;br/&gt;&lt;br/&gt;Java 8u121 (see https://www.oracle.com/java/technologies/javase/8u121-relnotes.html) protects against RCE by defaulting &amp;quot;com.sun.jndi.rmi.object.trustURLCodebase&amp;quot; and &amp;quot;com.sun.jndi.cosnaming.object.trustURLCodebase&amp;quot; to &lt;strong&gt;false&lt;/strong&gt;.</recommendation>
+  <severity>4</severity>
+  <score>9.800000190734863</score>
+  <cvss2>AV:N/AC:M/Au:N/C:C/I:C/A:C</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:A</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>CWE-78</tag>
+    <tag>CVE-2021-44228</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Log4Shell: RCE 0-day exploit found in log4j, a popular Java logging package</title>
+      <url>https://www.lunasec.io/docs/blog/log4j-zero-day/</url>
+    </reference>
+    <reference>
+      <title>Apache Log4j Security Vulnerabilities</title>
+      <url>https://logging.apache.org/log4j/2.x/security.html</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="spring_known_cves">
+  <name>Spring Framework Known CVE</name>
+  <description>The detected Spring Framework or Spring Boot version is affected by a known vulnerability (such as Spring4Shell / CVE-2022-22965 class-binding or SpEL injection) based on fingerprinting.</description>
+  <impact>Depends on the specific CVE; ranges from remote code execution to data binding bypass.</impact>
+  <recommendation>Upgrade Spring Framework / Spring Boot to a fixed version and apply relevant mitigations. Track the Spring security advisories.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>spring</tag>
+    <tag>rce</tag>
+    <tag>CVE</tag>
+    <tag>CWE-94</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Spring Security Advisories</title>
+      <url>https://spring.io/security</url>
+    </reference>
+  </references>
+</vuln>

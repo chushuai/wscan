@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="vcs_svn_leak">
+  <name>SVN Repository Metadata Exposed</name>
+  <description>The target serves the Subversion metadata directory (.svn/) of a working copy, typically left in the web root by a deployment that copied the whole repository instead of exporting it. The .svn/entries file reveals the file list of the project.</description>
+  <impact>An attacker can reconstruct the full source tree of the application, including files never intended to be public (configuration, credentials, internal logic), leading to further compromise.</impact>
+  <recommendation>Deploy from an svn export, never a checkout. Remove .svn/ directories from the web root and deny access to dotfiles in the web server config. Move the repository out of the document root entirely.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>source_code_disclosure</tag>
+    <tag>CWE-538</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP: Test for Old Backup and Unreferenced Files</title>
+      <url>https://owasp.org/www-community/web-vulnerabilities/source-code-disclosure</url>
+    </reference>
+  </references>
+</vuln>

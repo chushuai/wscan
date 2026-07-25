@@ -9,8 +9,9 @@ This package owns the advisory catalog. Scan plugins emit a stable `Binding.ID`;
 `idAliases` here maps that id onto a DB entry so callers (the web layer)
 retrieve the right advisory via `Lookup(id)`.
 
-The XML files are NOT checked into git (see `.gitignore`) — they are a build
-artifact produced from `core/scannable_vuln.json`.
+The XML files are checked into git alongside the package so the binary builds
+without running the generator. To refresh them from `core/scannable_vuln.json`,
+run the generator and commit the updated `data/` directory.
 
 ## Regenerate
 

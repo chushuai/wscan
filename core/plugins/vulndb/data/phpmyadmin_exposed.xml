@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="phpmyadmin_exposed">
+  <name>phpMyAdmin Exposed</name>
+  <description>A phpMyAdmin installation is reachable on the public interface. It is the web management UI for MySQL/MariaDB and is protected only by its own login.</description>
+  <impact>Exposing phpMyAdmin invites brute force and exploitation of phpMyAdmin CVEs; a successful login gives full database access. Many installs also leak version and server details.</impact>
+  <recommendation>Do not expose phpMyAdmin publicly. Restrict to a protected network or VPN, require strong credentials, and keep it patched.</recommendation>
+  <severity>2</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>exposed_service</tag>
+    <tag>phpmyadmin</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

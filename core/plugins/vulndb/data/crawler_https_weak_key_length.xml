@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crawler_https_weak_key_length">
+  <name>HTTPS connection with weak key length</name>
+  <description>The key length for HTTPS connections is lower than the recommended 128 bits.</description>
+  <impact>The connection may be intercepted and possibly decrypted by a third party.</impact>
+  <recommendation>The key length should be at least 128 bits.</recommendation>
+  <severity>2</severity>
+  <score>9.100000381469727</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>weak_crypto</tag>
+    <tag>CWE-310</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Testing for Weak SSL/TSL Ciphers, Insufficient Transport Layer Protection</title>
+      <url>https://www.owasp.org/index.php/Testing_for_Weak_SSL/TSL_Ciphers,_Insufficient_Transport_Layer_Protection_(OWASP-EN-002)</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crlf_injection">
+  <name>HTTP Header Injection</name>
+  <description>This script is vulnerable to CRLF injection attacks. &lt;br/&gt;&lt;br/&gt;HTTP headers have the structure &amp;quot;Key: Value&amp;quot;, where each line is separated by the CRLF combination. If the user input is injected into the value section without properly escaping/removing CRLF characters it is possible to alter the HTTP headers structure.&lt;br/&gt;
+HTTP Response Splitting is a new application attack technique which enables various new attacks such as web cache poisoning, cross user defacement, hijacking pages with sensitive user information and cross-site scripting (XSS). The attacker sends a single HTTP request that forces the web server to form an output stream, which is then interpreted by the target as two HTTP responses instead of one response.</description>
+  <impact>Is it possible for a remote attacker to inject custom HTTP headers. For example, an attacker can inject session cookies or HTML code. This may conduct to vulnerabilities like XSS (cross-site scripting) or session fixation.</impact>
+  <recommendation>You need to restrict CR(0x13) and LF(0x10) from the user input or properly encode the output in order to prevent the injection of custom HTTP headers.</recommendation>
+  <severity>2</severity>
+  <score>5.400000095367432</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{#matched_text}}Injected header found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}</details_template>
+  <tags>
+    <tag>crlf_injection</tag>
+    <tag>http_response_splitting</tag>
+    <tag>CWE-113</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Acunetix CRLF Injection Attack</title>
+      <url>https://www.acunetix.com/websitesecurity/crlf-injection/</url>
+    </reference>
+    <reference>
+      <title>Whitepaper -  HTTP Response Splitting</title>
+      <url>https://packetstormsecurity.com/papers/general/whitepaper_httpresponse.pdf</url>
+    </reference>
+    <reference>
+      <title>Introduction to HTTP Response Splitting</title>
+      <url>https://web.archive.org/web/20210507213818/https://securiteam.com/securityreviews/5wp0e2kfgk/</url>
+    </reference>
+  </references>
+</vuln>

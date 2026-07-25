@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="jboss_mbeans_exposed">
+  <name>JBoss MBeans Exposed</name>
+  <description>JBoss MBeans are reachable through an exposed JMX invoker or web console without authentication, allowing introspection and invocation of management operations.</description>
+  <impact>Exposes management operations to unauthenticated callers, enabling information disclosure and in many configurations remote code execution via WAR deployment.</impact>
+  <recommendation>Secure or remove the JMX invoker and web console. Require authentication and restrict to a management network. Upgrade to a supported version.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>jboss</tag>
+    <tag>rce</tag>
+    <tag>CWE-306</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

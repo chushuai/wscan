@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="esi_injection">
+  <name>Edge Side Include injection</name>
+  <description>Edge Side Include injection (ESI Injection) is a vulnerability that allows an attacker to reflect ESI tags in the HTTP response. &lt;br/&gt;&lt;br/&gt;
+The ESI language is based on a small set of XML tags and is used in many popular HTTP surrogate solutions to tackle performance issues by enabling heavy caching of Web content. ESI tags are used to instruct a reverse-proxy (or a caching server) to fetch more information about a web page for which a template is already cached. If an attacker can successfully reflect ESI tags in the HTTP response, then the surrogate will blindly parse and evaluate them, believing they are legitimate tags that are served from the upstream server.</description>
+  <impact>ESI attacks can lead to Server Side Request Forgery (SSRF), various Cross-Site Scripting (XSS) vectors that bypass the HTTPOnly cookie mitigation flag, and server-side denial of service.</impact>
+  <recommendation>Apply context-dependent encoding and/or validation to user input rendered on a page. Mitigation techniques against XSS recommended for the language or framework you are using will often be enough to protect against ESI injections.</recommendation>
+  <severity>3</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;&lt;br/&gt;
+{{#matched_text}}Pattern found: &lt;pre&gt;&lt;span class="bb-blue"&gt;{{.}}&lt;/span&gt;&lt;/pre&gt;{{/matched_text}}</details_template>
+  <tags>
+    <tag>denial_of_service</tag>
+    <tag>ssrf</tag>
+    <tag>xss</tag>
+    <tag>acumonitor</tag>
+    <tag>CWE-918</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Beyond XSS: Edge Side Include Injection</title>
+      <url>https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection</url>
+    </reference>
+  </references>
+</vuln>

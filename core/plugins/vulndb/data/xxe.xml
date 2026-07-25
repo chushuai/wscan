@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="xxe">
+  <name>XML external entity injection</name>
+  <description>XML supports a facility known as &amp;quot;external entities&amp;quot;, which instruct an XML processor to retrieve and perform an inline include of XML located at a particular  URI. An external XML entity can be used to append or modify the document type declaration (DTD) associated with an XML document.  An  external XML entity can also be used to include XML within the  content of an XML document. &lt;br/&gt;&lt;br/&gt;Now assume that the XML processor parses data originating from a source under attacker control. Most of the time the processor will not be validating, but it MAY include the replacement text thus initiating an unexpected file open operation, or HTTP transfer, or whatever system ids the XML
+processor knows how to access. &lt;br/&gt;&lt;br/&gt;below is a sample XML document that will use this functionality to include the contents of a local file (/etc/passwd)&lt;br/&gt;
+&lt;pre&gt;
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;
+&amp;lt;!DOCTYPE acunetix [
+&amp;lt;!ENTITY acunetixent SYSTEM &amp;quot;file:///etc/passwd&amp;quot;&amp;gt;
+]&amp;gt;
+&amp;lt;xxx&amp;gt;&amp;acunetixent;&amp;lt;/xxx&amp;gt;
+&lt;/pre&gt;</description>
+  <impact>Attacks can include disclosing local files, which may contain sensitive data such as passwords or private user data, using file: schemes or relative paths in the system identifier. Since the attack occurs relative to the application processing the XML document, an attacker may use this trusted application to pivot to other internal systems, possibly disclosing other internal content via http(s) requests.</impact>
+  <recommendation>If possible it's recommended to disable parsing of XML external entities.</recommendation>
+  <severity>3</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>POST data was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{payload}}&lt;/span&gt;&lt;/strong&gt;&lt;br/&gt;
+{{#subdomain}}&lt;br/&gt;An HTTP request was initiated for the domain &lt;strong&gt;{{.}}.bxss.me&lt;/strong&gt; which indicates that this script is vulnerable to XXE injection.{{/subdomain}}
+{{#reqData}}&lt;br/&gt;&lt;br/&gt;HTTP request details: &lt;br/&gt;&lt;pre&gt;{{.}}&lt;/pre&gt;{{/reqData}}</details_template>
+  <tags>
+    <tag>abuse_of_functionality</tag>
+    <tag>configuration</tag>
+    <tag>denial_of_service</tag>
+    <tag>information_disclosure</tag>
+    <tag>xxe</tag>
+    <tag>acumonitor</tag>
+    <tag>CWE-611</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CWE-611: Information Exposure Through XML External Entity Reference</title>
+      <url>http://cwe.mitre.org/data/definitions/611.html</url>
+    </reference>
+    <reference>
+      <title>XXE (Xml eXternal Entity) attack</title>
+      <url>https://seclists.org/bugtraq/2002/Oct/420</url>
+    </reference>
+    <reference>
+      <title>XML External Entity (XXE) Processing</title>
+      <url>https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing</url>
+    </reference>
+  </references>
+</vuln>

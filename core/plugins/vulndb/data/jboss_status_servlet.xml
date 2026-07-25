@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="jboss_status_servlet">
+  <name>JBoss Status Servlet Exposed</name>
+  <description>The JBoss Status Servlet (status-servlet) is reachable, leaking deployment and connector information including active sessions and thread counts.</description>
+  <impact>Information disclosure that aids an attacker in understanding the deployment topology and targeting further attacks.</impact>
+  <recommendation>Remove or restrict the status servlet. Require authentication and restrict to a management interface.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>jboss</tag>
+    <tag>information_disclosure</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

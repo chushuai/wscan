@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_misconfiguration">
+  <name>Content Security Policy Misconfigured</name>
+  <description>A Content-Security-Policy header is present but malformed, contradictory, or missing required directives (e.g. both report-only and enforced, a meta policy with disallowed directives, or a policy that fails to restrict script sources). Browsers fall back to permissive behavior.</description>
+  <impact>A broken CSP gives no protection and may create a false sense of security. XSS and injection defenses that depend on CSP are not enforced.</impact>
+  <recommendation>Validate the CSP with a parser, ship a single enforced policy with explicit script-src/style-src directives, and use report-uri to collect violations before switching report-only off.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>csp</tag>
+    <tag>configuration</tag>
+    <tag>CWE-1021</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Content Security Policy</title>
+      <url>https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</url>
+    </reference>
+  </references>
+</vuln>

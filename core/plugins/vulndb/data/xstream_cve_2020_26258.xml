@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="xstream_cve_2020_26258">
+  <name>XStream SSRF / RCE (CVE-2020-26258)</name>
+  <description>XStream before 1.4.14 allows Server-Side Request Forgery via a crafted serialized input, and in some configurations can be chained to remote code execution.</description>
+  <impact>Remote code execution or server-side request forgery with the privileges of the process deserializing the XStream payload. XStream deserialization flaws are routinely weaponized for full server compromise.</impact>
+  <recommendation>Upgrade XStream to a fixed version (&gt;= 1.4.18) and enable the security framework with a strict allowlist of permitted types (XStream.setupDefaultSecurity / addPermission). Never deserialize untrusted input; validate before deserialization.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>xstream</tag>
+    <tag>deserialization</tag>
+    <tag>rce</tag>
+    <tag>CVE-2020-26258</tag>
+    <tag>CWE-502</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>CVE-2020-26258</title>
+      <url>https://nvd.nist.gov/vuln/detail/CVE-2020-26258</url>
+    </reference>
+    <reference>
+      <title>XStream Security</title>
+      <url>https://x-stream.github.io/security.html</url>
+    </reference>
+  </references>
+</vuln>

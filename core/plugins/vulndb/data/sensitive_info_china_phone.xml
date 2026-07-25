@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="sensitive_info_china_phone">
+  <name>Chinese Mobile Phone Number Disclosed</name>
+  <description>A response body contains what matches the format of a Chinese mobile phone number (11 digits starting with the 1x pattern of a carrier).</description>
+  <impact>Disclosure of mobile numbers is a privacy breach under PIPL and enables spam, SIM-swap, and social-engineering attacks.</impact>
+  <recommendation>Remove phone numbers from the response. Mask or tokenize PII and restrict access to it.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>sensitive_data</tag>
+    <tag>PII</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

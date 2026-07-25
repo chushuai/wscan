@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="crawler_https_insecure_maxtls">
+  <name>HTTPS connection uses outdated TLS version</name>
+  <description>Acunetix could not establish a SSL/TLS connection using a TLS version of 1.2 or better. This is a strong indicator of the server supporting only outdated, unsupported, and potentially insecure versions of SSL/TLS.</description>
+  <impact>The connection may be intercepted and possibly decrypted by a third party.</impact>
+  <recommendation>The server should support TLS 1.2 or better.</recommendation>
+  <severity>2</severity>
+  <score>9.100000381469727</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{data}}</details_template>
+  <tags>
+    <tag>weak_crypto</tag>
+    <tag>CWE-310</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Testing for Weak SSL/TSL Ciphers, Insufficient Transport Layer Protection</title>
+      <url>https://www.owasp.org/index.php/Testing_for_Weak_SSL/TSL_Ciphers,_Insufficient_Transport_Layer_Protection_(OWASP-EN-002)</url>
+    </reference>
+    <reference>
+      <title>Chrome Deprecating Legacy TLS Versions</title>
+      <url>https://blog.chromium.org/2019/10/chrome-ui-for-deprecating-legacy-tls.html</url>
+    </reference>
+  </references>
+</vuln>

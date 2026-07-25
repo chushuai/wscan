@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="flask_debug_mode">
+  <name>Flask Debug Mode Enabled</name>
+  <description>The Flask application is running with debug mode (app.run(debug=True) or FLASK_DEBUG=1) enabled in production. The Werkzeug debugger exposes an interactive Python console at the traceback page.</description>
+  <impact>The Werkzeug debugger console allows arbitrary Python execution on the server by anyone who can trigger an exception (or via a PIN that is often brute-forceable). This is full remote code execution.</impact>
+  <recommendation>Never run Flask with debug=True in production. Set FLASK_DEBUG=0 and use a production WSGI server (gunicorn/uwsgi). The debugger must never be reachable from untrusted clients.</recommendation>
+  <severity>4</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>debug_mode</tag>
+    <tag>rce</tag>
+    <tag>CWE-489</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Flask Deployment</title>
+      <url>https://flask.palletsprojects.com/en/latest/deploying/</url>
+    </reference>
+    <reference>
+      <title>Werkzeug Debugger PIN</title>
+      <url>https://werkzeug.palletsprojects.com/en/latest/debug/</url>
+    </reference>
+  </references>
+</vuln>

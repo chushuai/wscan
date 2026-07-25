@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="tomcat_manager_exposure">
+  <name>Apache Tomcat Manager Application Exposed</name>
+  <description>The Tomcat Manager (and Host Manager) web application is reachable on the public interface. It allows deploying and undeploying web applications and is protected only by HTTP basic auth.</description>
+  <impact>If credentials are weak or default, an attacker can deploy a malicious WAR and achieve remote code execution. Even without valid credentials, the endpoint confirms Tomcat and invites brute force.</impact>
+  <recommendation>Remove the manager and host-manager webapps, or bind them to a localhost/management interface only. Use strong unique credentials and IP restrictions.</recommendation>
+  <severity>3</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>tomcat</tag>
+    <tag>rce</tag>
+    <tag>CWE-732</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Tomcat Manager App</title>
+      <url>https://tomcat.apache.org/tomcat-9.0-doc/manager-howto.html</url>
+    </reference>
+  </references>
+</vuln>

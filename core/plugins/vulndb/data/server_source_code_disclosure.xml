@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="server_source_code_disclosure">
+  <name>Source Code Disclosure</name>
+  <description>One or more pages disclosing source code were found. This check is using pattern matching to determine if server side tags are found in the file. In some cases this alert may generate false positives.</description>
+  <impact>An attacker can gather sensitive information (database connection strings, application logic) by analyzing the source code. This information can be used to conduct further attacks.</impact>
+  <recommendation>Remove these file(s) from your website or change their permissions to remove access.</recommendation>
+  <severity>2</severity>
+  <score>7.5</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Pages with source code disclosed:&lt;br/&gt; &lt;ul&gt; {{#.}} &lt;li&gt;&lt;strong&gt;{{fname}}&lt;/strong&gt; - tested variant {{variant}}&lt;br/&gt;&lt;pre&gt;{{matched_text}}&lt;/pre&gt;&lt;/li&gt; {{/.}} &lt;/ul&gt;</details_template>
+  <tags>
+    <tag>source_code_disclosure</tag>
+    <tag>information_disclosure</tag>
+    <tag>CWE-538</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Why is Source Code Disclosure Dangerous?</title>
+      <url>https://www.acunetix.com/blog/articles/source-code-disclosure-dangerous/</url>
+    </reference>
+    <reference>
+      <title>CWE-540: Inclusion of Sensitive Information in Source Code</title>
+      <url>https://cwe.mitre.org/data/definitions/540.html</url>
+    </reference>
+  </references>
+</vuln>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="http_parameter_pollution">
+  <name>HTTP parameter pollution</name>
+  <description>This script is possibly vulnerable to HTTP Parameter Pollution attacks.&lt;br/&gt;&lt;br/&gt;
+
+HPP attacks consist of injecting encoded query string delimiters into other existing parameters. If the web application does not properly sanitize the user input, a malicious user can compromise the logic of the application to perform either clientside or server-side attacks.</description>
+  <impact>The impact depends on the affected web application. An attacker could &lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Override existing hardcoded HTTP parameters&lt;/li&gt;
+&lt;li&gt;Modify the application behaviors&lt;/li&gt;
+&lt;li&gt;Access and, potentially exploit, uncontrollable variables&lt;/li&gt;
+&lt;li&gt;Bypass input validation checkpoints and WAFs rules&lt;/li&gt;
+&lt;/ul&gt;</impact>
+  <recommendation>The application should properly sanitize user input (URL encode) to protect against this vulnerability.</recommendation>
+  <severity>2</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:N/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>{{input_type}} input &lt;strong&gt;&lt;span class="bb-dark"&gt;{{input_name}}&lt;/span&gt;&lt;/strong&gt; was set to &lt;strong&gt;&lt;span class="bb-dark"&gt;{{test_value}}&lt;/span&gt;&lt;/strong&gt;
+&lt;br/&gt;Parameter precedence: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{precedence}}&lt;/span&gt;&lt;/strong&gt;
+&lt;br/&gt;Affected link: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{link}}&lt;/span&gt;&lt;/strong&gt;
+&lt;br/&gt;Affected parameter: &lt;strong&gt;&lt;span class="bb-dark"&gt;{{param}}&lt;/span&gt;&lt;/strong&gt;</details_template>
+  <tags>
+    <tag>http_parameter_pollution</tag>
+    <tag>CWE-88</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>HTTP Parameter Pollution</title>
+      <url>https://www.owasp.org/images/b/ba/AppsecEU09_CarettoniDiPaola_v0.8.pdf</url>
+    </reference>
+  </references>
+</vuln>

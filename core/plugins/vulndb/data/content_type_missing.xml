@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="content_type_missing">
+  <name>Missing Content-Type Header</name>
+  <description>An HTTP response is missing a Content-Type header, leaving the browser to sniff the content type. This can cause responses to be interpreted as HTML even when not intended.</description>
+  <impact>Combined with content sniffing this widens the window for XSS and content-confusion attacks.</impact>
+  <recommendation>Always send an explicit, correct Content-Type header, and send X-Content-Type-Options: nosniff.</recommendation>
+  <severity>0</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>configuration</tag>
+    <tag>CWE-434</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

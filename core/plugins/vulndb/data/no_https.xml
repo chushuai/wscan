@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="no_https">
+  <name>SSL/TLS Not Implemented</name>
+  <description>This scan target was connected to over an unencrypted connection. A potential attacker can intercept and modify data sent and received from this site.</description>
+  <impact>Possible information disclosure.</impact>
+  <recommendation>The site should send and receive data over a secure (HTTPS) connection.</recommendation>
+  <severity>2</severity>
+  <score>5.400000095367432</score>
+  <cvss2>AV:N/AC:M/Au:N/C:P/I:P/A:N</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>weak_crypto</tag>
+    <tag>sensitive_data_not_over_ssl</tag>
+    <tag>CWE-319</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>SSL/TLS Not Implemented | Invicti</title>
+      <url>https://www.invicti.com/web-vulnerability-scanner/vulnerabilities/ssltls-not-implemented/</url>
+    </reference>
+  </references>
+</vuln>

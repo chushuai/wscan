@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="csp_unsafe_inline_style">
+  <name>CSP Allows Unsafe Inline Style</name>
+  <description>The Content-Security-Policy style-src directive permits 'unsafe-inline', allowing inline style attributes and &lt;style&gt; elements. This weakens CSP and can enable some CSS-based data exfiltration.</description>
+  <impact>Lower than unsafe-inline script, but still weakens CSP and can enable CSS-based data exfiltration attacks.</impact>
+  <recommendation>Remove 'unsafe-inline' from style-src where feasible; use nonces or hashes for inline styles.</recommendation>
+  <severity>1</severity>
+  <cvss2></cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N</cvss3>
+  <cvss4></cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>csp</tag>
+    <tag>CWE-79</tag>
+  </tags>
+  <references>
+  </references>
+</vuln>

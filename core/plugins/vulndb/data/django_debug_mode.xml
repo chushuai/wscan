@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="django_debug_mode">
+  <name>Django Debug Mode Enabled</name>
+  <description>This Django web application is running with debug mode turned on (&lt;strong&gt;DEBUG = True&lt;/strong&gt; ). One of the main features of debug mode is the display of detailed error pages. If your app raises an exception when DEBUG is True, Django will display a detailed traceback, including a lot of metadata about your environment, such as all the currently defined Django settings (from settings.py).</description>
+  <impact>Possible sensitive information disclosure.</impact>
+  <recommendation>Never deploy a site into production with DEBUG turned on. To disable debug mode, set &lt;strong&gt;DEBUG = False&lt;/strong&gt; in your Django settings file.</recommendation>
+  <severity>2</severity>
+  <score>5.300000190734863</score>
+  <cvss2>AV:N/AC:L/Au:N/C:P/I:N/A:N</cvss2>
+  <cvss3>CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N</cvss4>
+  <details_template>Affected pages:&lt;br/&gt;&lt;ul&gt;{{#.}}&lt;li&gt;{{url}} &lt;br/&gt;&lt;strong&gt;{{match}}&lt;/strong&gt;&lt;/li&gt;{{/.}}&lt;/ul&gt;</details_template>
+  <tags>
+    <tag>information_disclosure</tag>
+    <tag>CWE-200</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>Django debug mode</title>
+      <url>https://docs.djangoproject.com/en/1.8/ref/settings/#std:setting-DEBUG</url>
+    </reference>
+  </references>
+</vuln>

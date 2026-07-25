@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vuln id="apache_struts_s2_046">
+  <name>Code Evaluation (Apache Struts) S2-046</name>
+  <description>Apache Struts is a free, open-source, MVC framework for creating elegant, modern Java web applications. This version of Apache Struts is vulnerable to arbitrary code execution by providing a malicious &lt;strong&gt;Content-Disposition&lt;/strong&gt; value or with improper &lt;strong&gt;Content-Length&lt;/strong&gt; header. If the Content-Disposition / Content-Length value is not valid an exception is thrown which is then used to display an error message to a user.</description>
+  <impact>An attacker can execute arbitrary OGNL expressions on the affected system. The attacker may also be able to execute arbitrary system commands.</impact>
+  <recommendation>Upgrade to Apache Struts version 2.3.32 or 2.5.10.1 or newer versions.</recommendation>
+  <severity>3</severity>
+  <score>10</score>
+  <cvss2>AV:N/AC:L/Au:N/C:C/I:C/A:C</cvss2>
+  <cvss3>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/RL:O</cvss3>
+  <cvss4>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H</cvss4>
+  <details_template></details_template>
+  <tags>
+    <tag>code_execution</tag>
+    <tag>CWE-94</tag>
+    <tag>CVE-2017-5638</tag>
+  </tags>
+  <references>
+    <reference>
+      <title>OWASP - Direct Dynamic Code Evaluation</title>
+      <url>https://wiki.owasp.org/index.php/Direct_Dynamic_Code_Evaluation_('Eval_Injection')</url>
+    </reference>
+    <reference>
+      <title>OWASP - Code Injection</title>
+      <url>https://wiki.owasp.org/index.php/Code_Injection</url>
+    </reference>
+    <reference>
+      <title>S2-046</title>
+      <url>https://cwiki.apache.org/confluence/display/WW/S2-046</url>
+    </reference>
+  </references>
+</vuln>

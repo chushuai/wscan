@@ -1,0 +1,18 @@
+sudo: false
+language: go
+os:
+  - linux
+  - osx
+go:
+  - 1.14.x
+  - 1.15.x
+go_import_path: github.com/kataras/pio
+install:
+  - go get ./...
+script:
+  - go test -v -race -cover ./...
+after_script:
+  # examples
+  - cd ./_examples
+  - go get ./...
+  - go test -v -race -cover ./...

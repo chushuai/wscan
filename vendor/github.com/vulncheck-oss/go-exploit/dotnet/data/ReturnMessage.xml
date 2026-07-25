@@ -1,0 +1,40 @@
+﻿<SOAP-ENV:Fault id="xref-1">
+    <faultcode id="xref-2">SOAP-ENV:Server</faultcode>
+    <faultstring id="xref-3"> **** System.Exception - Exception of type &#39;System.Exception&#39; was thrown.</faultstring>
+    <detail xsi:type="x1:ServerFault" xmlns:x1="http://schemas.microsoft.com/clr/ns/System.Runtime.Serialization.Formatters">
+        <exceptionType xsi:null="1"/>
+        <message xsi:null="1"/>
+        <stackTrace xsi:null="1"/>
+        <exception href="#xref-4"/>
+    </detail>
+</SOAP-ENV:Fault>
+<x2:Exception id="xref-4" xmlns:x2="http://schemas.microsoft.com/clr/ns/System">
+    <ClassName id="xref-5">System.Exception</ClassName>
+    <Message xsi:null="1"/>
+    <Data href="#xref-6"/>
+    <InnerException xsi:null="1"/>
+    <HelpURL xsi:null="1"/>
+    <StackTraceString xsi:null="1"/>
+    <RemoteStackTraceString xsi:null="1"/>
+    <RemoteStackIndex>0</RemoteStackIndex>
+    <ExceptionMethod xsi:null="1"/>
+    <HResult>-2146233088</HResult>
+    <Source xsi:null="1"/>
+    <WatsonBuckets xsi:null="1"/>
+</x2:Exception>
+<x3:ListDictionaryInternal id="xref-6" xmlns:x3="http://schemas.microsoft.com/clr/ns/System.Collections">
+    <head href="#xref-7"/>
+    <version>1</version>
+    <count>1</count>
+</x3:ListDictionaryInternal>
+<x3:ListDictionaryInternal_x002B_DictionaryNode id="xref-7" xmlns:x3="http://schemas.microsoft.com/clr/ns/System.Collections">
+    <key id="xref-9" xsi:type="SOAP-ENC:string">x</key>
+    <value />
+    <next xsi:null="1"/>
+</x3:ListDictionaryInternal_x002B_DictionaryNode>
+<x2:Version id="xref-11" xmlns:x2="http://schemas.microsoft.com/clr/ns/System">
+    <_Major>2</_Major>
+    <_Minor>0</_Minor>
+    <_Build>-1</_Build>
+    <_Revision>-1</_Revision>
+</x2:Version>

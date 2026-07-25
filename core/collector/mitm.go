@@ -8,6 +8,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"flag"
 	"log"
 	"net"
 	"net/http"
@@ -27,6 +28,15 @@ import (
 	"github.com/google/martian/v3/mitm"
 	"github.com/panjf2000/ants/v2"
 )
+
+// init 清除 martian init.go 里用 flag.Int("v") 注册的 -v 标志。urfave/cli 的
+// VersionFlag 也用了 -v 别名,两者都向 flag.CommandLine 注册 "v" 会触发
+// "flag redefined: v" panic。本 collector 包 import 了 martian,Go 保证被依赖
+// 包的 init 先执行,所以当本 init 运行时 martian 的 -v 已在 flag.CommandLine
+// 上,此处重建一个空的 flag.CommandLine(保留 ExitOnError 语义)即可抹掉它。
+func init() {
+	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+}
 
 var GenerateCA bool
 

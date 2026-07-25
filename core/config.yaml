@@ -1,0 +1,271 @@
+version: "1.14"
+parallel: 30
+http:
+    proxy: ""
+    proxy_rule: []
+    dial_timeout: 5
+    read_timeout: 18
+    max_conns_per_host: 50
+    enable_http2: false
+    pkcs12:
+        path: ""
+        password: ""
+    fail_retries: 0
+    max_redirect: 5
+    max_resp_body_size: 2097152
+    max_qps: 500
+    allow_methods:
+        - HEAD
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+        - OPTIONS
+        - CONNECT
+        - TRACE
+        - MOVE
+        - PROPFIND
+    headers:
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0
+reverse:
+    db_file_path: ""
+    token: ""
+    http:
+        enabled: false
+        listen_ip: 0.0.0.0
+        listen_port: ""
+        ip_header: ""
+    dns:
+        enabled: false
+        listen_ip: 0.0.0.0
+        domain: ""
+        is_domain_name_server: false
+        resolve:
+            - type: A
+              record: localhost
+              value: 127.0.0.1
+              ttl: 60
+    client:
+        remote_server: false
+        http_base_url: ""
+        dns_server_ip: ""
+vuln-filter:
+    min_severity: info
+    exclude_vulns: []
+    include_vulns: []
+postscan:
+    enabled: true
+    max_duration: 60
+    reverse_wait: 120
+crawler:
+    basic_auth:
+        username: ""
+        password: ""
+    restriction:
+        hostname_allowed: []
+        hostname_disallowed:
+            - '*google*'
+            - '*github*'
+            - '*.gov.cn'
+            - '*.edu.cn'
+        port_allowed: []
+        port_disallowed: []
+        path_allowed: []
+        path_disallowed: []
+        query_key_allowed: []
+        query_key_disallowed: []
+        fragment_allowed: []
+        fragment_disallowed: []
+        post_key_allowed: []
+        post_key_disallowed: []
+    basic-crawler:
+        max_depth: 0
+        max_count_of_links: 0
+        allow_visit_parent_path: false
+    browser-crawler:
+        exec_path: ""
+        disable_headless: false
+        force_sandbox: false
+        enable_image: false
+        disallowedresourcetype: []
+        trace: false
+        parent_path_detect: false
+        monitor: ""
+        max_depth: 10
+        width: 0
+        height: 0
+        navigate_timeout_second: 10
+        load_timeout_second: 10
+        retry: 0
+        page_analyze_timeout_second: 10
+        max_interactive: 0
+        max_interactive_depth: 0
+        max_page_concurrent: 10
+        max_page_visit: 500
+        max_page_visit_per_site: 200
+        maxjsredirect: 0
+        defaulturls: []
+        tabinitjs: ""
+        element_filter_strength: 0
+        newtaskdeduplicationoption: 0
+        outputdeduplicationoption: 0
+        sendformpost: false
+mitm:
+    ca_cert: ./ca.crt
+    ca_key: ./ca.key
+    basic_auth:
+        username: ""
+        password: ""
+    allow_ip_range: []
+    restriction:
+        hostname_allowed: []
+        hostname_disallowed:
+            - '*google*'
+            - '*github*'
+            - '*.gov.cn'
+            - '*.edu.cn'
+        port_allowed: []
+        port_disallowed: []
+        path_allowed: []
+        path_disallowed: []
+        query_key_allowed: []
+        query_key_disallowed: []
+        fragment_allowed: []
+        fragment_disallowed: []
+        post_key_allowed: []
+        post_key_disallowed: []
+    queue:
+        max_length: 3000
+    proxy_header:
+        via: ""
+        x_forwarded: false
+    upstream_proxy: ""
+plugins:
+    apikey-leak:
+        enabled: true
+        min_entropy: 3
+        max_body_size: 5242880
+    baseline:
+        enabled: false
+        detect_cors_header_config: true
+        detect_server_error_page: true
+        detect_system_path_leak: true
+        detect_outdated_ssl_version: true
+        detect_http_header_config: true
+        detect_cookie_httponly: true
+        detect_china_id_card_number: true
+        detect_china_phone_number: true
+        detect_china_bank_card: true
+        detect_private_ip: true
+        detect_email: true
+        detect_html_comment: true
+        detect_host_injection: true
+        detect_serialization_data_in_params: true
+        detect_cookie_password_leak: true
+        detect_china_address: true
+        detect_auto_complete: true
+        detect_unsafe_scheme: true
+        detect_redirect_logic: true
+        detect_debug_mode: true
+    brute-force:
+        enabled: true
+        username_dictionary: ""
+        password_dictionary: ""
+    cmd-injection:
+        enabled: true
+    crlf-injection:
+        enabled: true
+    custom:
+        enabled: true
+        depth: 0
+        auto_load_tmpl: false
+        include_tmpl: []
+        exclude_tmpl: []
+    dirscan:
+        enabled: true
+        depth: 1
+        dictionary: ""
+    django-audit:
+        enabled: true
+        check_admin_interface: true
+        check_debug_mode: true
+    fastjson:
+        enabled: true
+    fingerprint:
+        enabled: true
+    jboss-audit:
+        enabled: true
+    js:
+        enabled: true
+        sensitive_content_check: ""
+    jsonp:
+        enabled: true
+    path_traversal:
+        enabled: true
+    pathbrute:
+        enabled: true
+    prometheus:
+        enabled: true
+        depth: 1
+        auto_load_poc: false
+        include_poc: []
+        exclude_poc: []
+    redirect:
+        enabled: true
+    sensitivefile:
+        enabled: true
+        max_detect_per_scan: 15
+    shiro:
+        enabled: true
+        cookie_name: ""
+        aes_key: []
+    sqldet:
+        enabled: true
+        boolean_based_detection: true
+        error_based_detection: true
+        time_based_detection: true
+        use_comment_in_payload: false
+        detect_sqli_in_cookie: true
+    sslaudit:
+        enabled: false
+        check_protocols: true
+        check_ciphers: true
+        check_certificate: true
+        check_headers: true
+    ssrf:
+        enabled: true
+        detect_internal_service: false
+    struts:
+        enabled: true
+    thinkphp:
+        enabled: true
+        detect_thinkphp_sqli: false
+    upload:
+        enabled: true
+    waftest:
+        enabled: true
+        depth: 0
+        auto_load_tmpl: false
+        include_tmpl: []
+        exclude_tmpl: []
+        block_status_codes:
+            - 403
+        pass_status_codes:
+            - 200
+            - 404
+        block_regex: ""
+        pass_regex: ""
+        non_blocked_as_passed: false
+        use_builtin_fingerprints: true
+        active_probe: true
+    xss:
+        enabled: true
+        detect_xss_in_cookie: true
+        detect_xss_in_referer: true
+        ie_feature: true
+        detect_blind_xss: true
+    xstream:
+        enabled: true
+    xxe:
+        enabled: true

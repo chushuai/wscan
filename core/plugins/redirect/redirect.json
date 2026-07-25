@@ -1,0 +1,34 @@
+[
+  {
+    "create_time": 1703960235721,
+    "detail": {
+      "addr": "http://localhost:8080/listproducts.php?ab=https://www.baX.com",
+      "payload": "",
+      "snapshot": [
+        [
+          "GET /listproducts.php?ab=https%3A%2F%2Fwww.baX.com.381sbaX.com%3A8080%23%40www.baX.com%2Flistproducts.php HTTP/1.1\r\nHost: localhost:8080\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0\r\nAccept-Encoding: gzip\r\n\r\n",
+          "HTTP/1.1 302 Found\r\nContent-Length: 23\r\nContent-Type: text/html;charset=ISO-8859-1\r\nDate: Sat, 30 Dec 2023 18:17:15 GMT\r\nLocation: https://www.baX.com.381sbaX.com:8080#@www.baX.com/listproducts.php\r\nServer: Apache-Coyote/1.1\r\n\r\n<html>1111111111</html>"
+        ]
+      ],
+      "extra": {
+        "param": {
+          "key": "ab",
+          "position": "query",
+          "value": "https://www.baX.com.381sbaX.com:8080#@www.baX.com/listproducts.php"
+        }
+      }
+    },
+    "plugin": "redirect/redirect/default",
+    "target": {
+      "url": "http://localhost:8080/listproducts.php",
+      "params": [
+        {
+          "position": "query",
+          "path": [
+            "ab"
+          ]
+        }
+      ]
+    }
+  }
+]

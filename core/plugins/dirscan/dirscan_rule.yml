@@ -1,0 +1,1694 @@
+version: "1"
+category:
+  - name: dirscan/code/svn
+    title: svn
+  - name: dirscan/backup/default
+    title: backup_files
+  - name: dirscan/service/probe
+    title: server_probe
+  - name: dirscan/backup/php
+    title: phpinfo
+  - name: dirscan/temp/swp
+    title: swp_info
+  - name: dirscan/backup/bash
+    title: bash_history
+  - name: dirscan/backup/jsp
+    title: jsp_samples
+  - name: dirscan/default/cgi
+    title: cgi_documents
+  - name: dirscan/sample/test
+    title: test_samples
+  - name: dirscan/test/dreamware
+    title: mdrds
+  - name: dirscan/sensitive/statistic
+    title: statics_info
+  - name: dirscan/default/dir
+    title: default_diretory
+  - name: dirscan/sensitive/dir
+    title: sensitive_documents
+  - name: dirscan/directory/logs
+    title: log_info
+  - name: dirscan/config/frontpage
+    title: frontpage
+  - name: dirscan/file/resion
+    title: resion_doc
+  - name: dirscan/sensitive/file
+    title: sensitive_file
+  - name: dirscan/editor/CKEditor
+    title: ckedit_disclosure
+  - name: dirscan/editor/eWebEditor
+    title: ewebeditor_disclosure
+  - name: dirscan/database/file
+    title: database_disclosure
+  - name: dirscan/sensitive/sitemap
+    title: sitemap_disclosure
+  - name: dirscan/sensitive/crossdomain
+    title: crossdomain
+  - name: config/ide
+    title: ide_config
+  - name: dirscan/default
+    title: default
+rules:
+  # ====================================================================
+  # SVN / Git / Mercurial / Bazaar version control exposure
+  # ====================================================================
+  - category: dirscan/code/svn
+    paths:
+      - .svn/entries
+    suffix: []
+    expression: response.status == 200 && "dir.*?svn://|dir.*?https://".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - CVS/Entries
+    suffix: []
+    expression: response.status == 200 && "\d \d{2}:\d{2}:\d{2} \d{4}//".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/config
+    suffix: []
+    expression: response.status == 200 && "branch "master"".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/HEAD
+    suffix: []
+    expression: 'response.status == 200 && "^ref: refs/".bmatches(response.body)'
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/info/refs
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40}\s+refs/".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/objects/info/packs
+    suffix: []
+    expression: response.status == 200 && "^P pack-[a-f0-9]{40}\.pack".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/packed-refs
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40} refs/".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/refs/heads/master
+    suffix: []
+    expression: response.status == 200 && "^[a-f0-9]{40}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .git/index
+    suffix: []
+    expression: response.status == 200 && response.content_length > 0 && response.content_length < 1048576 && !"<html".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .hg/hgrc
+    suffix: []
+    expression: response.status == 200 && "\[\[paths\].*?default =".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .hg/requires
+    suffix: []
+    expression: response.status == 200 && "^revlogv1".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/code/svn
+    paths:
+      - .bzr/README
+    suffix: []
+    expression: response.status == 200 && "^This\sis\sa\sBazaar".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Backup files — archive formats with magic byte verification
+  # ====================================================================
+  - category: dirscan/backup/default
+    paths:
+      - wwwroot.rar
+      - htdocs.rar
+      - backup.rar
+    suffix: []
+    expression: response.status == 200 && "Rar!".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - backup.tar.gz
+      - htdocs.tar.gz
+    suffix: []
+    expression: response.status == 200 && "\x1f\x8b".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - wwwroot.zip
+      - htdocs.zip
+      - backup.zip
+      - index.zip
+      - site.zip
+    suffix: []
+    expression: response.status == 200 && "PK\x03\x04".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - wwwroot.tar
+      - htdocs.tar
+      - backup.tar
+    suffix: []
+    expression: response.status == 200 && "ustar".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - wwwroot.7z
+      - htdocs.7z
+      - backup.7z
+    suffix: []
+    expression: response.status == 200 && "7z\xbc\xaf\x27\x1c".bmatches(response.body)
+    partial: false
+    root: false
+
+  # Backup file extensions — require body content that looks like code/config
+  - category: dirscan/backup/default
+    paths:
+      - index.bak
+      - index.php.bak
+      - index.html.bak
+      - index.asp.bak
+      - index.aspx.bak
+      - index.jsp.bak
+      - index.php~
+      - index.html~
+      - config.php.bak
+      - config.php~
+      - config.inc.php.bak
+      - config.inc.php~
+      - db.php.bak
+      - db.php~
+      - db.inc
+      - database.yml
+      - config/database.yml
+    suffix: []
+    expression: response.status == 200 && response.content_length > 20 && ("<\?php|<html|<\!DOCTYPE|<script|<asp:|<%@|<%|<jsp:|<c:|password|secret|database|host:|adapter:|encoding:|username|connection".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/backup/default
+    paths:
+      - .old
+      - .bak
+      - .bck
+      - .copy
+      - .temp
+    suffix: []
+    expression: response.status == 200 && response.content_length > 20 && ("<\?php|<html|<\!DOCTYPE|<script|<asp:|<%@|<%|<jsp:|password|secret|database|host:|import |package |class |def |function |var |const |include|require|namespace".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Service probes — already have content matching (keep as-is)
+  # ====================================================================
+  - category: dirscan/service/probe
+    paths:
+      - iprober.php
+      - index1.php
+    suffix: []
+    expression: response.status == 200 && "Prober.*?V\d\.\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - i.php
+    suffix: []
+    expression: response.status == 200 && "<!--服务器相关参数-->.*?<!--组件信息-->.*?<!--数据库支持-->.*?<!--服务器性能检测-->".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - tz.php
+    suffix: []
+    expression: response.status == 200 && "<td id="f31">Powered by.*?<a href="http://www.depoch.net"><b>dEpoch
+      Studio</b>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - aspcheck.asp
+    suffix: []
+    expression: response.status == 200 && "<h2>ASP组件支持情况</h2><a name=".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - DotNetInfo.aspx
+    suffix: []
+    expression: response.status == 200 && "服务器COM组件安装检测</td>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/service/probe
+    paths:
+      - jspcheck.aspx
+    suffix: []
+    expression: response.status == 200 && "<td colspan="2" class="TrHead">服务器COM组件安装检测</td>".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # PHP info pages — already have content matching
+  # ====================================================================
+  - category: dirscan/backup/php
+    paths:
+      - /?phpinfo=1
+      - phpinfo.php
+    suffix: []
+    expression: response.status == 200 && "PHP Version.*?System.*?Build Date".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/backup/php
+    paths:
+      - test.php
+      - 1.php
+      - index1.php
+      - t.php
+      - p.php
+      - php.php
+      - info.php
+      - s.php
+      - x.php
+    suffix: []
+    expression: response.status == 200 && "PHPE9568F34-D428-11d2-A769-00AA001ACF42.*?PHPE9568F35-D428-11d2-A769-00AA001ACF42.*?PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Swap / vim temp files
+  # ====================================================================
+  - category: dirscan/temp/swp
+    paths:
+      - index.php.swp
+      - .index.php.swp
+      - .config.php.swp
+      - .config.inc.php.swp
+      - .settings.php.swp
+      - .database.php.swp
+      - .db.php.swp
+      - .mysql.php.swp
+      - config/.config.php.swp
+    suffix: []
+    expression: response.status == 200 && ("<\?php|<html|function |class |include|require|echo |print |namespace".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/temp/swp
+    paths:
+      - .bash_history
+      - .zsh_history
+    suffix: []
+    expression: response.status == 200 && "ls.*?cd.*?|dir.*?cd|chmod|chown|mkdir|rm |cat |echo |export|grep |find |curl |wget ".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/temp/swp
+    paths:
+      - .bashrc
+    suffix: []
+    expression: response.status == 200 && ("alias |export |PATH=|source |bind |set |shopt|umask|# ~/.bashrc".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # JSP samples
+  # ====================================================================
+  - category: dirscan/backup/jsp
+    paths:
+      - examples/jsp/
+    suffix: []
+    expression: response.status == 200 && "<title>jsp samples</title>|<title>jsp examples</title>".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # CGI
+  # ====================================================================
+  - category: dirscan/default/cgi
+    paths:
+      - cgi-bin/
+    suffix: []
+    expression: (response.status == 200 || response.status == 403) && response.content_length > 0
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Test/sample pages — require test-specific content in body
+  # ====================================================================
+  - category: dirscan/sample/test
+    paths:
+      - test
+      - test0
+      - test1
+      - test/
+    suffix: []
+    expression: response.status == 200 && ("<title>test|<h1>test|test page|testing|debug|it works|hello world|server info|phpinfo|system info|server status".bmatches(response.body) || "<title>Index of".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|test page|phpinfo|it works|hello world|debug|php version".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.asp
+    suffix: []
+    expression: response.status == 200 && ("<%@|test page|it works|hello world|debug|asp test|server object|response.write".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.aspx
+    suffix: []
+    expression: response.status == 200 && ("<%@|test page|it works|hello world|debug|asp.net".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.cfm
+    suffix: []
+    expression: response.status == 200 && ("<cf|coldfusion|test page|it works|hello world|debug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.cgi
+    suffix: []
+    expression: response.status == 200 && ("Content-type:|#!/|test page|it works|hello world|debug|cgi".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.chm
+    suffix: []
+    expression: response.status == 200 && "ITSF".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.htm
+      - test.html
+      - testing.htm
+      - testing.html
+    suffix: []
+    expression: response.status == 200 && ("<html|<head|<body|test page|it works|hello world|debug|testing".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.jsp
+      - testing.jsp
+    suffix: []
+    expression: response.status == 200 && ("<%@|<jsp:|test page|it works|hello world|debug|servlet".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.shtml
+      - testing.shtml
+    suffix: []
+    expression: response.status == 200 && ("<!--#|<html|test page|it works|hello world|debug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test.txt
+      - testing.txt
+    suffix: []
+    expression: response.status == 200 && ("test|debug|hello|it works|configuration|password|secret|admin|root|server".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - test_testing.asp
+    suffix: []
+    expression: response.status == 200 && ("<%@|test|it works|hello world|debug|response.write".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.cfm
+    suffix: []
+    expression: response.status == 200 && ("<cf|coldfusion|test|it works|hello world|debug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.cgi
+    suffix: []
+    expression: response.status == 200 && ("Content-type:|#!/|test|it works|hello world|debug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sample/test
+    paths:
+      - testing.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|test|it works|hello world|debug|phpinfo".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Dreamware
+  # ====================================================================
+  - category: dirscan/test/dreamware
+    paths:
+      - _mmServerScripts/
+      - _mmDBScripts/
+    suffix: []
+    expression: response.status == 200 && ("mmhttpdb|MMHTTPDB|Dreamweaver|adovbs.inc|MM_query".bmatches(response.body) || "<title>Index of".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Statistics
+  # ====================================================================
+  - category: dirscan/sensitive/statistic
+    paths:
+      - usage/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && "Usage Statistics".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Default directories — require directory listing or specific content
+  # ====================================================================
+  - category: dirscan/default/dir
+    paths:
+      - include/
+      - lib/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && ("<title>Index of|<h1>Index of|Parent Directory|.php|.asp|.jsp|.html".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Sensitive directories — require directory listing or app-specific content
+  # ====================================================================
+  - category: dirscan/sensitive/dir
+    paths:
+      - secured/
+      - error/
+      - private/
+      - stats/
+      - temp/
+      - class/
+      - files/
+      - inc/
+      - img/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && ("<title>Index of|<h1>Index of|Parent Directory".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - db/
+      - SQL/
+      - DB/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && ("<title>Index of|<h1>Index of|Parent Directory|.sql|.mdb|.db|.sqlite".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - backup/
+      - backups/
+      - bak/
+    suffix: []
+    expression: (response.status == 200 || response.status == 401) && ("<title>Index of|<h1>Index of|Parent Directory|.rar|.zip|.tar|.gz|.bak|.sql|.sql".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - server-status/
+    suffix: []
+    expression: response.status == 200 && "Server Status|Apache Server Status|Server Version|Current Time|Restart Time|Parent Server Generation|Server uptime".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - server-status
+    suffix: []
+    expression: response.status == 200 && "Server Status|Apache Server Status|Server Version|Current Time|Restart Time|Parent Server Generation|Server uptime".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - WEB-INF/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Parent Directory|web.xml|classes/|lib/".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - CVS/
+      - .idea/
+    suffix: []
+    expression: response.status == 200 && "<head><title>Index of [\w\W]+</title></head>[\S\s]*?<body
+      bgcolor="white">[\S\s]*?<h1>Index of [\w\W]+</h1><hr><pre><a href="\.\./">\.\./</a>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - CMS/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Parent Directory|cms|wordpress|joomla|drupal".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - '!install/'
+    suffix: []
+    expression: response.status == 200 && ("install|setup|wizard|configuration|database|step".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - jdbc/
+    suffix: []
+    expression: response.status == 200 && ("jdbc|driver|connection|database|oracle|mysql|postgres".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - ~root/
+      - ~log/
+      - ~admin/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Parent Directory".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/dir
+    paths:
+      - src/
+      - source/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Parent Directory|.java|.py|.php|.js|.ts|.go|.rb".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Log files
+  # ====================================================================
+  - category: dirscan/directory/logs
+    paths:
+      - access.log
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.[01]".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - error.log
+    suffix: []
+    expression: response.status == 200 && ("error|warn|fail|exception|traceback|stack|notice".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - errors.log
+      - error_log
+      - logs/access.log
+      - 'logs/error.log'
+      - 'logs/error_log'
+    suffix: []
+    expression: response.status == 200 && "GET.*?HTTP/1.[01].\d{3}".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/directory/logs
+    paths:
+      - logs/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Parent Directory|.log".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # FrontPage
+  # ====================================================================
+  - category: dirscan/config/frontpage
+    paths:
+      - postinfo.html
+    suffix: []
+    expression: response.status == 200 && "<!--\s*?postinfo.html version \d\.\d\d\d.*>".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Resin
+  # ====================================================================
+  - category: dirscan/file/resion
+    paths:
+      - resin-doc/viewfile/?contextpath=../../../../&file=WEB-INF/web.xml
+    suffix: []
+    expression: response.status == 200 && "<title>WEB-INF/web.xml</title>".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Sensitive files — generic PHP/ASP/JSP test files (require code content)
+  # ====================================================================
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.php
+      - a.php
+      - abc.php
+      - 2.php
+      - 3.php
+      - dama.php
+      - ooxx.php
+      - x.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|phpinfo|eval|system|exec|passthru|shell_exec|base64_decode|assert|preg_replace|str_rot13|call_user_func".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.asp
+      - a.asp
+      - abc.asp
+      - 2.asp
+      - 3.asp
+      - 123.asp
+      - dama.asp
+      - ooxx.asp
+      - x.asp
+    suffix: []
+    expression: response.status == 200 && ("<%@|<%|execute|eval|response.write|server.createobject|shell|wscript|command".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.aspx
+      - a.aspx
+      - abc.aspx
+      - 2.aspx
+      - 3.aspx
+      - 123.aspx
+      - dama.aspx
+      - ooxx.aspx
+      - x.aspx
+    suffix: []
+    expression: response.status == 200 && ("<%@|<asp:|CodeFile|Inherits|runat=\"server\"|eval|execute|system.diagnostics|process.start".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.jsp
+      - a.jsp
+      - abc.jsp
+      - 2.jsp
+      - 3.jsp
+      - 123.jsp
+      - dama.jsp
+      - ooxx.jsp
+      - x.jsp
+      - s.jsp
+    suffix: []
+    expression: response.status == 200 && ("<%@|<jsp:|Runtime.getRuntime|ProcessBuilder|exec\\(|scriptlet|out.print|request.getParameter|response.sendRedirect".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - 1.jspx
+      - test.jspx
+      - dama.jspx
+      - ooxx.jspx
+      - x.jspx
+      - s.jspx
+      - shell.jspx
+      - webshell.jspx
+    suffix: []
+    expression: response.status == 200 && ("<%@|<jsp:|Runtime.getRuntime|ProcessBuilder|exec\\(|scriptlet|jspx".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - ServerVariables.asp
+    suffix: []
+    expression: response.status == 200 && ("Request.ServerVariables|ALL_HTTP|APPL_MD_PATH|SERVER_NAME|SERVER_SOFTWARE|REMOTE_ADDR".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - WEB-INF/web.xml
+      - WEB-INF/jboss-web.xml
+    suffix: []
+    expression: response.status == 200 && "<web-app.*?</web-app>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - _debugadmin.php
+    suffix: []
+    expression: response.status == 200 && ("debug|var_dump|print_r|backtrace|profile|zend|xdebug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/sensitive/file
+    paths:
+      - _test
+    suffix: []
+    expression: response.status == 200 && ("test|debug|it works|hello world|server info|phpinfo|diagnostic".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # CKEditor / FCKeditor — require editor-specific content
+  # ====================================================================
+  - category: dirscan/editor/CKEditor
+    paths:
+      - fckeditor/editor/fckeditor.html
+      - fckeditor/editor/fckeditor.asp
+      - fckeditor/editor/fckeditor.jsp
+    suffix: []
+    expression: response.status == 200 && ("FCKeditor|fckeditor|FCKConfig|FCKTools|FCKeditorAPI".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - ckeditor/editor/ckeditor.html
+      - ckeditor/editor/ckeditor.aspx
+    suffix: []
+    expression: response.status == 200 && ("CKEditor|ckeditor|CKEDITOR|CKEDITOR.config|CKEDITOR.replace".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - Editor/FileUpload.aspx
+    suffix: []
+    expression: response.status == 200 && ("upload|FileUpload|fileupload|附件|上传".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/CKEditor
+    paths:
+      - ckfinder/ckfinder.html
+    suffix: []
+    expression: response.status == 200 && ("CKFinder|ckfinder|CKFinderAPI".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # eWebEditor — require editor-specific content
+  # ====================================================================
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - db/ewebeditor.mdb
+      - SouthidcEditor/Datas/SouthidcEditor.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin_login.asp
+    suffix: []
+    expression: response.status == 200 && ("eWebEditor|admin|login|密码|用户名|登录".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin_uploadfile.asp
+    suffix: []
+    expression: response.status == 200 && ("eWebEditor|upload|上传|附件|文件".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/ewebeditor.asp
+    suffix: []
+    expression: response.status == 200 && ("eWebEditor|editor|编辑器".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/
+    suffix: []
+    expression: response.status == 200 && ("eWebEditor|editor|编辑器|<title>Index of".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin/config.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|eWebEditor|config|配置".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/editor/eWebEditor
+    paths:
+      - ewebeditor/admin/
+    suffix: []
+    expression: response.status == 200 && ("eWebEditor|admin|管理|<title>Index of".bmatches(response.body))
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Database files — require magic bytes or DB-specific content
+  # ====================================================================
+  - category: dirscan/database/file
+    paths:
+      - Database.mdb
+      - L-BLOG.mdb
+      - Leadbbs.mdb
+      - PowerEasy2005.mdb
+      - PowerEasy2006.mdb
+      - PowerEasy4.mdb
+      - PowerEasy5.mdb
+      - PowerEasy6.mdb
+      - download.mdb
+      - ewebforum.mdb
+    suffix: []
+    expression: response.status == 200 && "Standard Jet DB".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/database/file
+    paths:
+      - db.sqlite
+      - db.sqlite3
+    suffix: []
+    expression: response.status == 200 && "SQLite format 3".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Sitemap / crossdomain
+  # ====================================================================
+  - category: dirscan/sensitive/sitemap
+    paths:
+      - sitemap.xml
+    suffix: []
+    expression: response.status == 200 && "</urlset>".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/sensitive/crossdomain
+    paths:
+      - /crossdomain.xml
+    suffix: []
+    expression: response.status == 200 && "cross-domain-policy".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # IDE config
+  # ====================================================================
+  - category: config/ide
+    paths:
+      - /.idea/workspace.xml
+    suffix: []
+    expression: response.status == 200 && "project".bmatches(response.body)
+    partial: false
+    root: true
+  - category: config/ide
+    paths:
+      - .idea/modules.xml
+    suffix: []
+    expression: response.status == 200 && "<module|idea|IMANTIC|moduleType".bmatches(response.body)
+    partial: false
+    root: false
+
+  # ====================================================================
+  # Default — sensitive files with content matching
+  # ====================================================================
+
+  # Webshells — require shell-specific signatures
+  - category: dirscan/default
+    paths:
+      - shell.php
+      - webshell.php
+      - phpspy.php
+    suffix: []
+    expression: response.status == 200 && ("eval\\(|assert\\(|system\\(|exec\\(|passthru\\(|shell_exec\\(|base64_decode\\(|preg_replace.*e['\"]|call_user_func|str_rot13|gzinflate|gzuncompress|chr\\(\\d|\\$_(POST|GET|REQUEST|COOKIE)\\[|<form.*enctype|<input.*type.*file|upload|cmd=|command=|c99|r57|b374k|WSO|FilesMan".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.jsp
+      - webshell.jsp
+      - jspspy.jsp
+      - shell.jspx
+      - webshell.jspx
+      - jspspy.jspx
+    suffix: []
+    expression: response.status == 200 && ("Runtime.getRuntime|ProcessBuilder|exec\\(|<jsp:|scriptlet|out.print|request.getParameter|FileOutputStream|InputStream|<form.*enctype|<input.*type.*file|upload|cmd=|command=".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.asp
+      - webshell.asp
+    suffix: []
+    expression: response.status == 200 && ("execute|eval|shell|wscript|command|createobject|<form.*enctype|<input.*type.*file|upload|cmd=|command=".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - shell.aspx
+      - webshell.aspx
+      - aspxspy.aspx
+    suffix: []
+    expression: response.status == 200 && ("System.Diagnostics|Process.Start|eval|execute|<%@|<asp:|<form.*enctype|<input.*type.*file|upload|cmd=|command=".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Admin / login pages — require login form or admin-specific content
+  - category: dirscan/default
+    paths:
+      - admin.php
+      - login.php
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|dashboard|后台|管理".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.jsp
+      - login.jsp
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|<%@|<jsp:".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.asp
+      - login.asp
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|<%@|<%".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.do
+      - login.do
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|dashboard".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin.html
+      - login.html
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|dashboard|后台|管理".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin
+      - login
+      - signin
+      - user/login
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|dashboard|后台|管理|authenticate".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - admin/
+    suffix: []
+    expression: response.status == 200 && ("<form|<input.*type.*password|<input.*type.*submit|login|登录|密码|用户名|password|username|admin|sign in|dashboard|后台|管理|<title>Index of|<h1>Index of".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Upload pages — require upload form
+  - category: dirscan/default
+    paths:
+      - upload.php
+      - upfile.php
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.jsp
+      - upfile.jsp
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件|<%@|<jsp:".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.asp
+      - upfile.asp
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件|<%@|<%".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.aspx
+      - upfile.aspx
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件|<%@|<asp:".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.do
+      - upfile.do
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - upload.html
+      - upfile.html
+    suffix: []
+    expression: response.status == 200 && ("<form.*enctype|<input.*type.*file|upload|上传|附件|选择文件".bmatches(response.body))
+    partial: false
+    root: false
+
+  # SQL dump files — require SQL syntax
+  - category: dirscan/default
+    paths:
+      - data.sql
+      - database.sql
+      - db.sql
+      - admin.sql
+      - backup.sql
+      - dump.sql
+      - create.sql
+      - test.sql
+      - data.txt
+    suffix: []
+    expression: response.status == 200 && ("CREATE TABLE|INSERT INTO|SELECT.*FROM|DROP TABLE|ALTER TABLE|CREATE DATABASE|CREATE INDEX|UPDATE.*SET|DELETE FROM|mysqldump|pg_dump|-- MySQL|PostgreSQL database dump".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - 127.0.0.1.sql
+      - 0.1.sql
+      - 127.sql
+      - 0.sql
+    suffix: []
+    expression: response.status == 200 && ("CREATE TABLE|INSERT INTO|SELECT.*FROM|DROP TABLE|mysqldump|pg_dump|-- MySQL|PostgreSQL database dump".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Shell scripts — require shell syntax
+  - category: dirscan/default
+    paths:
+      - install.sh
+      - deploy.sh
+      - upload.sh
+      - setup.sh
+      - backup.sh
+      - rsync.sh
+      - sync.sh
+      - run.sh
+      - test.sh
+    suffix: []
+    expression: response.status == 200 && ("#!/bin/bash|#!/bin/sh|#!/usr/bin/env|echo |export |chmod|mkdir|rm |cp |mv |curl |wget |apt-get|yum install|pip install|npm install|docker".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Config files — require config-like content
+  - category: dirscan/default
+    paths:
+      - .env
+    suffix: []
+    expression: response.status == 200 && ("DB_|DATABASE_|APP_|API_|SECRET|KEY=|PASSWORD=|HOST=|PORT=|DEBUG=|APP_KEY|APP_SECRET|AWS_|MAIL_|REDIS_|CACHE_".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.php
+      - config/config.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|\\$|define|require|include|password|secret|database|host|port|username|db_name|db_host|db_user|db_pass".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.inc
+      - config/config.inc
+    suffix: []
+    expression: response.status == 200 && ("<\?php|\\$|define|require|include|password|secret|database|host|port|username|db_type|db_host|db_user|db_password".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - config.json
+    suffix: []
+    expression: response.status == 200 && ("\\{|\".*\":.*\"|password|secret|database|host|port|username|api_key|token|private_key".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - composer.json
+    suffix: []
+    expression: response.status == 200 && ("\"name\"|\"require\"|\"autoload\"|\"description\"|php".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - composer.lock
+    suffix: []
+    expression: response.status == 200 && ("\"name\"|\"version\"|\"source\"|\"dist\"".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - settings.ini
+      - application.ini
+      - conf.ini
+      - app.ini
+      - config.ini
+      - config/config.ini
+      - conf/config.ini
+      - db.ini
+      - configs/application.ini
+      - application/configs/application.ini
+      - configuration.ini
+    suffix: []
+    expression: response.status == 200 && ("\\[.*\\]|=.*|password|secret|database|host|port|username|adapter|driver|dsn|pdo|mysqli|pgsql".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - app.cfg
+      - server.cfg
+    suffix: []
+    expression: response.status == 200 && ("\\{|\\[|password|secret|database|host|port|server|bind|listen|connect|driver".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - web.config
+    suffix: []
+    expression: response.status == 200 && ("<configuration|<connectionStrings|<appSettings|<system.web|<customErrors|<authentication".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - httpd.conf
+    suffix: []
+    expression: response.status == 200 && ("ServerRoot|DocumentRoot|Listen |ServerName|DirectoryIndex|LoadModule|<Directory|<VirtualHost".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - php.ini
+    suffix: []
+    expression: response.status == 200 && ("engine =|short_open_tag|asp_tags|precision|output_buffering|safe_mode|disable_functions|open_basedir|max_execution_time|upload_max_filesize|post_max_size".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .user.ini
+    suffix: []
+    expression: response.status == 200 && ("open_basedir|disable_functions|upload_max_filesize|auto_prepend_file|auto_append_file".bmatches(response.body))
+    partial: false
+    root: false
+
+  # SSH keys and related files
+  - category: dirscan/default
+    paths:
+      - .ssh/id_rsa
+      - id_rsa
+      - .ssh/id_dsa
+      - id_dsa
+    suffix: []
+    expression: response.status == 200 && "BEGIN (RSA |DSA |EC |OPENSSH )?PRIVATE KEY".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/id_rsa.pub
+      - id_rsa.pub
+      - .ssh/id_dsa.pub
+    suffix: []
+    expression: response.status == 200 && "ssh-(rsa|dss|ed25519|ecdsa)".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/authorized_keys
+    suffix: []
+    expression: response.status == 200 && "ssh-(rsa|dss|ed25519|ecdsa)".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .ssh/known_hosts
+    suffix: []
+    expression: response.status == 200 && ("ssh-(rsa|dss|ed25519|ecdsa)|ecdsa-sha2|ssh-ed25519".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Shell history files
+  - category: dirscan/default
+    paths:
+      - .zshrc
+    suffix: []
+    expression: response.status == 200 && ("alias |export |PATH=|source |bind |setopt|ZSH_THEME|plugins=|oh-my-zsh".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .bash_profile
+    suffix: []
+    expression: response.status == 200 && ("alias |export |PATH=|source |if \\[|fi$|# .bash_profile|# Get the aliases|# User specific environment".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .bash_logout
+    suffix: []
+    expression: response.status == 200 && ("# ~/.bash_logout|clear|rm -|if \\[|mesg".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .rediscli_history
+    suffix: []
+    expression: response.status == 200 && ("SET |GET |DEL |KEYS |HGETALL|INFO|CONFIG|FLUSHALL|FLUSHDB|SELECT|AUTH|PING|redis-cli".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .mysql_history
+    suffix: []
+    expression: response.status == 200 && ("SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|SHOW|USE |GRANT|SET PASSWORD|mysql".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Apache/htaccess/htpasswd
+  - category: dirscan/default
+    paths:
+      - .htaccess
+      - .htaccess.bak
+    suffix: []
+    expression: response.status == 200 && ("RewriteEngine|RewriteRule|RewriteCond|AuthType|AuthName|Require|Deny|Allow|Options|DirectoryIndex|AddHandler|SetEnv".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - .htpasswd
+      - .htpasswd.bak
+      - htpasswd.bak
+    suffix: []
+    expression: response.status == 200 && "\\$apr1\\$|\\$2[aby]\\$|\\{SHA\\}|:[a-zA-Z0-9./]{8,}".bmatches(response.body)
+    partial: false
+    root: false
+
+  # .DS_Store — Apple macOS directory metadata (binary)
+  - category: dirscan/default
+    paths:
+      - .DS_Store
+    suffix: []
+    expression: response.status == 200 && response.content_length > 0 && response.content_length < 1048576 && !"<html".bmatches(response.body)
+    partial: false
+    root: false
+
+  # sftp-config.json (Sublime SFTP plugin)
+  - category: dirscan/default
+    paths:
+      - sftp-config.json
+    suffix: []
+    expression: response.status == 200 && ("\"type\"|\"host\"|\"user\"|\"password\"|\"remote_path\"|\"sftp\"|\"ftp\"|\"ssh_key_file\"".bmatches(response.body))
+    partial: false
+    root: false
+
+  # PAC (Proxy Auto-Config)
+  - category: dirscan/default
+    paths:
+      - proxy.pac
+    suffix: []
+    expression: response.status == 200 && ("function FindProxyForURL|isPlainHostName|dnsDomainIs|isResolvable|shExpMatch|PROXY|DIRECT|FindProxyForURL".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Specific web apps — require app-specific content
+  - category: dirscan/default
+    paths:
+      - index.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|<html|<\!DOCTYPE|powered by|welcome".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - phpmyadmin/index.php
+      - _phpmyadmin/index.php
+      - phpMyAdmin/index.php
+      - pma/index.php
+    suffix: []
+    expression: response.status == 200 && ("phpMyAdmin|phpmyadmin|PMA|MySQL|欢迎|phpMyAdmin demo|Navigation Frame|server_status|logo_right".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - zabbix/
+    suffix: []
+    expression: response.status == 200 && ("Zabbix|zabbix|SIGN IN|登录|Username|Password|zabbix_server|Monitoring|Configuration|Administration".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - cacti/
+    suffix: []
+    expression: response.status == 200 && ("Cacti|cacti|Login|登录|Username|Password|graph|device|poller".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - memadmin/index.php
+    suffix: []
+    expression: response.status == 200 && ("MemAdmin|memadmin|Memcache|memcache|Login|登录".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - resin-admin/
+    suffix: []
+    expression: response.status == 200 && ("Resin|resin-admin|Administration|Server|Watchdog|Deploy|Config|Log".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jmx-console/HtmlAdaptor
+    suffix: []
+    expression: response.status == 200 && ("JMX|jboss|JMXConsole|JMImplementation|java.lang|MBeans|Adaptor".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - jenkins/script
+    suffix: []
+    expression: response.status == 200 && ("Jenkins|Groovy|script|Console|execute|println|System".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - manager/html
+    suffix: []
+    expression: response.status == 200 && ("Tomcat|Manager|Deploy|Applications|server-status|/manager".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - solr/
+    suffix: []
+    expression: response.status == 200 && ("Solr|solr|SolrAdmin|Dashboard|Core Admin|Logging|Collections|solr-admin".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug/pprof/
+    suffix: []
+    expression: response.status == 200 && ("profile|heap|goroutine|trace|allocs|block|mutex|debug".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - examples/
+    suffix: []
+    expression: response.status == 200 && ("<title>Index of|<h1>Index of|Servlet|JSP|Example|Apache Tomcat|servlets".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - examples/servlets/servlet/SessionExample
+    suffix: []
+    expression: response.status == 200 && ("Session|session|Session ID|Session Created|Last Accessed|session.getMaxInactiveInterval|Requested Session ID".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - help/
+    suffix: []
+    expression: response.status == 200 && ("Help|help|Document|FAQ|Guide|Manual|文档|帮助|使用手册".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug.php
+    suffix: []
+    expression: response.status == 200 && ("debug|var_dump|print_r|backtrace|profile|zend|xdebug|phpinfo|<\?php".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug.txt
+    suffix: []
+    expression: response.status == 200 && ("error|exception|traceback|debug|fail|warn|stack|trace".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - debug
+    suffix: []
+    expression: response.status == 200 && ("debug|var_dump|print_r|backtrace|profile|zend|xdebug|phpinfo|<\?php|<%@|<jsp:".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - nohup.out
+    suffix: []
+    expression: response.status == 200 && ("error|exception|traceback|Traceback|Exception|Error|started|stopped|listening|running|failed|success|WARNING|ERROR|INFO".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - a.out
+    suffix: []
+    expression: response.status == 200 && response.content_length > 0 && response.content_length < 1048576 && !"<html".bmatches(response.body)
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - core
+    suffix: []
+    expression: response.status == 200 && response.content_length > 0 && !"<html".bmatches(response.body)
+    partial: false
+    root: false
+
+  # Documentation files — require document-like content
+  - category: dirscan/default
+    paths:
+      - readme.md
+      - README.md
+      - readme.txt
+      - README.txt
+      - readme.html
+      - readme
+      - README
+    suffix: []
+    expression: response.status == 200 && ("# |## |Installation|Usage|Getting Started|Configuration|Requirements|License|Copyright|Author|Description|Contributing|Changelog|readme".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - LICENSE.md
+      - LICENSE.txt
+      - LICENSE
+    suffix: []
+    expression: response.status == 200 && ("MIT License|Apache License|GPL|BSD|Copyright|Licensed|license|All rights reserved|WARRANTIES|REDISTRIBUTIONS|MERCHANTABILITY".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CHANGELOG.md
+      - CHANGELOG.txt
+      - CHANGELOG
+      - changelog.md
+      - changelog.txt
+      - changelog
+    suffix: []
+    expression: response.status == 200 && ("Change Log|Changelog|CHANGELOG|Version|Release|Fixed|Added|Changed|Deprecated|Removed|Security|Bug Fix|Feature".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - CONTRIBUTING.md
+      - CONTRIBUTING.txt
+      - CONTRIBUTING
+    suffix: []
+    expression: response.status == 200 && ("Contributing|CONTRIBUTING|Pull Request|Issue|Bug Report|Code of Conduct|Development|Guidelines|How to Contribute|Style Guide".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - INSTALL.md
+      - INSTALL.txt
+      - INSTALL
+      - install.md
+      - install.txt
+      - install.php.md
+      - install.php.txt
+      - install
+    suffix: []
+    expression: response.status == 200 && ("Install|INSTALL|Requirements|Dependencies|Setup|Configuration|Quick Start|Getting Started|npm install|pip install|composer|make|cmake|build|install".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - UPGRADE.md
+      - UPGRADE.txt
+      - UPGRADE
+    suffix: []
+    expression: response.status == 200 && ("Upgrade|UPGRADE|Migration|Migrate|Breaking Change|Backward Compatibility|Version|Update|Changelog".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - MAINTAINERS.md
+      - MAINTAINERS.txt
+      - MAINTAINERS
+    suffix: []
+    expression: response.status == 200 && ("Maintainer|MAINTAINERS|Contributor|Author|Team|Core Team|Release Manager|Review".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - vendor/composer/LICENSE
+    suffix: []
+    expression: response.status == 200 && ("MIT License|Apache License|GPL|BSD|Copyright|Licensed|All rights reserved|WARRANTIES".bmatches(response.body))
+    partial: false
+    root: false
+
+  # install.php — require installer-specific content
+  - category: dirscan/default
+    paths:
+      - install.php
+    suffix: []
+    expression: response.status == 200 && ("<\?php|install|setup|wizard|step|database|configuration|admin password|site name|license agreement|next|submit".bmatches(response.body))
+    partial: false
+    root: false
+
+  # config.php.bak / .swp backup files
+  - category: dirscan/default
+    paths:
+      - config.php.bak
+      - config.inc.php.bak
+      - db.php.bak
+      - config/.config.php.swp
+      - .config.php.swp
+      - .config.inc.php.swp
+      - .settings.php.swp
+      - .database.php.swp
+      - .db.php.swp
+      - .mysql.php.swp
+      - index.php.bak
+    suffix: []
+    expression: response.status == 200 && ("<\?php|<html|password|secret|database|host|username|define|require|include|\\$".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Key/secret files — require key-like content
+  - category: dirscan/default
+    paths:
+      - key
+      - keys
+      - key.txt
+      - .key
+      - secret_key
+      - secret
+      - .secret
+      - .secret_key
+    suffix: []
+    expression: response.status == 200 && ("BEGIN|PRIVATE KEY|CERTIFICATE|ssh-|-----|MIIB|MIIA|MIIBIj|key|secret|token|password|AKIA|AIza|ya29".bmatches(response.body))
+    partial: false
+    root: false
+
+  # db.conf — database config
+  - category: dirscan/default
+    paths:
+      - db.conf
+    suffix: []
+    expression: response.status == 200 && ("database|host|port|username|password|driver|dsn|connection|mysql|postgres|mongodb|sqlite".bmatches(response.body))
+    partial: false
+    root: false
+
+  # requirements.txt — Python dependencies
+  - category: dirscan/default
+    paths:
+      - requirements.txt
+    suffix: []
+    expression: response.status == 200 && ("[a-zA-Z0-9_-]+==|django|flask|requests|numpy|pandas|sqlalchemy|pyyaml|pillow|beautifulsoup4|pytest".bmatches(response.body))
+    partial: false
+    root: false
+
+  # database.yml — Rails database config
+  - category: dirscan/default
+    paths:
+      - config/database.yml
+    suffix: []
+    expression: response.status == 200 && ("adapter|database|username|password|host|encoding|pool|development|production|test:".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Path traversal — require passwd content
+  - category: dirscan/default
+    paths:
+      - etc/passwd
+      - ../../../../../../../../../../etc/passwd
+      - '%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/%C0%AE%C0%AE/etc/passwd'
+    suffix: []
+    expression: response.status == 200 && "root:.{0,2}[0-9]*:[0-9]*:|nobody:.{0,2}[0-9]*:[0-9]*:|/bin/(ba)?sh|/usr/sbin/nologin".bmatches(response.body)
+    partial: false
+    root: false
+
+  # Resin doc LFI
+  - category: dirscan/default
+    paths:
+      - resin-doc/resource/tutorial/jndi-appconfig/test%3FinputFile=/etc/profile
+    suffix: []
+    expression: response.status == 200 && ("PATH=|export|alias|umask|profile|/bin/|/etc/|/usr/".bmatches(response.body))
+    partial: false
+    root: false
+  - category: dirscan/default
+    paths:
+      - resin-doc/viewfile/%3Fcontextpath=/&servletpath=&file=index.jsp
+    suffix: []
+    expression: response.status == 200 && ("<%@|<jsp:|out.print|request|response|<title>index.jsp".bmatches(response.body))
+    partial: false
+    root: false
+
+  # statistics.html
+  - category: dirscan/default
+    paths:
+      - statistics.html
+    suffix: []
+    expression: response.status == 200 && ("statistics|统计|visitors|visits|pageviews|hits|traffic|bandwidth".bmatches(response.body))
+    partial: false
+    root: false
+
+  # temp.txt / tmp.txt
+  - category: dirscan/default
+    paths:
+      - temp.txt
+      - tmp.txt
+    suffix: []
+    expression: response.status == 200 && ("password|secret|token|key|config|database|admin|root|host|port|connection|credential|api_key|private".bmatches(response.body))
+    partial: false
+    root: false
+
+  # Generic catch-all (empty path = site root — not useful, skip)
+  # Removed: the "" path rule that only checks status == 200

@@ -102,7 +102,10 @@ func TestTargetGroupCreateAddMembersPersist(t *testing.T) {
 	}
 
 	// Re-GET the list and confirm it survives (in-memory cache persists).
-	resp, _ := http.Get(s.URL + "/api/target-groups")
+	resp, err := http.Get(s.URL + "/api/target-groups")
+	if err != nil {
+		t.Fatalf("get groups: %v", err)
+	}
 	defer resp.Body.Close()
 	var groups []map[string]any
 	_ = json.NewDecoder(resp.Body).Decode(&groups)
@@ -128,7 +131,10 @@ func TestTargetGroupCreateAddMembersPersist(t *testing.T) {
 	groupCache = nil
 	groupsLoaded = false
 	groupMu.Unlock()
-	resp2, _ := http.Get(s.URL + "/api/target-groups")
+	resp2, err := http.Get(s.URL + "/api/target-groups")
+	if err != nil {
+		t.Fatalf("get groups: %v", err)
+	}
 	defer resp2.Body.Close()
 	var groups2 []map[string]any
 	_ = json.NewDecoder(resp2.Body).Decode(&groups2)
@@ -156,7 +162,10 @@ func TestDeleteTargetPrunesGroupMembers(t *testing.T) {
 
 	doJSON(t, s, "DELETE", "/api/targets/"+tid, nil)
 
-	resp, _ := http.Get(s.URL + "/api/target-groups")
+	resp, err := http.Get(s.URL + "/api/target-groups")
+	if err != nil {
+		t.Fatalf("get groups: %v", err)
+	}
 	defer resp.Body.Close()
 	var groups []map[string]any
 	_ = json.NewDecoder(resp.Body).Decode(&groups)

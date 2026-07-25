@@ -858,9 +858,10 @@ func (s *Server) handleTaskVulns(w http.ResponseWriter, r *http.Request, t *scan
 		items = append(items, webVulnToFront(v))
 	}
 	writeJSON(w, map[string]any{
-		"items": items,
-		"total": total,
-		"page":  page,
+		"items":     items,
+		"total":     total,
+		"page":      page,
+		"vulnTotal": total,
 	})
 }
 

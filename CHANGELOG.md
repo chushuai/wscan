@@ -1,4 +1,6 @@
 # 1.0.50  2026-07-25
+## SUPPORT
+* 【1】扫描详情页漏洞卡片补全 HTTP 请求/响应快照展示：后端将 `WebVuln.Detail.SnapShot` 的原始报文解析为结构化 request/response，前端 `httpSec` 渲染完整的请求头、请求体、响应头与响应体。
 ## BUGFIX
 * 【1】修复扫描详情页漏洞列表不显示的问题（`renderVulns` 用 `const t=taskCache[curTask]` 覆盖了全局翻译函数 `t`，导致 `t('vul.empty')` 抛出 `t is not a function`，漏洞面板空白）。
 

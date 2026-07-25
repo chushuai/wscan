@@ -1600,8 +1600,9 @@ func webVulnToFront(v *model.WebVuln) map[string]any {
 		"taskId":    "",
 	}
 	if len(v.Detail.SnapShot) > 0 {
-		if req, ok := v.Detail.SnapShot[0].([]string); ok && len(req) >= 1 {
-			row["attackVector"] = v.Detail.Payload
+		if req, res, ok := parseSnapShot(v.Detail.SnapShot[0]); ok {
+			row["request"] = req
+			row["response"] = res
 		}
 	}
 	if v.Detail.Payload != "" {
@@ -1614,6 +1615,200 @@ func webVulnToFront(v *model.WebVuln) map[string]any {
 	}
 	return row
 }
+
+// parseSnapShot turns a single SnapShot entry (as produced by model.Vuln.ToWebVuln:
+// a []any{"<raw HTTP request>", "<raw HTTP response>"}) into the request/response
+// object shape the SPA's httpSec() renderer expects: {method,uri,version,headers,body}
+// and {status,reason,headers,body}. Snapshots can also be a single combined string;
+// we split on the blank-line boundary between request and response as a fallback.
+func parseSnapShot(shot any) (req, res map[string]any, ok bool) {
+	parts := snapshotStrings(shot)
+	if len(parts) == 0 {
+		return nil, nil, false
+	}
+	if len(parts) >= 2 {
+		req = parseRawRequest(parts[0])
+		res = parseRawResponse(parts[1])
+		return req, res, true
+	}
+	// Single string: split request/response on the first blank line after the
+	// request body (best-effort — covers dumps that concatenate the two).
+	req = parseRawRequest(parts[0])
+	if req != nil {
+		if raw, _ := req["__raw"].(string); raw != "" {
+			delete(req, "__raw")
+			if idx := strings.Index(raw, "\r\n\r\n"); idx >= 0 {
+				rest := raw[idx+4:]
+				if r := parseRawResponse(rest); r != nil {
+					res = r
+				}
+			} else if idx := strings.Index(raw, "\n\n"); idx >= 0 {
+				rest := raw[idx+2:]
+				if r := parseRawResponse(rest); r != nil {
+					res = r
+				}
+			}
+		}
+	}
+	return req, res, req != nil
+}
+
+// snapshotStrings normalizes a SnapShot entry into raw HTTP text strings:
+// either a []any/[]string{request, response} or a single string.
+func snapshotStrings(shot any) []string {
+	switch s := shot.(type) {
+	case []string:
+		out := make([]string, 0, len(s))
+		for _, v := range s {
+			out = append(out, v)
+		}
+		return out
+	case []any:
+		out := make([]string, 0, len(s))
+		for _, v := range s {
+			if str, ok := v.(string); ok {
+				out = append(out, str)
+			}
+		}
+		return out
+	case string:
+		return []string{s}
+	}
+	return nil
+}
+
+// parseRawRequest parses a raw HTTP request dump into {method,uri,version,headers,body}.
+// headers is a map[string][]string. Returns nil if the request line cannot be parsed.
+func parseRawRequest(raw string) map[string]any {
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return nil
+	}
+	// split head/body
+	var head, body string
+	if idx := strings.Index(raw, "\r\n\r\n"); idx >= 0 {
+		head, body = raw[:idx], raw[idx+4:]
+	} else if idx := strings.Index(raw, "\n\n"); idx >= 0 {
+		head, body = raw[:idx], raw[idx+2:]
+	} else {
+		head = raw
+	}
+	lines := splitLines(head)
+	if len(lines) == 0 {
+		return nil
+	}
+	fields := strings.Fields(lines[0])
+	if len(fields) < 3 {
+		return nil
+	}
+	headers := map[string]any{}
+	for _, l := range lines[1:] {
+		if l == "" {
+			continue
+		}
+		if i := strings.IndexByte(l, ':'); i >= 0 {
+			k := strings.TrimSpace(l[:i])
+			v := strings.TrimSpace(l[i+1:])
+			if k == "" {
+				continue
+			}
+			if cur, exists := headers[k]; exists {
+				if arr, ok := cur.([]string); ok {
+					headers[k] = append(arr, v)
+				} else if s, ok := cur.(string); ok {
+					headers[k] = []string{s, v}
+				}
+			} else {
+				headers[k] = v
+			}
+		}
+	}
+	row := map[string]any{
+		"method":  fields[0],
+		"uri":     fields[1],
+		"version": fields[2],
+		"headers": headers,
+	}
+	if body != "" {
+		row["body"] = body
+	}
+	return row
+}
+
+// parseRawResponse parses a raw HTTP response dump into {status,reason,version,headers,body}.
+func parseRawResponse(raw string) map[string]any {
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return nil
+	}
+	var head, body string
+	if idx := strings.Index(raw, "\r\n\r\n"); idx >= 0 {
+		head, body = raw[:idx], raw[idx+4:]
+	} else if idx := strings.Index(raw, "\n\n"); idx >= 0 {
+		head, body = raw[:idx], raw[idx+2:]
+	} else {
+		head = raw
+	}
+	lines := splitLines(head)
+	if len(lines) == 0 {
+		return nil
+	}
+	fields := strings.SplitN(lines[0], " ", 3)
+	if len(fields) < 2 {
+		return nil
+	}
+	version := fields[0]
+	statusStr := fields[1]
+	reason := ""
+	if len(fields) >= 3 {
+		reason = fields[2]
+	}
+	status := 0
+	_ = json.Unmarshal([]byte(statusStr), &status)
+	headers := map[string]any{}
+	for _, l := range lines[1:] {
+		if l == "" {
+			continue
+		}
+		if i := strings.IndexByte(l, ':'); i >= 0 {
+			k := strings.TrimSpace(l[:i])
+			v := strings.TrimSpace(l[i+1:])
+			if k == "" {
+				continue
+			}
+			if cur, exists := headers[k]; exists {
+				if arr, ok := cur.([]string); ok {
+					headers[k] = append(arr, v)
+				} else if s, ok := cur.(string); ok {
+					headers[k] = []string{s, v}
+				}
+			} else {
+				headers[k] = v
+			}
+		}
+	}
+	row := map[string]any{
+		"status":  status,
+		"reason":  reason,
+		"version": version,
+		"headers": headers,
+	}
+	if body != "" {
+		row["body"] = body
+	}
+	return row
+}
+
+// splitLines splits on CRLF or LF, dropping trailing empties.
+func splitLines(s string) []string {
+	s = strings.ReplaceAll(s, "\r\n", "\n")
+	parts := strings.Split(s, "\n")
+	for len(parts) > 0 && parts[len(parts)-1] == "" {
+		parts = parts[:len(parts)-1]
+	}
+	return parts
+}
+
 
 func paramKey(v *model.WebVuln) string {
 	if len(v.Target.Params) > 0 && len(v.Target.Params[0].Path) > 0 {

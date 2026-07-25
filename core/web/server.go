@@ -1535,7 +1535,11 @@ func groupVulns(vs []*model.WebVuln) []vulnGroup {
 		tid := vulnTypeID(v)
 		g, ok := idx[tid]
 		if !ok {
-			g = &vulnGroup{typeID: tid, name: tid, sev: v.Severity, urls: map[string]struct{}{}}
+			name := tid
+			if e := lookupVulnDB(tid); e != nil && e.Name != "" {
+				name = e.Name
+			}
+			g = &vulnGroup{typeID: tid, name: name, sev: v.Severity, urls: map[string]struct{}{}}
 			idx[tid] = g
 			order = append(order, tid)
 		}
@@ -1564,7 +1568,11 @@ func groupFrontVulns(vs []map[string]any) []vulnGroup {
 		tid := fmt.Sprint(v["typeId"])
 		g, ok := idx[tid]
 		if !ok {
-			g = &vulnGroup{typeID: tid, name: tid, sev: model.SeverityLevel(fmt.Sprint(v["severity"])), urls: map[string]struct{}{}}
+			name := tid
+			if e := lookupVulnDB(tid); e != nil && e.Name != "" {
+				name = e.Name
+			}
+			g = &vulnGroup{typeID: tid, name: name, sev: model.SeverityLevel(fmt.Sprint(v["severity"])), urls: map[string]struct{}{}}
 			idx[tid] = g
 			order = append(order, tid)
 		}
@@ -1588,9 +1596,13 @@ func groupFrontVulns(vs []map[string]any) []vulnGroup {
 
 // webVulnToFront maps a model.WebVuln into the richer record shape the SPA's
 // vuln detail renderer expects (typeId/severity/plugin/affects/parameter/etc.).
+// The vuln type id (Binding.ID == vulndb xml stem) is used to look up the
+// embedded vuln DB and fill in description/impact/recommendation/cvss/tags/
+// references when present, so the detail pane shows the full advisory text.
 func webVulnToFront(v *model.WebVuln) map[string]any {
+	typeID := vulnTypeID(v)
 	row := map[string]any{
-		"typeId":    vulnTypeID(v),
+		"typeId":    typeID,
 		"name":      v.Plugin,
 		"severity":  string(v.Severity),
 		"plugin":    v.Plugin,
@@ -1598,6 +1610,42 @@ func webVulnToFront(v *model.WebVuln) map[string]any {
 		"affects":   v.Detail.Addr,
 		"parameter": paramKey(v),
 		"taskId":    "",
+	}
+	if entry := lookupVulnDB(typeID); entry != nil {
+		if entry.Name != "" {
+			row["name"] = entry.Name
+		}
+		if entry.Description != "" {
+			row["description"] = entry.Description
+		}
+		if entry.Impact != "" {
+			row["impact"] = entry.Impact
+		}
+		if entry.Recommendation != "" {
+			row["recommendation"] = entry.Recommendation
+		}
+		if entry.CVSS2 != "" {
+			row["cvss2"] = entry.CVSS2
+		}
+		if entry.CVSS3 != "" {
+			row["cvss3"] = entry.CVSS3
+		}
+		if entry.CVSS4 != "" {
+			row["cvss4"] = entry.CVSS4
+		}
+		if entry.DetailsTemplate != "" {
+			row["detailsTemplate"] = entry.DetailsTemplate
+		}
+		if len(entry.Tags) > 0 {
+			row["tags"] = entry.Tags
+		}
+		if len(entry.References) > 0 {
+			refs := make([]map[string]any, 0, len(entry.References))
+			for _, r := range entry.References {
+				refs = append(refs, map[string]any{"title": r.Title, "url": r.URL})
+			}
+			row["references"] = refs
+		}
 	}
 	if len(v.Detail.SnapShot) > 0 {
 		if req, res, ok := parseSnapShot(v.Detail.SnapShot[0]); ok {

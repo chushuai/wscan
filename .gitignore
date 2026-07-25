@@ -1,3 +1,7 @@
 
 # built binary
 core/core
+
+# generated vuln DB (built from core/scannable_vuln.json by core/web/gen_vulndb.py;
+# required at compile time by go:embed — run the generator before building)
+core/web/vulndb/*.xml

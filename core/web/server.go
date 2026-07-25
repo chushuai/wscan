@@ -258,6 +258,7 @@ func (m *taskManager) delete(id string) error {
 			break
 		}
 	}
+	unpersistScan(id)
 	return nil
 }
 
@@ -313,6 +314,7 @@ func StartWebUIServer(c *cli.Context) error {
 		reverse: rv,
 		mgr:     newTaskManager(),
 	}
+	srv.mgr.rehydrateScans()
 	srv.labs = newLabManager(srv)
 	srv.plugins = buildPluginCatalog()
 
@@ -928,6 +930,7 @@ func (s *Server) controlTask(t *scanTask, action string) {
 			}
 		}
 		t.mu.Unlock()
+		persistScan(t.toRecord())
 		t.emit(map[string]any{"type": "stopped"})
 	}
 }
@@ -1229,6 +1232,8 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 		}
 		st := t.status
 		t.mu.Unlock()
+		// Persist the finished scan so it survives a restart.
+		persistScan(t.toRecord())
 		if st == statusDone {
 			t.emit(map[string]any{"type": "done"})
 		} else if st == statusError {

@@ -2,17 +2,22 @@
 * @Author: shaochuyu
 * @Date: 7/25/2026
 *
-* Embedded vulnerability database. Each .xml file under core/web/vulndb/
-* describes one vulnerability type (name/description/impact/recommendation/
-* severity/cvss/details_template/tags/references). Files are generated from
-* core/scannable_vuln.json by core/web/gen_vulndb.py.
+* Embedded vulnerability database. Each .xml file under
+* core/plugins/vulndb/data/ describes one vulnerability type
+* (name/description/impact/recommendation/severity/cvss/details_template/tags/
+* references). Files are generated from core/scannable_vuln.json by
+* core/plugins/vulndb/gen_vulndb.py.
 *
 * The vuln "type id" (the SPA groups vulns by this) is the xml filename without
 * the .xml suffix — e.g. xss.xml -> "xss". Plugin Binding.IDs use action-scoped
 * names (xss/reflected/default); vulnIDAliases maps them onto DB ids so a vuln
 * record carries the right advisory text without changing plugin ids.
+*
+* This package owns the advisory catalog. The web layer calls Lookup to enrich
+* the vuln records it serves to the SPA; plugins themselves only need to emit a
+* stable Binding.ID — the alias table here maps it to the right advisory.
  */
-package web
+package vulndb
 
 import (
 	"embed"
@@ -20,28 +25,29 @@ import (
 	"strings"
 )
 
-//go:embed vulndb/*.xml
+//go:embed data/*.xml
 var vulndbFS embed.FS
 
-// vulnDBEntry is the parsed shape of one vulndb/*.xml file.
-type vulnDBEntry struct {
-	ID               string
-	Name             string
-	Description      string
-	Impact           string
-	Recommendation   string
-	Severity         int
-	Score            float64
-	HasScore         bool
-	CVSS2            string
-	CVSS3            string
-	CVSS4            string
-	DetailsTemplate  string
-	Tags             []string
-	References       []vulnDBRef
+// Entry is the parsed shape of one data/*.xml file.
+type Entry struct {
+	ID              string
+	Name            string
+	Description     string
+	Impact          string
+	Recommendation  string
+	Severity        int
+	Score           float64
+	HasScore        bool
+	CVSS2           string
+	CVSS3           string
+	CVSS4           string
+	DetailsTemplate string
+	Tags            []string
+	References      []Ref
 }
 
-type vulnDBRef struct {
+// Ref is one advisory reference (title + url).
+type Ref struct {
 	Title string
 	URL   string
 }
@@ -66,9 +72,9 @@ type vulnDBXML struct {
 	} `xml:"references>reference"`
 }
 
-var vulnDB = func() map[string]*vulnDBEntry {
-	db := map[string]*vulnDBEntry{}
-	entries, err := vulndbFS.ReadDir("vulndb")
+var db = func() map[string]*Entry {
+	db := map[string]*Entry{}
+	entries, err := vulndbFS.ReadDir("data")
 	if err != nil {
 		return db
 	}
@@ -76,7 +82,7 @@ var vulnDB = func() map[string]*vulnDBEntry {
 		if e.IsDir() || !strings.HasSuffix(e.Name(), ".xml") {
 			continue
 		}
-		raw, err := vulndbFS.ReadFile("vulndb/" + e.Name())
+		raw, err := vulndbFS.ReadFile("data/" + e.Name())
 		if err != nil {
 			continue
 		}
@@ -84,7 +90,7 @@ var vulnDB = func() map[string]*vulnDBEntry {
 		if err := xml.Unmarshal(raw, &x); err != nil {
 			continue
 		}
-		entry := &vulnDBEntry{
+		entry := &Entry{
 			ID:              x.ID,
 			Name:            x.Name,
 			Description:     x.Description,
@@ -102,14 +108,14 @@ var vulnDB = func() map[string]*vulnDBEntry {
 			entry.HasScore = true
 		}
 		for _, r := range x.Refs {
-			entry.References = append(entry.References, vulnDBRef{Title: r.Title, URL: r.URL})
+			entry.References = append(entry.References, Ref{Title: r.Title, URL: r.URL})
 		}
 		db[entry.ID] = entry
 	}
 	return db
 }()
 
-// vulnIDAliases maps a plugin Binding.ID to the vulndb xml stem (id) that
+// idAliases maps a plugin Binding.ID to the vulndb xml stem (id) that
 // describes the same vulnerability class. The AWVS-derived vuln DB uses its
 // own naming (e.g. "xss", "sql_injection", "directory_traversal"); wscan's
 // plugins use action-scoped ids (e.g. "xss/reflected/default",
@@ -117,7 +123,7 @@ var vulnDB = func() map[string]*vulnDBEntry {
 // record (Binding.ID is unchanged for back-compat); the alias is resolved at
 // lookup time so a vuln carries the right advisory text without forcing every
 // plugin id to match a DB filename exactly.
-var vulnIDAliases = map[string]string{
+var idAliases = map[string]string{
 	"xss/reflected/default":               "xss",
 	"xss/reflected/cookie":                "xss",
 	"xss/reflected/referer":               "xss",
@@ -279,20 +285,23 @@ var vulnIDAliases = map[string]string{
 	"cookiekey/yii2/weak-key":               "cookiekey_weak_key",
 }
 
-// lookupVulnDB returns the DB entry for a vuln type id (Binding.ID / xml stem),
-// or nil if no matching entry exists. Aliases (vulnIDAliases) are tried first
+// Lookup returns the DB entry for a vuln type id (Binding.ID / xml stem),
+// or nil if no matching entry exists. Aliases (idAliases) are tried first
 // so a plugin id like "xss/reflected/default" resolves to the "xss" entry.
-func lookupVulnDB(id string) *vulnDBEntry {
+func Lookup(id string) *Entry {
 	if id == "" {
 		return nil
 	}
-	if alias, ok := vulnIDAliases[id]; ok {
-		if e, ok := vulnDB[alias]; ok {
+	if alias, ok := idAliases[id]; ok {
+		if e, ok := db[alias]; ok {
 			return e
 		}
 	}
-	if e, ok := vulnDB[id]; ok {
+	if e, ok := db[id]; ok {
 		return e
 	}
 	return nil
 }
+
+// Loaded reports whether the embedded DB parsed any entries (mainly for tests).
+func Loaded() bool { return len(db) > 0 }

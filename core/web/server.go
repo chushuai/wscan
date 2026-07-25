@@ -32,6 +32,7 @@ import (
 	"wscan/core/output"
 	"wscan/core/plugins"
 	"wscan/core/plugins/base"
+	"wscan/core/plugins/vulndb"
 	"wscan/core/reverse"
 
 	logger "wscan/core/utils/log"
@@ -1536,7 +1537,7 @@ func groupVulns(vs []*model.WebVuln) []vulnGroup {
 		g, ok := idx[tid]
 		if !ok {
 			name := tid
-			if e := lookupVulnDB(tid); e != nil && e.Name != "" {
+			if e := vulndb.Lookup(tid); e != nil && e.Name != "" {
 				name = e.Name
 			}
 			g = &vulnGroup{typeID: tid, name: name, sev: v.Severity, urls: map[string]struct{}{}}
@@ -1569,7 +1570,7 @@ func groupFrontVulns(vs []map[string]any) []vulnGroup {
 		g, ok := idx[tid]
 		if !ok {
 			name := tid
-			if e := lookupVulnDB(tid); e != nil && e.Name != "" {
+			if e := vulndb.Lookup(tid); e != nil && e.Name != "" {
 				name = e.Name
 			}
 			g = &vulnGroup{typeID: tid, name: name, sev: model.SeverityLevel(fmt.Sprint(v["severity"])), urls: map[string]struct{}{}}
@@ -1611,7 +1612,7 @@ func webVulnToFront(v *model.WebVuln) map[string]any {
 		"parameter": paramKey(v),
 		"taskId":    "",
 	}
-	if entry := lookupVulnDB(typeID); entry != nil {
+	if entry := vulndb.Lookup(typeID); entry != nil {
 		if entry.Name != "" {
 			row["name"] = entry.Name
 		}

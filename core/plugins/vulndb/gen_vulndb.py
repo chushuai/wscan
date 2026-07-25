@@ -18,8 +18,8 @@ import sys
 from xml.sax.saxutils import escape
 
 SRC = "core/scannable_vuln.json"
-DST = "core/web/vulndb"
-ALLOWLIST = "core/web/vulndb_allowlist.txt"
+DST = "core/plugins/vulndb/data"
+ALLOWLIST = "core/plugins/vulndb/allowlist.txt"
 
 # target id (xml stem) -> source json key. Used when the id we want is not a
 # json key itself but a different entry describes exactly that vuln class.

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: uknowva (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]+>Powered by uKnowva</a>".bmatches(response.body)'

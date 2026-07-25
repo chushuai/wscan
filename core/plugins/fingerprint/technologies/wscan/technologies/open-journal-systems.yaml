@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Open Journal Systems Detect
+    author: ricardomaia
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?i).*<meta.name="generator".content="Open.Journal.Systems.*>".bmatches(response.body) && response.status == 200'

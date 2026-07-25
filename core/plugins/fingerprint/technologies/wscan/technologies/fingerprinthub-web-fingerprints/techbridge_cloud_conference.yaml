@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: techbridge-cloud-conference (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.techbridge-inc.com/\" target=\"_blank\"></a></span>")
+        - response.body.bcontains(b"/images/web_meeting/tool_bg.jpg")
+        - response.body.bcontains(b"/joinmeeting.js")

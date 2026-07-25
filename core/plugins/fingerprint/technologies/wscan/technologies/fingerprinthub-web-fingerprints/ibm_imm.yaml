@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ibm-imm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0;url=/designs/imm/noscript/noscript_en.php\" />")
+        - response.body.bcontains(b"ibm.stg.inlinemessage.messagetypes.msg_critical")
+        - response.body.bcontains(b"/ibmdojo/")

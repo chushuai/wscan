@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: material-design-lite (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]* href="[^"]*material(?:\\.[\\w]+-[\\w]+)?(?:\\.min)?\\.css".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: promail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"powered by squirrelmail.org. squirrelmail") && response.body.bcontains(b"promail &trade; - login") )

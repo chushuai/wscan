@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webmin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Webmin") && response.body.bcontains(b"session_login") )
+        - response.body.bcontains(b"webmin server on")

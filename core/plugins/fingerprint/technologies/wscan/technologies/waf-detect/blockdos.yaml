@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: blockdos (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)blockdos\\.net".bmatches(response.body)'

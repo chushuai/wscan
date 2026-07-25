@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: php-csl (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"php code snippet")
+        - response.body.bcontains(b"title=\"php-csl\">php-csl")

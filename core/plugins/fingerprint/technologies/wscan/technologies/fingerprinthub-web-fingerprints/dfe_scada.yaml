@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dfe-scada (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"536870912")

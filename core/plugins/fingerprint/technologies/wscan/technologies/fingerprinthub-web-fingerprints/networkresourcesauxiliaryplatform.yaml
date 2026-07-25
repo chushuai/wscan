@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: networkresourcesauxiliaryplatform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<b>网络资源综合支撑辅助平台</b>")

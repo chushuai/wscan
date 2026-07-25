@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: h3c-cloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"分布式存储管理系统 </p>")
+        - response.body.bcontains(b"vstor")

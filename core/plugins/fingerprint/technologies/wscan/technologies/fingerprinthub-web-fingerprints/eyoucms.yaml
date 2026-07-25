@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: eyoucms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by eyoucms")
+        - response.body.bcontains(b"name=\"generator\" content=\"eyoucms")

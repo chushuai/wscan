@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: gitea (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Gitea - Git with a cup of tea\"")
+        - 'response.raw_header.bcontains(b"Set-Cookie: i_like_gitea")'

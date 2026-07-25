@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: superdata-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"速达软件技术（广州）有限公司")

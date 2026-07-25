@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: zentao-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"$('#zentao').addClass('btn-success');")
+        - response.body.bcontains(b"zentao/theme")
+        - response.body.bcontains(b"<a id='zentaopro' href='/pro/'")
+        - response.body.bcontains(b"$('#zentaopro').addclass")
+        - ( response.body.bcontains(b"powered by <a href='http://www.zentao.net' target='_blank'>zentaopms") && response.body.bcontains(b"welcome to use zentao!") )
+        - response.body.bcontains(b"href='/zentao/favicon.ico")
+        - 'response.body.bcontains(b"server: cpws")'

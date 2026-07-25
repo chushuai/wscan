@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: zkteco-security-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"src='/login/images/zksecurity.png'") && response.body.bcontains(b"百傲瑞达") )
+        - ( response.body.bcontains(b"class=\"login-finger-btn disabled\"") && response.body.bcontains(b"id=\"password_hidden\"") )
+        - response.body.bcontains(b"$(\".copyright\").text(\"copyright ? \" + server_current_year + \" zkteco co., ltd. all rights reserved\");")

@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: vam-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"mymodallabel\">login vam system")
+        - response.body.bcontains(b"powered by virtual airlines manager")
+        - response.body.bcontains(b"src=\"js/vam.js\"")
+        - response.body.bcontains(b"href=\"https://virtualairlinesmanager.net/\">virtual airlines manager")

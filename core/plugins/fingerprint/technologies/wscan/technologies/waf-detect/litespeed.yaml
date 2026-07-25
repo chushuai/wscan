@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: litespeed (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)litespeed.web.server".bmatches(response.body)'

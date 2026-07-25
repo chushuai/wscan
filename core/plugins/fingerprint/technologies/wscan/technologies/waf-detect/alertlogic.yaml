@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: alertlogic (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>requested.url.cannot.be.found<.".bmatches(response.body) || "(?i)proceed.to.homepage".bmatches(response.body) || "(?i)back.to.previous.page".bmatches(response.body) || "(?i)we('re|.are)?sorry.{1,2}but.the.page.you.are.looking.for.cannot".bmatches(response.body) || "(?i)reference.id.?".bmatches(response.body) || "(?i)page.has.either.been.removed.{1,2}renamed".bmatches(response.body) )

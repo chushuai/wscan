@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kxmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.kxmail.net")
+        - response.body.bcontains(b"/systemfunction.pack.js")
+        - response.body.bcontains(b"lo_computername")

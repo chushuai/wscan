@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: citadel-servers (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/styles/webcit.css")
+        - response.body.bcontains(b"<div class=\"boxlabel\">citadel server - powered by")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: NimPlant C2 Server - Detect
+    author: ja1sh
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"NimPlant C2 Server")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: redis-object-cache (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--\\s+Performance optimized by Redis Object Cache".bmatches(response.body)'

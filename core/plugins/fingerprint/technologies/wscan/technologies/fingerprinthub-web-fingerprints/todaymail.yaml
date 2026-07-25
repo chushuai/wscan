@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: todaymail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"todaymail anti-spam police") && response.body.bcontains(b"todaynic.com,inc.") )

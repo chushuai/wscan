@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Detect websites using Herokuapp endpoints
+    author: alifathi-h1
+pscan:
+    path:
+        - /
+    expressions: []

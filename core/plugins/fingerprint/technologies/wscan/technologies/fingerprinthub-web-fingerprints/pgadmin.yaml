@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pgadmin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pgadmin 客户端安装包")

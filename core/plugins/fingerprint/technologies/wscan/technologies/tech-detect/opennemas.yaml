@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: opennemas (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"OpenNemas ")

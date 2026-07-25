@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sangfor-data-center (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"acloglogin.php")
+        - 'response.raw_header.bcontains(b"Location: ./src/acloglogin.php")'

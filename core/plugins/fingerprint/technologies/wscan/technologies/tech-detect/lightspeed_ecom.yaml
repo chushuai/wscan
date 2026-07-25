@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lightspeed-ecom (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- \\[START\\] ''blocks/head\\.rain'' -->".bmatches(response.body)'

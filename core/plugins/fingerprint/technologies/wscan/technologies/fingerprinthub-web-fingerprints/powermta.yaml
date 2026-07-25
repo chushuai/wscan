@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: powermta (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<html><body>access denied.  please consult the http-access directive in the user's guide for more information.</body>")

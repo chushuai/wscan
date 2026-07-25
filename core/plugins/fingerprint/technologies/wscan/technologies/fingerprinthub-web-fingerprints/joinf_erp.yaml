@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: joinf-erp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>富通天下erp</h1>")

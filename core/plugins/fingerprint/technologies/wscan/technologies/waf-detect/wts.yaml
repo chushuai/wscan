@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: wts (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)(<title>)?wts.wa(f)?(\\w+(\\w+(\\w+)?)?)?".bmatches(response.body)'

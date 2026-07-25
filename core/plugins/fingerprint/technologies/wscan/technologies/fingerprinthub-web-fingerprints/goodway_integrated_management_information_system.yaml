@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: goodway-integrated-management-information-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"option value=\"enterprise\"")
+        - response.body.bcontains(b"是否域账户登录")

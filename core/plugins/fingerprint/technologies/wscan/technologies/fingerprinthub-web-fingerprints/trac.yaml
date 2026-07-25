@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: trac (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>available projects</h1>")
+        - response.body.bcontains(b"wiki/tracguide")
+        - response.body.bcontains(b"powered by trac")

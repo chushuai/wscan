@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vectr (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Location: /sra-purpletools-webui/app")'

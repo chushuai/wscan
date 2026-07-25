@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wacintaki-poteto-bbs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.ninechime.com/products/\" title=\"get your own free bbs!\">wacintaki")
+        - response.body.bcontains(b"by <a href=\"http://suteki.nu\">ranmaguy</a> and <a href=\"http://www.cellosoft.com\">marcello</a>")

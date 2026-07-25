@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: asciinema (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<asciinema-player".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pmway-e5 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"tip_browsertoolow:\"您当前使用的浏览器版本或模式太低，鹏为e5为了您更好的体验，请升级您的ie版本至8.0或以上。\"")

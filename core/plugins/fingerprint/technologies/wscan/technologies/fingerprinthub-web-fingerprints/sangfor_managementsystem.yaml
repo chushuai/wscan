@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sangfor-managementsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/cgi-bin/login.cgi?requestname=")
+        - response.body.bcontains(b"var msg = '对不起，集中管理平台暂不支持您当前使用的浏览器")
+        - response.body.bcontains(b"var msg = '对不起, '+str+'暂不支持您当前使用的浏览器")

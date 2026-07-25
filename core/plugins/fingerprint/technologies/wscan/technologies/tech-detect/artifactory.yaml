@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: artifactory (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<span class="version">Artifactory(?: Pro)?(?: Power Pack)?(?: ([\\d.]+))?".bmatches(response.body)'

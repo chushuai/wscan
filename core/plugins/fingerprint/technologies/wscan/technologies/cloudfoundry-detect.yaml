@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Cloudfoundry Detect
+    author: uomogrande
+pscan:
+    path: []
+    expressions:
+        - contains(header, "X-Vcap-Request-Id:") || contains(header, "X-Cf-Routererror:")

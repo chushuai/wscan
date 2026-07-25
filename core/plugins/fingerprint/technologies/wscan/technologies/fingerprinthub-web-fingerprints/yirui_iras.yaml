@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yirui-iras (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/authjsp/login.jsp")
+        - response.body.bcontains(b"fe0174bb-f093-42af-ab20-7ec621d10488")

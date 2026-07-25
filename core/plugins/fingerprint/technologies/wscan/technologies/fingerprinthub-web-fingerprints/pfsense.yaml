@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pfsense (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"rubicon communications, llc (netgate)")
+        - response.body.bcontains(b"<h4>login to pfsense</h4>")

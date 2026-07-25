@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: symantec-client-security (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- symantec client security web based installation -->")

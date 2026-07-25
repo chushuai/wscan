@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: secupress (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<h\\d*>secupress<.".bmatches(response.body) || "(?i)block.id.{1,2}bad.url.contents.<.".bmatches(response.body) )

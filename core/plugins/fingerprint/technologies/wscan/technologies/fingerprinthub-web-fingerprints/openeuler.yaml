@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: openeuler (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>Test Page for the Apache HTTP Server on openEuler Linux</title>") || response.body.bcontains(b"<title>Test Page for the Nginx HTTP Server on openEuler</title>") )

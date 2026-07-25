@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: youhuaopt-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/ashx/log/logincheck.ashx?fresh=\" + math.random()")

@@ -1,0 +1,16 @@
+engine: fingerprint
+info:
+    name: weblogic (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"WebLogic")
+        - response.body.bcontains(b"Hypertext Transfer Protocol")
+        - response.body.bcontains(b"<i>Hypertext Transfer Protocol -- HTTP/1.1</i>")
+        - response.body.bcontains(b"/console/framework/skins/wlsconsole/images/login_WebLogic_branding.png")
+        - response.body.bcontains(b"Welcome to Weblogic Application Server")
+        - response.body.bcontains(b"Error 403--")
+        - response.body.bcontains(b"Error 404--Not Found")
+        - response.body.bcontains(b"Oracle WebLogic Server")

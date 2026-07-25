@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: moodle (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"moodle\" href=\"http://moodle.org/")
+        - response.body.bcontains(b"content=\"moodle")
+        - response.body.bcontains(b"m.str = {\"moodle\":")

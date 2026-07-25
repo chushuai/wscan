@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: solodev (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div class=["'']dynamicDiv["''] id=["'']dd\\.\\d\\.\\d(?:\\.\\d)?["'']>".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: taskfreak (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.taskfreak.com\">taskfreak")

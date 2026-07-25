@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: Tomcat Detection
+    author: philippedelteil, dhiyaneshdk, adamcrosser
+pscan:
+    path:
+        - /
+        - /{{randstr}}
+        - /docs/introduction.html
+    expressions:
+        - contains(tolower(header), "tomcat")
+        - ( contains(tolower(body), "apache tomcat") || contains(tolower(body), "/manager/html") || contains(tolower(body), "/manager/status") )

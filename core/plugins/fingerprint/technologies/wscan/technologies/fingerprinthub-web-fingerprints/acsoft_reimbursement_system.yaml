@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: acsoft-reimbursement-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<div id=\"dsitetitle\"") && response.body.bcontains(b"by:lin.zhibin") )
+        - response.body.bcontains(b"window.external.addfavorite(location.href,document.title);")

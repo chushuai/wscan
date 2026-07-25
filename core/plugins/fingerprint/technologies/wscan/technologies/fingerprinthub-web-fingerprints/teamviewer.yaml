@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: teamviewer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"teamviewer") && response.body.bcontains(b"this site is running") )
+        - response.body.bcontains(b"<a href='http://www.teamviewer.com'>teamviewer</a>")
+        - response.body.bcontains(b"this site is running")

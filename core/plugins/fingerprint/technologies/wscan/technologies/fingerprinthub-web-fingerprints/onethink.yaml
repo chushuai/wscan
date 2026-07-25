@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: onethink (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"OneThink管理平台")
+        - response.body.bcontains(b"onethink.css")

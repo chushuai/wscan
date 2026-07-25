@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: iSpyConnect - Detect
+    author: arafatansari
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"iSpy is running")
+        - 'response.raw_header.bcontains(b"Server: iSpy")'

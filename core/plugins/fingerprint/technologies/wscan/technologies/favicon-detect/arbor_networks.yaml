@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: arbor-networks (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1745552996" == mmh3(base64_py(body)))

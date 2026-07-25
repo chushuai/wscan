@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: brocade-data-angle-guard-database (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.host + \"/agweb\"")

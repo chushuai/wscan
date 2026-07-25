@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: mdaemon-email-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/worldclient.dll?view=main")
+        - response.body.bcontains(b"mdaemon ")
+        - response.body.bcontains(b"<strong>mdaemon/worldclient")

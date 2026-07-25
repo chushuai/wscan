@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: salien-performance-management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"images/login/cbgl/favicon.ico\"")
+        - response.body.bcontains(b"content=\"copyright 2010 www.salien.com.cn\"")

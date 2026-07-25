@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: sangfor-employee-internet-management (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b" = function(str, key)") && response.body.bcontains(b"content=\"must-revalidate\"") )
+        - response.body.bcontains(b"document.cookie = 'sangfor_session_hash=0'")
+        - response.body.bcontains(b"上网优化管理")
+        - response.body.bcontains(b"href=\"http://sec.sangfor.com.cn/events/89.html\"")
+        - response.body.bcontains(b"internet authentication system")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: amiro.cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"= Amiro.CMS (c) =")

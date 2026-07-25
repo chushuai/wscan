@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: lenovo-enterprise-network-disk (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"client/android/bin/lenovobox.apk")
+        - response.body.bcontains(b"alt=\"联想企业网盘android客户端下载\"")

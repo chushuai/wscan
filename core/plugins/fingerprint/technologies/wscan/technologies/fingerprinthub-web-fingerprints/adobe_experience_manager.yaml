@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adobe-experience-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"adobe experience manager")
+        - response.body.bcontains(b" class=\"coral-heading coral-heading--1\"")

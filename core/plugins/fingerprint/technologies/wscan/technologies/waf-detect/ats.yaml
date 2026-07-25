@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: ats (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)(\\()?apachetrafficserver((\\/)?\\d+(.\\d+(.\\d+)?)?)".bmatches(response.body) || "(?i)ats((\\/)?(\\d+(.\\d+(.\\d+)?)?))?".bmatches(response.body) )

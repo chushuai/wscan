@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pirobase-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<(?:script|link)[^>]/site/[a-z0-9/._-]+/resourceCached/[a-z0-9/._-]+".bmatches(response.body) || "<input[^>]+cbi:///cms/".bmatches(response.body) )

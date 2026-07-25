@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: om-video-conferencing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p><a href=\"http://www.omeeting.com\" target='_blank'>powered by")
+        - response.body.bcontains(b"content=\"om视频会议")
+        - response.body.bcontains(b"onclick=\"gotomeeting('/gotomeeting.php")

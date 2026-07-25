@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: microsoft-asp.net (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input[^>]+name="__VIEWSTATE".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fengyunqifei-firim (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"android/com.apsp.xnmdm-signed.apk\"")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: advantech-webaccess (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/bw_templete1.dwt")
+        - response.body.bcontains(b"/broadweb/webaccessclientsetup.exe")
+        - response.body.bcontains(b"/broadweb/bwuconfig.asp")

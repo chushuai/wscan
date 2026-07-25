@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sourcecode-k2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"document.getelementbyid(\"redirectform\").action = \"../mxworkspace/login.aspx")
+        - response.body.bcontains(b"document.getelementbyid(\"redirectform\").action = \"../workspace/default.aspx")

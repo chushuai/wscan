@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Zope Quick Start Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Zope QuickStart</title>")
+        - response.headers["server"].contains("Zope/")

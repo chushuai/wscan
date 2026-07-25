@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webasyst-shop-script (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.shop-script.com")
+        - 'response.body.bcontains(b"powered by webasyst shop-script <a href=\"http://www.shop-script.com/\" style=\"font-weight: normal\">shopping cart software</a>")'

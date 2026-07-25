@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: CentOs-WebPanel Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>HTTP Server Test Page powered by CentOS-WebPanel.com</title>")

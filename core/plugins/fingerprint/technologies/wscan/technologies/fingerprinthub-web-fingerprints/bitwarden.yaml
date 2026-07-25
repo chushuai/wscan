@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bitwarden (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title page-title>Bitwarden Web Vault</title>")

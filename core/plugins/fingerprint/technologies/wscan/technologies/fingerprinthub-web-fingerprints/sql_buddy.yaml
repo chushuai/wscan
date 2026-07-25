@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sql-buddy (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"h3><a href=\"http://www.sqlbuddy.com/help")
+        - response.body.bcontains(b"href=\"themes/bittersweet/css/main.css")

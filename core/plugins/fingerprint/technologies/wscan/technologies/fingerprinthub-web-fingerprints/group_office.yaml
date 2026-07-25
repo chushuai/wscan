@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: group-office (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by group-office")
+        - response.body.bcontains(b"\"theme\":\"group-office\",")

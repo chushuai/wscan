@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: MicroStrategy Instances Detection Template
+    author: philippedelteil, retr02332
+pscan:
+    path:
+        - /{{path}}
+    expressions:
+        - ( contains(body, "MicroStrategy, Incorporated.") || contains(body, "microstrategy.servletName") || contains(body, "mstrHiddenInput") )

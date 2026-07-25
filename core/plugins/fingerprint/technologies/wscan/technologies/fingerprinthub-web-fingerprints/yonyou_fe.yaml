@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yonyou-fe (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"v_hedden") && response.body.bcontains(b"v_show") )

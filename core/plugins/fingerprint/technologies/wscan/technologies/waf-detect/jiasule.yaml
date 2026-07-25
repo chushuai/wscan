@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: jiasule (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)^jsl(_)?tracking".bmatches(response.body) || "(?i)(__)?jsluid(=)?".bmatches(response.body) || "(?i)notice.jiasule".bmatches(response.body) || "(?i)(static|www|dynamic).jiasule.(com|net)".bmatches(response.body) )

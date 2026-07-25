@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpmps (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by phpmps")
+        - response.body.bcontains(b"templates/phpmps/style/index.css")

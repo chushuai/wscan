@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vignette (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+="vgn-?ext".bmatches(response.body)'

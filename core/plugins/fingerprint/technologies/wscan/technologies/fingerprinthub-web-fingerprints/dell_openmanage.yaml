@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dell-openmanage (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"openmanage\"")
+        - ( response.body.bcontains(b"src=\"/oem//data/images/logo.gif\"") && response.body.bcontains(b"url=/servlet/omsalogin?msgstatus='") )

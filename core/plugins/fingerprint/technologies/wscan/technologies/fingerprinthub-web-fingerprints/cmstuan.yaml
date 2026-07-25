@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cmstuan (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"开源团主机管理系统")

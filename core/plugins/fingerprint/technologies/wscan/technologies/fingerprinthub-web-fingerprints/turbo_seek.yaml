@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: turbo-seek (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var myspecs = \"'menubar=0,status=1,resizable=1,location=0,titlebar=1,toolbar=1,scrollbars=1,width=\" + mywidth + \",height=\" + myheight +")

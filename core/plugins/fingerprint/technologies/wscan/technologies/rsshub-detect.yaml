@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: RSSHub Detect
+    author: ritikchaddha
+pscan:
+    path:
+        - /favicon.ico
+    expressions:
+        - ('-1893514038' == mmh3(base64_py(body)))

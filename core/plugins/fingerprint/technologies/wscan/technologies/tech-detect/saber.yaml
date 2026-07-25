@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: saber (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div [^>]*id="_saber"".bmatches(response.body)'

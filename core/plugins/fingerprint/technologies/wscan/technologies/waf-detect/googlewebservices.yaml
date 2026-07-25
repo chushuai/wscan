@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: googlewebservices (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)your.client.has.issued.a.malformed.or.illegal.request".bmatches(response.body) || "(?i)our.systems.have.detected.unusual.traffic".bmatches(response.body) || "(?i)block(ed)?.by.g.cloud.security.policy.+".bmatches(response.body) )

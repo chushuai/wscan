@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hostbill (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://hostbillapp.com")
+        - response.body.bcontains(b"<strong>hostbill")

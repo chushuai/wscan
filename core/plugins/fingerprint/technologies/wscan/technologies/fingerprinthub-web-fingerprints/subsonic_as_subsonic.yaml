@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: subsonic-as-subsonic (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"subsonic")
+        - response.body.bcontains(b"onload=\"document.getelementbyid('j_username').focus()\"")
+        - response.body.bcontains(b"parent.frames.upper.keyboardshortcut(\"showindex\", index.touppercase());")

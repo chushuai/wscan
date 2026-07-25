@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yunanbao-yunxz (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"id=mtokenplugin width=0 height=0 style=\"position: absolute;left: 0px; top: 0px\"")'

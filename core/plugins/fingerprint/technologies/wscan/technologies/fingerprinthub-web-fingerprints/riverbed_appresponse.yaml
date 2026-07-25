@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: riverbed-appresponse (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"uiwebinsights/webinsights.html")

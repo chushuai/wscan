@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: schneider-citectscada (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0; url=/citectscada\">")
+        - response.body.bcontains(b"content=\"start services, start group, the start group, automation, industrial, software engineering, scada, plc, rtu, rockwell, rockwell automation, allen-bradley, allen bradley, allenbradley, citect, citectscada, kingfisher")

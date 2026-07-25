@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gitea (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div class="ui left">\\n\\s+© Gitea Version: ([\\d.]+)".bmatches(response.body)'

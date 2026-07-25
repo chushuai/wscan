@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vimeo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<(?:param|embed)[^>]+vimeo\\.com/moogaloop|<iframe[^>]player\\.vimeo\\.com)".bmatches(response.body)'

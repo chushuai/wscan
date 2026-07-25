@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vmware-secure-file-transfer (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1642701741" == mmh3(base64_py(body)))

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: grafana (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Grafana") && response.body.bcontains(b"login") )
+        - response.body.bcontains(b"window.grafanabootdata = ")
+        - response.body.bcontains(b"grafana-app")

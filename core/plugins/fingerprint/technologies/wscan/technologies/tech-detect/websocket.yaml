@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: websocket (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<link[^>]+rel=["']web-socket["']".bmatches(response.body) || "<(?:link|a)[^>]+href=["']wss?://".bmatches(response.body) )

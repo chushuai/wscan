@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kube API Version
+    author: sharath, raesene
+pscan:
+    path:
+        - /version
+    expressions:
+        - response.status == 200 && ( response.body.bcontains(b"\"major\":") && response.body.bcontains(b"\"minor\":") && response.body.bcontains(b"\"goVersion\":") )

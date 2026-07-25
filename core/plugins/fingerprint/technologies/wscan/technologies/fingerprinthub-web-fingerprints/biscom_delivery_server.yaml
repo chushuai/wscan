@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: biscom-delivery-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/bds/stylesheets/fds.css")
+        - response.body.bcontains(b"/bds/includes/fdsjavascript.do")

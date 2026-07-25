@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: articlepublisherpro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"www.articlepublisherpro.com")
+        - response.body.bcontains(b"content=\"article publisher pro")

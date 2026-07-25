@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"lgdynacodebtn")
+        - ( response.body.bcontains(b"id=\"lgform\" action=\"/sso/login") && response.body.bcontains(b"vop") )

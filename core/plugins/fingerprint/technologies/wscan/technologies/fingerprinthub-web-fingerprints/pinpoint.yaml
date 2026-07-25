@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pinpoint (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<body id=\"pinpoint\">") && response.body.bcontains(b"<title>PINPOINT</title>") )

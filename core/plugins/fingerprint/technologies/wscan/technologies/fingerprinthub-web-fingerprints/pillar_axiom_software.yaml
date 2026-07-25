@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pillar-axiom-software (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"axiom storage services manager")

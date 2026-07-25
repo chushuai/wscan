@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: confluence (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Location: /login.action?os_destination=")'
+        - ( response.body.bcontains(b"id=\"com-atlassian-confluence") && response.body.bcontains(b"name=\"confluence-base-url\"") )

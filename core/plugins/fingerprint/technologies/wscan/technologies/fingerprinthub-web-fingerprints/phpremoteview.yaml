@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpremoteview (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"style=''font: 8pt verdana''>phpremoteview")'

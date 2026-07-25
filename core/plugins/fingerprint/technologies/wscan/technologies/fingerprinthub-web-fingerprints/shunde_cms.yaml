@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shunde-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"for=\"ctl00_cph_l_login_username\">crm帐号")

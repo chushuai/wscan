@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: safedog (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)(http(s)?)?(://)?(www|404|bbs|\\w+)?.safedog.\\w".bmatches(response.body) || "(?i)waf(.?\\d+.?\\d+)".bmatches(response.body) )

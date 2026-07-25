@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jboss-as (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"manage this jboss as instance")

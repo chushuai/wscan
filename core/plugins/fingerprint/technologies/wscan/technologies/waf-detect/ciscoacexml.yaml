@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: ciscoacexml (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)ace.xml.gateway".bmatches(response.body)'

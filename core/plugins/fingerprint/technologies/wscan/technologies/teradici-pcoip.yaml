@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Teradici PCoIP Detection
+    author: pdteam
+pscan:
+    path:
+        - /info/
+    expressions:
+        - response.body.bcontains(b"PCoIP Connection Manager")

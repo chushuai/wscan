@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: clarity (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<clr-main-container".bmatches(response.body) || "<link [^>]*href="[^"]*clr-ui(?:\\.min)?\\.css".bmatches(response.body) )

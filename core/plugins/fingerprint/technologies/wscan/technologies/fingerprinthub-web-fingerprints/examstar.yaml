@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: examstar (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/examstar_icon.ico")
+        - response.body.bcontains(b"<div class=\"content-bottom-text\">考试星为您提供方便、高效的考试服务</div>")

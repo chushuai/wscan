@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: wygk-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"wrzcnet.ico")
+        - response.body.bcontains(b"<a href=\"mailto:webmaster@wrzc.net")
+        - response.body.bcontains(b"url = 'wrzcnet_vote.asp?stype=view';")

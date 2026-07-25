@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: creatsoft-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/corrosion/charts/water-pid.jsp")
+        - response.body.bcontains(b"href=\"/corrosion/charts/ph.jsp\"")

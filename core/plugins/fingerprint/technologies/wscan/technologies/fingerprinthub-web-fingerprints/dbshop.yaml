@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dbshop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"DBShop")
+        - response.body.bcontains(b"content=\"dbshop")

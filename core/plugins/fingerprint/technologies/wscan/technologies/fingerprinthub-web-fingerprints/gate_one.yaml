@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: gate-one (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<div id=\"gateone\"></div>") && response.body.bcontains(b"gateone.css") && response.body.bcontains(b"gateone.js") )
+        - 'response.raw_header.bcontains(b"Server: GateOne")'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: forcepoint-websense-email-security-gateway (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"websense email security gateway")

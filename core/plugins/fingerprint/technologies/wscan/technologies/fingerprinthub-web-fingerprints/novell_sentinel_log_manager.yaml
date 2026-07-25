@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novell-sentinel-log-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"novell sentinel log manager")
+        - response.body.bcontains(b"content=\"0;url=/novelllogmanager\">")

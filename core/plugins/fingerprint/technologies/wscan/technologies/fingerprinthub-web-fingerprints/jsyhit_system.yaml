@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jsyhit-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"仪化产品质量查询系统\"")

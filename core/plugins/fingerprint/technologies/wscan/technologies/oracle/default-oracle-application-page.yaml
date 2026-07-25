@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle Application Server Containers
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<TITLE>Oracle Application Server Containers for J2EE 10g</TITLE>")

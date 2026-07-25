@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: flyspray (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<a[^>]+>Powered by Flyspray|<map id="projectsearchform)".bmatches(response.body)'

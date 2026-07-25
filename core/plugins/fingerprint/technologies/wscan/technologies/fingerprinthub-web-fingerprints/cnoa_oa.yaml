@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cnoa-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"admin@cnoa.cn") && response.body.bcontains(b"powered by 协众oa") )
+        - response.body.bcontains(b"powered by cnoa.cn")

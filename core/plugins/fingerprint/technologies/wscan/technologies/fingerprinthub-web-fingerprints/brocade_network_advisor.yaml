@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: brocade-network-advisor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<span class=\"ui-menuitem-text\">about network advisor</span></a>")

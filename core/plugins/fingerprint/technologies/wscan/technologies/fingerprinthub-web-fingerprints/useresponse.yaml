@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: useresponse (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<form id=\"system-form-registration\" enctype=\"application/x-www-form-urlencoded\" class=\"system-form-registration\" accept-charset=\"utf-8")
+        - response.body.bcontains(b"title=\"customer feedback software, community support system\" target=\"_blank\" href=\"http://www.useresponse.com\" class=\"popup-logo\">")

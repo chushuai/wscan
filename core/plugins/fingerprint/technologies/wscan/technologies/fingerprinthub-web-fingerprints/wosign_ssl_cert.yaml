@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wosign-ssl-cert (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"https://seal.wosign.com/tws.js")
+        - response.body.bcontains(b"https://seal.wosign.com/signature")

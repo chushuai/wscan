@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: BIGIP - Detection
+    author: pr3r00t, 0x240x23elu
+pscan:
+    path:
+        - /
+        - /my.policy
+    expressions:
+        - response.raw_header.bcontains(b"BIGipServer~")
+        - response.raw_header.bcontains(b"BigIP")
+        - response.body.bcontains(b"F5 Networks.")

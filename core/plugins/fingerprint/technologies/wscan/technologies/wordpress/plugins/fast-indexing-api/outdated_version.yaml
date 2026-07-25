@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Instant Indexing for Google Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/fast-indexing-api/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

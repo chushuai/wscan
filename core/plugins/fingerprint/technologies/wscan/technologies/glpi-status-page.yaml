@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: GLPI Status Page - Detect
+    author: canberbamber
+pscan:
+    path:
+        - /status.php
+    expressions:
+        - ( response.body.bcontains(b"GLPI_DB_OK") || response.body.bcontains(b"GLPI_SESSION_DIR_OK") || response.body.bcontains(b"GLPI_OK") ) && response.status == 200

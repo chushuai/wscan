@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: chnitc-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.chnitc.com\" style=\"text-decoration:none;color:#fff;\">")
+        - response.body.bcontains(b"科业开发团队出品")

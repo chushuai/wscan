@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: strikingly (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powered by Strikingly\\.com".bmatches(response.body)'

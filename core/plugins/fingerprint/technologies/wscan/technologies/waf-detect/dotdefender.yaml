@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: dotdefender (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)dotdefender.blocked.your.request".bmatches(response.body)'

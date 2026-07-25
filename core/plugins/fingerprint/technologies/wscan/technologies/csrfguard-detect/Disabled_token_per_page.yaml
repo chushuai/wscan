@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Disabled-token-per-page (OWASP CSRFGuard 3.x/4.x - Detect)
+    author: forgedhallpass
+pscan:
+    path: []
+    expressions:
+        - ( status_code_3==400 && contains(body, "Token-Per-Page functionality is disabled") )

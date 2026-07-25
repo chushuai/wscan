@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: websvn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"WebSVN") && response.body.bcontains(b"subversion") )

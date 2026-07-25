@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adobe-campaign-classic (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-333791179" == mmh3(base64_py(body)))

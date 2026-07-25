@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hadoop-hue (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"jhuehdfstreeglobals")
+        - ( response.body.bcontains(b"hue and the hue logo are trademarks of cloudera, inc.") && response.body.bcontains(b"id=\"jhuenotify") )

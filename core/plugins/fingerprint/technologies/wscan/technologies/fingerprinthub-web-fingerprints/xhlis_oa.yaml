@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xhlis-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>杏和区域检验业务协同平台登录界面</title>")

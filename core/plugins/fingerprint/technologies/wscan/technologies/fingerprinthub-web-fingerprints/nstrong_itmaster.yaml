@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: nstrong-itmaster (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var base_path = '/stormweb';")
+        - response.body.bcontains(b"netstrong")

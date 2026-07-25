@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webpa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<td align=\"right\"><div id=\"inst_logo\"><img src=")

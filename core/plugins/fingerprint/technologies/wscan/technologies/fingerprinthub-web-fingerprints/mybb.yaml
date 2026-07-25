@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: mybb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.mybboard.com")
+        - response.body.bcontains(b"<!-- mybb is free software developed and maintained")
+        - response.body.bcontains(b"visibility of the mybb copyright at any time")
+        - response.body.bcontains(b"onchange=\"mybb.changelanguage();")

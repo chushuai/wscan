@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: opendocman (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"welcome to opendocman")
+        - response.body.bcontains(b"target=\"_new\">opendocman")

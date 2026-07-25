@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: intershop (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<ish-root".bmatches(response.body)'

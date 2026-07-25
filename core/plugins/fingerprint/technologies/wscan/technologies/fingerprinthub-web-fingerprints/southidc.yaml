@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: southidc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/southidckefu.js")
+        - response.body.bcontains(b"content=\"copyright 2003-2015 - southidc.net")
+        - response.body.bcontains(b"/southidcj2f.js")

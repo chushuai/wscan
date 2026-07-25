@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webmine (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe[^>]+src=[\\''"]https://webmine\\.cz/miner\\?key=".bmatches(response.body)'

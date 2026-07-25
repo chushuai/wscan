@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: siteserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"http://www.siteserver.cn") && response.body.bcontains(b"powered by") )
+        - response.body.bcontains(b"siteserver cms")
+        - ( response.body.bcontains(b"siteserver") && response.body.bcontains(b"t_系统首页模板") )
+        - response.body.bcontains(b"sitefiles")

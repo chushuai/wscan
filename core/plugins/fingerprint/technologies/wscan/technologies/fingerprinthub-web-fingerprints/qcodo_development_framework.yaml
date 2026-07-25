@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: qcodo-development-framework (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"zend engine version:</b>")
+        - response.body.bcontains(b"<b>qcodo version:")

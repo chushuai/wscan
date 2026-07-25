@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: irroba (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]*href="https://www\\.irroba\\.com\\.br".bmatches(response.body)'

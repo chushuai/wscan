@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: airlock (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)\\Aal[.-]?(sess|lb)=?".bmatches(response.body)'

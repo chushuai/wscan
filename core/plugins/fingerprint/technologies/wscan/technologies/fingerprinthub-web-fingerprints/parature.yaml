@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: parature (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"kbfolder.asp?deptid=")
+        - response.body.bcontains(b"redirectportalurl('/ics/support/custhandler.asp?")

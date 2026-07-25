@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: graylog (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"org.graylog.plugins.pipelineprocessor.processorplugin")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache HTTP Server Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>Apache HTTP Server Test Page powered by CentOS</title>")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: pk (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>pkSecurityModule\\W..\\WSecurity.Alert<.".bmatches(response.body) || "(?i).http(s)?.//([w]{3})?.kitnetwork.\\w".bmatches(response.body) || "(?i).>A.safety.critical.request.was.discovered.and.blocked.<.".bmatches(response.body) )

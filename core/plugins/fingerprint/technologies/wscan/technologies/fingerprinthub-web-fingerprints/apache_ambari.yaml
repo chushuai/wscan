@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-ambari (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"\"/licenses/NOTICE.txt\"") && response.body.bcontains(b"<title>Ambari</title>") )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: videosurveillancemanagementplatform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b" <span>平台采用最新图像化展现技术")

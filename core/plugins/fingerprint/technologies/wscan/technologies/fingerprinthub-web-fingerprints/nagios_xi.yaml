@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: nagios-xi (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"click the link below to get started using nagios xi.")
+        - response.body.bcontains(b"/nagiosxi/images/favicon.ico")

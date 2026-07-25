@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tianyang-bpm-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"value=\"sinopec.ad\" readonly=\"readonly\" id=\"ddldomains2\"")

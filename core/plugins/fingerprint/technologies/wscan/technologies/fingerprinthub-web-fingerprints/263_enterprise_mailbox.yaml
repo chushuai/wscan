@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 263-enterprise-mailbox (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"net263.wm.custom_login.homepage_init")
+        - response.body.bcontains(b"src=\"/custom_login/js/net263_wm_util.js")

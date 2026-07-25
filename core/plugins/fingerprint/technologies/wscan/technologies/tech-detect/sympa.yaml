@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sympa (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="https?://www\\.sympa\\.org">\\s*Powered by Sympa\\s*</a>".bmatches(response.body)'

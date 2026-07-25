@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: infusionsoft (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<input [^>]*name="infusionsoft_version" [^>]*value="([^>]*)" [^>]*\\/>".bmatches(response.body) || "<input [^>]*value="([^>]*)" [^>]*name="infusionsoft_version" [^>]*\\/>".bmatches(response.body) )

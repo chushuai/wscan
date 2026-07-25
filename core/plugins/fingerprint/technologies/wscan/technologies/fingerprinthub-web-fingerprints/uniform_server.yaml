@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: uniform-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.uniformserver.com\">")
+        - response.body.bcontains(b"<meta name=\"description\" content=\"the uniform server 8.1.0-coral.\" />")
+        - response.body.bcontains(b"<div id=\"divider\">developed by <a href=\"http://www.uniformserver.com/\">the uniform server development team</a></div>")

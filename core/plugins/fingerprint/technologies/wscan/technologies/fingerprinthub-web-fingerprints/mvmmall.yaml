@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mvmmall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"mvmmall")
+        - response.body.bcontains(b"content=\"www.mvmmall.cn\"")

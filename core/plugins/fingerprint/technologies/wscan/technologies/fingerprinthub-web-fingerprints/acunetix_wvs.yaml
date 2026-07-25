@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: acunetix-wvs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<acx-root>") && response.body.bcontains(b"<title>Acunetix") )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dnatools-dnalims (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/cgi-bin/dna/password.cgi") && response.body.bcontains(b"dnalims") )

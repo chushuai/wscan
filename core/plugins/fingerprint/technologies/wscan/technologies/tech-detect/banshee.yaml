@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: banshee (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Built upon the <a href="[^>]+banshee-php\\.org/">[a-z]+</a>(?:v([\\d.]+))?".bmatches(response.body)'

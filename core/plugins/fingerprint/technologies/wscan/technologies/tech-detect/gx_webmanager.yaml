@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gx-webmanager (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--\\s+Powered by GX".bmatches(response.body)'

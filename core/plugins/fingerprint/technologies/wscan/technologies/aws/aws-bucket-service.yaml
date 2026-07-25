@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect websites using AWS bucket storage
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - ( contains(tolower(header), 'x-amz-bucket') || contains(tolower(header), 'x-amz-request') || contains(tolower(header), 'x-amz-id') || contains(tolower(header), 'amazons3') ) && contains(tolower(header), 'x-guploader-uploadid')

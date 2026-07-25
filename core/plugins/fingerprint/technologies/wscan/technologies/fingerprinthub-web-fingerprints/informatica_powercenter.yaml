@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: informatica-powercenter (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/adminconsole/loginsubmit.do")
+        - 'response.raw_header.bcontains(b"Server: informatica")'

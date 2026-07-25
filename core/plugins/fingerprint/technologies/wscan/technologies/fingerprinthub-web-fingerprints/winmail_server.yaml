@@ -1,0 +1,16 @@
+engine: fingerprint
+info:
+    name: winmail-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"amax information technologies inc.")
+        - 'response.body.bcontains(b"pop3,smtp server: <font color=red>")'
+        - response.body.bcontains(b"src=\"themes/default/images/mail_pic.jpg")
+        - ( response.body.bcontains(b"encryptpwd") && response.body.bcontains(b"sessid") )
+        - ( response.body.bcontains(b"f_theme") && response.body.bcontains(b"pwdplaceholder") )
+        - response.body.bcontains(b"winmail mail server")
+        - ( response.body.bcontains(b"(build ") && response.body.bcontains(b"background=\"customer/winmail_bg11.jpg") )
+        - response.body.bcontains(b"src=\"customer/index_winmail_new.gif")

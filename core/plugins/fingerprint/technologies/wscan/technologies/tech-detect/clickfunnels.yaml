@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: clickfunnels (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<meta property="cf:app_domain" content="app\\.clickfunnels\\.com"".bmatches(response.body)'

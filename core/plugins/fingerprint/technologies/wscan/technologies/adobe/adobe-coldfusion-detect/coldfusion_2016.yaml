@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: coldfusion-2016 (Adobe ColdFusion Detector)
+    author: philippedelteil
+pscan:
+    path:
+        - /CFIDE/administrator/images/mx_login.gif
+        - /cfide/administrator/images/mx_login.gif
+        - /CFIDE/administrator/images/background.jpg
+        - /cfide/administrator/images/background.jpg
+        - /CFIDE/administrator/images/componentutilslogin.jpg
+        - /cfide/administrator/images/componentutilslogin.jpg
+    expressions:
+        - status_code==200 && ("f1281b6866aef66e35dc36fe4f0bf990" == md5(body))

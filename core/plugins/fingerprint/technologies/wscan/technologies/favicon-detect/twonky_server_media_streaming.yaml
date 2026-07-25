@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: twonky-server-media-streaming (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-878891718" == mmh3(base64_py(body)))

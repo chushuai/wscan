@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: west263 (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)wt\\d*cdn".bmatches(response.body)'

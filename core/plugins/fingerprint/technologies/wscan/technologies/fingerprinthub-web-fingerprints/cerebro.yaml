@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cerebro (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"lang=\"en\" ng-app=\"cerebro")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shwatermeter-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"关于正则表达式的内容在本书的第10章中有较详细的讨论")

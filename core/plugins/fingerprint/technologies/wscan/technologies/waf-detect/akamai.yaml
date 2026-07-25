@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: akamai (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>access.denied<.".bmatches(response.body) || "(?i)akamaighost".bmatches(response.body) || "(?i)ak.bmsc.".bmatches(response.body) )

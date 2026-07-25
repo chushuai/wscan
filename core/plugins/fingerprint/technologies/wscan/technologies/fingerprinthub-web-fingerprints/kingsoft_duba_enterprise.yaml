@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: kingsoft-duba-enterprise (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"title\">关于全网部署金山毒霸企业版")

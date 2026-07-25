@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: atlassian-jira (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Project Management Software") && response.body.bcontains(b"atlassian.com/software/jira") )

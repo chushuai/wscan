@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webflow (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]+data-wf-site".bmatches(response.body)'

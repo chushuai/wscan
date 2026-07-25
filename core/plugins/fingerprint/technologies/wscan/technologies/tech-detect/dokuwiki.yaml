@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dokuwiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div[^>]+id="dokuwiki__>".bmatches(response.body) || "<a[^>]+href="#dokuwiki__".bmatches(response.body) )

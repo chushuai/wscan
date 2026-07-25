@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Detect Sentry Instance
+    author: sicksec
+pscan:
+    path:
+        - /
+    expressions: []

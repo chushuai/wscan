@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: teradici-pcoip-zero-client (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pcoip&#174 zero client")
+        - response.body.bcontains(b"password_value")

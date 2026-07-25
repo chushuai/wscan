@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: jira (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Location: /secure/SetupMode!default.jspa")'
+        - response.body.bcontains(b"jira.webresources")
+        - response.body.bcontains(b"ams-build-number")
+        - response.body.bcontains(b"com.atlassian.jira")

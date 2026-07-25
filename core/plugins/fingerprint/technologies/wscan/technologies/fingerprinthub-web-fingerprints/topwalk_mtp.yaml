@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: topwalk-mtp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0;url=/usercertloginaction.action\" />")

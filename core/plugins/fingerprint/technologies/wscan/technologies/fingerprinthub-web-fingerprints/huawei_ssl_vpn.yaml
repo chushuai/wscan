@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: huawei-ssl-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"var apppath = \"/app/hw/\"") && response.body.bcontains(b"href=\"./logo/&logo&.ico\"") )

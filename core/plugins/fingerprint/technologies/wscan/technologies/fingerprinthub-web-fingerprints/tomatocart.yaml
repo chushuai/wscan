@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tomatocart (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"tomatocart open source shopping cart solutions\" />")
+        - response.body.bcontains(b"powered by <a href=\"http://www.tomatocart.com\" target=\"_blank\">tomatocart</a>")

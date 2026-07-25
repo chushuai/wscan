@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mida-eframework (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.body.bcontains(b"<title>Mida eFramework</title>") || response.body.bcontains(b"Server: Mida eFramework") )'

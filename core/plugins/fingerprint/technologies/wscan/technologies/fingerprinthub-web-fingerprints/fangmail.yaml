@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fangmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/fangmail/cgi/index.cgi") && response.body.bcontains(b"/fangmail/default/css/em_css.css") )

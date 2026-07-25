@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sourcebans (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"footqversion\">version(")
+        - response.body.bcontains(b"http://www.sourcebans.net\" target=\"_blank\"><img src=\"images/sb.png")

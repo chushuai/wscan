@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bestsch-ecs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/userfiles/admin/customskin")
+        - response.body.bcontains(b"src=\"/include/ecsserverapi.js")

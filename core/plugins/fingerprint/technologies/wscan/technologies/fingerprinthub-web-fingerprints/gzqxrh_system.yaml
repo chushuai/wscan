@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: gzqxrh-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"广州全息若海信息科技有限公司")
+        - response.body.bcontains(b"src=\"/scripts/easyui/jquery.easyui.min.js\"")
+        - 'response.body.bcontains(b"style=\"vertical-align: middle; cursor: pointer")'
+        - response.body.bcontains(b"响应键盘的回车事件")

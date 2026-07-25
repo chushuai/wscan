@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: luci (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/luci-static/openwrt.org/cascade.css")
+        - response.body.bcontains(b"luci - lua configuration interface")
+        - response.body.bcontains(b"powered by luci")
+        - response.body.bcontains(b"action=\"/cgi-bin/luci\">")
+        - response.body.bcontains(b"href=\"/cgi-bin/luci\"></a>")
+        - response.body.bcontains(b"<head> <meta http-equiv=\"refresh\" content=\"0; url=/cgi-bin/luci\" /> </head>")

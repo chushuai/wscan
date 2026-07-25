@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: gogs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"gogs")
+        - response.body.bcontains(b"<a class=\"item\" target=\"_blank\" href=\"https://gogs.io/docs\" rel=\"noreferrer\">帮助</a>")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-archiva (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/archiva.js")
+        - response.body.bcontains(b"/archiva.css")

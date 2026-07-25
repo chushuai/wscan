@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Apache Ranger Detection
+    author: for3stco1d
+pscan:
+    path:
+        - /login.jsp
+        - /images/favicon.ico
+    expressions:
+        - response.body.bcontains(b"<title> Ranger - Sign In</title>")
+        - status_code==200 && ('1302629996' == mmh3(base64_py(body)))

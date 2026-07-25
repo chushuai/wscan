@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bxemail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"请输入正确的电子邮件地址，如：abc@bxemail.com")

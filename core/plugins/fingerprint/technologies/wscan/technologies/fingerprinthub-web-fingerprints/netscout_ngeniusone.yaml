@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: netscout-ngeniusone (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var newpath = \"/common/ngeniusdirect.jsp")

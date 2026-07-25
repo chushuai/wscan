@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dreamweaver (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]*(?:InstanceBeginEditable|Dreamweaver([^>]+)target|DWLayoutDefaultTable)".bmatches(response.body)'

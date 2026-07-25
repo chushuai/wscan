@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: w7-officialaccounts (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"copyright\">powered by <a href=\"http://www.we7.cc\"><b>微擎</b>")
+        - ( response.body.bcontains(b"content=\"微擎,微信") && response.body.bcontains(b"onsubmit=\"return formcheck();\" class=\"we7-form\">") )
+        - response.body.bcontains(b"powered by we7.cc")

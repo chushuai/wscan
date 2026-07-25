@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: nexusguard (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)nexus.?guard".bmatches(response.body) || "(?i)((http(s)?://)?speresources.)?nexusguard.com.wafpage".bmatches(response.body) )

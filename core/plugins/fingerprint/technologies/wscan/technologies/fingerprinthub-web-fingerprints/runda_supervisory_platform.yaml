@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: runda-supervisory-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"log_rbox\"")

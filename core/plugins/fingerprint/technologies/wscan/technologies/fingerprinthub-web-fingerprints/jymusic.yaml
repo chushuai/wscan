@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jymusic (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"jymusic音乐管理系统")
+        - response.body.bcontains(b"public/static/libs/jymusic/css")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yahoo!-tag-manager (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- (?:End )?Yahoo! Tag Manager -->".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dell-n1108p-on (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"login_server_default\">n1108p-on")

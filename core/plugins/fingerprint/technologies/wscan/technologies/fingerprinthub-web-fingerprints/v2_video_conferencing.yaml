@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: v2-video-conferencing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<frame src=\"../conference/currentconfaction.do")
+        - response.body.bcontains(b"src=\"content.jsp\"")

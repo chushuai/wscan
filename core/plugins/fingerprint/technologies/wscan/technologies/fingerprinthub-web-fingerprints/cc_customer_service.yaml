@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cc-customer-service (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<script src=\"http://kefu.qycn.com/")

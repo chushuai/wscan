@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: parallels-plesk-panel (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"parallels ip holdings gmbh")
+        - response.body.bcontains(b"<img src=\"./img/panel-logo.png\" alt=\"parallels plesk panel\"></a>")

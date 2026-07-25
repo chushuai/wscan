@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: haitian-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"htvos.js")
+        - response.body.bcontains(b"images/myjs.js")
+        - response.body.bcontains(b"mshtml 8.00.6001.19298")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Vmware Horizon Version Detect
+    author: veshraj
+pscan:
+    path:
+        - /portal/info.jsp
+    expressions: []

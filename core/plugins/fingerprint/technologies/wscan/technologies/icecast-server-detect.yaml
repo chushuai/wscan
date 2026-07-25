@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Icecast Streaming Media Server Detection
+    author: theamanrawat
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"Icecast") && response.status == 200

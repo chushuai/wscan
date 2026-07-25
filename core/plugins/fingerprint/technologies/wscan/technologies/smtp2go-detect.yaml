@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: SMTP2GO Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>SMTP2GO</title>") || response.body.bcontains(b"2022 &copy; SMTP2GO.") ) && response.status == 200

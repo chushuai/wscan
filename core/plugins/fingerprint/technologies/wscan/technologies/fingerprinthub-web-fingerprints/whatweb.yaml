@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: whatweb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<body><center><table border=0><tr align=center><td><font color=red size=5>troy serial server</font></td></tr>")
+        - response.body.bcontains(b"network card access password&#058; </b><input type=password size=16 maxlength=16 name=access_psw>")

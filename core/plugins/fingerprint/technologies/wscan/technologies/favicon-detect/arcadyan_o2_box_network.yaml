@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: arcadyan-o2-box-network (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1479202414" == mmh3(base64_py(body)))

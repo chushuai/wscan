@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sawmill (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"password:error")
+        - response.body.bcontains(b"src=\"/picts/sawmill_logo.png")

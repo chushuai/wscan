@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: photoshelter (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<!--\\s+#+ Powered by the PhotoShelter Beam platform".bmatches(response.body) || "<link[^>]+c\\.photoshelter\\.com".bmatches(response.body) )

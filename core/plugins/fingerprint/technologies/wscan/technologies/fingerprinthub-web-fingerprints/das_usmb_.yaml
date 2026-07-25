@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: das-usmb- (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var pagefunc968535468893538dasdaweqwertion = \"timeout\";")
+        - response.body.bcontains(b"src=\"loadoem?path=login-logo.png")

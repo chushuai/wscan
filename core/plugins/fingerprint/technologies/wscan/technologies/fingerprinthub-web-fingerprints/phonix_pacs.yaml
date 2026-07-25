@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phonix-pacs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"/pacs/\"><img src=\"pacs/images/logo.svg\">")

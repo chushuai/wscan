@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ovirt-virtualization (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"https://www.ovirt.org\" class=\"obrand_loginpagelogolink\">")

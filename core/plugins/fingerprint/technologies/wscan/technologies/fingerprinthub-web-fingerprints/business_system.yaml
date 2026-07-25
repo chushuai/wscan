@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: business-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onsubmit=\"return checksubmit()")
+        - response.body.bcontains(b"function hiddenpass(e)")
+        - response.body.bcontains(b"window.location=contextpath+\"/work/index.jsp\"")
+        - response.body.bcontains(b"function omiga_window(url)")
+        - response.body.bcontains(b"images/login_d.png")
+        - response.body.bcontains(b"function updatapipeline(pipelinename)")

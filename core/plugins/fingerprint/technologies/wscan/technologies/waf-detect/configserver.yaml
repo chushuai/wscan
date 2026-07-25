@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: configserver (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i).>the.firewall.on.this.server.is.blocking.your.connection.<+".bmatches(response.body)'

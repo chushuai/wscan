@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: whir-flexoffice (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var flexofficepath=\"\/flexoffice\"")

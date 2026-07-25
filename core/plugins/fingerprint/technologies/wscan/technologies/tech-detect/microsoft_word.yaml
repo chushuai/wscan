@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: microsoft-word (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<html [^>]*xmlns:w="urn:schemas-microsoft-com:office:word"|<w:WordDocument>|<div [^>]*class="?WordSection1[" >]|<style[^>]*>[^>]*@page WordSection1)".bmatches(response.body)'

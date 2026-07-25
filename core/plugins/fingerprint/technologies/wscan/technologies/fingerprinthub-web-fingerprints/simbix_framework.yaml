@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: simbix-framework (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"simbix framework v")
+        - response.body.bcontains(b"logo-lpage-owner.png")
+        - response.body.bcontains(b"<div class=\"image\"><img src=\"/logo-lpage.png\" width=\"40\" height=\"40\" alt=\"simbix framework\" /></div>")

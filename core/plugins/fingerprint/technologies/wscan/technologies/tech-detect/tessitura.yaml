@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tessitura (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+Tessitura Version: (\\d*\\.\\d*\\.\\d*)?".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: violation-outreach-monitoring-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<body onload=\"forward_to_logon()\">")
+        - response.body.bcontains(b"window.location='login.action';")
+        - response.body.bcontains(b"欢迎登录违规外联平台")

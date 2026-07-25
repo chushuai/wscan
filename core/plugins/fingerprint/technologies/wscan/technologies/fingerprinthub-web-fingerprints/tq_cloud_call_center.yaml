@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tq-cloud-call-center (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"tq.cn/floatcard?")

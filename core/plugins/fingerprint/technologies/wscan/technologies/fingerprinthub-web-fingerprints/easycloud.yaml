@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: easycloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1 class=\"white\">云资源管控平台</h1>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: opencms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link href="/opencms/".bmatches(response.body)'

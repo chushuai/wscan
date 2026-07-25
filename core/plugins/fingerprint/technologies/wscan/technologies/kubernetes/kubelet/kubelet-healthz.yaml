@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubelet Healthz
+    author: sharath
+pscan:
+    path:
+        - /healthz
+    expressions:
+        - response.status == 200 && "text/plain".bmatches(response.raw_header) && response.body.bcontains(b"ok") && response.raw_header.bcontains(b"Kubernetes")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: suremail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"北京国信安邮科技有限公司")
+        - response.body.bcontains(b"<span> 客服邮箱：support@suremail.cn</span>")

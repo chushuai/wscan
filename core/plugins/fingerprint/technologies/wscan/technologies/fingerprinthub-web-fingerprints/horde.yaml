@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: horde (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"_setHordeTitle")
+        - 'response.body.bcontains(b"imp: copyright 2001-2009 the horde project")'

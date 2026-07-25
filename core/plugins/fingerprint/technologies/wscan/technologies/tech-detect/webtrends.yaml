@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webtrends (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]+id="DCSIMG"[^>]+webtrends".bmatches(response.body)'

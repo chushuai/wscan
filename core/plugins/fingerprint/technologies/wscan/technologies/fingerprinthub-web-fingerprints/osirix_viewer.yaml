@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: osirix-viewer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"service provided by <a href=\"https://www.osirix-viewer.com\"")

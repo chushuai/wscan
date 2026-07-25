@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Hetzner Cloud Detect
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"Hetzner Cloud") && response.body.bcontains(b"Hetzner Logo") ) && response.status == 200

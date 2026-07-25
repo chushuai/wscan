@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: telerik-sitefinity (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"telerik.web.ui.webresource.axd")
+        - response.body.bcontains(b"content=\"sitefinity")

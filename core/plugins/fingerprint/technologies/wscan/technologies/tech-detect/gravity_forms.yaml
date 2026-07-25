@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gravity-forms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div class=(?:"|')[^>]*gform_wrapper".bmatches(response.body) || "<div class=(?:"|')[^>]*gform_body".bmatches(response.body) || "<ul [^>]*class=(?:"|')[^>]*gform_fields".bmatches(response.body) || "<link [^>]*href=(?:"|')[^>]*wp-content/plugins/gravityforms/css/".bmatches(response.body) )

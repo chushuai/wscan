@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vmedia-multimedia-publishing-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"function toggle(targetid)")
+        - response.body.bcontains(b"class=\"video_00\"")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Samsung SmartTV Debug Config
+    author: pussycat0x
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<title>Debug Config</title>") && response.body.bcontains(b"MultiScreen Service") ) && response.status == 200

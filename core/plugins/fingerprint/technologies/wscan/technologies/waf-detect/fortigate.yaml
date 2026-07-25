@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: fortigate (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>powered.by.fortinet<.".bmatches(response.body) || "(?i).>fortigate.ips.sensor<.".bmatches(response.body) || "(?i)fortigate".bmatches(response.body) || "(?i).fgd_icon".bmatches(response.body) || "(?i)\\AFORTIWAFSID=".bmatches(response.body) || "(?i)application.blocked.".bmatches(response.body) || "(?i).fortiGate.application.control".bmatches(response.body) || "(?i)(http(s)?)?://\\w+.fortinet(.\\w+:)?".bmatches(response.body) || "(?i)fortigate.hostname".bmatches(response.body) || "(?i)the.page.cannot.be.displayed..please.contact.[^@]+@[^@]+\\.[^@]+.for.additional.information".bmatches(response.body) )

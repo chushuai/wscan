@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache Cocoon detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-Cocoon-Version")

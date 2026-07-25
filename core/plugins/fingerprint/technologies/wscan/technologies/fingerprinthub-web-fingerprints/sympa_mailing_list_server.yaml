@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sympa-mailing-list-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"sympa")
+        - response.body.bcontains(b"alt=\"sympa logo")

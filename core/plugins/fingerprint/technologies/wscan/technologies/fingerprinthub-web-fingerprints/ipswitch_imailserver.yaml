@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ipswitch-imailserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"myicalusername")
+        - 'response.raw_header.bcontains(b"Server: ipswitch-imail")'

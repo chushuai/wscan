@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mysqlman (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"mysql.cgi?do=top_level_op")
+        - response.body.bcontains(b"size=\"1\">mysqlman")

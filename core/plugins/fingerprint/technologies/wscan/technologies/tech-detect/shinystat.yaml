@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: shinystat (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<img[^>]*\\s+src=[''"]?https?://www\\.shinystat\\.com/cgi-bin/shinystat\\.cgi\\?[^''"\\s>]*[''"\\s/>]".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cisco-iox (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var g_url_version = \"/iox/api/v2\"")

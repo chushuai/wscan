@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 5ikq (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"我爱考勤云平台")
+        - response.body.bcontains(b"我爱考勤云平台</span>")

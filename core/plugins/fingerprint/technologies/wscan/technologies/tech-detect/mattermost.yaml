@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mattermost (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<noscript> To use Mattermost, please enable JavaScript\\. </noscript>".bmatches(response.body)'

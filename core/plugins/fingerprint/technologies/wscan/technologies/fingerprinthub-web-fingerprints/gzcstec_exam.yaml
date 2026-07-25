@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gzcstec-exam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"placeholder=\"请输入凭据\"")

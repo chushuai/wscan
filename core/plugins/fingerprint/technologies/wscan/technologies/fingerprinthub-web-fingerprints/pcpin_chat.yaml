@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: pcpin-chat (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"powered by pcpin chat")
+        - response.body.bcontains(b"onclick=\"document.loginform.register.value=0; document.loginform.lostpassword.value=0")
+        - response.body.bcontains(b"window.appname_='pcpin_chat'")

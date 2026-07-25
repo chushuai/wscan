@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: anmai-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b" id=\"lblname\">版权所有：上海安脉计算机科技有限公司")
+        - response.body.bcontains(b"id=\"lblname1\">版权所有：上海安脉计算机科技有限公司")
+        - response.body.bcontains(b"<font color=\"#000000\">上海安脉计算机科技有限公司</font>")

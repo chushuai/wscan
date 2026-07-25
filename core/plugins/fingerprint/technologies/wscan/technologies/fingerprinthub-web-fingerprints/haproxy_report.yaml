@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: haproxy-report (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"statistics report for haproxy")

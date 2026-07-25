@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pro-chat-rooms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"border=\"0\" alt=\"pro chat rooms")
+        - response.body.bcontains(b"href='http://prochatrooms.com'>pro chat rooms</a>")

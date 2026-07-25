@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 6kbbs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by 6kbbs")
+        - response.body.bcontains(b"generator\" content=\"6kbbs")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: froala-editor (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+class="[^"]*(?:fr-view|fr-box)".bmatches(response.body)'

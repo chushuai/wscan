@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: remobjects-dxsock (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"remobjects sdk")
+        - response.body.bcontains(b"remobjects software, llc.")

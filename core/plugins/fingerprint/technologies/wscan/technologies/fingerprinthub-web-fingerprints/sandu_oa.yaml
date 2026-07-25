@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sandu-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"青岛叁度信息技术有限公司")

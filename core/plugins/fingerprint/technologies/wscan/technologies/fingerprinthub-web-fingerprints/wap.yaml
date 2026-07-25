@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wap (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location = 'wap.htm'")

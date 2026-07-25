@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: semaphore (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"www.smartlogic.com")
+        - response.body.bcontains(b"alt=\"powered by semaphore\"")

@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: trs-wcm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/wcm/app/js")
+        - response.body.bcontains(b"0;url=/wcm")
+        - response.body.bcontains(b"window.location.href = \"/wcm\";")
+        - response.body.bcontains(b"forum.trs.com.cn")
+        - ( response.body.bcontains(b"/wcm\" target=\"_blank\">网站管理") && response.body.bcontains(b"wcm") )
+        - response.body.bcontains(b"/wcm\" target=\"_blank\">管理")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: percussion (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+class="perc-region"".bmatches(response.body)'

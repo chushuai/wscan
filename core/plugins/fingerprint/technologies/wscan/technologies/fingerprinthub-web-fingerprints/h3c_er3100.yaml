@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: h3c-er3100 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"ER3100") && response.body.bcontains(b"h3c.com") && response.body.bcontains(b"login") )

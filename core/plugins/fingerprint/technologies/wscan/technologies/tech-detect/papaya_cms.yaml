@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: papaya-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]*/papaya-themes/".bmatches(response.body)'

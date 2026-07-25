@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mermaid (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div [^>]*class=["'']mermaid["'']>".bmatches(response.body)'

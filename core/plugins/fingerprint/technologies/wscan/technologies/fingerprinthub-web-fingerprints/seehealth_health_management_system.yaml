@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: seehealth-health-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"upvalidatefile.aspx")

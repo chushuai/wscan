@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: neusoft-senginx (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"senginx-robot-mitigation")

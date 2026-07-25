@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: suitecrm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"sugar.themes.theme_name = 'suitep'")
+        - response.body.bcontains(b"sugar.themes.theme_name      = 'suiter'")
+        - response.body.bcontains(b"src=\"img/suitecrm.png\" alt=\"bitnami suitecrm stack\"")
+        - response.body.bcontains(b"supercharged by suitecrm")
+        - response.body.bcontains(b"src=\"custom/themes/default/images/company_logo.png")
+        - response.body.bcontains(b"alt=\"suitecrm\"")
+        - 'response.raw_header.bcontains(b"Set-Cookie: sugar_user_theme=suitep")'

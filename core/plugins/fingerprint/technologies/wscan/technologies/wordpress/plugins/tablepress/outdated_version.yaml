@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (TablePress – Tables in WordPress made easy Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/tablepress/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

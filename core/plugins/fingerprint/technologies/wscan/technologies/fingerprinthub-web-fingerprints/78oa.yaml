@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: 78oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.78oa.com\" target=\"_blank\">78OA办公系统</a>")
+        - response.body.bcontains(b"/resource/javascript/system/runtime.min.js")
+        - response.body.bcontains(b"license.78oa.com")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: everweb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"EverWeb ")

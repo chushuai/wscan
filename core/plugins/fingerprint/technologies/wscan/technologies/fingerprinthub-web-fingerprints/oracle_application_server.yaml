@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: oracle-application-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"oracle http server</font></font></b></h1>")
+        - response.body.bcontains(b"mod_ssl web site")
+        - response.body.bcontains(b"oracle jsp documentation")
+        - response.body.bcontains(b"mod_ose documentation")

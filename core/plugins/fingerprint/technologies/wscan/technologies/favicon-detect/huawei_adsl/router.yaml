@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: huawei-adsl/router (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1395400951" == mmh3(base64_py(body)))

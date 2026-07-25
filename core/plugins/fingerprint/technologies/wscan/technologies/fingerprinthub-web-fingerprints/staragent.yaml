@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: staragent (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location = \"/user/home.jsx\";")
+        - response.body.bcontains(b"href=\"/aisc/aisc.css")

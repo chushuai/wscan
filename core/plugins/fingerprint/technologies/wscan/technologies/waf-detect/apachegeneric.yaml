@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: apachegeneric (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)apache".bmatches(response.body) || "(?i).>you.don.t.have.permission.to.access+".bmatches(response.body) || "(?i)was.not.found.on.this.server".bmatches(response.body) || "(?i)<address>apache/([\\d+{1,2}](.[\\d+]{1,2}(.[\\d+]{1,3})?)?)?".bmatches(response.body) || "(?i)<title>403 Forbidden</title>".bmatches(response.body) )

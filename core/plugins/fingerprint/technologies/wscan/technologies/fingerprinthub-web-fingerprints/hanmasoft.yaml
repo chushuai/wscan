@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hanmasoft (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"汉码软件logo")
+        - response.body.bcontains(b"content=\"汉码软件")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: clientexec (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"clientexec\\.[^>]*\\s?=\\s?[^>]*;".bmatches(response.body)'

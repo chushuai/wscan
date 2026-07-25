@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ucap-search- (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"http://so.kaipuyun.cn?sitecode=")
+        - response.body.bcontains(b"method=\"post\" action=\"s\" onsubmit=\"return checksearchform();\">")

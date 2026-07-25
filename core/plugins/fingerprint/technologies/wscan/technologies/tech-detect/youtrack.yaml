@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: youtrack (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "no-title="YouTrack">".bmatches(response.body) || "data-reactid="[^"]+">youTrack ([0-9.]+)<".bmatches(response.body) || "type="application/opensearchdescription\\+xml" title="YouTrack"/>".bmatches(response.body) )

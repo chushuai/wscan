@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jira (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("855273746" == mmh3(base64_py(body)))

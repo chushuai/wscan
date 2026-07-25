@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: zotonic (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.body.bcontains(b"/lib/js/apps/zotonic-1.0") && response.body.bcontains(b"powered by: zotonic") )'

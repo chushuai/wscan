@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bulletlink-newspaper-template (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/modalpopup/core-modalpopup.css")
+        - response.body.bcontains(b"powered by bulletlink")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: spark-history-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/static/historypage-common.js\">")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pure-css (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<link[^>]+(?:([\\d.])+/)?pure(?:-min)?\\.css".bmatches(response.body) || "<div[^>]+class="[^"]*pure-u-(?:sm-|md-|lg-|xl-)?\\d-\\d".bmatches(response.body) )

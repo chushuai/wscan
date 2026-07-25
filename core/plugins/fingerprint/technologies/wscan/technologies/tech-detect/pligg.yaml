@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pligg (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<span[^>]+id="xvotes-0".bmatches(response.body)'

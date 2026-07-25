@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: xinhaisoft-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"北京心海导航教育科技股份有限公司-中国心理网版权所有<br>")
+        - response.body.bcontains(b"../regist.asp?school=")

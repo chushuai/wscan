@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Moveit File Transfer - Detect
+    author: tess
+pscan:
+    path:
+        - /
+        - /human.aspx
+    expressions:
+        - ( response.body.bcontains(b"stylesheet_MOVEit") || response.body.bcontains(b"moveit.transfer") || response.body.bcontains(b"MOVEitPopUp") || response.body.bcontains(b"MOVEit Automation") ) && response.status == 200

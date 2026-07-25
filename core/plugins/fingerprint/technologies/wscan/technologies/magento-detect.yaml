@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Magento Detect
+    author: techbrunchfr
+pscan:
+    path:
+        - /
+        - /graphql?query=+{customerDownloadableProducts+{+items+{+date+download_url}}+}
+    expressions:
+        - ( contains(tolower(header), "x-magento") && status_code == 200 )
+        - ( contains(body, "graphql-authorization") && contains(body, "The current customer") && status_code == 200 )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: salien-device-integrity-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"rmsie = /(msie\s|trident.*rv:)([\w.]+)/")

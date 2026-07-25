@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: paloalto (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "has.been.blocked.in.accordance.with.company.policy".bmatches(response.body) || ".>Virus.Spyware.Download.Blocked<.".bmatches(response.body) )

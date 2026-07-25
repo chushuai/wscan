@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: spark-jobs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/jobs/job?id=")
+        - response.body.bcontains(b"spark jobs")

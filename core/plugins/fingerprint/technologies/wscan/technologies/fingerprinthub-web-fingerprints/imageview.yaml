@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: imageview (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"imageview")
+        - response.body.bcontains(b"by jorge schrauwen")
+        - response.body.bcontains(b"href=\"http://www.blackdot.be\" title=\"blackdot.be")

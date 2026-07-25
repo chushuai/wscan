@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: lighttpd (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"lighttpd")
+        - response.raw_header.bcontains(b"lighttpd")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: InfluxDB Version Information - Detect
+    author: c-sh0
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"X-Influxdb-")

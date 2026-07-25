@@ -1,0 +1,3 @@
+invalid: yaml: content: [
+  - broken
+  - { improperly: formatted

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hp-ilo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://www.hp.com/go/ilo")
+        - response.body.bcontains(b"js/ilo.js")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: juniper-hdr (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/stylesheet/juniper.css")
+        - response.body.bcontains(b"/hdr_logo.gif")

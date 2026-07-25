@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: prtg-network-monitor (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-655683626" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Mojoportal - Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "Powered by mojoPortal".bmatches(response.body) || "title=['"]mojoPortal".bmatches(response.body) || "alt=['"]mojoPortal".bmatches(response.body) ) && response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: episerver (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"https://dl.episerver.net/")

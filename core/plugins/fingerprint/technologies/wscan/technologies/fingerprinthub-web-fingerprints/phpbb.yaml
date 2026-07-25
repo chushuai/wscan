@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: phpbb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: phpbb3_")'
+        - response.body.bcontains(b"http://www.longluntan.com/zh/phpbb/")
+        - ( response.body.bcontains(b"phpbb") && response.body.bcontains(b"phpbb group\" />") )
+        - response.body.bcontains(b"start quick hack - phpbb statistics mod")

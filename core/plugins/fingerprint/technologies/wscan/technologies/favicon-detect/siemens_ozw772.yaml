@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: siemens-ozw772 (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-336242473" == mmh3(base64_py(body)))

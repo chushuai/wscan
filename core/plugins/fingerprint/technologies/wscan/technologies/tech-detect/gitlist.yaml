@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gitlist (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<p>Powered by <a[^>]+>GitList ([\\d.]+)".bmatches(response.body)'

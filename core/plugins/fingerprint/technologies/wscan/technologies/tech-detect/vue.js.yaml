@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vue.js (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+\\sdata-v(?:ue)?-".bmatches(response.body)'

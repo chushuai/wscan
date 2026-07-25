@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Django Default Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>The install worked successfully! Congratulations!</title>")

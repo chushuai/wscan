@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: symfony (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by symfony")
+        - response.body.bcontains(b"powered by <a href=\"http://www.symfony-project.org/\">")

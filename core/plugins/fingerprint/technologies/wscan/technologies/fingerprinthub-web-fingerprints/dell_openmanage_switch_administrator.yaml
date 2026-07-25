@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dell-openmanage-switch-administrator (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.top.location.href = \"dell_login.html")
+        - response.body.bcontains(b"progressgraphicnone")

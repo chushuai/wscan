@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webengine-site (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/webengine/images/common.css")
+        - response.body.bcontains(b"location.href = \"/webengine/web/\";")

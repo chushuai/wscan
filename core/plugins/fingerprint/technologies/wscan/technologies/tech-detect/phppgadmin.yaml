@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phppgadmin (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<title>phpPgAdmin</title>|<span class="appname">phpPgAdmin)".bmatches(response.body)'

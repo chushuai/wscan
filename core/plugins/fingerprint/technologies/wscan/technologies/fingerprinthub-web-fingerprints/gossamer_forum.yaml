@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gossamer-forum (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"gforum.cgi?username=")

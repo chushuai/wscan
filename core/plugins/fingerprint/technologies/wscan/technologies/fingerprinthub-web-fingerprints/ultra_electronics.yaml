@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ultra_electronics (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/preauth/login.cgi")
+        - response.body.bcontains(b"/preauth/style.css")

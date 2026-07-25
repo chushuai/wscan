@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: cpanel-login (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("1993518473" == mmh3(base64_py(body)))
+        - status_code==200 && ("1544230796" == mmh3(base64_py(body)))
+        - status_code==200 && ("1244636413" == mmh3(base64_py(body)))

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: struts2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"struts problem report")
+        - response.body.bcontains(b"there is no action mapped for namespace")
+        - response.body.bcontains(b"no result defined for action and result input")

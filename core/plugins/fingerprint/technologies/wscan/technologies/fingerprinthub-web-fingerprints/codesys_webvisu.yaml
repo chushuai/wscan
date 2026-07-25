@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: codesys-webvisu (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<param name=\"startvisu\" value=\"plc_visu\">")

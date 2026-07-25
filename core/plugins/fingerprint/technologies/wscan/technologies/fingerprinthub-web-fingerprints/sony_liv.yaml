@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: sony-liv (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"author\" content=\"sony pictures networks india pvt. ltd\">")
+        - response.body.bcontains(b"<meta name=\"twitter:image\" content=\"http://sonyliv.com/asset/socialsharelogo\"/>")
+        - response.body.bcontains(b"content=\"sony liv")

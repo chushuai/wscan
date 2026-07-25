@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-kylin (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"1;url=kylin\">") || response.body.bcontains(b"href=\"/kylin/\"") )

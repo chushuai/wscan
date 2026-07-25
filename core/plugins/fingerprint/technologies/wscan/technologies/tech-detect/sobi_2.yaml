@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sobi-2 (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<!-- start of Sigsiu Online Business Index|<div[^>]* class="sobi2)".bmatches(response.body)'

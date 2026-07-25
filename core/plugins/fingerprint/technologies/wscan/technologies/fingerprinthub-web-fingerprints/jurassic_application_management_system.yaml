@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jurassic-application-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var _usermenusurl = '/appcenter/functions/getusermenu'")
+        - response.body.bcontains(b"jurassic")

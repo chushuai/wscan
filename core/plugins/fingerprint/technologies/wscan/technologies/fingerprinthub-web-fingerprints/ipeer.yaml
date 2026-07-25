@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ipeer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by ipeer")
+        - response.body.bcontains(b"/css/ipeer.css")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: trac (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<a id="tracpowered".bmatches(response.body) || "Powered by <a href="[^"]*"><strong>Trac(?:[ /]([\\d.]+))?".bmatches(response.body) )

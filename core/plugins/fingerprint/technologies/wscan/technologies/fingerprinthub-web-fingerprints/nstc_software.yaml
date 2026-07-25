@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nstc-software (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"skysz.fw.index.validatecodenew = \"/loginaction/validatecodenew.html")

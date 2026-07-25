@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: h3c-ssl-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"welcome to ssl vpn</h1>") && response.body.bcontains(b"keep me signed in</span>") )

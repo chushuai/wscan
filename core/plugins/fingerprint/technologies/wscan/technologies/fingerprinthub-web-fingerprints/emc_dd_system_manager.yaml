@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: emc-dd-system-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"emc-favicon.ico")
+        - response.body.bcontains(b"dd system manager")

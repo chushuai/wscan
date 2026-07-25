@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tiddlywiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]*type=[^>]text\\/vnd\\.tiddlywiki".bmatches(response.body)'

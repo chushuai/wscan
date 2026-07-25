@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: aws-codebuild (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.raw_header.bcontains(b"arn: arn:aws:codebuild") || response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Buildarn:") || response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Content-Sha256:") || response.raw_header.bcontains(b"X-Amz-Meta-Codebuild-Content-Md5:") )'

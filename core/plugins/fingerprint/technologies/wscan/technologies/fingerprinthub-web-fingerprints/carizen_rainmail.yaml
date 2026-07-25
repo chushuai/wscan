@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: carizen-rainmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - '( response.body.bcontains(b"href=\"/resources/rainmailvpninstaller.exe") && response.body.bcontains(b".: <b>rainmail intranet login </b> :.</div>") )'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Popup Builder by OptinMonster – WordPress Popups for Optins, Email Newsletters and Lead Generation Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/optinmonster/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

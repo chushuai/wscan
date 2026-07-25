@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novell-open-enterprise-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- this is all just a super-duper redirect to the welcome page")
+        - response.body.bcontains(b"href=\"http://www.novell.com/products/openenterpriseserver")

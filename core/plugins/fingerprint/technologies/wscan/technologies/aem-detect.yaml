@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Favicon based AEM Detection
+    author: shifacyclewala, hackergautam
+pscan:
+    path:
+        - /libs/granite/core/content/login/favicon.ico
+    expressions:
+        - status_code==200 && ("-144483185" == mmh3(base64_py(body)))

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novell-zenworks (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/zenworks/js/dojo")
+        - response.body.bcontains(b"managementzonename")

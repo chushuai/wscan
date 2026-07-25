@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adobe-coldfusion (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- START headerTags\\.cfm".bmatches(response.body)'

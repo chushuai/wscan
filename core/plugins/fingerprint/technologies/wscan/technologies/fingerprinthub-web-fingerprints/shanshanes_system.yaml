@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: shanshanes-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/dist/libs/layui/css/layui.css")
+        - response.body.bcontains(b"amap.mousetool,amap.districtsearch")
+        - response.body.bcontains(b"<title>杉杉储能监控平台</title>")

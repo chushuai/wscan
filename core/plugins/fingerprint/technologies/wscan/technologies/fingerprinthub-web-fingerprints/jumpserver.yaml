@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jumpserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"JumpServer 开源堡垒机") || response.body.bcontains(b"JumpServer Open Source Bastion Host") )

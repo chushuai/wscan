@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wso2-carbon-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: wso2 carbon server")'

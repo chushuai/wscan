@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sxzrouter-caching (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/public/sec/assets/js/libs/jquery.placeholder.min.js\">")
+        - response.body.bcontains(b" href=\"http://www.dwcache.com\"")

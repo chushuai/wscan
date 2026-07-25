@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Fastjson Version Detection
+    author: yuansec
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"fastjson-version")

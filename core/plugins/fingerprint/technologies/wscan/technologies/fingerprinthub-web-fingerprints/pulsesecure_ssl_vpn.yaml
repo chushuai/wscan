@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pulsesecure-ssl-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<b>pulse connect secure</b>")

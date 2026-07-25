@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: edusoho-open-source-web-classroom- (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by edusoho")

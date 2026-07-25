@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: chuangyudun (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)(http(s)?.//(www.)?)?365cyd.(com|net)".bmatches(response.body)'

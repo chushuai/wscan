@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: kloxo-single-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/img/hypervm-logo.gif")
+        - response.body.bcontains(b"/htmllib/js/preop.js")

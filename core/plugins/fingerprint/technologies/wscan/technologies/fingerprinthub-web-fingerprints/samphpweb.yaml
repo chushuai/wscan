@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: samphpweb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"songinfo.php")
+        - response.body.bcontains(b"copyright spacial audio solutions")
+        - response.body.bcontains(b"href=\"http://www.spacialaudio.com/products/sambroadcaster/\"")
+        - response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0;url=playing.html\">")

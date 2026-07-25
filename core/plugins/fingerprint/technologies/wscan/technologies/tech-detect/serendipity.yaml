@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: serendipity (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"Serendipity ")

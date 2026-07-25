@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: d-link-camera (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-355305208" == mmh3(base64_py(body)))
+        - status_code==200 && ("-1897829998" == mmh3(base64_py(body)))

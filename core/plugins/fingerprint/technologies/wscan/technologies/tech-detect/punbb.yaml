@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: punbb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="[^>]+punbb".bmatches(response.body)'

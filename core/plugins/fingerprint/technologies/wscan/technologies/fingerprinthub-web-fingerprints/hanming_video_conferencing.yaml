@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hanming-video-conferencing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"win_introduce")
+        - response.body.bcontains(b"/resources/fmweb/other/js/login.js")

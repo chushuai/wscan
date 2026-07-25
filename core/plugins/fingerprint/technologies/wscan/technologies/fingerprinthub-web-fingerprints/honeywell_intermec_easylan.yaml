@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: honeywell-intermec-easylan (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"color=\"black\" size=\"5\">intermec easylan")

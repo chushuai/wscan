@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpdenora (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"content=\"chat4all phpdenora") && response.body.bcontains(b"powered by phpdenora") )
+        - response.body.bcontains(b"powered by <a href=\"http://denorastats.org/")

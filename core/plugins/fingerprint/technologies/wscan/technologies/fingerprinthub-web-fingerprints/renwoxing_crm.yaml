@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: renwoxing-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/resources/imgs/defaultannex/loginpictures/")

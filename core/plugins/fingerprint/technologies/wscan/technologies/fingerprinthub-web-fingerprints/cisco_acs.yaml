@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cisco-acs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<meta http-equiv=\"refresh\" content=\"0;url=/acsadmin\" />") && response.body.bcontains(b"cisco") )
+        - response.body.bcontains(b"href=\"/acsadmin\">launch acs")

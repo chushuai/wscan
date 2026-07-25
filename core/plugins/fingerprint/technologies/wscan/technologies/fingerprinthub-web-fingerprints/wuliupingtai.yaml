@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wuliupingtai (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"static/styles/frame/basic.css")

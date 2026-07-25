@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: hiki (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"hiki")
+        - response.body.bcontains(b"/hiki_base.css")
+        - response.body.bcontains(b"by <a href=\"http://hikiwiki.org/")

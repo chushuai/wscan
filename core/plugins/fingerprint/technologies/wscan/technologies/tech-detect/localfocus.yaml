@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: localfocus (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe[^>]+\\blocalfocus\\b".bmatches(response.body)'

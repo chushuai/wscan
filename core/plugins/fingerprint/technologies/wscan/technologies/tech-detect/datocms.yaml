@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: datocms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+https://www\\.datocms-assets\\.com".bmatches(response.body)'

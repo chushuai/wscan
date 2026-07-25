@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: h3c-web-managerment-home (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/wnm/ssl/web/frame/login.html")

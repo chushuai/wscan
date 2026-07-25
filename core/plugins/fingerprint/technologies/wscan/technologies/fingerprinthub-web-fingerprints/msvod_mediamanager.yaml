@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: msvod-mediamanager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"$('.sign-btn').addclass(\"completion\");")
+        - response.body.bcontains(b"static/js/meisicms.js")
+        - response.body.bcontains(b"content=\"魅思cms")

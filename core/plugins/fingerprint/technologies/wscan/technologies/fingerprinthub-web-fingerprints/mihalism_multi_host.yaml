@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: mihalism-multi-host (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"http://www.mihalism.com/product/mmh/\">mihalism multi host")
+        - response.body.bcontains(b"powered by mihalism multi host")
+        - response.body.bcontains(b"content=\"mihalism multi host")

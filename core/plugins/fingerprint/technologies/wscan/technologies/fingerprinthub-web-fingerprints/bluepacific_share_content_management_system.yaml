@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bluepacific-share-content-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/visadmin/viscms/index.do")

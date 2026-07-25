@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: directadmin (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a[^>]+>DirectAdmin</a> Web Control Panel".bmatches(response.body)'

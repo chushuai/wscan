@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mailman (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/images/mailman") && response.body.bcontains(b"delivered by mailman") )

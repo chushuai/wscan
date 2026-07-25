@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apigee (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<script>[^>]{0,50}script src=[^>]/profiles/apigee".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: blogenginenet (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"pics/blogengine.ico")
+        - response.body.bcontains(b"http://www.dotnetblogengine.net")

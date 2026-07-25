@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-jspwiki (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<html[^>]* xmlns:jspwiki=".bmatches(response.body)'

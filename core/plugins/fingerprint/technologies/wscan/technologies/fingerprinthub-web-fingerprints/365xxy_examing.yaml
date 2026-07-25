@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 365xxy-examing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=https://unpkg.com/element-ui/lib/theme-chalk/index.css")
+        - response.body.bcontains(b"<title>云时政在线考试系统</title>")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adviserlogiccli (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"navigator.serviceworker.register('/adviserlogiccache.js')")

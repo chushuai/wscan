@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: agilebpm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"logo-element\">agile-bpm")
+        - response.body.bcontains(b"class=\"logo-element\">bpm")

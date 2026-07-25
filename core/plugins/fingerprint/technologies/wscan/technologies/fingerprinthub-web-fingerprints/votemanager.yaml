@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: votemanager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"微平台投票系统")
+        - ( response.body.bcontains(b"<a href=\"http://www.cdrbp.cn\">微信数字投票") && response.body.bcontains(b"content=\"微平台投票管理系统") )

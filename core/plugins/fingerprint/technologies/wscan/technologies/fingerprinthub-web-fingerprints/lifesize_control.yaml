@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lifesize-control (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/lifesizecontrol/asp/index.html")

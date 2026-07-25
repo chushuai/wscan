@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: expressionengine (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>error.-.expressionengine<.".bmatches(response.body) || "(?i).>:.the.uri.you.submitted.has.disallowed.characters.<.".bmatches(response.body) || "(?i)invalid.(get|post).data".bmatches(response.body) )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zhongyou-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"background=zhongyou.jpg")
+        - response.body.bcontains(b"众友科技巡检管理软件")

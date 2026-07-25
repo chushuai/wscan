@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wsncm-iot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"login\">物联网供应链与金融风险管理服务")

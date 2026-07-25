@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: owl-carousel (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link [^>]*href="[^"]+owl\\.carousel(?:\\.min)?\\.css".bmatches(response.body)'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: photopost-php (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"adm-misc.php?admact=mainmenu")
+        - response.body.bcontains(b"href=\"http://www.photopost.com\">photopost")

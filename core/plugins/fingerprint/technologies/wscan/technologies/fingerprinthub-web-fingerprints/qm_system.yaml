@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: qm-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"polyfills.js")
+        - response.body.bcontains(b"assets/css/fdb.css")

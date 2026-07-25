@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: quarkmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.replace(\"/cgi-bin/web2cgi/index.cgi\");")
+        - response.body.bcontains(b"<iframe src=\"/cgi-bin/web2cgi/index.cgi\" scrolling=\"no\" frameborder=")

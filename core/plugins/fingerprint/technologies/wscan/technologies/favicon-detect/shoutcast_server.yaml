@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: shoutcast-server (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-632583950" == mmh3(base64_py(body)))

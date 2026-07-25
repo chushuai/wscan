@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ewebs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"ClientDownload.xgi") && response.body.bcontains(b"NewSoft") )
+        - response.body.bcontains(b"/js/xajax05/xajax_js/xajax_core.js")
+        - response.body.bcontains(b"<a href='../client/ewebsclientsetup.exe'></a> </td>")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: opsview-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/images/opsview_logo_large.gif")
+        - response.body.bcontains(b"/images/opsviewcommunitylogo-large.png")
+        - response.body.bcontains(b"follow @opsview")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: supermap-iserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"window.location.href=\"iserver\";")
+        - response.body.bcontains(b"id=\"copyright\"><a href=\"http://www.supermap.com.cn")

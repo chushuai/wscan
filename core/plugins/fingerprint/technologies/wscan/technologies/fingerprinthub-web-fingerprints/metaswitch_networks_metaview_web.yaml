@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: metaswitch-networks-metaview-web (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content='dcl.metaview.web.client'")
+        - response.body.bcontains(b"src=\"dcl.metaview.web.client.nocache.js\">")

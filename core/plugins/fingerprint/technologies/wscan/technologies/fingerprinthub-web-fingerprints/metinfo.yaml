@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: metinfo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"metinfo")
+        - response.body.bcontains(b"powered_by_metinfo")
+        - response.body.bcontains(b"/images/css/metinfo.css")

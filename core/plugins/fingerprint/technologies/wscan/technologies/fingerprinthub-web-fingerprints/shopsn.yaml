@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: shopsn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"shopsn")
+        - response.body.bcontains(b"href=\"http://www.shopsn.net\">商城系统</a>&nbsp;提供技术支持")
+        - 'response.body.bcontains(b"<span>shopsn全网开源<a style=\"padding: 0px\" href=\"http://www.shopsn.net")'

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: dian-diagnostics (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"浙江迪安诊断技术股份有限公司")
+        - response.body.bcontains(b"src=\"/resources/pages/img/logo.svg\"")

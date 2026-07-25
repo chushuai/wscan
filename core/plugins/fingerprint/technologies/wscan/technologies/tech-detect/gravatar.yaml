@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gravatar (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+gravatar\\.com/avatar/".bmatches(response.body)'

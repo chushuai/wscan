@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kindeditor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"kindeditor.js")
+        - response.body.bcontains(b"kindeditor.ready")
+        - ( response.body.bcontains(b"k.create") && response.body.bcontains(b"kindeditor-min.js") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cloodie-his (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/design/common/his.logo.white.svg\" alt=\"his logo")
+        - response.body.bcontains(b"href=\"/design/design/cloodie.css")

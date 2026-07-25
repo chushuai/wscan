@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ibm-websphere (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"websphere")
+        - response.body.bcontains(b"com.ibm.websphere.ihs.doc")
+        - response.body.bcontains(b"content=\"websphere application server")

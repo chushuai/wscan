@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: genieatm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"copyright© genie networks ltd.")
+        - response.body.bcontains(b"defect 3531")

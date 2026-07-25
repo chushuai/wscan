@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: asp168-oho (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"upload/moban/images/style.css")
+        - response.body.bcontains(b"default.php?mod=article&do=detail&tid")

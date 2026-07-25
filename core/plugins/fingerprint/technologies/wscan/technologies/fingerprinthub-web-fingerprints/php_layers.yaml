@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: php-layers (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"powered by php layers menu")
+        - response.body.bcontains(b"<!-- end of menu header - php layers menu")
+        - response.body.bcontains(b"<!-- beginning of menu header - php layers menu")

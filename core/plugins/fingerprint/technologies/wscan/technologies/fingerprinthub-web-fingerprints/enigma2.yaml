@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: enigma2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/web/movielist.rss?tag")

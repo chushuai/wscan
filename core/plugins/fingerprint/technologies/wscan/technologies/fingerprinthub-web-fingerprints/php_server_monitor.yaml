@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: php-server-monitor (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"target=\"_blank\">php server monitor")
+        - response.body.bcontains(b"powered by <a href=\"http://www.phpservermonitor.org/")

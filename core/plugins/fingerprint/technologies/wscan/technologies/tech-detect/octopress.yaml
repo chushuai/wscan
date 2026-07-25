@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: octopress (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="http://octopress\\.org">".bmatches(response.body)'

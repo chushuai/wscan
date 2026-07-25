@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: formmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"aboutus/magicmail.gif")
+        - response.body.bcontains(b"/formmail.pl")
+        - response.body.bcontains(b"href=\"http://www.worldwidemart.com/scripts/formmail.shtml")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nopcommerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<!--Powered by nopCommerce|Powered by: <a[^>]+nopcommerce)".bmatches(response.body)'

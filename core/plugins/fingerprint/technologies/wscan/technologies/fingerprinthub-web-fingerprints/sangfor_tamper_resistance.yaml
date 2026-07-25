@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: sangfor-tamper-resistance (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<li style=\"color:#999999;margin-left:6px;list-style:circle inside;\">如忘记密码，请与防火墙管理员联系</li>")
+        - response.body.bcontains(b"href=\"tamper/style/control.css\"")

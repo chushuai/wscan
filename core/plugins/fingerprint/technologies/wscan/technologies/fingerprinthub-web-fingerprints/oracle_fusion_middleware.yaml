@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oracle-fusion-middleware (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"css/fmw_bottom_area.css")

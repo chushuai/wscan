@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cambium-networks (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-435817905" == mmh3(base64_py(body)))

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: tightvnc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://www.tightvnc.com/\">www.tightvnc.com")
+        - response.body.bcontains(b"js/thinvnc.sdk.js")
+        - response.body.bcontains(b"js/thinvnc.app.js")

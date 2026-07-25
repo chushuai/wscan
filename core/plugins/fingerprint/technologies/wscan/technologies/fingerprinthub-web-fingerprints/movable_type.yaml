@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: movable-type (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"movable type version")
+        - response.body.bcontains(b"content=\"movable type")
+        - response.body.bcontains(b"rel=\"generator\">movable type")

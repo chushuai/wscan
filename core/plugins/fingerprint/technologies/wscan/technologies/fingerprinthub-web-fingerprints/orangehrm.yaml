@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: orangehrm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"welcome to the orangehrm ver")
+        - response.body.bcontains(b"name=\"hdnusertimezoneoffset")
+        - response.body.bcontains(b"href=\"http://www.orangehrm.com\" target=")

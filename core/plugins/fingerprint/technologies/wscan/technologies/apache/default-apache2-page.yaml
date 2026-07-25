@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Apache2 Default Test Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<title>Apache2 Debian Default Page: It works</title>")'

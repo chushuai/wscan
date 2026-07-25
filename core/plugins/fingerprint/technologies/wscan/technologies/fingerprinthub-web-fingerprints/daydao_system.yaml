@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: daydao-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"$(document).attr(\"title\",\"我被修改啦.哈哈\"")

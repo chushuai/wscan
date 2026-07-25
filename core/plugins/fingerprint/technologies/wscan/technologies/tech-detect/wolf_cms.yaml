@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wolf-cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<a href="[^>]+wolfcms\\.org[^>]+>Wolf CMS(?:</a>)? inside|Thank you for using <a[^>]+>Wolf CMS)".bmatches(response.body)'

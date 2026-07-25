@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: tccms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"index.php?ac=link_more")
+        - response.body.bcontains(b"index.php?ac=news_list")

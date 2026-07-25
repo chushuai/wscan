@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pmway-e4 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"风<span style=\"padding-left: 12px;\"></span>格")'
+        - response.body.bcontains(b"热情似火</option>")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: h2-database (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"login.jsp?jsessionid=")
+        - response.body.bcontains(b"welcome to h2")

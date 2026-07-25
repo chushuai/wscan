@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: uikit (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+class="[^"]*(?:uk-container|uk-section)".bmatches(response.body)'

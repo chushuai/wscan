@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Amazon EC2 Server Detect
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: EC2ws")'

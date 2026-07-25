@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect websites using Google bucket storage
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - ( contains(tolower(header), 'x-goog-component-count') || contains(tolower(header), 'x-goog-expiration') || contains(tolower(header), 'x-goog-generation') || contains(tolower(header), 'x-goog-metageneration') || contains(tolower(header), 'x-goog-stored-content-encoding') || contains(tolower(header), 'x-goog-stored-content-length') || contains(tolower(header), 'x-guploader-uploadid') )

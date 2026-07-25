@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: sabre (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)dxsupport@sabre.com".bmatches(response.body)'

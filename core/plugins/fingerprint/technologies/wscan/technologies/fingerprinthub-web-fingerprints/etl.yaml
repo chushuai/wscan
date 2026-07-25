@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: etl (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class=\"header\">登录补天etl系统</div>")

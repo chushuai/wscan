@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chorus (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<meta data-chorus-version=".bmatches(response.body)'

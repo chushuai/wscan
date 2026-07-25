@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: b2evolution (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/powered-by-b2evolution-150t.gif")
+        - response.body.bcontains(b"powered by b2evolution")
+        - response.body.bcontains(b"content=\"b2evolution")

@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: s-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<p class=\"alignright\">powered by s:cms - copyright ©") && response.body.bcontains(b"class=\"scms_container w1200\"") )
+        - response.body.bcontains(b"/media/20151019095214828.png")
+        - response.body.bcontains(b"<h2>闪灵cms建站系统</h2>")
+        - response.body.bcontains(b"type=news&s_id=")
+        - response.body.bcontains(b"type=newsinfo&s_id=")

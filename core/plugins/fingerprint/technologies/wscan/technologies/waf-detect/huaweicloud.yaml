@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: huaweicloud (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '( "(?)content="CloudWAF"".bmatches(response.body) && "Server: CloudWAF".bmatches(response.body) && "Set-Cookie: HWWAFSESID=".bmatches(response.body) )'

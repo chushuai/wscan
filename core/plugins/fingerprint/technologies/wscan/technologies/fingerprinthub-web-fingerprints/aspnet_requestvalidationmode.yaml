@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: aspnet-requestvalidationmode (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"httprequestvalidationexception")
+        - response.body.bcontains(b"request validation has detected a potentially dangerous client input value")

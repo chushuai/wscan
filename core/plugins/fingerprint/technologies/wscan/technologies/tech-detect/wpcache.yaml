@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: wpcache (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--[^>]+wpCache".bmatches(response.body)'

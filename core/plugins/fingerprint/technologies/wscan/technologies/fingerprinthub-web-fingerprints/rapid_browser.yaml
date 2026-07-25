@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: rapid-browser (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"<!-- ### bullet table ### -->")'
+        - response.body.bcontains(b"images/login_button.gif\" alt=\"login to rapid browser")

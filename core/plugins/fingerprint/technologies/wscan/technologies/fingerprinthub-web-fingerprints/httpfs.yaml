@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: httpfs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<b>httpfs service</b")

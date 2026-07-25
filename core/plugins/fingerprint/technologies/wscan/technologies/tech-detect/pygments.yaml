@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pygments (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+pygments\\.css["'']".bmatches(response.body)'

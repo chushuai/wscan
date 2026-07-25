@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vpn358system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"form-actions j_add_ip_actions\"")
+        - response.body.bcontains(b"href=\"/lib/bootstrap/ico/favicon.ico\"")

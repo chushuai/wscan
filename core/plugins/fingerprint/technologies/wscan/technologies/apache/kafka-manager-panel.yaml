@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Kafka Manager Panel
+    author: ritikchaddha
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Kafka Manager")
+        - response.raw_header.bcontains(b"Kafka-Manager")

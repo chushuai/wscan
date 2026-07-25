@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: bitninja (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)bitninja".bmatches(response.body) || "(?i)security.check.by.bitninja".bmatches(response.body) || "(?i).>visitor.anti(\\S)?robot.validation<.".bmatches(response.body) )

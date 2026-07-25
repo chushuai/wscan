@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: eqmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"eqmail.ico")
+        - response.body.bcontains(b"<frame src=\"/cgi-bin/eqwebmail?empty=1")

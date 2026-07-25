@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Google Firebase DB URL Finder
+    author: panch0r3d
+pscan:
+    path:
+        - /
+    expressions:
+        - '".*?(f|F)(i|I)(r|R)(e|E)(b|B)(a|A)(s|S)(e|E)(i|I)(o|O)[.](c|C)(o|O)(m|M).*?".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: thinksaas (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"https://www.thinksaas.cn/app/home/skins/default/style.css\"")

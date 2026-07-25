@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apusic (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<td>管理apusic应用服务器</td>")
+        - response.headers["server"].contains("Apusic Application Server")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: chef-automate (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-276759139" == mmh3(base64_py(body)))

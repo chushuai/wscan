@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: akamai cdn detection
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"deploy.akamai")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: dw (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)dw.inj.check".bmatches(response.body)'

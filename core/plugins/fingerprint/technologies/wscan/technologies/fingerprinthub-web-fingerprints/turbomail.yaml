@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: turbomail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"TurboMail管理系统")
+        - ( response.body.bcontains(b"powered by turbomail") && response.body.bcontains(b"wzcon1 clearfix") )
+        - response.body.bcontains(b"<a href=\"http://www.turbomail.org\">powered by turbomail</a>")
+        - response.body.bcontains(b"alt=\"turbomail 电子邮件系统\"/>")

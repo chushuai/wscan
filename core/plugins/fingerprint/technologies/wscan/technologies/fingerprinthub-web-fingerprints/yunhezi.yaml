@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: yunhezi (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ui/js/seaconfig.js")
+        - response.body.bcontains(b"ui/skins/black/style.css")
+        - response.body.bcontains(b"class=\"client-list dm-clear\">")

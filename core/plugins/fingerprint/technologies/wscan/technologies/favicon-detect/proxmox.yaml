@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: proxmox (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - len(body)==2336 && status_code==200 && ("02f4db63a9cfb650c05ffd82956cbfd6" == md5(body))

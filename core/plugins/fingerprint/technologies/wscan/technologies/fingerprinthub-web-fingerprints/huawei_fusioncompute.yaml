@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: huawei-fusioncompute (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"resources/themes/images/logo/favicon.ico")
+        - response.body.bcontains(b"/omsportal/")

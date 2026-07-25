@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: istio-envoy (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.headers["server"].contains("istio-envoy")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: autoindex-php-script (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"autoindex default")
+        - 'response.raw_header.bcontains(b"Set-Cookie: autoindex2")'
+        - response.body.bcontains(b"autoindex.sourceforge.net/")

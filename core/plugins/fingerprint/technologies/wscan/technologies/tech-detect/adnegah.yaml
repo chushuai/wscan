@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adnegah (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe [^>]*src="[^"]+adnegah\\.net".bmatches(response.body)'

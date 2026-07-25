@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: goldlib-library (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onclick=\"change('book');")
+        - response.body.bcontains(b"/opac/periodicals")
+        - response.body.bcontains(b"class=\"jp-searchtabs")
+        - ( response.body.bcontains(b"图书") && response.body.bcontains(b"金盘软件") )

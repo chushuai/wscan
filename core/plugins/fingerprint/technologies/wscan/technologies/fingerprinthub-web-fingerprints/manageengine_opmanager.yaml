@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: manageengine-opmanager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"the complete network monitoring software from manageengine")
+        - response.body.bcontains(b"<a href=\"http://www.manageengine.com/products/opmanager/index.html\" target=")

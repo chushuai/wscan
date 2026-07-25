@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: awesomplete (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+href="[^>]*awesomplete(?:\\.min)?\\.css".bmatches(response.body)'

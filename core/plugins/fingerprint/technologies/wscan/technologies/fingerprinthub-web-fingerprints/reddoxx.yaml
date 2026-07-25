@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: reddoxx (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"148779de-1cf1-49bb-8bdb-129321cf8974")

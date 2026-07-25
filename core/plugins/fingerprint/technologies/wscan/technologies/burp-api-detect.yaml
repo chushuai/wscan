@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Burp Rest API Server Running
+    author: joanbono
+pscan:
+    path:
+        - /v0.1/
+    expressions:
+        - response.body.bcontains(b"<title>Burp API</title>") && response.raw_header.bcontains(b"X-Burp-Version") && response.status == 200

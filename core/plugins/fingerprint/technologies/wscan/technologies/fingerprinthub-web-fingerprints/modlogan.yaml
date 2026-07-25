@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: modlogan (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"modlogan.css")
+        - response.body.bcontains(b">modlogan")

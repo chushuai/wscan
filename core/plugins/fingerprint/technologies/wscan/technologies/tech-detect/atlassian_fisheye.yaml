@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: atlassian-fisheye (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>(?:Log in to )?FishEye (?:and Crucible )?([\\d.]+)?</title>".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: visual-website-optimizer (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- (?:Start|End) Visual Website Optimizer A?Synchronous Code -->".bmatches(response.body)'

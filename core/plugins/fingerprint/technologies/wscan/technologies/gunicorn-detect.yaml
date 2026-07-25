@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Gunicorn Server
+    author: joanbono
+pscan:
+    path:
+        - /
+    expressions:
+        - '"gunicorn+".bmatches(response.raw_header)'

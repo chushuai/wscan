@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: qingyuan-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"-moz-background-size") && response.body.bcontains(b"class=\"u_logo fa fa-user\"") )

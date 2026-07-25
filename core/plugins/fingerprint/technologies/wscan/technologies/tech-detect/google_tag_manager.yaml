@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: google-tag-manager (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "googletagmanager\\.com/ns\\.html[^>]+></iframe>".bmatches(response.body) || "<!-- (?:End )?Google Tag Manager -->".bmatches(response.body) )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: multilaser (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("916642917" == mmh3(base64_py(body)))

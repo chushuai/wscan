@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ibm-websphere-commerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"href="(?:\\/|[^>]+)webapp\\/wcs\\/".bmatches(response.body)'

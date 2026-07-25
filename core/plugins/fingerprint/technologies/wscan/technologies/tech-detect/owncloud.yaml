@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: owncloud (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="https://owncloud\\.com" target="_blank">ownCloud Inc\\.</a><br/>Your Cloud, Your Data, Your Way!".bmatches(response.body)'

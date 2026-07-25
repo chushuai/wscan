@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: microsoft-publisher (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?:<html [^>]*xmlns:w="urn:schemas-microsoft-com:office:publisher"|<!--[if pub]><xml>)".bmatches(response.body)'

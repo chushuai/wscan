@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hugo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"powered by <a [^>]*href="http://hugo\\.spf13\\.com".bmatches(response.body)'

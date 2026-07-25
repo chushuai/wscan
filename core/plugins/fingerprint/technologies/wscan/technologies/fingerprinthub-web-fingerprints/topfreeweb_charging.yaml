@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: topfreeweb-charging (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"background=\"images/logbg.jpg\"")
+        - response.body.bcontains(b"value=\"经理\">经理</option>")

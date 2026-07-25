@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: yonyou-shop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"url:\"/shophome/ajaxgetcompetemessagelist.action\",")
+        - response.body.bcontains(b"$.post(\"/shopfront/shoppingcar/gotoshoppingcartajax.action\",function(data){")
+        - response.body.bcontains(b"北京用友政务软件股份有限公司")

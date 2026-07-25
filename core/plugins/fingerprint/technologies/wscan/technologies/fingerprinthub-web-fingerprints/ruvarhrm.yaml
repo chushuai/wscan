@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ruvarhrm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/ruvarhrm/web_login/login.aspx")

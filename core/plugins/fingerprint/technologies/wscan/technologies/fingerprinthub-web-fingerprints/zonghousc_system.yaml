@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zonghousc-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"data-errormessage-value-missing=\"* 请录入用户名")
+        - response.body.bcontains(b"style/default/frui.css")

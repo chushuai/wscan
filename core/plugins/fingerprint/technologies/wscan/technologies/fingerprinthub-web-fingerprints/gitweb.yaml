@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: gitweb (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"gitweb")
+        - response.body.bcontains(b"/gitweb.css")
+        - response.body.bcontains(b"/gitweb.js")

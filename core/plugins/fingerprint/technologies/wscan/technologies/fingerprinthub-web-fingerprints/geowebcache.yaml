@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: geowebcache (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"welcome to geowebcache version")
+        - response.body.bcontains(b"<a href=\"http://geowebcache.org\">geowebcache</a>")

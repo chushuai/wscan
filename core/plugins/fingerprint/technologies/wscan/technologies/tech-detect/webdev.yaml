@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: webdev (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- [a-zA-Z0-9_]+ [\\d/]+ [\\d:]+ WebDev \\d\\d ([\\d.]+) -->".bmatches(response.body)'

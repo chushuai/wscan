@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: taocms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"template/taocms")
+        - response.body.bcontains(b"src=\"/taocms/code/calendar.js\"")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: videojs (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div[^>]+class="video-js+">".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gogs (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( "<div class="ui left">\\n\\s+© \\d{4} Gogs Version: ([\\d.]+) Page:".bmatches(response.body) || "<button class="ui basic clone button" id="repo-clone-ssh" data-link="gogs@".bmatches(response.body) )'

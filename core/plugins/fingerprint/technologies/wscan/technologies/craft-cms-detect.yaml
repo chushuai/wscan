@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Craft CMS Detect
+    author: skeltavik
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"X-Powered-By: Craft CMS")'
+        - '"Set-Cookie: (Craft|CRAFT)".bmatches(response.raw_header)'

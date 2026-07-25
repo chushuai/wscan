@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dosarrest (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"DOSarrest") || response.raw_header.bcontains(b"X-DIS-Request-ID:") )

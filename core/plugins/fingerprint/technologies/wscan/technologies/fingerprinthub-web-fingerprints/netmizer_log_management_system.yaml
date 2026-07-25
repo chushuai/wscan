@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: netmizer-log-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var mywindows = ext.create")
+        - response.body.bcontains(b"window.location.href=\"main.html\";")

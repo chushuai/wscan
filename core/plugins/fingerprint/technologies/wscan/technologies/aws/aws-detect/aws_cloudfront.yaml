@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: aws-cloudfront (AWS Service - Detect)
+    author: 6mile
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.raw_header.bcontains(b"X-Amz-Cf-Id:") || response.raw_header.bcontains(b"X-Amz-Cf-Pop:") )
+        - '( contains(tolower(header), ''x-cache: hit from cloudfront'') || contains(tolower(header), ''x-cache: refreshhit from cloudfront'') || contains(tolower(header), ''x-cache: miss from cloudfront'') || contains(tolower(header), ''x-cache: error from cloudfront'') )'

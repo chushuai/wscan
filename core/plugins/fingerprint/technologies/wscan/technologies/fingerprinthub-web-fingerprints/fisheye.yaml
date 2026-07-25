@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: fisheye (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: fesessionid")'
+        - response.body.bcontains(b"fisheye ")
+        - response.body.bcontains(b"fisheye-16.ico")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: favicon (Hikvision Panel)
+    author: pdteam, its0x08
+pscan:
+    path:
+        - /favicon.ico
+        - /doc/page/login.asp
+    expressions:
+        - '''999357577'' == mmh3(base64_py(body))'

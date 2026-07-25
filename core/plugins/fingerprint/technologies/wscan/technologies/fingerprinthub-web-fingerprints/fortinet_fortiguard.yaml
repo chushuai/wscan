@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: fortinet-fortiguard (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"fortiguard web filtering")
+        - response.body.bcontains(b"/xx/yy/zz/ci/mgpghgpgpfghcdpfggogfgeh")

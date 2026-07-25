@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: pelican (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "powered by <a href="[^>]+getpelican\\.com".bmatches(response.body) || "powered by <a href="https?://pelican\\.notmyidea\\.org".bmatches(response.body) )

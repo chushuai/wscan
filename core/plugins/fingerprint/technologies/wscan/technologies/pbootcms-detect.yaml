@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: PbootCMS Detect
+    author: princechaddha, daffainfo
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"PbootCMS")
+        - '"<title>PbootCMS(.*)</title>".bmatches(response.body)'

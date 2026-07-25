@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: marcopacs-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"data-redirect=\"account/systemconfiguration.aspx\"")

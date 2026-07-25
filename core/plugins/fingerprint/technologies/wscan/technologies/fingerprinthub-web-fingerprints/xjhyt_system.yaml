@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: xjhyt-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<input class=\"an1\" name=\"btnrst\" id=\"btnrst\" type=\"reset\" value=\" \" />")
+        - response.body.bcontains(b"class=\"wrap login_wrap\"")
+        - response.body.bcontains(b"url(images/yh.jpg)")

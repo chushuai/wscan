@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: 360-tianqing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"appid\":\"skylar6")
+        - response.body.bcontains(b"/task/index/detail?id={item.id}")
+        - response.body.bcontains(b"已过期或者未授权，购买请联系4008-136-360")

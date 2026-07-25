@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: virtuemart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div id="vmMainPage".bmatches(response.body)'

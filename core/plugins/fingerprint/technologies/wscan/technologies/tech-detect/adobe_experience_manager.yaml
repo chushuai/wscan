@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adobe-experience-manager (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div class="[^"]*parbase".bmatches(response.body) || "<div[^>]+data-component-path="[^"+]jcr:".bmatches(response.body) || "<div class="[^"]*aem-Grid".bmatches(response.body) )

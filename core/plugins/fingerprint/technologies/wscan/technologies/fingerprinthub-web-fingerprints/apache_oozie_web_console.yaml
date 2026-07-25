@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-oozie-web-console (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"oozie-console")
+        - response.body.bcontains(b"href=\"/oozie\">oozie console")

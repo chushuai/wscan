@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: duda (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div[^>]*id="P6iryBW0Wu"".bmatches(response.body)'
+        - response.body.bcontains(b"<!-- RT CSS Include d-css-runtime-desktop-one-package-new-->")

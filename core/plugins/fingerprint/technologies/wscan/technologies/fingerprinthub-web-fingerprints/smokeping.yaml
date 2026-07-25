@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: smokeping (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<a href=\"http://oss.oetiker.ch/smokeping/counter.cgi/")
+        - response.body.bcontains(b"<tr><td class=\"menuitem\" colspan=\"2\">&nbsp;-&nbsp;<a class=\"menulink\" href=\"?target=")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: powergap (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<a[^>]+title="POWERGAP".bmatches(response.body) || "<input type="hidden" name="shopid"".bmatches(response.body) )

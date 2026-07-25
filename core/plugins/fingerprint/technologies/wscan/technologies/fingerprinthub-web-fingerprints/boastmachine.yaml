@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: boastmachine (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by boastmachine")
+        - response.body.bcontains(b"powered by <a href=\"http://boastology.com")

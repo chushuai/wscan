@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: citrix-xcp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p/>citrix systems, inc. xcp 1.6.10")

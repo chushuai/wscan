@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: appserv (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"appserv/softicon.gif")
+        - response.body.bcontains(b"index.php?appservlang=th")

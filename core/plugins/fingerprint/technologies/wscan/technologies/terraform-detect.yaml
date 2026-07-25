@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Terraform Provider
+    author: geeknik
+pscan:
+    path:
+        - /provider.tf
+    expressions:
+        - ( response.body.bcontains(b"access_key") && response.body.bcontains(b"terraform") ) && response.status == 200

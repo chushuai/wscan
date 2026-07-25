@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: sap-web-application-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: sap web application server")'
+        - ( response.body.bcontains(b"<title>Application Server Error</title>") && response.body.bcontains(b"SAP logo") )
+        - 'response.raw_header.bcontains(b"Server: sap netweaver application server")'
+        - 'response.raw_header.bcontains(b"Server: sap j2ee engine")'

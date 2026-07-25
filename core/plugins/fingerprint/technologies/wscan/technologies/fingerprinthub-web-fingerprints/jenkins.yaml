@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: jenkins (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"hudson.model.Hudson.Administer")
+        - response.body.bcontains(b"jenkins-agent-protocols")
+        - response.body.bcontains(b"[Jenkins]")

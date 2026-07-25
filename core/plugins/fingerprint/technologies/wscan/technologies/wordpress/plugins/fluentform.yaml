@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Contact Form Plugin – Fastest Contact Form Builder Plugin for WordPress by Fluent Forms Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/fluentform/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))
+        - '"(?i)Stable.tag:\\s?([\\w.]+)".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: whir-ezoffice (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ezofficeusername")
+        - response.body.bcontains(b"whirrootpath")
+        - response.body.bcontains(b"/defaultroot/js/cookie.js")

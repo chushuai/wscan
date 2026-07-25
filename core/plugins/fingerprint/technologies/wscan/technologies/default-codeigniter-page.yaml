@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Default CodeIgniter Page
+    author: dhiyaneshdk
+pscan:
+    path:
+        - /
+    expressions:
+        - '"^<title>Welcome to CodeIgniter\\s?(?:[0-9]!)?</title>$".bmatches(response.body) && response.status == 200'

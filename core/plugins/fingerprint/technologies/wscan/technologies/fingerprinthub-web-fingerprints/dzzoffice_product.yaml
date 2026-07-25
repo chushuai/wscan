@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: dzzoffice-product (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"dzz/system/scripts/jquery.jstree.min.js")
+        - response.body.bcontains(b"dzz/scripts/dzz_min.js")
+        - response.body.bcontains(b"<a href=\"http://www.dzzoffice.com\"")
+        - response.body.bcontains(b"misc.php?mod=sendmail")

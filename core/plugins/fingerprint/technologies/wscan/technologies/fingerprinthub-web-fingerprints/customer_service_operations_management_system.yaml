@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: customer-service-operations-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class=\"count-down\">页面在<em>5</em>秒后自动跳转至您有权限的页面</div>")

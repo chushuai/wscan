@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: jetshop (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<(?:div|aside) id="jetshop-branding">".bmatches(response.body)'

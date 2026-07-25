@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (SVG Support Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/svg-support/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

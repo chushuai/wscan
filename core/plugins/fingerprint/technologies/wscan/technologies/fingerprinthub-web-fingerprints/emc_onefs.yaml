@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: emc-onefs (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/onefs/styles/onefs.css")

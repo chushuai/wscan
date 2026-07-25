@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: geoserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/org.geoserver.web.geoserverbasepage/")
+        - response.body.bcontains(b"class=\"geoserver lebeg")
+        - response.body.bcontains(b"\webapps\geoserver")
+        - response.body.bcontains(b"window.location.replace(\"web/\");")
+        - response.body.bcontains(b"geoserver")

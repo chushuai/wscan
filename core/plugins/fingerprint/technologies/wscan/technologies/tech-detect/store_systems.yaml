@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: store-systems (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Shopsystem von <a href=[^>]+store-systems\\.de"|\\.mws_boxTop".bmatches(response.body)'

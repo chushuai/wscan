@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nuxt.js (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<div [^>]*id="__nuxt"".bmatches(response.body) || "<script [^>]*>window\\.__NUXT__".bmatches(response.body) )

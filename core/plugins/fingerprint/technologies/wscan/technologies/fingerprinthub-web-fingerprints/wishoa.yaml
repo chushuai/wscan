@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wishoa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"WishOA_WebPlugin.js")
+        - response.body.bcontains(b"wishoa_webplugin.js")

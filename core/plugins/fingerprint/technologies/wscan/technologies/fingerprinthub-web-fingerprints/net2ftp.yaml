@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: net2ftp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- net2ftp version")
+        - response.body.bcontains(b"<!-- end of net2ftp login form")
+        - response.body.bcontains(b"href=\"http://www.net2ftp.com\">net2ftp</a>")
+        - response.body.bcontains(b"content=\"net2ftp")

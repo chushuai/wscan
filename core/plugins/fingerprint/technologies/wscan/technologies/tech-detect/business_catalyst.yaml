@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: business-catalyst (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- BC_OBNW -->".bmatches(response.body)'

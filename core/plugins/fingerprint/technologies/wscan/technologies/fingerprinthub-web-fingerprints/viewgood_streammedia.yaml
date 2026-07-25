@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: viewgood-streammedia (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"fgetquery")
+        - response.body.bcontains(b"viewgood")
+        - ( response.body.bcontains(b"location.href") && response.body.bcontains(b"var webvirtualdiretory = 'viewgood';") )
+        - response.body.bcontains(b"src='/viewgood/pc/")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Detect PRTG
+    author: geeknik
+pscan:
+    path:
+        - /index.htm
+        - /prtg/index.htm
+        - /PRTG/index.htm
+    expressions:
+        - response.status == 200 && response.body.bcontains(b"PRTG Network Monitor") && "PRTG".bmatches(response.raw_header)

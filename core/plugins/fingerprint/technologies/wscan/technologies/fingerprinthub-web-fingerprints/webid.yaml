@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: webid (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.webidsupport.com/\">webid")
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"webid\">")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ibm-spectrum-computing (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/platform/framework/logout/logout.action")
+        - response.body.bcontains(b"ssoclient_")

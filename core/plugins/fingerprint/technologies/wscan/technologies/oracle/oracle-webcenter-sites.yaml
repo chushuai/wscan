@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Oracle WebCenter Sites
+    author: leovalcante
+pscan:
+    path:
+        - /welcome_webcenter.html
+    expressions:
+        - ( response.body.bcontains(b"FOR ORACLE") && response.body.bcontains(b"WebCenter Framework") ) && response.status == 200

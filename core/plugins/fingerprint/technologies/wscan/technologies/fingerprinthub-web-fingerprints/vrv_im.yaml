@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: vrv-im (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h3>连豆豆pc客户端 </h3>")
+        - response.body.bcontains(b"href=\"http://im.vrv.cn/server-securitycenter/password/goretrieval.vrv")
+        - response.body.bcontains(b"class=\"loginusername\" value=\"\" placeholder=\"连豆豆账号/邮箱/手机号")
+        - response.body.bcontains(b"class=\"wj-text wj-title\">下载信源豆豆</p>")

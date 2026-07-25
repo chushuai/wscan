@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tuling-code-filing-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"编码申报系统")

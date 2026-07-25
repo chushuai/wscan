@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: resourcemanager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"this is standby rm. redirecting to the current active rm")

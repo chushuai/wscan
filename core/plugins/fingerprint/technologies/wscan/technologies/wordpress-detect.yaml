@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: WordPress Detect
+    author: pdteam, daffainfo, ricardomaia, topscoder, adamcrosser
+pscan:
+    path:
+        - /
+        - /wp-admin/install.php
+        - /feed/
+        - /?feed=rss2
+    expressions:
+        - ( "<generator>https?:\\/\\/wordpress\\.org.*</generator>".bmatches(response.body) || "wp-login.php".bmatches(response.body) || "\\/wp-content/themes\\/".bmatches(response.body) || "\\/wp-includes\\/".bmatches(response.body) || "name="generator" content="wordpress".bmatches(response.body) || "<link[^>]+s\\d+\\.wp\\.com".bmatches(response.body) || "<!-- This site is optimized with the Yoast (?:WordPress )?SEO plugin v([\\d.]+) -".bmatches(response.body) || "<!--[^>]+WP-Super-Cache".bmatches(response.body) ) && response.status == 200

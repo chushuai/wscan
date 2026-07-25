@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: quick.cms (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="[^>]+opensolution\\.org/">CMS by".bmatches(response.body)'

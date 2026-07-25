@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adt-iam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"tpn,vpn,内网安全,内网控制,主机防护\"")

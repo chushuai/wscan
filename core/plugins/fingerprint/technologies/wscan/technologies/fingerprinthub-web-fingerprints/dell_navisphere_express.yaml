@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dell-navisphere-express (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"parent.main.location = urlnonst + \"?nst=\" + top.menu.securitytoken")

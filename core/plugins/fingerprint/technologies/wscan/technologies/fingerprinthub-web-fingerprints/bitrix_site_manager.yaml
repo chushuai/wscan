@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bitrix-site-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"bitrix_sm_time_zone")
+        - response.body.bcontains(b"bx.setcsslist")

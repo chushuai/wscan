@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: otrs (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!--\\s+OTRS: Copyright".bmatches(response.body)'

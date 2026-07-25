@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: posun-sales (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/view/static/js/eidpcommon.min.js\"")
+        - response.body.bcontains(b"<p>快易销公众号</p>")

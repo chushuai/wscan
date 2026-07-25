@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: dokuwiki (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by dokuwiki")
+        - response.body.bcontains(b"content=\"dokuwiki")
+        - response.body.bcontains(b"<div id=\"dokuwiki")

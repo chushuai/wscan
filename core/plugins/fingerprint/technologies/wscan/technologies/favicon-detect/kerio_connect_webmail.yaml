@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: kerio-connect-webmail (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-677167908" == mmh3(base64_py(body)))
+        - status_code==200 && ("-1678298769" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: codiad (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"CodiMD") && response.body.bcontains(b"hackmd") )

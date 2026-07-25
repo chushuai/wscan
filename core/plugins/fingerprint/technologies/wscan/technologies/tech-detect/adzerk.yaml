@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adzerk (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<iframe [^>]*src="[^"]+adzerk\\.net".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: chanzhicms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title='cms系统，首选蝉知cms")
+        - response.body.bcontains(b"chanzhi.js")
+        - response.body.bcontains(b"poweredby'><a href='http://www.chanzhi.org")

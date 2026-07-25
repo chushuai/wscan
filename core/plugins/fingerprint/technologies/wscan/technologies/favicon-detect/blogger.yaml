@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: blogger (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - len(body)==3638 && status_code==200 && ("59a0c7b6e4848ccdabcea0636efda02b" == md5(body))

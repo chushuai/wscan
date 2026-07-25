@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: hanna-drawing-service (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"hanna图纸服务")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: emerson-permasense (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/permasense/app/webroot/flot/css/layout.print.ie.css")

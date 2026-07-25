@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (POST SMTP Mailer – Email log, Delivery Failure Notifications and Best Mail SMTP for WordPress Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/post-smtp/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

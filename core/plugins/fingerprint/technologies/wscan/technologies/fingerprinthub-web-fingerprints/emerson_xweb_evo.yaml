@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: emerson-xweb-evo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"img/xweb-logo.png\"")
+        - response.body.bcontains(b"src=\"/css/images/logo_xweb_alpha.png\"")

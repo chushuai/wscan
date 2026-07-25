@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: zknet-attendance-management (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onclick=\"showstate(gettext('forgotten password')) ")
+        - ( response.body.bcontains(b"zknet") && response.body.bcontains(b"zksoftware inc.") )
+        - response.body.bcontains(b"web考勤管理系统")

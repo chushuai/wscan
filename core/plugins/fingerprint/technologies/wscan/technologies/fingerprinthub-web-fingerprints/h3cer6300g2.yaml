@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: h3cer6300g2 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"ER6300G2") && response.body.bcontains(b"h3c.com") && response.body.bcontains(b"login") )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: goldencis-nacp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class=\"tit_b\"> 通过管理员分配的密码使用紧急入口。</div>")

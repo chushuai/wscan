@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: softnext-spam (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"snspam/spam_request/")
+        - response.body.bcontains(b"snspam/start_page.asp")
+        - response.body.bcontains(b"spam_request/spam_requestact.asp")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: radware (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).\\bcloudwebsec.radware.com\\b.".bmatches(response.body) || "(?i).>unauthorized.activity.has.been.detected<.".bmatches(response.body) || "(?i)with.the.following.case.number.in.its.subject:.\\d+.".bmatches(response.body) )

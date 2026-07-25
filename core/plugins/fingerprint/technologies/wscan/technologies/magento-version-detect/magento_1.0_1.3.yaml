@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: magento-1.0-1.3 (Magento Version Detect)
+    author: sullo, dogancanbakir
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"Copyright (c) 2008 Irubin Consulting Inc.")

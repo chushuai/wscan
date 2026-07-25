@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: acsoft-cloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"sdiyun.com, all rights reserved")
+        - response.body.bcontains(b"onrememberpasswordclick")

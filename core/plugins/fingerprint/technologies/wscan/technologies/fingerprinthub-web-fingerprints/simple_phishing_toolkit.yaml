@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: simple-phishing-toolkit (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<span id=\"spt\"><a href=\"http://www.sptoolkit.com/download/\" target=\"_blank\">")
+        - response.body.bcontains(b"content=\"welcome to spt - simple phishing toolkit.  spt is a super simple but powerful phishing toolkit.\" />")

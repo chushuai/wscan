@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: information-operation-and-maintenance-support-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"placeholder=\"ad域账号 / 系统账号\"")

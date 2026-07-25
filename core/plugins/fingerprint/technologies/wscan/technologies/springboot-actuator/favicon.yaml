@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: favicon (Detect Springboot Actuators)
+    author: that_juan_, dwisiswant0, wdahlenb, dr0pd34d
+pscan:
+    path:
+        - /
+        - /actuator
+        - /favicon.ico
+        - /actuator/favicon.ico
+    expressions:
+        - status_code==200 && ("116323821" == mmh3(base64_py(body)))

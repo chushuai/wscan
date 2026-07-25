@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: goaccess-log (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"by <a href=\"https://goaccess.io/\">goaccess</a>")

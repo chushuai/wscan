@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: activecollab (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by activecollab")
+        - response.body.bcontains(b"<p id=\"powered_by\"><a href=\"http://www.activecollab.com/\"")

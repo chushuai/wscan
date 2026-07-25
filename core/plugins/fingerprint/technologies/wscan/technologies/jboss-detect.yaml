@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: JBoss detected
+    author: daffainfo, idealphase
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"JBoss EAP 7")
+        - '"<title>Welcome to JBoss(.*)</title>".bmatches(response.body)'

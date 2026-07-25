@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: body-error-present (Linkerd detection via bad rule)
+    author: dudez
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"expected but end of input found at")

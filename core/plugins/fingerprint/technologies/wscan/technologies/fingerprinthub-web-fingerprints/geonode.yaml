@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: geonode (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://geonode.org")
+        - response.body.bcontains(b"href=\"/catalogue/opensearch\" title=\"geonode search")

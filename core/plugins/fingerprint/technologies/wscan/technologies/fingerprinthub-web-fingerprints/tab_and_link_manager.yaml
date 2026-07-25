@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tab-and-link-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id=\"footer_copyright\" class=\"shade footer_copyright\">powered by <a href=\"http://www.wolfshead-solutions.com/ws-products/product-1")

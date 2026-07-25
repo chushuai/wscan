@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: easted-ecloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<span>easted vserver虚拟数据中心系统</span></a></div>")

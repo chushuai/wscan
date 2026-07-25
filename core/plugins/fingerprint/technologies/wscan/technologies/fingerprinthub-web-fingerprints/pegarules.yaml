@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: pegarules (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"unable to logon to the pegarules system")
+        - response.body.bcontains(b"href=\"images/pzpegaicon.ico")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zhu-ji-bao (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"您访问的是主机宝服务器默认页")
+        - response.body.bcontains(b"<a href=\"http://z.admin5.com/\" target=")

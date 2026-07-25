@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cms4j (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/cms4jadmin/login.jsp")
+        - response.body.bcontains(b"method=\"post\" name=\"cms4jsearchform\" id=\"cms4jsearchform")

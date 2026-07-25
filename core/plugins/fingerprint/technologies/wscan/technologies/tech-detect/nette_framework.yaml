@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nette-framework (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<input[^>]+data-nette-rules".bmatches(response.body) || "<div[^>]+id="snippet-".bmatches(response.body) || "<input[^>]+id="frm-".bmatches(response.body) )

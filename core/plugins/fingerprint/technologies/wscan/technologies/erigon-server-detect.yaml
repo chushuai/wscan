@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Erigon JSON-RPC HTTP Server - Detect
+    author: nullfuzz
+pscan:
+    path: []
+    expressions:
+        - ( status_code == 200 && contains(header, "application/json") && contains(body, "erigon") )

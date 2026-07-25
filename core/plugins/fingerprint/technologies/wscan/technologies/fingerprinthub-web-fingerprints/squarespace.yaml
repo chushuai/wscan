@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: squarespace (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"new squarespace.fixedpositiontip(\"logout successful\", \"you have been successfully logged out.\", { xmargin: 15, ymargin: 15, icon: \"/universal/images/helptip-info.png\", orientation: \"upper-right\", viewportfixed: true, autohide: 1800 }).show();")'

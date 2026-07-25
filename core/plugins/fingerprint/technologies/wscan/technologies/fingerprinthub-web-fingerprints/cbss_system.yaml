@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cbss-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"</a>登录cbss系统</p>")
+        - response.body.bcontains(b"<li>com.cbss.xss.filter.xssfilter.dofilter")

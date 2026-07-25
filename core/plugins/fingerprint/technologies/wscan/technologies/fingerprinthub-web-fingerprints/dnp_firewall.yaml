@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: dnp-firewall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"name=\"dnp_firewall_redirect")
+        - response.body.bcontains(b"<form name=dnp_firewall")
+        - response.body.bcontains(b"dnp_firewall_redirect")

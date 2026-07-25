@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: rising-antivirus-online (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"ravweb_files/")

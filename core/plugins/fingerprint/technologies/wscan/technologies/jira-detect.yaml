@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: Jira Detect
+    author: pdteam, philippedelteil, adamcrosser
+pscan:
+    path:
+        - /secure/Dashboard.jspa
+        - /jira/secure/Dashboard.jspa
+        - /login.jsp
+    expressions:
+        - response.body.bcontains(b"Project Management Software")

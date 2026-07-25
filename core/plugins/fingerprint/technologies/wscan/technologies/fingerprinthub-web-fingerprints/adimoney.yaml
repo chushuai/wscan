@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: adimoney (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"/img/logo.png\" alt=\"adimoney\"/>")
+        - response.body.bcontains(b"content=\"adimoney.com mobile advertisement network. ")

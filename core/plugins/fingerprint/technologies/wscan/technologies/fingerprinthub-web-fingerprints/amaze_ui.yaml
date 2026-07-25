@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: amaze-ui (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"amazeui.min.js")
+        - response.body.bcontains(b"amazeui.js")
+        - response.body.bcontains(b"amazeui.css")

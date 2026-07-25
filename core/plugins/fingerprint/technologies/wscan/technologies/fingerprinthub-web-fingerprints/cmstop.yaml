@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: cmstop (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/css/cmstop-common.css")
+        - response.body.bcontains(b"/js/cmstop-common.js")
+        - ( response.body.bcontains(b"<a class=\"poweredby\" href=\"http://www.cmstop.com\"") && response.body.bcontains(b"cmstop-list-text.css") )

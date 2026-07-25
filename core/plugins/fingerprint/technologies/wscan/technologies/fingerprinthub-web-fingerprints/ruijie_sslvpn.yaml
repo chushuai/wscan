@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ruijie-sslvpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"document.cookie = \"rjsslvpn_encookie=yes;\"")
+        - ( response.body.bcontains(b"SSLVPN") && response.body.bcontains(b"login") && response.body.bcontains(b"rjsslvpn_encookie") )

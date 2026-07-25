@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Versa Analytics Server Detection
+    author: c-sh0
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"Versa-Analytics-Server")

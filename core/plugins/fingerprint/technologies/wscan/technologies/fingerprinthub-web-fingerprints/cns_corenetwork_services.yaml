@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cns-corenetwork-services (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!--p>cns网络核心服务自动化开通平台系统. ")
+        - response.body.bcontains(b"<span class=\"left\">cns-app ")

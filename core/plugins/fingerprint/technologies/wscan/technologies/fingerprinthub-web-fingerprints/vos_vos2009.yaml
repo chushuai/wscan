@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: vos-vos2009 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"vos2009, voip, voip运营支撑系统, 软交换\"")

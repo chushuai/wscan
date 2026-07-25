@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: huawei-esight (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"location.replace('login.action?_='+ new date().gettime());")
+        - response.body.bcontains(b"<body onload=\"gotologin()\">")
+        - response.body.bcontains(b"esight_login_copy_right_font")

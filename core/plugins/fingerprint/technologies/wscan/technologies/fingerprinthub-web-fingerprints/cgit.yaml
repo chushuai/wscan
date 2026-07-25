@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: cgit (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div id='cgit'>")
+        - response.body.bcontains(b"href='/cgit.css'/>")
+        - response.body.bcontains(b"content='cgit")

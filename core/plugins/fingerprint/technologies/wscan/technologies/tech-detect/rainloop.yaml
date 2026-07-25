@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: rainloop (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]href="rainloop/v/([0-9.]+)/static/apple-touch-icon\\.png/>".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phpbb (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "Powered by <a[^>]+phpBB".bmatches(response.body) || "<div class=phpbb_copyright>".bmatches(response.body) || "<[^>]+styles/(?:sub|pro)silver/theme".bmatches(response.body) || "<img[^>]+i_icon_mini".bmatches(response.body) || "<table class="[^"]*forumline".bmatches(response.body) )

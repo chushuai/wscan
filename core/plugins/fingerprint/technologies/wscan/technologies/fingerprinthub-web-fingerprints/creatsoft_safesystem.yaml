@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: creatsoft-safesystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"javascript:update_news('board/noticelist.jsp')")

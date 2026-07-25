@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Ymhome-detect
+    author: ffffffff0x
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"yimioa.apk") && response.body.bcontains(b"isSavePwd:") ) && response.status == 200

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: carbon-ads (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[a-z]+ [^>]*id="carbonads-container"".bmatches(response.body)'

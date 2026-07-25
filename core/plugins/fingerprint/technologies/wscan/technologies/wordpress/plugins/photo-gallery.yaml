@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Photo Gallery by 10Web – Mobile-Friendly Image Gallery Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/photo-gallery/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))
+        - '"(?i)Stable.tag:\\s?([\\w.]+)".bmatches(response.body)'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dradis-framework (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p class=\"copyright\">dradis")

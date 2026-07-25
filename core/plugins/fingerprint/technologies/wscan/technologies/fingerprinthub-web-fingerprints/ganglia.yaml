@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ganglia (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onchange=\"ganglia_form.submit();")
+        - response.body.bcontains(b"name=\"ganglia_form")

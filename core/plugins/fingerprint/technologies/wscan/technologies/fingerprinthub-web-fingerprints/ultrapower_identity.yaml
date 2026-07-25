@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ultrapower-identity (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<li><p>欢迎进入身份与安全管控系统</p></li>")

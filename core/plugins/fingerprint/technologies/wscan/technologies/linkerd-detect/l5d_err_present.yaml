@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: l5d-err-present (Linkerd detection via bad rule)
+    author: dudez
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?mi)^l5d-err:.*$".bmatches(response.raw_header)'

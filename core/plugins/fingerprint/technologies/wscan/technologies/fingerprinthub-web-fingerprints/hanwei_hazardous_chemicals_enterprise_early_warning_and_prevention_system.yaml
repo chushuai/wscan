@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hanwei-hazardous-chemicals-enterprise-early-warning-and-prevention-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"default value is bootstrapdialog.type_primary")
+        - response.body.bcontains(b"var objheight = document.documentelement.clientheight")

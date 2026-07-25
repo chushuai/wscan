@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: mywebftp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href='mwftp/common/mwftp.css")
+        - response.body.bcontains(b"mwftp/common/mwftp.js")
+        - response.body.bcontains(b">mywebftp</a>")

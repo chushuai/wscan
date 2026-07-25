@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nextgen-gallery (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- <meta name="NextGEN" version="([\\d.]+)" /> -->".bmatches(response.body)'

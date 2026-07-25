@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zhirui (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"智睿软件")
+        - response.body.bcontains(b"zhirui.js")

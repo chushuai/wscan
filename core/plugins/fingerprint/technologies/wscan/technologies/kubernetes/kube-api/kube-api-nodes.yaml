@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Kube API Nodes
+    author: sharath, ritikchaddha
+pscan:
+    path:
+        - /api/v1/nodes
+    expressions:
+        - ( response.body.bcontains(b"\"NodeList\":") && response.body.bcontains(b"\"items\":") )
+        - '( response.body.bcontains(b"\"containerRuntimeVersion\"") && response.body.bcontains(b"\"kubeletVersion\": \"v") )'

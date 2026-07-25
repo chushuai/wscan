@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: vmware-virtualcenter (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"vmware virtualcenter")
+        - response.body.bcontains(b"content=\"vmware vsphere")
+        - response.body.bcontains(b"url=vcops-vsphere/")
+        - response.body.bcontains(b"the vshield manager requires")

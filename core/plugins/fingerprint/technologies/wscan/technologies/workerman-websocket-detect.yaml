@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Workerman Websocket Detection
+    author: geeknik
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"workerman/")

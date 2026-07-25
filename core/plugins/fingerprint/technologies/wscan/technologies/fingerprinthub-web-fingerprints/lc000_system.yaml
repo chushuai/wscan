@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: lc000-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>secondary_nodes</title>")

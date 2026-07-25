@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: kendo-ui (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]*\\s+href=[^>]*styles/kendo\\.common(?:\\.min)?\\.css[^>]*/>".bmatches(response.body)'

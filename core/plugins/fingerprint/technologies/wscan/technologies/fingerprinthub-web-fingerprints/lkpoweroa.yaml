@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: lkpoweroa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/lksys_windowcontrolscript.js")
+        - response.body.bcontains(b"onload=\"lksys_pubmaxwin()")
+        - response.body.bcontains(b"id=\"lkblogin\" href=\"javascript:__dopostback('lkblogin','')")
+        - response.body.bcontains(b"identityvalidator")
+        - response.body.bcontains(b"hhctrlmax")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: cloudera-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Set-Cookie: cloudera_manager_sessionid=")'
+        - response.body.bcontains(b"var loginpageurl = \"/cmf/login\";")

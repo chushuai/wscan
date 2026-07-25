@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: methode (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Methode uuid: "[a-f\\d]+" ?-->".bmatches(response.body)'

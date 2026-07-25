@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: apache-dubbo (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"WWW-Authenticate: Basic realm=\"dubbo\"")'

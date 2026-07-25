@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: avtech-ip-surveillance-camera (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-194439630" == mmh3(base64_py(body)))

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: rebelmouse (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Powered by RebelMouse\\.".bmatches(response.body)'

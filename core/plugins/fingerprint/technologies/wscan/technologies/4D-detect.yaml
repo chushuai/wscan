@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: 4D Detection
+    author: righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/4DACTION/") || response.body.bcontains(b"/4DSTATS") || response.body.bcontains(b"/4DHTMLSTATS") || response.body.bcontains(b"/4DCACHECLEAR") || response.body.bcontains(b"/4DWEBTEST") ) && response.status == 200

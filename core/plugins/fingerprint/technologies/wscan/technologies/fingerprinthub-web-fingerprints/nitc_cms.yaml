@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: nitc-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/images/nitc1.png") && response.body.bcontains(b"nitc web marketing service") )

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: locomoco (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Locomoco WebServer - <span style='color:blue'>RUN ( SUCCESS )")

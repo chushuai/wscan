@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Basic Auth Detection
+    author: w4cky_, bhutch
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?i)www-authenticate: basic".bmatches(response.raw_header) && response.status == 401'

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: HP iLO
+    author: milo2012
+pscan:
+    path:
+        - /xmldata?item=all
+    expressions:
+        - response.status == 200 && response.raw_header.bcontains(b"text/xml") && ( response.body.bcontains(b"<RIMP>") && response.body.bcontains(b"<HSI>") )

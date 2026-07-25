@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: atlassian (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("743365239" == mmh3(base64_py(body)))
+        - status_code==200 && ("628535358" == mmh3(base64_py(body)))
+        - status_code==200 && ("705143395" == mmh3(base64_py(body)))

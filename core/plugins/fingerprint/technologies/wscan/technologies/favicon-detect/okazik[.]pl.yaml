@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: okazik[.]pl (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-1583478052" == mmh3(base64_py(body)))

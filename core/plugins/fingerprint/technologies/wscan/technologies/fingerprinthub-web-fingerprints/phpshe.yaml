@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: phpshe (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by phpshe")
+        - response.body.bcontains(b"content=\"phpshe")

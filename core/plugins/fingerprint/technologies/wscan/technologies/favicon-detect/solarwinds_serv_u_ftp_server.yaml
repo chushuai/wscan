@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: solarwinds-serv-u-ftp-server (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("812385209" == mmh3(base64_py(body)))

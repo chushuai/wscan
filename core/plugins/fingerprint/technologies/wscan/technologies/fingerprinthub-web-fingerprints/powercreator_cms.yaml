@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: powercreator-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"email:support@powercreator.com.cn<br />")
+        - response.body.bcontains(b"<span class=\"bottom_versionno\">")
+        - response.body.bcontains(b"powercreator ")

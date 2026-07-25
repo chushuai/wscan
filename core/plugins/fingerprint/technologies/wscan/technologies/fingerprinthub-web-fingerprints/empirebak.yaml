@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: empirebak (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"http://www.phome.net\" target=\"_blank\"><strong>empirebak</strong>")
+        - response.body.bcontains(b"<div align=\"center\">(<a href=\"doc.html\" target=\"_blank\">查看帝国备份王说明文档</a>)</div>")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: aws (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<RequestId>[0-9a-zA-Z]{16,25}<.RequestId>".bmatches(response.body) || "(?i)<Error><Code>AccessDenied<.Code>".bmatches(response.body) || "(?i)x.amz.id.\\d+".bmatches(response.body) || "(?i)x.amz.request.id".bmatches(response.body) )

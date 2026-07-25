@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Site Kit by Google – Analytics, Search Console, AdSense, Speed Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/google-site-kit/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))
+        - '"(?i)Stable.tag:\\s?([\\w.]+)".bmatches(response.body)'

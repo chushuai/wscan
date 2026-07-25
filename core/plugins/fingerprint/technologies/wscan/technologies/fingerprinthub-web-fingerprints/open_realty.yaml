@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: open-realty (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"open-realty")
+        - response.body.bcontains(b"href=\"http://www.open-realty.org\" title=\"powered by open-realty")

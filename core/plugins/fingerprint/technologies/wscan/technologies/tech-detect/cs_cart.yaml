@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cs-cart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "&nbsp;Powered by (?:<a href=[^>]+cs-cart\\.com|CS-Cart)".bmatches(response.body) || "\\.cm-noscript[^>]+</style>".bmatches(response.body) )

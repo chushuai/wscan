@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mkportal (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"mkportal")
+        - response.body.bcontains(b"target=\"_blank\">mkportal</a>")

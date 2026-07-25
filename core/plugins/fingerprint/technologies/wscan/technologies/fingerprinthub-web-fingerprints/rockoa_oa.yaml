@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: rockoa-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"onclick=\"loginsubmit()\"")
+        - response.body.bcontains(b"信呼开发团队")
+        - response.body.bcontains(b"技术支持：<a href=\"http://www.rockoa.com/\"")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: soft78-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"offlineservice/showdownloadmessage.aspx")
+        - response.body.bcontains(b"add by sll")

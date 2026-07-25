@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ostec-firebox (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"background-image: url(''/icones/fundo_firebox.png'')")'
+        - response.body.bcontains(b"http://colorzilla.com/")

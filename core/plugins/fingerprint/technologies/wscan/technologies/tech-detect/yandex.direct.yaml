@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yandex.direct (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<yatag class="ya-partner__ads">".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: ipcop-firewall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<!-- ipcop logo row -->")
+        - response.body.bcontains(b"href='https://sourceforge.net/projects/ipcop/")
+        - response.body.bcontains(b"href='http://sf.net/projects/ipcop/")

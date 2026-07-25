@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: styled-components (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( "<style[^>]*data-styled(?:-components)?[\\s"]".bmatches(response.body) || "<style[^>]+data-styled-version="([0-9]+)"".bmatches(response.body) || "<[^>]+sc-component-id: sc-".bmatches(response.body) )'

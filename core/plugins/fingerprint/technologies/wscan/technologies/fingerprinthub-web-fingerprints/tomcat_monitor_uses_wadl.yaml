@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tomcat-monitor-uses-wadl (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"tomcat monitor uses wadl to describe services it can offer")

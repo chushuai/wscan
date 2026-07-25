@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vmware-esxi (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"ng-app=\"esxuiapp\"")
+        - response.body.bcontains(b"<title ng-bind=\"$root.title\">")

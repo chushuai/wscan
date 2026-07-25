@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wackopicko (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h2>welcome to wackopicko</h2>")
+        - response.body.bcontains(b"<h1 id=\"title\"><a href=\"/\">wackopicko.com</a></h1>")

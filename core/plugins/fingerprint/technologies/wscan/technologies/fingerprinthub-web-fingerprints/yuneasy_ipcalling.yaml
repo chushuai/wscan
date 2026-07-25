@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yuneasy-ipcalling (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"云翌ip呼叫中心</span>")

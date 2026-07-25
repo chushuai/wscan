@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: collectionsystem (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"upgrade/ocx/ccdmsshell.cab#version")
+        - response.body.bcontains(b"class=\"s_container_left\"")

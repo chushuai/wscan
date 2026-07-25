@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: 5vtechnologies-blueangelsoftwaresuite (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/cgi-bin/webctrl.cgi?action=index_page")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: netflow-analyzer-zoho-traffic-management (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"netflow analyzer")
+        - response.body.bcontains(b"zoho")
+        - response.body.bcontains(b"href=\"/netflow/css/netflow.css")

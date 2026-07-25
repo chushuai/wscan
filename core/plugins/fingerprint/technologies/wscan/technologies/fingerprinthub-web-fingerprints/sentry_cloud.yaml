@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sentry-cloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.body.bcontains(b"src: url(/static/fonts/lcdd.eot) format(\"truetype\"), url(/static/fonts/lcdd.ttf) format(\"truetype\");")'

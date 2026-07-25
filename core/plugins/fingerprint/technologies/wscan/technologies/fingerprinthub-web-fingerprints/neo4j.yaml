@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: neo4j (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"neo4j")
+        - response.body.bcontains(b"ng-show=\"neo4j.enterpriseedition")
+        - response.body.bcontains(b"play-topic=\"neo4j-sync")
+        - response.body.bcontains(b"{{ neo4j.version | neo4jdeveloperdoc }}/")

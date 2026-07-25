@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: isunor-order-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"var c_name = 'jsessionid';")

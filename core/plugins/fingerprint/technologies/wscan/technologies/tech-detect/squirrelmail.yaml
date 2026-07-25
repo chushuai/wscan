@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: squirrelmail (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<small>SquirrelMail version ([.\\d]+)[^<]*<br ".bmatches(response.body)'

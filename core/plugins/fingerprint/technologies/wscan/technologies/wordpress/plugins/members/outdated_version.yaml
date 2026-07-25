@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Members – Membership & User Role Editor Plugin Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/members/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

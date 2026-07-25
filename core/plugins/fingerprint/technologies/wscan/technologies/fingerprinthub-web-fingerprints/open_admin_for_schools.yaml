@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: open-admin-for-schools (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"action=\"/cgi-bin/rptbirthday.pl")
+        - response.body.bcontains(b"open admin for schools")

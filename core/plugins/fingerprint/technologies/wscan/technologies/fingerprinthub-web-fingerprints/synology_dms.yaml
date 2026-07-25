@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: synology-dms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"logo-synology\"")
+        - response.body.bcontains(b"class=\"logo-dsm\"")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tictail (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]*tictail\\.com".bmatches(response.body)'

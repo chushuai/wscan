@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: kenna-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"/favicon.ico?kenna\"")
+        - response.body.bcontains(b"class=\"kenna sessions new\"")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: squid (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)squid".bmatches(response.body) || "(?i)Access control configuration prevents".bmatches(response.body) || "(?i)X.Squid.Error".bmatches(response.body) )

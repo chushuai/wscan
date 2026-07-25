@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yizhitong-e7 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"name=\"hidden_isbiaozhun\"")

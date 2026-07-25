@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Switching Protocol Detection
+    author: pdteam
+pscan:
+    path:
+        - /
+    expressions:
+        - '( status_code == 101 || contains(to_lower(header), "switching protocols") || contains(to_lower(header), "connection: upgrade") || contains(to_lower(header), "upgrade:") )'

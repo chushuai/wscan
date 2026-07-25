@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xenforo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "(?:jQuery\\.extend\\(true, XenForo|Forum software by XenForo™|<!--XF:branding|<html[^>]+id="XenForo")".bmatches(response.body) || "<html id="XF" ".bmatches(response.body) )

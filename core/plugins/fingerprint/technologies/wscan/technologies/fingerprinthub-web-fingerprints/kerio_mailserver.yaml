@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: kerio-mailserver (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - 'response.raw_header.bcontains(b"Server: kerio mailserver")'

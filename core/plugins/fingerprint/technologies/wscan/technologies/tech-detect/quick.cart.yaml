@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: quick.cart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a href="[^>]+opensolution\\.org/">(?:Shopping cart by|Sklep internetowy)".bmatches(response.body)'

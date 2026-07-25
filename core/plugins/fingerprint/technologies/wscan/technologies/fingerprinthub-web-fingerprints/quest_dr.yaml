@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: quest-dr (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"quest software")
+        - response.body.bcontains(b"cui-login-screen")

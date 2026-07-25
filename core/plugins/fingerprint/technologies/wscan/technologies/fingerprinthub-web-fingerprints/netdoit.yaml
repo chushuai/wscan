@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: netdoit (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"power by netdoit")
+        - response.body.bcontains(b"align=\"center\"><a href=\"http://www.net-doit.com\" target=\"_blank")

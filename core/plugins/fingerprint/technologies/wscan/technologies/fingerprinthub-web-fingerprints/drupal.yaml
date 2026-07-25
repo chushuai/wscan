@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: drupal (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/misc/drupal.js")
+        - response.body.bcontains(b"Powered by <a href=\"https://www.drupal.org\">Drupal</a>")
+        - response.body.bcontains(b"Drupal.settings")
+        - response.body.bcontains(b"jquery.extend(drupal.settings")
+        - response.body.bcontains(b"/sites/default/files/")
+        - response.body.bcontains(b"/sites/all/modules/")
+        - response.body.bcontains(b"/sites/all/themes/")

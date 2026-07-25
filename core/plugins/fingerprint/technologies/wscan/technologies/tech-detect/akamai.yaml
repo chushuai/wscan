@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: akamai (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - response.raw_header.bcontains(b"AkamaiGHost")

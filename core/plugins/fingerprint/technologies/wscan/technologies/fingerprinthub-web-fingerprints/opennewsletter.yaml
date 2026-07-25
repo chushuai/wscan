@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: opennewsletter (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"http://netmeans.net\">netmeans.net")
+        - response.body.bcontains(b"this software is based on the opennewsletter project")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cargo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link [^>]+Cargo feed".bmatches(response.body)'

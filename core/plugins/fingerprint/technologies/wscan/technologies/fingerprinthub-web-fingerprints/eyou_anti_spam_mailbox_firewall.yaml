@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: eyou-anti-spam-mailbox-firewall (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"亿邮大容量电子邮件系统，反垃圾邮件网关")

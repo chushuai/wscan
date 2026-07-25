@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gemius (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<a [^>]*onclick="gemius_hit".bmatches(response.body)'

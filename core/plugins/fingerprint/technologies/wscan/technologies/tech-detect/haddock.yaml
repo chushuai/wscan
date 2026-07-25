@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: haddock (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<p>Produced by <a href="http://www\\.haskell\\.org/haddock/">Haddock</a> version ([0-9.]+)</p>".bmatches(response.body)'

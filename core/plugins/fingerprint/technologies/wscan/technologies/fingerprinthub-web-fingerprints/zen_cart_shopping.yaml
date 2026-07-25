@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: zen_cart-shopping (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"shopping cart program by zen cart")
+        - 'response.raw_header.bcontains(b"Set-Cookie: zenid=")'

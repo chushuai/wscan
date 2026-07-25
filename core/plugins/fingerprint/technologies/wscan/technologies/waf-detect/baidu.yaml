@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: baidu (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)yunjiasu.nginx".bmatches(response.body)'

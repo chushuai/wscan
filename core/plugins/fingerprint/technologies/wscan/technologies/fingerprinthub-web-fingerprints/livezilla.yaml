@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: livezilla (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"thank you for using livezilla!")
+        - response.body.bcontains(b"content=\"livezilla")
+        - response.body.bcontains(b"href=\"http://www.livezilla.net\" target=\"_blank")
+        - response.body.bcontains(b"livezilla is a registered trademark of livezilla gmbh</div>")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: novnc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"novnc-control-bar")
+        - 'response.body.bcontains(b"novnc example: simple")'

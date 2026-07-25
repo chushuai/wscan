@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mylittleforum (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by my little forum")
+        - response.body.bcontains(b"index.php?mode=js_defaults")

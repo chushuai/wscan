@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: myvuehelp (CARESTREAM Vue Motion Detector)
+    author: philippedelteil
+pscan:
+    path:
+        - /portal/favicon.ico
+        - /portal/images/MyVue/MyVueHelp.png
+    expressions:
+        - status_code==200 && ("84054196570ecd7526894ccb6e7c5c6e" == md5(body))

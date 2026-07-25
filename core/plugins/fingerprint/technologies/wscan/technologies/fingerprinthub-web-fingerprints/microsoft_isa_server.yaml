@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: microsoft-isa-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"the isa server denied the specified uniform resource locator")
+        - response.body.bcontains(b"the server denied the specified uniform resource locator (url). contact the server administrator")

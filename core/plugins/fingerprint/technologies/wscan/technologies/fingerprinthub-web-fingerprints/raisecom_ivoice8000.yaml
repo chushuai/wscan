@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: raisecom-ivoice8000 (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"id=\"com_raisecom_ums_aos_portal_login_domain")

@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bh-bh5000c (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"bhclientcer:\"/modules/web/common/data/bhclient.cer")

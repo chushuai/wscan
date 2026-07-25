@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cpanel (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- cPanel".bmatches(response.body)'

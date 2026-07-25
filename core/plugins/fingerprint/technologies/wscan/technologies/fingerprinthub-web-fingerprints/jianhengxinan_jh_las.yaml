@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jianhengxinan-jh-las (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"jh-la3600")
+        - response.body.bcontains(b"建恒信安日志审计系统")

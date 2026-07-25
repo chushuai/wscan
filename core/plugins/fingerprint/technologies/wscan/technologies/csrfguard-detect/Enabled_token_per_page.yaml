@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: Enabled-token-per-page (OWASP CSRFGuard 3.x/4.x - Detect)
+    author: forgedhallpass
+pscan:
+    path: []
+    expressions:
+        - ( status_code_3==200 && contains(body, "{\"pageTokens") )

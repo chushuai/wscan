@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: adverticum (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div (?:id="[a-zA-Z0-9_]*" )?class="goAdverticum"".bmatches(response.body)'

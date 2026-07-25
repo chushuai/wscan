@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: yelala (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/public/js/knockout-3.4.1.debug.js")
+        - 'response.body.bcontains(b"<form action=\"/index.php/home/login/login.html\" method=\"post\" id=\"login\" class=\"form\" data-bind=\"submit: submitform\">")'

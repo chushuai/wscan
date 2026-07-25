@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: swagger (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"Swagger UI")
+        - response.body.bcontains(b"swagger-ui.css")
+        - response.body.bcontains(b"swagger-ui.js")

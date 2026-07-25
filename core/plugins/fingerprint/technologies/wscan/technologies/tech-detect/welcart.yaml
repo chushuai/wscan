@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: welcart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '( "<link[^>]+?href="[^"]+usces_default(?:\\.min)?\\.css".bmatches(response.body) || "<!-- Welcart version : v([\\d.]+)".bmatches(response.body) )'

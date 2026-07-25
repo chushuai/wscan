@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: swiper-slider (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+=swiper-container".bmatches(response.body)'

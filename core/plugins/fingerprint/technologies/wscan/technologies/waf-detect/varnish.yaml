@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: varnish (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)varnish".bmatches(response.body) || "(?i).>.?security.by.cachewall.?<.".bmatches(response.body) || "(?i)cachewall".bmatches(response.body) || "(?i).>access.is.blocked.according.to.our.site.security.policy.<+".bmatches(response.body) )

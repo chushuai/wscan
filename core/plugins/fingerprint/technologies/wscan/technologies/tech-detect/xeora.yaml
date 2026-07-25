@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xeora (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<input type="hidden" name="_sys_bind_\\d+" id="_sys_bind_\\d+" />".bmatches(response.body)'

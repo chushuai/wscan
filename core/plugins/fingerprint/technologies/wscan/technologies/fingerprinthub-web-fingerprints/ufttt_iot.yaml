@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ufttt-iot (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"sdkjs/uftttsdk2.js\"")

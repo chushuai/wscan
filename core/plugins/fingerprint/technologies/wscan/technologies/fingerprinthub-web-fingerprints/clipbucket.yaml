@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: clipbucket (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<!-- clipbucket") && response.body.bcontains(b"content=\"clipbucket") )
+        - response.body.bcontains(b"<!-- forged by clipbucket")
+        - response.body.bcontains(b"href=\"http://clip-bucket.com/\">clipbucket")

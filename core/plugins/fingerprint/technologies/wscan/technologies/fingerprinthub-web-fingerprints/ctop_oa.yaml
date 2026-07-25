@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: ctop-oa (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/ctop/index.jsp")
+        - response.body.bcontains(b"/software/jinstall.exe")
+        - response.body.bcontains(b"src=\"images/logo-ctop.gif")
+        - response.body.bcontains(b"src=\"images/ctop_logo.gif")

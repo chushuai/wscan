@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: synology-diskstation (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<noscript><div class=''syno-no-script''".bmatches(response.body)'

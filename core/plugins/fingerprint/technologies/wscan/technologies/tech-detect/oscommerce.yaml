@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: oscommerce (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - ( "<br />Powered by <a href="https?://www\\.oscommerce\\.com".bmatches(response.body) || "<(?:input|a)[^>]+name="osCsid"".bmatches(response.body) || "<(?:tr|td|table)class="[^"]*infoBoxHeading".bmatches(response.body) )

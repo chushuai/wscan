@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: smartsite (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+/smartsite\\.(?:dws|shtml)\\?id=".bmatches(response.body)'

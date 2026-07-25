@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: utt-device (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"utt-inline-block\" src=\"./images/login_btmlogo.png\"")

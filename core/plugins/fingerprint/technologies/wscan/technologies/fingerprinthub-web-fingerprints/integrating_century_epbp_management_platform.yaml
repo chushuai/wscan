@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: integrating-century-epbp-management-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"rmsie = /(msie\s|trident.*rv:)([\w.]+)/i")
+        - response.body.bcontains(b"match = rmsie.exec(window.navigator.useragent")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: china-shine-video-on-demand (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"视翰公司")
+        - response.body.bcontains(b"background=\"images/cbackground.jpg\"")

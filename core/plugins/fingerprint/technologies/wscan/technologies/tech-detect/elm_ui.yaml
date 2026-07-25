@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: elm-ui (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<style>[\\s\\S]*\\.explain > \\.s[\\s\\S]*\\.explain > \\.ctr > \\.s".bmatches(response.body)'

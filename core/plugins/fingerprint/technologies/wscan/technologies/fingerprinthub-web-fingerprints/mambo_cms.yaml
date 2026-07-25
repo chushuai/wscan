@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: mambo-cms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"mambo")
+        - response.body.bcontains(b"<div id=\"mambo")

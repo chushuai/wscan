@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Converter for Media – Optimize images | Convert WebP & AVIF Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/webp-converter-for-media/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

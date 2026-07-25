@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: juniper-vpn (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"juniper networks vpn") && response.body.bcontains(b"junos pulse secure access service") )

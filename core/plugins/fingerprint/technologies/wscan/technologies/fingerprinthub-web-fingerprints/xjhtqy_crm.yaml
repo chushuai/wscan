@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: xjhtqy-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"class=\"hidden-xs ewheaderrow\"><img src=\"aspximages/htqy.png\"")

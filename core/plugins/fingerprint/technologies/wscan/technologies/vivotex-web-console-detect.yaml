@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: VIVOTEK Web Console Detect
+    author: pikpikcu
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<title>VIVOTEK Web Console</title>") && response.raw_header.bcontains(b"text/html") && response.status == 200

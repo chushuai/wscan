@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apabi-digital-resource-platform (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"default/apabi.css")
+        - response.body.bcontains(b"<link href=\"http://apabi")

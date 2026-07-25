@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: iguard-security-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"lucky-tech iguard")

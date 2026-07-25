@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: bad-debt-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"登录密码错误次数超过5次，帐号被锁定。请联系省坏账系统管理员，或发邮件解锁")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: wuzhicms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<meta name=\"generator\" content=\"wuzhicms")
+        - ( response.body.bcontains(b"content=\"wuzhicms") && response.body.bcontains(b"powered by wuzhicms") )

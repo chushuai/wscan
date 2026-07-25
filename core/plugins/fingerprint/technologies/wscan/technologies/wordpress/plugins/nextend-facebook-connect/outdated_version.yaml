@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: outdated_version (Nextend Social Login and Register Detection)
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/nextend-facebook-connect/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))

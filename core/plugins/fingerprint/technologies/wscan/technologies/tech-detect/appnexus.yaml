@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: appnexus (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<(?:iframe|img)[^>]+adnxs\\.(?:net|com)".bmatches(response.body)'

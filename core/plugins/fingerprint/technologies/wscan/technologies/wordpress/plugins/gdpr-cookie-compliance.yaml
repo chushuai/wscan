@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent) Detection
+    author: ricardomaia
+pscan:
+    path:
+        - /wp-content/plugins/gdpr-cookie-compliance/readme.txt
+    expressions:
+        - compare_versions(internal_detected_version, concat("< ", last_version))
+        - '"(?i)Stable.tag:\\s?([\\w.]+)".bmatches(response.body)'

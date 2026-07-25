@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Check Point Mobile SSL VPN - Detect
+    author: righettod
+pscan:
+    path:
+        - /sslvpn/Login
+    expressions:
+        - ( response.body.bcontains(b"Check Point Mobile") && response.body.bcontains(b"Check Point Software Technologies") ) && response.status == 403

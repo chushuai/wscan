@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: dart (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"/(?:<script)[^>]+(?:type="application/dart")/".bmatches(response.body)'

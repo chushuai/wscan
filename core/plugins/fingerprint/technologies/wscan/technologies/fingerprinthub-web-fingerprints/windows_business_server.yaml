@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: windows-business-server (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"images/sbslogo.gif")
+        - response.body.bcontains(b"href=\"/remote\">remote web workplace")

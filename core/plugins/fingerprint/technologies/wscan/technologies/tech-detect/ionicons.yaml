@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ionicons (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]* href=[^>]+ionicons(?:\\.min)?\\.css".bmatches(response.body)'

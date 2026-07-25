@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: roundcube (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<title>RoundCube".bmatches(response.body)'

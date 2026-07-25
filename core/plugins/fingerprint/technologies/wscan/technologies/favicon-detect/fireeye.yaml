@@ -1,0 +1,15 @@
+engine: fingerprint
+info:
+    name: fireeye (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("95271369" == mmh3(base64_py(body)))
+        - status_code==200 && ("1476335317" == mmh3(base64_py(body)))
+        - status_code==200 && ("-842192932" == mmh3(base64_py(body)))
+        - status_code==200 && ("105083909" == mmh3(base64_py(body)))
+        - status_code==200 && ("240606739" == mmh3(base64_py(body)))
+        - status_code==200 && ("2121539357" == mmh3(base64_py(body)))

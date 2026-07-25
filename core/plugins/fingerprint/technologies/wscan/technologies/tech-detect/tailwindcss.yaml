@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: tailwindcss (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+?href="[^"]+tailwindcss(?:\\.min)?\\.css".bmatches(response.body)'

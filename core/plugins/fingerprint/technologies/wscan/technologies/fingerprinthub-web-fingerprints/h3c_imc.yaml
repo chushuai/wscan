@@ -1,0 +1,17 @@
+engine: fingerprint
+info:
+    name: h3c-imc (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/imc/login.jsf")
+        - response.body.bcontains(b"imc来宾接入自助管理系统")
+        - response.body.bcontains(b"login_logo_h3c.png.jsf")
+        - response.body.bcontains(b"com_h3c_imc_usr_usermgr_alluser_overlaydiv")
+        - response.body.bcontains(b"action=\"/imc/login.jsf")
+        - response.body.bcontains(b"src=\"/imc/javax.faces.resource/images/login_logo_h3c.png.jsf?ln=primefaces-imc-new-webui")
+        - response.body.bcontains(b"<span class=\"cmn_mn_normalfont\">h3c 智能管理中心")
+        - ( response.body.bcontains(b"h3c &#26234;&#33021;&#31649;&#29702;&#20013;&#24515;</span>") && response.body.bcontains(b"src=\"/imc/faces/extensionresource/com.h3c.imc.component.util.extensionresourceloader/") )
+        - response.body.bcontains(b"href=\"/selfservice/javax.faces.resource/theme.css.xhtml?ln=primefaces-imc-classic-blue\"")

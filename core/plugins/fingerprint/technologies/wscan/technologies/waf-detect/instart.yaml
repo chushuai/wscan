@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: instart (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)instartrequestid".bmatches(response.body)'

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: janusec (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)janusec".bmatches(response.body) || "(?i)(http(s)?\\W+(www.)?)?janusec.(com|net|org)".bmatches(response.body) )

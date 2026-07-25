@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: jenkins (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<span class="jenkins_ver"><a href="https://jenkins\\.io/">Jenkins ver\\. ([\\d.]+)".bmatches(response.body)'
+        - response.raw_header.bcontains(b"X-Jenkins")

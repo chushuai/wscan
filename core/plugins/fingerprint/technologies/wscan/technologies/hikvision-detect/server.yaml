@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: server (Hikvision Panel)
+    author: pdteam, its0x08
+pscan:
+    path:
+        - /favicon.ico
+        - /doc/page/login.asp
+    expressions:
+        - response.raw_header.bcontains(b"Hikvision-Webs")

@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: denyall (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)\\Acondition.intercepted".bmatches(response.body) || "(?i)\\Asessioncookie=".bmatches(response.body) )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: apache-tomcat (favicon-detection)
+    author: un-fmunozs, dhiyaneshdk
+pscan:
+    path:
+        - /favicon.ico
+        - /{{path}}favicon.ico
+    expressions:
+        - status_code==200 && ("-297069493" == mmh3(base64_py(body)))

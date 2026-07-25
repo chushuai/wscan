@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Detect Weblogic
+    author: pdteam
+pscan:
+    path:
+        - /{{randstr}}
+    expressions:
+        - ( response.body.bcontains(b"From RFC 2068") && response.body.bcontains(b"Error 404--Not Found") ) && response.status == 404

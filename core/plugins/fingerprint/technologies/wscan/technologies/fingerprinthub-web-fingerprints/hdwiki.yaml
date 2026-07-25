@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: hdwiki (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"hdwiki")
+        - response.body.bcontains(b"http://kaiyuan.hudong.com?hf=hdwiki_copyright_kaiyuan")

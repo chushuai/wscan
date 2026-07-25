@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: firehose_service_monitoring (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h1>firehose_service_monitoring status</h1>")

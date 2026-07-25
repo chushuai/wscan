@@ -1,0 +1,12 @@
+engine: fingerprint
+info:
+    name: manageengine-adselfservice (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"images/adssp_favicon.ico")
+        - response.body.bcontains(b"small_status_box")
+        - response.body.bcontains(b"src=\"adsf/js/")
+        - response.body.bcontains(b"manageengine")

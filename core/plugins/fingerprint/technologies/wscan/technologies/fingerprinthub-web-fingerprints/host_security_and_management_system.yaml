@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: host-security-and-management-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=./static/css/app.edb681c84a53277f9336fc297ebca96e.css")

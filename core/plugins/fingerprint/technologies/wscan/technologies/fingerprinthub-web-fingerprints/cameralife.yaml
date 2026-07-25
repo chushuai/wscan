@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cameralife (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"content=\"camera life") && response.body.bcontains(b"this site is powered by camera life") )

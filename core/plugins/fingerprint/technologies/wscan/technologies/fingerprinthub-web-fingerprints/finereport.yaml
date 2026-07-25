@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: finereport (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"=fs") && response.body.bcontains(b"ReportServer") )
+        - response.body.bcontains(b"content=\"finereport--web reporting tool\"")

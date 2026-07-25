@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: onminutes-crm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"<div class=\"extras\" id=\"password_extras\">") && response.body.bcontains(b"crm") )

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: fanwe (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"app/tpl/fanwe_1/images/lazy_loading.gif")
+        - response.body.bcontains(b"index.php?ctl=article_cate")

@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: chiliproject (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"powered by <a href=\"https://www.chiliproject.org/")
+        - response.body.bcontains(b"content=\"chiliproject")

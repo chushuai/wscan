@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: oceansoft (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"江苏欧索软件有限公司")
+        - response.body.bcontains(b"/ocensoftcomm.js")
+        - response.body.bcontains(b"技术支持：<a href=\"http://www.oceansoft.com.cn/\">")
+        - ( response.body.bcontains(b"aspx/casecenter/acasecenter.aspx?pagetype=sxcx&casetype=sscs&casename=") && response.body.bcontains(b"href=\"/e/action/listinfo/?") )
+        - response.body.bcontains(b"江苏欧索")

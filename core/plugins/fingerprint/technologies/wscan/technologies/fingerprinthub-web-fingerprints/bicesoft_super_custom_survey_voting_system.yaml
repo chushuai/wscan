@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: bicesoft-super-custom-survey-voting-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"href=\"images/bicesoft.css\"")
+        - response.body.bcontains(b"佰思超强自定义问卷调查系统(bicesoft.com)")

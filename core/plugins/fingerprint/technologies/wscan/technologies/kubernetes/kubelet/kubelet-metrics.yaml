@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Kubelet Metrics
+    author: sharath
+pscan:
+    path:
+        - /metrics
+    expressions:
+        - ( response.body.bcontains(b"# HELP ") && response.body.bcontains(b"# TYPE ") ) && "text/plain".bmatches(response.raw_header) && response.status == 200

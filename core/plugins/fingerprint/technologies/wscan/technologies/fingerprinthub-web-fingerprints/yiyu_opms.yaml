@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: yiyu-opms (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"opms") && response.body.bcontains(b"opms管理系统,织蝶-企业应用系统为您的企业保驾护航") )

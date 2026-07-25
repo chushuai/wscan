@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: Werkzeug debugger console
+    author: pdteam
+pscan:
+    path:
+        - /console
+    expressions:
+        - response.body.bcontains(b"<h1>Interactive Console</h1>")

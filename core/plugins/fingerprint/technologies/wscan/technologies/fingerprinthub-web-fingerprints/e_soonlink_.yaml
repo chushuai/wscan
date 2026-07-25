@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: e-soonlink- (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"document.writeln(companymail)")
+        - response.body.bcontains(b"志高易联")

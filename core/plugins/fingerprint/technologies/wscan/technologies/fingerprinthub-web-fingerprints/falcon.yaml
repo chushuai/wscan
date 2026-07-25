@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: falcon (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<h3 class=\"font-bold\">opsplatform</h3>")
+        - response.body.bcontains(b"textarea class=\"form-control endpoints")

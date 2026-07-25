@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: sweetalert (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<link[^>]+?href="[^"]+sweet-alert(?:\\.min)?\\.css".bmatches(response.body)'

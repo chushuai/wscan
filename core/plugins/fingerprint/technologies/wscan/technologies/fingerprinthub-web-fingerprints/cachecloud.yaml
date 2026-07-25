@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: cachecloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alert(\"系统不存在该用户名，请确认该用户申请了cachecloud权限!\");")

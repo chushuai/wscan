@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mailer (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/jdwm/cgi/login.cgi?login")

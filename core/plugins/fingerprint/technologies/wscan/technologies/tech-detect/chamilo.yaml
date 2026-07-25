@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: chamilo (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"">Chamilo ([\\d.]+)</a>".bmatches(response.body)'

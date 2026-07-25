@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ADFS Detect
+    author: adam crosser
+pscan:
+    path:
+        - /adfs/ls/idpinitiatedsignon.aspx
+    expressions:
+        - response.body.bcontains(b"/adfs/portal/css/style.css")

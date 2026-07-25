@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: barikode (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i).>barikode<.".bmatches(response.body) || "(?i)<h\\d{1}>forbidden.access<.h\\d{1}>".bmatches(response.body) )

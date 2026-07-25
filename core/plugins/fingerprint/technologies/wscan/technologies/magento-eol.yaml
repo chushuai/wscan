@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: Magento End-of-life Detect
+    author: dogancanbakir
+pscan:
+    path:
+        - /
+    expressions:
+        - compare_versions(version, '<=2.4')
+        - '"Magento\\/([0-9.]+) ".bmatches(response.body)'

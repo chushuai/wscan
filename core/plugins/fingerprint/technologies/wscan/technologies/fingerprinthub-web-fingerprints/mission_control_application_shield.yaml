@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: mission-control-application-shield (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"mission control application shield")

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: phplist (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"michiel dethmers - http://www.phplist.com")
+        - response.body.bcontains(b"content=\"phplist version")
+        - response.body.bcontains(b"&copy; <a href=\"http://phplist.com\" target")

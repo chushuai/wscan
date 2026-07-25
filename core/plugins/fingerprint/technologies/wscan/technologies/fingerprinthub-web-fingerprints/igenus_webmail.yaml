@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: igenus-webmail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"href=\"http://www.igenus.org/\" target=\"_blank\">") && response.body.bcontains(b"igenus webmail system") )

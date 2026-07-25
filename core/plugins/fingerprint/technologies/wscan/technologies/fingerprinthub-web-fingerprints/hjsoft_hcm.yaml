@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: hjsoft-hcm (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/images/hcm/copyright.gif\"")
+        - response.body.bcontains(b"src=\"/images/hcm/themes/default/login/login_banner2.png?v=12334\"")
+        - response.body.bcontains(b"src=\"/general/sys/hjaxmanage.js\"")

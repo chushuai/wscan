@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: dsview (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"src=\"/dsview/images/avocent-logo.png")
+        - response.body.bcontains(b"href=\"/dsview/themes/")
+        - 'response.raw_header.bcontains(b"Server: avocent dsview")'
+        - response.body.bcontains(b"/dsview/images/favicon.ico")
+        - response.body.bcontains(b"/dsview/protected/login.do")

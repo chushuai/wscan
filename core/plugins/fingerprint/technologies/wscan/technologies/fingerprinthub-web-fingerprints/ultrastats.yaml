@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ultrastats (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<img src=\"./images/main/ultrastatslogo.png\" width=\"300\" height=\"200\" name=\"ultrastats_logo\" align=\"center\">")

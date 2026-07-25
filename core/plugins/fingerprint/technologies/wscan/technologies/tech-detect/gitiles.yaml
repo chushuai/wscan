@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: gitiles (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"Powered by <a href="https://gerrit\\.googlesource\\.com/gitiles/">Gitiles<".bmatches(response.body)'

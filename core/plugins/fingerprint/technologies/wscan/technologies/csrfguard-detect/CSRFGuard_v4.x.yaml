@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: CSRFGuard-v4.x (OWASP CSRFGuard 3.x/4.x - Detect)
+    author: forgedhallpass
+pscan:
+    path: []
+    expressions:
+        - response.body.bcontains(b"masterTokenValue")

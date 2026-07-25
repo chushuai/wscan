@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: statusnet (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<p>this site is powered by <a href=\"http://status.net/\">statusnet</a> version")
+        - response.body.bcontains(b"it runs the <a href=\"http://status.net/\">statusnet</a> microblogging software, version ")

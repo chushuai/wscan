@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: wallarm (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - '"(?i)nginix.wallarm".bmatches(response.body)'

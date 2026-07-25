@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ibm-cognos (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"/cgi-bin/cognos.cgi") && response.body.bcontains(b"cognos &#26159; international business machines corp") )

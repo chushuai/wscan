@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: 35mail (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"35") && response.body.bcontains(b"images/mail/35pushmail.app.png") && response.body.bcontains(b"switchingserverpopup") )
+        - response.body.bcontains(b"class=\"user_define_img_btn6\" href=\"http://help.mail.35.com/mailman/81.html")

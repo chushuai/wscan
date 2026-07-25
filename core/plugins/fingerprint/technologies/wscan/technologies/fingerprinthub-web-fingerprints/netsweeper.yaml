@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: netsweeper (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"netsweepersmbtextatbottomofloginscreen")
+        - response.body.bcontains(b"href=\"http://www.poweredbynetsweeper.com\"><img ")
+        - 'response.raw_header.bcontains(b"Set-Cookie: webadmin=")'

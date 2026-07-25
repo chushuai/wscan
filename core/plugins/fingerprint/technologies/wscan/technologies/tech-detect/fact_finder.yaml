@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: fact-finder (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- Factfinder".bmatches(response.body)'

@@ -1,0 +1,11 @@
+engine: fingerprint
+info:
+    name: itenable (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"/enableq.css")
+        - response.body.bcontains(b"js/checkquestion.js.php")
+        - response.body.bcontains(b"/images/enableq.ico")

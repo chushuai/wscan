@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: ruijie-rg-uac (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"bbs.ruijie.com.cn") && response.body.bcontains(b"锐捷统一上网行为管理与审计系统") )
+        - response.body.bcontains(b"src='images/free_login.png'")

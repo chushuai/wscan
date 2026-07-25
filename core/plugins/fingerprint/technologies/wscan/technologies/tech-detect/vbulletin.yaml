@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: vbulletin (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<div id="copyright">Powered by vBulletin".bmatches(response.body)'
+        - ( response.body.bcontains(b"vBulletin.version") || response.body.bcontains(b"content=\"vBulletin") )

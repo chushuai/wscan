@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: ruijie-cloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"content=\"rcp, 管理平台\"")

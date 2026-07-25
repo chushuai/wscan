@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: cloudfront (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)[a-zA-Z0-9]{,60}.cloudfront.net".bmatches(response.body) || "(?i)cloudfront".bmatches(response.body) || "(?i)x.amz.cf.id|nguardx".bmatches(response.body) )

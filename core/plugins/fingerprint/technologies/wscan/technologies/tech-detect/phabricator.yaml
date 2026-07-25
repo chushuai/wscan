@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: phabricator (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<[^>]+(?:class|id)="phabricator-".bmatches(response.body)'

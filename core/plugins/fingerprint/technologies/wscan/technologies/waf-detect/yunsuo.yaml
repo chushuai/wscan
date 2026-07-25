@@ -1,0 +1,8 @@
+engine: fingerprint
+info:
+    name: yunsuo (WAF Detection)
+    author: dwisiswant0, lu4nx
+pscan:
+    path: []
+    expressions:
+        - ( "(?i)<img.class=.yunsuologo.".bmatches(response.body) || "(?i)yunsuo.session".bmatches(response.body) )

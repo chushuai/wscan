@@ -1,0 +1,13 @@
+engine: fingerprint
+info:
+    name: php-cloud (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"<div class=\"index_link_list_name\">")
+        - response.body.bcontains(b"yun_toplogin a.yun_more")
+        - response.body.bcontains(b"yun_index.css")
+        - response.body.bcontains(b"$(this).removeclass('dn'")
+        - response.body.bcontains(b"phpyun")

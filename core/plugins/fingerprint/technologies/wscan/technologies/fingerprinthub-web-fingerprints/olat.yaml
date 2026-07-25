@@ -1,0 +1,14 @@
+engine: fingerprint
+info:
+    name: olat (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"title=\"homepage of open source lms olat")
+        - response.body.bcontains(b"content=\"olat")
+        - response.body.bcontains(b"content=\"olat 是一个学习内容管理系统 (lcms).")
+        - response.body.bcontains(b"content=\"olat - online learning and training")
+        - response.body.bcontains(b"o_info.uriprefix=\"/olat/dmz/\";")
+        - response.body.bcontains(b"href=\"/olat/raw/")

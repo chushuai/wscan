@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: act-manager (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"url:\"/ucenter/login/loginaction!gettitle.action\",")
+        - response.body.bcontains(b"<script>location.href=\"ucenter\";</script>")

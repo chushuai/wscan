@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: snb-stock-trading-software (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"copyright 2005–2009 <a href=\"http://www.s-mo.com\">")

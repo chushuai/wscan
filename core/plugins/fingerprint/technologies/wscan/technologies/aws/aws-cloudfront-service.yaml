@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: AWS Cloudfront service detection
+    author: jiheon-dev
+pscan:
+    path:
+        - /
+    expressions:
+        - '( contains(tolower(header), ''x-cache: hit from cloudfront'') || contains(tolower(header), ''x-cache: refreshhit from cloudfront'') || contains(tolower(header), ''x-cache: miss from cloudfront'') || contains(tolower(header), ''x-cache: error from cloudfront'') )'

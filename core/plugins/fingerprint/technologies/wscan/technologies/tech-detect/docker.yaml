@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: docker (Wappalyzer Technology Detection)
+    author: hakluke
+pscan:
+    path:
+        - /
+    expressions:
+        - '"<!-- This comment is expected by the docker HEALTHCHECK  -->".bmatches(response.body)'

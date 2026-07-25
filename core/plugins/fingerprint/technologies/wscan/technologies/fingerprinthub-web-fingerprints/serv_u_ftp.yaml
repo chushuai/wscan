@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: serv-u-ftp (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"alt=\"serv-u ftp server")

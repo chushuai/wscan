@@ -1,0 +1,10 @@
+engine: fingerprint
+info:
+    name: php-voting-system (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - ( response.body.bcontains(b"content=\"http://www.888072.com") && response.body.bcontains(b"content=\"qq 7000719") )
+        - response.body.bcontains(b"content=\"http://www.vote123.cn")

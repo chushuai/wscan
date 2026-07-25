@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: advantech_wise (FingerprintHub Technology Fingerprint)
+    author: pdteam, righettod
+pscan:
+    path:
+        - /
+    expressions:
+        - response.body.bcontains(b"remote manage your intelligent systems")

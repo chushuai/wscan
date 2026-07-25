@@ -1,0 +1,9 @@
+engine: fingerprint
+info:
+    name: via-linkerd-present (Linkerd detection via bad rule)
+    author: dudez
+pscan:
+    path:
+        - /
+    expressions:
+        - '"(?mi)^Via\\s*?:.*?linkerd.*$".bmatches(response.raw_header)'

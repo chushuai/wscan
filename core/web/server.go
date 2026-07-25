@@ -371,6 +371,7 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/labs", s.handleLabs)
 	mux.HandleFunc("/api/labs/", s.handleLabAction)
 	mux.HandleFunc("/api/target-groups", s.handleTargetGroups)
+	mux.HandleFunc("/api/target-groups/", s.handleTargetGroup)
 	mux.HandleFunc("/api/report", s.handleReport)
 }
 
@@ -436,20 +437,43 @@ func (s *Server) handleTargetsBulk(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	created := 0
+	newIDs := []string{}
 	for _, trow := range body.Targets {
 		addr, _ := trow["address"].(string)
 		if addr == "" {
 			continue
 		}
+		id := newID()
 		t := map[string]any{
-			"id":            newID(),
+			"id":            id,
 			"address":       addr,
 			"description":   trow["description"],
-			"groups":        []string{},
+			"groups":        append([]string{}, body.Groups...),
 			"vulnBreakdown": map[string]int{},
 		}
 		s.addTarget(t)
+		newIDs = append(newIDs, id)
 		created++
+	}
+	// Add the freshly created targets as members of each selected group.
+	for _, gid := range body.Groups {
+		g := s.groupRaw(gid)
+		if g == nil {
+			continue
+		}
+		existing, _ := g["members"].([]string)
+		set := map[string]struct{}{}
+		for _, m := range existing {
+			set[m] = struct{}{}
+		}
+		merged := append([]string{}, existing...)
+		for _, id := range newIDs {
+			if _, ok := set[id]; !ok {
+				merged = append(merged, id)
+				set[id] = struct{}{}
+			}
+		}
+		s.updateGroup(gid, map[string]any{"members": merged})
 	}
 	writeJSON(w, map[string]any{"created": created})
 }
@@ -477,9 +501,69 @@ func (s *Server) handleTarget(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleTargetGroups(w http.ResponseWriter, r *http.Request) {
-	// minimal stub: groups aren't persisted in WScan; return an empty list so the
-	// SPA's target-groups page renders cleanly.
-	writeJSON(w, []any{})
+	switch r.Method {
+	case http.MethodPost:
+		var body struct {
+			Name        string `json:"name"`
+			Description string `json:"description"`
+		}
+		if err := readJSON(r, &body); err != nil {
+			writeJSON(w, map[string]any{"error": err.Error()})
+			return
+		}
+		if body.Name == "" {
+			writeJSON(w, map[string]any{"error": "name is required"})
+			return
+		}
+		g := s.createGroup(body.Name, body.Description)
+		writeJSON(w, s.groupForFrontend(g))
+		return
+	case http.MethodGet, "":
+		writeJSON(w, s.groups())
+		return
+	default:
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+	}
+}
+
+// handleTargetGroup routes /api/target-groups/<id> for GET (not used by the SPA
+// yet), PUT (update name/description or members), and DELETE.
+func (s *Server) handleTargetGroup(w http.ResponseWriter, r *http.Request) {
+	id := strings.TrimPrefix(r.URL.Path, "/api/target-groups/")
+	if id == "" {
+		http.NotFound(w, r)
+		return
+	}
+	switch r.Method {
+	case http.MethodPut:
+		var body map[string]any
+		if err := readJSON(r, &body); err != nil {
+			writeJSON(w, map[string]any{"error": err.Error()})
+			return
+		}
+		// members arrive from the SPA as an array of id strings; coerce to []string.
+		if raw, ok := body["members"]; ok {
+			var arr []string
+			if list, ok := raw.([]any); ok {
+				for _, m := range list {
+					arr = append(arr, fmt.Sprint(m))
+				}
+			}
+			body["members"] = arr
+		}
+		g := s.updateGroup(id, body)
+		if g == nil {
+			http.NotFound(w, r)
+			return
+		}
+		writeJSON(w, s.groupForFrontend(g))
+		return
+	case http.MethodDelete:
+		writeJSON(w, map[string]any{"ok": s.deleteGroup(id)})
+		return
+	default:
+		http.NotFound(w, r)
+	}
 }
 
 // ---- labs (preset + custom vulnerable targets) ----

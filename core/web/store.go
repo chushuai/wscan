@@ -21,8 +21,11 @@ const dataDir = "data"
 var (
 	targetMu      sync.Mutex
 	profileMu     sync.Mutex
+	groupMu       sync.Mutex
 	targetCache   []map[string]any
 	targetsLoaded bool
+	groupCache    []map[string]any
+	groupsLoaded  bool
 )
 
 func ensureDataDir() {
@@ -108,6 +111,158 @@ func deleteProfile(id string) bool {
 	return true
 }
 
+// ---- target groups ----
+
+// toInt converts a numeric value (including json.Number) to an int.
+func toInt(v any) (int, bool) {
+	switch n := v.(type) {
+	case int:
+		return n, true
+	case int64:
+		return int(n), true
+	case float64:
+		return int(n), true
+	case json.Number:
+		i, err := n.Int64()
+		return int(i), err == nil
+	}
+	return 0, false
+}
+
+// groupForFrontend computes the UI-facing view of a group: member count and
+// the summed vuln breakdown across its members.
+func (s *Server) groupForFrontend(g map[string]any) map[string]any {
+	members, _ := g["members"].([]any)
+	memberIDs := make([]string, 0, len(members))
+	breakdown := map[string]int{}
+	for _, m := range members {
+		id := fmt.Sprint(m)
+		memberIDs = append(memberIDs, id)
+		for _, t := range s.targets() {
+			if fmt.Sprint(t["id"]) == id {
+				if vb, ok := t["vulnBreakdown"].(map[string]any); ok {
+					for k, v := range vb {
+						if n, ok := toInt(v); ok {
+							breakdown[k] += n
+						}
+					}
+				}
+				break
+			}
+		}
+	}
+	out := map[string]any{
+		"id":            g["id"],
+		"name":          g["name"],
+		"description":   g["description"],
+		"members":       memberIDs,
+		"memberCount":   len(memberIDs),
+		"vulnBreakdown": breakdown,
+	}
+	return out
+}
+
+// groupsLocked loads groupCache from disk on first use. Caller must hold groupMu.
+func (s *Server) groupsLocked() {
+	if groupsLoaded {
+		return
+	}
+	groupsLoaded = true
+	ensureDataDir()
+	b, err := os.ReadFile(filepath.Join(dataDir, "webui_groups.json"))
+	if err == nil {
+		_ = json.Unmarshal(b, &groupCache)
+	}
+	if groupCache == nil {
+		groupCache = []map[string]any{}
+	}
+}
+
+// groups returns the persisted group list projected for the frontend.
+func (s *Server) groups() []map[string]any {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	out := make([]map[string]any, 0, len(groupCache))
+	for _, g := range groupCache {
+		out = append(out, s.groupForFrontend(g))
+	}
+	return out
+}
+
+// groupRaw returns the raw stored group matching id (or nil).
+func (s *Server) groupRaw(id string) map[string]any {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	for _, g := range groupCache {
+		if fmt.Sprint(g["id"]) == id {
+			return g
+		}
+	}
+	return nil
+}
+
+// saveGroupsLocked writes groupCache to disk. Caller must hold groupMu.
+func saveGroupsLocked() {
+	ensureDataDir()
+	_ = writeJSONFile(filepath.Join(dataDir, "webui_groups.json"), groupCache)
+}
+
+// createGroup appends a new group and persists it.
+func (s *Server) createGroup(name, description string) map[string]any {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	g := map[string]any{
+		"id":          newID(),
+		"name":        name,
+		"description": description,
+		"members":     []string{},
+	}
+	groupCache = append(groupCache, g)
+	saveGroupsLocked()
+	return g
+}
+
+// updateGroup merges body into the stored group with the given id.
+func (s *Server) updateGroup(id string, body map[string]any) map[string]any {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	for _, g := range groupCache {
+		if fmt.Sprint(g["id"]) == id {
+			for k, v := range body {
+				g[k] = v
+			}
+			saveGroupsLocked()
+			return g
+		}
+	}
+	return nil
+}
+
+// deleteGroup removes the group with the given id.
+func (s *Server) deleteGroup(id string) bool {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	out := groupCache[:0]
+	removed := false
+	for _, g := range groupCache {
+		if fmt.Sprint(g["id"]) == id {
+			removed = true
+			continue
+		}
+		out = append(out, g)
+	}
+	if removed {
+		groupCache = out
+		saveGroupsLocked()
+	}
+	return removed
+}
+
 func writeJSONFile(path string, v any) error {
 	b, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {
@@ -142,8 +297,38 @@ func (s *Server) deleteTarget(id string) bool {
 	if removed {
 		targetCache = out
 		_ = writeJSONFile(filepath.Join(dataDir, "webui_targets.json"), targetCache)
+		// Drop the deleted id from any group it belonged to.
+		s.removeTargetFromGroupsLocked(id)
 	}
 	return removed
+}
+
+// removeTargetFromGroupsLocked prunes a target id from every group's members.
+// Caller may hold targetMu; groupMu is taken here independently.
+func (s *Server) removeTargetFromGroupsLocked(id string) {
+	groupMu.Lock()
+	defer groupMu.Unlock()
+	s.groupsLocked()
+	changed := false
+	for _, g := range groupCache {
+		members, _ := g["members"].([]string)
+		filtered := members[:0]
+		drop := false
+		for _, m := range members {
+			if m == id {
+				drop = true
+				continue
+			}
+			filtered = append(filtered, m)
+		}
+		if drop {
+			g["members"] = filtered
+			changed = true
+		}
+	}
+	if changed {
+		saveGroupsLocked()
+	}
 }
 
 func (s *Server) updateTarget(id string, body map[string]any) bool {

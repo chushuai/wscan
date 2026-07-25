@@ -12,7 +12,6 @@ require (
 	github.com/dgraph-io/badger/v3 v3.2103.2
 	github.com/dlclark/regexp2 v1.11.5
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
-	github.com/emicklei/dot v1.0.0
 	github.com/fatih/color v1.18.0
 	github.com/gobwas/glob v0.2.3
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8
@@ -25,7 +24,6 @@ require (
 	github.com/kataras/golog v0.1.7
 	github.com/kataras/pio v0.0.10
 	github.com/logrusorgru/aurora v2.0.3+incompatible
-	github.com/mark3labs/mcp-go v0.34.0
 	github.com/miekg/dns v1.1.68
 	github.com/modelcontextprotocol/go-sdk v1.1.0
 	github.com/panjf2000/ants/v2 v2.5.0
@@ -33,17 +31,21 @@ require (
 	github.com/projectdiscovery/gologger v1.1.68
 	github.com/projectdiscovery/nuclei/v3 v3.8.0
 	github.com/projectdiscovery/ratelimit v0.0.85
+	github.com/projectdiscovery/utils v0.10.1
 	github.com/robertkrimen/otto v0.4.0
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.9.3
+	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/spaolacci/murmur3 v1.1.0
 	github.com/stretchr/testify v1.11.1
 	github.com/thoas/go-funk v0.9.2
 	github.com/urfave/cli/v2 v2.10.2
+	github.com/vulncheck-oss/go-exploit v1.51.0
 	go.etcd.io/bbolt v1.4.3
 	go.mongodb.org/mongo-driver v1.17.9
-	go.opencensus.io v0.24.0
 	go.uber.org/automaxprocs v1.5.2
+	go.uber.org/multierr v1.11.0
+	golang.org/x/crypto v0.49.0
 	golang.org/x/net v0.52.0
 	golang.org/x/text v0.35.0
 	golang.org/x/time v0.14.0
@@ -148,7 +150,6 @@ require (
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/gaissmai/bart v0.26.1 // indirect
 	github.com/geoffgarside/ber v1.1.0 // indirect
-	github.com/getkin/kin-openapi v0.140.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.9.1 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.5.8-0.20250403174932-29230038a667 // indirect
@@ -157,8 +158,6 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/go-openapi/jsonpointer v0.22.5 // indirect
-	github.com/go-openapi/swag/jsonname v0.25.5 // indirect
 	github.com/go-pdf/fpdf v0.9.0 // indirect
 	github.com/go-pg/pg/v10 v10.15.0 // indirect
 	github.com/go-pg/zerochecker v0.2.0 // indirect
@@ -247,8 +246,6 @@ require (
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nwaples/rardecode/v2 v2.2.2 // indirect
-	github.com/oasdiff/yaml v0.1.0 // indirect
-	github.com/oasdiff/yaml3 v0.0.13 // indirect
 	github.com/onsi/gomega v1.27.10 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.1 // indirect
@@ -285,7 +282,6 @@ require (
 	github.com/projectdiscovery/sarif v0.0.1 // indirect
 	github.com/projectdiscovery/tlsx v1.2.2 // indirect
 	github.com/projectdiscovery/useragent v0.0.107 // indirect
-	github.com/projectdiscovery/utils v0.10.1 // indirect
 	github.com/projectdiscovery/yamldoc-go v1.0.6 // indirect
 	github.com/redis/go-redis/v9 v9.11.0 // indirect
 	github.com/refraction-networking/utls v1.8.2 // indirect
@@ -293,7 +289,6 @@ require (
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
-	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
 	github.com/sashabaranov/go-openai v1.37.0 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
 	github.com/shirou/gopsutil v3.21.11+incompatible // indirect
@@ -327,7 +322,6 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.3.4 // indirect
 	github.com/vmihailenco/tagparser v0.1.2 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	github.com/vulncheck-oss/go-exploit v1.51.0 // indirect
 	github.com/weppos/publicsuffix-go v0.50.3 // indirect
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
@@ -352,18 +346,17 @@ require (
 	github.com/zmap/zcrypto v0.0.0-20240803002437-3a861682ac77 // indirect
 	github.com/zmap/zgrab2 v0.1.8 // indirect
 	gitlab.com/gitlab-org/api/client-go v0.130.1 // indirect
+	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.62.0 // indirect
 	go.opentelemetry.io/otel v1.38.0 // indirect
 	go.opentelemetry.io/otel/metric v1.38.0 // indirect
 	go.opentelemetry.io/otel/trace v1.38.0 // indirect
-	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
 	go4.org v0.0.0-20230225012048-214862532bf5 // indirect
 	goftp.io/server/v2 v2.0.1 // indirect
 	golang.org/x/arch v0.7.0 // indirect
-	golang.org/x/crypto v0.49.0 // indirect
 	golang.org/x/exp v0.0.0-20250911091902-df9299821621 // indirect
 	golang.org/x/mod v0.33.0 // indirect
 	golang.org/x/oauth2 v0.34.0 // indirect

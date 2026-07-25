@@ -378,6 +378,8 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/report", s.handleReport)
 	mux.HandleFunc("/api/ai-notify", s.handleAiNotify)
 	mux.HandleFunc("/api/ai-notify/test", s.handleAiNotifyTest)
+	mux.HandleFunc("/api/ai-notify/feishu/qrcode/start", s.handleFeishuQRStart)
+	mux.HandleFunc("/api/ai-notify/feishu/qrcode/poll", s.handleFeishuQRPoll)
 }
 
 // ---- status / tasks ----
@@ -1931,4 +1933,52 @@ func (s *Server) handleAiNotifyTest(w http.ResponseWriter, r *http.Request) {
 		detail = res.Err.Error()
 	}
 	writeJSON(w, map[string]any{"ok": false, "error": fmt.Sprintf("%s (HTTP %d): %s", platformLabel(testCfg.Platform), res.Status, detail)})
+}
+
+// handleFeishuQRStart 发起飞书扫码建机器人流程,返回 QR PNG(base64)+ URL + 会话 token。
+// 契约:{ok, qr, url, token, expireIn} 或 {ok:false, error}。
+func (s *Server) handleFeishuQRStart(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeJSON(w, map[string]any{"ok": false, "error": "method not allowed"})
+		return
+	}
+	ctx, cancel := context.WithTimeout(r.Context(), 30*time.Second)
+	defer cancel()
+	qrB64, uri, token, expireIn, err := feishuQRStart(ctx)
+	if err != nil {
+		writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+		return
+	}
+	writeJSON(w, map[string]any{
+		"ok":       true,
+		"qr":       "data:image/png;base64," + qrB64,
+		"url":      uri,
+		"token":    token,
+		"expireIn": expireIn,
+	})
+}
+
+// handleFeishuQRPoll 轮询扫码状态。成功时凭证已落库。
+// 契约:{ok, done} 或 {ok:false, error}。done=false 表示仍在等待扫码。
+func (s *Server) handleFeishuQRPoll(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeJSON(w, map[string]any{"ok": false, "error": "method not allowed"})
+		return
+	}
+	var body struct {
+		Token string `json:"token"`
+	}
+	if err := readJSON(r, &body); err != nil {
+		writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+		return
+	}
+	cfg := getNotifyConfig()
+	ctx, cancel := context.WithTimeout(r.Context(), 30*time.Second)
+	defer cancel()
+	done, err := feishuQRPoll(ctx, body.Token, cfg)
+	if err != nil {
+		writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+		return
+	}
+	writeJSON(w, map[string]any{"ok": true, "done": done})
 }

@@ -463,6 +463,17 @@ const I18N = {
   'notify.testOk': ['测试消息已发送(请到 IM 确认)', 'Test message sent (check your IM)'],
   'notify.testFail': ['推送失败: ', 'Push failed: '],
   'notify.testFail2': ['webhook 地址不对或网络不通', 'webhook URL wrong or network unreachable'],
+  'notify.mode': ['接入模式', 'Mode'],
+  'notify.modeWebhook': ['群机器人 Webhook', 'Group-bot webhook'],
+  'notify.modeApp': ['扫码建机器人 (1v1 应用消息)', 'Scan to create bot (1v1 app msg)'],
+  'notify.appBound': ['已绑定应用(扫码获取),消息将发送给创建者', 'App bound (via scan); messages go to the creator'],
+  'notify.appUnbound': ['尚未扫码绑定,点下方生成二维码', 'Not bound yet — click the button to generate a QR code'],
+  'notify.qrGen': ['生成二维码', 'Generate QR code'],
+  'notify.qrRegen': ['重新生成二维码', 'Regenerate QR code'],
+  'notify.qrWait': ['请用飞书/Lark App 扫码完成机器人创建与授权…', 'Scan with Feishu/Lark app to create & authorize the bot…'],
+  'notify.qrDone': ['✓ 扫码成功,凭证已保存', '✓ Scan done, credentials saved'],
+  'notify.qrExpire': ['二维码已过期,请重新生成', 'QR expired, regenerate'],
+  'notify.qrFail': ['生成二维码失败: ', 'QR generation failed: '],
   // --- config: email ---
   'email.zeroDep': ['零依赖', 'Zero-dependency'],
   'email.desc': [' 直接讲 SMTP 协议(net/tls),支持隐式 TLS(465)/STARTTLS(587)、AUTH LOGIN。扫描完成与发现高危漏洞时触发。', ' Speaks SMTP directly (net/tls), supports implicit TLS (465)/STARTTLS (587), AUTH LOGIN. Triggered on scan completion and high-severity vuln discovery.'],
@@ -2386,8 +2397,8 @@ const AI_TOOLS=[
   ['key-round','awvs_js_leak','ait.awvs_js_leak'],
   ['globe','http','ait.http'],
 ];
-async function aiLoadNotify(){
-  if(_aiNotify)return _aiNotify;
+async function aiLoadNotify(force){
+  if(_aiNotify&&!force)return _aiNotify;
   try{_aiNotify=await api('/api/ai-notify');}catch(e){_aiNotify={ok:false,config:{enabled:false}};}
   return _aiNotify;
 }
@@ -2770,12 +2781,21 @@ function wireCfgLlm(){
 }
 // --- 推送 tab ---
 function cfgNotifyPane(){
-  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,platform:'feishu',webhook:'',secret:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
+  const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,platform:'feishu',mode:'webhook',webhook:'',secret:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
+  const isFeishu=nc.platform==='feishu';
+  const mode=isFeishu?(nc.mode||'webhook'):'webhook';
+  const appBound=!!(nc.feishuAppId&&nc.feishuAppSecret&&nc.feishuOpenId);
+  const modeSel=isFeishu?('<div class="row" style="margin-top:6px"><div><label>'+t('notify.mode')+'</label><select id="cfgAnMode"><option value="webhook"'+(mode==='webhook'?' selected':'')+'>'+t('notify.modeWebhook')+'</option><option value="app"'+(mode==='app'?' selected':'')+'>'+t('notify.modeApp')+'</option></select></div></div>'):'';
+  const webhookFields='<label>'+t('notify.webhook')+'</label><input id="cfgAnWebhook" value="'+esc(nc.webhook||'')+'" placeholder="'+t('notify.webhookPh')+'">'+
+    '<label>'+t('notify.secret')+'</label><input id="cfgAnSecret" value="'+esc(nc.secret||'')+'" placeholder="'+t('notify.secretPh')+'">';
+  const appFields='<div class="muted tiny" id="cfgAnAppState" style="margin-top:4px">'+(appBound?t('notify.appBound'):t('notify.appUnbound'))+'</div>'+
+    '<div class="row" style="margin-top:6px"><button type="button" class="sec" id="cfgAnQrGen">'+ic('qr-code','btn-ic')+(appBound?t('notify.qrRegen'):t('notify.qrGen'))+'</button></div>'+
+    '<div id="cfgAnQrBox" style="margin-top:10px;text-align:center"></div>';
   return '<div class="card"><div class="muted tiny" style="margin-bottom:10px"><span class="stub-badge">'+t('notify.principle')+'</span>'+t('notify.principleDesc')+'</div>'+
     '<div class="row"><div><label>'+t('notify.enableLbl')+'</label><label style="width:auto"><input type="checkbox" id="cfgAnOn" style="width:auto"'+(nc.enabled?' checked':'')+'> '+t('notify.enable')+'</label></div>'+
     '<div><label>'+t('notify.platform')+'</label><select id="cfgAnPlat">'+AI_IM_PLATFORMS.map(p=>'<option value="'+p[0]+'"'+(nc.platform===p[0]?' selected':'')+'>'+p[1]+'</option>').join('')+'</select></div></div>'+
-    '<label>'+t('notify.webhook')+'</label><input id="cfgAnWebhook" value="'+esc(nc.webhook||'')+'" placeholder="'+t('notify.webhookPh')+'">'+
-    '<label>'+t('notify.secret')+'</label><input id="cfgAnSecret" value="'+esc(nc.secret||'')+'" placeholder="'+t('notify.secretPh')+'">'+
+    modeSel+
+    '<div id="cfgAnModeFields">'+(mode==='app'?appFields:webhookFields)+'</div>'+
     '<label style="width:auto;margin-top:8px"><input type="checkbox" id="cfgAnAtAll" style="width:auto"'+(nc.atAll?' checked':'')+'> '+t('notify.atAll')+'</label>'+
     '<fieldset style="margin-top:10px"><legend>'+t('notify.events')+'</legend>'+
     '<label style="width:auto"><input type="checkbox" class="cfgAnEvt" data-k="fact" style="width:auto"'+(nc.events&&nc.events.fact!==false?' checked':'')+'> '+t('notify.evtFact')+'</label> &nbsp;'+
@@ -2784,8 +2804,65 @@ function cfgNotifyPane(){
     '<div class="row" style="margin-top:10px"><button id="cfgAnSave">'+t('c.save')+'</button><button class="sec" id="cfgAnTest">'+ic('bell','btn-ic')+t('notify.testBtn')+'</button></div>'+
     '<div id="cfgAnTestMsg" class="muted tiny" style="margin-top:6px"></div></div>';
 }
+let _cfgNotifyQrTimer=null;
 function wireCfgNotify(){
-  const collect=()=>({enabled:$('cfgAnOn').checked,platform:$('cfgAnPlat').value,webhook:($('cfgAnWebhook').value||'').trim(),secret:($('cfgAnSecret').value||'').trim(),atAll:$('cfgAnAtAll').checked,events:{fact:document.querySelector('.cfgAnEvt[data-k=fact]').checked,goal:document.querySelector('.cfgAnEvt[data-k=goal]').checked,stopped:document.querySelector('.cfgAnEvt[data-k=stopped]').checked}});
+  const collect=()=>{
+    const plat=$('cfgAnPlat').value;
+    const mode=(plat==='feishu'&&$('cfgAnMode'))?$('cfgAnMode').value:'webhook';
+    const base=(_aiNotify&&_aiNotify.config)||{};
+    const cfg={enabled:$('cfgAnOn').checked,platform:plat,mode:plat==='feishu'?mode:'webhook',
+      webhook:mode==='webhook'?($('cfgAnWebhook')?$('cfgAnWebhook').value:'').trim():(base.webhook||''),
+      secret:mode==='webhook'?($('cfgAnSecret')?$('cfgAnSecret').value:'').trim():(base.secret||''),
+      atAll:$('cfgAnAtAll').checked,
+      feishuAppId:base.feishuAppId||'',feishuAppSecret:base.feishuAppSecret||'',feishuOpenId:base.feishuOpenId||'',feishuIsLark:!!base.feishuIsLark,
+      events:{fact:document.querySelector('.cfgAnEvt[data-k=fact]').checked,goal:document.querySelector('.cfgAnEvt[data-k=goal]').checked,stopped:document.querySelector('.cfgAnEvt[data-k=stopped]').checked}};
+    return cfg;
+  };
+  const stopQrPoll=()=>{if(_cfgNotifyQrTimer){clearTimeout(_cfgNotifyQrTimer);_cfgNotifyQrTimer=null;}};
+  const pollQr=async(token)=>{
+    stopQrPoll();
+    try{
+      const r=await api('/api/ai-notify/feishu/qrcode/poll',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token})});
+      if(r&&r.ok&&r.done){
+        const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="tiny" style="color:var(--ok,#2a8)">'+t('notify.qrDone')+'</div>';
+        const st=$('cfgAnAppState');if(st)st.textContent=t('notify.appBound');
+        await aiLoadNotify(true);
+        return;
+      }
+      if(r&&r.ok&&!r.done){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),2500);return;}
+      const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="tiny" style="color:var(--err,#a33)">'+esc((r&&r.error)||t('notify.qrExpire'))+'</div>';
+    }catch(e){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),2500);}
+  };
+  const wireMode=()=>{
+    const modeSel=$('cfgAnMode');
+    if(modeSel)modeSel.onchange=()=>{rerenderFields();};
+    const gen=$('cfgAnQrGen');
+    if(gen)gen.onclick=async()=>{
+      stopQrPoll();
+      const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="muted tiny">'+t('notify.qrGen')+'…</div>';
+      try{
+        const r=await api('/api/ai-notify/feishu/qrcode/start',{method:'POST'});
+        if(!r||!r.ok){if(box)box.innerHTML='<div class="tiny" style="color:var(--err,#a33)">'+t('notify.qrFail')+esc((r&&r.error)||'')+'</div>';return;}
+        if(box)box.innerHTML='<img src="'+r.qr+'" width="240" height="240" alt="qr"><div class="muted tiny" style="margin-top:6px">'+t('notify.qrWait')+'</div>';
+        pollQr(r.token);
+      }catch(e){if(box)box.innerHTML='<div class="tiny" style="color:var(--err,#a33)">'+t('notify.qrFail')+esc(e.message||e)+'</div>';}
+    };
+  };
+  const rerenderFields=()=>{
+    const plat=$('cfgAnPlat').value;
+    const mode=(plat==='feishu'&&$('cfgAnMode'))?$('cfgAnMode').value:'webhook';
+    const nc=(_aiNotify&&_aiNotify.config)||{};
+    const isFeishu=plat==='feishu';
+    let modeSel='';
+    if(isFeishu){modeSel='<div class="row" style="margin-top:6px"><div><label>'+t('notify.mode')+'</label><select id="cfgAnMode"><option value="webhook"'+(mode==='webhook'?' selected':'')+'>'+t('notify.modeWebhook')+'</option><option value="app"'+(mode==='app'?' selected':'')+'>'+t('notify.modeApp')+'</option></select></div></div>';}
+    const webhookFields='<label>'+t('notify.webhook')+'</label><input id="cfgAnWebhook" value="'+esc(nc.webhook||'')+'" placeholder="'+t('notify.webhookPh')+'"><label>'+t('notify.secret')+'</label><input id="cfgAnSecret" value="'+esc(nc.secret||'')+'" placeholder="'+t('notify.secretPh')+'">';
+    const appBound=!!(nc.feishuAppId&&nc.feishuAppSecret&&nc.feishuOpenId);
+    const appFields='<div class="muted tiny" id="cfgAnAppState" style="margin-top:4px">'+(appBound?t('notify.appBound'):t('notify.appUnbound'))+'</div><div class="row" style="margin-top:6px"><button type="button" class="sec" id="cfgAnQrGen">'+ic('qr-code','btn-ic')+(appBound?t('notify.qrRegen'):t('notify.qrGen'))+'</button></div><div id="cfgAnQrBox" style="margin-top:10px;text-align:center"></div>';
+    $('cfgAnModeFields').outerHTML='<div id="cfgAnModeFields">'+(isFeishu?modeSel:'')+(mode==='app'?appFields:webhookFields)+'</div>';
+    wireMode();
+  };
+  const plat=$('cfgAnPlat');if(plat)plat.onchange=()=>{rerenderFields();};
+  wireMode();
   $('cfgAnSave').onclick=async()=>{const r=await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});$('cfgMsg').textContent=(r&&r.ok)?t('notify.saved'):t('llm.saveFail');_aiNotify=r;};
   $('cfgAnTest').onclick=async()=>{$('cfgAnTestMsg').textContent=t('notify.testing');await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});const r=await api('/api/ai-notify/test',{method:'POST'});if(r&&r.ok) $('cfgAnTestMsg').textContent=t('notify.testOk');else $('cfgAnTestMsg').textContent=t('notify.testFail')+esc((r&&r.error)||t('notify.testFail2'));};
 }

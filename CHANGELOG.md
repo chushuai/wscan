@@ -1,7 +1,8 @@
 # 1.0.52  2026-07-26
 ## SUPPORT
-* 【1】WebUI 推送通知改为 wscan 原生直连 IM 群机器人 incoming webhook,不再依赖 cc-connect 桥接:新增 `core/web/notify.go`,原生支持飞书/Lark、企业微信、钉钉三个平台,均走标准 HTTPS POST,无第三方 SDK 依赖;飞书/钉钉支持加签 secret 完整性校验,企业微信/钉钉支持 @全体。
-* 【2】补齐前端已调用但后端缺失的 `/api/ai-notify`(GET 读取 / POST 保存推送配置)与 `/api/ai-notify/test`(POST 发测试消息)handler,配置持久化到 `data/webui_notify.json`;前端「全局配置 → 推送」页与「新建 AI 渗透」模态框的推送表单同步改造为平台选择 + webhook URL + 加签 secret 字段,移除原 cc-connect 的 bin/project/sessionKey 配置。
+* 【1】WebUI 推送通知改为 wscan 原生直连 IM,不再依赖 cc-connect 桥接:新增 `core/web/notify.go`,原生支持飞书/Lark、企业微信、钉钉三个平台,均走标准 HTTPS POST,无第三方 SDK 依赖;飞书/钉钉 webhook 支持加签 secret 完整性校验,企业微信/钉钉支持 @全体。
+* 【2】飞书支持扫码建机器人→1v1 应用消息模式(复刻 cc-connect `feishu setup` 的 device_code 流程):新增 `/api/ai-notify/feishu/qrcode/start` 与 `/api/ai-notify/feishu/qrcode/poll`,后端用 `github.com/skip2/go-qrcode` 把 verification_uri_complete 编码成 PNG 返给前端;扫码成功后用 app_id/app_secret 换 tenant_access_token,调 `/open-apis/im/v1/messages` 给创建者发 1v1 文本,无需群、无需公网回调。
+* 【3】补齐前端已调用但后端缺失的 `/api/ai-notify`(GET 读取 / POST 保存推送配置)与 `/api/ai-notify/test`(POST 发测试消息)handler,配置持久化到 `data/webui_notify.json`;前端「全局配置 → 推送」页支持平台选择、飞书 webhook/扫码两种模式切换、二维码渲染与自动轮询,移除原 cc-connect 的 bin/project/sessionKey 配置。
 
 # 1.0.51  2026-07-25
 ## SUPPORT

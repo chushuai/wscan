@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"testing"
 )
@@ -176,6 +177,13 @@ func TestURL_QueryMap_MultipleValues(t *testing.T) {
 	if len(sliceVal) != 2 {
 		t.Errorf("expected 2 values, got %d", len(sliceVal))
 	}
+}
+
+func TestURL_QueryMap_RawQuery(t *testing.T) {
+	u, _ := url.Parse("http://pu2lh35z.ia.aqlab.cn/bb.php?id=1")
+	wu := &URL{URL: *u}
+	fmt.Println(wu.RawQuery)
+
 }
 
 func TestURL_QueryMapID(t *testing.T) {

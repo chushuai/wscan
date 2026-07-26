@@ -31,6 +31,8 @@ func TestDoFilter(t *testing.T) {
 		"https://demo.testfire.net/disclaimer.htm?url=http://www.netscape.com",
 		"http://demo.testfire.net/disclaimer.htm?url=http://www.netscape.com",
 		"http://demo.testfire.net/disclaimer.htm?url=http://www.microsoft.com",
+		"http://pu2lh35z.ia.aqlab.cn/",
+		"https://pu2lh35z.ia.aqlab.cn/",
 	}
 	for _, test := range tests {
 		req, _ := http.NewRequest("GET", test, nil)

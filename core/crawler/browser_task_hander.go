@@ -73,6 +73,9 @@ func (c *Crawler) InitBrowser(chromiumPath string, incognito bool, extraHeaders 
 		// 忽略证书错误
 		chromedp.Flag("ignore-certificate-errors", true),
 
+		// 禁用 Chrome 的自动 HTTPS 升级，避免配置的 http:// 目标被静默升级为 https://
+		chromedp.Flag("disable-features", "HttpsUpgrades,HttpsFirstBalancedMode"),
+
 		//chromedp.Flag("disable-images", true),
 		//
 		chromedp.Flag("disable-web-security", true),
@@ -790,12 +793,18 @@ func (tab *task) IsNavigatorRequest(networkID string) bool {
 */
 func (tab *task) HandleAuthRequired(req *fetch.EventAuthRequired) {
 	defer tab.WG.Done()
-	logger.Debug("auth required found, auto auth.")
 	ctx := tab.GetExecutor()
+	// 优先用配置的 BasicAuth 凭证应答 401/407 挑战;否则用占位凭证(与原行为一致)。
+	user, pass := "Scan", "Scan"
+	if ba := tab.crawlerTask.config.BasicAuth; ba != nil && ba.Username != "" {
+		user, pass = ba.Username, ba.Password
+	} else {
+		logger.Debug("auth required found, auto auth (default placeholder credentials).")
+	}
 	authRes := fetch.AuthChallengeResponse{
 		Response: fetch.AuthChallengeResponseResponseProvideCredentials,
-		Username: "Scan",
-		Password: "Scan",
+		Username: user,
+		Password: pass,
 	}
 	// 取消认证
 	_ = fetch.ContinueWithAuth(req.RequestID, &authRes).Do(ctx)

@@ -11,7 +11,6 @@
   <div class="logo"><span class="mark">W</span> WScan <span class="sub">· Web 漏洞扫描</span></div>
   <span class="spacer"></span>
   <span class="status" id="srvStatus">就绪</span>
-  <button id="btnNewScan"></button>
   <button class="btn-icon" id="themeToggle" title="切换明暗主题" aria-label="切换明暗主题"></button>
   <button class="btn-icon" id="langToggle" title="" aria-label=""></button>
   <span class="avatar" title="本地运行">L</span>
@@ -33,10 +32,8 @@
     if(saved==='dark')root.classList.add('dark');
     var btn=document.getElementById('themeToggle');
     var langBtn=document.getElementById('langToggle');
-    var newScan=document.getElementById('btnNewScan');
     function syncIcon(){
       if(btn&&window.ic) btn.innerHTML=root.classList.contains('dark')?ic('sun'):ic('moon');
-      if(newScan&&window.ic) newScan.innerHTML=ic('plus','btn-ic')+' '+(typeof t==='function'?t('top.newScan'):'新建扫描');
     };
     if(btn)btn.onclick=function(){
       var d=root.classList.toggle('dark');

@@ -21,7 +21,16 @@ import (
 )
 
 var (
-	level = flag.Int("v", 0, "log level")
+	// level 注册 -v 标志;若已被别的库(如 golang/glog)注册则复用占位 int,
+	// 避免 "flag redefined: v" panic。wscan 同时引入 martian 与 glog,两者都
+	// 向 flag.CommandLine 注册 "v" 会冲突。
+	level = func() *int {
+		if f := flag.Lookup("v"); f != nil {
+			// 已存在,返回一个零值指针,mlog.SetLevel(0) 即默认级别。
+			return new(int)
+		}
+		return flag.Int("v", 0, "log level")
+	}()
 )
 
 // Init runs common initialization code for a martian proxy.

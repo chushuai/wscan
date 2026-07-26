@@ -1,3 +1,16 @@
+# 1.0.54  2026-07-26
+## SUPPORT
+* 【1】WebUI「AI 自动渗透」详情页新增「URL 结果」tab:黑板结构加 `URLs` 段(按 url 去重),dispatcher bootstrap 侦察爬取到的页面/端点经 `addURL` 写入黑板并广播 SSE `url` 事件;`GET /api/ai-pentest/:id/urls` 返回 URL 列表,前端 tab 复用扫描详情的 resultsTable 行结构(状态/方法/URL/标题/来源 + 点开查看完整请求-响应),支持 TXT/JSON/XML 导出。
+* 【2】AI 自动渗透「工具范围 (Tool scope)」支持用户自定义工具:新增 `/api/ai-pentest/tools`(GET 列出内置+自定义 / POST 新建或更新)与 `DELETE /api/ai-pentest/tools/:tid`,自定义工具持久化到 `data/ai_custom_tools.json`;「新建 AI 渗透」模态框的工具范围区把内置工具与自定义工具合并勾选,并支持就地新增(名称/描述/图标/分类)与删除,详情页右侧工具箱同步展示。
+
+# 1.0.53  2026-07-26
+## SUPPORT
+* 【1】补齐 WebUI「AI 自动渗透」页全部后端接口与 Cairn 风格黑板模型:新增 `core/web/ai_pentest.go` + `core/web/ai_pentest_handlers.go`,实现 `/api/ai-pentest` 项目列表/新建、`/:id` 详情、`/:id/{start,stop,hint,vulns,events}`、`/llm-config`、`/llm-test` 全部路由,数据持久化到 `data/ai_pentestest.json`;黑板结构含 Fact(已确认发现)/Intent(探索方向,unclaimed→claimed→done)/Event(事件流,经 SSE 实时推前端)/aiVuln(漏洞,provenance 标 scanner/ai-tool/ai-manual,经 vulndb 富化复用扫描详情卡片)。
+* 【2】实现 AI 渗透 dispatcher 的 OODA 循环(bootstrap 侦察→reason 生成探索意图→explore 执行意图产出 Fact)与三种 worker:`claudecode`(本机 claude CLI)、`llm`(OpenAI/Anthropic 兼容 chat-completions,新增 `llmChat` HTTP 客户端)、`mock`(规则 worker,无 LLM 也可用);bootstrap/explore 复用 `startScan` 同步跑爬取/扫描并把结果回喂黑板。
+* 【3】LLM 配置与 claude CLI 探测:GET/POST `/api/ai-pentest/llm-config` 持久化到 `data/ai_llm_config.json` 并返回 `claude` 可用性(`exec.LookPath("claude")` + ANTHROPIC_API_KEY/AUTH_TOKEN/BASE_URL 环境变量探测);POST `/api/ai-pentest/llm-test` 发一条 ping 验证连通。前端「新建 AI 渗透」「LLM 配置」模态框现可真实保存与测试。
+## BUGFIX
+* 【1】修复 wscan 启动时 `flag redefined: v` panic:`github.com/google/martian/v3` 与 `github.com/golang/glog` 都在包 init 时用 `flag.Int/Var("v")` 向 `flag.CommandLine` 注册 `-v`,二者同时入链即冲突 panic,导致 `wscan version`/`webui` 等所有子命令都启动失败。给 `vendor/.../martian/v3/init.go` 的 `level` 改为先 `flag.Lookup("v")` 复用占位再注册(避免 redefined),并在 `cmd/wscan/main.go` 加兜底 `init()` 重建 `flag.CommandLine`。
+
 # 1.0.52  2026-07-26
 ## SUPPORT
 * 【1】WebUI 推送通知改为 wscan 原生直连 IM,不再依赖 cc-connect 桥接:新增 `core/web/notify.go`,原生支持飞书/Lark、企业微信、钉钉三个平台,均走标准 HTTPS POST,无第三方 SDK 依赖;飞书/钉钉 webhook 支持加签 secret 完整性校验,企业微信/钉钉支持 @全体。
@@ -6,7 +19,7 @@
 
 # 1.0.51  2026-07-25
 ## SUPPORT
-* 【1】WebUI 漏洞详情补全漏洞描述库：按扫描插件可映射到的漏洞类型生成单文件 XML（`core/web/vulndb/*.xml`，93 条，含 AWVS 描述库复用与手写补齐），`go:embed` 嵌入二进制；后端按漏洞 ID（含插件 ID 别名映射）查库，向前端填充 name/description/impact/recommendation/CVSS/tags/references，扫描详情漏洞卡片与分组标题展示完整顾问文案。映射严格按语义一一对应，匹配不上的插件（CSP 各类问题、cookiekey 弱密钥、thinkphp、xstream 各 CVE、tomcat/jboss/weblogic/spring 暴露检查等）单独补充对应 XML 描述。
+* 【1】WebUI 漏洞详情补全漏洞描述库：按扫描插件可映射到的漏洞类型生成单文件 XML（`core/web/vulndb/*.xml`，93 条，`go:embed` 嵌入二进制；后端按漏洞 ID（含插件 ID 别名映射）查库，向前端填充 name/description/impact/recommendation/CVSS/tags/references，扫描详情漏洞卡片与分组标题展示完整顾问文案。映射严格按语义一一对应，匹配不上的插件（CSP 各类问题、cookiekey 弱密钥、thinkphp、xstream 各 CVE、tomcat/jboss/weblogic/spring 暴露检查等）单独补充对应 XML 描述。
 
 # 1.0.50  2026-07-25
 ## SUPPORT

@@ -682,6 +682,8 @@ const I18N = {
   'ai.tabIntents': ['Intents', 'Intents'],
   'ai.tabHints': ['Hints', 'Hints'],
   'ai.tabGraph': ['攻击链', 'Attack chain'],
+  'ai.tabUrls': ['URL结果', 'URL Results'],
+  'ai.customTag': ['自定义', 'Custom'],
   'ai.blackboard': ['黑板概览', 'Blackboard'],
   'ai.fact': ['Fact', 'Fact'],
   'ai.conv': ['已收敛', 'Converged'],
@@ -699,9 +701,11 @@ const I18N = {
   'ai.timelineEmpty': ['黑板为空 — 等待 dispatcher 启动 worker 跑 OODA 循环', 'Blackboard empty — waiting for the dispatcher to start the OODA loop'],
   'ai.talkDesc': ['<span class="live"></span>LLM 对话回合 · 仅 LLM / Claude Code worker 产生(规则 worker 无)。点开查看 prompt 与完整响应', '<span class="live"></span>LLM turns · only LLM / Claude Code workers produce these (rule worker has none). Click to see prompt & full response'],
   'ai.talkEmpty': ['暂无对话 — 仅 LLM / Claude Code worker 产生', 'No turns — only LLM / Claude Code workers produce these'],
-  'ai.vulnsDesc': ['<span class="live"></span>已确认漏洞 · 标记来源:扫描器(规则 worker 自动扫)/ AI 调工具(AI 决策调 awvs_scan 等)/ AI 自主验证(AI 自主 curl 验证),按严重度排序', '<span class="live"></span>Confirmed vulns · source badges: scanner (rule worker auto-scan) / AI tool-call (AI calls awvs_scan etc.) / AI self-verify (AI curls to verify), sorted by severity'],
-  'ai.vulnsEmpty': ['暂无已确认漏洞 — worker 调 awvs_scan / run_plugin 发现的漏洞(标「扫描器/AI 调工具」)与 AI 自主 curl 验证的漏洞(标「AI 自主验证」)均在此汇总', 'No confirmed vulns — vulns found via awvs_scan / run_plugin (badged "scanner/AI tool-call") and AI self-verified via curl (badged "AI self-verify") are aggregated here'],
+  'ai.vulnsDesc': ['<span class="live"></span>已确认漏洞 · 标记来源:扫描器(规则 worker 自动扫)/ AI 调工具(AI 决策调 wscan_scan 等)/ AI 自主验证(AI 自主 curl 验证),按严重度排序', '<span class="live"></span>Confirmed vulns · source badges: scanner (rule worker auto-scan) / AI tool-call (AI calls wscan_scan etc.) / AI self-verify (AI curls to verify), sorted by severity'],
+  'ai.vulnsEmpty': ['暂无已确认漏洞 — worker 调 wscan_scan / run_plugin 发现的漏洞(标「扫描器/AI 调工具」)与 AI 自主 curl 验证的漏洞(标「AI 自主验证」)均在此汇总', 'No confirmed vulns — vulns found via wscan_scan / run_plugin (badged "scanner/AI tool-call") and AI self-verified via curl (badged "AI self-verify") are aggregated here'],
   'ai.vulnsLoadFail': ['加载失败', 'Load failed'],
+  'ai.urlsDesc': ['<span class="live"></span>bootstrap 侦察阶段爬取到的 URL/端点 · 含请求方法/状态/标题,点开查看完整请求-响应', '<span class="live"></span>URLs/endpoints crawled during bootstrap recon · with method/status/title; click to see full request-response'],
+  'ai.urlsEmpty': ['暂无 URL — bootstrap 爬取后此处汇总所有采集到的页面/端点', 'No URLs — pages/endpoints crawled during bootstrap are aggregated here'],
   'ai.factsEmpty': ['暂无 Fact', 'No Facts'],
   'ai.intentsEmpty': ['暂无 Intent', 'No Intents'],
   'ai.hintsEmpty': ['暂无 Hint — 新建时填写,或运行中点「', 'No Hints — fill in when creating, or click "'],
@@ -770,7 +774,14 @@ const I18N = {
   'aiM.llmNone': ['未配置 LLM(将用规则 worker)', 'No LLM configured (will use rule worker)'],
   'aiM.cfg': ['配置', 'Configure'],
   'aiM.fldTools': ['工具范围', 'Tool scope'],
-  'aiM.toolsDesc': ['勾选 worker 可调用的工具(默认全开)。scope 严格限制在 Origin 主机。', 'Check tools the worker may call (all on by default). Scope is strictly limited to the Origin host.'],
+  'aiM.toolsDesc': ['勾选 worker 可调用的工具(默认全开)。scope 严格限制在 Origin 主机。支持新增自定义工具。', 'Check tools the worker may call (all on by default). Scope is strictly limited to the Origin host. Custom tools supported.'],
+  'aiM.ctNamePh': ['自定义工具名(如 sqlmap)', 'Custom tool name (e.g. sqlmap)'],
+  'aiM.ctDescPh': ['工具描述', 'Tool description'],
+  'aiM.ctIconPh': ['图标(lucide id, 可选)', 'Icon (lucide id, optional)'],
+  'aiM.ctKindPh': ['分类(可选,如 shell/scan)', 'Kind (optional, e.g. shell/scan)'],
+  'aiM.ctAdd': ['添加工具', 'Add tool'],
+  'aiM.ctNoName': ['请输入工具名', 'Please enter a tool name'],
+  'aiM.ctDelConfirm': ['删除该自定义工具?', 'Delete this custom tool?'],
   'aiM.fldNotify': ['通知推送 (飞书/企业微信/钉钉)', 'Notifications (Feishu/WeCom/DingTalk)'],
   'aiM.notifyDesc': ['wscan 原生调用群机器人 webhook,把事件(发现 Fact / 目标达成 / 停止)推到所选 IM 平台,无需外部桥接。', 'wscan natively calls the group-bot webhook to push events (Fact found / Goal reached / stopped) to the selected IM platform; no external bridge.'],
   'aiM.enablePush': ['启用推送', 'Enable push'],
@@ -824,13 +835,13 @@ const I18N = {
   'aiw.llm': ['LLM (OpenAI/Anthropic 兼容)', 'LLM (OpenAI/Anthropic compatible)'],
   'aiw.mock': ['规则 worker (无 LLM,跑 awvs 全扫)', 'Rule worker (no LLM, runs awvs full scan)'],
   'aiw.mockShort': ['规则 worker', 'Rule worker'],
-  'ait.awvs_crawl': ['爬站点 URL/表单/参数/技术指纹', 'Crawl site URLs/forms/params/tech fingerprints'],
-  'ait.awvs_scan': ['对 URL 自动选插件扫漏洞', 'Auto-select plugins to scan a URL for vulns'],
-  'ait.awvs_list_plugins': ['列插件目录供选', 'List the plugin catalog for selection'],
-  'ait.awvs_run_plugin': ['跑指定 rel 插件', 'Run a specific plugin by rel'],
-  'ait.awvs_glob': ['按 glob 批量跑插件', 'Batch-run plugins by glob'],
-  'ait.awvs_write_plugin': ['写自定义插件并跑', 'Write & run a custom plugin'],
-  'ait.awvs_js_leak': ['语义分析 JS 文件,提取泄露的 API/凭据并推理漏洞', 'Semantically analyze JS files, extract leaked API/credentials and infer vulns'],
+  'ait.wscan_crawl': ['爬站点 URL/表单/参数/技术指纹', 'Crawl site URLs/forms/params/tech fingerprints'],
+  'ait.wscan_scan': ['对 URL 自动选插件扫漏洞', 'Auto-select plugins to scan a URL for vulns'],
+  'ait.wscan_list_plugins': ['列插件目录供选', 'List the plugin catalog for selection'],
+  'ait.wscan_run_plugin': ['跑指定 rel 插件', 'Run a specific plugin by rel'],
+  'ait.wscan_glob': ['按 glob 批量跑插件', 'Batch-run plugins by glob'],
+  'ait.wscan_write_plugin': ['写自定义插件并跑', 'Write & run a custom plugin'],
+  'ait.wscan_js_leak': ['语义分析 JS 文件,提取泄露的 API/凭据并推理漏洞', 'Semantically analyze JS files, extract leaked API/credentials and infer vulns'],
   'ait.http': ['curl 等价 HTTP 请求', 'curl-equivalent HTTP request'],
   // --- misc status strings used inline ---
   'misc.scanOnlyType': ['仅扫描', 'Scan only'],
@@ -854,7 +865,6 @@ function applyStaticI18n(){
   const ss=$('srvStatus'); if(ss && ss.getAttribute('data-default')!=='0') ss.textContent = t('status.ready');
   const tt=$('themeToggle'); if(tt){ tt.title=t('top.theme'); tt.setAttribute('aria-label', t('top.theme')); }
   const av=document.querySelector('#topbar .avatar'); if(av) av.title = t('top.localRun');
-  const ns=$('btnNewScan'); if(ns && window.ic) ns.innerHTML = ic('plus','btn-ic')+' '+t('top.newScan');
 }
 function syncLangIcon(){
   const btn=$('langToggle'); if(!btn||!window.ic) return;
@@ -2388,15 +2398,28 @@ function platformName(v){const p=AI_IM_PLATFORMS.find(x=>x[0]===v);return p?p[1]
 const AI_STATUS_TXT={active:'running',completed:'done',stopped:'stopped'};
 // AI worker 可调用的工具(对应后端 ai_tools.js),仅用于前端展示
 const AI_TOOLS=[
-  ['search','awvs_crawl','ait.awvs_crawl'],
-  ['shield-alert','awvs_scan','ait.awvs_scan'],
-  ['list-checks','awvs_list_plugins','ait.awvs_list_plugins'],
-  ['play-circle','awvs_run_plugin','ait.awvs_run_plugin'],
-  ['layers','awvs_glob','ait.awvs_glob'],
-  ['pencil-line','awvs_write_plugin','ait.awvs_write_plugin'],
-  ['key-round','awvs_js_leak','ait.awvs_js_leak'],
+  ['search','wscan_crawl','ait.wscan_crawl'],
+  ['shield-alert','wscan_scan','ait.wscan_scan'],
+  ['list-checks','wscan_list_plugins','ait.wscan_list_plugins'],
+  ['play-circle','wscan_run_plugin','ait.wscan_run_plugin'],
+  ['layers','wscan_glob','ait.wscan_glob'],
+  ['pencil-line','wscan_write_plugin','ait.wscan_write_plugin'],
+  ['key-round','wscan_js_leak','ait.wscan_js_leak'],
   ['globe','http','ait.http'],
 ];
+// 自定义工具缓存(/api/ai-pentest/tools 的 custom 段)。新建/详情页的工具范围
+// 区会把内置 AI_TOOLS 与这些自定义工具合并展示。
+let _aiCustomTools=[];
+async function aiLoadTools(){
+  try{const r=await api('/api/ai-pentest/tools');_aiCustomTools=(r&&r.custom)||[];}catch(e){_aiCustomTools=[];}
+  return _aiCustomTools;
+}
+// 合并后的工具表(内置 + 自定义),供工具范围区与工具箱共用。
+function aiAllTools(){
+  const built=AI_TOOLS.map(it=>({icon:it[0],name:it[1],descKey:it[2],builtin:true}));
+  const custom=(_aiCustomTools||[]).map(c=>({icon:c.icon||'wrench',name:c.name,desc:c.description||'',custom:true,id:c.id,kind:c.kind||''}));
+  return built.concat(custom);
+}
 async function aiLoadNotify(force){
   if(_aiNotify&&!force)return _aiNotify;
   try{_aiNotify=await api('/api/ai-notify');}catch(e){_aiNotify={ok:false,config:{enabled:false}};}
@@ -2475,6 +2498,7 @@ async function renderAIDetail(id){
           '<div class="tab" data-t="timeline">'+t('ai.tabTimeline')+'</div>'+
           '<div class="tab" data-t="talk">'+t('ai.tabTalk')+' <span class="cnt">'+(p.events||[]).filter(e=>e.type==='llm_turn').length+'</span></div>'+
           '<div class="tab" data-t="vulns">'+t('ai.tabVulns')+' <span class="cnt">'+(p.events||[]).filter(e=>e.type==='vuln').length+'</span></div>'+
+          '<div class="tab" data-t="urls">'+t('ai.tabUrls')+' <span class="cnt">'+(p.urls||[]).length+'</span></div>'+
           '<div class="tab" data-t="facts">'+t('ai.tabFacts')+' <span class="cnt">'+(p.facts||[]).length+'</span></div>'+
           '<div class="tab" data-t="intents">'+t('ai.tabIntents')+' <span class="cnt">'+(p.intents||[]).length+'</span></div>'+
           '<div class="tab" data-t="hints">'+t('ai.tabHints')+' <span class="cnt">'+(p.hints||[]).length+'</span></div>'+
@@ -2526,10 +2550,14 @@ function aiSyncTopStats(){
   const bar=$('aiProgBar');if(bar)bar.style.width=aiProgress(p)+'%';
   const txt=$('aiProgTxt');if(txt)txt.textContent=t('ai.progTxt')+aiProgress(p)+'%';
   const strip=document.querySelector('.ai-status-strip .ai-sub');if(strip)strip.textContent=t('ai.worker')+(p.project.worker||'llm')+' · '+(p.intents||[]).filter(i=>i.status==='done').length+'/'+(p.intents||[]).length+t('ai.intentsConv');
-  const tabs=$('aiTabs');if(tabs){const evs=p.events||[];const t1=tabs.querySelector('[data-t=talk] .cnt');if(t1)t1.textContent=evs.filter(e=>e.type==='llm_turn').length;const t2=tabs.querySelector('[data-t=vulns] .cnt');if(t2)t2.textContent=evs.filter(e=>e.type==='vuln').length;const f=tabs.querySelector('[data-t=facts] .cnt');if(f)f.textContent=(p.facts||[]).length;const i=tabs.querySelector('[data-t=intents] .cnt');if(i)i.textContent=(p.intents||[]).length;}
+  const tabs=$('aiTabs');if(tabs){const evs=p.events||[];const t1=tabs.querySelector('[data-t=talk] .cnt');if(t1)t1.textContent=evs.filter(e=>e.type==='llm_turn').length;const t2=tabs.querySelector('[data-t=vulns] .cnt');if(t2)t2.textContent=evs.filter(e=>e.type==='vuln').length;const u=tabs.querySelector('[data-t=urls] .cnt');if(u)u.textContent=(p.urls||[]).length;const f=tabs.querySelector('[data-t=facts] .cnt');if(f)f.textContent=(p.facts||[]).length;const i=tabs.querySelector('[data-t=intents] .cnt');if(i)i.textContent=(p.intents||[]).length;}
 }
 function aiToolboxHtml(){
-  return AI_TOOLS.map(it=>'<div class="ai-tool"><span class="ai-tool-ic">'+ic(it[0])+'</span><span class="ai-tool-nm">'+esc(it[1])+'</span><span class="ai-tool-st">'+esc(t(it[2]))+'</span></div>').join('');
+  return aiAllTools().map(it=>{
+    const desc=it.builtin?t(it.descKey):(it.desc||'');
+    const tag=it.builtin?'':'<span class="badge s0" style="margin-left:4px">'+t('ai.customTag')+'</span>';
+    return '<div class="ai-tool"><span class="ai-tool-ic">'+ic(it.icon)+'</span><span class="ai-tool-nm">'+esc(it.name)+tag+'</span><span class="ai-tool-st">'+esc(desc)+'</span></div>';
+  }).join('');
 }
 function aiSyncTabs(){$('aiTabs').querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.t===_aiDetailTab));}
 // 渲染当前 tab 内容(数据来自 _aiCur,后端真实结构)
@@ -2547,6 +2575,8 @@ function aiRenderPane(){
   }else if(_aiDetailTab==='vulns'){
     pane.innerHTML='<div class="muted tiny" style="margin-bottom:6px">'+t('ai.vulnsDesc')+'</div><div id="aiVulnList">'+empty(t('c.loading'))+'</div>';
     aiLoadVulns(p.project.id);
+  }else if(_aiDetailTab==='urls'){
+    aiRenderUrls(p);
   }else if(_aiDetailTab==='facts'){
     const fs=p.facts||[];
     pane.innerHTML=fs.length?fs.slice().reverse().map(f=>aiEventHtml({type:'fact',fact:f})).join(''):empty(t('ai.factsEmpty'));
@@ -2573,20 +2603,20 @@ function aiRenderPane(){
 }
 // 单条事件卡片:接受后端黑板事件结构(type: fact/intent/intent_claimed/intent_done/hint/tool_call/tool_done/log/goal/stopped)
 function aiEventHtml(e){
-  const t=e.type;
-  if(t==='fact'){const f=e.fact;const m=f.meta||{};const intent=(m.intent)?'<div class="ai-ex">'+ic('compass')+t('ai.hypothesis')+esc(m.intent)+'</div>':'';const findings=(Array.isArray(m.findings)&&m.findings.length)?'<div class="ai-ex">'+ic('shield-alert')+t('ai.finding')+m.findings.map(x=>esc((x.title||x.typeId)+(x.affects?' @ '+x.affects:'')+(x.severity?(' ['+x.severity+']'):''))).join(' · ')+'</div>':'';const acts=(Array.isArray(m.toolResults)&&m.toolResults.length)?('<details style="margin-top:4px"><summary class="tiny muted" style="cursor:pointer">'+ic('wrench')+t('ai.action')+esc(m.toolResults.length+t('ai.actionUnit'))+'</summary><div class="tiny" style="margin-top:3px">'+m.toolResults.map(x=>'<div><code>'+esc(x.tool)+'</code> '+(x.ok?ic('check'):ic('x'))+' <span class="muted">'+esc(x.summary||'')+'</span></div>').join('')+'</div></details>'):'';return '<div class="ai-ev"><div class="ai-dot fact">'+ic('microscope')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.fact')+'</b> <code>'+esc(f.id)+'</code><span style="margin-left:auto">'+esc((f.at||'').slice(11,19))+'</span></div><div class="ai-ed">'+esc(f.description)+'</div>'+intent+findings+acts+(f.from&&f.from.length?'<div class="ai-ex">← '+f.from.map(esc).join(', ')+'</div>':'')+'</div></div>';}
-  if(t==='intent'){const i=e.intent;const icEl=i.status==='done'?ic('circle-check'):i.status==='claimed'?ic('loader-circle'):ic('circle-dot');const cls=i.status==='done'?'intent-done':'intent';const badge=' <span class="badge '+(i.status==='done'?'st-done':i.status==='claimed'?'st-running':'s0')+'">'+({done:t('ai.intDone'),claimed:t('ai.intExploring'),unclaimed:t('ai.intUnclaimed')}[i.status]||i.status)+'</span>';return '<div class="ai-ev"><div class="ai-dot '+cls+'">'+icEl+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(i.id)+'</code>'+badge+'</div><div class="ai-ed">'+esc(i.description)+'</div>'+(i.from&&i.from.length?'<div class="ai-ex">← '+i.from.map(esc).join(', ')+(i.worker?' · '+esc(i.worker):' · '+t('ai.noClaim'))+'</div>':'')+'</div></div>';}
-  if(t==='intent_claimed'){return '<div class="ai-ev"><div class="ai-dot intent">'+ic('loader-circle')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(e.intent.id)+'</code> <span class="badge st-running">'+t('ai.intClaimed')+'</span></div><div class="ai-ed tiny">'+esc(e.intent.description)+'</div><div class="ai-ex">'+t('ai.worker')+esc(e.intent.worker)+'</div></div></div>';}
-  if(t==='intent_done'){const i=e.intent;return '<div class="ai-ev"><div class="ai-dot intent-done">'+ic('circle-check')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(i.id)+'</code> <span class="badge st-done">'+t('ai.intDone')+'</span></div><div class="ai-ed tiny">'+esc(i.description)+'</div>'+(e.fact?'<div class="ai-ex">→ '+t('ai.fact')+' '+esc(e.fact.id)+'</div>':'')+'</div></div>';}
-  if(t==='hint'){const h=e.hint;return '<div class="ai-ev"><div class="ai-dot hint">'+ic('lightbulb')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.hintLbl')+'</b> <code>'+esc(h.id)+'</code></div><div class="ai-ed">'+esc(h.content)+'</div><div class="ai-ex">'+t('ai.by2')+esc(h.creator)+'</div></div></div>';}
-  if(t==='tool_call'){const a=e.args;return '<div class="ai-ev"><div class="ai-dot system">'+ic('wrench')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.toolCallLbl')+'</b> <code>'+esc(e.tool)+'</code><span class="tiny muted" style="margin:0 6px">'+t('ai.by')+'</span><code class="tiny">'+esc(workerLabel(e.worker))+'</code><span style="margin-left:auto">'+esc((e.at||'').slice(11,19))+'</span></div><details><summary class="tiny muted" style="cursor:pointer">'+esc(e.tool)+' '+esc(JSON.stringify(a).slice(0,80))+'</summary><pre class="tiny" style="margin-top:4px;background:var(--panel2);padding:6px;border-radius:4px;overflow:auto">'+esc(JSON.stringify(a,null,2))+'</pre></details></div></div>';}
-  if(t==='tool_done'){const okEl=e.ok?ic('check'):ic('x');return '<div class="ai-ev"><div class="ai-dot system">'+okEl+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.toolDoneLbl')+'</b> <code>'+esc(e.tool)+'</code> <span class="tiny muted">'+t('ai.by2')+esc(workerLabel(e.worker))+'</span> <span class="tiny muted">'+(e.ms||0)+'ms</span></div><div class="ai-ed tiny">'+esc(e.summary||'')+'</div></div></div>';}
-  if(t==='goal'){return '<div class="ai-ev"><div class="ai-dot fact">'+ic('flag')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.goalReached')+'</b></div><div class="ai-ed">'+t('ai.goalReachedDesc')+'</div></div></div>';}
-  if(t==='stopped'){return '<div class="ai-ev"><div class="ai-dot system">'+ic('circle-stop')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.stoppedEv')+'</b></div></div></div>';}
-  if(t==='llm_turn'){const ph={bootstrap:t('ai.phaseBoot'),reason:t('ai.phaseReason'),explore:t('ai.phaseExplore')}[e.phase]||e.phase;return '<div class="ai-ev"><div class="ai-dot system">'+ic('message-square')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.turn')+'</b> <span class="badge st-running">'+esc(ph)+'</span> <code class="tiny">'+esc(e.worker||'')+'</code><span style="margin-left:auto">'+esc((e.at||'').slice(11,19))+'</span></div><div class="ai-ed tiny muted">'+esc((e.response||e.error||'').slice(0,160))+'</div></div></div>';}
-  if(t==='vuln'){const v=e.vuln||{};const sev='<span class="badge '+(v.severity==='critical'||v.severity==='high'?'st-stopped':v.severity==='medium'?'s2':'s0')+'">'+esc(v.severity||'info')+'</span>';return '<div class="ai-ev"><div class="ai-dot system">'+ic('shield-alert')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('nav.vulnerabilities')+'</b> '+sev+' '+esc(v.title||v.name||v.typeId||'')+' '+provenanceBadge(v.provenance)+'<span class="tiny muted" style="margin:0 6px">'+t('ai.by')+'</span><code class="tiny">'+esc(workerLabel(e.worker))+'</code><span style="margin-left:auto">'+esc((v.affects||'').slice(0,40))+'</span></div><div class="ai-ed tiny">'+esc(v.affects||'')+(v.parameter?' · '+esc(v.parameter):'')+'</div></div></div>';}
+  const et=e.type;
+  if(et==='fact'){const f=e.fact;const m=f.meta||{};const intent=(m.intent)?'<div class="ai-ex">'+ic('compass')+t('ai.hypothesis')+esc(m.intent)+'</div>':'';const findings=(Array.isArray(m.findings)&&m.findings.length)?'<div class="ai-ex">'+ic('shield-alert')+t('ai.finding')+m.findings.map(x=>esc((x.title||x.typeId)+(x.affects?' @ '+x.affects:'')+(x.severity?(' ['+x.severity+']'):''))).join(' · ')+'</div>':'';const acts=(Array.isArray(m.toolResults)&&m.toolResults.length)?('<details style="margin-top:4px"><summary class="tiny muted" style="cursor:pointer">'+ic('wrench')+t('ai.action')+esc(m.toolResults.length+t('ai.actionUnit'))+'</summary><div class="tiny" style="margin-top:3px">'+m.toolResults.map(x=>'<div><code>'+esc(x.tool)+'</code> '+(x.ok?ic('check'):ic('x'))+' <span class="muted">'+esc(x.summary||'')+'</span></div>').join('')+'</div></details>'):'';return '<div class="ai-ev"><div class="ai-dot fact">'+ic('microscope')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.fact')+'</b> <code>'+esc(f.id)+'</code><span style="margin-left:auto">'+esc((f.at||'').slice(11,19))+'</span></div><div class="ai-ed">'+esc(f.description)+'</div>'+intent+findings+acts+(f.from&&f.from.length?'<div class="ai-ex">← '+f.from.map(esc).join(', ')+'</div>':'')+'</div></div>';}
+  if(et==='intent'){const i=e.intent;const icEl=i.status==='done'?ic('circle-check'):i.status==='claimed'?ic('loader-circle'):ic('circle-dot');const cls=i.status==='done'?'intent-done':'intent';const badge=' <span class="badge '+(i.status==='done'?'st-done':i.status==='claimed'?'st-running':'s0')+'">'+({done:t('ai.intDone'),claimed:t('ai.intExploring'),unclaimed:t('ai.intUnclaimed')}[i.status]||i.status)+'</span>';return '<div class="ai-ev"><div class="ai-dot '+cls+'">'+icEl+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(i.id)+'</code>'+badge+'</div><div class="ai-ed">'+esc(i.description)+'</div>'+(i.from&&i.from.length?'<div class="ai-ex">← '+i.from.map(esc).join(', ')+(i.worker?' · '+esc(i.worker):' · '+t('ai.noClaim'))+'</div>':'')+'</div></div>';}
+  if(et==='intent_claimed'){return '<div class="ai-ev"><div class="ai-dot intent">'+ic('loader-circle')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(e.intent.id)+'</code> <span class="badge st-running">'+t('ai.intClaimed')+'</span></div><div class="ai-ed tiny">'+esc(e.intent.description)+'</div><div class="ai-ex">'+t('ai.worker')+esc(e.intent.worker)+'</div></div></div>';}
+  if(et==='intent_done'){const i=e.intent;return '<div class="ai-ev"><div class="ai-dot intent-done">'+ic('circle-check')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.intentLbl')+'</b> <code>'+esc(i.id)+'</code> <span class="badge st-done">'+t('ai.intDone')+'</span></div><div class="ai-ed tiny">'+esc(i.description)+'</div>'+(e.fact?'<div class="ai-ex">→ '+t('ai.fact')+' '+esc(e.fact.id)+'</div>':'')+'</div></div>';}
+  if(et==='hint'){const h=e.hint;return '<div class="ai-ev"><div class="ai-dot hint">'+ic('lightbulb')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.hintLbl')+'</b> <code>'+esc(h.id)+'</code></div><div class="ai-ed">'+esc(h.content)+'</div><div class="ai-ex">'+t('ai.by2')+esc(h.creator)+'</div></div></div>';}
+  if(et==='tool_call'){const a=e.args;return '<div class="ai-ev"><div class="ai-dot system">'+ic('wrench')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.toolCallLbl')+'</b> <code>'+esc(e.tool)+'</code><span class="tiny muted" style="margin:0 6px">'+t('ai.by')+'</span><code class="tiny">'+esc(workerLabel(e.worker))+'</code><span style="margin-left:auto">'+esc((e.at||'').slice(11,19))+'</span></div><details><summary class="tiny muted" style="cursor:pointer">'+esc(e.tool)+' '+esc(JSON.stringify(a).slice(0,80))+'</summary><pre class="tiny" style="margin-top:4px;background:var(--panel2);padding:6px;border-radius:4px;overflow:auto">'+esc(JSON.stringify(a,null,2))+'</pre></details></div></div>';}
+  if(et==='tool_done'){const okEl=e.ok?ic('check'):ic('x');return '<div class="ai-ev"><div class="ai-dot system">'+okEl+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.toolDoneLbl')+'</b> <code>'+esc(e.tool)+'</code> <span class="tiny muted">'+t('ai.by2')+esc(workerLabel(e.worker))+'</span> <span class="tiny muted">'+(e.ms||0)+'ms</span></div><div class="ai-ed tiny">'+esc(e.summary||'')+'</div></div></div>';}
+  if(et==='goal'){return '<div class="ai-ev"><div class="ai-dot fact">'+ic('flag')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.goalReached')+'</b></div><div class="ai-ed">'+t('ai.goalReachedDesc')+'</div></div></div>';}
+  if(et==='stopped'){return '<div class="ai-ev"><div class="ai-dot system">'+ic('circle-stop')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.stoppedEv')+'</b></div></div></div>';}
+  if(et==='llm_turn'){const ph={bootstrap:t('ai.phaseBoot'),reason:t('ai.phaseReason'),explore:t('ai.phaseExplore')}[e.phase]||e.phase;return '<div class="ai-ev"><div class="ai-dot system">'+ic('message-square')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('ai.turn')+'</b> <span class="badge st-running">'+esc(ph)+'</span> <code class="tiny">'+esc(e.worker||'')+'</code><span style="margin-left:auto">'+esc((e.at||'').slice(11,19))+'</span></div><div class="ai-ed tiny muted">'+esc((e.response||e.error||'').slice(0,160))+'</div></div></div>';}
+  if(et==='vuln'){const v=e.vuln||{};const sev='<span class="badge '+(v.severity==='critical'||v.severity==='high'?'st-stopped':v.severity==='medium'?'s2':'s0')+'">'+esc(v.severity||'info')+'</span>';return '<div class="ai-ev"><div class="ai-dot system">'+ic('shield-alert')+'</div><div class="ai-body"><div class="ai-et"><b>'+t('nav.vulnerabilities')+'</b> '+sev+' '+esc(v.title||v.name||v.typeId||'')+' '+provenanceBadge(v.provenance)+'<span class="tiny muted" style="margin:0 6px">'+t('ai.by')+'</span><code class="tiny">'+esc(workerLabel(e.worker))+'</code><span style="margin-left:auto">'+esc((v.affects||'').slice(0,40))+'</span></div><div class="ai-ed tiny">'+esc(v.affects||'')+(v.parameter?' · '+esc(v.parameter):'')+'</div></div></div>';}
   // log / default
-  if(t==='log'||!t){return '<div class="ai-ev"><div class="ai-dot system">'+ic('circle-dot')+'</div><div class="ai-body"><div class="ai-ed tiny muted">'+esc(e.msg||'')+'</div></div></div>';}
+  if(et==='log'||!et){return '<div class="ai-ev"><div class="ai-dot system">'+ic('circle-dot')+'</div><div class="ai-body"><div class="ai-ed tiny muted">'+esc(e.msg||'')+'</div></div></div>';}
   return '';
 }
 // llm_turn 对话卡片(system/prompt/response 可折叠,与 tool_call 的 <details> 风格一致)
@@ -2613,10 +2643,53 @@ async function aiLoadVulns(pid){
   el.innerHTML=vs.map(v=>detVulnCard(v)).join('');
   wireVulnCards(el);
 }
+// URL 结果 tab:复用扫描详情的 resultsTable 行结构(rrow + rdet 折叠详情),
+// 数据来自项目黑板 p.urls(bootstrap 爬取写入)。支持 TXT/JSON/XML 导出。
+function aiRenderUrls(p){
+  const pane=$('aiPane');if(!pane)return;
+  const urls=p.urls||[];
+  const desc='<div class="muted tiny" style="margin-bottom:6px">'+t('ai.urlsDesc')+'</div>';
+  const toolbar='<div class="toolbar"><span style="flex:1"></span><button class="sec" data-aiexport="txt">TXT</button><button class="sec" data-aiexport="json">JSON</button><button class="sec" data-aiexport="xml">XML</button></div>';
+  if(!urls.length){pane.innerHTML=desc+empty(t('ai.urlsEmpty'));return;}
+  const rows=urls.map(u=>{
+    const method=(u.http&&u.http.request&&u.http.request.method)||u.method||'';
+    const r='<tr class="rrow" data-url="'+esc(u.url)+'"><td>'+statusBadge(u.status)+'</td><td class="mtd">'+methodBadge(method)+'</td><td class="url '+(u.isSoft404?'soft':'')+'">'+esc(u.url)+'<span class="tw">▾</span></td><td>'+esc((u.title||'').slice(0,30))+'</td><td>'+esc((u.source||'').slice(0,12))+'</td></tr>';
+    const d='<tr class="rdet" data-url="'+esc(u.url)+'" style="display:none"><td colspan=5><div class="rd"><div class="rd-grid">'
+      +rdCell(t('sd.rdMethod'),method||'-')
+      +rdCell(t('sd.rdUrl'),u.url,true)
+      +rdCell(t('sd.rdStatus'),(u.status||0)+(u.isSoft404?t('sd.soft404'):''))
+      +rdCell(t('sd.rdType'),u.contentType||'')
+      +rdCell(t('sd.rdTitle'),u.title||'')
+      +rdCell(t('sd.rdSource'),u.source||'')
+      +'</div>'
+      +((u.params&&u.params.length)?'<div class="rd-sec"><div class="rd-sec-h">'+t('sd.rdParams')+' ('+u.params.length+')</div><table class="rd-params"><thead><tr><th>'+t('sd.rdParamName')+'</th><th>'+t('sd.rdParamVal')+'</th></tr></thead><tbody>'+u.params.map(pp=>'<tr><td class="mono">'+esc(pp.name||pp)+'</td><td class="mono">'+esc(pp.value!=null?pp.value:'')+'</td></tr>').join('')+'</tbody></table></div>':'')
+      +(u.http&&u.http.request?httpSec(u.http.request,true):'')
+      +(u.http&&u.http.response?httpSec(u.http.response,false):'')
+      +'</div></td></tr>';
+    return r+d;
+  }).join('');
+  pane.innerHTML=desc+toolbar+'<table id="aiUrlTable"><thead><tr><th>'+t('sd.thStatus')+'</th><th>'+t('sd.thMethod')+'</th><th>'+t('sd.thUrl')+'</th><th>'+t('sd.thTitle')+'</th><th>'+t('sd.thSource')+'</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  const tb=$('aiUrlTable').querySelector('tbody');
+  if(tb)tb.addEventListener('click',(e)=>{
+    const tr=e.target.closest('tr.rrow');if(!tr)return;
+    const det=tb.querySelector('tr.rdet[data-url="'+CSS.escape(tr.dataset.url)+'"]');
+    if(det){const on=det.style.display==='none';det.style.display=on?'':'none';tr.querySelector('.tw').textContent=on?'▴':'▾';}
+  });
+  pane.querySelectorAll('[data-aiexport]').forEach(b=>b.onclick=()=>{
+    const fmt=b.dataset.aiexport;
+    const blob=new Blob([aiUrlsExport(urls,fmt)],{type:fmt==='json'?'application/json':(fmt==='xml'?'text/xml':'text/plain')});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ai_urls.'+fmt;a.click();
+  });
+}
+function aiUrlsExport(urls,fmt){
+  if(fmt==='json')return JSON.stringify(urls,null,2);
+  if(fmt==='xml'){let s='<?xml version="1.0"?>\n<urls>\n';urls.forEach(u=>{s+='  <url>'+(u.url||'')+'</url>\n';});return s+'</urls>\n';}
+  return urls.map(u=>u.url||'').join('\n');
+}
 // 新建 AI 渗透模态框:Origin/Goal/Hints + 工具范围 + LLM 配置入口 + 推送
 async function openNewAIModal(){
-  // 预加载配置(LLM/推送),回填表单默认值
-  await Promise.all([aiLoadLlm(),aiLoadNotify()]);
+  // 预加载配置(LLM/推送/工具),回填表单默认值
+  await Promise.all([aiLoadLlm(),aiLoadNotify(),aiLoadTools()]);
   const ll=(_aiLlm&&_aiLlm.config)||{provider:'openai',base_url:'',api_key:'',model:''};
   const cc=(_aiLlm&&_aiLlm.claude)||{available:false};
   const nc=(_aiNotify&&_aiNotify.config)||{enabled:false,platform:'feishu',webhook:'',secret:'',atAll:false,events:{fact:true,goal:true,stopped:true}};
@@ -2636,7 +2709,10 @@ async function openNewAIModal(){
     '<div><label>'+t('aiM.llmState')+'</label><div class="tiny" style="margin-top:4px">'+(hasLlm?(ic('check')+t('aiM.llmOk')+esc(ll.provider)+t('aiM.llmOk2')+esc(ll.model||t('aiM.llmDefault'))):(ic('triangle-alert')+t('aiM.llmNone')))+' <a href="#" id="aiCfgLlm" class="tiny">'+t('aiM.cfg')+'</a></div></div></div>'+
     '<fieldset><legend>'+t('aiM.fldTools')+'</legend>'+
     '<div class="muted tiny" style="margin-bottom:6px">'+t('aiM.toolsDesc')+'</div>'+
-    AI_TOOLS.map(it=>'<label style="width:auto;margin-right:10px"><input type="checkbox" class="aiToolChk" value="'+it[1]+'" style="width:auto" checked> '+it[0]+' '+esc(it[1])+'</label>').join('')+'</fieldset>'+
+    '<div id="aiToolList">'+aiToolListHtml(true)+'</div>'+
+    '<div class="row" style="margin-top:8px"><input id="aiCtName" placeholder="'+t('aiM.ctNamePh')+'" style="flex:1"><input id="aiCtDesc" placeholder="'+t('aiM.ctDescPh')+'" style="flex:2"></div>'+
+    '<div class="row" style="margin-top:4px"><input id="aiCtIcon" placeholder="'+t('aiM.ctIconPh')+'" style="flex:1"><input id="aiCtKind" placeholder="'+t('aiM.ctKindPh')+'" style="flex:1"><button class="sec" type="button" id="aiCtAdd" style="width:auto">+ '+t('aiM.ctAdd')+'</button></div>'+
+    '</fieldset>'+
     '<fieldset><legend>'+t('aiM.fldNotify')+'</legend>'+
     '<div class="muted tiny" style="margin-bottom:6px">'+t('aiM.notifyDesc')+'</div>'+
     '<label style="width:auto"><input type="checkbox" id="aiNotifyOn" style="width:auto"'+(nc.enabled?' checked':'')+'> '+t('aiM.enablePush')+'</label>'+
@@ -2649,6 +2725,16 @@ async function openNewAIModal(){
   $('aiTgt').onchange=()=>{if($('aiTgt').value)$('aiOrigin').value=$('aiTgt').value;};
   document.querySelectorAll('[data-goal]').forEach(b=>b.onclick=()=>$('aiGoal').value=b.dataset.goal);
   $('aiCfgLlm').onclick=(e)=>{e.preventDefault();closeModal();openLlmModal();};
+  // 自定义工具:删除 + 新增
+  document.querySelectorAll('.ai-ct-del').forEach(a=>a.onclick=(e)=>{e.preventDefault();const id=a.dataset.id;if(!confirm(t('aiM.ctDelConfirm')))return;api('/api/ai-pentest/tools/'+encodeURIComponent(id),{method:'DELETE'}).then(()=>{aiLoadTools().then(()=>{const el=$('aiToolList');if(el)el.innerHTML=aiToolListHtml(true);});});});
+  $('aiCtAdd').onclick=async()=>{
+    const name=$('aiCtName').value.trim();if(!name){alert(t('aiM.ctNoName'));return;}
+    const body={name,description:$('aiCtDesc').value.trim(),icon:$('aiCtIcon').value.trim(),kind:$('aiCtKind').value.trim()};
+    await api('/api/ai-pentest/tools',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    await aiLoadTools();
+    $('aiCtName').value='';$('aiCtDesc').value='';$('aiCtIcon').value='';$('aiCtKind').value='';
+    const el=$('aiToolList');if(el){el.innerHTML=aiToolListHtml(true);el.querySelectorAll('.ai-ct-del').forEach(a=>a.onclick=(e)=>{e.preventDefault();const id=a.dataset.id;if(!confirm(t('aiM.ctDelConfirm')))return;api('/api/ai-pentest/tools/'+encodeURIComponent(id),{method:'DELETE'}).then(()=>{aiLoadTools().then(()=>{el.innerHTML=aiToolListHtml(true);});});});}
+  };
   $('aiNotifyTest').onclick=async()=>{
     await saveAiNotifyFromModal();
     const r=await api('/api/ai-notify/test',{method:'POST'});
@@ -2709,6 +2795,15 @@ async function openLlmModal(){
     else if(body.ccModel)$('srvStatus').textContent=t('llm.ccModelSaved');
     else $('srvStatus').textContent=t('llm.savedRule');
   };
+}
+// 工具范围勾选区(新建模态框):内置工具 + 自定义工具,均默认勾选。
+// checked=true 表示初始勾选状态。
+function aiToolListHtml(checked){
+  return aiAllTools().map(it=>{
+    const desc=it.builtin?t(it.descKey):(it.desc||'');
+    const del=it.builtin?'':' <a href="#" class="tiny ai-ct-del" data-id="'+esc(it.id)+'" style="margin-left:4px">✕</a>';
+    return '<label style="width:auto;margin-right:10px;display:inline-flex;align-items:center"><input type="checkbox" class="aiToolChk" value="'+esc(it.name)+'" style="width:auto"'+(checked?' checked':'')+'> '+ic(it.icon)+' '+esc(it.name)+(it.builtin?'':' <span class="badge s0">'+t('ai.customTag')+'</span>')+' <span class="muted tiny" title="'+esc(desc)+'">'+esc(desc.slice(0,24))+'</span>'+del+'</label>';
+  }).join(' ');
 }
 // 从新建模态框读取推送配置并 POST 到后端持久化
 async function saveAiNotifyFromModal(){
@@ -3137,7 +3232,7 @@ function closeModal(){$('modal').classList.remove('show');$('modalBox').innerHTM
 $('modal').addEventListener('click',(e)=>{if(e.target===$('modal'))closeModal();});
 
 // ===== wiring =====
-$('btnNewScan').onclick=()=>openNewScanModal();
+// (顶层「New Scan」按钮已移除;新建扫描入口仍在各列表页的「+ 新建扫描」按钮)
 // No auto-refresh polling: lists/dashboard/vulnerabilities used to re-render every
 // 2.5s via setInterval(router), which flickered the page and reset scroll/expand
 // state. Now views only refresh on explicit user action — navigating (hash change

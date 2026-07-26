@@ -380,6 +380,8 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/ai-notify/test", s.handleAiNotifyTest)
 	mux.HandleFunc("/api/ai-notify/feishu/qrcode/start", s.handleFeishuQRStart)
 	mux.HandleFunc("/api/ai-notify/feishu/qrcode/poll", s.handleFeishuQRPoll)
+	mux.HandleFunc("/api/ai-pentest", s.handleAIPentest)
+	mux.HandleFunc("/api/ai-pentest/", s.handleAIPentest)
 }
 
 // ---- status / tasks ----
@@ -1861,7 +1863,6 @@ func splitLines(s string) []string {
 	}
 	return parts
 }
-
 
 func paramKey(v *model.WebVuln) string {
 	if len(v.Target.Params) > 0 && len(v.Target.Params[0].Path) > 0 {

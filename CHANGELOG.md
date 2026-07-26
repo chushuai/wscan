@@ -1,7 +1,17 @@
+# 1.0.55  2026-07-27
+## SUPPORT
+* 【1】WebUI 扫描详情页新增「任务详情」tab:展示本次扫描的请求配置(目标/类型/状态/开始时间/耗时/爬虫模式/最大页数/最大深度/并发/自动扫描/插件/自定义请求头/包含·排除路径/代理/靶场/种子方法·请求体/鉴权)。`scanTask` 新增 `req scanRequest` 字段并在 `startScan` 赋值,`toFrontTaskDetail` 把 `req` 一并返回;`scanRecord` 新增 `Req` 字段持久化,`rehydrateScans` 用 helper(`strVal/intVal/boolVal/strSlice/mapVal`)还原 `scanRequest`,重启后历史任务也能看配置。密码字段以星号脱敏,token/cookie/长值截断显示。
+## BUGFIX
+* 【1】修复 WebUI「仅爬取」任务实际仍执行漏洞扫描、且列表类型显示为「爬取+扫描」的问题:`handleCrawl` 无条件 `req.AutoScan=true` 把前端传来的 `autoScan:false`(仅爬取)改成了 true;`startScan` 又用 `CrawlerMode=="static" && Method!="" && Data!=nil` 判定 taskType,与是否扫描脱节。现 `handleCrawl` 不再强制置 true,语义完全由 `autoScan` 字段决定;`startScan` 改用 `autoScan` 判定 taskType:`true`→`crawl`(爬取+扫描)、`false`→`crawlonly`(仅爬取,只爬不扫,`disp.Run` 传 `noScan=true`)、扫描入口→`scan`。新增 `misc.crawlOnlyType` 文案,列表与详情按三态正确显示。
+
 # 1.0.54  2026-07-26
 ## SUPPORT
 * 【1】WebUI「AI 自动渗透」详情页新增「URL 结果」tab:黑板结构加 `URLs` 段(按 url 去重),dispatcher bootstrap 侦察爬取到的页面/端点经 `addURL` 写入黑板并广播 SSE `url` 事件;`GET /api/ai-pentest/:id/urls` 返回 URL 列表,前端 tab 复用扫描详情的 resultsTable 行结构(状态/方法/URL/标题/来源 + 点开查看完整请求-响应),支持 TXT/JSON/XML 导出。
 * 【2】AI 自动渗透「工具范围 (Tool scope)」支持用户自定义工具:新增 `/api/ai-pentest/tools`(GET 列出内置+自定义 / POST 新建或更新)与 `DELETE /api/ai-pentest/tools/:tid`,自定义工具持久化到 `data/ai_custom_tools.json`;「新建 AI 渗透」模态框的工具范围区把内置工具与自定义工具合并勾选,并支持就地新增(名称/描述/图标/分类)与删除,详情页右侧工具箱同步展示。
+* 【3】移除顶层菜单状态栏的「New Scan」按钮(新建扫描入口仍在各列表页的「+ 新建扫描」按钮)。
+## BUGFIX
+* 【1】修复 WebUI 扫描目标指定了 Basic 认证但爬取和扫描都没生效的问题:`startScan` 只处理了自定义请求头,未处理前端 `auth` 鉴权字段。新增 `applyScanAuth` 把鉴权(basic/digest/token/jwt/cookie/header)注入到单次扫描任务的配置克隆(basic 写入 `cfg.Crawler.BasicAuth` + `Authorization` 头,其余作为默认头注入),爬虫与扫描器共用同一份 `cfg.HTTP` 故一并生效,与 CLI 入口 `entry.go` 的 basic-auth 注入同构。
+* 【2】修复动态(浏览器)爬虫在目标配了 Basic 认证时爬不到受保护页面(如 `?id=1`)的问题:`startScan` 构造动态爬虫的 `crawler.Config` 时未传 `AuthConfig`,且 `HandleAuthRequired` 收到 401/407 挑战时只回固定占位凭证 `Scan/Scan`。现把 `cfg.Crawler.BasicAuth` 传入动态/静态两路 `crawler.Config.AuthConfig`,并将 `HandleAuthRequired` 改为优先用配置的 BasicAuth 凭证应答挑战,无配置时才回退占位凭证。
 
 # 1.0.53  2026-07-26
 ## SUPPORT

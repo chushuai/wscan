@@ -247,6 +247,38 @@ const I18N = {
   'sd.tabResults': ['URL结果', 'URL Results'],
   'sd.tabVulns': ['漏洞', 'Vulns'],
   'sd.tabTech': ['技术识别', 'Tech'],
+  'sd.tabDetail': ['任务详情', 'Task Detail'],
+  'sd.detMTitle': ['任务详情', 'Task Detail'],
+  'sd.detTarget': ['目标', 'Target'],
+  'sd.detType': ['类型', 'Type'],
+  'sd.detStatus': ['状态', 'Status'],
+  'sd.detStart': ['开始时间', 'Started'],
+  'sd.detElapsed': ['耗时', 'Elapsed'],
+  'sd.detCrawlerMode': ['爬虫模式', 'Crawler mode'],
+  'sd.detMaxPages': ['最大页数', 'Max pages'],
+  'sd.detMaxDepth': ['最大深度', 'Max depth'],
+  'sd.detConcurrency': ['并发', 'Concurrency'],
+  'sd.detPlugins': ['插件', 'Plugins'],
+  'sd.detAuth': ['鉴权', 'Auth'],
+  'sd.detAuthType': ['类型', 'Type'],
+  'sd.detAuthUser': ['用户名', 'Username'],
+  'sd.detAuthPass': ['密码', 'Password'],
+  'sd.detAuthToken': ['Token', 'Token'],
+  'sd.detAuthHeader': ['Header', 'Header'],
+  'sd.detAuthValue': ['值', 'Value'],
+  'sd.detAuthCookie': ['Cookie', 'Cookie'],
+  'sd.detHeaders': ['自定义请求头', 'Custom headers'],
+  'sd.detIncPatterns': ['包含路径', 'Include patterns'],
+  'sd.detExcPatterns': ['排除路径', 'Exclude patterns'],
+  'sd.detProxy': ['代理', 'Proxy'],
+  'sd.detProxyNone': ['不使用代理', 'No proxy'],
+  'sd.detLab': ['靶场', 'Lab'],
+  'sd.detMethod': ['种子方法', 'Seed method'],
+  'sd.detBody': ['种子请求体', 'Seed body'],
+  'sd.detAutoScan': ['自动扫描', 'Auto scan'],
+  'sd.detAuto': ['自动(全部插件)', 'Auto (all plugins)'],
+  'sd.detNoReq': ['该任务无配置记录(可能由旧版本创建)。', 'No config recorded for this task (may be from an older version).'],
+  'sd.detCopyAuth': ['鉴权信息已复制到剪贴板', 'Auth info copied to clipboard'],
   'sd.delInvalid': ['删除无效', 'Delete invalid'],
   'sd.rescan': ['重扫选中', 'Rescan selected'],
   'sd.rescanFromUrl': ['以此请求新建扫描', 'New scan from this request'],
@@ -846,6 +878,7 @@ const I18N = {
   // --- misc status strings used inline ---
   'misc.scanOnlyType': ['仅扫描', 'Scan only'],
   'misc.crawlScanType': ['爬取+扫描', 'Crawl+Scan'],
+  'misc.crawlOnlyType': ['仅爬取', 'Crawl only'],
   'misc.paramPrefix': ['param=', 'param='],
 };
 function t(key){ const e = I18N[key]; if(!e) return key; return e[curLang==='en'?1:0]; }
@@ -999,7 +1032,7 @@ async function renderDashboard(){
   const tot=vs.total||1;
   $('dbSev').innerHTML='<div class="sevbar"><div style="width:'+(sev.high/tot*100)+'%;background:var(--high)"></div><div style="width:'+(sev.medium/tot*100)+'%;background:var(--med)"></div><div style="width:'+(sev.low/tot*100)+'%;background:var(--low)"></div><div style="width:'+(sev.info/tot*100)+'%;background:var(--info)"></div></div>'+
     '<div class="sevlegend"><span><b style="background:var(--high)"></b>'+t('dash.sevHigh')+' '+sev.high+'</span><span><b style="background:var(--med)"></b>'+t('dash.sevMed')+' '+sev.medium+'</span><span><b style="background:var(--low)"></b>'+t('dash.sevLow')+' '+sev.low+'</span><span><b style="background:var(--info)"></b>'+t('dash.sevInfo')+' '+sev.info+'</span></div>';
-  $('dbRecent').innerHTML=ts.length?ts.slice(0,6).map(t=>'<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bd)"><span class="pill st-'+t.status+'">'+({running:t('st.running'),done:t('st.done'),error:t('st.error'),paused:t('st.paused'),stopped:t('st.stopped')}[t.status])+'</span><a href="#/scans/'+t.id+'" style="font-family:ui-monospace,monospace;font-size:11px">'+esc(t.target)+'</a><span style="margin-left:auto" class="muted tiny">#'+t.id+' · '+t.vulns+' '+t('dash.vulnCount')+'</span></div>').join(''):empty(t('dash.noScans'));
+  $('dbRecent').innerHTML=ts.length?ts.slice(0,6).map(sc=>'<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bd)"><span class="pill st-'+sc.status+'">'+({running:t('st.running'),done:t('st.done'),error:t('st.error'),paused:t('st.paused'),stopped:t('st.stopped')}[sc.status])+'</span><a href="#/scans/'+sc.id+'" style="font-family:ui-monospace,monospace;font-size:11px">'+esc(sc.target)+'</a><span style="margin-left:auto" class="muted tiny">#'+sc.id+' · '+sc.vulns+' '+t('dash.vulnCount')+'</span></div>').join(''):empty(t('dash.noScans'));
 }
 function statCard(n,l,cls){return '<div class="statcard '+(cls||'')+'"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'}
 
@@ -1358,7 +1391,7 @@ function renderScansSlice(){
   $('scBody').innerHTML=slice.length?slice.map(sc=>{const p=sc.progress||((taskCache[sc.id]||{}).progress)||{};const pct=progressPct(sc.status,p);const crawled=p.crawled!=null?p.crawled:sc.crawled;const progTxt=p.phase==='scanning'?(p.done+'/'+p.total):(crawled!=null?crawled+t('sc.pageUnit'):'-');
     const canDel=sc.status==='done'||sc.status==='error'||sc.status==='stopped';
     const canStop=sc.status==='running'||sc.status==='paused';
-    return '<tr><td onclick="event.stopPropagation()">'+(canDel?'<input type="checkbox" class="scsel" data-id="'+sc.id+'" style="width:auto">':'')+'</td><td>#'+sc.id+'</td><td>'+(sc.type==='crawl'?t('misc.crawlScanType'):t('misc.scanOnlyType'))+'</td><td class="url">'+esc(sc.target||'')+'</td><td>'+statusPill(sc.status)+'</td><td><div class="pbar"><div style="width:'+pct+'%"></div></div><span class="tiny">'+progTxt+'</span></td><td style="color:var(--err);font-weight:700">'+sc.vulns+'</td><td>'+sc.crawled+'</td><td class="tiny">'+(sc.startedAt||'').slice(0,19).replace('T',' ')+'</td><td><a class="btn sec tiny" href="#/scans/'+sc.id+'">'+t('c.view')+'</a> '+(canStop?'<button class="btn danger tiny" data-stop="'+sc.id+'">'+t('c.stop')+'</button> ':'')+(canDel?'<button class="btn danger tiny" data-del="'+sc.id+'">'+t('c.delete')+'</button>':'')+'</td></tr>';}).join(''):empty(t('sc.empty'));
+    return '<tr><td onclick="event.stopPropagation()">'+(canDel?'<input type="checkbox" class="scsel" data-id="'+sc.id+'" style="width:auto">':'')+'</td><td>#'+sc.id+'</td><td>'+(sc.type==='crawl'?t('misc.crawlScanType'):(sc.type==='crawlonly'?t('misc.crawlOnlyType'):t('misc.scanOnlyType')))+'</td><td class="url">'+esc(sc.target||'')+'</td><td>'+statusPill(sc.status)+'</td><td><div class="pbar"><div style="width:'+pct+'%"></div></div><span class="tiny">'+progTxt+'</span></td><td style="color:var(--err);font-weight:700">'+sc.vulns+'</td><td>'+sc.crawled+'</td><td class="tiny">'+(sc.startedAt||'').slice(0,19).replace('T',' ')+'</td><td><a class="btn sec tiny" href="#/scans/'+sc.id+'">'+t('c.view')+'</a> '+(canStop?'<button class="btn danger tiny" data-stop="'+sc.id+'">'+t('c.stop')+'</button> ':'')+(canDel?'<button class="btn danger tiny" data-del="'+sc.id+'">'+t('c.delete')+'</button>':'')+'</td></tr>';}).join(''):empty(t('sc.empty'));
   const scPager=$('scPager'); if(scPager) scPager.innerHTML= total?pagerHtml('sc',total,scPageSize,scPage):'';
   // select-all toggles all deletable rows (done/error only)
   $('scSelAll').onchange=(e)=>document.querySelectorAll('.scsel').forEach(c=>c.checked=e.target.checked);
@@ -1413,11 +1446,12 @@ function renderScanDetail(id){
     '<div class="det-stat"><div class="n" id="stStatus">-</div><div class="l">'+t('sd.status')+'</div></div>'+
     '<div class="det-ctrl"><button class="btn sec" id="btnPauseScan" style="display:none">'+ic('pause','btn-ic')+' '+t('sd.pause')+'</button><button class="btn sec" id="btnResumeScan" style="display:none">'+ic('play','btn-ic')+' '+t('sd.resume')+'</button><button class="btn danger" id="btnStopScan" style="display:none">'+ic('circle-stop','btn-ic')+' '+t('sd.stop')+'</button></div></div>'+
     '<div class="gbar"><div id="gbar"></div></div>'+
-    '<div class="tabs"><div class="tab active" data-pane="sitemap">'+t('sd.tabSitemap')+'<span class="cnt" id="cSite">0</span></div><div class="tab" data-pane="results">'+t('sd.tabResults')+'<span class="cnt" id="cUrl">0</span></div><div class="tab" data-pane="vulns">'+t('sd.tabVulns')+'<span class="cnt" id="cVuln">0</span></div><div class="tab" data-pane="tech">'+t('sd.tabTech')+'<span class="cnt" id="cTech">0</span></div></div>'+
+    '<div class="tabs"><div class="tab active" data-pane="sitemap">'+t('sd.tabSitemap')+'<span class="cnt" id="cSite">0</span></div><div class="tab" data-pane="results">'+t('sd.tabResults')+'<span class="cnt" id="cUrl">0</span></div><div class="tab" data-pane="vulns">'+t('sd.tabVulns')+'<span class="cnt" id="cVuln">0</span></div><div class="tab" data-pane="tech">'+t('sd.tabTech')+'<span class="cnt" id="cTech">0</span></div><div class="tab" data-pane="detail">'+t('sd.tabDetail')+'</div></div>'+
     '<div class="pane" id="paneSitemap"></div>'+
     '<div class="pane" id="paneResults" style="display:none"><div class="toolbar"><button class="sec" id="btnDelInvalid">'+t('sd.delInvalid')+'</button><button class="sec" id="btnRescan">'+t('sd.rescan')+'</button><span style="flex:1"></span><button class="sec" data-export="txt">TXT</button><button class="sec" data-export="json">JSON</button><button class="sec" data-export="xml">XML</button></div><table id="resultsTable"><thead><tr><th><input type="checkbox" id="selAll" style="width:auto"></th><th>'+t('sd.thStatus')+'</th><th>'+t('sd.thMethod')+'</th><th>'+t('sd.thUrl')+'</th><th>'+t('sd.thTitle')+'</th><th>'+t('sd.thSource')+'</th></tr></thead><tbody class="rtbody"></tbody></table><div id="resPager"></div></div>'+
     '<div class="pane" id="paneVulns" style="display:none"></div>'+
-    '<div class="pane" id="paneTech" style="display:none"></div>';
+    '<div class="pane" id="paneTech" style="display:none"></div>'+
+    '<div class="pane" id="paneDetail" style="display:none"></div>';
   wireScanDetail();
   openSSE(id);refreshTask();
 }
@@ -1453,7 +1487,7 @@ function wireScanDetail(){
     const on=card.classList.toggle('open');const tw=card.querySelector('.tw');if(tw)tw.textContent=on?t('vul.collapse'):t('vul.detail');
     onDetailToggled();
   });
-  document.querySelectorAll('.tab[data-pane]').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab[data-pane]').forEach(x=>x.classList.remove('active'));t.classList.add('active');['sitemap','results','vulns','tech'].forEach(p=>$('pane'+p.charAt(0).toUpperCase()+p.slice(1)).style.display='none');$('pane'+t.dataset.pane.charAt(0).toUpperCase()+t.dataset.pane.slice(1)).style.display='block';flushPane(t.dataset.pane);onDetailToggled();});
+  document.querySelectorAll('.tab[data-pane]').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab[data-pane]').forEach(x=>x.classList.remove('active'));t.classList.add('active');['sitemap','results','vulns','tech','detail'].forEach(p=>$('pane'+p.charAt(0).toUpperCase()+p.slice(1)).style.display='none');$('pane'+t.dataset.pane.charAt(0).toUpperCase()+t.dataset.pane.slice(1)).style.display='block';flushPane(t.dataset.pane);onDetailToggled();});
   $('btnDelInvalid').onclick=async()=>{const sel=Array.from(document.querySelectorAll('tr[data-url]')).filter(tr=>{const s=tr.querySelector('.badge');return s&&(+s.textContent>=400||tr.querySelector('.url.soft'));}).map(tr=>tr.dataset.url);if(!sel.length){alert(t('sd.noInvalid'));return;}const r=await api('/api/task/'+curTask+'/url',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls:sel})});$('srvStatus').textContent=t('sd.deleted')+r.removed+' '+t('c.unit');refreshTask();};
   $('btnRescan').onclick=async()=>{const urls=[...document.querySelectorAll('.urlsel:checked')].map(c=>c.dataset.url);if(!urls.length){alert(t('sd.selUrlFirst'));return;}await api('/api/task/'+curTask+'/rescan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls})});$('srvStatus').textContent=t('sd.rescanning')+urls.length+t('sd.rescanning2');};
   document.querySelectorAll('[data-export]').forEach(b=>b.onclick=async()=>{const fmt=b.dataset.export;const r=await fetch('/api/task/'+curTask+'/export',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({format:fmt})});const blob=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='urls.'+fmt;a.click();});
@@ -1505,9 +1539,9 @@ function hasExpandedDetail(){
 // currently-visible pane — hidden panes get a dirty flag and are rendered when
 // the user switches to them. Each renderer is itself an incremental patch, so
 // even the visible pane is never fully rebuilt (异步局部刷新).
-let paneDirty={sitemap:false,results:false,vulns:false,tech:false};
+let paneDirty={sitemap:false,results:false,vulns:false,tech:false,detail:false};
 function visiblePane(){
-  for(const k of ['sitemap','results','vulns','tech']){
+  for(const k of ['sitemap','results','vulns','tech','detail']){
     const el=$('pane'+k.charAt(0).toUpperCase()+k.slice(1));
     if(el&&el.style.display!=='none')return k;
   }
@@ -1519,6 +1553,7 @@ function renderPane(k){
   else if(k==='results')renderResults(t.pages);
   else if(k==='vulns')renderVulns();
   else if(k==='tech')renderTech(true);
+  else if(k==='detail')renderTaskDetail();
 }
 function safeRenderLists(){
   if(listRenderTimer) return;
@@ -1528,7 +1563,7 @@ function safeRenderLists(){
     if(hasExpandedDetail()){ listDirty=true; return; }
     const v=visiblePane();
     // mark every pane dirty; then flush only the visible one now
-    paneDirty.sitemap=paneDirty.results=paneDirty.vulns=paneDirty.tech=true;
+    paneDirty.sitemap=paneDirty.results=paneDirty.vulns=paneDirty.tech=paneDirty.detail=true;
     renderPane(v); paneDirty[v]=false;
     listDirty=false;
   },500);
@@ -1601,7 +1636,7 @@ async function refreshTask(){
   // (listDirty) so opening a finished task or finishing a scan does not
   // collapse a detail the user is reading — it refreshes on collapse.
   if(hasExpandedDetail()){ listDirty=true; paneDirty.sitemap=paneDirty.results=paneDirty.vulns=paneDirty.tech=true; }
-  else { renderResults(t.pages);renderTree();renderVulns();renderTech(); listDirty=false; paneDirty.sitemap=paneDirty.results=paneDirty.vulns=paneDirty.tech=false; }
+  else { renderResults(t.pages);renderTree();renderVulns();renderTech();renderTaskDetail(); listDirty=false; paneDirty.sitemap=paneDirty.results=paneDirty.vulns=paneDirty.tech=paneDirty.detail=false; }
 }
 function statusBadge(s){return '<span class="badge s'+(s>=500?5:s>=400?4:s>=300?3:s>=200?2:0)+'">'+(s||0)+'</span>'}
 // method badge for the URL results table: colored by verb family (read/write/other)
@@ -2162,6 +2197,71 @@ function drawTech(data){
     techs.map(t=>'<tr><td><b>'+esc(t.name)+'</b></td><td>'+(t.version?'<code>'+esc(t.version)+'</code>':'<span class="muted">-</span>')+'</td>'+
     '<td>'+t.confidence+'%</td><td class="tiny">'+esc((t.categories||[]).map(c=>c.name).join(', '))+'</td>'+
     '<td>'+t.hits+'</td><td class="tiny url">'+esc((t.sampleUrls||[]).join(' '))+'</td></tr>').join('')+
+    '</tbody></table>';
+}
+
+// scan-detail 任务详情 pane: 展示本次扫描的请求配置(目标/爬虫模式/鉴权/
+// 插件/范围/代理等),数据来自 /api/task/:id 返回的 task.req 字段。无配置记录
+// (旧版本创建的任务)时给出提示。
+function renderTaskDetail(){
+  const el=$('paneDetail');if(!el)return;
+  if(!curTask||!taskCache[curTask]){el.innerHTML=empty(t('sd.detNoReq'));return;}
+  const task=taskCache[curTask];
+  const r=task.req;
+  if(!r){el.innerHTML=empty(t('sd.detNoReq'));return;}
+  const p=task.progress||{};
+  const modeTxt=r.crawlerMode==='dynamic'?t('ns.modeDynamic'):(r.crawlerMode==='static'?t('ns.modeStatic'):(r.crawlerMode||'-'));
+  const rows=[
+    [t('sd.detTarget'), esc(r.target||task.target||'-')],
+    [t('sd.detType'), task.type==='scan'?t('misc.scanOnlyType'):(task.type==='crawlonly'?t('misc.crawlOnlyType'):t('misc.crawlScanType'))],
+    [t('sd.detStatus'), statusPill(task.status)],
+    [t('sd.detStart'), (task.startedAt||'').slice(0,19).replace('T',' ')||'-'],
+    [t('sd.detElapsed'), ((p.elapsedMs||0)/1000|0)+'s'],
+    [t('sd.detCrawlerMode'), modeTxt],
+    [t('sd.detMaxPages'), r.maxPages||'-'],
+    [t('sd.detMaxDepth'), r.maxDepth||'-'],
+    [t('sd.detConcurrency'), r.concurrency||'-'],
+    [t('sd.detAutoScan'), r.autoScan?t('c.yes'):t('c.no')],
+    [t('sd.detPlugins'), (r.plugins&&r.plugins.length)?r.plugins.map(esc).join(', '):'<span class="muted">'+esc(t('sd.detAuto'))+'</span>'],
+    [t('sd.detHeaders'), r.headers&&r.headers.length?'<pre class="tiny" style="margin:0;white-space:pre-wrap">'+r.headers.map(esc).join('\n')+'</pre>':'<span class="muted">-</span>'],
+    [t('sd.detIncPatterns'), (r.includePatterns&&r.includePatterns.length)?r.includePatterns.map(esc).join(', '):'-'],
+    [t('sd.detExcPatterns'), (r.excludePatterns&&r.excludePatterns.length)?r.excludePatterns.map(esc).join(', '):'-'],
+    [t('sd.detProxy'), r.noProxy?esc(t('sd.detProxyNone')):(r.proxyUrl?esc(r.proxyUrl):'-')],
+    [t('sd.detLab'), r.lab?esc(r.lab):'-'],
+    [t('sd.detMethod'), r.method?esc(r.method):'-'],
+    [t('sd.detBody'), r.data?esc(r.data):'-'],
+  ];
+  // 鉴权区单独成块,无鉴权时显示「无」
+  let authBlock;
+  if(r.auth&&r.auth.type){
+    const a=r.auth;
+    const ar=[];
+    ar.push([t('sd.detAuthType'), esc(a.type)]);
+    if(a.type==='basic'||a.type==='digest'){
+      ar.push([t('sd.detAuthUser'), esc(a.username||'')]);
+      ar.push([t('sd.detAuthPass'), a.password?('<span class="muted">'+('*'.repeat(Math.min((a.password||'').length||6,12)))+'</span>'):'-']);
+    }else if(a.type==='jwt'){
+      ar.push([t('sd.detAuthToken'), a.token?('<code class="tiny">'+esc(a.token.slice(0,20))+(a.token.length>20?'…':'')+'</code>'):'-']);
+    }else if(a.type==='token'){
+      ar.push([t('sd.detAuthHeader'), esc(a.header||'Authorization')]);
+      ar.push([t('sd.detAuthValue'), a.value?('<code class="tiny">'+esc(a.value.slice(0,20))+(a.value.length>20?'…':'')+'</code>'):'-']);
+    }else if(a.type==='cookie'){
+      ar.push([t('sd.detAuthCookie'), a.cookies?('<code class="tiny">'+esc(a.cookies.slice(0,40))+(a.cookies.length>40?'…':'')+'</code>'):'-']);
+    }else if(a.type==='header'&&a.headers){
+      ar.push([t('sd.detHeaders'), '<pre class="tiny" style="margin:0;white-space:pre-wrap">'+(Array.isArray(a.headers)?a.headers.map(esc).join('\n'):esc(String(a.headers)))+'</pre>']);
+    }
+    authBlock='<h4 style="margin:10px 0 4px">'+t('sd.detAuth')+' · '+esc(a.type)+'</h4>'+detRowsHtml(ar);
+  }else{
+    authBlock='<h4 style="margin:10px 0 4px">'+t('sd.detAuth')+'</h4><div class="muted tiny">'+esc(t('auth.none'))+'</div>';
+  }
+  el.innerHTML='<div class="card" style="padding:12px">'+
+    '<h3 style="margin-top:0">'+t('sd.detMTitle')+' · #'+esc(task.id)+'</h3>'+
+    detRowsHtml(rows)+authBlock+
+    '</div>';
+}
+function detRowsHtml(rows){
+  return '<table class="det-tbl" style="width:100%;border-collapse:collapse"><tbody>'+
+    rows.map(function(rw){return '<tr><th style="text-align:right;padding:3px 10px 3px 0;width:140px;vertical-align:top;color:var(--muted);white-space:nowrap">'+rw[0]+'</th><td style="padding:3px 0;word-break:break-all">'+rw[1]+'</td></tr>';}).join('')+
     '</tbody></table>';
 }
 

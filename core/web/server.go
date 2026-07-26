@@ -11,6 +11,7 @@ package web
 import (
 	"context"
 	"crypto/rand"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -69,6 +70,10 @@ type scanTask struct {
 
 	vulns []*model.WebVuln
 	pages []map[string]any
+
+	// req 保存本次扫描的请求配置(目标/爬虫模式/鉴权/插件/范围等),供扫描详情
+	// 的「任务详情」模态框展示。值类型,直接拷贝即可。
+	req scanRequest
 
 	dispatcher *ctrl.Dispatcher
 	cancel     context.CancelFunc
@@ -141,6 +146,7 @@ func (t *scanTask) toFrontTaskDetail() map[string]any {
 		"startedAt": started,
 		"progress":  t.progress,
 		"pages":     t.pages,
+		"req":       t.req,
 	}
 }
 
@@ -1056,9 +1062,9 @@ func (s *Server) handleCrawl(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, map[string]any{"error": "target is required"})
 		return
 	}
-	if !req.AutoScan {
-		req.AutoScan = true
-	}
+	// /api/crawl 的语义由前端 autoScan 字段决定:autoScan=false -> 仅爬取(只爬不扫);
+	// autoScan=true -> 爬取+扫描。前端「仅爬取」按钮传 autoScan:false,其余传 true。
+	// 之前无条件 req.AutoScan=true,导致「仅爬取」也触发了漏洞扫描。
 	if req.CrawlerMode == "" {
 		req.CrawlerMode = "static"
 	}
@@ -1115,15 +1121,25 @@ func (s *Server) startScan(req scanRequest) string {
 		cfg.HTTP.WroteBack()
 	}
 
+	// UI 鉴权 → 注入到本次扫描的 HTTP 配置。
+	// 与 CLI 入口(entry.go)的 basic-auth 注入同构:basic/digest 写入
+	// cfg.Crawler.BasicAuth + Authorization 头;token/cookie/header/jwt 直接
+	// 作为默认头注入。爬虫与扫描器共用 cfg.HTTP,故两者一并生效。
+	applyScanAuth(cfg, req.Auth)
+
 	// plugin selection: empty/nil => keep config defaults; otherwise enable only
 	// the named plugins and disable the rest.
 	if len(req.Plugins) > 0 {
 		applyPluginSelection(cfg, req.Plugins)
 	}
 
-	taskType := "crawl"
-	if req.CrawlerMode == "static" && req.Method != "" && req.Data != nil {
-		taskType = "scan"
+	taskType := "scan"
+	if req.AutoScan {
+		// autoScan=true -> 爬取+扫描(「爬取+扫描」按钮)
+		taskType = "crawl"
+	} else {
+		// autoScan=false -> 仅爬取(「仅爬取」按钮),只爬不扫
+		taskType = "crawlonly"
 	}
 
 	t := &scanTask{
@@ -1134,6 +1150,7 @@ func (s *Server) startScan(req scanRequest) string {
 		status:    statusCreated,
 		startedAt: time.Now(),
 		runDone:   make(chan struct{}),
+		req:       req,
 	}
 	s.mgr.add(t)
 
@@ -1185,6 +1202,12 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 			MaxDepth:        maxDepth,
 			MaxCountOfURLs:  maxVisit,
 			Restrictions:    cfg.Crawler.Restriction,
+			AuthConfig: crawler.AuthConfig{
+				BasicAuth: &crawler.BasicAuth{
+					Username: cfg.Crawler.BasicAuth.Username,
+					Password: cfg.Crawler.BasicAuth.Password,
+				},
+			},
 		})
 	default: // static / basic
 		maxDepth := req.MaxDepth
@@ -1198,6 +1221,12 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 			MaxDepth:             maxDepth,
 			Restrictions:         cfg.Crawler.Restriction,
 			AllowVisitParentPath: cfg.Crawler.BasicCrawler.AllowVisitParentPath,
+			AuthConfig: crawler.AuthConfig{
+				BasicAuth: &crawler.BasicAuth{
+					Username: cfg.Crawler.BasicAuth.Username,
+					Password: cfg.Crawler.BasicAuth.Password,
+				},
+			},
 		})
 	}
 
@@ -1485,6 +1514,78 @@ func splitHeader(h string) (string, string, bool) {
 		return "", "", false
 	}
 	return strings.TrimSpace(h[:idx]), strings.TrimSpace(h[idx+1:]), true
+}
+
+// applyScanAuth 把 WebUI 鉴权(前端 collectAuthFromModal 的 {type,...})注入到
+// 单次扫描任务的配置克隆。爬虫与扫描器共用同一份 cfg.HTTP,所以一处注入、爬取
+// 与扫描都带上鉴权。与 CLI 入口 entry.go 的 basic-auth 注入保持同构,避免
+// 「目标配了 Basic 认证但爬取/扫描没生效」。
+func applyScanAuth(cfg *entry.CliEntryConfig, auth map[string]any) {
+	if len(auth) == 0 {
+		return
+	}
+	typ, _ := auth["type"].(string)
+	if typ == "" {
+		return
+	}
+	if cfg.HTTP.DefaultHeaders == nil {
+		cfg.HTTP.DefaultHeaders = map[string]string{}
+	}
+	setHeader := func(k, v string) {
+		if v == "" {
+			return
+		}
+		cfg.HTTP.DefaultHeaders[k] = v
+		if cfg.HTTP.Headers == nil {
+			cfg.HTTP.Headers = map[string][]string{}
+		}
+		cfg.HTTP.Headers[k] = []string{v}
+	}
+	switch typ {
+	case "basic", "digest":
+		user, _ := auth["username"].(string)
+		pass, _ := auth["password"].(string)
+		if user == "" {
+			return
+		}
+		cfg.Crawler.BasicAuth.Username = user
+		cfg.Crawler.BasicAuth.Password = pass
+		if typ == "basic" {
+			if _, has := cfg.HTTP.DefaultHeaders["Authorization"]; !has {
+				creds := base64.StdEncoding.EncodeToString([]byte(user + ":" + pass))
+				setHeader("Authorization", "Basic "+creds)
+			}
+		}
+	case "jwt":
+		tok, _ := auth["token"].(string)
+		if tok != "" {
+			setHeader("Authorization", "Bearer "+tok)
+		}
+	case "token":
+		header, _ := auth["header"].(string)
+		val, _ := auth["value"].(string)
+		if header == "" {
+			header = "Authorization"
+		}
+		setHeader(header, val)
+	case "cookie":
+		cookie, _ := auth["cookies"].(string)
+		setHeader("Cookie", cookie)
+	case "header":
+		// headers: ["Name: value", ...]
+		if raw, ok := auth["headers"].([]any); ok {
+			for _, h := range raw {
+				s, _ := h.(string)
+				k, v, ok := splitHeader(s)
+				if ok {
+					setHeader(k, v)
+				}
+			}
+		}
+	}
+	if cfg.HTTP.DefaultHeaders != nil {
+		cfg.HTTP.WroteBack()
+	}
 }
 
 func newID() string {

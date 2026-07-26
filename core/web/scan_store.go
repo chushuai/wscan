@@ -42,6 +42,7 @@ type scanRecord struct {
 	Vulns     []*model.WebVuln `json:"vulns"`
 	Pages     []map[string]any `json:"pages,omitempty"`
 	Progress  map[string]any   `json:"progress,omitempty"`
+	Req       map[string]any   `json:"req,omitempty"`
 }
 
 // scansLocked populates scanCache from disk on first use. Caller holds scanMu.
@@ -145,6 +146,30 @@ func (m *taskManager) rehydrateScans() {
 			pages:     r.Pages,
 			runDone:   make(chan struct{}),
 		}
+		if r.Req != nil {
+			t.req = scanRequest{
+				Target:          strVal(r.Req["target"]),
+				CrawlerMode:     strVal(r.Req["crawlerMode"]),
+				MaxPages:        intVal(r.Req["maxPages"]),
+				MaxDepth:        intVal(r.Req["maxDepth"]),
+				Concurrency:     intVal(r.Req["concurrency"]),
+				Plugins:         strSlice(r.Req["plugins"]),
+				Auth:            mapVal(r.Req["auth"]),
+				Method:          strVal(r.Req["method"]),
+				Headers:         strSlice(r.Req["headers"]),
+				IncludePatterns: strSlice(r.Req["includePatterns"]),
+				ExcludePatterns: strSlice(r.Req["excludePatterns"]),
+				ProxyURL:        strVal(r.Req["proxyUrl"]),
+				NoProxy:         boolVal(r.Req["noProxy"]),
+				AutoScan:        boolVal(r.Req["autoScan"]),
+				Lab:             strVal(r.Req["lab"]),
+			}
+			if d, ok := r.Req["data"]; ok {
+				if s, ok := d.(string); ok {
+					t.req.Data = &s
+				}
+			}
+		}
 		// mark runDone as already closed — these tasks are terminal.
 		close(t.runDone)
 		m.tasks[r.ID] = t
@@ -156,7 +181,7 @@ func (m *taskManager) rehydrateScans() {
 func (t *scanTask) toRecord() scanRecord {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	return scanRecord{
+	rec := scanRecord{
 		ID:        t.id,
 		Name:      t.name,
 		Target:    t.target,
@@ -169,4 +194,66 @@ func (t *scanTask) toRecord() scanRecord {
 		Pages:     t.pages,
 		Progress:  t.progress,
 	}
+	// 把 scanRequest 序列化成 map,落到记录里(过滤掉敏感原文后由前端展示)。
+	if b, err := json.Marshal(t.req); err == nil {
+		var m map[string]any
+		if err := json.Unmarshal(b, &m); err == nil {
+			rec.Req = m
+		}
+	}
+	return rec
+}
+
+// 以下 helper 仅供 rehydrateScans 从持久化的 map[string]any 还原 scanRequest 用。
+func strVal(v any) string {
+	if v == nil {
+		return ""
+	}
+	if s, ok := v.(string); ok {
+		return s
+	}
+	return ""
+}
+
+func intVal(v any) int {
+	switch n := v.(type) {
+	case float64:
+		return int(n)
+	case int:
+		return n
+	case int64:
+		return int(n)
+	}
+	return 0
+}
+
+func boolVal(v any) bool {
+	if b, ok := v.(bool); ok {
+		return b
+	}
+	return false
+}
+
+func strSlice(v any) []string {
+	arr, ok := v.([]any)
+	if !ok {
+		return nil
+	}
+	out := make([]string, 0, len(arr))
+	for _, e := range arr {
+		if s, ok := e.(string); ok {
+			out = append(out, s)
+		}
+	}
+	if len(out) == 0 {
+		return nil
+	}
+	return out
+}
+
+func mapVal(v any) map[string]any {
+	if m, ok := v.(map[string]any); ok {
+		return m
+	}
+	return nil
 }

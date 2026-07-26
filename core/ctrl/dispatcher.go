@@ -343,17 +343,19 @@ func (d *Dispatcher) publishToNode(b resource.Resource) {
 		d.evBus.Publish("javascript", b)
 		return
 	}
-	if u.Path == "" || strings.HasSuffix(u.Path, "/") {
-		if d.requestFilter.TargetURL(req.URL()).IsNewWebsiteDir() != nil {
-			log.Infof("publishToNode web-directory: %s", req.URL().String())
-			d.evBus.Publish("web-directory", b)
+	if u.RawQuery == "" && u.Fragment == "" {
+		if u.Path == "" || strings.HasSuffix(u.Path, "/") {
+			if d.requestFilter.TargetURL(req.URL()).IsNewWebsiteDir() != nil {
+				log.Infof("publishToNode web-directory: %s", req.URL().String())
+				d.evBus.Publish("web-directory", b)
+			}
 		}
-	}
-	// website 仅在网站纯根路径（无查询参数、无Fragment）时触发
-	// 避免 http://example.com/?a=b 或 http://example.com/#a 误触发
-	if (u.Path == "" || u.Path == "/") && u.RawQuery == "" && u.Fragment == "" {
-		if d.requestFilter.TargetURL(req.URL()).IsNewWebsite() != nil {
-			d.evBus.Publish("website", b)
+		// website 仅在网站纯根路径（无查询参数、无Fragment）时触发
+		// 避免 http://example.com/?a=b 或 http://example.com/#a 误触发
+		if u.Path == "" || u.Path == "/" {
+			if d.requestFilter.TargetURL(req.URL()).IsNewWebsite() != nil {
+				d.evBus.Publish("website", b)
+			}
 		}
 	}
 

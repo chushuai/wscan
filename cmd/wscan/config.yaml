@@ -85,7 +85,7 @@ crawler:
         allow_visit_parent_path: false
     browser-crawler:
         exec_path: ""
-        disable_headless: false
+        disable_headless: true
         force_sandbox: false
         enable_image: false
         disallowedresourcetype: []

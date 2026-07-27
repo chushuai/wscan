@@ -3,8 +3,7 @@
 * @Date: 7/25/2026
 *
 * WebUI: an HTTP server that exposes a REST API + embedded SPA for managing
-* WScan crawl/scan tasks in a browser. Modeled on the AWVS runtime web UI but
-* backed by WScan's own collector + dispatcher.
+* WScan crawl/scan tasks in a browser. backed by WScan's own collector + dispatcher.
  */
 package web
 
@@ -813,7 +812,7 @@ func (s *Server) handleTask(w http.ResponseWriter, r *http.Request) {
 }
 
 // handleTaskVulns supports flat + grouped pagination + typeId filtering, mirroring
-// the AWVS runtime's /api/task/:id/vulns contract that the SPA relies on.
+// the Wscan runtime's /api/task/:id/vulns contract that the SPA relies on.
 func (s *Server) handleTaskVulns(w http.ResponseWriter, r *http.Request, t *scanTask) {
 	q := r.URL.Query()
 	page := atoiDefault(q.Get("page"), 0)
@@ -1267,10 +1266,20 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 	// flow's full response (the *http.Flow carries headers+body that the later
 	// model.CrawlerResult lacks). When the engine is unavailable (nil) we skip
 	// the tee and pass taskChan straight through.
+	//
+	// The tee must NOT react to ctx cancellation: runScan returns right after
+	// launching the completion watcher, so its defer cancel() fires almost
+	// immediately. The collector ignores that cancel (it runs on its own
+	// goroutines and only closes its out-channel when the crawl finishes), so
+	// the tee must do the same — drive purely off the source channel closing.
+	// An earlier version had a `case <-ctx.Done(): return` here, which exited
+	// the tee at once, closed dispChan, made disp.Run finish before any flow
+	// arrived, and starved the collector's `out <- flow` — losing every page
+	// (URL results went empty in dynamic crawl-only mode).
 	dispChan := taskChan
 	if s.fpEngine != nil {
 		dispChan = make(chan resource.Resource, cap(taskChan))
-		go s.fingerprintTee(ctx, taskChan, dispChan, t)
+		go s.fingerprintTee(taskChan, dispChan, t)
 	}
 
 	multi := printer.NewMultiPrinter()
@@ -1561,25 +1570,19 @@ func countDistinctPages(pages []fingerprint.AggPage) int {
 // the flow to dst for the dispatcher to consume unchanged. Closes dst when src
 // is drained. The flow's Response is read-only here; the dispatcher only
 // deep-clones the Request, so there's no write race on the Response.
-func (s *Server) fingerprintTee(ctx context.Context, src, dst chan resource.Resource, t *scanTask) {
+//
+// Driven purely by src closing — deliberately NOT watching ctx: runScan's
+// deferred cancel() fires as soon as it returns, but the collector and this
+// goroutine are meant to keep streaming until the crawl completes (the
+// collector closes its out-channel then). Watching ctx here would tear the
+// pipeline down prematurely and starve the collector.
+func (s *Server) fingerprintTee(src, dst chan resource.Resource, t *scanTask) {
 	defer close(dst)
-	for {
-		select {
-		case <-ctx.Done():
-			return
-		case res, ok := <-src:
-			if !ok {
-				return
-			}
-			if flow, ok := res.(*whttp.Flow); ok && flow.Response != nil {
-				s.analyzePage(t, flow)
-			}
-			select {
-			case dst <- res:
-			case <-ctx.Done():
-				return
-			}
+	for res := range src {
+		if flow, ok := res.(*whttp.Flow); ok && flow.Response != nil {
+			s.analyzePage(t, flow)
 		}
+		dst <- res
 	}
 }
 

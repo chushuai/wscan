@@ -1,3 +1,9 @@
+# 1.0.56  2026-07-27
+## SUPPORT
+* 【1】AI 自动渗透 `claudecode` worker 实现真正的 claude CLI 编排循环:每轮 headless 调本机 `claude -p --output-format json`(禁用 claude 自带工具、只产出工具调用意图 JSON),把黑板快照(origin/goal/facts/urls/已知漏洞)注入 prompt,我们在本进程执行真实 wscan 工具,emit `tool_call`/`tool_done`/`llm_turn`(补 `model`/`round` 字段)事件,结果回写黑板循环至目标达成(最多 8 轮)。修复此前 `claudecode` 从未真正调用 claude CLI、三种 worker 共用同一套写死 OODA 流程、对话 tab 的 "crawl + tech fingerprint" 为硬编码假事件、`tool_call`/`tool_done` 事件前端已实现却后端零 emit 的问题;claude CLI 不可用或失败时优雅回退到原 OODA。
+* 【2】AI 自动渗透 crawl→scan 解耦,flow 复用不重爬:`aiProject` 黑板新增运行时 `flows` 缓存(`*http.Flow`,不落盘),`wscan_crawl` 爬取时 tee 捕获 flow 入板,后续 `wscan_scan`/`wscan_run_plugin` 优先吃缓存 flow 走新增的 `runDispatcherForFlows`(从 flow 列表直接喂 dispatcher,绕开 collector 爬取阶段),缓存空才回退自爬。并修复静态爬虫 `MaxDepth` 零值导致只抓首页、`aiScanSync` 忽略 `intent` 参数永远全插件全扫的问题(新增 `pluginsFromIntent` 从意图文本解析插件名传 `Plugins` 白名单)。
+* 【3】AI 自动渗透新增 5 个可被 claude 调用的 wscan 工具执行器(`wscan_crawl`/`wscan_scan`/`wscan_run_plugin`/`wscan_list_plugins`/`http`),统一签名,产出的漏洞标 `provenance:"ai-tool"` 经 vulndb 富化;补 flow 缓存去重、工具注册表、claude 意图 JSON 解析(裸 JSON/markdown 代码块/带解释/空/无 JSON)、intent→插件解析、工具范围校验等单测。
+
 # 1.0.55  2026-07-27
 ## SUPPORT
 * 【1】WebUI 扫描详情页新增「任务详情」tab:展示本次扫描的请求配置(目标/类型/状态/开始时间/耗时/爬虫模式/最大页数/最大深度/并发/自动扫描/插件/自定义请求头/包含·排除路径/代理/靶场/种子方法·请求体/鉴权)。`scanTask` 新增 `req scanRequest` 字段并在 `startScan` 赋值,`toFrontTaskDetail` 把 `req` 一并返回;`scanRecord` 新增 `Req` 字段持久化,`rehydrateScans` 用 helper(`strVal/intVal/boolVal/strSlice/mapVal`)还原 `scanRequest`,重启后历史任务也能看配置。密码字段以星号脱敏,token/cookie/长值截断显示。

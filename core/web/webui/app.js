@@ -33,7 +33,6 @@ const I18N = {
   'nav.aiPentest': ['AI 自动渗透', 'AI Auto-Pentest'],
   'nav.reports': ['报告', 'Reports'],
   'nav.discovery': ['发现', 'Discovery'],
-  'nav.technologies': ['技术识别', 'Technologies'],
   'nav.users': ['用户', 'Users'],
   'nav.profiles': ['扫描配置', 'Profiles'],
   'nav.config': ['全局配置', 'Config'],
@@ -362,9 +361,6 @@ const I18N = {
   'dc.thExc': ['Exclude', 'Exclude'],
   'dc.empty': ['暂无目标。范围在「目标」页随目标一起配置。', 'No targets. Scope is configured with each target on the Targets page.'],
   // --- technologies ---
-  'tech.title': ['技术识别', 'Technologies'],
-  'tech.desc': ['wappalyzer 指纹:识别目标站点技术栈与版本 (Server/X-Powered-By/JS库/DOM 等) · 跨所有扫描任务聚合', 'wappalyzer fingerprints: detect target tech stack & versions (Server/X-Powered-By/JS libs/DOM etc.) · aggregated across all scans'],
-  'tech.allTasks': ['全部任务', 'All tasks'],
   'tech.thTech': ['技术', 'Technology'],
   'tech.thVer': ['版本', 'Version'],
   'tech.thConf': ['置信度', 'Confidence'],
@@ -374,7 +370,6 @@ const I18N = {
   'tech.stat': ['共 ', 'Total '],
   'tech.stat2': [' 项技术 · 覆盖 ', ' technologies · covering '],
   'tech.stat3': [' 个页面', ' pages'],
-  'tech.empty': ['暂无识别结果。先运行一次爬取/扫描任务 (动态模式)。', 'No results yet. Run a crawl/scan task first (dynamic mode).'],
   'tech.emptyDetail': ['暂无识别结果。爬取完成后此处会展示 wappalyzer 检出的技术栈与版本。', 'No results. After crawling, wappalyzer-detected tech stack & versions appear here.'],
   'tech.loadFail': ['技术识别加载失败', 'Failed to load technologies'],
   'tech.descSource': [' · 数据来自 wappalyzer 指纹( Server/X-Powered-By 头 + &lt;script src&gt; 文件名 + 浏览器 window 属性链/DOM )', ' · data from wappalyzer fingerprints (Server/X-Powered-By headers + &lt;script src&gt; filenames + browser window prop chain/DOM)'],
@@ -518,7 +513,7 @@ const I18N = {
   'email.secureNone': ['无 / STARTTLS(587)', 'None / STARTTLS (587)'],
   'email.secureTls': ['隐式 TLS(465)', 'Implicit TLS (465)'],
   'email.from': ['发件人', 'From'],
-  'email.fromPh': ['awvs@example.com 或 名称 <a@b.c>', 'awvs@example.com or Name <a@b.c>'],
+  'email.fromPh': ['wscan@example.com 或 名称 <a@b.c>', 'wscan@example.com or Name <a@b.c>'],
   'email.user': ['用户名 (可选)', 'Username (optional)'],
   'email.userPh': ['SMTP 登录账号', 'SMTP login account'],
   'email.pass': ['密码 (可选)', 'Password (optional)'],
@@ -945,7 +940,6 @@ const NAV=[
   {id:'ai-pentest',ic:'bot',lbl:'nav.aiPentest'},
   {id:'reports',ic:'file-text',lbl:'nav.reports'},
   {id:'discovery',ic:'globe',lbl:'nav.discovery'},
-  {id:'technologies',ic:'network',lbl:'nav.technologies'},
   {id:'users',ic:'user',lbl:'nav.users'},
   {id:'profiles',ic:'crosshair',lbl:'nav.profiles'},
   {id:'config',ic:'settings',lbl:'nav.config'},
@@ -976,7 +970,7 @@ function router(){
     labs:renderLabs, vulnerabilities:renderVulnsAgg,
     scans:parts[1]?()=>renderScanDetail(parts[1]):renderScans,
     'ai-pentest':parts[1]?()=>renderAIDetail(parts[1]):renderAIPentest,
-    reports:renderReports, discovery:renderDiscovery, profiles:renderProfiles, technologies:renderTechnologies,
+    reports:renderReports, discovery:renderDiscovery, profiles:renderProfiles,
     users:()=>renderStub(t('usr.title'),t('usr.blurb'),t('usr.hint')),
     config:renderConfig,
   };
@@ -1931,7 +1925,7 @@ function vulnDetail(v){
   s+='</div>';return s;
 }
 // ---- Mustache renderer (zero-dep) for vuln details_template ----------------
-// AWVS details_template is a Mustache template that produces HTML from
+// Wscan details_template is a Mustache template that produces HTML from
 // scan-result fields, e.g. the XSS template:
 //   {{#repro}}<div class="bb-coolbox"><span class="bb-dark">{{.}}</span></div><br/>{{/repro}}
 //   {{#uri}}URI was set to <strong>{{uri}}</strong>{{/uri}}
@@ -1983,7 +1977,7 @@ function mustacheRender(nodes,scopes){
   }
   return out;
 }
-// Build the details_template render context from a vuln record. Maps AWVS
+// Build the details_template render context from a vuln record. Maps Wscan
 // template variables onto the fields our scan records actually carry. Fields
 // we don't have (reflection_point/extra_details/test_result/test_calculation)
 // are simply omitted — their {{#section}} blocks then render empty (Mustache
@@ -2027,7 +2021,7 @@ function renderDetailsTemplate(v){
   if(!v||!v.details_template) return '';
   try {
     const nodes=mustacheParse(v.details_template);
-    // AWVS renders details_template with the vuln's `details` field AS the root
+    // renders details_template with the vuln's `details` field AS the root
     // context. Three shapes occur in practice:
     //  (a) a structured array the template iterates directly — e.g.
     //      cookie_misconfiguration.xml stores
@@ -2061,7 +2055,7 @@ function renderDetailsTemplate(v){
   catch(e){ return ''; }
 }
 // escape for HTML + collapse \n / <br/> into line breaks (DB descriptions carry
-// <br/> tags from AWVS). Keep <br/> as a real break, escape everything else.
+// <br/> ). Keep <br/> as a real break, escape everything else.
 function escBr(str){
   return esc(str).replace(/&lt;br\/?&gt;/gi,'<br>').replace(/\n/g,'<br>');
 }
@@ -2299,23 +2293,8 @@ async function renderDiscovery(){
 }
 
 // ===== Technologies (wappalyzer fingerprint aggregation) =====
-let _techFilterTask='';
-async function renderTechnologies(){
-  $('view').innerHTML=pageHead(t('tech.title'),t('tech.desc'),'<select id="techFilt" class="sec" style="padding:6px"></select> <button class="sec" onclick="renderTechnologies()">'+t('c.refresh')+'</button>')
-    +'<div class="card"><div id="techStats" class="muted tiny" style="margin-bottom:8px"></div><table><thead><tr><th>'+t('tech.thTech')+'</th><th>'+t('tech.thVer')+'</th><th>'+t('tech.thConf')+'</th><th>'+t('tech.thCat')+'</th><th>'+t('tech.thHits')+'</th><th>'+t('tech.thSample')+'</th></tr></thead><tbody id="techBody"></tbody></table></div>';
-  const ts=await api('/api/tasks');
-  let opts='<option value="">'+t('tech.allTasks')+'</option>'+ts.map(t=>'<option value="'+t.id+'"'+(_techFilterTask==String(t.id)?' selected':'')+'>#'+t.id+' '+esc(t.target||'')+'</option>').join('');
-  $('techFilt').innerHTML=opts;
-  $('techFilt').onchange=()=>{ _techFilterTask=$('techFilt').value; renderTechnologies(); };
-  const url='/api/technologies'+(_techFilterTask?('?taskId='+_techFilterTask):'');
-  let data={technologies:[],count:0}; try{ data=await api(url); }catch(e){}
-  $('techStats').textContent=t('tech.stat')+data.technologies.length+t('tech.stat2')+data.count+t('tech.stat3');
-  $('techBody').innerHTML=data.technologies.length?data.technologies.map(t=>
-    '<tr><td><b>'+esc(t.name)+'</b></td><td>'+(t.version?'<code>'+esc(t.version)+'</code>':'<span class="muted">-</span>')+'</td>'
-    +'<td>'+t.confidence+'%</td><td class="tiny">'+esc((t.categories||[]).map(c=>c.name).join(', '))+'</td>'
-    +'<td>'+t.hits+'</td><td class="tiny url">'+esc((t.sampleUrls||[]).join(' '))+'</td></tr>'
-  ).join(''):empty(t('tech.empty'));
-}
+// 仅在扫描详情的 tech pane (renderTech/drawTech) 展示;独立的「技术识别」菜单页已移除。
+// /api/technologies?taskId= 仍提供数据。
 
 
 // ===== Labs (preset + custom) =====

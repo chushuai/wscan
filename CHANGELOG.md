@@ -1,3 +1,7 @@
+# 1.0.57  2026-07-28
+## BUGFIX
+* 【1】修复 WebUI 重启后扫描任务列表不按开始时间倒序展示(最旧在前)的问题:`rehydrateScans` 误把持久化记录按 `StartedAt.After` 排序后正序 append 进 `m.order`,而 `taskManager.list()` 倒序遍历 `m.order` 产出最新在前 —— 二者叠加使重启恢复的任务变成「最旧在前」。改为按 `StartedAt.Before` 升序 append,与 `startScan` 的 `add()` 语义一致,`list()` 倒序遍历后恢复最新在前。
+
 # 1.0.56  2026-07-27
 ## SUPPORT
 * 【1】WebUI 新增「技术识别」(wappalyzer 指纹)功能:新增 `core/fingerprint` 包移植 wappalyzer 静态信号引擎(加载嵌入的 `technologies.json` 签名库,对 url/headers/html/cookies/scripts/meta 做正则匹配,经 implies/excludes 解析、按 confidence 聚合),实现前端早已调用但后端缺失的 `/api/technologies?taskId=` 接口,返回 `{technologies:[{name,version,confidence,categories,hits,sampleUrls}],count}`;`runScan` 用 tee goroutine 在 collector 输出与 dispatcher 之间旁路捕获每个 `*http.Flow` 的完整响应(头/体/cookie/script src/meta)跑指纹,结果存入 `scanTask.techPages`;`scanRecord` 新增 `TechPages` 持久化,重启后历史任务的技术识别结果仍可展示。前端「技术识别」页面与扫描详情 tech pane 现可直接渲染技术栈与版本。

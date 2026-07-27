@@ -124,10 +124,17 @@ func unpersistScan(id string) {
 // /api/tasks, /api/vulnerabilities and per-task detail keep working after a
 // restart. Only the persisted (terminal) tasks come back; running tasks from a
 // previous process are lost by design.
+//
+// Records are appended into m.order in oldest-first order (matching startScan's
+// add()), so taskManager.list()'s newest-first reverse traversal keeps working.
 func (m *taskManager) rehydrateScans() {
 	records := loadScanRecords()
-	// newest-first: records on disk are append-order (oldest first), so reverse.
-	sort.Slice(records, func(i, j int) bool { return records[i].StartedAt.After(records[j].StartedAt) })
+	// 按开始时间升序(最旧在前)append 进 m.order,与 startScan 的 add() 保持一致:
+	// taskManager.list() 倒序遍历 m.order(最新在前),所以 order 必须是正序。
+	// 磁盘是 append 顺序(最旧在前),这里先按时间稳定排序兜底(防止落盘顺序被
+	// upsert 打乱),再正序 append —— 之前误把排序结果当倒序、又叠加 list() 的
+	// 倒序遍历,导致重启后任务列表变成「最旧在前」。
+	sort.Slice(records, func(i, j int) bool { return records[i].StartedAt.Before(records[j].StartedAt) })
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	for _, r := range records {

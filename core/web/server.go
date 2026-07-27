@@ -29,11 +29,14 @@ import (
 	"wscan/core/crawler"
 	"wscan/core/ctrl"
 	"wscan/core/entry"
+	"wscan/core/fingerprint"
+	whttp "wscan/core/http"
 	"wscan/core/model"
 	"wscan/core/output"
 	"wscan/core/plugins"
 	"wscan/core/plugins/base"
 	"wscan/core/plugins/vulndb"
+	"wscan/core/resource"
 	"wscan/core/reverse"
 
 	logger "wscan/core/utils/log"
@@ -70,6 +73,11 @@ type scanTask struct {
 
 	vulns []*model.WebVuln
 	pages []map[string]any
+	// techPages holds each crawled page's detected wappalyzer technologies, fed
+	// into /api/technologies for the "技术识别" view. Populated by the tee
+	// goroutine in runScan from the live *http.Flow (which carries the full
+	// response, unlike the model.CrawlerResult the printer sees).
+	techPages []fingerprint.AggPage
 
 	// req 保存本次扫描的请求配置(目标/爬虫模式/鉴权/插件/范围等),供扫描详情
 	// 的「任务详情」模态框展示。值类型,直接拷贝即可。
@@ -300,6 +308,10 @@ type Server struct {
 	mgr     *taskManager
 	plugins []pluginEntry
 	labs    *labManager
+	// fpEngine is the wappalyzer signature engine powering /api/technologies.
+	// nil if the embedded DB failed to load (fingerprinting degrades to "no
+	// techs detected" without breaking scans).
+	fpEngine *fingerprint.Engine
 }
 
 type pluginEntry struct {
@@ -324,6 +336,15 @@ func StartWebUIServer(c *cli.Context) error {
 	srv.mgr.rehydrateScans()
 	srv.labs = newLabManager(srv)
 	srv.plugins = buildPluginCatalog()
+
+	// Load the wappalyzer signature engine once. A failure here is logged but
+	// non-fatal: scans keep running, /api/technologies just returns empty.
+	if eng, err := fingerprint.DefaultEngine(); err != nil {
+		logger.Errorf("fingerprint engine load failed: %v (technologies view disabled)", err)
+	} else {
+		srv.fpEngine = eng
+		logger.Printf("fingerprint engine loaded: %d technologies", eng.Count())
+	}
 
 	addr := fmt.Sprintf("%s:%d", c.String("webui-host"), c.Int("webui-port"))
 	mux := http.NewServeMux()
@@ -374,6 +395,7 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/proxy", s.handleProxy)
 	mux.HandleFunc("/api/proxy/test", s.handleProxyTest)
 	mux.HandleFunc("/api/vulnerabilities", s.handleVulnerabilities)
+	mux.HandleFunc("/api/technologies", s.handleTechnologies)
 	mux.HandleFunc("/api/targets", s.handleTargets)
 	mux.HandleFunc("/api/targets/", s.handleTarget)
 	mux.HandleFunc("/api/targets/bulk", s.handleTargetsBulk)
@@ -1240,6 +1262,17 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 		return
 	}
 
+	// Tee the collector's output so the dispatcher keeps consuming flows as-is
+	// while a side goroutine runs the wappalyzer fingerprint engine over each
+	// flow's full response (the *http.Flow carries headers+body that the later
+	// model.CrawlerResult lacks). When the engine is unavailable (nil) we skip
+	// the tee and pass taskChan straight through.
+	dispChan := taskChan
+	if s.fpEngine != nil {
+		dispChan = make(chan resource.Resource, cap(taskChan))
+		go s.fingerprintTee(ctx, taskChan, dispChan, t)
+	}
+
 	multi := printer.NewMultiPrinter()
 	multi.AddPrinters([]printer.Printer{&webPrinter{task: t}, output.NewStdoutPrinter()})
 
@@ -1251,7 +1284,7 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 
 	// completion watcher: emit done/error when the dispatcher finishes.
 	go func() {
-		disp.Run(taskChan, !req.AutoScan)
+		disp.Run(dispChan, !req.AutoScan)
 		disp.Release()
 		t.mu.Lock()
 		if t.status == statusRunning || t.status == "paused" {
@@ -1463,6 +1496,127 @@ func (s *Server) handleVulnerabilities(w http.ResponseWriter, r *http.Request) {
 		end = total
 	}
 	writeJSON(w, map[string]any{"items": filtered[start:end], "total": total, "page": page, "vulnTotal": total})
+}
+
+// ---- technologies (wappalyzer fingerprint aggregation) ----
+
+// handleTechnologies returns the aggregated wappalyzer tech stack for one task
+// (?taskId=N) or across all tasks (no query). The front-end "技术识别" view and
+// the scan-detail tech pane both call this. Output shape:
+//
+//	{ "technologies": [...AggTech], "count": <hit-page-count> }
+//
+// count = number of distinct pages that contributed a detection (matches the
+// front-end "覆盖 N 个页面" wording).
+func (s *Server) handleTechnologies(w http.ResponseWriter, r *http.Request) {
+	if s.fpEngine == nil {
+		writeJSON(w, map[string]any{"technologies": []any{}, "count": 0})
+		return
+	}
+	taskID := r.URL.Query().Get("taskId")
+	if taskID != "" {
+		t, ok := s.mgr.get(taskID)
+		if !ok {
+			writeJSON(w, map[string]any{"technologies": []any{}, "count": 0})
+			return
+		}
+		t.mu.RLock()
+		pages := append([]fingerprint.AggPage(nil), t.techPages...)
+		t.mu.RUnlock()
+		writeJSON(w, map[string]any{
+			"technologies": fingerprint.Aggregate(pages),
+			"count":        countDistinctPages(pages),
+		})
+		return
+	}
+	// no taskId: aggregate across every task (newest-first).
+	var all []fingerprint.AggPage
+	for _, t := range s.mgr.list() {
+		t.mu.RLock()
+		all = append(all, t.techPages...)
+		t.mu.RUnlock()
+	}
+	writeJSON(w, map[string]any{
+		"technologies": fingerprint.Aggregate(all),
+		"count":        countDistinctPages(all),
+	})
+}
+
+// countDistinctPages counts unique URLs among the AggPage slice. Empty URLs are
+// ignored. (Pages with no detected tech aren't stored in techPages, so len≈
+// unique URLs in practice.)
+func countDistinctPages(pages []fingerprint.AggPage) int {
+	seen := map[string]struct{}{}
+	for _, p := range pages {
+		if p.URL == "" {
+			continue
+		}
+		seen[p.URL] = struct{}{}
+	}
+	return len(seen)
+}
+
+// fingerprintTee reads each crawled flow from src, runs the wappalyzer engine
+// over its full response, records the detected techs on the task, then forwards
+// the flow to dst for the dispatcher to consume unchanged. Closes dst when src
+// is drained. The flow's Response is read-only here; the dispatcher only
+// deep-clones the Request, so there's no write race on the Response.
+func (s *Server) fingerprintTee(ctx context.Context, src, dst chan resource.Resource, t *scanTask) {
+	defer close(dst)
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case res, ok := <-src:
+			if !ok {
+				return
+			}
+			if flow, ok := res.(*whttp.Flow); ok && flow.Response != nil {
+				s.analyzePage(t, flow)
+			}
+			select {
+			case dst <- res:
+			case <-ctx.Done():
+				return
+			}
+		}
+	}
+}
+
+// analyzePage builds a PageInput from one flow's response, runs the wappalyzer
+// engine, and appends any detected technologies to the task's techPages.
+func (s *Server) analyzePage(t *scanTask, flow *whttp.Flow) {
+	resp := flow.Response
+	var urlStr string
+	if flow.Request != nil {
+		urlStr = flow.Request.URL().String()
+	}
+	htmlBytes := resp.GetRawBody()
+	if len(htmlBytes) == 0 {
+		if ub, err := resp.GetUTF8Body(); err == nil {
+			htmlBytes = ub
+		}
+	}
+	html := string(htmlBytes)
+	cookies := map[string]string{}
+	for _, c := range resp.Cookies() {
+		cookies[c.Name] = c.Value
+	}
+	in := fingerprint.PageInput{
+		URL:     urlStr,
+		Headers: resp.GetHeaderMap(),
+		HTML:    html,
+		Cookies: cookies,
+		Scripts: fingerprint.ExtractScriptSrcs(html, urlStr),
+		Meta:    fingerprint.ExtractMeta(html),
+	}
+	techs := s.fpEngine.AnalyzeStatic(in)
+	if len(techs) == 0 {
+		return
+	}
+	t.mu.Lock()
+	t.techPages = append(t.techPages, fingerprint.AggPage{URL: urlStr, Technologies: techs})
+	t.mu.Unlock()
 }
 
 // ---- report ----

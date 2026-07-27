@@ -17,6 +17,7 @@ import (
 	"sync"
 	"time"
 
+	"wscan/core/fingerprint"
 	"wscan/core/model"
 )
 
@@ -31,18 +32,19 @@ var (
 // scanRecord is the persisted shape of one completed scan: its front-facing
 // summary plus the raw vulns (re-projected on load).
 type scanRecord struct {
-	ID        string           `json:"id"`
-	Name      string           `json:"name"`
-	Target    string           `json:"target"`
-	TaskType  string           `json:"taskType"`
-	Status    string           `json:"status"`
-	ErrMsg    string           `json:"errMsg,omitempty"`
-	Crawled   int              `json:"crawled"`
-	StartedAt time.Time        `json:"startedAt"`
-	Vulns     []*model.WebVuln `json:"vulns"`
-	Pages     []map[string]any `json:"pages,omitempty"`
-	Progress  map[string]any   `json:"progress,omitempty"`
-	Req       map[string]any   `json:"req,omitempty"`
+	ID        string                `json:"id"`
+	Name      string                `json:"name"`
+	Target    string                `json:"target"`
+	TaskType  string                `json:"taskType"`
+	Status    string                `json:"status"`
+	ErrMsg    string                `json:"errMsg,omitempty"`
+	Crawled   int                   `json:"crawled"`
+	StartedAt time.Time             `json:"startedAt"`
+	Vulns     []*model.WebVuln      `json:"vulns"`
+	Pages     []map[string]any      `json:"pages,omitempty"`
+	Progress  map[string]any        `json:"progress,omitempty"`
+	Req       map[string]any        `json:"req,omitempty"`
+	TechPages []fingerprint.AggPage `json:"techPages,omitempty"`
 }
 
 // scansLocked populates scanCache from disk on first use. Caller holds scanMu.
@@ -144,6 +146,7 @@ func (m *taskManager) rehydrateScans() {
 			progress:  r.Progress,
 			vulns:     r.Vulns,
 			pages:     r.Pages,
+			techPages: r.TechPages,
 			runDone:   make(chan struct{}),
 		}
 		if r.Req != nil {
@@ -193,6 +196,7 @@ func (t *scanTask) toRecord() scanRecord {
 		Vulns:     t.vulns,
 		Pages:     t.pages,
 		Progress:  t.progress,
+		TechPages: t.techPages,
 	}
 	// 把 scanRequest 序列化成 map,落到记录里(过滤掉敏感原文后由前端展示)。
 	if b, err := json.Marshal(t.req); err == nil {

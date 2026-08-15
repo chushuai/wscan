@@ -202,4 +202,4 @@ expression: response.body.bcontains(bytes(substr(md5(string(r1)), 0, 31)))
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=chushuai/wscan,chaitin/xray,projectdiscovery/nuclei&type=Date)](https://star-history.com/#chushuai/wscan&chaitin/xray&projectdiscovery/nuclei&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=chushuai/wscan,chaitin/xray,projectdiscovery/nuclei&type=Date)](https://star-history.dera.page/#chushuai/wscan&chaitin/xray&projectdiscovery/nuclei&Date)

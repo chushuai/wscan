@@ -1,4 +1,3 @@
-// Package fingerprint is the Go port of awvs-go/internal/fingerprint (the
 // wappalyzer static-signal engine). It loads the bundled technologies.json
 // signature DB and matches a page's url/headers/html/cookies/scripts/meta
 // signals against it, the way wappalyzer's analyzeStatic does.
@@ -183,7 +182,7 @@ func (e *Engine) Count() int {
 }
 
 type rawDB struct {
-	Technologies map[string]rawTech `json:"technologies"`
+	Technologies map[string]rawTech  `json:"technologies"`
 	Categories   map[string]category `json:"categories"`
 }
 

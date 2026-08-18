@@ -1,3 +1,8 @@
+# 1.0.58  2026-07-28
+## SUPPORT
+* 【1】插件可复用 Web 技术识别门禁(TechGate):新增 `core/plugins/base/techgate.go`,封装 `core/fingerprint` wappalyzer 引擎(与 WebUI「技术识别」同源),对当前 `*http.Flow` 实时检测指定技术是否命中。导出 `base.HasTech(bi, flow, "PHP")`、`base.TechVersion`(返回版本)、`base.DetectTechs`(返回全栈)三个助手,任意插件在 `CheckAction` 内一行即可门禁。引擎单例 `fingerprint.DefaultEngine()` 全进程共享、惰性加载,加载失败或 flow 无响应时优雅降级为「不命中」而非 panic,不依赖 `fingerprint` CEL 插件是否启用、不受 KDB 累积顺序影响(规避 CEL 规则名 "PHP Detect" 与 wappalyzer 技术名 "PHP" 不一致及异步竞态)。
+* 【2】示例插件 `phpaudit`(`core/plugins/phpaudit`):演示 TechGate 用法 —— 仅当 `base.HasTech(bi, flow, "PHP")` 命中才执行,探测 PHP 专属信息泄露端点(`phpinfo.php`/`info.php`/`test.php`/`?phpinfo=1`/`phpcgi`/`.user.ini`/`.htaccess`),响应体经正则二次校验(phpinfo 页/INI 指令/CGI 状态签名)防误报,按 host+路径去重。非 PHP 目标零探测、零误报。已在 `plugins.All()` 注册,默认启用,`config.yaml` 可调 `check_paths`。补 `techgate`/`phpaudit` 单测(PHP/非 PHP/空响应三态门禁 + 真实 httptest 服务端门禁集成)。
+
 # 1.0.57  2026-07-28
 ## BUGFIX
 * 【1】修复 WebUI 重启后扫描任务列表不按开始时间倒序展示(最旧在前)的问题:`rehydrateScans` 误把持久化记录按 `StartedAt.After` 排序后正序 append 进 `m.order`,而 `taskManager.list()` 倒序遍历 `m.order` 产出最新在前 —— 二者叠加使重启恢复的任务变成「最旧在前」。改为按 `StartedAt.Before` 升序 append,与 `startScan` 的 `add()` 语义一致,`list()` 倒序遍历后恢复最新在前。

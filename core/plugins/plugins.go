@@ -21,6 +21,7 @@ import (
 	"wscan/core/plugins/jsonp"
 	"wscan/core/plugins/path_traversal"
 	"wscan/core/plugins/pathbrute"
+	"wscan/core/plugins/phpaudit"
 	"wscan/core/plugins/prometheus"
 	"wscan/core/plugins/redirect"
 	"wscan/core/plugins/sensitivefile"
@@ -95,6 +96,7 @@ func All() []base.Plugin {
 	//plugins = append(plugins, &tomcataudit.TomcatAudit{})
 	//plugins = append(plugins, &springaudit.SpringAudit{})
 	plugins = append(plugins, &jbossaudit.JBossAudit{})
+	plugins = append(plugins, &phpaudit.PHPAudit{})
 
 	return plugins
 }

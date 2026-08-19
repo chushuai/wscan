@@ -20,22 +20,12 @@ import (
 )
 
 // init 清除 martian init.go 用 flag.Int("v") 在 flag.CommandLine 上注册的 -v 标志。
-// urfave/cli 的 VersionFlag 也用 -v 别名,两者都向 flag.CommandLine 注册 "v" 会
-// 触发 "flag redefined: v" panic。core/collector 的 init 会重建 flag.CommandLine,
-// 但 collector 仅被部分包导入;main 包一定在所有被依赖包之后 init,在此兜底重建
-// 一次 flag.CommandLine,确保无论 import 链如何,-v 冲突都被抹掉。
-// setVersion 设置版本号
-func setVersion() {
-	utils.VersionInfo = "1.0.46"
-}
-
-// init 清除 martian init.go 用 flag.Int("v") 在 flag.CommandLine 上注册的 -v 标志。
 // urfave/cli 的 VersionFlag 也用 -v 别名，两者都向 flag.CommandLine 注册 "v" 会
 // 触发 "flag redefined: v" panic。core/collector 的 init 会重建 flag.CommandLine,
 // 但 collector 仅被部分包导入;main 包一定在所有被依赖包之后 init,在此兜底重建
 // 一次 flag.CommandLine，确保无论 import 链如何，-v 冲突都被抹掉。
 func init() {
-	setVersion()
+	utils.VersionInfo = "1.0.59"
 	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 }
 
@@ -228,7 +218,7 @@ func main() {
 	app := &cli.App{
 		Name:    "wscan",
 		Usage:   "A powerful scanner engine ",
-		Version: "1.0.46",
+		Version: utils.VersionInfo,
 		Authors: []*cli.Author{&author},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

@@ -2159,6 +2159,25 @@ func (s *Server) handleAiNotify(w http.ResponseWriter, r *http.Request) {
 		if cfg.Platform == "" {
 			cfg.Platform = platformFeishu
 		}
+		// 修复：当保存配置时，如果飞书应用模式的关键凭证为空，从现有配置中保留
+		// 避免前端提交空值覆盖扫码成功后获取的凭证
+		if cfg.Mode == "app" {
+			existing := getNotifyConfig()
+			if existing != nil && existing.Mode == "app" {
+				if cfg.FeishuAppId == "" && existing.FeishuAppId != "" {
+					cfg.FeishuAppId = existing.FeishuAppId
+				}
+				if cfg.FeishuAppSecret == "" && existing.FeishuAppSecret != "" {
+					cfg.FeishuAppSecret = existing.FeishuAppSecret
+				}
+				if cfg.FeishuOpenId == "" && existing.FeishuOpenId != "" {
+					cfg.FeishuOpenId = existing.FeishuOpenId
+				}
+				if !cfg.FeishuIsLark && existing.FeishuIsLark {
+					cfg.FeishuIsLark = existing.FeishuIsLark
+				}
+			}
+		}
 		if err := saveNotifyConfig(&cfg); err != nil {
 			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
 			return

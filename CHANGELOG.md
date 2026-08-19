@@ -1,3 +1,7 @@
+# 1.0.59  2026-07-29
+## BUGFIX
+* 【1】修复飞书扫码建机器人模式保存配置时凭证被前端空值覆盖的问题：当用户点击「保存」按钮时，如果提交的 `feishuAppId`/`feishuAppSecret`/`feishuOpenId` 等字段为空，会从现有配置中保留已获取的凭证，避免覆盖扫码成功后持久化的数据。同时修复 Lark 租户检测时会话状态未保存回映射的问题，确保后续轮询请求使用正确的域名。
+
 # 1.0.58  2026-07-28
 ## SUPPORT
 * 【1】插件可复用 Web 技术识别门禁(TechGate):新增 `core/plugins/base/techgate.go`,封装 `core/fingerprint` wappalyzer 引擎(与 WebUI「技术识别」同源),对当前 `*http.Flow` 实时检测指定技术是否命中。导出 `base.HasTech(bi, flow, "PHP")`、`base.TechVersion`(返回版本)、`base.DetectTechs`(返回全栈)三个助手,任意插件在 `CheckAction` 内一行即可门禁。引擎单例 `fingerprint.DefaultEngine()` 全进程共享、惰性加载,加载失败或 flow 无响应时优雅降级为「不命中」而非 panic,不依赖 `fingerprint` CEL 插件是否启用、不受 KDB 累积顺序影响(规避 CEL 规则名 "PHP Detect" 与 wappalyzer 技术名 "PHP" 不一致及异步竞态)。

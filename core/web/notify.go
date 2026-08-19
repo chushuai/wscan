@@ -495,6 +495,9 @@ func feishuQRPoll(ctx context.Context, token string, cfg *NotifyConfig) (done bo
 	// 命中 lark 租户品牌时切换域名重试一次。
 	if strings.EqualFold(strings.TrimSpace(pollRes.UserInfo.TenantBrand), "lark") && !sess.IsLark {
 		sess.IsLark = true
+		feishuRegMu.Lock()
+		feishuRegSessions[token] = sess
+		feishuRegMu.Unlock()
 		return feishuQRPoll(ctx, token, cfg)
 	}
 	switch pollRes.Error {

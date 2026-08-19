@@ -2164,14 +2164,14 @@ func (s *Server) handleAiNotify(w http.ResponseWriter, r *http.Request) {
 		if cfg.Mode == "app" {
 			existing := getNotifyConfig()
 			if existing != nil && existing.Mode == "app" {
-				if cfg.FeishuAppId == "" && existing.FeishuAppId != "" {
-					cfg.FeishuAppId = existing.FeishuAppId
+				if cfg.FeishuAppID == "" && existing.FeishuAppID != "" {
+					cfg.FeishuAppID = existing.FeishuAppID
 				}
 				if cfg.FeishuAppSecret == "" && existing.FeishuAppSecret != "" {
 					cfg.FeishuAppSecret = existing.FeishuAppSecret
 				}
-				if cfg.FeishuOpenId == "" && existing.FeishuOpenId != "" {
-					cfg.FeishuOpenId = existing.FeishuOpenId
+				if cfg.FeishuOpenID == "" && existing.FeishuOpenID != "" {
+					cfg.FeishuOpenID = existing.FeishuOpenID
 				}
 				if !cfg.FeishuIsLark && existing.FeishuIsLark {
 					cfg.FeishuIsLark = existing.FeishuIsLark

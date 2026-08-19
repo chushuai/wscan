@@ -41,6 +41,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	logger "wscan/core/utils/log"
 
 	"github.com/skip2/go-qrcode"
 )
@@ -400,6 +401,7 @@ func feishuRegCall(ctx context.Context, baseURL, action string, params map[strin
 	if err != nil {
 		return err
 	}
+	logger.Infof("%s \n%s", baseURL+"/oauth/v1/app/registration", string(body))
 	return json.Unmarshal(body, out)
 }
 
@@ -504,7 +506,7 @@ func feishuQRPoll(ctx context.Context, token string, cfg *NotifyConfig) (done bo
 		return feishuQRPoll(ctx, token, cfg)
 	}
 	switch pollRes.Error {
-	case "", "authorization_pending":
+	case "authorization_pending":
 		return false, nil
 	case "slow_down":
 		return false, nil

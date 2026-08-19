@@ -2992,6 +2992,7 @@ function wireCfgNotify(){
       events:{fact:document.querySelector('.cfgAnEvt[data-k=fact]').checked,goal:document.querySelector('.cfgAnEvt[data-k=goal]').checked,stopped:document.querySelector('.cfgAnEvt[data-k=stopped]').checked}};
     return cfg;
   };
+  let _cfgNotifyQrDelay = 5000; // 初始轮询间隔 5 秒
   const stopQrPoll=()=>{if(_cfgNotifyQrTimer){clearTimeout(_cfgNotifyQrTimer);_cfgNotifyQrTimer=null;}};
   const pollQr=async(token)=>{
     stopQrPoll();
@@ -3003,9 +3004,9 @@ function wireCfgNotify(){
         await aiLoadNotify(true);
         return;
       }
-      if(r&&r.ok&&!r.done){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),5000);return;}
+      if(r&&r.ok&&!r.done){_cfgNotifyQrDelay+=1000;_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),_cfgNotifyQrDelay);return;}
       const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="tiny" style="color:var(--err,#a33)">'+esc((r&&r.error)||t('notify.qrExpire'))+'</div>';
-    }catch(e){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),5000);}
+    }catch(e){_cfgNotifyQrDelay+=1000;_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),_cfgNotifyQrDelay);}
   };
   const wireMode=()=>{
     const modeSel=$('cfgAnMode');
@@ -3013,6 +3014,7 @@ function wireCfgNotify(){
     const gen=$('cfgAnQrGen');
     if(gen)gen.onclick=async()=>{
       stopQrPoll();
+      _cfgNotifyQrDelay = 5000; // 重置轮询间隔为初始值
       const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="muted tiny">'+t('notify.qrGen')+'…</div>';
       try{
         const r=await api('/api/ai-notify/feishu/qrcode/start',{method:'POST'});

@@ -51,6 +51,7 @@ const notifyFile = "webui_notify.json"
 // 支持的推送平台标识。与前端 select 的 option value 一致。
 const (
 	platformFeishu   = "feishu"
+	platformLark     = "lark"
 	platformWecom    = "wecom"
 	platformDingtalk = "dingtalk"
 )
@@ -78,18 +79,18 @@ type NotifyEvents struct {
 
 // NotifyConfig 与前端推送配置表单一一对应。
 type NotifyConfig struct {
-	Enabled  bool         `json:"enabled"`
-	Platform string       `json:"platform"` // feishu / wecom / dingtalk
-	Mode     string       `json:"mode"`     // 飞书:webhook / app;其余平台忽略
+	Enabled  bool   `json:"enabled"`
+	Platform string `json:"platform"` // feishu / wecom / dingtalk
+	Mode     string `json:"mode"`     // 飞书:webhook / app;其余平台忽略
 	// webhook 模式字段
 	Webhook string `json:"webhook"` // 群机器人 incoming webhook URL
 	Secret  string `json:"secret"`  // 加签密钥(飞书/钉钉可选,企业微信无)
 	AtAll   bool   `json:"atAll"`   // @全体(企业微信/钉钉 markdown 支持)
 	// 飞书 app 模式字段(扫码建机器人后落盘)
-	FeishuAppID     string `json:"feishuAppId"`
-	FeishuAppSecret string `json:"feishuAppSecret"`
-	FeishuOpenID    string `json:"feishuOpenId"` // 创建者 open_id,1v1 收件人
-	FeishuIsLark    bool   `json:"feishuIsLark"` // 是否 Lark 国际版
+	FeishuAppID     string       `json:"feishuAppId"`
+	FeishuAppSecret string       `json:"feishuAppSecret"`
+	FeishuOpenID    string       `json:"feishuOpenId"` // 创建者 open_id,1v1 收件人
+	FeishuIsLark    bool         `json:"feishuIsLark"` // 是否 Lark 国际版
 	Events          NotifyEvents `json:"events"`
 }
 
@@ -178,7 +179,7 @@ func sendNotify(ctx context.Context, cfg *NotifyConfig, message string) notifyRe
 		return notifyResult{Err: fmt.Errorf("notify disabled")}
 	}
 	switch cfg.Platform {
-	case platformFeishu:
+	case platformFeishu, platformLark:
 		if cfg.Mode == feishuModeApp {
 			return sendFeishuApp(ctx, cfg, message)
 		}
@@ -291,7 +292,7 @@ func sendWecom(ctx context.Context, cfg *NotifyConfig, message string) notifyRes
 		return httpPostJSON(ctx, cfg.Webhook, body)
 	}
 	body := map[string]any{
-		"msgtype": "markdown",
+		"msgtype":  "markdown",
 		"markdown": map[string]string{"content": message},
 	}
 	return httpPostJSON(ctx, cfg.Webhook, body)
@@ -318,11 +319,13 @@ func notifyEvent(ctx context.Context, event string, message string) {
 	sendNotify(ctx, cfg, message)
 }
 
-// platformLabel 返回平台的中文展示名(用于错误消息)。
+// platformLabel 返回平台的中文展示名 (用于错误消息)。
 func platformLabel(p string) string {
 	switch p {
 	case platformFeishu:
-		return "飞书/Lark"
+		return "飞书"
+	case platformLark:
+		return "Lark"
 	case platformWecom:
 		return "企业微信"
 	case platformDingtalk:
@@ -364,9 +367,9 @@ type feishuRegBeginResp struct {
 	ErrorDescription        string `json:"error_description"`
 }
 type feishuRegPollResp struct {
-	ClientID         string `json:"client_id"`
-	ClientSecret     string `json:"client_secret"`
-	UserInfo         struct {
+	ClientID     string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	UserInfo     struct {
 		OpenID      string `json:"open_id"`
 		TenantBrand string `json:"tenant_brand"`
 	} `json:"user_info"`
@@ -649,5 +652,3 @@ func sendFeishuApp(ctx context.Context, cfg *NotifyConfig, message string) notif
 	}
 	return notifyResult{OK: ok, Status: resp.StatusCode, Body: bodyStr}
 }
-
-

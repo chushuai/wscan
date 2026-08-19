@@ -1,1 +1,58 @@
-```
+# Compiled and build artifacts
+*.o
+*.obj
+*.out
+
+# Dependencies
+node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Editors
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Build directories
+build/
+dist/
+*.egg
+
+# Go specific
+*.a
+*.o
+*.so
+*.test
+*.prof
+vendor/
+
+# Web artifacts
+*.min.js
+*.min.css
+*.bundle.js
+
+# Original rules preserved
+*.log

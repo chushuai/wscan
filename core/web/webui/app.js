@@ -2472,7 +2472,7 @@ let _aiCur=null;               // current detail project detail cache (project/f
 let _aiNotify=null;            // IM 推送配置(/api/ai-notify)
 let _aiLlm=null;               // LLM 配置(/api/ai-pentest/llm-config)
 const AI_WORKERS=[['claudecode',''],['llm',''],['mock','']];
-const AI_IM_PLATFORMS=[['feishu','飞书 / Lark'],['wecom','企业微信'],['dingtalk','钉钉']];
+const AI_IM_PLATFORMS=[['feishu','飞书'],['lark','Lark'],['wecom','企业微信'],['dingtalk','钉钉']];
 function platformName(v){const p=AI_IM_PLATFORMS.find(x=>x[0]===v);return p?p[1]:(v||'');}
 const AI_STATUS_TXT={active:'running',completed:'done',stopped:'stopped'};
 // AI worker 可调用的工具(对应后端 ai_tools.js),仅用于前端展示

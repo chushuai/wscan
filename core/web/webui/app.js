@@ -3003,9 +3003,9 @@ function wireCfgNotify(){
         await aiLoadNotify(true);
         return;
       }
-      if(r&&r.ok&&!r.done){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),2500);return;}
+      if(r&&r.ok&&!r.done){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),5000);return;}
       const box=$('cfgAnQrBox');if(box)box.innerHTML='<div class="tiny" style="color:var(--err,#a33)">'+esc((r&&r.error)||t('notify.qrExpire'))+'</div>';
-    }catch(e){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),2500);}
+    }catch(e){_cfgNotifyQrTimer=setTimeout(()=>pollQr(token),5000);}
   };
   const wireMode=()=>{
     const modeSel=$('cfgAnMode');

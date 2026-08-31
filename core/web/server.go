@@ -314,9 +314,10 @@ type Server struct {
 	// nil if the embedded DB failed to load (fingerprinting degrades to "no
 	// techs detected" without breaking scans).
 	fpEngine *fingerprint.Engine
-	// aiEngine hosts the migrated OODA engine; WebUI supplies only scanner callbacks.
+	// aiEngine owns the migrated AI lifecycle and blackboards.
 	aiEngine *aipentest.Engine
 	aiTools  *tools.Registry
+	aiDisp   *aipentest.Dispatcher
 }
 
 type pluginEntry struct {
@@ -340,6 +341,17 @@ func StartWebUIServer(c *cli.Context) error {
 		aiTools: tools.NewRegistry(),
 	}
 	srv.aiEngine = aipentest.NewEngine(filepath.Join(dataDir, "ai_pentest"))
+	srv.aiTools.SetScanner(wscanAIAdapter{server: srv})
+	srv.aiDisp = aipentest.NewDispatcher(srv.aiEngine, func() aipentest.Config {
+		lc := globalAIStore.getLlmConfig()
+		return aipentest.Config{LLM: aipentest.LLMConfig{Provider: lc.Provider, BaseURL: lc.BaseURL, APIKey: lc.APIKey, Model: lc.Model}}
+	}, func(ctx context.Context, b *aipentest.Blackboard, cfg aipentest.Config, root string) bool {
+		if b.Project.Worker == "llm" || cfg.MultiAgent {
+			return aipentest.LLMRunProject(ctx, b, cfg, root, srv.aiTools)
+		}
+		return aipentest.RuleRunProjectWithRegistry(ctx, b, cfg, root, srv.aiTools)
+	})
+	srv.aiDisp.SetProjectRoot(".")
 	srv.mgr.rehydrateScans()
 	srv.labs = newLabManager(srv)
 	srv.plugins = buildPluginCatalog()

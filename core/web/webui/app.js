@@ -789,7 +789,7 @@ const I18N = {
   'aiM.fldHints': ['人工提示 (Hints, 每行一条)', 'Hints (one per line)'],
   'aiM.hintsPh': ['优先验证已知历史漏洞&#10;目标可能存在反序列化', 'Verify known historical vulns first&#10;Target may have deserialization'],
   'aiM.fldEngine': ['AI 引擎 (Worker)', 'AI Engine (Worker)'],
-  'aiM.engineDesc': ['Claude Code 模式调用本机 <code>claude</code> CLI(自带 Bash/curl 等工具,认证经环境变量);LLM 模式调用 OpenAI/Anthropic 兼容 chat-completions;未配置 LLM 时降级为「规则 worker」(按模板跑 awvs 全扫)。', 'Claude Code mode calls the local <code>claude</code> CLI (bundles Bash/curl etc., auth via env vars); LLM mode calls OpenAI/Anthropic-compatible chat-completions; with no LLM configured it falls back to the "rule worker" (runs a template awvs full scan).'],
+  'aiM.engineDesc': ['Claude Code 模式调用本机 <code>claude</code> CLI(自带 Bash/curl 等工具,认证经环境变量);LLM 模式调用 OpenAI/Anthropic 兼容 chat-completions;未配置 LLM 时降级为「规则 worker」(按模板跑 wscan 全扫)。', 'Claude Code mode calls the local <code>claude</code> CLI (bundles Bash/curl etc., auth via env vars); LLM mode calls OpenAI/Anthropic-compatible chat-completions; with no LLM configured it falls back to the "rule worker" (runs a template wscan full scan).'],
   'aiM.workerType': ['Worker 类型', 'Worker type'],
   'aiM.ccOpt': ['Claude Code (本机 CLI', 'Claude Code (local CLI'],
   'aiM.ccNotDet': [' — 未检测到 claude/认证', ' — claude/auth not detected'],
@@ -860,7 +860,7 @@ const I18N = {
   // --- AI worker / tool / platform labels (descriptions) ---
   'aiw.claudecode': ['Claude Code (本机 CLI,自带工具)', 'Claude Code (local CLI, bundled tools)'],
   'aiw.llm': ['LLM (OpenAI/Anthropic 兼容)', 'LLM (OpenAI/Anthropic compatible)'],
-  'aiw.mock': ['规则 worker (无 LLM,跑 awvs 全扫)', 'Rule worker (no LLM, runs awvs full scan)'],
+  'aiw.mock': ['规则 worker (无 LLM,使用 wscan 全量扫描)', 'Rule worker (no LLM, runs wscan full scan)'],
   'aiw.mockShort': ['规则 worker', 'Rule worker'],
   'ait.wscan_crawl': ['爬站点 URL/表单/参数/技术指纹', 'Crawl site URLs/forms/params/tech fingerprints'],
   'ait.wscan_scan': ['对 URL 自动选插件扫漏洞', 'Auto-select plugins to scan a URL for vulns'],
@@ -2471,7 +2471,7 @@ let _aiSSE=null;               // EventSource for current detail project
 let _aiCur=null;               // current detail project detail cache (project/facts/intents/hints/events)
 let _aiNotify=null;            // IM 推送配置(/api/ai-notify)
 let _aiLlm=null;               // LLM 配置(/api/ai-pentest/llm-config)
-const AI_WORKERS=[['claudecode',''],['llm',''],['mock','']];
+const AI_WORKERS=[['llm',''],['mock','']];
 const AI_IM_PLATFORMS=[['feishu','飞书'],['lark','Lark'],['wecom','企业微信'],['dingtalk','钉钉']];
 function platformName(v){const p=AI_IM_PLATFORMS.find(x=>x[0]===v);return p?p[1]:(v||'');}
 const AI_STATUS_TXT={active:'running',completed:'done',stopped:'stopped'};

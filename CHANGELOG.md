@@ -2,7 +2,14 @@
 ## SUPPORT
 * 【1】AI 自动渗透引擎：新增 `core/aipentest`，覆盖黑板与事件流、Rule/LLM Worker、Multi-Agent、MCP、搜索、记忆、Prompt 模板、子任务规划、执行监控、登录态和工具调用限流等能力。
 * 【2】AI 渗透扫描工具统一接入当前 wscan 扫描链路：新增 `ScannerAdapter`，将 `wscan_scan`、`wscan_crawl`、`wscan_list_plugins`、`wscan_run_plugin`、`wscan_glob`、`wscan_write_plugin` 通过当前 WebUI 的 crawler、插件和 dispatcher 执行，不再依赖来源工程的扫描实现。
-* 【3】WebUI 初始化迁移后的 AI Engine 与工具 Registry，AI 工具调用结果继续复用当前漏洞结构、漏洞库富化、SSE 事件和 scope 安全校验。
+* 【3】WebUI 初始化迁移后的 AI Engine、Dispatcher 与工具 Registry，Rule Worker 支持使用宿主注入的 wscan 工具执行器；AI 工具调用结果继续复用当前漏洞结构、漏洞库富化、SSE 事件和 scope 安全校验。
+* 【4】AI 渗透项目新增项目级配置能力，支持代理、认证头、Scope 白名单、爬虫参数、工具超时和插件数量限制，配置通过 `/api/ai-pentest/:id/config` 读取及保存。
+* 【5】清理 AI 迁移模块及 WebUI 中的旧产品名称、工具常量和 Prompt 文案，统一使用 wscan 命名；新增 ScannerAdapter 的越权拒绝和未配置适配器校验。
+
+## BUGFIX
+* 【1】修复 AI 渗透任务 LLM Worker 未实际进入迁移后的 LLM 对话引擎、仅执行旧版静态 OODA 流程的问题。现在项目由迁移后的 `aipentest.Engine`、`Dispatcher` 和 `LLMRunProject` 接管，支持多轮对话、工具调用和工具结果回传。
+* 【2】修复 AI 渗透任务因 ScannerAdapter 未绑定当前 AI 项目，导致工具执行时项目上下文为 `nil`、出现 `out of scope: <nil>` 的问题。现在扫描适配器按项目注入并正确复用项目上下文。
+* 【3】修复 LLM 未返回有效探索意图时仍直接将任务标记为完成的问题。空计划会回退到规则扫描；初始侦察失败时任务标记为 stopped，不再错误标记为 completed。
 
 # 1.0.59  2026-07-29
 ## BUGFIX

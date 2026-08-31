@@ -344,8 +344,11 @@ func StartWebUIServer(c *cli.Context) error {
 	srv.aiTools.SetScanner(wscanAIAdapter{server: srv})
 	srv.aiDisp = aipentest.NewDispatcher(srv.aiEngine, func() aipentest.Config {
 		lc := globalAIStore.getLlmConfig()
-		return aipentest.Config{LLM: aipentest.LLMConfig{Provider: lc.Provider, BaseURL: lc.BaseURL, APIKey: lc.APIKey, Model: lc.Model}}
+		return aipentest.Config{LLM: aipentest.LLMConfig{Provider: lc.Provider, BaseURL: lc.BaseURL, APIKey: lc.APIKey, Model: lc.Model, CCModel: lc.CCModel}}
 	}, func(ctx context.Context, b *aipentest.Blackboard, cfg aipentest.Config, root string) bool {
+		if b.Project.Worker == "claudecode" {
+			return aipentest.ClaudeRunProject(ctx, b, cfg, root, srv.aiTools)
+		}
 		if b.Project.Worker == "llm" || cfg.MultiAgent {
 			return aipentest.LLMRunProject(ctx, b, cfg, root, srv.aiTools)
 		}

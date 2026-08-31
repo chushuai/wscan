@@ -9,7 +9,7 @@
 ## BUGFIX
 * 【1】修复 AI 渗透任务 LLM Worker 未实际进入迁移后的 LLM 对话引擎、仅执行旧版静态 OODA 流程的问题。现在项目由迁移后的 `aipentest.Engine`、`Dispatcher` 和 `LLMRunProject` 接管，支持多轮对话、工具调用和工具结果回传。
 * 【2】修复 AI 渗透任务因 ScannerAdapter 未绑定当前 AI 项目，导致工具执行时项目上下文为 `nil`、出现 `out of scope: <nil>` 的问题。现在扫描适配器按项目注入并正确复用项目上下文。
-* 【3】修复 LLM 未返回有效探索意图时仍直接将任务标记为完成的问题。空计划会回退到规则扫描；初始侦察失败时任务标记为 stopped，不再错误标记为 completed。
+* 【3】修复选择 `Claude Code (本机 CLI)` 后错误进入 LLM/规则 Worker 的问题。现在 `claudecode` 独立路由到迁移后的 `aipentest.ClaudeRunProject`，通过本机 Claude Code CLI 执行多轮对话，并经 wscan 工具 Registry 调用扫描能力。
 
 # 1.0.59  2026-07-29
 ## BUGFIX

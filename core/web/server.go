@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"path/filepath"
 	"sort"
 	"strings"
 	"sync"
@@ -23,6 +24,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
+	"wscan/core/aipentest"
+	"wscan/core/aipentest/tools"
 	"wscan/core/collector"
 	"wscan/core/collector/basiccrawler"
 	"wscan/core/crawler"
@@ -311,6 +314,9 @@ type Server struct {
 	// nil if the embedded DB failed to load (fingerprinting degrades to "no
 	// techs detected" without breaking scans).
 	fpEngine *fingerprint.Engine
+	// aiEngine hosts the migrated OODA engine; WebUI supplies only scanner callbacks.
+	aiEngine *aipentest.Engine
+	aiTools  *tools.Registry
 }
 
 type pluginEntry struct {
@@ -331,7 +337,9 @@ func StartWebUIServer(c *cli.Context) error {
 		cfg:     cfg,
 		reverse: rv,
 		mgr:     newTaskManager(),
+		aiTools: tools.NewRegistry(),
 	}
+	srv.aiEngine = aipentest.NewEngine(filepath.Join(dataDir, "ai_pentest"))
 	srv.mgr.rehydrateScans()
 	srv.labs = newLabManager(srv)
 	srv.plugins = buildPluginCatalog()

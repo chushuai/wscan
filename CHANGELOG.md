@@ -1,3 +1,9 @@
+# Unreleased  2026-09-01
+## SUPPORT
+* 【1】AI 自动渗透引擎：新增 `core/aipentest`，覆盖黑板与事件流、Rule/LLM Worker、Multi-Agent、MCP、搜索、记忆、Prompt 模板、子任务规划、执行监控、登录态和工具调用限流等能力。
+* 【2】AI 渗透扫描工具统一接入当前 wscan 扫描链路：新增 `ScannerAdapter`，将 `wscan_scan`、`wscan_crawl`、`wscan_list_plugins`、`wscan_run_plugin`、`wscan_glob`、`wscan_write_plugin` 通过当前 WebUI 的 crawler、插件和 dispatcher 执行，不再依赖来源工程的扫描实现。
+* 【3】WebUI 初始化迁移后的 AI Engine 与工具 Registry，AI 工具调用结果继续复用当前漏洞结构、漏洞库富化、SSE 事件和 scope 安全校验。
+
 # 1.0.59  2026-07-29
 ## BUGFIX
 * 【1】修复飞书扫码建机器人模式保存配置时凭证被前端空值覆盖的问题：当用户点击「保存」按钮时，如果提交的 `feishuAppId`/`feishuAppSecret`/`feishuOpenId` 等字段为空，会从现有配置中保留已获取的凭证，避免覆盖扫码成功后持久化的数据。同时修复 Lark 租户检测时会话状态未保存回映射的问题，确保后续轮询请求使用正确的域名。

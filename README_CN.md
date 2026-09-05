@@ -2,207 +2,213 @@
 
 # wscan
 
-一款覆盖主动、被动与 AI 驱动渗透测试的 Web 安全扫描器。
+一款面向授权安全测试的 Web 安全扫描器。最快的使用方式是启动 WebUI；需要脚本化、批量化或 CI 执行时使用 CLI。
 
-wscan 覆盖完整 OWASP Web 漏洞面——XSS、SQL 注入、命令执行、路径穿越、SSRF、XXE、文件上传等——并具备组件指纹识别、敏感信息检测,以及一个能同时跑 Nuclei / Xray / Goby POC 的插件引擎。它自带浏览器版 WebUI 管理扫描任务、内置反连平台用于验证盲打漏洞,还有 AI 智能体模式:通过本机 Claude CLI 自主驱动扫描器完成你设定的目标。
+> ⚠️ **必须获得授权**：只能扫描你拥有或明确获准测试的系统。被动扫描会捕获经过配置代理的流量，启动前必须明确扫描范围，不能把与测试无关的浏览器流量导入被动任务。使用前请阅读 [License](LICENSE.md)。
 
-> ⚠️ **法律免责声明**:未经事先双方同意,使用 wscan 扫描目标是非法的。wscan 仅用于授权的安全测试。使用前请务必阅读并同意 [License](LICENSE.md),否则请勿安装使用本工具。
+## 你可以用 wscan 做什么
 
----
+- 在 WebUI 中管理目标、扫描任务、漏洞、页面和技术识别结果。
+- 使用静态爬虫、无头浏览器爬虫、单 URL、URL 文件或原始请求进行主动扫描。
+- 创建有范围限制的 MITM 被动扫描，分析授权浏览器或客户端产生的流量。
+- 查看、筛选和导出结果；WebUI 重启后扫描历史仍然保留。
+- 按需选择插件或加载 POC 模板。
+- 使用内置反连平台验证盲打漏洞回连。
+- 在 WebUI 中创建 AI 自动渗透项目，执行有目标的多步骤测试。
 
-## 核心特性一览
+## 可以扫描哪些漏洞
 
-- **WebUI** —— 浏览器里管理目标、扫描与结果;结果落盘,重启不丢;支持 IM 推送通知(飞书/Lark、企业微信、钉钉)。
-- **主动 + 被动扫描** —— 先爬后扫(静态或无头浏览器爬虫)、单 URL / URL 文件 / 原始请求模式,以及基于 MITM 的被动监听。
-- **28+ 内置检测插件** —— 语义分析 XSS、SQL 注入(报错/布尔/时间盲注)、命令注入、路径穿越、XXE、SSRF、文件上传、弱口令爆破、JSONP、跳转、CRLF、基线,以及 Struts2 / Shiro / Fastjson / ThinkPHP / XStream 组件检测。
-- **POC 引擎** —— 一个目录同时跑 Nuclei、Xray、Goby POC,检测深度可配。
-- **自定义 FUZZ 与 WAF 测试** —— YAML 定义 payload,配 encoder、placeholder 与 CEL/正则验证;测试 WAF 是否能拦截你的 payload。
-- **AI 自动渗透** —— 智能体循环:Claude(本机 CLI)在事实黑板上推理,调用 wscan 工具(爬取 / 扫描 / 单插件 / HTTP)逐步达成你设定的目标。
-- **反连平台** —— HTTP / DNS / RMI / LDAP 回连,验证盲打 RCE、SSRF、Log4j、Fastjson 等。
-- **MCP 服务器** —— Streamable HTTP 协议,供其他工具远程管理任务与扫描。
+wscan 主要覆盖常见 Web 应用漏洞和安全配置问题。实际覆盖范围取决于选择的插件、请求数据、鉴权状态、目标行为和扫描模式，主要包括：
 
----
+- **注入类**：SQL 注入、命令注入、表达式/模板注入、CRLF/HTTP 头注入以及其他参数注入检查。
+- **跨站与跨域问题**：反射型/存储型 XSS、JSONP 和跨域敏感数据暴露。
+- **文件与路径问题**：路径穿越、敏感文件/目录探测、备份文件和配置文件暴露、文件上传检查。
+- **服务端请求与解析问题**：SSRF、XXE、不安全反序列化，以及 Fastjson、Shiro、XStream、ThinkPHP、Struts 等组件相关检查。
+- **认证与会话问题**：HTTP Basic/Digest 弱点、简单表单弱口令、Cookie 安全属性，以及认证相关信息暴露。
+- **配置与信息泄露**：HTTP 安全响应头缺失或配置不安全、TLS/SSL 配置问题、调试/错误信息泄露、HTML 注释敏感信息，以及响应或 JavaScript 中的凭据、API Key、邮箱、手机号等敏感内容。
+- **组件和 API 发现**：Web 组件指纹识别、JavaScript 接口发现、Swagger/OpenAPI 发现、重定向和其他暴露的 Web 资源。
+- **自定义和外部检查**：基于 YAML 的自定义 FUZZ 规则，以及可选的 Nuclei/Xray/Goby 兼容 POC 模板。
 
-## 检测模块
+扫描结果是需要复核的线索，不等于已经确认的实际影响。对于主动探测、鉴权、文件上传、SSRF 和反连验证等检查，务必在授权范围内人工确认重要结果。
 
-| 模块 | wscan | Xray | 说明 |
-|---|:--:|:--:|---|
-| 动态爬虫(浏览器) | √ | × | 爬取 JavaScript 渲染页面 |
-| 静态爬虫 | √ | √ | 爬取静态 HTML |
-| MITM 被动扫描 | √ | √ | 中间人方式被动分析流量 |
-| `xss` | √ | √ | 语义分析检测 XSS |
-| `sqldet` | √ | 部分 | 报错/布尔/时间盲注/头注入/路径注入 |
-| `cmd-injection` | √ | √ | Shell 注入、PHP 代码执行、模板注入 |
-| `dirscan` | √ | √ | 备份文件、debug 页面、配置文件等 10+ 敏感路径 |
-| `path-traversal` | √ | √ | 常见平台与编码 |
-| `xxe` | √ | √ | 有回显与反连检测 |
-| `upload` | √ | √ | 常见后端语言 |
-| `brute-force` | √ | √ | HTTP 基础认证与简易表单弱口令 |
-| `jsonp` | √ | √ | 跨域读取敏感信息的 JSONP 接口 |
-| `ssrf` | √ | √ | 常见绕过 + 反连检测 |
-| `baseline` | √ | √ | 低 SSL 版本、缺失/误加的 HTTP 头 |
-| `redirect` | √ | √ | HTML meta、30x 跳转 |
-| `crlf-injection` | √ | √ | HTTP 头注入(query/body) |
-| `xstream` | √ | √ | XStream 系列漏洞 |
-| `struts` | √ | √ | Struts2 s2-016/032/045/059/061 |
-| `thinkphp` | √ | √ | ThinkPHP 相关漏洞 |
-| `shiro` | √ | √ | Shiro 反序列化 |
-| `fastjson` | √ | √ | Fastjson 系列漏洞 |
-| Nuclei YAML POC | √ | × | Nuclei 标准 POC |
-| Xray YAML POC | √ | √ | Xray 标准 POC |
-| Goby JSON POC | √ | × | Goby 标准 POC |
-| 自定义 FUZZ 插件 | √ | × | 对 body/query/header/cookie 参数模糊测试 |
-| WAF 绕过 / WAF 测试 | √ | × | 自定义 payload 测试 WAF 拦截能力 |
-| Web 组件识别 | √ | × | 识别网站组件与技术 |
-| JS 敏感内容检测 | √ | × | JS 中的 AK/SK、API key、电话、邮箱 |
-| Swagger / OpenAPI | √ | × | Swagger/OpenAPI 渗透测试 |
+## 快速开始：WebUI
 
----
+### 1. 启动 WebUI
 
-## 快速开始
-
-⬇️ [下载地址](https://github.com/chushuai/wscan/releases) · 🏠 [最佳实践](doc/最佳实践.md) · 🔌 [插件编写指南](#插件编写)
-
-### WebUI(浏览器管理)
-
-最简单的用法:启动 WebUI,然后在浏览器里完成一切——添加目标、发起扫描、查看结果、跑 AI 渗透。
+从 [Releases](https://github.com/chushuai/wscan/releases) 下载程序，或从当前仓库构建后运行：
 
 ```bash
-./wscan webui --webui-host=0.0.0.0 --webui-port=7002
+./wscan webui --webui-host=127.0.0.1 --webui-port=7002
 ```
 
-浏览器打开 `http://<host>:7002` 即可管理目标、发起扫描、查看结果。扫描与漏洞结果落盘,重启后历史保留。可在全局配置页配置 IM 推送通知(飞书/Lark、企业微信、钉钉)。
+浏览器打开 <http://127.0.0.1:7002>。只有在确实需要其他机器访问时才使用 `0.0.0.0`，并通过网络访问控制保护 WebUI。
 
-在 WebUI 中也可以新建 **AI 渗透** 项目:设定目标 origin 和目标成果(例如"找出所有 RCE 漏洞"),选择 worker,即可看着智能体驱动 wscan 完成任务。
+### 2. 创建主动扫描
 
-### AI 自动渗透
+1. 打开「新建扫描」。
+2. 保持「主动扫描」模式。
+3. 输入已获授权的目标 URL，例如 `https://example.com/`。
+4. 选择已保存目标，或配置爬虫和扫描范围。
+5. 选择「爬取+扫描」「仅爬取」或「仅扫描」。
+6. 打开任务查看进度、页面、技术识别和漏洞结果。
 
-在 WebUI 中新建一个 **AI 渗透** 项目:设定目标 origin 和目标成果(例如"找出所有 RCE 漏洞"),选择 worker:
+JavaScript 较多的应用选择「动态」；普通 HTML 站点可以选择「静态」，速度更快。
 
-- **Claude Code** —— 通过本机 `claude` CLI 驱动智能体循环。每轮 Claude 在事实黑板(已发现 URL、事实、已知漏洞)上推理,调用 wscan 工具(`wscan_crawl`、`wscan_run_plugin`、`wscan_scan`、`wscan_list_plugins`、`http`)推进,工具调用与结果实时推送到界面。需要 PATH 中有 `claude`,并设置 `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN`。
-- **LLM** —— OpenAI/Anthropic 兼容的 chat-completions 接口。
-- **Mock** —— 规则 worker,无需 LLM。
+### 3. 创建被动扫描
 
-当 Claude 不可用时,项目会优雅回退到基于规则的 OODA 循环。
+被动模式只启动本地 MITM 代理，不会主动爬取目标。
+
+1. 打开「新建扫描」，选择「被动监听」。
+2. 填写「扫描目标」。该目标用于限制允许的主机和路径范围。
+3. 保持默认监听地址 `127.0.0.1:7100`，或改为其他未占用地址。
+4. 选择需要启用的插件和范围。
+5. 点击「启动监听」。
+6. 将已获授权的浏览器或客户端代理设置为页面显示的监听地址。
+7. 在该浏览器或客户端中安装项目 CA 证书 `ca.crt`。
+8. 通过代理访问授权目标。
+9. 在任务中查看流量和漏洞，完成后点击「停止」。
+
+被动任务必须填写扫描目标，这样访问其他主机的流量会被拒绝。不要把被动代理当成普通浏览器代理使用。
+
+需要时先生成 CA：
+
+```bash
+./wscan genca
+```
+
+`ca.key` 是 CA 私钥，属于敏感文件，不要上传或分享。
+
+## 查看和导出结果
+
+- 「扫描」页面显示任务状态、进度、目标、流量/页面数量和漏洞数量。
+- 打开任务可以查看收集到的页面/请求、技术识别、漏洞和本次任务配置。
+- 使用漏洞筛选器按严重性或类型缩小结果范围。
+- 任务导出功能可以将收集到的 URL 导出为 TXT、JSON 或 XML。
+- 扫描和漏洞历史保存在数据目录中，重启后会自动恢复。
+
+## CLI 快速参考
+
+CLI 适合脚本、CI 和可重复扫描。命令名为 `ws` 或 `webscan`。
 
 ### 主动扫描
 
 ```bash
-# 爬取 + 扫描单个 URL
-./wscan --log-level=debug ws --basic-crawler --url http://testphp.vulnweb.com/ \
+# 静态爬取 + 扫描
+./wscan ws --basic-crawler \
+  --url https://example.com/ \
   --json-output=result.json --html-output=result.html
 
-# 无头浏览器爬取(JS 渲染站点)
-./wscan --log-level=debug ws --browser --url http://testphp.vulnweb.com/ --html-output=result.html
+# 针对 JavaScript 应用使用无头浏览器爬取
+./wscan ws --browser-crawler \
+  --url https://example.com/ \
+  --html-output=result.html
 
-# 扫描 URL 文件(每行一个 URL)
-./wscan --log-level=debug ws --basic-crawler --url-file=urls.txt --html-output=result.html
+# 扫描 URL 文件，每行一个 URL
+./wscan ws --basic-crawler --url-file=urls.txt --json-output=result.json
 
-# 带 body 扫描单个端点
-./wscan --log-level=debug ws -d "uname=111&pass=111" --url http://testphp.vulnweb.com/userinfo.php
+# 带请求体扫描一个端点
+./wscan ws --url https://example.com/login \
+  --data 'username=test&password=test' \
+  --json-output=result.json
 
-# 只跑指定插件
-./wscan --log-level=debug ws --plug=sqldet --basic-crawler --url http://testphp.vulnweb.com/
+# 仅爬取，不执行漏洞检测
+./wscan ws --browser-crawler --url https://example.com/ \
+  --no-scan --json-crawler-output=crawl.json
 
-# 仅爬取,不扫描
-./wscan --log-level=debug ws --browser --url http://testphp.vulnweb.com/ --no-scan --json-crawler-output=crawl.json
+# 只运行指定插件
+./wscan ws --basic-crawler --url https://example.com/ \
+  --plug=sqldet,xss --json-output=result.json
 ```
 
-### WebUI 被动扫描
+### CLI 被动扫描
 
-启动 WebUI 后，在「新建扫描」中选择「被动监听」，填写监听地址（如 `127.0.0.1:7100`）并启动。将浏览器或客户端代理指向该地址，安装 `ca.crt` 后访问已授权目标；流量会进入当前任务的被动插件扫描链路。完成后在任务详情中停止监听。
-
-### 被动扫描(MITM)
 ```bash
-# 生成并安装 CA(方法与 Xray 一致)
+# 如果尚未生成 CA，先执行
 ./wscan genca
 
-# 监听并对代理流量被动扫描
-./wscan --log-level=debug ws --listen=127.0.0.1:1000 --json-output=result.json
+# 在本机监听
+./wscan ws --listen=127.0.0.1:7100 --json-output=result.json
 
-# 指定插件被动扫描
-./wscan --log-level=debug ws --plug=sqldet,xss --listen=127.0.0.1:1000 --json-output=result.json
+# 限制插件集合
+./wscan ws --listen=127.0.0.1:7100 \
+  --plug=sqldet,xss --json-output=result.json
 ```
 
-### POC 扫描
+浏览器/客户端代理和 CA 的配置方式与上面的 WebUI 被动扫描相同。CLI 被动扫描可以在 `config.yaml` 的 `mitm.restriction` 中配置主机、路径、端口和参数限制。
 
-wscan 不内置 POC,但 `prometheus` 引擎可一个目录同时跑 Nuclei / Xray / Goby POC。下载 POC 包:
+## 目标、范围、鉴权和代理
 
-- Xray / Goby:https://github.com/chaitin/xray/tree/master/pocs
-- Nuclei:https://github.com/projectdiscovery/nuclei-templates/tree/main/http(只保留 `http/` 模板)
+为了方便重复使用，可以先在 WebUI 中保存目标，再填写包含/排除规则和鉴权配置，然后创建任务。
 
-用 `--poc` 指向它们,或在 `config.yaml` 配 `include_poc` 做深度扫描:
+- **目标**：你获准测试的基础 URL。
+- **包含/排除**：限制路径和请求模式；除非测试明确要求，否则建议排除退出登录、删除、支付等有状态变化的接口。
+- **鉴权**：在任务表单或已保存目标中选择支持的鉴权方式。账号、Cookie、Token 都应作为敏感信息保管。
+- **代理**：在「全局配置 → 代理」中设置全局代理，也可以为主动扫描单独覆盖。它是 wscan 访问上游的代理，与被动模式给浏览器使用的本地 MITM 监听地址不同。
 
-```bash
-./wscan --log-level=debug ws --poc=/path/to/wscan-poc/pocs/* \
-  --url http://testphp.vulnweb.com/ --html-output=result.html
-```
+上游代理配置示例：
 
 ```yaml
-prometheus:
-    enabled: true
-    depth: 1                 # 探测深度,1 = URL 深度 0 和 1
-    auto_load_poc: false
-    include_poc:
-       - /path/to/wscan-poc/pocs/*
-    exclude_poc: []
+http:
+  proxy: "socks5://127.0.0.1:1080"
 ```
 
-### 反连平台
+## POC 模板和自定义插件
 
-面对盲打漏洞(RCE、SSRF、Log4j、Fastjson,目标无可见响应),运行反连平台,通过回连证明漏洞存在:
+项目不内置 POC。如果授权测试需要，可以将本地 Nuclei/Xray/Goby 兼容模板目录传给 POC 参数：
+
+```bash
+./wscan ws --url https://example.com/ \
+  --poc=/path/to/pocs/* --html-output=poc-result.html
+```
+
+高级编写参考：
+
+- [Web 指纹插件编写指南](doc/WEB指纹插件编写指南.md)
+- [Web 通用漏扫插件编写指南](doc/WEB通用漏扫插件编写指南.md)
+- [自定义 FUZZ 插件指南](doc/自定义FUZZ插件.md)
+
+## AI 自动渗透
+
+在 WebUI 中创建「AI 自动渗透」项目，填写已授权的目标 origin 和明确目标，选择 worker 后启动。页面会实时展示智能体进度、工具调用、发现的事实和结果。
+
+请使用明确且较小的目标范围，检查每一项自动生成的动作和发现，再将结果视为确认结论。本机 Claude Code worker 需要系统中可执行 `claude` 命令并完成认证；规则 worker 不需要 LLM。
+
+## 盲打漏洞反连平台
+
+授权测试需要外部回连来确认盲打漏洞时，启动反连平台：
 
 ```bash
 ./wscan reverse
 ```
 
-wscan 支持 HTTP、DNS、RMI、LDAP 四种反连(HTTP/RMI/LDAP 复用同一端口)。客户端/服务端配置见[最佳实践](doc/最佳实践.md)。
+部署和回连配置参见[最佳实践](doc/最佳实践.md)。
 
-### MCP 服务器
+## MCP 服务器
 
-通过 Streamable HTTP 协议把扫描管理暴露给其他工具:
+将任务和扫描操作通过 Streamable HTTP 暴露给授权的 MCP 客户端：
 
 ```bash
-./wscan mcp --mcp-host=0.0.0.0 --mcp-port=7001
+./wscan mcp --mcp-host=127.0.0.1 --mcp-port=7001
 ```
 
----
+不要在没有认证和网络访问控制的情况下，将 MCP 或 WebUI 端口暴露到公网。
 
-## 代理扫描
+## 配置和排查
 
-在 `config.yaml` 为爬虫与扫描器配置代理:
+- `config.yaml` 包含爬虫、HTTP、MITM、插件和反连平台配置。
+- 使用 `./wscan ws --help` 和 `./wscan webui --help` 查看当前版本支持的参数。
+- 被动任务无法启动时，检查监听端口是否已被占用，以及 `ca.crt` / `ca.key` 是否可读。
+- HTTPS 流量无法通过 MITM 时，在客户端安装生成的 CA，并确认客户端信任该证书。
+- 扫描没有结果时，检查目标范围、鉴权状态、插件选择，以及客户端是否确实通过配置的代理发送流量。
 
-```yaml
-http:
-    proxy: "socks5://153.34.245.41:7777"
-```
+## 使用建议
 
----
+- 从小范围、低影响插件开始，确认结果后再扩大范围。
+- 除非项目明确覆盖，否则排除退出登录、删除、支付、重置密码等有状态变化的接口。
+- 被动扫描使用独立的浏览器配置文件，避免捕获与测试无关的流量。
+- 安全保存结果文件、Cookie、Token、CA 私钥和配置备份。
+- 不使用时停止 WebUI、MCP、反连平台和被动监听器。
 
-## 插件编写
+## License
 
-- 🎯 [Web 指纹插件编写指南](doc/WEB指纹插件编写指南.md)
-- 🎯 [Web 通用漏扫插件编写指南](doc/WEB通用漏扫插件编写指南.md)
-- 🧩 [自定义 FUZZ 插件指南](doc/自定义FUZZ插件.md)
-
-自定义 FUZZ 插件用 YAML 定义 payload,配 encoder、placeholder 与 CEL/正则验证,对指定位置参数模糊测试:
-
-```yaml
-name: "custom-sqli"
-set:
-  r1: randomInt(800000000, 1000000000)
-payload:
-  - extractvalue(1,concat(char(126),md5({{r1}})))
-placeholder:
-  - query
-  - body
-  - header
-  - cookie
-expression: response.body.bcontains(bytes(substr(md5(string(r1)), 0, 31)))
-```
-
----
-
-## Star History
-
-[![Star History Chart](https://star-history.dera.page/svg?repos=chushuai/wscan,chaitin/xray,projectdiscovery/nuclei&type=Date)](https://star-history.dera.page/#chushuai/wscan&chaitin/xray&projectdiscovery/nuclei&Date)
+参见 [LICENSE.md](LICENSE.md)。

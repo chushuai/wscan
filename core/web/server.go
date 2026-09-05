@@ -15,7 +15,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
+	"net/url"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -41,6 +43,7 @@ import (
 	"wscan/core/resource"
 	"wscan/core/reverse"
 
+	"wscan/core/utils/checker"
 	logger "wscan/core/utils/log"
 	"wscan/core/utils/printer"
 )
@@ -80,8 +83,10 @@ type scanTask struct {
 	// goroutine in runScan from the live *http.Flow (which carries the full
 	// response, unlike the model.CrawlerResult the printer sees).
 	techPages []fingerprint.AggPage
+	collector collector.Fitter
+	passive   *collector.MitmProxy
 
-	// req 保存本次扫描的请求配置(目标/爬虫模式/鉴权/插件/范围等),供扫描详情
+	// req 保存本次扫描的请求配置
 	// 的「任务详情」模态框展示。值类型,直接拷贝即可。
 	req scanRequest
 
@@ -127,6 +132,8 @@ func (t *scanTask) toFrontTask() map[string]any {
 		"name":      t.name,
 		"target":    t.target,
 		"type":      t.taskType,
+		"mode":      t.req.Mode,
+		"listen":    t.req.Listen,
 		"status":    string(t.status),
 		"vulns":     len(t.vulns),
 		"vulnCount": len(t.vulns),
@@ -149,6 +156,8 @@ func (t *scanTask) toFrontTaskDetail() map[string]any {
 		"name":      t.name,
 		"target":    t.target,
 		"type":      t.taskType,
+		"mode":      t.req.Mode,
+		"listen":    t.req.Listen,
 		"status":    string(t.status),
 		"vulns":     len(t.vulns),
 		"vulnCount": len(t.vulns),
@@ -980,14 +989,19 @@ func (s *Server) controlTask(t *scanTask, action string) {
 		t.mu.Unlock()
 		t.emit(map[string]any{"type": "resumed"})
 	case "stop":
+		var passive *collector.MitmProxy
 		t.mu.Lock()
 		if t.status == statusRunning || t.status == "paused" {
 			t.status = statusStopped
 			if t.cancel != nil {
 				t.cancel()
 			}
+			passive = t.passive
 		}
 		t.mu.Unlock()
+		if passive != nil {
+			passive.Close()
+		}
 		persistScan(t.toRecord())
 		t.emit(map[string]any{"type": "stopped"})
 	}
@@ -1044,6 +1058,8 @@ func (s *Server) handleTaskEvents(w http.ResponseWriter, r *http.Request, t *sca
 
 type scanRequest struct {
 	Target          string         `json:"target"`
+	Mode            string         `json:"mode"`
+	Listen          string         `json:"listen"`
 	UseTestServer   bool           `json:"useTestServer"`
 	CrawlerMode     string         `json:"crawlerMode"`
 	MaxPages        int            `json:"maxPages"`
@@ -1070,6 +1086,28 @@ func (s *Server) handleScan(w http.ResponseWriter, r *http.Request) {
 	var req scanRequest
 	if err := readJSON(r, &req); err != nil {
 		writeJSON(w, map[string]any{"error": err.Error()})
+		return
+	}
+	if req.Mode == "passive" {
+		if req.Target == "" {
+			writeJSON(w, map[string]any{"error": "target is required for passive scan"})
+			return
+		}
+		if _, err := url.ParseRequestURI(req.Target); err != nil {
+			writeJSON(w, map[string]any{"error": "invalid scan target"})
+			return
+		}
+		if req.Listen == "" {
+			req.Listen = "127.0.0.1:7100"
+		}
+		if _, _, err := net.SplitHostPort(req.Listen); err != nil {
+			writeJSON(w, map[string]any{"error": "invalid listen address"})
+			return
+		}
+		req.AutoScan = true
+		req.CrawlerMode = "passive"
+		id := s.startScan(req)
+		writeJSON(w, map[string]any{"id": id})
 		return
 	}
 	if req.Lab != "" {
@@ -1139,6 +1177,9 @@ func (s *Server) resolveLabTarget(key string) (string, bool) {
 func (s *Server) startScan(req scanRequest) string {
 	id := newID()
 	target := req.Target
+	if req.Mode == "passive" {
+		target = req.Target + " [被动监听 " + req.Listen + "]"
+	}
 
 	// per-task config clone so proxy/plugin/header overrides don't leak
 	cfg := s.cfg.Clone()
@@ -1223,7 +1264,42 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 
 	// build the collector
 	var col collector.Fitter
-	switch req.CrawlerMode {
+	switch req.Mode {
+	case "passive":
+		mc := cfg.Mitm
+		mc.Listen = req.Listen
+		if u, err := url.Parse(req.Target); err == nil && u.Hostname() != "" {
+			if mc.Restriction == nil {
+				mc.Restriction = &checker.RequestCheckerConfig{}
+			} else {
+				copy := *mc.Restriction
+				mc.Restriction = &copy
+			}
+			// Passive traffic must be restricted to the target selected in the UI.
+			// Keep the configured deny rules, but replace the allow scope so a
+			// browser configured to use this proxy cannot scan unrelated hosts.
+			mc.Restriction.HostnameAllowed = []string{u.Hostname()}
+			path := u.EscapedPath()
+			if path == "" {
+				path = "/"
+			}
+			if path != "/" {
+				path += "*"
+			}
+			mc.Restriction.PathAllowed = []string{path}
+		}
+		if mc.CACert == "" {
+			mc.CACert = "./ca.crt"
+		}
+		if mc.CAKey == "" {
+			mc.CAKey = "./ca.key"
+		}
+		p := collector.NewMitmProxy(&mc, cfg.HTTP)
+		col = p
+		t.mu.Lock()
+		t.passive = p
+		t.collector = p
+		t.mu.Unlock()
 	case "dynamic", "browser":
 		maxConc := req.Concurrency
 		if maxConc <= 0 {
@@ -1274,7 +1350,13 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 		})
 	}
 
-	taskChan, err := col.FitOut(ctx, []string{t.target})
+	if req.Mode == "passive" {
+		t.mu.Lock()
+		t.target = "被动监听 " + req.Listen
+		t.mu.Unlock()
+	}
+
+	taskChan, err := col.FitOut(ctx, []string{req.Target})
 	if err != nil {
 		t.mu.Lock()
 		t.status = statusError
@@ -1282,6 +1364,25 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 		t.mu.Unlock()
 		t.emit(map[string]any{"type": "error", "message": err.Error()})
 		return
+	}
+
+	if req.Mode == "passive" {
+		if p, ok := col.(*collector.MitmProxy); ok {
+			t.mu.Lock()
+			if addr := p.ListenAddr(); addr != "" {
+				t.req.Listen = addr
+				t.target = "被动监听 " + addr
+			}
+			t.progress = map[string]any{
+				"phase":     "listening",
+				"done":      0,
+				"total":     0,
+				"crawled":   0,
+				"elapsedMs": time.Since(t.startedAt).Milliseconds(),
+			}
+			t.mu.Unlock()
+			t.emit(map[string]any{"type": "progress", "progress": t.progressMap()})
+		}
 	}
 
 	// Tee the collector's output so the dispatcher keeps consuming flows as-is
@@ -1326,11 +1427,21 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 				t.status = statusDone
 			}
 		}
-		t.progress = map[string]any{
-			"phase":     "scanning",
-			"done":      len(t.vulns),
-			"total":     len(t.pages),
-			"elapsedMs": time.Since(t.startedAt).Milliseconds(),
+		if req.Mode == "passive" {
+			t.progress = map[string]any{
+				"phase":     "listening",
+				"done":      len(t.vulns),
+				"total":     0,
+				"crawled":   t.crawled,
+				"elapsedMs": time.Since(t.startedAt).Milliseconds(),
+			}
+		} else {
+			t.progress = map[string]any{
+				"phase":     "scanning",
+				"done":      len(t.vulns),
+				"total":     len(t.pages),
+				"elapsedMs": time.Since(t.startedAt).Milliseconds(),
+			}
 		}
 		st := t.status
 		t.mu.Unlock()

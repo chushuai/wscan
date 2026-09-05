@@ -27,6 +27,7 @@ import (
 	martianlog "github.com/google/martian/v3/log"
 	"github.com/google/martian/v3/mitm"
 	"github.com/panjf2000/ants/v2"
+	"sync"
 )
 
 // init 清除 martian init.go 里用 flag.Int("v") 注册的 -v 标志。urfave/cli 的
@@ -47,6 +48,11 @@ type MitmProxy struct {
 	pool       *ants.Pool
 	dupChecker *checker.RequestChecker
 	onFlow     func(*vhttp.Flow) error
+
+	mu       sync.Mutex
+	listener net.Listener
+	output   chan resource.Resource
+	closed   bool
 }
 
 func NewMitmProxy(conf *MitmConfig, httpOpts *vhttp.ClientOptions) *MitmProxy {
@@ -67,21 +73,63 @@ func NewMitmProxy(conf *MitmConfig, httpOpts *vhttp.ClientOptions) *MitmProxy {
 	return m
 }
 
-func (m *MitmProxy) FitOut(context.Context, []string) (chan resource.Resource, error) {
+func (m *MitmProxy) FitOut(ctx context.Context, _ []string) (chan resource.Resource, error) {
 	martian.Init()
 	l, err := net.Listen("tcp", m.conf.Listen)
 	if err != nil {
-		logger.Fatal(err)
+		return nil, err
 	}
-	logger.Infof("starting mitm server at %s", m.conf.Listen)
 	out := m.makeResultChan()
+	m.mu.Lock()
+	m.listener = l
+	m.output = out
+	m.mu.Unlock()
 	httpMirrorModifier := mitmhelper.NewHTTPMirrorModifier(m.pool, m.dupChecker, m.httpOpts, out)
 	m.proxy.SetRequestModifier(httpMirrorModifier)
 	m.proxy.SetResponseModifier(httpMirrorModifier)
 
-	go m.proxy.Serve(l)
-
+	go func() {
+		if err := m.proxy.Serve(l); err != nil && !m.proxy.Closing() {
+			logger.Errorf("mitm server stopped: %v", err)
+		}
+		m.Close()
+	}()
+	logger.Infof("starting mitm server at %s", l.Addr().String())
 	return out, nil
+}
+
+// ListenAddr returns the actual address bound by the proxy, including an
+// ephemeral port selected when the configured address ends in :0.
+func (m *MitmProxy) ListenAddr() string {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	if m.listener == nil {
+		return ""
+	}
+	return m.listener.Addr().String()
+}
+
+// Close stops the proxy and closes its resource stream. It is safe to call
+// repeatedly, which lets both task cancellation and Serve cleanup race safely.
+func (m *MitmProxy) Close() {
+	m.mu.Lock()
+	if m.closed {
+		m.mu.Unlock()
+		return
+	}
+	m.closed = true
+	l := m.listener
+	out := m.output
+	m.mu.Unlock()
+	if l != nil && !m.proxy.Closing() {
+		m.proxy.Close()
+	}
+	if l != nil {
+		_ = l.Close()
+	}
+	if out != nil {
+		close(out)
+	}
 }
 
 func (*MitmProxy) OnFlow(func(*vhttp.Flow) error) {

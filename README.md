@@ -108,8 +108,11 @@ If Claude is unavailable, the project gracefully falls back to the rule-based OO
 ./wscan --log-level=debug ws --browser --url http://testphp.vulnweb.com/ --no-scan --json-crawler-output=crawl.json
 ```
 
-### Passive scan (MITM)
+### WebUI passive scan
 
+After starting the WebUI, choose **Passive listener** in **New Scan**, enter a listen address such as `127.0.0.1:7100`, and start it. Configure your browser or client to use that proxy, install `ca.crt`, and browse only authorized targets. Stop the listener from the task detail when finished.
+
+### Passive scan (MITM)
 ```bash
 # Generate and install the CA (same approach as Xray)
 ./wscan genca

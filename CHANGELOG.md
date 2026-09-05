@@ -1,5 +1,6 @@
 # Unreleased  2026-09-01
 ## SUPPORT
+* 【1】WebUI 新增 MITM 被动扫描模式，支持配置监听地址、实时接收代理流量并通过任务控制停止监听。
 * 【1】AI 自动渗透引擎：新增 `core/aipentest`，覆盖黑板与事件流、Rule/LLM Worker、Multi-Agent、MCP、搜索、记忆、Prompt 模板、子任务规划、执行监控、登录态和工具调用限流等能力。
 * 【2】AI 渗透扫描工具统一接入当前 wscan 扫描链路：新增 `ScannerAdapter`，将 `wscan_scan`、`wscan_crawl`、`wscan_list_plugins`、`wscan_run_plugin`、`wscan_glob`、`wscan_write_plugin` 通过当前 WebUI 的 crawler、插件和 dispatcher 执行，不再依赖来源工程的扫描实现。
 * 【3】WebUI 初始化迁移后的 AI Engine、Dispatcher 与工具 Registry，Rule Worker 支持使用宿主注入的 wscan 工具执行器；AI 工具调用结果继续复用当前漏洞结构、漏洞库富化、SSE 事件和 scope 安全校验。

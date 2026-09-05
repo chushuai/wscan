@@ -616,6 +616,15 @@ const I18N = {
   // --- new scan modal ---
   'ns.title': ['新建扫描', 'New Scan'],
   'ns.fldTarget': ['目标', 'Target'],
+  'ns.scanMode': ['扫描模式', 'Scan mode'],
+  'ns.activeMode': ['主动扫描', 'Active scan'],
+  'ns.passiveMode': ['被动监听', 'Passive listener'],
+  'ns.listen': ['监听地址', 'Listen address'],
+  'ns.listenPh': ['127.0.0.1:7100', '127.0.0.1:7100'],
+  'ns.passiveTarget': ['扫描目标', 'Scan target'],
+  'ns.passiveHint': ['请将浏览器或客户端代理设置为该地址，并安装项目 CA 证书后再访问目标。', 'Configure your browser or client to use this proxy and install the project CA before browsing the target.'],
+  'ns.startListen': [' 启动监听', ' Start listener'],
+  'ns.passiveType': ['被动监听', 'Passive listener'],
   'ns.selTarget': ['选择已保存目标', 'Select a saved target'],
   'ns.manual': ['— 手动输入地址 —', '— Enter address manually —'],
   'ns.orAddr': ['或输入地址', 'Or enter address'],
@@ -990,6 +999,7 @@ function statusPill(s){return '<span class="pill st-'+s+'">'+({running:t('st.run
 function progressPct(status,p){
   if(status==='done')return 100;
   if(status==='error')return 0;
+  if(p.phase==='listening')return 0;
   if(!p)return 0;
   if(p.phase==='scanning')return p.total?Math.min(100,(p.done||0)/(p.total||1)*100):0;
   return p.maxPages?Math.min(100,(p.crawled||0)/(p.maxPages||1)*100):0;
@@ -1385,7 +1395,7 @@ function renderScansSlice(){
   $('scBody').innerHTML=slice.length?slice.map(sc=>{const p=sc.progress||((taskCache[sc.id]||{}).progress)||{};const pct=progressPct(sc.status,p);const crawled=p.crawled!=null?p.crawled:sc.crawled;const progTxt=p.phase==='scanning'?(p.done+'/'+p.total):(crawled!=null?crawled+t('sc.pageUnit'):'-');
     const canDel=sc.status==='done'||sc.status==='error'||sc.status==='stopped';
     const canStop=sc.status==='running'||sc.status==='paused';
-    return '<tr><td onclick="event.stopPropagation()">'+(canDel?'<input type="checkbox" class="scsel" data-id="'+sc.id+'" style="width:auto">':'')+'</td><td>#'+sc.id+'</td><td>'+(sc.type==='crawl'?t('misc.crawlScanType'):(sc.type==='crawlonly'?t('misc.crawlOnlyType'):t('misc.scanOnlyType')))+'</td><td class="url">'+esc(sc.target||'')+'</td><td>'+statusPill(sc.status)+'</td><td><div class="pbar"><div style="width:'+pct+'%"></div></div><span class="tiny">'+progTxt+'</span></td><td style="color:var(--err);font-weight:700">'+sc.vulns+'</td><td>'+sc.crawled+'</td><td class="tiny">'+(sc.startedAt||'').slice(0,19).replace('T',' ')+'</td><td><a class="btn sec tiny" href="#/scans/'+sc.id+'">'+t('c.view')+'</a> '+(canStop?'<button class="btn danger tiny" data-stop="'+sc.id+'">'+t('c.stop')+'</button> ':'')+(canDel?'<button class="btn danger tiny" data-del="'+sc.id+'">'+t('c.delete')+'</button>':'')+'</td></tr>';}).join(''):empty(t('sc.empty'));
+    return '<tr><td onclick="event.stopPropagation()">'+(canDel?'<input type="checkbox" class="scsel" data-id="'+sc.id+'" style="width:auto">':'')+'</td><td>#'+sc.id+'</td><td>'+(sc.mode==='passive'?t('ns.passiveType'):(sc.type==='crawl'?t('misc.crawlScanType'):(sc.type==='crawlonly'?t('misc.crawlOnlyType'):t('misc.scanOnlyType'))))+'</td><td class="url">'+esc(sc.mode==='passive'?(sc.listen||sc.target||''):(sc.target||''))+'</td><td>'+statusPill(sc.status)+'</td><td><div class="pbar"><div style="width:'+pct+'%"></div></div><span class="tiny">'+progTxt+'</span></td><td style="color:var(--err);font-weight:700">'+sc.vulns+'</td><td>'+sc.crawled+'</td><td class="tiny">'+(sc.startedAt||'').slice(0,19).replace('T',' ')+'</td><td><a class="btn sec tiny" href="#/scans/'+sc.id+'">'+t('c.view')+'</a> '+(canStop?'<button class="btn danger tiny" data-stop="'+sc.id+'">'+t('c.stop')+'</button> ':'')+(canDel?'<button class="btn danger tiny" data-del="'+sc.id+'">'+t('c.delete')+'</button>':'')+'</td></tr>';}).join(''):empty(t('sc.empty'));
   const scPager=$('scPager'); if(scPager) scPager.innerHTML= total?pagerHtml('sc',total,scPageSize,scPage):'';
   // select-all toggles all deletable rows (done/error only)
   $('scSelAll').onchange=(e)=>document.querySelectorAll('.scsel').forEach(c=>c.checked=e.target.checked);
@@ -2204,9 +2214,9 @@ function renderTaskDetail(){
   const r=task.req;
   if(!r){el.innerHTML=empty(t('sd.detNoReq'));return;}
   const p=task.progress||{};
-  const modeTxt=r.crawlerMode==='dynamic'?t('ns.modeDynamic'):(r.crawlerMode==='static'?t('ns.modeStatic'):(r.crawlerMode||'-'));
+  const modeTxt=r.mode==='passive'?t('ns.passiveType'):(r.crawlerMode==='dynamic'?t('ns.modeDynamic'):(r.crawlerMode==='static'?t('ns.modeStatic'):(r.crawlerMode||'-')));
   const rows=[
-    [t('sd.detTarget'), esc(r.target||task.target||'-')],
+    [t('sd.detTarget'), esc(r.mode==='passive'?(r.listen||task.target||'-'):(r.target||task.target||'-'))],
     [t('sd.detType'), task.type==='scan'?t('misc.scanOnlyType'):(task.type==='crawlonly'?t('misc.crawlOnlyType'):t('misc.crawlScanType'))],
     [t('sd.detStatus'), statusPill(task.status)],
     [t('sd.detStart'), (task.startedAt||'').slice(0,19).replace('T',' ')||'-'],
@@ -3179,22 +3189,21 @@ function wireExtRowEvents(){
 function openNewScanModal(prefill){
   prefill=prefill||{};
   modalBox('<h2>'+t('ns.title')+'</h2>',
-    '<fieldset><legend>'+t('ns.fldTarget')+'</legend><label>'+t('ns.selTarget')+'</label><select id="nsTarget"><option value="">'+t('ns.manual')+'</option></select>'+
-    '<label>'+t('ns.orAddr')+'</label><input id="nsAddr" placeholder="'+t('ns.addrPh')+'"><label><input type="checkbox" id="useTestServer" style="width:auto"> '+t('ns.useTest')+'</label></fieldset>'+
+    '<fieldset><legend>'+t('ns.fldTarget')+'</legend><div class="row"><div><label>'+t('ns.scanMode')+'</label><select id="scanMode"><option value="active">'+t('ns.activeMode')+'</option><option value="passive">'+t('ns.passiveMode')+'</option></select></div><div id="nsListenWrap" style="display:none"><label>'+t('ns.listen')+'</label><input id="nsListen" value="127.0.0.1:7100" placeholder="'+t('ns.listenPh')+'"><span class="ns-help" title="'+esc(t('ns.passiveHint'))+'" aria-label="'+esc(t('ns.passiveHint'))+'" style="display:inline-flex;vertical-align:middle;margin-left:4px;cursor:help;color:var(--acc)">'+ic('info')+'</span></div></div><div id="nsActiveTarget"><label>'+t('ns.selTarget')+'</label><select id="nsTarget"><option value="">'+t('ns.manual')+'</option></select><label>'+t('ns.orAddr')+'</label><input id="nsAddr" placeholder="'+t('ns.addrPh')+'"><label><input type="checkbox" id="useTestServer" style="width:auto"> '+t('ns.useTest')+'</label></div><div id="nsPassiveTarget" style="display:none"><label>'+t('ns.passiveTarget')+'</label><input id="nsPassiveTargetUrl" placeholder="'+t('ns.addrPh')+'"></div></fieldset>'+
     '<fieldset><legend>'+t('ns.fldScan')+'</legend><select id="nsProfile"></select><div id="nsProfileNote" class="muted tiny" style="margin-top:4px"></div>'+
     '<div class="row" style="margin:8px 0 6px"><label style="width:auto"><input type="checkbox" id="pluginAuto" style="width:auto" checked onchange="togglePluginPicker()">'+t('ns.autoSel')+'</label></div>'+
     '<div id="pluginPicker" style="display:none"><div class="row" style="margin-bottom:6px"><input id="pluginFilter" placeholder="'+t('pf.filterPh')+'" style="flex:1"><button class="sec" type="button" id="btnPluginAll" style="width:auto">'+t('pf.allBtn')+'</button><button class="sec" type="button" id="btnPluginNone" style="width:auto">'+t('pf.noneBtn')+'</button></div><div id="pluginList" style="border:1px solid var(--bd);background:#fff"></div></div></fieldset>'+
-    '<fieldset><legend>'+t('ns.fldCrawler')+'</legend><div class="row"><div><label>'+t('ns.mode')+'</label><select id="crawlerMode"><option value="dynamic">'+t('ns.modeDynamic')+'</option><option value="static">'+t('ns.modeStatic')+'</option></select></div><div><label>'+t('ns.apiEnum')+'</label><select id="apiEnum"><option value="1">'+t('ns.apiYes')+'</option><option value="0">'+t('ns.apiNo')+'</option></select></div></div>'+
+    '<fieldset id="nsCrawlerField"><legend>'+t('ns.fldCrawler')+'</legend><div class="row"><div><label>'+t('ns.mode')+'</label><select id="crawlerMode"><option value="dynamic">'+t('ns.modeDynamic')+'</option><option value="static">'+t('ns.modeStatic')+'</option></select></div><div><label>'+t('ns.apiEnum')+'</label><select id="apiEnum"><option value="1">'+t('ns.apiYes')+'</option><option value="0">'+t('ns.apiNo')+'</option></select></div></div>'+
     '<div class="row" style="margin:6px 0"><label style="width:auto"><input type="checkbox" id="discoverParentDirs" style="width:auto" checked>'+t('ns.discoverParent')+'</label></div>'+
     '<div class="row" style="margin:6px 0"><label style="width:auto"><input type="checkbox" id="postScanDiscover" style="width:auto" checked>'+t('ns.postScan')+'</label></div>'+
     '<div class="row3" style="margin-top:6px"><div><label>'+t('ns.backfillLimit')+'</label><input id="postScanDiscoverLimit" type="number" value="20" min="1" title="'+t('ns.backfillLimitTitle')+'"></div><div><label>'+t('ns.backfillRounds')+'</label><input id="postScanDiscoverDepth" type="number" value="1" min="1" max="5" title="'+t('ns.backfillRoundsTitle')+'"></div><div></div></div>'+
     '<div class="row3"><div><label>'+t('ns.pages')+'</label><input id="maxPages" type="number" value="40"></div><div><label>'+t('ns.depth')+'</label><input id="maxDepth" type="number" value="3"></div><div><label>'+t('ns.concurrency')+'</label><input id="concurrency" type="number" value="4"></div></div>'+
     '<div class="row3" style="margin-top:6px"><div><label>'+t('ns.timeout')+'</label><input id="timeoutMs" type="number" value="30000" min="1000" step="1000" title="'+t('ns.timeoutTitle')+'"></div><div><label>&nbsp;</label><span class="muted tiny" style="display:block;padding-top:9px">'+t('ns.timeoutHint')+'</span></div><div></div></div></fieldset>'+
     '<fieldset><legend>'+t('ns.fldScope')+'</legend><label>'+t('tm.include')+'</label><input id="includePatterns" placeholder="'+t('ns.incPh')+'"><label>'+t('tm.exclude')+'</label><input id="excludePatterns" placeholder="'+t('ns.excPh')+'" value="'+esc((window.DEFAULT_EXCLUDE_PATTERNS||[]).join(','))+'"></fieldset>'+
-    '<fieldset><legend>'+t('ns.fldReq')+'</legend><div class="row"><div><label>'+t('ns.method')+'</label><select id="reqMethod"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option><option>HEAD</option><option>OPTIONS</option><option>PATCH</option></select></div><div><label>&nbsp;</label><span class="muted tiny" style="display:block;padding-top:9px">'+t('ns.reqSeedHint')+'</span></div></div>'+
+    '<fieldset id="nsReqField"><legend>'+t('ns.fldReq')+'</legend><div class="row"><div><label>'+t('ns.method')+'</label><select id="reqMethod"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option><option>HEAD</option><option>OPTIONS</option><option>PATCH</option></select></div><div><label>&nbsp;</label><span class="muted tiny" style="display:block;padding-top:9px">'+t('ns.reqSeedHint')+'</span></div></div>'+
     '<label>'+t('ns.customHeaders')+'</label><textarea id="reqHeaders" rows="3" placeholder="'+t('ns.headersPh')+'"></textarea>'+
     '<label>'+t('ns.reqBody')+'</label><textarea id="reqBody" rows="3" placeholder="'+t('ns.bodyPh')+'"></textarea></fieldset>'+
-    '<fieldset><legend>'+t('ns.fldAuth')+'</legend>'+authFieldsHtml(prefill.auth||null)+'</fieldset>'+
+    '<fieldset id="nsAuthField"><legend>'+t('ns.fldAuth')+'</legend>'+authFieldsHtml(prefill.auth||null)+'</fieldset>'+
     '<fieldset><legend>'+t('ns.fldProxy')+'</legend><div id="nsProxyState" class="muted tiny" style="margin-bottom:6px">'+t('px.loading')+'</div>'+
     '<div><label><input type="radio" name="nsProxyMode" value="global" checked style="width:auto">'+t('px.global')+'</label></div>'+
     '<div><label><input type="radio" name="nsProxyMode" value="custom" style="width:auto">'+t('px.custom')+'</label></div>'+
@@ -3208,7 +3217,8 @@ function openNewScanModal(prefill){
   $('nsProfile').onchange=()=>{const p=(_profiles.length?_profiles:[]).find(x=>x.id===$('nsProfile').value);$('nsProfileNote').textContent=p?(p.plugins.length?(t('ns.selAllPlugins')+p.plugins.length+t('ns.selPlugins2')):t('ns.autoAll2')):'';
     // prefill the plugin tree with this profile's selection (so user can view/edit)
     _pluginChecked=new Set(p?p.plugins||[]:[]);if(!_pluginCatalog.length){loadPlugins();}else if($('pluginList'))renderPluginTree();};
-  // plugin tree controls
+  function syncScanMode(){const passive=$('scanMode')&&$('scanMode').value==='passive';$('nsActiveTarget').style.display=passive?'none':'';$('nsPassiveTarget').style.display=passive?'':'none';$('nsListenWrap').style.display=passive?'':'none';$('nsReqField').style.display=passive?'none':'';$('nsAuthField').style.display=passive?'none':'';$('nsCrawlerField').style.display=passive?'none':'';$('nsScanOnly').style.display=passive?'none':'';$('nsCrawlOnly').style.display=passive?'none':'';$('nsCrawl').innerHTML=passive?ic('radio','btn-ic')+t('ns.startListen'):ic('play','btn-ic')+t('ns.crawlScan');}
+  $('scanMode').onchange=syncScanMode; syncScanMode();
   $('pluginFilter').oninput=renderPluginTree;
   $('btnPluginAll').onclick=()=>{for(const g of _pluginCatalog)for(const pl of g.plugins)_pluginChecked.add(pl.rel);renderPluginTree();};
   $('btnPluginNone').onclick=()=>{_pluginChecked.clear();renderPluginTree();};
@@ -3232,11 +3242,11 @@ function openNewScanModal(prefill){
   $('nsScanOnly').onclick=()=>startScanFromModal(false,true);
 }
 async function startScanFromModal(onlyCrawl,scanOnly){
-  const tid=$('nsTarget').value;const tgt=tid?_targets.find(x=>x.id===tid):null;
+  const tid=$('nsTarget').value;const mode=$('scanMode').value;const tgt=tid?_targets.find(x=>x.id===tid):null;
   const pid=$('nsProfile').value;const p=pid?_profiles.find(x=>x.id===pid):null;
   const useTest=$('useTestServer').checked;
-  const addr=useTest?'':($('nsAddr').value.trim()||(tgt?tgt.address:''));
-  if(!useTest&&!addr){alert(t('ns.noAddr'));return;}
+  const addr=mode==='passive'?($('nsPassiveTargetUrl').value.trim()): (useTest?'':($('nsAddr').value.trim()||(tgt?tgt.address:'')));
+  if(!addr){alert(t('ns.noAddr'));return;}
   // plugin selection: if "auto" on, use the profile as-is (profile.plugins:[] => server auto-select);
   // if off, use the tree selection (collectPlugins) which the user may have edited from the profile's preset.
   let plugins;
@@ -3247,14 +3257,14 @@ async function startScanFromModal(onlyCrawl,scanOnly){
   const reqHeaders=collectReqHeaders();
   const reqMethod=$('reqMethod')?($('reqMethod').value||'GET'):'GET';
   const reqBody=$('reqBody')?$('reqBody').value:'';
-  const body={target:addr,useTestServer:useTest,crawlerMode:$('crawlerMode').value,apiEnum:$('apiEnum').value==='1',
+  const body={target:addr,mode:$('scanMode').value,listen:$('nsListen').value.trim(),useTestServer:useTest,crawlerMode:$('crawlerMode').value,apiEnum:$('apiEnum').value==='1',
     maxPages:+$('maxPages').value,maxDepth:+$('maxDepth').value,concurrency:+$('concurrency').value,timeoutMs:+$('timeoutMs').value,
     includePatterns:splitCsv($('includePatterns').value),excludePatterns:splitCsv($('excludePatterns').value),
     discoverParentDirs:$('discoverParentDirs')?$('discoverParentDirs').checked:true,
     postScanDiscover:$('postScanDiscover')?$('postScanDiscover').checked:true,
     postScanDiscoverLimit:+$('postScanDiscoverLimit').value,postScanDiscoverDepth:+$('postScanDiscoverDepth').value,
     plugins:plugins,auth:auth,autoScan:!onlyCrawl};
-  const path=scanOnly?'/api/scan':'/api/crawl';
+  const path=mode==='passive'?'/api/scan':(scanOnly?'/api/scan':'/api/crawl');
   // 自定义方法/请求体/请求头:scan-only 用作种子请求;crawl 模式用作爬虫的
   // 初始 seed 请求(后续链接抓取仍走 GET)。之前 crawl 模式丢掉这些字段,导致
   // 用户设的 POST 在爬取里变成了 GET。

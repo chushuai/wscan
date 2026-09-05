@@ -159,6 +159,8 @@ func (m *taskManager) rehydrateScans() {
 		if r.Req != nil {
 			t.req = scanRequest{
 				Target:          strVal(r.Req["target"]),
+				Mode:            strVal(r.Req["mode"]),
+				Listen:          strVal(r.Req["listen"]),
 				CrawlerMode:     strVal(r.Req["crawlerMode"]),
 				MaxPages:        intVal(r.Req["maxPages"]),
 				MaxDepth:        intVal(r.Req["maxDepth"]),

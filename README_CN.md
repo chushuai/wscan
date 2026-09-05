@@ -108,8 +108,11 @@ wscan 覆盖完整 OWASP Web 漏洞面——XSS、SQL 注入、命令执行、�
 ./wscan --log-level=debug ws --browser --url http://testphp.vulnweb.com/ --no-scan --json-crawler-output=crawl.json
 ```
 
-### 被动扫描(MITM)
+### WebUI 被动扫描
 
+启动 WebUI 后，在「新建扫描」中选择「被动监听」，填写监听地址（如 `127.0.0.1:7100`）并启动。将浏览器或客户端代理指向该地址，安装 `ca.crt` 后访问已授权目标；流量会进入当前任务的被动插件扫描链路。完成后在任务详情中停止监听。
+
+### 被动扫描(MITM)
 ```bash
 # 生成并安装 CA(方法与 Xray 一致)
 ./wscan genca

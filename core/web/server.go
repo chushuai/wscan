@@ -314,11 +314,13 @@ func (m *taskManager) allVulns() []map[string]any {
 // Server is the WebUI HTTP server. Holds a single global config + reverse
 // platform (mirrors the mcp server) so every scan task reuses them.
 type Server struct {
-	cfg     *entry.CliEntryConfig
-	reverse *reverse.Reverse
-	mgr     *taskManager
-	plugins []pluginEntry
-	labs    *labManager
+	cfg            *entry.CliEntryConfig
+	reverse        *reverse.Reverse
+	reverseMu      sync.RWMutex
+	reverseEnabled bool
+	mgr            *taskManager
+	plugins        []pluginEntry
+	labs           *labManager
 	// fpEngine is the wappalyzer signature engine powering /api/technologies.
 	// nil if the embedded DB failed to load (fingerprinting degrades to "no
 	// techs detected" without breaking scans).
@@ -344,10 +346,11 @@ func StartWebUIServer(c *cli.Context) error {
 	rv := reverse.NewReverse(cfg.Reverse)
 
 	srv := &Server{
-		cfg:     cfg,
-		reverse: rv,
-		mgr:     newTaskManager(),
-		aiTools: tools.NewRegistry(),
+		cfg:            cfg,
+		reverse:        rv,
+		reverseEnabled: rv != nil,
+		mgr:            newTaskManager(),
+		aiTools:        tools.NewRegistry(),
 	}
 	srv.aiEngine = aipentest.NewEngine(filepath.Join(dataDir, "ai_pentest"))
 	srv.aiTools.SetScanner(wscanAIAdapter{server: srv})
@@ -441,9 +444,141 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/ai-notify/feishu/qrcode/poll", s.handleFeishuQRPoll)
 	mux.HandleFunc("/api/ai-pentest", s.handleAIPentest)
 	mux.HandleFunc("/api/ai-pentest/", s.handleAIPentest)
+	mux.HandleFunc("/api/reverse", s.handleReverse)
+	mux.HandleFunc("/api/reverse/", s.handleReverse)
+}
+func (s *Server) currentReverse() *reverse.Reverse {
+	s.reverseMu.RLock()
+	defer s.reverseMu.RUnlock()
+	return s.reverse
 }
 
 // ---- status / tasks ----
+func (s *Server) handleReverse(w http.ResponseWriter, r *http.Request) {
+	rest := strings.TrimPrefix(r.URL.Path, "/api/reverse")
+	s.reverseMu.RLock()
+	rv, enabled := s.reverse, s.reverseEnabled
+	s.reverseMu.RUnlock()
+	if rest == "" {
+		if r.Method == http.MethodGet {
+			cfg := s.cfg.Reverse
+			if cfg == nil {
+				writeJSON(w, map[string]any{"ok": true, "config": nil, "enabled": false})
+				return
+			}
+			view := map[string]any{"config": cfg, "enabled": enabled, "status": cfg.ManagementStatus(enabled)}
+			if cfg.Token != "" {
+				view["tokenConfigured"] = true
+				safe := *cfg
+				safe.Token = ""
+				view["config"] = safe
+			}
+			writeJSON(w, map[string]any{"ok": true, "data": view})
+			return
+		}
+		if r.Method == http.MethodPut {
+			var cfg reverse.Config
+			if err := readJSON(r, &cfg); err != nil {
+				writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+				return
+			}
+			if cfg.Token == "" && s.cfg.Reverse != nil {
+				cfg.Token = s.cfg.Reverse.Token
+			}
+			if err := cfg.ValidateForManagement(); err != nil {
+				writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+				return
+			}
+			s.cfg.Reverse = &cfg
+			if err := saveReverseConfig(map[string]any{"config": cfg, "enabled": enabled}); err != nil {
+				writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+				return
+			}
+			writeJSON(w, map[string]any{"ok": true})
+			return
+		}
+	}
+	switch rest {
+	case "/test":
+		var cfg reverse.Config
+		if err := readJSON(r, &cfg); err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		if cfg.Token == "" && s.cfg.Reverse != nil {
+			cfg.Token = s.cfg.Reverse.Token
+		}
+		writeJSON(w, cfg.Test(r.Context()))
+		return
+	case "/enable":
+		if s.cfg.Reverse == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "reverse config is required"})
+			return
+		}
+		if err := s.cfg.Reverse.ValidateForManagement(); err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		newRV := reverse.NewReverse(s.cfg.Reverse)
+		if newRV == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "failed to start reverse platform"})
+			return
+		}
+		s.reverseMu.Lock()
+		s.reverse, s.reverseEnabled = newRV, true
+		s.reverseMu.Unlock()
+		writeJSON(w, map[string]any{"ok": true})
+		return
+	case "/disable":
+		s.reverseMu.Lock()
+		old := s.reverse
+		s.reverse, s.reverseEnabled = nil, false
+		s.reverseMu.Unlock()
+		if old != nil {
+			_ = old.Close()
+		}
+		writeJSON(w, map[string]any{"ok": true})
+		return
+	case "/stats":
+		if rv == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "reverse platform is disabled"})
+			return
+		}
+		stats, err := rv.EventStats()
+		if err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		writeJSON(w, map[string]any{"ok": true, "data": stats})
+		return
+	case "/events":
+		if rv == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "reverse platform is disabled"})
+			return
+		}
+		q := r.URL.Query()
+		events, total, err := rv.ListEvents(q.Get("type"), atoiDefault(q.Get("count"), 50))
+		if err != nil {
+			writeJSON(w, map[string]any{"ok": false, "error": err.Error()})
+			return
+		}
+		writeJSON(w, map[string]any{"ok": true, "events": events, "total": total})
+		return
+	case "/payloads":
+		if rv == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "reverse platform is disabled"})
+			return
+		}
+		p := rv.NewPayload(r.URL.Query().Get("type"))
+		if p == nil {
+			writeJSON(w, map[string]any{"ok": false, "error": "unsupported payload type"})
+			return
+		}
+		writeJSON(w, map[string]any{"ok": true, "data": p})
+		return
+	}
+	http.NotFound(w, r)
+}
 
 func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	s.mgr.mu.RLock()
@@ -1409,7 +1544,7 @@ func (s *Server) runScan(t *scanTask, cfg *entry.CliEntryConfig, req scanRequest
 	multi := printer.NewMultiPrinter()
 	multi.AddPrinters([]printer.Printer{&webPrinter{task: t}, output.NewStdoutPrinter()})
 
-	disp := ctrl.NewDispatcher(&cfg.Config, multi, s.reverse)
+	disp := ctrl.NewDispatcher(&cfg.Config, multi, s.currentReverse())
 	disp.Init(false)
 	t.mu.Lock()
 	t.dispatcher = disp

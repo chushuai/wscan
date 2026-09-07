@@ -438,6 +438,7 @@ const I18N = {
   'cfg.tabEmail': ['邮件', 'Email'],
   'cfg.tabExt': ['MCP/技能', 'MCP/Skills'],
   'cfg.tabProxy': ['代理', 'Proxy'],
+  'nav.reverse': ['返连平台', 'Reverse Platform'],
   // --- config: LLM ---
   'llm.ccTitle': ['Claude Code(本机 CLI)', 'Claude Code (local CLI)'],
   'llm.ccDesc': ['Claude Code 模式走本机 <code>claude</code> CLI,无需在此配 API Key(认证用环境变量)。LLM 模式配 OpenAI/Anthropic 兼容 chat-completions;留空 api_key/base_url 则降级为规则 worker。', 'Claude Code mode uses the local <code>claude</code> CLI; no API key here (auth via env vars). LLM mode configures OpenAI/Anthropic-compatible chat-completions; empty api_key/base_url falls back to the rule worker.'],
@@ -947,6 +948,7 @@ const NAV=[
   {id:'vulnerabilities',ic:'bug',lbl:'nav.vulnerabilities'},
   {id:'scans',ic:'refresh-cw',lbl:'nav.scans'},
   {id:'ai-pentest',ic:'bot',lbl:'nav.aiPentest'},
+  {id:'reverse',ic:'network',lbl:'nav.reverse'},
   {id:'reports',ic:'file-text',lbl:'nav.reports'},
   {id:'discovery',ic:'globe',lbl:'nav.discovery'},
   {id:'users',ic:'user',lbl:'nav.users'},
@@ -980,6 +982,7 @@ function router(){
     scans:parts[1]?()=>renderScanDetail(parts[1]):renderScans,
     'ai-pentest':parts[1]?()=>renderAIDetail(parts[1]):renderAIPentest,
     reports:renderReports, discovery:renderDiscovery, profiles:renderProfiles,
+    reverse:renderReversePlatform,
     users:()=>renderStub(t('usr.title'),t('usr.blurb'),t('usr.hint')),
     config:renderConfig,
   };
@@ -3052,7 +3055,26 @@ function wireCfgNotify(){
   $('cfgAnSave').onclick=async()=>{const r=await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});$('cfgMsg').textContent=(r&&r.ok)?t('notify.saved'):t('llm.saveFail');_aiNotify=r;};
   $('cfgAnTest').onclick=async()=>{$('cfgAnTestMsg').textContent=t('notify.testing');await api('/api/ai-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect())});const r=await api('/api/ai-notify/test',{method:'POST'});if(r&&r.ok) $('cfgAnTestMsg').textContent=t('notify.testOk');else $('cfgAnTestMsg').textContent=t('notify.testFail')+esc((r&&r.error)||t('notify.testFail2'));};
 }
-// --- 代理 tab ---
+let _reverseCfg=null;
+async function aiLoadReverse(){try{_reverseCfg=await api('/api/reverse');}catch(e){_reverseCfg={ok:false,data:{config:{},enabled:false}};}return _reverseCfg;}
+async function renderReversePlatform(){
+  if(!_reverseCfg||!_reverseCfg.data){await aiLoadReverse();}
+  const d=(_reverseCfg&&_reverseCfg.data)||{}, st=d.status||{}, c=d.config||{};
+  const toggle='<button class="sec" onclick="(async()=>{const r=await api(\'/api/reverse/'+(d.enabled?'disable':'enable')+'\',{method:\'POST\'});if(!r.ok)alert(r.error||\'操作失败\');else renderReversePlatform();})()">'+(d.enabled?'停用平台':'启用平台')+'</button>';
+  $('view').innerHTML=pageHead(t('nav.reverse'),'HTTP / DNS / RMI / LDAP OOB 返连管理',toggle+'<button class="sec" id="rvRefresh">刷新</button>')+
+    '<div class="rv-stats"><div class="rv-stat"><span>STATUS</span><b class="rv-'+(d.enabled?'ok':'off')+'">'+(d.enabled?'运行中':'已停用')+'</b></div><div class="rv-stat"><span>MODE</span><b>'+(st.remote?'REMOTE':'LOCAL')+'</b></div><div class="rv-stat"><span>ADDRESS</span><b class="rv-mono">'+esc(st.address||'—')+'</b></div><div class="rv-stat"><span>TOKEN</span><b>'+(st.token_configured?'已配置':'未配置')+'</b></div></div>'+
+    '<div class="rv-tabs"><button class="on" data-rvtab="generate">生成 Payload</button><button data-rvtab="events">回连事件</button><button data-rvtab="settings">平台设置</button></div><div id="rvPanel"></div>';
+  document.querySelectorAll('[data-rvtab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-rvtab]').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderRvPanel(b.dataset.rvtab);});
+  $('rvRefresh').onclick=()=>renderReversePlatform(); renderRvPanel('generate');
+}
+function renderRvPanel(tab){
+  const p=$('rvPanel'); if(!p)return;
+  if(tab==='generate'){p.innerHTML='<div class="rv-gen-grid">'+[['http','HTTP URL','浏览器或服务端请求回连'],['http_template','HTTP 模板 URL','自定义响应内容'],['dns','DNS Domain','DNS 查询回连'],['rmi','Java RMI','RMI 连接地址'],['ldap','LDAP','LDAP 连接地址']].map(x=>'<button class="rv-gen-card rv-'+x[0]+'" data-rvgen="'+x[0]+'"><strong>'+x[1]+'</strong><small>'+x[2]+'</small></button>').join('')+'</div><div id="rvResult"></div>';document.querySelectorAll('[data-rvgen]').forEach(b=>b.onclick=async()=>{const r=await api('/api/reverse/payloads?type='+b.dataset.rvgen);$('rvResult').innerHTML=r.ok?'<div class="rv-result"><div class="rv-result-label">GENERATED PAYLOAD</div><pre>'+esc(JSON.stringify(r.data,null,2))+'</pre><button class="sec" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);this.textContent=\'已复制\'">复制</button></div>':'<div class="rv-error">'+esc(r.error||'生成失败')+'</div>';});return;}
+  if(tab==='events'){p.innerHTML='<div class="rv-event-toolbar"><select id="rvFilter"><option value="">全部协议</option><option>http</option><option>dns</option><option>rmi</option><option>ldap</option></select><button class="sec" id="rvLoad">刷新事件</button></div><div id="rvEventsList" class="rv-event-list"></div>';const load=async()=>{const r=await api('/api/reverse/events?count=50&type='+encodeURIComponent($('rvFilter').value));$('rvEventsList').innerHTML=r.ok&&r.events.length?r.events.map(e=>'<details class="rv-event"><summary><b>'+esc(e.event_type)+'</b><span>'+esc(e.group_id+'/'+e.unit_id)+'</span><span>'+esc(e.remote_addr)+'</span><time>'+new Date(e.time_stamp).toLocaleString()+'</time></summary><pre>'+esc(e.request||'')+'</pre></details>').join(''):'<div class="rv-empty">暂无回连。生成 Payload 后等待目标触发请求。</div>';};$('rvLoad').onclick=load;$('rvFilter').onchange=load;load();return;}
+  p.innerHTML='<div class="card"><h3>平台设置</h3><label>模式<select id="rvRemote"><option value="0">本地内置</option><option value="1">远程平台</option></select></label><label>Token<input id="rvToken" type="password" placeholder="留空保持不变"></label><label>远程 HTTP 地址<input id="rvBase" value="'+esc((_reverseCfg.data.config.client||{}).http_base_url||'')+'"></label><label>HTTP 监听端口<input id="rvPort" value="'+esc((_reverseCfg.data.config.http||{}).listen_port||'188')+'"></label><div class="row"><button id="rvSave">保存</button><button class="sec" id="rvTest">测试</button></div><div id="rvMsg" class="muted tiny"></div></div>'; $('rvSave').onclick=async()=>{const cfg=_reverseCfg.data.config;cfg.client=cfg.client||{};cfg.http=cfg.http||{};cfg.client.remote_server=$('rvRemote').value==='1';cfg.client.http_base_url=$('rvBase').value.trim();cfg.http.listen_port=$('rvPort').value.trim();cfg.token=$('rvToken').value.trim();const r=await api('/api/reverse',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});$('rvMsg').textContent=r.ok?'已保存':r.error||'保存失败';};$('rvTest').onclick=async()=>{const r=await api('/api/reverse/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_reverseCfg.data.config)});$('rvMsg').textContent=r.ok?'连接成功':r.error||'连接失败';};
+}
+
+
 function cfgProxyPane(){
   return '<div class="card"><h3>'+t('px.cur')+'</h3><div id="cfgProxyCur" class="muted">'+t('px.loading')+'</div></div>'+
     '<div class="card"><h3>'+t('px.cfg')+'</h3>'+

@@ -22,6 +22,7 @@ var (
 	targetMu      sync.Mutex
 	profileMu     sync.Mutex
 	groupMu       sync.Mutex
+	reverseMu     sync.Mutex
 	targetCache   []map[string]any
 	targetsLoaded bool
 	groupCache    []map[string]any
@@ -283,6 +284,28 @@ func writeJSONFile(path string, v any) error {
 		return err
 	}
 	return os.WriteFile(path, b, 0o644)
+}
+
+func loadReverseConfig() (map[string]any, error) {
+	reverseMu.Lock()
+	defer reverseMu.Unlock()
+	ensureDataDir()
+	b, err := os.ReadFile(filepath.Join(dataDir, "webui_reverse.json"))
+	if err != nil {
+		return nil, err
+	}
+	var out map[string]any
+	if err := json.Unmarshal(b, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func saveReverseConfig(v map[string]any) error {
+	reverseMu.Lock()
+	defer reverseMu.Unlock()
+	ensureDataDir()
+	return writeJSONFile(filepath.Join(dataDir, "webui_reverse.json"), v)
 }
 
 // addTarget appends a target to the in-memory + on-disk store.
